@@ -105,8 +105,7 @@ func (handler myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		if err == nil {
 			handler.Send(&m)
-			out, _ := json.Marshal(m)
-			fmt.Fprintf(w, "%s", out)
+			fmt.Fprintf(w, "OK")
 		} else {
 			fmt.Fprintf(w, "Unable to parse JSON: %s", err)
 		}
