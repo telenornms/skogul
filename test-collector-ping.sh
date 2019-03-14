@@ -1,27 +1,25 @@
 #!/bin/bash
 
-
-
-
-
+me="$$"
+offset="$(( ( $RANDOM % 4 ) + 1))"
 generate() {
-    time=$(date --iso-8601=seconds -d @$1)
+    timeit=$(date --iso-8601=seconds -d @$1)
     cat <<-_EOF_
-
 {
     "src": "test",
     "metrics": [
 _EOF_
     COMMA=" "
-    for row in {1..5}; do
+    for row in {1..50}; do
         for num in {1..4}; do 
-            latency4="1.$(( $RANDOM % 1000 ))"
-            latency6="1.$(( $RANDOM % 1000 ))"
+            latency4="$offset.$(( $RANDOM % 1000 ))"
+            latency6="$offset.$(( $RANDOM % 1000 ))"
     cat <<_EOF_
         ${COMMA}{
-            "timestamp": "$time",
+            "timestamp": "$timeit",
             "metadata":  {
-                "switch": "row$row-n$num"
+                "switch": "row$row-n$num",
+                "src": "test-collector-pid-$me"
             },
             "data": {
                 "latency4": $latency4,
@@ -35,20 +33,11 @@ _EOF_
 cat <<_EOF_
     ]
 }
-
 _EOF_
 }
 
 startd=$(( $(date +%s) - 3600 ))
 for a in {0..3600}; do
-    data="$(generate $(( $startd + $a )))"
-    o=$(POST http://localhost:8080/api/write/collector <<<"$data")
-    if [ "x$o" != "xOK" ]; then
-        echo $o
-        echo -e "$data"
-        echo $o
-        read
-
-        fi
-sleep 2
+    generate $(( $startd + $a )) | POST -H Content-type:\ application/json http://[::1]:8080/api/write/collector > /dev/null
+    echo -n "."
 done

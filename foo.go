@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"time"
+        "io"
 	"fmt"
 	"log"
 	"bytes"
@@ -78,7 +79,8 @@ func (handler myHandler) Send(c *GollectorContainer) error {
 		}
 		fmt.Fprintf(&buffer," %d\n",m.Time.UnixNano())
 	}
-	req, err := http.NewRequest("POST", "http://localhost:8086/write?db=test", &buffer)
+        log.Print("Starting backend request")
+	req, err := http.NewRequest("POST", "http://127.0.0.1:8086/write?db=test", &buffer)
 	req.Header.Set("Content-Type", "text/plain")
 	timeout := time.Duration(5 * time.Second)
 	client := http.Client{
@@ -91,15 +93,20 @@ func (handler myHandler) Send(c *GollectorContainer) error {
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		log.Print(resp)
 	}
+        log.Print("Done")
 	return nil
 }
 
 func (handler myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.ContentLength > 0 {
+                log.Printf("Processing request from %v",r.RemoteAddr)
 		b := make([]byte, r.ContentLength)
-		r.Body.Read(b)
+                n,err := io.ReadFull(r.Body,b)
+                if err != nil {
+                    log.Panicf("Read error from client, read %d bytes: %s", n,err)
+                }
 		var m GollectorContainer
-		err := json.Unmarshal(b,&m)
+		err = json.Unmarshal(b,&m)
 		if err == nil {
 			err = m.validate()
 		}
@@ -109,6 +116,7 @@ func (handler myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		} else {
 			fmt.Fprintf(w, "Unable to parse JSON: %s", err)
 		}
+                log.Printf("Done with %v",r.RemoteAddr)
 	}
 }
 
