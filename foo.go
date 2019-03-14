@@ -11,12 +11,14 @@ import (
 )
 
 type GollectorContainer struct {
-	Source	string			`json:"src"`
-	Metrics	[]GollectorMetric	`json:"metrics"`
+	Source	    string		        `json:"src"`
+        Template    map[string]interface{}      `json:"template"`
+	Time	    time.Time	                `json:"timestamp"`
+	Metrics	    []GollectorMetric	        `json:"metrics"`
 }
 
 type GollectorMetric struct {
-	Time		time.Time	`json:"timestamp"`
+	Time		time.Time	        `json:"timestamp"`
 	Metadata	map[string]interface{}	`json:"metadata"`
 	Data		map[string]interface{}	`json:"data"`
 }
@@ -26,6 +28,7 @@ type gerror struct {
 }
 
 func (e gerror) Error() string {
+        log.Printf("Error: %v",e.Reason)
 	return e.Reason
 }
 
@@ -36,12 +39,6 @@ type myHandler struct {
 func (m GollectorMetric) validate() error {
 	if m.Data == nil {
 		return gerror{"Missing data for metric"}
-	}
-	/*
-	 * This is a bit of a cheat, due to a lack of a decent nil-test
-	 */
-	if m.Time == (time.Time{}) {
-		return gerror{"no time?"}
 	}
 	return nil
 }
@@ -56,7 +53,10 @@ func (c GollectorContainer) validate() error {
 		return gerror{"Empty metrics[] data"}
 	}
 	for i := 0; i < len(c.Metrics); i++ {
-		err := c.Metrics[i].validate()
+                if c.Metrics[i].Time == (time.Time{}) && c.Time  == (time.Time{}) {
+                    return gerror{"Missing timestamp in both metric and container"}
+                }
+                err := c.Metrics[i].validate()
 		if err != nil {
 			return err
 		}
@@ -68,6 +68,9 @@ func (handler myHandler) Send(c *GollectorContainer) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer,"%s",c.Source)
+		for key,value := range c.Template {
+			fmt.Fprintf(&buffer,",%s=%#v",key,value)
+		}
 		for key,value := range m.Metadata {
 			fmt.Fprintf(&buffer,",%s=%#v",key,value)
 		}
@@ -77,7 +80,11 @@ func (handler myHandler) Send(c *GollectorContainer) error {
 			fmt.Fprintf(&buffer,"%s%s=%#v",comma,key,value)
 			comma = ","
 		}
-		fmt.Fprintf(&buffer," %d\n",m.Time.UnixNano())
+                lt := c.Time
+                if m.Time != (time.Time{}) {
+                    lt = m.Time
+                }
+		fmt.Fprintf(&buffer," %d\n",lt.UnixNano())
 	}
         log.Print("Starting backend request")
 	req, err := http.NewRequest("POST", "http://127.0.0.1:8086/write?db=test", &buffer)

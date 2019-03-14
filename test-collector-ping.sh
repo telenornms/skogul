@@ -7,6 +7,10 @@ generate() {
     cat <<-_EOF_
 {
     "src": "test",
+    "timestamp": "$timeit",
+    "template": {
+        "src": "test-collector-pid-$me"
+    },
     "metrics": [
 _EOF_
     COMMA=" "
@@ -16,10 +20,8 @@ _EOF_
             latency6="$offset.$(( $RANDOM % 1000 ))"
     cat <<_EOF_
         ${COMMA}{
-            "timestamp": "$timeit",
             "metadata":  {
-                "switch": "row$row-n$num",
-                "src": "test-collector-pid-$me"
+                "switch": "row$row-n$num"
             },
             "data": {
                 "latency4": $latency4,
