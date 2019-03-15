@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package main
+package receivers
 
 import (
 	"encoding/json"
@@ -29,10 +29,11 @@ import (
 	"io"
 	"log"
 	"net/http"
+	. "github.com/KristianLyng/gollector/pkg/common"
 )
 
 type HTTPReceiver struct {
-	h *Handler
+	Handler *Handler
 }
 
 func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -51,10 +52,10 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Fprintf(w, "Unable to parse JSON: %s", err)
 		}
-		for _, t := range handler.h.transformers {
+		for _, t := range handler.Handler.Transformers {
 			t.Transform(&m)
 		}
-		for _, s := range handler.h.senders {
+		for _, s := range handler.Handler.Senders {
 			s.Send(&m)
 		}
 		fmt.Fprintf(w, "OK\n")
@@ -62,12 +63,8 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (handler HTTPReceiver) SetHandler(h *Handler) {
-	handler.h = h
-}
-
 func (handler HTTPReceiver) Start() error {
 	http.Handle("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
-	return gerror{"Shouldn't reach this"}
+	return Gerror{"Shouldn't reach this"}
 }

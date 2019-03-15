@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package main
+package senders
 
 import (
 	"bytes"
@@ -29,17 +29,18 @@ import (
 	"log"
 	"net/http"
 	"time"
+	. "github.com/KristianLyng/gollector/pkg/common"
 )
 
 type InfluxDB struct {
-	url         string
-	measurement string
+	Url         string
+	Measurement string
 }
 
 func (idb InfluxDB) Send(c *GollectorContainer) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
-		fmt.Fprintf(&buffer, "%s", idb.measurement)
+		fmt.Fprintf(&buffer, "%s", idb.Measurement)
 		for key, value := range c.Template.Metadata {
 			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
 		}
@@ -59,7 +60,7 @@ func (idb InfluxDB) Send(c *GollectorContainer) error {
 		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())
 	}
 	log.Print("Starting backend request")
-	req, err := http.NewRequest("POST", idb.url, &buffer)
+	req, err := http.NewRequest("POST", idb.Url, &buffer)
 	req.Header.Set("Content-Type", "text/plain")
 	timeout := time.Duration(5 * time.Second)
 	client := http.Client{

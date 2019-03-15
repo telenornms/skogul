@@ -21,15 +21,15 @@
  * 02110-1301  USA
  */
 
-package main
+package common
 
 import (
 	"log"
 )
 
 type Handler struct {
-	transformers []Transformer
-	senders      []Sender
+	Transformers []Transformer
+	Senders      []Sender
 }
 
 type Sender interface {
@@ -41,15 +41,14 @@ type Transformer interface {
 }
 
 type Receiver interface {
-	SetHandler(h *Handler)
 	Start() error
 }
 
-type gerror struct {
+type Gerror struct {
 	Reason string
 }
 
-func (e gerror) Error() string {
+func (e Gerror) Error() string {
 	log.Printf("Error: %v", e.Reason)
 	return e.Reason
 }

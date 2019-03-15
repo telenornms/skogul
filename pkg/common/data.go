@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package main
+package common
 
 import (
 	"time"
@@ -40,21 +40,21 @@ type GollectorMetric struct {
 
 func (m GollectorMetric) Validate() error {
 	if m.Data == nil {
-		return gerror{"Missing data for metric"}
+		return Gerror{"Missing data for metric"}
 	}
 	return nil
 }
 
 func (c GollectorContainer) Validate() error {
 	if c.Metrics == nil {
-		return gerror{"Missing metrics[] data"}
+		return Gerror{"Missing metrics[] data"}
 	}
 	if len(c.Metrics) <= 0 {
-		return gerror{"Empty metrics[] data"}
+		return Gerror{"Empty metrics[] data"}
 	}
 	for i := 0; i < len(c.Metrics); i++ {
 		if c.Metrics[i].Time == (time.Time{}) && c.Template.Time == (time.Time{}) {
-			return gerror{"Missing timestamp in both metric and container"}
+			return Gerror{"Missing timestamp in both metric and container"}
 		}
 		err := c.Metrics[i].Validate()
 		if err != nil {
