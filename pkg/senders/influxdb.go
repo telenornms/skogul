@@ -59,7 +59,6 @@ func (idb InfluxDB) Send(c *GollectorContainer) error {
 		}
 		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())
 	}
-	log.Print("Starting backend request")
 	req, err := http.NewRequest("POST", idb.Url, &buffer)
 	req.Header.Set("Content-Type", "text/plain")
 	timeout := time.Duration(5 * time.Second)
@@ -73,7 +72,6 @@ func (idb InfluxDB) Send(c *GollectorContainer) error {
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		log.Print(resp)
 	}
-	log.Print("Done")
 	return nil
 }
 
