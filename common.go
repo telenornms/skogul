@@ -9,12 +9,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
@@ -24,25 +24,25 @@
 package main
 
 import (
-    "log"
+	"log"
 )
 
 type Handler struct {
-    transformers []Transformer
-    senders  []Sender
+	transformers []Transformer
+	senders      []Sender
 }
 
 type Sender interface {
-    Send(c *GollectorContainer) error 
+	Send(c *GollectorContainer) error
 }
 
 type Transformer interface {
-    Transform(c *GollectorContainer) error
+	Transform(c *GollectorContainer) error
 }
 
 type Receiver interface {
-    SetHandler(h *Handler)
-    Start() error
+	SetHandler(h *Handler)
+	Start() error
 }
 
 type gerror struct {
@@ -50,7 +50,6 @@ type gerror struct {
 }
 
 func (e gerror) Error() string {
-        log.Printf("Error: %v",e.Reason)
+	log.Printf("Error: %v", e.Reason)
 	return e.Reason
 }
-

@@ -9,12 +9,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
@@ -24,41 +24,41 @@
 package main
 
 import (
-	"net/http"
-	"time"
+	"bytes"
 	"fmt"
 	"log"
-	"bytes"
+	"net/http"
+	"time"
 )
 
 type InfluxDB struct {
-    url string
-    measurement string
+	url         string
+	measurement string
 }
 
 func (idb InfluxDB) Send(c *GollectorContainer) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
-		fmt.Fprintf(&buffer,"%s",idb.measurement)
-		for key,value := range c.Template.Metadata {
-			fmt.Fprintf(&buffer,",%s=%#v",key,value)
+		fmt.Fprintf(&buffer, "%s", idb.measurement)
+		for key, value := range c.Template.Metadata {
+			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
 		}
-		for key,value := range m.Metadata {
-			fmt.Fprintf(&buffer,",%s=%#v",key,value)
+		for key, value := range m.Metadata {
+			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
 		}
-		fmt.Fprintf(&buffer," ")
+		fmt.Fprintf(&buffer, " ")
 		comma := ""
-		for key,value := range m.Data {
-			fmt.Fprintf(&buffer,"%s%s=%#v",comma,key,value)
+		for key, value := range m.Data {
+			fmt.Fprintf(&buffer, "%s%s=%#v", comma, key, value)
 			comma = ","
 		}
-                lt := c.Template.Time
-                if m.Time != (time.Time{}) {
-                    lt = m.Time
-                }
-		fmt.Fprintf(&buffer," %d\n",lt.UnixNano())
+		lt := c.Template.Time
+		if m.Time != (time.Time{}) {
+			lt = m.Time
+		}
+		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())
 	}
-        log.Print("Starting backend request")
+	log.Print("Starting backend request")
 	req, err := http.NewRequest("POST", idb.url, &buffer)
 	req.Header.Set("Content-Type", "text/plain")
 	timeout := time.Duration(5 * time.Second)
@@ -72,7 +72,8 @@ func (idb InfluxDB) Send(c *GollectorContainer) error {
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		log.Print(resp)
 	}
-        log.Print("Done")
+	log.Print("Done")
 	return nil
 }
-	//req, err := http.NewRequest("POST", "http://127.0.0.1:8086/write?db=test", &buffer)
+
+//req, err := http.NewRequest("POST", "http://127.0.0.1:8086/write?db=test", &buffer)
