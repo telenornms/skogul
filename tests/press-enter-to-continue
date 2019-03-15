@@ -21,7 +21,7 @@ while true; do
     echo "Ready to build. Press enter to continue"
     read
     echo Building:
-    go build || echo "Failed? L2CODE"
+    go build github.com/KristianLyng/gollector/pkg/gollector/ || echo "Failed? L2CODE"
     echo Running
     running=1
     ./gollector
