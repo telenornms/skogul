@@ -26,10 +26,10 @@ package receivers
 import (
 	"encoding/json"
 	"fmt"
+	. "github.com/KristianLyng/gollector/pkg/common"
 	"io"
 	"log"
 	"net/http"
-	. "github.com/KristianLyng/gollector/pkg/common"
 )
 
 type HTTPReceiver struct {

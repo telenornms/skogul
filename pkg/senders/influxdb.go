@@ -26,10 +26,10 @@ package senders
 import (
 	"bytes"
 	"fmt"
+	. "github.com/KristianLyng/gollector/pkg/common"
 	"log"
 	"net/http"
 	"time"
-	. "github.com/KristianLyng/gollector/pkg/common"
 )
 
 type InfluxDB struct {
