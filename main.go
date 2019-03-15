@@ -1,5 +1,5 @@
 /*
- * gollector, generic metrics-collector framework
+ * gollector, main method/init
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -20,6 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301  USA
  */
+
 package main
 
 import (
@@ -32,65 +33,15 @@ import (
 	"encoding/json"
 )
 
-type GollectorContainer struct {
-	Source	    string		        `json:"src"`
-        Template    map[string]interface{}      `json:"template"`
-	Time	    time.Time	                `json:"timestamp"`
-	Metrics	    []GollectorMetric	        `json:"metrics"`
-}
-
-type GollectorMetric struct {
-	Time		time.Time	        `json:"timestamp"`
-	Metadata	map[string]interface{}	`json:"metadata"`
-	Data		map[string]interface{}	`json:"data"`
-}
-
-type gerror struct {
-	Reason string
-}
-
-func (e gerror) Error() string {
-        log.Printf("Error: %v",e.Reason)
-	return e.Reason
-}
-
 type myHandler struct {
 
-}
-
-func (m GollectorMetric) validate() error {
-	if m.Data == nil {
-		return gerror{"Missing data for metric"}
-	}
-	return nil
-}
-func (c GollectorContainer) validate() error {
-	if c.Source != "test" {
-		return gerror{"Only support \"test\" data source for now"}
-	}
-	if c.Metrics == nil {
-		return gerror{"Missing metrics[] data"}
-	}
-	if len(c.Metrics) <= 0 {
-		return gerror{"Empty metrics[] data"}
-	}
-	for i := 0; i < len(c.Metrics); i++ {
-                if c.Metrics[i].Time == (time.Time{}) && c.Time  == (time.Time{}) {
-                    return gerror{"Missing timestamp in both metric and container"}
-                }
-                err := c.Metrics[i].validate()
-		if err != nil {
-			return err
-		}
-	}
-	return nil;
 }
 
 func (handler myHandler) Send(c *GollectorContainer) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
-		fmt.Fprintf(&buffer,"%s",c.Source)
-		for key,value := range c.Template {
+		fmt.Fprintf(&buffer,"test")
+		for key,value := range c.Template.Metadata {
 			fmt.Fprintf(&buffer,",%s=%#v",key,value)
 		}
 		for key,value := range m.Metadata {
@@ -102,7 +53,7 @@ func (handler myHandler) Send(c *GollectorContainer) error {
 			fmt.Fprintf(&buffer,"%s%s=%#v",comma,key,value)
 			comma = ","
 		}
-                lt := c.Time
+                lt := c.Template.Time
                 if m.Time != (time.Time{}) {
                     lt = m.Time
                 }
@@ -137,7 +88,7 @@ func (handler myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		var m GollectorContainer
 		err = json.Unmarshal(b,&m)
 		if err == nil {
-			err = m.validate()
+			err = m.Validate()
 		}
 		if err == nil {
 			handler.Send(&m)
