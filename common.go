@@ -27,6 +27,24 @@ import (
     "log"
 )
 
+type Handler struct {
+    transformers []Transformer
+    senders  []Sender
+}
+
+type Sender interface {
+    Send(c *GollectorContainer) error 
+}
+
+type Transformer interface {
+    Transform(c *GollectorContainer) error
+}
+
+type Receiver interface {
+    SetHandler(h *Handler)
+    Start() error
+}
+
 type gerror struct {
 	Reason string
 }
