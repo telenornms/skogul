@@ -54,7 +54,7 @@ func (idb InfluxDB) Send(c *GollectorContainer) error {
 			comma = ","
 		}
 		lt := c.Template.Time
-		if m.Time != (time.Time{}) {
+		if m.Time != nil {
 			lt = m.Time
 		}
 		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())

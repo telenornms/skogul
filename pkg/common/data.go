@@ -28,14 +28,14 @@ import (
 )
 
 type GollectorContainer struct {
-	Template GollectorMetric   `json:"template"`
+	Template GollectorMetric   `json:"template,omitempty"`
 	Metrics  []GollectorMetric `json:"metrics"`
 }
 
 type GollectorMetric struct {
-	Time     time.Time              `json:"timestamp"`
-	Metadata map[string]interface{} `json:"metadata"`
-	Data     map[string]interface{} `json:"data"`
+	Time     *time.Time              `json:"timestamp,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Data     map[string]interface{} `json:"data,omitempty"`
 }
 
 func (m GollectorMetric) Validate() error {
@@ -53,7 +53,7 @@ func (c GollectorContainer) Validate() error {
 		return Gerror{"Empty metrics[] data"}
 	}
 	for i := 0; i < len(c.Metrics); i++ {
-		if c.Metrics[i].Time == (time.Time{}) && c.Template.Time == (time.Time{}) {
+		if c.Metrics[i].Time == nil && c.Template.Time == nil {
 			return Gerror{"Missing timestamp in both metric and container"}
 		}
 		err := c.Metrics[i].Validate()
