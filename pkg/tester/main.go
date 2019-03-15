@@ -30,11 +30,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"flag"
+	"fmt"
 	"math/rand"
 	. "github.com/KristianLyng/gollector/pkg/common"
 )
 
 var metrics = flag.Int64("metrics",1000,"Number of metrics per HTTP post")
+var values = flag.Int64("values",5,"Number of values per metric")
 
 func meh(t time.Time) int64 {
 	c := GollectorContainer{}
@@ -45,8 +47,9 @@ func meh(t time.Time) int64 {
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}
-		m.Data["metric1"] = rand.Int63()
-		m.Data["metric2"] = rand.Int63()
+		for key := int64(0); key < *values; key++ {
+			m.Data[fmt.Sprintf("metric%d",key)] = rand.Int63()
+		}
 		c.Metrics[i] = m
 	}
 	b,err := json.Marshal(c)
@@ -66,7 +69,7 @@ func meh(t time.Time) int64 {
 			log.Print(resp)
 		}
 	}
-	return *metrics
+	return *metrics * *values
 }
 
 func main() {
