@@ -24,35 +24,35 @@
 package main
 
 import (
-	"net/http"
-	"time"
-	"log"
 	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
-	"math/rand"
 	. "github.com/KristianLyng/gollector/pkg/common"
+	"log"
+	"math/rand"
+	"net/http"
+	"time"
 )
 
-var metrics = flag.Int64("metrics",1000,"Number of metrics per HTTP post")
-var values = flag.Int64("values",5,"Number of values per metric")
+var metrics = flag.Int64("metrics", 1000, "Number of metrics per HTTP post")
+var values = flag.Int64("values", 5, "Number of values per metric")
 
 func meh(t time.Time) int64 {
 	c := GollectorContainer{}
 	c.Template.Time = &t
-	c.Metrics = make([]GollectorMetric,*metrics)
+	c.Metrics = make([]GollectorMetric, *metrics)
 	for i := int64(0); i < *metrics; i++ {
 		m := GollectorMetric{}
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}
 		for key := int64(0); key < *values; key++ {
-			m.Data[fmt.Sprintf("metric%d",key)] = rand.Int63()
+			m.Data[fmt.Sprintf("metric%d", key)] = rand.Int63()
 		}
 		c.Metrics[i] = m
 	}
-	b,err := json.Marshal(c)
+	b, err := json.Marshal(c)
 	var buffer bytes.Buffer
 	buffer.Write(b)
 	req, err := http.NewRequest("POST", "http://[::1]:8080", &buffer)
@@ -78,13 +78,13 @@ func main() {
 	start := time.Now()
 	end := time.Now()
 	var mets int64
-	mets=0
+	mets = 0
 	for runs := 0; runs < 3600; runs++ {
 		mets += meh(t.Add(time.Second * time.Duration(runs)))
 		if (runs % 10) == 0 {
 			end = time.Now()
-			log.Printf("Run %d, %d metrics/s", runs, mets * int64(time.Second) / int64(end.Sub(start)))
-			mets=0
+			log.Printf("Run %d, %d metrics/s", runs, mets*int64(time.Second)/int64(end.Sub(start)))
+			mets = 0
 			start = time.Now()
 
 		}

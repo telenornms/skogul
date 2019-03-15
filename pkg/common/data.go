@@ -33,7 +33,7 @@ type GollectorContainer struct {
 }
 
 type GollectorMetric struct {
-	Time     *time.Time              `json:"timestamp,omitempty"`
+	Time     *time.Time             `json:"timestamp,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Data     map[string]interface{} `json:"data,omitempty"`
 }
