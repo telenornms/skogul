@@ -26,14 +26,14 @@ package senders
 import (
 	"bytes"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg/common"
+	. "github.com/KristianLyng/gollector/pkg"
 	"log"
 	"net/http"
 	"time"
 )
 
 type InfluxDB struct {
-	Url         string
+	URL         string
 	Measurement string
 }
 
@@ -59,7 +59,7 @@ func (idb InfluxDB) Send(c *GollectorContainer) error {
 		}
 		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())
 	}
-	req, err := http.NewRequest("POST", idb.Url, &buffer)
+	req, err := http.NewRequest("POST", idb.URL, &buffer)
 	req.Header.Set("Content-Type", "text/plain")
 	timeout := time.Duration(5 * time.Second)
 	client := http.Client{

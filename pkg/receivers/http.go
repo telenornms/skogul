@@ -26,7 +26,7 @@ package receivers
 import (
 	"encoding/json"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg/common"
+	. "github.com/KristianLyng/gollector/pkg"
 	"io"
 	"log"
 	"net/http"

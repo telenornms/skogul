@@ -24,7 +24,7 @@
 package main
 
 import (
-	. "github.com/KristianLyng/gollector/pkg/common"
+	. "github.com/KristianLyng/gollector/pkg"
 	. "github.com/KristianLyng/gollector/pkg/receivers"
 	. "github.com/KristianLyng/gollector/pkg/senders"
 )

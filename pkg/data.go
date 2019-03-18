@@ -21,17 +21,41 @@
  * 02110-1301  USA
  */
 
-package common
+package gollector
 
 import (
 	"time"
 )
 
+/*
+ * The Container is the top-level object that simply contains a collection
+ * of metrics.
+ *
+ * It contains an optional template, and an array of metrics. The idea is
+ * that a producer of metrics sends a bulk of metrics in a single request,
+ * and we deal with it. To provide flexibility, the producer can provide an
+ * (optional) template, which will be the starting point of individual
+ * metrics. Example use-cases of the template include providing a timestamp
+ * if all the metrics provided are from the same time stamp, and metadata
+ * keys that are common, such as origin-server perhaps.
+ */
 type GollectorContainer struct {
 	Template GollectorMetric   `json:"template,omitempty"`
 	Metrics  []GollectorMetric `json:"metrics"`
 }
 
+/*
+ * A metric is a single set of measurements and related timestamp and
+ * metadata.
+ *
+ * The difference between Data and Metadata is that the metadata is used to
+ * identify the data, along with the timestamp. In database-terms, the
+ * indexed parts are timestamp and metadata. Examples are "ifName"
+ * (interface name) can be metadata, since it makes sense to search for or
+ * graph data related to a single port, while "ifHCInOctets" would be data,
+ * as it does NOT make sense to search for or graph data related to exactly
+ * 12162 ifHCInOctets.
+ */
 type GollectorMetric struct {
 	Time     *time.Time             `json:"timestamp,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`

@@ -1,5 +1,5 @@
 /*
- * gollector, common trivialities
+ * gollector, http writer
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,34 +21,39 @@
  * 02110-1301  USA
  */
 
-package common
+package senders
 
 import (
+	"bytes"
+	"encoding/json"
+	. "github.com/KristianLyng/gollector/pkg"
 	"log"
+	"net/http"
+	"time"
 )
 
-type Handler struct {
-	Transformers []Transformer
-	Senders      []Sender
+type HTTP struct {
+	URL string
 }
 
-type Sender interface {
-	Send(c *GollectorContainer) error
-}
-
-type Transformer interface {
-	Transform(c *GollectorContainer) error
-}
-
-type Receiver interface {
-	Start() error
-}
-
-type Gerror struct {
-	Reason string
-}
-
-func (e Gerror) Error() string {
-	log.Printf("Error: %v", e.Reason)
-	return e.Reason
+func (ht HTTP) Send(c *GollectorContainer) error {
+	b, err := json.Marshal(*c)
+	var buffer bytes.Buffer
+	buffer.Write(b)
+	req, err := http.NewRequest("POST", ht.URL, &buffer)
+	req.Header.Set("Content-Type", "application/json")
+	timeout := time.Duration(5 * time.Second)
+	client := http.Client{
+		Timeout: timeout,
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Print(err)
+		return err
+	} else {
+		if resp.StatusCode < 200 || resp.StatusCode > 299 {
+			log.Print(resp)
+		}
+	}
+	return nil
 }
