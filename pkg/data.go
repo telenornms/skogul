@@ -39,9 +39,9 @@ import (
  * if all the metrics provided are from the same time stamp, and metadata
  * keys that are common, such as origin-server perhaps.
  */
-type GollectorContainer struct {
-	Template GollectorMetric   `json:"template,omitempty"`
-	Metrics  []GollectorMetric `json:"metrics"`
+type Container struct {
+	Template Metric   `json:"template,omitempty"`
+	Metrics  []Metric `json:"metrics"`
 }
 
 /*
@@ -56,20 +56,20 @@ type GollectorContainer struct {
  * as it does NOT make sense to search for or graph data related to exactly
  * 12162 ifHCInOctets.
  */
-type GollectorMetric struct {
+type Metric struct {
 	Time     *time.Time             `json:"timestamp,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Data     map[string]interface{} `json:"data,omitempty"`
 }
 
-func (m GollectorMetric) Validate() error {
+func (m Metric) Validate() error {
 	if m.Data == nil {
 		return Gerror{"Missing data for metric"}
 	}
 	return nil
 }
 
-func (c GollectorContainer) Validate() error {
+func (c Container) Validate() error {
 	if c.Metrics == nil {
 		return Gerror{"Missing metrics[] data"}
 	}

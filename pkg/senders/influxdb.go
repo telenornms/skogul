@@ -26,7 +26,7 @@ package senders
 import (
 	"bytes"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg"
+	gollector "github.com/KristianLyng/gollector/pkg"
 	"log"
 	"net/http"
 	"time"
@@ -37,7 +37,7 @@ type InfluxDB struct {
 	Measurement string
 }
 
-func (idb InfluxDB) Send(c *GollectorContainer) error {
+func (idb InfluxDB) Send(c *gollector.Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)

@@ -26,7 +26,7 @@ package senders
 import (
 	"bytes"
 	"encoding/json"
-	. "github.com/KristianLyng/gollector/pkg"
+	gollector "github.com/KristianLyng/gollector/pkg"
 	"log"
 	"net/http"
 	"time"
@@ -36,7 +36,7 @@ type HTTP struct {
 	URL string
 }
 
-func (ht HTTP) Send(c *GollectorContainer) error {
+func (ht HTTP) Send(c *gollector.Container) error {
 	b, err := json.Marshal(*c)
 	var buffer bytes.Buffer
 	buffer.Write(b)

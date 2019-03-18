@@ -26,14 +26,14 @@ package receivers
 import (
 	"encoding/json"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg"
+	gollector "github.com/KristianLyng/gollector/pkg"
 	"io"
 	"log"
 	"net/http"
 )
 
 type HTTPReceiver struct {
-	Handler *Handler
+	Handler *gollector.Handler
 }
 
 func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +43,7 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Panicf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
 		}
-		var m GollectorContainer
+		var m gollector.Container
 		err = json.Unmarshal(b, &m)
 		if err == nil {
 			err = m.Validate()
@@ -64,5 +64,5 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (handler HTTPReceiver) Start() error {
 	http.Handle("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
-	return Gerror{"Shouldn't reach this"}
+	return gollector.Gerror{"Shouldn't reach this"}
 }

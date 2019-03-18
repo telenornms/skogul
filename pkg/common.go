@@ -66,7 +66,7 @@ type Handler struct {
  * SNMP-data is not.
  */
 type Sender interface {
-	Send(c *GollectorContainer) error
+	Send(c *Container) error
 }
 
 /*
@@ -81,7 +81,7 @@ type Sender interface {
  * needed.
  */
 type Transformer interface {
-	Transform(c *GollectorContainer) error
+	Transform(c *Container) error
 }
 
 /*

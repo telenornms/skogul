@@ -26,8 +26,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	. "github.com/KristianLyng/gollector/pkg"
-	. "github.com/KristianLyng/gollector/pkg/senders"
+	gollector "github.com/KristianLyng/gollector/pkg"
+	senders "github.com/KristianLyng/gollector/pkg/senders"
 	"log"
 	"math/rand"
 	"time"
@@ -36,12 +36,12 @@ import (
 var metrics = flag.Int64("metrics", 1000, "Number of metrics per HTTP post")
 var values = flag.Int64("values", 5, "Number of values per metric")
 
-func generate(t time.Time) (GollectorContainer, int64) {
-	c := GollectorContainer{}
+func generate(t time.Time) (gollector.Container, int64) {
+	c := gollector.Container{}
 	c.Template.Time = &t
-	c.Metrics = make([]GollectorMetric, *metrics)
+	c.Metrics = make([]gollector.Metric, *metrics)
 	for i := int64(0); i < *metrics; i++ {
-		m := GollectorMetric{}
+		m := gollector.Metric{}
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}
@@ -56,7 +56,7 @@ func generate(t time.Time) (GollectorContainer, int64) {
 func main() {
 	flag.Parse()
 	t := time.Now().Add(time.Second * -3600)
-	sender := HTTP{"http://[::1]:8080"}
+	sender := senders.HTTP{"http://[::1]:8080"}
 	start := time.Now()
 	end := time.Now()
 	var mets int64
