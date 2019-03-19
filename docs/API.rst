@@ -1,7 +1,7 @@
 API
 ===
 
-The general API for the gollector framework is aimed at being a
+The general API for the Skogul framework is aimed at being a
 general-purpose "data"-moving API that can transform data, but also has to
 be reasonably fast.
 
@@ -18,7 +18,7 @@ There are two parts to the API:
    than writing to /ping or /generic.
 
 The latter part is not part of the spec except a single generic variant,
-and while the gollector-code will probably provide multiple implementations
+and while the skogul-code will probably provide multiple implementations
 for convenience, the actual endpoints are considered site-specific.
 
 This document deals with the general aspects of the API.

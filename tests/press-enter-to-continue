@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright 2019 Kristian Lyngstøl <kly@kly.no>
 #
-# Simple wrapper to just run go build/gollector in a loop.
+# Simple wrapper to just run go build/skogul in a loop.
 
 # Alternative implementations would be variations of "trap: sprung!"
 # or similar, but this old classic never fails.
@@ -21,10 +21,10 @@ while true; do
     echo "Ready to build. Press enter to continue"
     read
     echo Building:
-    go build github.com/KristianLyng/gollector/pkg/gollector/ || echo "Failed? L2CODE"
+    go build github.com/KristianLyng/skogul/pkg/cmd/skogul/ || echo "Failed? L2CODE"
     echo Running
     running=1
-    ./gollector
+    ./skogul
     running=0
     echo "Done"
 done

@@ -1,5 +1,5 @@
 /*
- * gollector, http writer
+ * skogul, http writer
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -26,7 +26,7 @@ package senders
 import (
 	"bytes"
 	"encoding/json"
-	gollector "github.com/KristianLyng/gollector/pkg"
+	skogul "github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
 	"time"
@@ -36,7 +36,7 @@ type HTTP struct {
 	URL string
 }
 
-func (ht HTTP) Send(c *gollector.Container) error {
+func (ht HTTP) Send(c *skogul.Container) error {
 	b, err := json.Marshal(*c)
 	var buffer bytes.Buffer
 	buffer.Write(b)

@@ -1,5 +1,5 @@
 /*
- * gollector, extremely dumb benchmarker
+ * skogul, extremely dumb benchmarker
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -26,8 +26,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	gollector "github.com/KristianLyng/gollector/pkg"
-	senders "github.com/KristianLyng/gollector/pkg/senders"
+	skogul "github.com/KristianLyng/skogul/pkg"
+	senders "github.com/KristianLyng/skogul/pkg/senders"
 	"log"
 	"math/rand"
 	"time"
@@ -36,12 +36,12 @@ import (
 var metrics = flag.Int64("metrics", 1000, "Number of metrics per HTTP post")
 var values = flag.Int64("values", 5, "Number of values per metric")
 
-func generate(t time.Time) (gollector.Container, int64) {
-	c := gollector.Container{}
+func generate(t time.Time) (skogul.Container, int64) {
+	c := skogul.Container{}
 	c.Template.Time = &t
-	c.Metrics = make([]gollector.Metric, *metrics)
+	c.Metrics = make([]skogul.Metric, *metrics)
 	for i := int64(0); i < *metrics; i++ {
-		m := gollector.Metric{}
+		m := skogul.Metric{}
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}

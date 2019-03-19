@@ -1,8 +1,8 @@
-=============================
-Gollector - generic collector
-=============================
+======================================
+Skogul - generic metric/data collector
+======================================
 
-Gollector is a collector of various data, but unlike most similar tools, it
+Skogul is a collector of various data, but unlike most similar tools, it
 does NOT provide a backend storage, and the aim is to provide a generic,
 reasonably future-proof API that can be built upon using various backend
 writers, transformers and more.
@@ -26,3 +26,14 @@ what you do with it.
 At present time, it's not suited for much more than looking at the general
 development of the architecture. As such, build-instructions and more are
 explicitly left out.
+
+Name
+----
+
+Skogul is a Valkyrie. After extensive research (5 minutes on wikipedia with
+a cross-check on duckduckgo), this name was selected because it is
+reasonably unique and is also a valkyrie, like Gondul, a sister-project.
+
+Being a whole week old, a name change was due, so you might find references
+to Gollector here and there, if I suck at grep(1).
+

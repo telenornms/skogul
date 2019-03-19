@@ -1,5 +1,5 @@
 /*
- * gollector, main method/init
+ * skogul, main method/init
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -24,9 +24,9 @@
 package main
 
 import (
-	. "github.com/KristianLyng/gollector/pkg"
-	. "github.com/KristianLyng/gollector/pkg/receivers"
-	. "github.com/KristianLyng/gollector/pkg/senders"
+	. "github.com/KristianLyng/skogul/pkg"
+	. "github.com/KristianLyng/skogul/pkg/receivers"
+	. "github.com/KristianLyng/skogul/pkg/senders"
 )
 
 func main() {

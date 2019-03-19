@@ -1,5 +1,5 @@
 /*
- * gollector, influxdb writer
+ * skogul, influxdb writer
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -26,7 +26,7 @@ package senders
 import (
 	"bytes"
 	"fmt"
-	gollector "github.com/KristianLyng/gollector/pkg"
+	skogul "github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
 	"time"
@@ -37,7 +37,7 @@ type InfluxDB struct {
 	Measurement string
 }
 
-func (idb InfluxDB) Send(c *gollector.Container) error {
+func (idb InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)

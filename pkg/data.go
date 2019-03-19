@@ -1,5 +1,5 @@
 /*
- * gollector, core data structures
+ * skogul, core data structures
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package gollector
+package skogul
 
 import (
 	"time"
