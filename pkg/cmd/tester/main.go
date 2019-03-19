@@ -26,8 +26,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	skogul "github.com/KristianLyng/skogul/pkg"
-	senders "github.com/KristianLyng/skogul/pkg/senders"
+	"github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg/senders"
 	"log"
 	"math/rand"
 	"time"

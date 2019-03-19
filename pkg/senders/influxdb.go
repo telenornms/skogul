@@ -26,7 +26,7 @@ package senders
 import (
 	"bytes"
 	"fmt"
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
 	"time"
@@ -41,9 +41,6 @@ func (idb InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)
-		for key, value := range c.Template.Metadata {
-			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
-		}
 		for key, value := range m.Metadata {
 			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
 		}
@@ -53,11 +50,7 @@ func (idb InfluxDB) Send(c *skogul.Container) error {
 			fmt.Fprintf(&buffer, "%s%s=%#v", comma, key, value)
 			comma = ","
 		}
-		lt := c.Template.Time
-		if m.Time != nil {
-			lt = m.Time
-		}
-		fmt.Fprintf(&buffer, " %d\n", lt.UnixNano())
+		fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
 	}
 	req, err := http.NewRequest("POST", idb.URL, &buffer)
 	req.Header.Set("Content-Type", "text/plain")

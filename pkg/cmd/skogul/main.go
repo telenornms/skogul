@@ -24,15 +24,16 @@
 package main
 
 import (
-	. "github.com/KristianLyng/skogul/pkg"
-	. "github.com/KristianLyng/skogul/pkg/receivers"
-	. "github.com/KristianLyng/skogul/pkg/senders"
+	"github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg/receivers"
+	"github.com/KristianLyng/skogul/pkg/senders"
+	"github.com/KristianLyng/skogul/pkg/transformers"
 )
 
 func main() {
-	h := Handler{}
-	h.Senders = []Sender{InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"}}
-	var receiver Receiver
-	receiver = HTTPReceiver{&h}
+	h := skogul.Handler{}
+	h.Senders = []skogul.Sender{senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"}}
+	h.Transformers = []skogul.Transformer{transformers.Templater{}}
+	receiver := receivers.HTTPReceiver{&h}
 	receiver.Start()
 }

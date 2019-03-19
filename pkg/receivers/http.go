@@ -26,7 +26,7 @@ package receivers
 import (
 	"encoding/json"
 	"fmt"
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg"
 	"io"
 	"log"
 	"net/http"

@@ -26,7 +26,7 @@ package senders
 import (
 	"bytes"
 	"encoding/json"
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
 	"time"
