@@ -1,5 +1,5 @@
 /*
- * skogul, main method/init
+ * skogul, debug sender
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,20 +21,26 @@
  * 02110-1301  USA
  */
 
-package main
+package senders
 
 import (
+	"encoding/json"
 	"github.com/KristianLyng/skogul/pkg"
-	"github.com/KristianLyng/skogul/pkg/receivers"
-	"github.com/KristianLyng/skogul/pkg/senders"
-	"github.com/KristianLyng/skogul/pkg/transformers"
+	"log"
 )
 
-func main() {
-	h := skogul.Handler{}
-	h.Senders = append(h.Senders, senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"})
-	h.Senders = append(h.Senders, senders.Debug{})
-	h.Transformers = append(h.Transformers, transformers.Templater{})
-	receiver := receivers.HTTPReceiver{&h}
-	receiver.Start()
+/* Debug sender simply prints the metrics in json-marshalled format to
+ * stdout.
+ */
+type Debug struct {
+}
+
+func (db Debug) Send(c *skogul.Container) error {
+	b, err := json.MarshalIndent(*c, "", "  ")
+	if err != nil {
+		log.Panic("Unable to marshal json for debug output: %s", err)
+		return err
+	}
+	log.Printf("Debug: \n%s", b)
+	return nil
 }

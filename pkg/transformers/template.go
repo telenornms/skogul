@@ -25,7 +25,6 @@ package transformers
 
 import (
 	"github.com/KristianLyng/skogul/pkg"
-	"log"
 )
 
 /*
@@ -66,5 +65,6 @@ func (t Templater) Transform(c *skogul.Container) error {
 			}
 		}
 	}
+	c.Template = skogul.Metric{}
 	return nil
 }
