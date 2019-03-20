@@ -32,8 +32,13 @@ import (
 
 func main() {
 	h := skogul.Handler{}
-	h.Senders = append(h.Senders, senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"})
-	h.Senders = append(h.Senders, senders.Debug{})
+	fb := senders.Fallback{}
+	dupe := senders.Dupe{}
+	dupe.Next = append(dupe.Next, senders.Log{"The following failed:"})
+	dupe.Next = append(dupe.Next, senders.Debug{})
+	fb.Next = append(fb.Next, senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"})
+	fb.Next = append(fb.Next, dupe)
+	h.Senders = append(h.Senders, fb)
 	h.Transformers = append(h.Transformers, transformers.Templater{})
 	receiver := receivers.HTTPReceiver{&h}
 	receiver.Start()

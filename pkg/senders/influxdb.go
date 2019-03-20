@@ -61,9 +61,11 @@ func (idb InfluxDB) Send(c *skogul.Container) error {
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Print(err)
+		return err
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		log.Print(resp)
+		return skogul.Gerror{"Bad response code from InfluxDB"}
 	}
 	return nil
 }
