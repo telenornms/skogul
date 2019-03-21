@@ -28,16 +28,22 @@ import (
 	"github.com/KristianLyng/skogul/pkg/receivers"
 	"github.com/KristianLyng/skogul/pkg/senders"
 	"github.com/KristianLyng/skogul/pkg/transformers"
+	"time"
 )
 
 func main() {
-	h := skogul.Handler{}
 	fb := senders.Fallback{}
 	dupe := senders.Dupe{}
+	influx := senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"}
+	counter := &senders.Counter{Next: influx}
+	delay := senders.Sleeper{counter, 100 * time.Millisecond, false}
 	dupe.Next = append(dupe.Next, senders.Log{"The following failed:"})
 	dupe.Next = append(dupe.Next, senders.Debug{})
-	fb.Next = append(fb.Next, senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"})
+	fb.Next = append(fb.Next, delay)
+	//fb.Next = append(fb.Next, delay)
 	fb.Next = append(fb.Next, dupe)
+
+	h := skogul.Handler{}
 	h.Senders = append(h.Senders, fb)
 	h.Transformers = append(h.Transformers, transformers.Templater{})
 	receiver := receivers.HTTPReceiver{&h}

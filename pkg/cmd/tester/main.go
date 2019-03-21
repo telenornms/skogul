@@ -36,7 +36,7 @@ import (
 var metrics = flag.Int64("metrics", 1000, "Number of metrics per HTTP post")
 var values = flag.Int64("values", 5, "Number of values per metric")
 
-func generate(t time.Time) (skogul.Container, int64) {
+func generate(t time.Time) skogul.Container {
 	c := skogul.Container{}
 	c.Template.Time = &t
 	c.Metrics = make([]skogul.Metric, *metrics)
@@ -50,30 +50,19 @@ func generate(t time.Time) (skogul.Container, int64) {
 		}
 		c.Metrics[i] = m
 	}
-	return c, *metrics * *values
+	return c
 }
 
 func main() {
 	flag.Parse()
 	t := time.Now().Add(time.Second * -3600)
-	sender := senders.HTTP{"http://[::1]:8080"}
-	start := time.Now()
-	end := time.Now()
-	var mets int64
-	mets = 0
+	skoup := senders.HTTP{"http://[::1]:8080"}
+	sender := &senders.Counter{Next: skoup}
 	for runs := 0; runs < 3600; runs++ {
-		c, nm := generate(t.Add(time.Second * time.Duration(runs)))
-		mets += nm
+		c := generate(t.Add(time.Second * time.Duration(runs)))
 		err := sender.Send(&c)
 		if err != nil {
 			log.Print(err)
-		}
-		if (runs % 10) == 0 {
-			end = time.Now()
-			log.Printf("Run %d, %d metrics/s", runs, mets*int64(time.Second)/int64(end.Sub(start)))
-			mets = 0
-			start = time.Now()
-
 		}
 	}
 }
