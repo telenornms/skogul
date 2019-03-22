@@ -34,7 +34,7 @@ Skogul is meant to scale well. At present time, there are known flaws in
 the implementation, but still, simple local testing on a laptop is able to
 produce decent results.
 
-.. images:: docs/skogul-rates.png
+.. image:: docs/skogul-rates.png
 
 The above graph is from a very simple test on a laptop (with a quad core
 i7), using the provided tester to write data to influxdb. It demonstrates
