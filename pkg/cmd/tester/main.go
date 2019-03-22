@@ -57,7 +57,7 @@ func main() {
 	flag.Parse()
 	t := time.Now().Add(time.Second * -3600)
 	skoup := senders.HTTP{"http://[::1]:8080"}
-	sender := &senders.Counter{Next: skoup}
+	sender := &senders.Counter{Next: skoup, Stats: senders.Debug{}}
 	for runs := 0; runs < 3600; runs++ {
 		c := generate(t.Add(time.Second * time.Duration(runs)))
 		err := sender.Send(&c)
