@@ -27,6 +27,28 @@ At present time, it's not suited for much more than looking at the general
 development of the architecture. As such, build-instructions and more are
 explicitly left out.
 
+Performance
+-----------
+
+Skogul is meant to scale well. At present time, there are known flaws in
+the implementation, but still, simple local testing on a laptop is able to
+produce decent results.
+
+.. images:: docs/skogul-rates.png
+
+The above graph is from a very simple test on a laptop (with a quad core
+i7), using the provided tester to write data to influxdb. It demonstrates
+that despite well-known weaknesses (specially in the influx-writer), we're
+able to push roughly 600-800k values/s through Skogul.
+
+The laptop in question was using about 150-190% CPU for skogul and 400% for
+InfluxDB, the rest went to the testers. No real attempt at tuning was done.
+
+As future work will introduce buffers and "batch aggregators" to make it
+better equipped to handle irregular traffic, it's is expected and
+acceptable that performance dips when the number of values per container
+drops.
+
 Name
 ----
 
