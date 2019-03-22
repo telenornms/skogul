@@ -29,15 +29,18 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 )
 
 type InfluxDB struct {
 	URL         string
 	Measurement string
+	client      *http.Client
+	mux         sync.Mutex
 }
 
-func (idb InfluxDB) Send(c *skogul.Container) error {
+func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)
@@ -52,13 +55,15 @@ func (idb InfluxDB) Send(c *skogul.Container) error {
 		}
 		fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
 	}
-	req, err := http.NewRequest("POST", idb.URL, &buffer)
-	req.Header.Set("Content-Type", "text/plain")
-	timeout := time.Duration(5 * time.Second)
-	client := http.Client{
-		Timeout: timeout,
+	if idb.client == nil {
+		idb.mux.Lock()
+		// Recheck after acquiring lock
+		if idb.client == nil {
+			idb.client = &http.Client{Timeout: 5 * time.Second}
+		}
+		idb.mux.Unlock()
 	}
-	resp, err := client.Do(req)
+	resp, err := idb.client.Post(idb.URL, "text/plain", &buffer)
 	if err != nil {
 		log.Print(err)
 		return err

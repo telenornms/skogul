@@ -34,12 +34,10 @@ import (
 func main() {
 	fb := senders.Fallback{}
 	dupe := senders.Dupe{}
-	influx := &senders.InfluxDB{"http://127.0.0.1:8086/write?db=test", "test"}
-	counter := senders.Counter{
-		Next:   influx,
-		Stats:  influx,
-		Period: 1 * time.Second}
-	delay := &senders.Sleeper{&counter, 1 * time.Millisecond, false}
+	influx := &senders.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
+	counter := &senders.Counter{Next: influx, Stats: influx, Period: 1 * time.Second}
+	delay := &senders.Sleeper{counter, 1 * time.Millisecond, false}
+
 	dupe.Next = append(dupe.Next, senders.Log{"The following failed:"})
 	dupe.Next = append(dupe.Next, senders.Debug{})
 	fb.Next = append(fb.Next, delay)
