@@ -34,10 +34,15 @@ import (
 func main() {
 	fb := senders.Fallback{}
 	dupe := senders.Dupe{}
+	dupe2 := senders.Dupe{}
 	influx := &senders.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
-	counter := &senders.Counter{Next: influx, Stats: influx, Period: 1 * time.Second}
-	delay := &senders.Sleeper{counter, 1 * time.Millisecond, false}
+	postgres := &senders.Postgres{ConnStr: "user=postgres dbname=test host=localhost port=5432 sslmode=disable"}
+	postgres.Init()
 
+	dupe2.Next = append(dupe2.Next, influx)
+	dupe2.Next = append(dupe2.Next, postgres)
+	counter := &senders.Counter{Next: dupe2, Stats: influx, Period: 1 * time.Second}
+	delay := &senders.Sleeper{counter, 1 * time.Millisecond, false}
 	dupe.Next = append(dupe.Next, senders.Log{"The following failed:"})
 	dupe.Next = append(dupe.Next, senders.Debug{})
 	fb.Next = append(fb.Next, delay)

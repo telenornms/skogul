@@ -1,0 +1,136 @@
+/*
+ * skogul, postgres sender
+ *
+ * Copyright (c) 2019 Telenor Norge AS
+ * Author(s):
+ *  - Kristian Lyngstøl <kly@kly.no>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301  USA
+ */
+
+package senders
+
+import (
+	"database/sql"
+	"encoding/json"
+	"github.com/KristianLyng/skogul/pkg"
+	"github.com/lib/pq"
+	"log"
+	"sync"
+)
+
+/*
+Postgres-sender writes to a postgres-database, at the moment using the simplest
+schema imaginable with ts (timestamp), metadata (jsonb), data (jsonb). Future
+versions will most likely be less stupid schema-wise.
+*/
+type Postgres struct {
+	ConnStr string
+	db      *sql.DB
+	mux     sync.Mutex
+}
+
+func (pqs *Postgres) Init() error {
+	var err error
+	pqs.db, err = sql.Open("postgres", pqs.ConnStr)
+	if err != nil {
+		log.Print(err)
+		return err
+	}
+	err = pqs.db.Ping()
+	if err != nil {
+		log.Print(err)
+		return err
+	}
+	return nil
+}
+
+func (pqs *Postgres) checkInit() error {
+	if pqs.db == nil {
+		pqs.mux.Lock()
+		defer pqs.mux.Unlock()
+		if pqs.db == nil {
+			err := pqs.Init()
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (pqs *Postgres) Send(c *skogul.Container) error {
+	var er error
+	er = pqs.checkInit()
+	if er != nil {
+		log.Print(er)
+		return er
+	}
+	txn, err := pqs.db.Begin()
+	if err != nil {
+		log.Print(err)
+		return err
+	}
+
+	stmt, err := txn.Prepare(pq.CopyIn("test", "ts", "metadata", "data"))
+	if err != nil {
+		log.Print(err)
+		return err
+	}
+
+	for _, m := range c.Metrics {
+		meta, er1 := json.Marshal(m.Metadata)
+		if er1 != nil {
+			log.Print(err)
+			txn.Rollback()
+			return er1
+		}
+		data, er2 := json.Marshal(m.Data)
+		if er2 != nil {
+			log.Print(err)
+			txn.Rollback()
+			return er2
+		}
+		_, err = stmt.Exec(m.Time, meta, data)
+		if err != nil {
+			log.Print(err)
+			txn.Rollback()
+			return err
+		}
+	}
+
+	_, err = stmt.Exec()
+	if err != nil {
+		log.Print(err)
+		txn.Rollback()
+		return err
+	}
+
+	err = stmt.Close()
+	if err != nil {
+		log.Print(err)
+		txn.Rollback()
+		return err
+	}
+
+	err = txn.Commit()
+	if err != nil {
+		log.Print(err)
+		txn.Rollback()
+		return err
+	}
+	return nil
+}
