@@ -42,7 +42,12 @@ that despite well-known weaknesses (specially in the influx-writer), we're
 able to push roughly 600-800k values/s through Skogul.
 
 The laptop in question was using about 150-190% CPU for skogul and 400% for
-InfluxDB, the rest went to the testers. No real attempt at tuning was done.
+InfluxDB, the rest went to the testers. No real attempt at tuning was done,
+but a few different scenarios were tested.
+
+Note that the general values/s is decent both with a ton of values for each
+metric, and just a handful of values per metric, but tons of metrics per
+containers.
 
 As future work will introduce buffers and "batch aggregators" to make it
 better equipped to handle irregular traffic, it's is expected and
