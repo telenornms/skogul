@@ -43,6 +43,16 @@ type Postgres struct {
 	mux     sync.Mutex
 }
 
+/*
+Init() will connect to the database, ping it and set things up.
+
+Running it is optional. It will be run when the first metric passes
+through the Postgres sender, but it might still be a good idea to
+run it "yourself" so you can decide what to do before you start receiving
+metrics (e.g.: if used as part of a cluster, it might be better to exit/die
+if the storage isn't present so upstream skogul instances can use other
+members of the cluster - your milage may vary)
+*/
 func (pqs *Postgres) Init() error {
 	var err error
 	pqs.db, err = sql.Open("postgres", pqs.ConnStr)

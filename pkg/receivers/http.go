@@ -32,17 +32,35 @@ import (
 	"net/http"
 )
 
-type HTTPReceiver struct {
-	Address string
+/*
+The HTTP receiver accepts HTTP connections on the Address
+specified and directs valid Skogul metric containers to
+the appropriate skogul.Handler.
+
+Set it up similar to net/http:
+
+rcv := receiver.HTTP{Address: "localhost:8080"}
+rcv.Handle("/", foo)
+rcv.Handle("/blatti", bar)
+
+
+*/
+
+type HTTP struct {
+	Address  string
+	handlers map[string]*skogul.Handler
+}
+
+type receiver struct {
 	Handler *skogul.Handler
 }
 
-func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.ContentLength > 0 {
 		b := make([]byte, r.ContentLength)
 		n, err := io.ReadFull(r.Body, b)
 		if err != nil {
-			log.Panicf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
+			log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
 		}
 		var m skogul.Container
 		err = json.Unmarshal(b, &m)
@@ -62,8 +80,26 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (handler HTTPReceiver) Start() error {
-	http.Handle("/", handler)
+/*
+Adds a handler to a URL-pattern (same as net/http). Mostly
+a convenience function to get less-ugly assignements.
+*/
+func (handler *HTTP) Handle(idx string, h *skogul.Handler) {
+	if handler.handlers == nil {
+		handler.handlers = make(map[string]*skogul.Handler)
+	}
+	if handler.handlers[idx] != nil {
+		log.Fatalf("Error: Refusing to overwrite existing handler for %s", idx)
+	}
+	handler.handlers[idx] = h
+}
+
+// Start the HTTP receiver
+func (handler *HTTP) Start() error {
+	for idx, h := range handler.handlers {
+		log.Printf("Adding handler for %v", idx)
+		http.Handle(idx, receiver{h})
+	}
 	if handler.Address == "" {
 		log.Print("HTTP: No listen-address specified. Using localhost:8080")
 		handler.Address = "localhost:8080"
