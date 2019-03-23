@@ -68,3 +68,29 @@ func (sl *Sleeper) Send(c *skogul.Container) error {
 	time.Sleep(time.Duration(d))
 	return sl.Next.Send(c)
 }
+
+/*
+ForwardAndFail sender will pass the container to the Next sender, but
+always returns an error. The use-case for this is to allow the fallback
+Sender or similar to eventually send data to a sender that ALWAYS works,
+e.g. the Debug-sender og just printing a message in the log, but we still
+want to propogate the error upwards in the stack so clients can take
+appropriate action.
+
+Example use:
+
+faf := senders.ForwardAndFail{Next: skogul.Debug{}}
+fb := senders.Fallback{Next: []skogul.Sender{influx, faf}}
+
+*/
+type ForwardAndFail struct {
+	Next skogul.Sender
+}
+
+func (faf *ForwardAndFail) Send(c *skogul.Container) error {
+	err := faf.Next.Send(c)
+	if err == nil {
+		return skogul.Gerror{"Forced failure"}
+	}
+	return err
+}

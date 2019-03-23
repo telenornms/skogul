@@ -33,6 +33,7 @@ import (
 )
 
 type HTTPReceiver struct {
+	Address string
 	Handler *skogul.Handler
 }
 
@@ -63,6 +64,11 @@ func (handler HTTPReceiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (handler HTTPReceiver) Start() error {
 	http.Handle("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	if handler.Address == "" {
+		log.Print("HTTP: No listen-address specified. Using localhost:8080")
+		handler.Address = "localhost:8080"
+	}
+	log.Printf("Starting http receiver at http://%s", handler.Address)
+	log.Fatal(http.ListenAndServe(handler.Address, nil))
 	return skogul.Gerror{"Shouldn't reach this"}
 }
