@@ -65,7 +65,7 @@ func main() {
 	counter := &senders.Counter{Next: dupe2, Stats: influx, Period: 1 * time.Second}
 
 	// Let's also inject a random delay for testing
-	delay := &senders.Sleeper{counter, 1 * time.Millisecond, false}
+	delay := senders.Sleeper{counter, 1 * time.Millisecond, false}
 
 	// An other duplicator. This one just prints "The following failed"
 	// and then uses the Debug-sender to print the metrics.
@@ -75,7 +75,9 @@ func main() {
 	// (delay->counter->dupe2->{postgres,influx}), but if this
 	// fails, it will write to the dupe-sender (print "the following
 	// failed" and the request).
-	fb := senders.Fallback{Next: []skogul.Sender{delay, dupe}}
+	fb := senders.Fallback{}
+	fb.Add(&delay)
+	fb.Add(&dupe)
 
 	// That takes care of the sender-chains. Let's set up three
 	// receiver handlers.
@@ -84,7 +86,7 @@ func main() {
 	// that's it. It also has a single transformer that - prior to
 	// sending the data on - expands any template provided.
 	h := skogul.Handler{
-		Senders:      []skogul.Sender{fb},
+		Senders:      []skogul.Sender{&fb},
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
 	// This is the same - but just print the request.
@@ -99,7 +101,7 @@ func main() {
 		Transformers: []skogul.Transformer{}}
 
 	// Set up a HTTP receiver
-	receiver := receivers.HTTP{Address: "localhost:8080"}
+	receiver := receivers.HTTP{Address: "[::1]:8080"}
 
 	// Add the various handlers to relevant paths.
 	receiver.Handle("/", &h)

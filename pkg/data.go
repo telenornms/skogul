@@ -28,16 +28,20 @@ import (
 )
 
 /*
- * The Container is the top-level object that simply contains a collection
- * of metrics.
- *
- * It contains an optional template, and an array of metrics. The idea is
- * that a producer of metrics sends a bulk of metrics in a single request,
- * and we deal with it. To provide flexibility, the producer can provide an
- * (optional) template, which will be the starting point of individual
- * metrics. Example use-cases of the template include providing a timestamp
- * if all the metrics provided are from the same time stamp, and metadata
- * keys that are common, such as origin-server perhaps.
+The Container is the top-level object that simply contains a collection
+of metrics.
+
+It contains an optional template, and an array of metrics. The idea is
+that a producer of metrics sends a bulk of metrics in a single request,
+and we deal with it. To provide flexibility, the producer can provide an
+(optional) template, which will be the starting point of individual
+metrics. Example use-cases of the template include providing a timestamp
+if all the metrics provided are from the same time stamp, and metadata
+keys that are common, such as origin-server perhaps.
+
+The template (should) be "expanded" by the receiver using the Template
+transformer, and down-stream Senders need not worry about the template
+mechanics.
  */
 type Container struct {
 	Template Metric   `json:"template,omitempty"`
@@ -45,16 +49,87 @@ type Container struct {
 }
 
 /*
- * A metric is a single set of measurements and related timestamp and
- * metadata.
- *
- * The difference between Data and Metadata is that the metadata is used to
- * identify the data, along with the timestamp. In database-terms, the
- * indexed parts are timestamp and metadata. Examples are "ifName"
- * (interface name) can be metadata, since it makes sense to search for or
- * graph data related to a single port, while "ifHCInOctets" would be data,
- * as it does NOT make sense to search for or graph data related to exactly
- * 12162 ifHCInOctets.
+A metric is a single set of measurements and related timestamp and
+metadata.
+
+The difference between Data and Metadata is that the metadata is used to
+identify the data, along with the timestamp. In database-terms, the
+indexed parts are timestamp and metadata. Examples are "ifName"
+(interface name) can be metadata, since it makes sense to search for or
+graph data related to a single port, while "ifHCInOctets" would be data,
+as it does NOT make sense to search for or graph data related to exactly
+12162 ifHCInOctets.
+
+Example:
+	
+	{
+		"time": "2019-03-25T12:00:00Z",
+		"metadata": {
+			"device": "routera",
+			"os": "JUNOS 15.4R1",
+			"chassisId": "something"
+		},
+		"data": {
+			"uptime": 124125124,
+			"cputemp": 22
+		}
+	}
+
+Note that multi-dimensional metrics ARE allowed, but the behavior will
+depend on the storage backend. It might be wise to use a transformer
+to split it into individual metrics. Example:
+
+	{
+		"time": "2019-03-25T12:00:00Z",
+		"metadata": {
+			"device": "routera",
+			"os": "JUNOS 15.4R1",
+			"chassisId": "something"
+		},
+		"data": {
+			"ports": {
+				"ge-0/0/0": {
+					"ifHCInOctets":  5,
+					"ifHCOutOctets": 10
+				},
+				"ge-0/0/1": {
+					"ifHCInOctets":  2,
+					"ifHCOutOctets": 20
+				}
+			}
+		}
+	}
+
+This is legal, but it's probably wise to use a transformer to change it into:
+
+	{
+		"time": "2019-03-25T12:00:00Z",
+		"metadata": {
+			"device": "routera",
+			"os": "JUNOS 15.4R1",
+			"chassisId": "something",
+			"port": "ge-0/0/0"
+		},
+		"data": {
+			"ifHCInOctets":  5,
+			"ifHCOutOctets": 10
+			}
+		}
+	},
+	{
+		"time": "2019-03-25T12:00:00Z",
+		"metadata": {
+			"device": "routera",
+			"os": "JUNOS 15.4R1",
+			"chassisId": "something",
+			"port": "ge-0/0/1"
+		},
+		"data": {
+			"ifHCInOctets":  2,
+			"ifHCOutOctets": 20
+			}
+		}
+	}
  */
 type Metric struct {
 	Time     *time.Time             `json:"timestamp,omitempty"`
@@ -62,14 +137,19 @@ type Metric struct {
 	Data     map[string]interface{} `json:"data,omitempty"`
 }
 
-func (m Metric) Validate() error {
+/*
+Validate checks the validity of the metric, verifying that it follows
+the exepcted spec.
+*/
+func (m *Metric) Validate() error {
 	if m.Data == nil {
 		return Gerror{"Missing data for metric"}
 	}
 	return nil
 }
 
-func (c Container) Validate() error {
+// Validate ensures a container follows the spec
+func (c *Container) Validate() error {
 	if c.Metrics == nil {
 		return Gerror{"Missing metrics[] data"}
 	}

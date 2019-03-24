@@ -21,6 +21,10 @@
  * 02110-1301  USA
  */
 
+/*
+Receivers accept data and execute a handler. They are the "inbound"
+API of Skogul.
+*/
 package receivers
 
 import (
@@ -39,10 +43,9 @@ the appropriate skogul.Handler.
 
 Set it up similar to net/http:
 
-rcv := receiver.HTTP{Address: "localhost:8080"}
-rcv.Handle("/", foo)
-rcv.Handle("/blatti", bar)
-
+        rcv := receiver.HTTP{Address: "localhost:8080"}
+        rcv.Handle("/", foo)
+        rcv.Handle("/blatti", bar)
 
 */
 
@@ -81,7 +84,7 @@ func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 /*
-Adds a handler to a URL-pattern (same as net/http). Mostly
+Handle adds a handler to a URL-pattern (same as net/http). Mostly
 a convenience function to get less-ugly assignements.
 */
 func (handler *HTTP) Handle(idx string, h *skogul.Handler) {

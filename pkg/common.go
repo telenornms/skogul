@@ -34,9 +34,6 @@ This means you can use Skogul to receive data on a influxdb-like
 line-based TCP interface and send it on to postgres - or influxdb -
 without having to write explicit support, just set up the chain.
 
-Only thing is, we neither have an influxdb line interface receiver yet,
-nor a postgres writer. But the idea is cool!
-
 The guiding principles of Skogul is:
 
 - Make as few assumptions as possible about how data is received
@@ -49,46 +46,12 @@ receiving subsets of a total data set, write it to a local queue, then
 transmit - through strong authentication - to two central Skogul servers
 that store the data to multiple influxdb instances based on sharding
 rules.
-
-Skogul also provides a command line, but this is meant more as an
-example of how to put together a chain than it is meant as the One
-Correct Way to use Skogul.
-
-
-WARNING WARNING WARNING WARNING WARNING WARNING
-WARNING WARNING WARNING WARNING WARNING WARNING
-
-Skogul is a MOVING TARGET at present. Every facet of the project is likely
-to change and morph, and while I will do my best to keep documentation and
-APIs up to date, they are still likely to change.
-
-WARNING WARNING WARNING WARNING WARNING WARNING
-WARNING WARNING WARNING WARNING WARNING WARNING
 */
 package skogul
 
 import (
 	"log"
 )
-
-/*
- * The idea is that setting up new binaries should be trivial. It may be
- * necessary to write some Go-code, but given that, the fundamental
- * distinction is that receiving data should be disconnected from storing
- * it. E.g.: We might be collecting interface statistics with a home-brew
- * SNMP collector that can post to us, and a different collector based on
- * streaming telemetry instead of SNMP, and a third source might be a
- * different security domain where they might even use the TICK-stack and
- * export to us. So we have a generic receiver-stack (so far, only HTTP),
- * a reasonably generic writer/sender stack, but the trick is to be able to
- * put this all together.
- *
- * In all likelihood, these interfaces will change over time as we add more
- * actual use cases, but the idea is the above.
- *
- * Things that WILL come in to play: What parts are concurrent and what are
- * not? Queues? What are idempotent, what are not?
- */
 
 /*
 The Handler is inteded to be the "you've got the data... now what?"
@@ -100,29 +63,28 @@ type Handler struct {
 }
 
 /*
-A Sender is _seemingly_ the final step in the chain. It accepts data,
-and that's the end of it. Anything that writes to storage will be a
-sender, but it can also be things such as queues (e.g.: Send() to a
-queue which only ensures a quick accept, then sends it on to a slower
-storage up to a threshold, after which it starts blocking or dropping,
-depending on the queue-setup). This will allow us to do things like have
-a queue for streaming telemetry that is lossy, while the queue for
-SNMP-data is not.
+A Sender accepts data through Send() - and "sends it off". The canoncial
+sender is one that implements a storage backend or outgoing API. E.g.:
+accept data, send to influx.
+
+But the real power of a sender is chaining them together using tiny,
+single-purpose senders to build complicated logic.
+
+E.g.: The fallback sender is set up using a list of "down stream"
+senders and will accept data and try the first sender on the list,
+if that fail, try the next, and so on.
+
+A Sender should not modify the data it accepts. If it needs to do
+that, it has to make a copy, as multiple senders may be accessing
+the same data.
 */
 type Sender interface {
 	Send(c *Container) error
 }
 
 /*
-A transformer is a fast(!) way to modify a collection of metrics. Not
-sure exactly how useful it will be, but it could convecivably be things
-such as ASN1-lookup, lower-casing(?) of names, or the whole
-template-logic.
-
-The key difference between a transformer and a sender is that a
-transformer just modifies an existing collection, while a sender
-consumes it and (optionally) produces others if further processing is
-needed.
+A transformer is a fast(!) way to modify a collection of metrics. It
+is the safe way to modify data before it is passed to the first Sender.
 */
 type Transformer interface {
 	Transform(c *Container) error

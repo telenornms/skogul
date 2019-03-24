@@ -28,14 +28,36 @@ import (
 	"log"
 )
 
-/* Fallback sender tries each provided sender in turn before failing.
- */
+/*
+Fallback sender tries each provided sender in turn before failing.
+
+E.g.:
+
+	primary := senders.InfluxDB{....}
+	secondary := senders.Queue{....} // Not implemented yet
+	emergency := senders.Debug{}
+	
+	fallback := senders.Fallback{}
+	fallback.Add(&primary)
+	fallback.Add(&secondary)
+	fallback.Add(&emergency)
+
+This will send data to Influx normally. If Influx fails, it will send it to
+a queue. If that fails, it will print it to stdout.
+*/
 type Fallback struct {
-	Next []skogul.Sender
+	next []skogul.Sender
 }
 
-func (fb Fallback) Send(c *skogul.Container) error {
-	for _, s := range fb.Next {
+/*
+Add an other Sender
+*/
+func (fb *Fallback) Add(s skogul.Sender) error {
+	fb.next = append(fb.next,s)
+	return nil
+}
+func (fb *Fallback) Send(c *skogul.Container) error {
+	for _, s := range fb.next {
 		err := s.Send(c)
 		if err == nil {
 			return nil
@@ -44,10 +66,7 @@ func (fb Fallback) Send(c *skogul.Container) error {
 	return skogul.Gerror{"No working senders left..."}
 }
 
-/* Dupe-sender executes all provided senders in turn.
- *
- * Further options will include what to do when one fails.
- */
+// Dupe-sender executes all provided senders in turn.
 type Dupe struct {
 	Next []skogul.Sender
 }
@@ -62,10 +81,11 @@ func (dp Dupe) Send(c *skogul.Container) error {
 	return nil
 }
 
-/* Log-sender simply executes log.Print() on a predefined message.
- *
- * Intended use is in combination with other senders, e.g. to explain WHY
- * senders.Debug() was used.
+/*
+Log-sender simply executes log.Print() on a predefined message.
+
+Intended use is in combination with other senders, e.g. to explain WHY
+senders.Debug() was used.
  */
 type Log struct {
 	Message string
