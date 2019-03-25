@@ -28,24 +28,73 @@ import (
 )
 
 /*
-The template transformer is responsbile for consuming the template of a
-container and copying it to the individual metrics.
+Template iterates over all Metrics in a Skogul Container and fills in any
+missing template variable from the Template in the Container, so noone else
+has to.
 
-Note that templates are SHALLOW. If you have a template that goes
+Skogul Templates are shallow:
 
-"metadata": { "foo": { "key1": "value1" }
+        {
+                "tempate": {
+                        "foo": "bar",
+                        "geo": {
+                                "country": "Norway"
+                        }
+                },
+                "metrics": [
+                {
+                        "timestamp": "...",
+                        "metadata": {
+                                "name": "john",
+                                "geo": {
+                                        "city": "Oslo"
+                                }
+                        },
+                        "data": ...
+                },
+                {
+                        "timestamp": "...",
+                        "metadata": {
+                                "name": "fred",
+                                "foo": "BANANA"
+                        },
+                        "data": ...
+                }
+                ]
+        }
 
-then a metric provides
+Will result in:
 
-"metadata": { "foo": { "key2": "value2" } }
+        {
+                "metrics": [
+                {
+                        "timestamp": "...",
+                        "metadata": {
+                                "name": "john",
+                                "foo", "bar",
+                                "geo": {
+                                        "city": "Oslo"
+                                }
+                        },
+                        "data": ...
+                },
+                {
+                        "timestamp": "...",
+                        "metadata": {
+                                "name": "fred",
+                                "foo": "BANANA",
+                                "geo": {
+                                        "country": "Norway"
+                                }
+                        },
+                        "data": ...
+                }
+                ]
+        }
 
-then the "foo.key1" will NOT be part of the end result, as the template logic
-only sees that the metric has a "foo" object, and thus does not try to do
-further templating of that key.
+The template just checked if "geo" was present or not - it did not merge missing keys.
 
-Implementation-wise, this isn't really perfect - ideally it should be done
-on read, but because this provides a degree of flexibility that is hard to
-achieve with a getter, this seems like a reasonable compromise.
+It is good practice to use a template for any common fields, particularly timestamps.
 */
 type Templater struct{}
 

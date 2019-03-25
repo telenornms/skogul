@@ -70,7 +70,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		log.Print(resp)
-		return skogul.Gerror{"Bad response code from InfluxDB"}
+		return skogul.Error{Reason: "Bad response code from InfluxDB"}
 	}
 	return nil
 }

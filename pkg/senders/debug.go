@@ -41,7 +41,7 @@ type Debug struct {
 func (db Debug) Send(c *skogul.Container) error {
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {
-		log.Panic("Unable to marshal json for debug output: %s", err)
+		log.Panicf("Unable to marshal json for debug output: %s", err)
 		return err
 	}
 	log.Printf("Debug: \n%s", b)
@@ -90,7 +90,7 @@ type ForwardAndFail struct {
 func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 	err := faf.Next.Send(c)
 	if err == nil {
-		return skogul.Gerror{"Forced failure"}
+		return skogul.Error{Reason: "Forced failure"}
 	}
 	return err
 }

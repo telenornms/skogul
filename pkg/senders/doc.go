@@ -27,7 +27,7 @@ is a simple primitive that receives skogul metrics and "does something
 with them".
 
 The traditional and obvious sender accepts metrics and uses and external
-service to persist them to disk. E.g.: the InfluxDB sender stores the 
+service to persist them to disk. E.g.: the InfluxDB sender stores the
 metrics to influxdb. The postgres sender accepts metrics and stores to
 postgres, and so forth.
 

@@ -46,6 +46,10 @@ receiving subsets of a total data set, write it to a local queue, then
 transmit - through strong authentication - to two central Skogul servers
 that store the data to multiple influxdb instances based on sharding
 rules.
+
+A full blown example of Skogul is provided in cmd/skogul/main.go, which
+is - as the file itself points out - meant as an EXAMPLE, not a final
+solution.
 */
 package skogul
 
@@ -54,8 +58,10 @@ import (
 )
 
 /*
-The Handler is inteded to be the "you've got the data... now what?"
-part. It most certainly will not look like this at the end of the day.
+Handler determines what a receiver will do with data received. Typically it
+will execute one or more transformers to mutate the incoming data (a minimum
+would be expanding templates). After transforming data, it will execute a
+single Sender, from skogul.senders, and the "chain" starts.
 */
 type Handler struct {
 	Transformers []Transformer
@@ -63,28 +69,34 @@ type Handler struct {
 }
 
 /*
-A Sender accepts data through Send() - and "sends it off". The canoncial
+Sender accepts data through Send() - and "sends it off". The canoncial
 sender is one that implements a storage backend or outgoing API. E.g.:
 accept data, send to influx.
 
-But the real power of a sender is chaining them together using tiny,
-single-purpose senders to build complicated logic.
+Senders are not allowed to modify the Container - there could be multiple
+goroutines running with same Container. If modification is required, the
+Sender needs to take a copy.
+
+While a single sender writing to a database is useful, the true power of
+the Sender-pattern is chaining multiple, tiny, senders together to build
+completely custom "sender chains" and thus provide site-specific handling
+of data.
 
 E.g.: The fallback sender is set up using a list of "down stream"
 senders and will accept data and try the first sender on the list,
 if that fail, try the next, and so on.
-
-A Sender should not modify the data it accepts. If it needs to do
-that, it has to make a copy, as multiple senders may be accessing
-the same data.
 */
 type Sender interface {
 	Send(c *Container) error
 }
 
 /*
-A transformer is a fast(!) way to modify a collection of metrics. It
-is the safe way to modify data before it is passed to the first Sender.
+Transformer mutates a collection before it is passed to a sender. Transformers
+should be very fast, but are the only means to modifying the data.
+
+Currently, the only transformer is the template transfromer, that expands a
+template in a Container so underlying senders need not worry about the existence
+of a template or not.
 */
 type Transformer interface {
 	Transform(c *Container) error
@@ -95,8 +107,9 @@ Receiver is how we get data. The only current implementation is a HTTP
 interface, but we should also expect UDP-receivers, line-based
 TCP-receivers and even things such as influxdb-format receivers.
 
-The exact details of the interface will most likely change once we see
-more how it will be used in real deployments.
+Currently, the included test-tool of skogul does not use a receiver, but
+in the future there will probably be a "synthesizer"-receiver both to
+demonstrate the concept and because it simplifies the tester.
 */
 type Receiver interface {
 	Start() error
@@ -105,11 +118,11 @@ type Receiver interface {
 /*
 Not sure we really need these, but here you are...
 */
-type Gerror struct {
+type Error struct {
 	Reason string
 }
 
-func (e Gerror) Error() string {
+func (e Error) Error() string {
 	log.Printf("Error: %v", e.Reason)
 	return e.Reason
 }

@@ -28,40 +28,43 @@ import (
 )
 
 /*
-The Container is the top-level object that simply contains a collection
-of metrics.
+Container is the top-level object for one or more metric.
 
-It contains an optional template, and an array of metrics. The idea is
-that a producer of metrics sends a bulk of metrics in a single request,
-and we deal with it. To provide flexibility, the producer can provide an
-(optional) template, which will be the starting point of individual
-metrics. Example use-cases of the template include providing a timestamp
-if all the metrics provided are from the same time stamp, and metadata
-keys that are common, such as origin-server perhaps.
+If a Template is provided, it will used as the initial value for each of
+the metrics - this is expanded by the transformers.Template transfromers,
+and internal code does not need to worry about this.
 
-The template (should) be "expanded" by the receiver using the Template
-transformer, and down-stream Senders need not worry about the template
-mechanics.
- */
+A single Container instance is typically the result of a single POST to the
+HTTP receiver or similar.
+*/
 type Container struct {
 	Template Metric   `json:"template,omitempty"`
 	Metrics  []Metric `json:"metrics"`
 }
 
 /*
-A metric is a single set of measurements and related timestamp and
-metadata.
+Metric is a collection of measurements related to the same metadata and
+point in time.
 
-The difference between Data and Metadata is that the metadata is used to
-identify the data, along with the timestamp. In database-terms, the
-indexed parts are timestamp and metadata. Examples are "ifName"
-(interface name) can be metadata, since it makes sense to search for or
-graph data related to a single port, while "ifHCInOctets" would be data,
-as it does NOT make sense to search for or graph data related to exactly
-12162 ifHCInOctets.
+A good example of a single metric is port statistics for a single interface
+on a router.
+
+Both Metadata and Data is proided. The difference is generally in how data
+is accessed. Metadata is data you will search for - e.g. the name of the
+router, the name of the interface, etc. It is also possible to add more
+dynamic data as metadata, such as OS versions, but exactly how this will be
+handled will be up to underlying storage engines. E.g.: for influxdb, anything
+in metadata will be an (indexed) tag, so having reasonably rich metadata is
+perfectly fine, but you may want to keep an eye on the granularity.
+
+A simple rule of thumb:
+
+Metadata is what you search with.
+
+Data is what you search for.
 
 Example:
-	
+
 	{
 		"time": "2019-03-25T12:00:00Z",
 		"metadata": {
@@ -75,9 +78,12 @@ Example:
 		}
 	}
 
-Note that multi-dimensional metrics ARE allowed, but the behavior will
-depend on the storage backend. It might be wise to use a transformer
-to split it into individual metrics. Example:
+It is possible to have nested data, however, it is NOT a requirement
+that a sender accepts this. And in general, it is better to "flatten"
+out data into multiple metrics instead. This can be done with a
+(custom) transformer.
+
+Example of a nested structure:
 
 	{
 		"time": "2019-03-25T12:00:00Z",
@@ -130,37 +136,40 @@ This is legal, but it's probably wise to use a transformer to change it into:
 			}
 		}
 	}
- */
+*/
 type Metric struct {
 	Time     *time.Time             `json:"timestamp,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Data     map[string]interface{} `json:"data,omitempty"`
 }
 
-/*
-Validate checks the validity of the metric, verifying that it follows
-the exepcted spec.
-*/
-func (m *Metric) Validate() error {
+// Validate a single metric.
+func (m *Metric) validate() error {
 	if m.Data == nil {
-		return Gerror{"Missing data for metric"}
+		return Error{Reason: "Missing data for metric"}
 	}
 	return nil
 }
 
-// Validate ensures a container follows the spec
+/*
+Validate checks the validity of the container, verifying that it follows
+the exepcted spec. It should be called by any HTTP receiver after
+accepting a Container from an external source. It is NOT required
+nor recommended to use Validate in senders - the data is already
+validated by that time.
+*/
 func (c *Container) Validate() error {
 	if c.Metrics == nil {
-		return Gerror{"Missing metrics[] data"}
+		return Error{Reason: "Missing metrics[] data"}
 	}
 	if len(c.Metrics) <= 0 {
-		return Gerror{"Empty metrics[] data"}
+		return Error{Reason: "Empty metrics[] data"}
 	}
 	for i := 0; i < len(c.Metrics); i++ {
 		if c.Metrics[i].Time == nil && c.Template.Time == nil {
-			return Gerror{"Missing timestamp in both metric and container"}
+			return Error{Reason: "Missing timestamp in both metric and container"}
 		}
-		err := c.Metrics[i].Validate()
+		err := c.Metrics[i].validate()
 		if err != nil {
 			return err
 		}

@@ -36,7 +36,7 @@ E.g.:
 	primary := senders.InfluxDB{....}
 	secondary := senders.Queue{....} // Not implemented yet
 	emergency := senders.Debug{}
-	
+
 	fallback := senders.Fallback{}
 	fallback.Add(&primary)
 	fallback.Add(&secondary)
@@ -53,7 +53,7 @@ type Fallback struct {
 Add an other Sender
 */
 func (fb *Fallback) Add(s skogul.Sender) error {
-	fb.next = append(fb.next,s)
+	fb.next = append(fb.next, s)
 	return nil
 }
 func (fb *Fallback) Send(c *skogul.Container) error {
@@ -63,7 +63,7 @@ func (fb *Fallback) Send(c *skogul.Container) error {
 			return nil
 		}
 	}
-	return skogul.Gerror{"No working senders left..."}
+	return skogul.Error{Reason: "No working senders left..."}
 }
 
 // Dupe-sender executes all provided senders in turn.
@@ -86,7 +86,7 @@ Log-sender simply executes log.Print() on a predefined message.
 
 Intended use is in combination with other senders, e.g. to explain WHY
 senders.Debug() was used.
- */
+*/
 type Log struct {
 	Message string
 }

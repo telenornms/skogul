@@ -37,9 +37,7 @@ import (
 )
 
 /*
-The HTTP receiver accepts HTTP connections on the Address
-specified and directs valid Skogul metric containers to
-the appropriate skogul.Handler.
+HTTP accepts HTTP connections on the Address specified.
 
 Set it up similar to net/http:
 
@@ -48,16 +46,27 @@ Set it up similar to net/http:
         rcv.Handle("/blatti", bar)
 
 */
-
 type HTTP struct {
 	Address  string
 	handlers map[string]*skogul.Handler
 }
 
+// For each path we handle, we set up a receiver such as this
+// to simplify things.
+// FIXME: This should almost certianly have a more descriptive name to
+// avoid collisions and confusion.
 type receiver struct {
 	Handler *skogul.Handler
 }
 
+// defaultAddress is the address used if none is provided to the HTTP
+// instance. It doesn't really make much sense to change it, since you
+// wont be able to start multiple HTTP receivers on the same address
+// anyway, so it's a const, not var. If you want to try: Just set the same
+// Address on each HTTP receiver....
+const defaultAddress = "[::1]:8080"
+
+// Core HTTP handler
 func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.ContentLength > 0 {
 		b := make([]byte, r.ContentLength)
@@ -84,6 +93,12 @@ func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 /*
 Handle adds a handler to a URL-pattern (same as net/http). Mostly
 a convenience function to get less-ugly assignements.
+
+Example:
+
+        rcv := receiver.HTTP{Address: "localhost:8080"}
+        rcv.Handle("/", foo)
+        rcv.Handle("/blatti", bar)
 */
 func (handler *HTTP) Handle(idx string, h *skogul.Handler) {
 	if handler.handlers == nil {
@@ -95,17 +110,17 @@ func (handler *HTTP) Handle(idx string, h *skogul.Handler) {
 	handler.handlers[idx] = h
 }
 
-// Start the HTTP receiver
+// Start never returns.
 func (handler *HTTP) Start() error {
 	for idx, h := range handler.handlers {
 		log.Printf("Adding handler for %v", idx)
 		http.Handle(idx, receiver{h})
 	}
 	if handler.Address == "" {
-		log.Print("HTTP: No listen-address specified. Using localhost:8080")
-		handler.Address = "localhost:8080"
+		log.Print("HTTP: No listen-address specified. Using %s", defaultAddress)
+		handler.Address = defaultAddress
 	}
 	log.Printf("Starting http receiver at http://%s", handler.Address)
 	log.Fatal(http.ListenAndServe(handler.Address, nil))
-	return skogul.Gerror{"Shouldn't reach this"}
+	return skogul.Error{Reason: "Shouldn't reach this"}
 }

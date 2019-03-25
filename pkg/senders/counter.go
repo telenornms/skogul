@@ -39,7 +39,7 @@ actual aggregation and calculation.
 */
 type Counter struct {
 	Next   skogul.Sender
-	Stats  skogul.Sender
+	Stats  skogul.Handler
 	Period time.Duration
 	ch     chan count
 	mux    sync.Mutex
@@ -95,36 +95,39 @@ func (co *Counter) getIt() {
 	var current count
 	var total count
 	last := time.Now()
-	container := skogul.Container{}
-	metric := skogul.Metric{}
-	metric.Metadata = make(map[string]interface{})
-	metric.Data = make(map[string]interface{})
-	metric.Metadata["skogul"] = "counter"
-	container.Metrics = append(container.Metrics, metric)
 
 	for {
-		metric := <-co.ch
-		current.containers += metric.containers
-		current.metrics += metric.metrics
-		current.values += metric.values
-		if metric.ts.Sub(last) > co.Period {
+		m := <-co.ch
+		current.containers += m.containers
+		current.metrics += m.metrics
+		current.values += m.values
+		if m.ts.Sub(last) > co.Period {
+			container := skogul.Container{}
+			metric := skogul.Metric{}
+			metric.Metadata = make(map[string]interface{})
+			metric.Data = make(map[string]interface{})
+			metric.Metadata["skogul"] = "counter"
+			container.Metrics = append(container.Metrics, metric)
 			total.containers += current.containers
 			total.metrics += current.metrics
 			total.values += current.values
 			rate := count{
-				containers: current.containers * int64(time.Second) / int64(metric.ts.Sub(last)),
-				metrics:    current.metrics * int64(time.Second) / int64(metric.ts.Sub(last)),
-				values:     current.values * int64(time.Second) / int64(metric.ts.Sub(last))}
-			container.Metrics[0].Time = metric.ts
+				containers: current.containers * int64(time.Second) / int64(m.ts.Sub(last)),
+				metrics:    current.metrics * int64(time.Second) / int64(m.ts.Sub(last)),
+				values:     current.values * int64(time.Second) / int64(m.ts.Sub(last))}
+			container.Metrics[0].Time = m.ts
 			container.Metrics[0].Data["total_containers"] = total.containers
 			container.Metrics[0].Data["total_metrics"] = total.metrics
 			container.Metrics[0].Data["total_values"] = total.values
 			container.Metrics[0].Data["rate_containers"] = rate.containers
 			container.Metrics[0].Data["rate_metrics"] = rate.metrics
 			container.Metrics[0].Data["rate_values"] = rate.values
-			co.Stats.Send(&container)
+			for _, t := range co.Stats.Transformers {
+				t.Transform(&container)
+			}
+			co.Stats.Sender.Send(&container)
 			current = count{nil, 0, 0, 0}
-			last = *metric.ts
+			last = *m.ts
 		}
 	}
 }
