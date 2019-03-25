@@ -21,16 +21,6 @@
  * 02110-1301  USA
  */
 
-package main
-
-import (
-	"github.com/KristianLyng/skogul/pkg"
-	"github.com/KristianLyng/skogul/pkg/receivers"
-	"github.com/KristianLyng/skogul/pkg/senders"
-	"github.com/KristianLyng/skogul/pkg/transformers"
-	"time"
-)
-
 /*
 Skogul is primarily a framework, where you use it to build your OWN
 binaries. This package is provided to show-case a complete chain of
@@ -56,6 +46,16 @@ The primary chain looks sort of like this:
 		               `-> debug(print json to stdout)
 
 */
+package main
+
+import (
+	"github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg/receivers"
+	"github.com/KristianLyng/skogul/pkg/senders"
+	"github.com/KristianLyng/skogul/pkg/transformers"
+	"time"
+)
+
 func main() {
 	// Let's start by setting up two "final" storage senders
 	influx := &senders.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
