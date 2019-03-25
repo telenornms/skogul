@@ -59,7 +59,7 @@ part. It most certainly will not look like this at the end of the day.
 */
 type Handler struct {
 	Transformers []Transformer
-	Senders      []Sender
+	Sender       Sender
 }
 
 /*

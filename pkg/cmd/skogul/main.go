@@ -86,18 +86,18 @@ func main() {
 	// that's it. It also has a single transformer that - prior to
 	// sending the data on - expands any template provided.
 	h := skogul.Handler{
-		Senders:      []skogul.Sender{&fb},
+		Sender:       &fb,
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
 	// This is the same - but just print the request.
 	debugtemplate := skogul.Handler{
-		Senders:      []skogul.Sender{senders.Debug{}},
+		Sender:      senders.Debug{},
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
 	// Print the request, but do NOT expand the template. Demonstrates
 	// what a template does and what the template transformer does.
 	debugnotemplate := skogul.Handler{
-		Senders:      []skogul.Sender{senders.Debug{}},
+		Sender:      senders.Debug{},
 		Transformers: []skogul.Transformer{}}
 
 	// Set up a HTTP receiver

@@ -76,9 +76,7 @@ func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		for _, t := range handler.Handler.Transformers {
 			t.Transform(&m)
 		}
-		for _, s := range handler.Handler.Senders {
-			s.Send(&m)
-		}
+		handler.Handler.Sender.Send(&m)
 		fmt.Fprintf(w, "OK\n")
 	}
 }
