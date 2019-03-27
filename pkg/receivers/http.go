@@ -28,7 +28,6 @@ API of Skogul.
 package receivers
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/KristianLyng/skogul/pkg"
 	"io"
@@ -74,8 +73,7 @@ func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
 		}
-		var m skogul.Container
-		err = json.Unmarshal(b, &m)
+		m, err := handler.Handler.Parser.Parse(b)
 		if err == nil {
 			err = m.Validate()
 		}

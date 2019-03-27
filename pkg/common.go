@@ -58,14 +58,19 @@ import (
 )
 
 /*
-Handler determines what a receiver will do with data received. Typically it
-will execute one or more transformers to mutate the incoming data (a minimum
-would be expanding templates). After transforming data, it will execute a
-single Sender, from skogul.senders, and the "chain" starts.
+Handler determines what a receiver will do with data received. It requires a parser
+to interperet the raw data, 0 or more transformers to mutate Containers, and a sender
+to call after data is parsed and mutated and ready to be dealt with.
 */
 type Handler struct {
+	Parser       Parser
 	Transformers []Transformer
 	Sender       Sender
+}
+
+// Parser is the interface for parsing arbitrary data into a Container
+type Parser interface {
+	Parse(data []byte) (Container, error)
 }
 
 /*

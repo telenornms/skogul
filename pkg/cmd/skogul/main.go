@@ -50,6 +50,7 @@ package main
 
 import (
 	"github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg/parsers"
 	"github.com/KristianLyng/skogul/pkg/receivers"
 	"github.com/KristianLyng/skogul/pkg/senders"
 	"github.com/KristianLyng/skogul/pkg/transformers"
@@ -103,17 +104,20 @@ func main() {
 	// that's it. It also has a single transformer that - prior to
 	// sending the data on - expands any template provided.
 	h := skogul.Handler{
+		Parser:       parsers.JSON{},
 		Sender:       &fb,
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
 	// This is the same - but just print the request.
 	debugtemplate := skogul.Handler{
+		Parser:       parsers.JSON{},
 		Sender:       senders.Debug{},
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
 	// Print the request, but do NOT expand the template. Demonstrates
 	// what a template does and what the template transformer does.
 	debugnotemplate := skogul.Handler{
+		Parser:       parsers.JSON{},
 		Sender:       senders.Debug{},
 		Transformers: []skogul.Transformer{}}
 
