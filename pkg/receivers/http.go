@@ -78,7 +78,9 @@ func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			err = m.Validate()
 		}
 		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
 			fmt.Fprintf(w, "Unable to parse JSON: %s", err)
+			return
 		}
 		for _, t := range handler.Handler.Transformers {
 			t.Transform(&m)
