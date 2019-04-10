@@ -1,0 +1,35 @@
+{
+    "template": {
+            "timestamp": "2019-03-15T11:08:02+01:00",
+            "metadata": {
+                "server": "somewhere.example.com"
+            }
+    },
+    "metrics": [
+        {
+            "metadata": {
+		"prefix": "myDevice.",
+                "key": "value",
+		"paramkey": "paramvalue"
+            },
+            "data": {
+                "astring": "text",
+                "float": 1.11,
+                "integer": 5
+            }
+        },
+        {
+            "metadata": {
+		"prefix": "myOtherDevice.",
+                "key": "value",
+		"paramkey": "paramvalue",
+		"group": "override"
+            },
+            "data": {
+                "astring": "text",
+                "float": 1.11,
+                "integer": 5
+            }
+        }
+    ]
+}
