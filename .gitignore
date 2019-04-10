@@ -1,3 +1,4 @@
 /pkg/cmd/skogul/skogul
 /pkg/cmd/tester/tester
 /skogul
+.*swp
