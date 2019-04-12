@@ -130,7 +130,7 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 			}
 		}
 		for key, value := range m.Data {
-			fmt.Fprintf(d, "%s%s%s\t%v\tname=%s%s\t%s\n", bufferpre.String(), pre, key, value, pre, key, bufferpost.String())
+			fmt.Fprintf(d, "%s%s%s\t%v\tname=%s%s\n", bufferpre.String(), pre, key, value, key, bufferpost.String())
 		}
 	}
 	d.Close()
