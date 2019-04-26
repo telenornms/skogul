@@ -60,14 +60,14 @@ import (
 func main() {
 	// Let's start by setting up two "final" storage senders
 	influx := &senders.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
-	postgres := &senders.Postgres{ConnStr: "user=postgres dbname=test host=localhost port=5432 sslmode=disable"}
+	//postgres := &senders.Postgres{ConnStr: "user=postgres dbname=test host=localhost port=5432 sslmode=disable"}
 	// Init is optional, see the skogul.senders.Postgres documentation
-	postgres.Init()
+	//postgres.Init()
 
 	// Set up a duplicator and hook influx and postgres up to it -
 	// Everything going to the duplicator will go to both influx and
 	// postgres.
-	dupe2 := senders.Dupe{Next: []skogul.Sender{influx, postgres}}
+	dupe2 := senders.Dupe{Next: []skogul.Sender{influx}}
 
 	// Set up a handler for where to send statistics. In this case, we
 	// just send it to influx.
@@ -83,7 +83,12 @@ func main() {
 	counter := &senders.Counter{Next: dupe2, Stats: countHandler, Period: 1 * time.Second}
 
 	// Let's also inject a random delay for testing!
-	delay := senders.Sleeper{counter, 1 * time.Millisecond, false}
+	delay := senders.Sleeper{counter, 5000 * time.Millisecond, false}
+
+	fanout := senders.Fanout{Next: &delay}
+
+	// Let's detach
+	detach := senders.Detacher{Next: &fanout}
 
 	// An other duplicator. This one just prints "The following failed"
 	// and then uses the Debug-sender to print the metrics.
@@ -94,7 +99,7 @@ func main() {
 	// fails, it will write to the dupe-sender (print "the following
 	// failed" and the request).
 	fb := senders.Fallback{}
-	fb.Add(&delay)
+	fb.Add(&detach)
 	fb.Add(&dupe)
 
 	// That takes care of the sender-chains. Let's set up three
