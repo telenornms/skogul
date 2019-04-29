@@ -50,6 +50,6 @@ func main() {
 		Sender:       fanout,
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
-	receiver := receivers.MQTT{Address: *flisten, Handler: &h}
+	receiver := receivers.MQTT{Address: *flisten, Handler: &h, Username: *fluser, Password: *flpass}
 	receiver.Start()
 }
