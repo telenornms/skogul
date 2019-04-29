@@ -33,6 +33,7 @@ import (
 	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"log"
+	"math/rand"
 	"net/url"
 	"time"
 )
@@ -124,6 +125,9 @@ func (handler *MQTT) createClientOptions() error {
 	handler.opts.SetUsername(handler.uri.User.Username())
 	password, _ := handler.uri.User.Password()
 	handler.opts.SetPassword(password)
+	if handler.clientId == "" {
+		handler.clientId = fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
+	}
 	handler.opts.SetClientID(handler.clientId)
 	handler.opts.SetAutoReconnect(false)
 	handler.opts.SetConnectionLostHandler(handler.connLostHandler)
