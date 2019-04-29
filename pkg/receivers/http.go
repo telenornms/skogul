@@ -63,7 +63,7 @@ type receiver struct {
 // wont be able to start multiple HTTP receivers on the same address
 // anyway, so it's a const, not var. If you want to try: Just set the same
 // Address on each HTTP receiver....
-const defaultAddress = "[::1]:8080"
+var defaultAddress = "[::1]:8080"
 
 // Core HTTP handler
 func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {

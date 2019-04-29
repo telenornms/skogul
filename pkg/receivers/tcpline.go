@@ -45,7 +45,7 @@ skogul.senders.HTTP to forward over a more sensible channel.
 */
 type TCPLine struct {
 	Address string
-	Handler skogul.Handler
+	Handler *skogul.Handler
 }
 
 /*
