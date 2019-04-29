@@ -26,6 +26,7 @@ package senders
 import (
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
+	"runtime"
 	"sync"
 )
 
@@ -116,8 +117,9 @@ func (fo *Fanout) Init() {
 		return
 	}
 	if fo.Workers == 0 {
-		log.Print("No fanout size set. Using default of 10.")
-		fo.Workers = 10
+		n := runtime.NumCPU()
+		log.Printf("No fanout size set. Using default of NumCPU: %v.", n)
+		fo.Workers = n
 	}
 	fo.workers = make(chan chan *skogul.Container)
 	for i := 0; i < fo.Workers; i++ {

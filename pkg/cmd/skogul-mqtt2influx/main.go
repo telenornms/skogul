@@ -41,16 +41,16 @@ func main() {
 	flag.Parse()
 	counterinflux := &senders.InfluxDB{URL: *finflux, Measurement: "skogul"}
 	influx := &senders.InfluxDB{URL: *finflux, Measurement: *fmeasurement}
-
 	countHandler := skogul.Handler{
 		Sender:       counterinflux,
 		Transformers: []skogul.Transformer{}}
 
 	counter := &senders.Counter{Next: influx, Stats: countHandler, Period: 1 * time.Second}
+	fanout := &senders.Fanout{Next: counter}
 
 	h := skogul.Handler{
 		Parser:       parsers.JSON{},
-		Sender:       counter,
+		Sender:       fanout,
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
 	receiver := receivers.MQTT{Address: *flisten, Handler: &h}

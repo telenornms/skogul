@@ -77,7 +77,7 @@ func (handler *MQTT) Connect() error {
 	for !token.WaitTimeout(3 * time.Second) {
 	}
 	if err := token.Error(); err != nil {
-		log.Print("Failed to connect to MQTT broker: %v", err)
+		log.Printf("Failed to connect to MQTT broker: %v", err)
 		return err
 	}
 	for i, _ := range handler.topics {
@@ -105,7 +105,16 @@ func (handler *MQTT) Init() error {
 // Handle reconnects when the connection drops.
 func (handler *MQTT) connLostHandler(client mqtt.Client, e error) {
 	log.Printf("Connection lost... Auto-reconnecting and re-subscribing. Error: %v", e)
-	handler.Connect()
+	for {
+		e := handler.Connect()
+		if e != nil {
+			log.Printf("Failed to re-connect to MQTT broker (%v). Retrying in 5 seconds", e)
+			time.Sleep(time.Duration(5 * time.Second))
+		} else {
+			log.Printf("Reconnected to MQTT broker successfully.")
+			break
+		}
+	}
 }
 
 // createClientOptions() sets up our default options.

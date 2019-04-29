@@ -25,12 +25,13 @@ package senders
 
 import (
 	"github.com/KristianLyng/skogul/pkg"
+	"log"
 	"sync"
 	"time"
 )
 
 /*
-The Counter sender emits, periodically, the flow-rate of metrics through
+Counter sender emits, periodically, the flow-rate of metrics through
 it. The stats are sent on to the Stats-sender every Period.
 
 To avoid locks and support multiple go routines using the same counter,
@@ -59,6 +60,7 @@ func (co *Counter) init() {
 	co.ch = make(chan count, 100)
 	co.up = true
 	if co.Period == 0 {
+		log.Print("No Period set for Counter-sender. Using 5 second intervals.")
 		co.Period = 5 * time.Second
 	}
 	go co.getIt()
@@ -91,6 +93,13 @@ func (co *Counter) Send(c *skogul.Container) error {
 }
 
 // Eat count-objects, once co.Period has passed, send them on.
+//
+// XXX: The sending should probably be a separate go routine for optimal
+// performance and reliable stats, since the current implementation will
+// stop sending updates if no stats are received. The _math_ will still
+// be correct (Afaik), but right now this can't be used to verify that
+// skogul is actually running, since there's no way to tell if Skogul is
+// simply not receiving data or if it died.
 func (co *Counter) getIt() {
 	var current count
 	var total count
