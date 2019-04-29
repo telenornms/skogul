@@ -57,6 +57,7 @@ type MessageHandler func(Message mqtt.Message)
 // Subscribe to a topic. callback is called whenever a message is received.
 // This also deals with re-subscribing when a reconnect takes place.
 func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
+	log.Printf("MQTT subscribing to %s", topic)
 	if handler.topics == nil {
 		handler.topics = make(map[string]*MessageHandler)
 	}
@@ -98,7 +99,7 @@ func (handler *MQTT) Init() error {
 	}
 	handler.Topic = handler.uri.Path[1:len(handler.uri.Path)]
 	if handler.Topic == "" {
-		handler.Topic = "/"
+		handler.Topic = "#"
 	}
 	handler.createClientOptions()
 	handler.Client = mqtt.NewClient(handler.opts)
