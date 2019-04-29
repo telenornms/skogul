@@ -98,7 +98,7 @@ func (handler *MQTT) Init() error {
 	}
 	handler.Topic = handler.uri.Path[1:len(handler.uri.Path)]
 	if handler.Topic == "" {
-		handler.Topic = "skogul"
+		handler.Topic = "/"
 	}
 	handler.createClientOptions()
 	handler.Client = mqtt.NewClient(handler.opts)
