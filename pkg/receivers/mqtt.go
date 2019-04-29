@@ -36,8 +36,10 @@ import (
 MQTT connects to a MQTT broker and listens for messages on a topic.
 */
 type MQTT struct {
-	Address string
-	Handler *skogul.Handler
+	Address  string
+	Handler  *skogul.Handler
+	Password string
+	Username string
 
 	mc skmqtt.MQTT
 }
@@ -61,6 +63,8 @@ func (handler *MQTT) receiver(msg mqtt.Message) {
 // Start MQTT receiver.
 func (handler *MQTT) Start() error {
 	handler.mc.Address = handler.Address
+	handler.mc.Username = handler.Username
+	handler.mc.Password = handler.Password
 	handler.mc.Init()
 	handler.mc.Subscribe(handler.mc.Topic, handler.receiver)
 	log.Printf("Starting MQTT receiver at %s", handler.Address)

@@ -36,6 +36,8 @@ import (
 )
 
 var flisten = flag.String("listen", "mqtt://localhost:1883/", "Address for MQTT broker")
+var fluser = flag.String("mqtt-user", "", "MQTT username")
+var flpass = flag.String("mqtt-pass", "", "MQTT password")
 var ftarget = flag.String("target", "http://127.0.0.1:8086/write?db=test", "InfluxDB to write to")
 
 func main() {

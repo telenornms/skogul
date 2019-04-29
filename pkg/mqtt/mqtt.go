@@ -42,6 +42,8 @@ type MQTT struct {
 	Address  string
 	Client   mqtt.Client
 	Topic    string
+	Username string
+	Password string
 	opts     *mqtt.ClientOptions
 	topics   map[string]*MessageHandler
 	uri      *url.URL
@@ -122,9 +124,17 @@ func (handler *MQTT) connLostHandler(client mqtt.Client, e error) {
 func (handler *MQTT) createClientOptions() error {
 	handler.opts = mqtt.NewClientOptions()
 	handler.opts.AddBroker(fmt.Sprintf("tcp://%s", handler.uri.Host))
-	handler.opts.SetUsername(handler.uri.User.Username())
-	password, _ := handler.uri.User.Password()
-	handler.opts.SetPassword(password)
+	if handler.Username != "" {
+		handler.opts.SetUsername(handler.Username)
+	} else {
+		handler.opts.SetUsername(handler.uri.User.Username())
+	}
+	if handler.Password != "" {
+		handler.opts.SetPassword(handler.Password)
+	} else {
+		password, _ := handler.uri.User.Password()
+		handler.opts.SetPassword(password)
+	}
 	if handler.clientId == "" {
 		handler.clientId = fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
 	}
