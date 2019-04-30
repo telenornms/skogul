@@ -129,12 +129,12 @@ func getUrls() (turl *url.URL, rurl *url.URL) {
 	var err error
 	turl, err = url.Parse(*ftarget)
 	if err != nil {
-		log.Print("Failed to parse target url: %v", err)
+		log.Printf("Failed to parse target url: %v", err)
 		os.Exit(1)
 	}
 	rurl, err = url.Parse(*flisten)
 	if err != nil {
-		log.Print("Failed to parse receiver url: %v", err)
+		log.Printf("Failed to parse receiver url: %v", err)
 		os.Exit(1)
 	}
 	return

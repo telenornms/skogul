@@ -105,7 +105,7 @@ be negligible. But this should, of course, be fixed in the future.
 func (mnr *MnR) Send(c *skogul.Container) error {
 	d, err := net.Dial("tcp", mnr.Address)
 	if err != nil {
-		log.Print("Failed to connect to MnR: %s", err)
+		log.Printf("Failed to connect to MnR: %v", err)
 		return err
 	}
 	for _, m := range c.Metrics {

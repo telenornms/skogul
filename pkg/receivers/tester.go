@@ -68,7 +68,6 @@ func (tst *Tester) Start() error {
 			log.Print(err)
 		}
 	}
-	return skogul.Error{Reason: "Shouldn't reach this"}
 }
 
 func init() {

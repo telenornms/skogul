@@ -22,7 +22,7 @@
  */
 
 /*
-MQTT package provides a bit of glue common between Skogul's MQTT sender and
+Package mqtt provides a bit of glue common between Skogul's MQTT sender and
 receiver. Mostly providing mechanisms for setting up and maintaining a
 connection to a broker.
 */
@@ -37,6 +37,7 @@ import (
 	"time"
 )
 
+// MQTT shared data structure annd interal state
 type MQTT struct {
 	Address  string
 	Client   mqtt.Client
@@ -46,7 +47,7 @@ type MQTT struct {
 	opts     *mqtt.ClientOptions
 	topics   map[string]*MessageHandler
 	uri      *url.URL
-	clientId string
+	clientID string
 }
 
 // MessageHandler is used to establish a callback when a message is
@@ -83,7 +84,7 @@ func (handler *MQTT) Connect() error {
 		log.Printf("Failed to connect to MQTT broker: %v", err)
 		return err
 	}
-	for i, _ := range handler.topics {
+	for i := range handler.topics {
 		handler.Client.Subscribe(i, 0, handler.receiver)
 	}
 	return nil
@@ -135,10 +136,10 @@ func (handler *MQTT) createClientOptions() error {
 		password, _ := handler.uri.User.Password()
 		handler.opts.SetPassword(password)
 	}
-	if handler.clientId == "" {
-		handler.clientId = fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
+	if handler.clientID == "" {
+		handler.clientID = fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
 	}
-	handler.opts.SetClientID(handler.clientId)
+	handler.opts.SetClientID(handler.clientID)
 	handler.opts.SetAutoReconnect(false)
 	handler.opts.SetConnectionLostHandler(handler.connLostHandler)
 	return nil

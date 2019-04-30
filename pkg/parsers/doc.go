@@ -22,9 +22,9 @@
  */
 
 /*
-Parsers are responsible for interpreting raw byte data into Containers.
-They are disconnected from how the byte data is received and what happens
-with it afterwards.
+Package parsers is responsible for interpreting raw byte data into
+Containers. Each parser is disconnected from how the byte data is received
+and what happens with it afterwards.
 
 The simplest parser is probably the JSON parser, which simply assumes the
 byte slice is a JSON representation of a Skogul Container.

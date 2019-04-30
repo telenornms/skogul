@@ -114,7 +114,7 @@ func (handler *HTTP) Start() error {
 		http.Handle(idx, receiver{h})
 	}
 	if handler.Address == "" {
-		log.Print("HTTP: No listen-address specified. Using %s", defaultAddress)
+		log.Printf("HTTP: No listen-address specified. Using %s", defaultAddress)
 		handler.Address = defaultAddress
 	}
 	log.Printf("Starting http receiver at http://%s", handler.Address)

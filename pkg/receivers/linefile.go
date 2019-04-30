@@ -65,11 +65,10 @@ func (lf *LineFile) Start() error {
 			lf.Handler.Sender.Send(&m)
 		}
 		if err := scanner.Err(); err != nil {
-			log.Print("Error reading file: %s", err)
+			log.Printf("Error reading file: %s", err)
 			return skogul.Error{Reason: "Error reading file"}
 		}
 	}
-	return skogul.Error{Reason: "Shouldn't reach this"}
 }
 
 func init() {

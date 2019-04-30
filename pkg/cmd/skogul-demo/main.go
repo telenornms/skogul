@@ -83,7 +83,7 @@ func main() {
 	counter := &senders.Counter{Next: dupe2, Stats: countHandler, Period: 1 * time.Second}
 
 	// Let's also inject a random delay for testing!
-	delay := senders.Sleeper{counter, 5000 * time.Millisecond, false}
+	delay := senders.Sleeper{Next: counter, MaxDelay: 5000 * time.Millisecond, Verbose: false}
 
 	fanout := senders.Fanout{Next: &delay}
 
@@ -92,7 +92,7 @@ func main() {
 
 	// An other duplicator. This one just prints "The following failed"
 	// and then uses the Debug-sender to print the metrics.
-	dupe := senders.Dupe{Next: []skogul.Sender{senders.Log{"The following failed"}, senders.Debug{}}}
+	dupe := senders.Dupe{Next: []skogul.Sender{senders.Log{Message: "The following failed"}, senders.Debug{}}}
 
 	// the Fallback sender tries to write to the delay-sender
 	// (delay->counter->dupe2->{postgres,influx}), but if this

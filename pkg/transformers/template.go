@@ -22,8 +22,8 @@
  */
 
 /*
-Transformers can be attached to skogul.Handlers to mutate Containers before
-they are sent to a Sender.
+Package transformers provides the means to mutate a container as part of a
+skogul.Handler, before it is passed on to a Sender.
 */
 package transformers
 
@@ -32,7 +32,7 @@ import (
 )
 
 /*
-Template iterates over all Metrics in a Skogul Container and fills in any
+Templater iterates over all Metrics in a Skogul Container and fills in any
 missing template variable from the Template in the Container, so noone else
 has to.
 
@@ -102,6 +102,7 @@ It is good practice to use a template for any common fields, particularly timest
 */
 type Templater struct{}
 
+// Transform compiles/expands the template of a container
 func (t Templater) Transform(c *skogul.Container) error {
 	for mi, m := range c.Metrics {
 		if m.Time == nil && c.Template.Time != nil {
