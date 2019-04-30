@@ -54,9 +54,9 @@ type Detacher struct {
 	mux   sync.Mutex
 }
 
-// Consume is the detached go routine that picks up containers and passes
+// consume is the detached go routine that picks up containers and passes
 // them on.
-func (de *Detacher) Consume() {
+func (de *Detacher) consume() {
 	for c := range de.ch {
 		de.Next.Send(c)
 	}
@@ -76,7 +76,7 @@ func (de *Detacher) doInit() {
 		de.Depth = 1000
 	}
 	de.ch = make(chan *skogul.Container, de.Depth)
-	go de.Consume()
+	go de.consume()
 	de.init = true
 }
 
