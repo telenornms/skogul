@@ -65,10 +65,9 @@ func (ht HTTP) Send(c *skogul.Container) error {
 	if err != nil {
 		log.Print(err)
 		return err
-	} else {
-		if resp.StatusCode < 200 || resp.StatusCode > 299 {
-			log.Print(resp)
-		}
+	}
+	if resp.StatusCode < 200 || resp.StatusCode > 299 {
+		log.Print(resp)
 	}
 	return nil
 }

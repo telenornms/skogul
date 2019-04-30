@@ -38,7 +38,7 @@ exploding? etc.
 */
 
 /*
-Deatcher accepts a message, sends it to a channel, then picks it up on the
+Detacher accepts a message, sends it to a channel, then picks it up on the
 other end in a separate go routine. This, unfortunately, leades to fan-in:
 if used in conjunction with HTTP receiver, for example, you end up going from
 multiple independent go routines to a single one, which is probably not what
