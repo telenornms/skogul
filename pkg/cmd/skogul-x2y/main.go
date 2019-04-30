@@ -28,10 +28,13 @@ of using Skogul as a simple gateway from X to Y - it only utilizes a
 small subset of the possible senders and receivers provided by Skogul,
 but should prove sufficient for many scenarios.
 
-XXX: Future work on Senders and Receivers will include a convention/method
-of automating this process. Quite possibly by providing a FromURL(url)
-function which will (attempt to) generate the appropriate Sender
-or Receiver based on URL.
+It also doesn't necessarily offer the full capabilities of the relevant
+senders and receivers, but authors of senders and receivers are encouraged
+to make it possible to expose as many features as possible in this fashion,
+through the senders.Auto and receivers.Auto mechanisms.
+
+What you are mainly missing with this package is advanced error-handling,
+load balancing, graceful failure, etc.
 */
 package main
 
@@ -45,15 +48,35 @@ import (
 	"github.com/KristianLyng/skogul/pkg/transformers"
 	"log"
 	"net/url"
+	"os"
 )
 
-var flisten = flag.String("listen", "http://[::1]:8080", "Where to listen. Supports schemas http:// mqtt:// and tcp://")
-var ftarget = flag.String("target", "debug://", "Target address. Currently supported schemes: debug://, http://, influx://")
+var flisten = flag.String("listen", "http://[::1]:8080", "Where to listen. See -help for details.")
+var ftarget = flag.String("target", "debug://", "Target address. See -help for details.")
+var fhelp = flag.Bool("help", false, "Print help")
+
+func help() {
+	fmt.Printf("Available senders:\n")
+	fmt.Printf("%9s:// | %s\n", "scheme", "Description")
+	fmt.Printf("%9s----+------------\n", "---------")
+	for _, m := range senders.Auto {
+		fmt.Printf("%9s:// | %s\n", m.Scheme, m.Help)
+	}
+	fmt.Printf("\n\n")
+	fmt.Printf("Available receivers:\n")
+	fmt.Printf("%9s:// | %s\n", "scheme", "Description")
+	fmt.Printf("%9s----+------------\n", "---------")
+	for _, m := range receivers.Auto {
+		fmt.Printf("%9s:// | %s\n", m.Scheme, m.Help)
+	}
+}
 
 func main() {
 	flag.Parse()
-	var target skogul.Sender
-	var receiver skogul.Receiver
+	if *fhelp {
+		help()
+		os.Exit(0)
+	}
 	turl, err := url.Parse(*ftarget)
 	if err != nil {
 		log.Print("Failed to parse target url: %v", err)
@@ -61,36 +84,26 @@ func main() {
 	}
 	rurl, err := url.Parse(*flisten)
 	if err != nil {
-		log.Print("Failed to parse target url: %v", err)
+		log.Print("Failed to parse receiver url: %v", err)
 		return
 	}
 
-	if turl.Scheme == "influx" {
-		turl.Scheme = "http"
-		target = &senders.InfluxDB{URL: turl.String()}
-		log.Print("influx sender")
-	} else if turl.Scheme == "http" {
-		target = &senders.HTTP{URL: turl.String()}
-		log.Print("HTTP sender")
-	} else if turl.Scheme == "debug" {
-		log.Print("debug sender")
-		target = senders.Debug{}
+	if senders.Auto[turl.Scheme] == nil {
+		log.Fatalf("Unknown target scheme: %s", turl.Scheme)
 	}
+
+	target := senders.Auto[turl.Scheme].Init(*turl)
 
 	h := skogul.Handler{
 		Parser:       parsers.JSON{},
 		Sender:       target,
 		Transformers: []skogul.Transformer{transformers.Templater{}}}
 
-	if rurl.Scheme == "http" {
-		hl := &receivers.HTTP{Address: rurl.Host}
-		hl.Handle(fmt.Sprintf("/%s", rurl.Path), &h)
-		receiver = hl
-	} else if rurl.Scheme == "mqtt" {
-		receiver = &receivers.MQTT{Address: rurl.String(), Handler: &h}
-	} else if rurl.Scheme == "tcp" {
-		receiver = &receivers.TCPLine{Address: rurl.String(), Handler: &h}
+	if receivers.Auto[rurl.Scheme] == nil {
+		log.Fatalf("Unknown receiver scheme: %s", rurl.Scheme)
 	}
+
+	receiver := receivers.Auto[rurl.Scheme].Init(*rurl, h)
 
 	receiver.Start()
 }

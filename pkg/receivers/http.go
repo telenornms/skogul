@@ -21,10 +21,6 @@
  * 02110-1301  USA
  */
 
-/*
-Receivers accept data and execute a handler. They are the "inbound"
-API of Skogul.
-*/
 package receivers
 
 import (
@@ -33,6 +29,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 /*
@@ -123,4 +120,18 @@ func (handler *HTTP) Start() error {
 	log.Printf("Starting http receiver at http://%s", handler.Address)
 	log.Fatal(http.ListenAndServe(handler.Address, nil))
 	return skogul.Error{Reason: "Shouldn't reach this"}
+}
+
+func init() {
+	addAutoReceiver("http", NewHTTP, "Listen for Skogul-formatted JSON on a HTTP endpoint")
+}
+
+/*
+NewNTTP returns a HTTP receiver, with the Path of the url being the one to
+listen to.
+*/
+func NewHTTP(ul url.URL, h skogul.Handler) skogul.Receiver {
+	hl := HTTP{Address: ul.Host}
+	hl.Handle(fmt.Sprintf("/%s", ul.Path), &h)
+	return &hl
 }

@@ -28,6 +28,7 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"math/rand"
+	"net/url"
 	"time"
 )
 
@@ -38,6 +39,17 @@ stdout.
 type Debug struct {
 }
 
+func init() {
+	addAutoSender("debug", NewDebug, "Debug sender prints received metrics to stdout")
+}
+
+/*
+NewDebug creates a new Debug sender, ignoring the URL.
+*/
+func NewDebug(url url.URL) skogul.Sender {
+	x := Debug{}
+	return x
+}
 func (db Debug) Send(c *skogul.Container) error {
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {

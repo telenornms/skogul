@@ -29,6 +29,8 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
+	"net/url"
+	"path"
 	"sync"
 	"time"
 )
@@ -38,6 +40,17 @@ type InfluxDB struct {
 	Measurement string
 	client      *http.Client
 	mux         sync.Mutex
+}
+
+func init() {
+	addAutoSender("influx", NewInflux, "Send InfluxDB data to a HTTP endpoint, using the first element of the path as db and second as measurement, e.g: influx://host/db/measurement")
+}
+
+func NewInflux(ul url.URL) skogul.Sender {
+	db, measurement := path.Split(ul.Path)
+	t := fmt.Sprintf("http://%s/write?db=%s", ul.Host, db[1:len(db)-1])
+	x := InfluxDB{URL: t, Measurement: measurement}
+	return &x
 }
 
 func (idb *InfluxDB) Send(c *skogul.Container) error {

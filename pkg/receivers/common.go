@@ -1,5 +1,5 @@
 /*
- * skogul, http writer
+ * skogul, receiver boilerplate
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,49 +21,32 @@
  * 02110-1301  USA
  */
 
-package senders
+/*
+Receivers accept data and execute a handler. They are the "inbound"
+API of Skogul.
+*/
+package receivers
 
 import (
-	"bytes"
-	"encoding/json"
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
-	"net/http"
 	"net/url"
-	"time"
 )
 
-type HTTP struct {
-	URL string
+type AutoReceiver struct {
+	Scheme string
+	Init   func(url url.URL, h skogul.Handler) skogul.Receiver
+	Help   string
 }
 
-func init() {
-	addAutoSender("http", NewHTTP, "Post Skogul-formatted JSON to a HTTP endpoint")
-}
+var Auto map[string]*AutoReceiver
 
-func NewHTTP(url url.URL) skogul.Sender {
-	x := HTTP{URL: url.String()}
-	return &x
-}
-
-func (ht HTTP) Send(c *skogul.Container) error {
-	b, err := json.Marshal(*c)
-	var buffer bytes.Buffer
-	buffer.Write(b)
-	req, err := http.NewRequest("POST", ht.URL, &buffer)
-	req.Header.Set("Content-Type", "application/json")
-	timeout := time.Duration(5 * time.Second)
-	client := http.Client{
-		Timeout: timeout,
+func addAutoReceiver(scheme string, init func(url url.URL, h skogul.Handler) skogul.Receiver, help string) {
+	if Auto == nil {
+		Auto = make(map[string]*AutoReceiver)
 	}
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Print(err)
-		return err
-	} else {
-		if resp.StatusCode < 200 || resp.StatusCode > 299 {
-			log.Print(resp)
-		}
+	if Auto[scheme] != nil {
+		log.Fatalf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
 	}
-	return nil
+	Auto[scheme] = &AutoReceiver{scheme, init, help}
 }

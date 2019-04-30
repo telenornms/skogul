@@ -28,6 +28,7 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net"
+	"net/url"
 )
 
 /*
@@ -104,4 +105,16 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 		return skogul.Error{Reason: "Error reading file"}
 	}
 	return nil
+}
+
+func init() {
+	addAutoReceiver("tcp", NewTCPLine, "Listen for Skogul-formatted JSON on a line-separate tcp socket")
+}
+
+/*
+NewTCPLine returns a new TCPLine receiver built from the url. Correct format is
+tcp://ip:port
+*/
+func NewTCPLine(ul url.URL, h skogul.Handler) skogul.Receiver {
+	return &TCPLine{Address: ul.String(), Handler: &h}
 }

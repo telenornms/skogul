@@ -41,3 +41,27 @@ if that fails, write a message to the log.
 
 */
 package senders
+
+import (
+	"github.com/KristianLyng/skogul/pkg"
+	"log"
+	"net/url"
+)
+
+type AutoSender struct {
+	Scheme string
+	Init   func(url url.URL) skogul.Sender
+	Help   string
+}
+
+var Auto map[string]*AutoSender
+
+func addAutoSender(scheme string, init func(url url.URL) skogul.Sender, help string) {
+	if Auto == nil {
+		Auto = make(map[string]*AutoSender)
+	}
+	if Auto[scheme] != nil {
+		log.Fatalf("BUG: Attempting to overwrite existing auto-add sender %v", scheme)
+	}
+	Auto[scheme] = &AutoSender{scheme, init, help}
+}

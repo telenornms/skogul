@@ -27,6 +27,7 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	skmqtt "github.com/KristianLyng/skogul/pkg/mqtt"
 	"log"
+	"net/url"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -76,4 +77,16 @@ func (handler *MQTT) Start() error {
 	for range timer.C {
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
+}
+
+func init() {
+	addAutoReceiver("mqtt", NewMQTT, "Listen for Skogul-formatted JSON on a MQTT endpoint")
+}
+
+/*
+NewMQTT returns a new MQTT receiver built from provided URL, using
+the path as the topic to subscribe to.
+*/
+func NewMQTT(ul url.URL, h skogul.Handler) skogul.Receiver {
+	return &MQTT{Address: ul.String(), Handler: &h}
 }
