@@ -69,7 +69,7 @@ func (tst *Tester) Start() error {
 }
 
 func init() {
-	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, format: tester://$m/$v")
+	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, format: test://$m/$v")
 }
 
 /*

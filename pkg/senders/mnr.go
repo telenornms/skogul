@@ -29,6 +29,7 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net"
+	"net/url"
 )
 
 /*
@@ -135,4 +136,12 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 	}
 	d.Close()
 	return nil
+}
+func init() {
+	addAutoSender("mnr", NewMnR, "MNR sender sends M&R line format to an endpoint")
+}
+
+func NewMnR(ul url.URL) skogul.Sender {
+	x := MnR{Address: ul.Host, DefaultGroup: ul.Path[1:len(ul.Path)]}
+	return &x
 }

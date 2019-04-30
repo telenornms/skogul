@@ -28,6 +28,7 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 	skmqtt "github.com/KristianLyng/skogul/pkg/mqtt"
 	"log"
+	"net/url"
 	"sync"
 )
 
@@ -65,4 +66,15 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 	}
 	handler.mc.Client.Publish(handler.mc.Topic, 0, false, b)
 	return nil
+}
+func init() {
+	addAutoSender("mqtt", NewMQTT, "MQTT sender publishes received metrics to an MQTT broker/topic")
+}
+
+/*
+NewMQTT creates a new MQTT sender
+*/
+func NewMQTT(url url.URL) skogul.Sender {
+	x := MQTT{Address: url.String()}
+	return &x
 }
