@@ -50,6 +50,8 @@ func NewDebug(url url.URL) skogul.Sender {
 	x := Debug{}
 	return x
 }
+
+// Send prints the JSON-formatted container to stdout
 func (db Debug) Send(c *skogul.Container) error {
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {
@@ -61,7 +63,7 @@ func (db Debug) Send(c *skogul.Container) error {
 }
 
 /*
-The Sleeper-sender injects a random delay between 0 and MaxDelay before
+The Sleeper sender injects a random delay between 0 and MaxDelay before
 passing execution over to the Next sender.
 
 The purpose is testing.
@@ -72,6 +74,8 @@ type Sleeper struct {
 	Verbose  bool
 }
 
+// Send sleeps a random duration according to Sleeper spec, then passes the
+// data to the next sender.
 func (sl *Sleeper) Send(c *skogul.Container) error {
 	d := rand.Float64() * float64(sl.MaxDelay)
 	if sl.Verbose {
@@ -99,6 +103,7 @@ type ForwardAndFail struct {
 	Next skogul.Sender
 }
 
+// Send forwards the data to the next sender and always returns an error.
 func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 	err := faf.Next.Send(c)
 	if err == nil {

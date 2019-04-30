@@ -50,12 +50,14 @@ type Fallback struct {
 }
 
 /*
-Add an other Sender
+Add an other Sender to the fallback sender.
 */
 func (fb *Fallback) Add(s skogul.Sender) error {
 	fb.next = append(fb.next, s)
 	return nil
 }
+
+// Send sends data down stream
 func (fb *Fallback) Send(c *skogul.Container) error {
 	for _, s := range fb.next {
 		err := s.Send(c)
@@ -66,11 +68,12 @@ func (fb *Fallback) Send(c *skogul.Container) error {
 	return skogul.Error{Reason: "No working senders left..."}
 }
 
-// Dupe-sender executes all provided senders in turn.
+// Dupe sender executes all provided senders in turn.
 type Dupe struct {
 	Next []skogul.Sender
 }
 
+// Send sends data down stream
 func (dp Dupe) Send(c *skogul.Container) error {
 	for _, s := range dp.Next {
 		err := s.Send(c)
@@ -82,7 +85,7 @@ func (dp Dupe) Send(c *skogul.Container) error {
 }
 
 /*
-Log-sender simply executes log.Print() on a predefined message.
+Log sender simply executes log.Print() on a predefined message.
 
 Intended use is in combination with other senders, e.g. to explain WHY
 senders.Debug() was used.
@@ -91,6 +94,7 @@ type Log struct {
 	Message string
 }
 
+// Send logs a message and does no further processing
 func (lg Log) Send(c *skogul.Container) error {
 	log.Print(lg.Message)
 	return nil

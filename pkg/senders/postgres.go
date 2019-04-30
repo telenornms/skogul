@@ -33,7 +33,7 @@ import (
 )
 
 /*
-Postgres-sender writes to a postgres-database, at the moment using the simplest
+Postgres sender writes to a postgres-database, at the moment using the simplest
 schema imaginable with ts (timestamp), metadata (jsonb), data (jsonb). Future
 versions will most likely be less stupid schema-wise.
 */
@@ -44,7 +44,7 @@ type Postgres struct {
 }
 
 /*
-Init() will connect to the database, ping it and set things up.
+Init will connect to the database, ping it and set things up.
 
 Running it is optional. It will be run when the first metric passes
 through the Postgres sender, but it might still be a good idea to
@@ -82,6 +82,16 @@ func (pqs *Postgres) checkInit() error {
 	return nil
 }
 
+/*
+Send will send to the Postgres database, after first ensuring
+the connection is OK.
+
+Currently it will expect a table named "test" which accepts
+"ts", "metadata" and "data" in json-encoded format for metadata and data.
+
+Future versions should probably be smarter, and auto-create the
+required tables if they are missing.
+*/
 func (pqs *Postgres) Send(c *skogul.Container) error {
 	var er error
 	er = pqs.checkInit()

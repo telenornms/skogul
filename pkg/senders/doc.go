@@ -22,9 +22,9 @@
  */
 
 /*
-senders is a set of types that implement skogul.Sender. A Sender in skogul
-is a simple primitive that receives skogul metrics and "does something
-with them".
+Package senders is a set of types that implement skogul.Sender. A Sender in
+skogul is a simple primitive that receives skogul metrics and "does
+something with them".
 
 The traditional and obvious sender accepts metrics and uses and external
 service to persist them to disk. E.g.: the InfluxDB sender stores the
@@ -48,12 +48,15 @@ import (
 	"net/url"
 )
 
+// AutoSender is used to provide generic constructors by URL/Scheme.
+// See Auto or cmd/skogul-x2y for more.
 type AutoSender struct {
 	Scheme string
 	Init   func(url url.URL) skogul.Sender
 	Help   string
 }
 
+// Auto maps schemas to senders and help text to make appropriate senders.
 var Auto map[string]*AutoSender
 
 func addAutoSender(scheme string, init func(url url.URL) skogul.Sender, help string) {

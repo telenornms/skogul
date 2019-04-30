@@ -57,6 +57,9 @@ func (handler *MQTT) testInit() {
 	handler.mc.Connect()
 	handler.init = true
 }
+
+// Send publishes the container in skogul JSON-encoded format on an MQTT
+// topic.
 func (handler *MQTT) Send(c *skogul.Container) error {
 	handler.testInit()
 	b, err := json.MarshalIndent(*c, "", "  ")

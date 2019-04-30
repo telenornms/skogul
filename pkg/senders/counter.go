@@ -76,6 +76,8 @@ func (co *Counter) checkInit() {
 	}
 }
 
+// Send counts metrics, sends the count on a channel, then executes
+// the next sender in the chain.
 func (co *Counter) Send(c *skogul.Container) error {
 	co.checkInit()
 	var tmpc count

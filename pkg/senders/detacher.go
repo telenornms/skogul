@@ -54,13 +54,15 @@ type Detacher struct {
 	mux   sync.Mutex
 }
 
+// Consume is the detached go routine that picks up containers and passes
+// them on.
 func (de *Detacher) Consume() {
 	for c := range de.ch {
 		de.Next.Send(c)
 	}
 }
 
-func (de *Detacher) Init() {
+func (de *Detacher) doInit() {
 	if de.init {
 		return
 	}
@@ -78,8 +80,10 @@ func (de *Detacher) Init() {
 	de.init = true
 }
 
+// Send ensures a consumer exists, then transmits the container on a
+// channel and returns immediately.
 func (de *Detacher) Send(c *skogul.Container) error {
-	de.Init()
+	de.doInit()
 	de.ch <- c
 	return nil
 }
@@ -107,7 +111,7 @@ type Fanout struct {
 	workers chan chan *skogul.Container
 }
 
-func (fo *Fanout) Init() {
+func (fo *Fanout) doInit() {
 	if fo.init {
 		return
 	}
@@ -128,13 +132,17 @@ func (fo *Fanout) Init() {
 	fo.init = true
 }
 
+// Send ensures the workers are booted, then picks up a channel from
+// available workers and sends the container to that container.
 func (fo *Fanout) Send(c *skogul.Container) error {
-	fo.Init()
+	fo.doInit()
 	x := <-fo.workers
 	x <- c
 	return nil
 }
 
+// worker makes a channel for work, makes that channel available on the
+// shared fo.workers channel, then reads from it.
 func (fo *Fanout) worker() {
 	c := make(chan *skogul.Container)
 	for {

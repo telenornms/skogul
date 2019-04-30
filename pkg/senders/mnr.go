@@ -91,7 +91,7 @@ type MnR struct {
 }
 
 /*
-Sends to MnR.
+Send to MnR.
 
 Implementation details: We need to write each value as its own variable to
 MnR, so we start by constructing two buffers for what comes before and after
@@ -137,10 +137,12 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 	d.Close()
 	return nil
 }
+
 func init() {
-	addAutoSender("mnr", NewMnR, "MNR sender sends M&R line format to an endpoint")
+	addAutoSender("mnr", NewMnR, "MNR sender sends M&R line format to an endpoint, optional DefaultGroup is provided as the path element.")
 }
 
+// NewMnR returns a MnR sender where default group is the path-element.
 func NewMnR(ul url.URL) skogul.Sender {
 	x := MnR{Address: ul.Host, DefaultGroup: ul.Path[1:len(ul.Path)]}
 	return &x

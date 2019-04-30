@@ -33,6 +33,9 @@ import (
 	"time"
 )
 
+/*
+HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
+*/
 type HTTP struct {
 	URL string
 }
@@ -41,11 +44,13 @@ func init() {
 	addAutoSender("http", NewHTTP, "Post Skogul-formatted JSON to a HTTP endpoint")
 }
 
+// NewHTTP creates a new HTTP sender
 func NewHTTP(url url.URL) skogul.Sender {
 	x := HTTP{URL: url.String()}
 	return &x
 }
 
+// Send POSTS data
 func (ht HTTP) Send(c *skogul.Container) error {
 	b, err := json.Marshal(*c)
 	var buffer bytes.Buffer

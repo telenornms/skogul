@@ -35,6 +35,10 @@ import (
 	"time"
 )
 
+/*
+InfluxDB posts data to the provided URL and measurement, using the InfluxDB
+line format over HTTP.
+*/
 type InfluxDB struct {
 	URL         string
 	Measurement string
@@ -46,6 +50,12 @@ func init() {
 	addAutoSender("influx", NewInflux, "Send InfluxDB data to a HTTP endpoint, using the first element of the path as db and second as measurement, e.g: influx://host/db/measurement")
 }
 
+/*
+NewInflux returns a new InfluxDB sender, parsing the URL more than the regular
+InfluxDB.URL field. Since it is mapped to the "influx" schema, the url
+provided is not used as-is, and instead follows the spec of
+influx://host[:port]/database/measurement
+*/
 func NewInflux(ul url.URL) skogul.Sender {
 	db, measurement := path.Split(ul.Path)
 	t := fmt.Sprintf("http://%s/write?db=%s", ul.Host, db[1:len(db)-1])
@@ -53,6 +63,7 @@ func NewInflux(ul url.URL) skogul.Sender {
 	return &x
 }
 
+// Send data to Influx, re-using idb.client.
 func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
@@ -87,5 +98,3 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	}
 	return nil
 }
-
-//req, err := http.NewRequest("POST", "http://127.0.0.1:8086/write?db=test", &buffer)
