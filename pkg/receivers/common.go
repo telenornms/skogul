@@ -22,8 +22,8 @@
  */
 
 /*
-Receivers accept data and execute a handler. They are the "inbound"
-API of Skogul.
+Package receivers provides various skogul Receivers that accept data and
+execute a handler. They are the "inbound" API of Skogul.
 */
 package receivers
 
@@ -33,12 +33,15 @@ import (
 	"net/url"
 )
 
+// AutoReceiver is used to initialize and document a receiver based on URL
 type AutoReceiver struct {
 	Scheme string
 	Init   func(url url.URL, h skogul.Handler) skogul.Receiver
 	Help   string
 }
 
+// Auto maps schemas to AutoReceivers to allow skogul-x2y (and others?) to
+// automatically support receivers.
 var Auto map[string]*AutoReceiver
 
 func addAutoReceiver(scheme string, init func(url url.URL, h skogul.Handler) skogul.Receiver, help string) {

@@ -127,7 +127,7 @@ func init() {
 }
 
 /*
-NewNTTP returns a HTTP receiver, with the Path of the url being the one to
+NewHTTP returns a HTTP receiver, with the Path of the url being the one to
 listen to.
 */
 func NewHTTP(ul url.URL, h skogul.Handler) skogul.Receiver {

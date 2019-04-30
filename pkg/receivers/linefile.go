@@ -76,6 +76,8 @@ func init() {
 	addAutoReceiver("fifo", NewLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
 }
 
+// NewLineFile returns a LineFile receiver reading from the Path-element of
+// the provided URL
 func NewLineFile(ul url.URL, h skogul.Handler) skogul.Receiver {
 	log.Printf("File: %s", ul.Path)
 	return &LineFile{File: ul.Path, Handler: h}
