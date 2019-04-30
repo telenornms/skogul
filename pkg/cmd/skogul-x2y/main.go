@@ -28,10 +28,20 @@ of using Skogul as a simple gateway from X to Y - it only utilizes a
 small subset of the possible senders and receivers provided by Skogul,
 but should prove sufficient for many scenarios.
 
+skogul-x2y will allow you to accept metrics from a single data source and
+forward it to an other. Since Skogul will parse the input data into an
+internal format, any "receiver" can be forwarded to any "sender", as long
+as said receiver and sender participate in the Auto-framework that allows
+semi-automatic configuration.
+
 It also doesn't necessarily offer the full capabilities of the relevant
 senders and receivers, but authors of senders and receivers are encouraged
 to make it possible to expose as many features as possible in this fashion,
 through the senders.Auto and receivers.Auto mechanisms.
+
+For a demonstration of more complex features, see pkg/cmd/skogul-demo, which
+tries to demonstrate how to chain multiple senders and set up a more
+complex receiver, for the sake of demonstration.
 
 What you are mainly missing with this package is advanced error-handling,
 load balancing, graceful failure, etc.
@@ -53,9 +63,11 @@ import (
 
 var flisten = flag.String("listen", "http://[::1]:8080", "Where to listen. See -help for details.")
 var ftarget = flag.String("target", "debug://", "Target address. See -help for details.")
-var fhelp = flag.Bool("help", false, "Print help")
+var fhelp = flag.Bool("help", false, "Print extensive help/usage")
 
 func help() {
+	flag.Usage()
+	fmt.Printf("\n")
 	fmt.Printf("Available senders:\n")
 	fmt.Printf("%9s:// | %s\n", "scheme", "Description")
 	fmt.Printf("%9s----+------------\n", "---------")

@@ -27,6 +27,7 @@ import (
 	"bufio"
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
+	"net/url"
 	"os"
 )
 
@@ -69,4 +70,13 @@ func (lf *LineFile) Start() error {
 		}
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
+}
+
+func init() {
+	addAutoReceiver("fifo", NewLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
+}
+
+func NewLineFile(ul url.URL, h skogul.Handler) skogul.Receiver {
+	log.Printf("File: %s", ul.Path)
+	return &LineFile{File: ul.Path, Handler: h}
 }
