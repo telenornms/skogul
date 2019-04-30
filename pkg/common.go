@@ -37,6 +37,7 @@ without having to write explicit support, just set up the chain.
 The guiding principles of Skogul is:
 
 - Make as few assumptions as possible about how data is received
+
 - Be stupid fast
 
 In the most simple setup, you can use Skogul simply to receive data from
@@ -45,11 +46,17 @@ you can have multiple Skogul servers, each in different security zones
 receiving subsets of a total data set, write it to a local queue, then
 transmit - through strong authentication - to two central Skogul servers
 that store the data to multiple influxdb instances based on sharding
-rules.
+rules. Etc.
 
-A full blown example of Skogul is provided in cmd/skogul/main.go, which
-is - as the file itself points out - meant as an EXAMPLE, not a final
+A full blown example of Skogul is provided in cmd/skogul-demo/main.go,
+which is - as the file itself points out - meant as an EXAMPLE, not a final
 solution.
+
+A general-purpose command is also provided under cmd/skogul-x2y, which
+provides a mechanism for starting a simplistic 1-to-1 receiver/sender chain,
+and should satisfy many common use-cases. E.g.: Accepting data from MQTT
+and passing it to influx. Or accepting from HTTP and printing to stdout
+for debug purposes.
 */
 package skogul
 
@@ -58,9 +65,10 @@ import (
 )
 
 /*
-Handler determines what a receiver will do with data received. It requires a parser
-to interperet the raw data, 0 or more transformers to mutate Containers, and a sender
-to call after data is parsed and mutated and ready to be dealt with.
+Handler determines what a receiver will do with data received. It requires
+a parser to interperet the raw data, 0 or more transformers to mutate
+Containers, and a sender to call after data is parsed and mutated and ready
+to be dealt with.
 */
 type Handler struct {
 	Parser       Parser
@@ -100,21 +108,20 @@ Transformer mutates a collection before it is passed to a sender. Transformers
 should be very fast, but are the only means to modifying the data.
 
 Currently, the only transformer is the template transfromer, that expands a
-template in a Container so underlying senders need not worry about the existence
-of a template or not.
+template in a Container so underlying senders need not worry about the
+existence of a template or not.
 */
 type Transformer interface {
 	Transform(c *Container) error
 }
 
 /*
-Receiver is how we get data. The only current implementation is a HTTP
-interface, but we should also expect UDP-receivers, line-based
-TCP-receivers and even things such as influxdb-format receivers.
-
-Currently, the included test-tool of skogul does not use a receiver, but
-in the future there will probably be a "synthesizer"-receiver both to
-demonstrate the concept and because it simplifies the tester.
+Receiver is how we get data. At the point of this writing, a HTTP
+receiver, line-based TCP receiver, line-based FIFO receiver, MQTT receiver
+and "tester"-receiver exists. A receiver uses a Handler to deal with
+data, including how to parse it. Meaning: The HTTP receiver could support
+both Skogul JSON-data and other formats, and the same goes for any other
+receiver.
 */
 type Receiver interface {
 	Start() error

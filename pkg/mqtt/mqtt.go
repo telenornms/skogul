@@ -21,13 +21,12 @@
  * 02110-1301  USA
  */
 
-package mqtt
-
 /*
 MQTT package provides a bit of glue common between Skogul's MQTT sender and
 receiver. Mostly providing mechanisms for setting up and maintaining a
 connection to a broker.
 */
+package mqtt
 
 import (
 	"fmt"

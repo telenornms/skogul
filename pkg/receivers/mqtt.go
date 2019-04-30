@@ -88,5 +88,6 @@ NewMQTT returns a new MQTT receiver built from provided URL, using
 the path as the topic to subscribe to.
 */
 func NewMQTT(ul url.URL, h skogul.Handler) skogul.Receiver {
-	return &MQTT{Address: ul.String(), Handler: &h}
+	n := MQTT{Address: ul.String(), Handler: &h}
+	return &n
 }

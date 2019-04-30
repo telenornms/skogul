@@ -21,6 +21,10 @@
  * 02110-1301  USA
  */
 
+/*
+Transformers can be attached to skogul.Handlers to mutate Containers before
+they are sent to a Sender.
+*/
 package transformers
 
 import (
