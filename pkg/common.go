@@ -22,8 +22,8 @@
  */
 
 /*
-Skogul is a framework for receiving, processing and forwarding data,
-typically metric data or event-oriented data, at high throughput.
+Package skogul is a framework for receiving, processing and forwarding
+data, typically metric data or event-oriented data, at high throughput.
 
 It is designed to be as agnostic as possible with regards to how it
 transmits data and how it receives it, and the processors in between
@@ -128,7 +128,8 @@ type Receiver interface {
 }
 
 /*
-Not sure we really need these, but here you are...
+Error is a typical skogul error, but I'm not really sure
+this is actually needed....
 */
 type Error struct {
 	Reason string
