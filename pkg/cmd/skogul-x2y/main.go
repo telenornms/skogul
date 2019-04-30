@@ -59,28 +59,85 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 )
 
-var flisten = flag.String("listen", "http://[::1]:8080", "Where to listen. See -help for details.")
-var ftarget = flag.String("target", "debug://", "Target address. See -help for details.")
+var flisten = flag.String("receiver", "http://[::1]:8080", "Where to receive data from. See -help for details.")
+var ftarget = flag.String("sender", "debug://", "Where to send data. See -help for details.")
 var fhelp = flag.Bool("help", false, "Print extensive help/usage")
+
+// Max width of help text before wrapping, should be some number lower than
+// expected terminal size.
+const helpWidth = 70
+
+/*
+Print a table of scheme | desc, wrapping the description at helpWidth.
+
+E.g. assuming small helpWidth value:
+
+Without prettyPrint:
+
+foo:// | A very long line will be wrapped
+
+With:
+
+foo:// | A very long
+       | line will
+       | be wrapped
+
+We wrap at word boundaries to avoid splitting words.
+*/
+func prettyPrint(scheme string, desc string) {
+	fmt.Printf("%8s:// |", scheme)
+	fields := strings.Fields(desc)
+	l := 0
+	for _, w := range fields {
+		if (l + len(w)) > helpWidth {
+			l = 0
+			fmt.Printf("\n%11s |", "")
+		}
+		fmt.Printf(" %s", w)
+		l += len(w) + 1
+	}
+	fmt.Printf("\n")
+}
+
+// Convenience function to avoid copy/paste
+func prettyHeader(title string) {
+	fmt.Printf("Available %s:\n", title)
+	fmt.Printf("%8s:// | %s\n", "scheme", "Description")
+	fmt.Printf("%8s----+------------\n", "--------")
+}
 
 func help() {
 	flag.Usage()
 	fmt.Printf("\n")
-	fmt.Printf("Available senders:\n")
-	fmt.Printf("%9s:// | %s\n", "scheme", "Description")
-	fmt.Printf("%9s----+------------\n", "---------")
+	fmt.Print("skogul-x2y sets up a skogul receiver, accepts data from it and passes it to the sender.")
+	fmt.Printf("\n\n")
+	prettyHeader("senders")
 	for _, m := range senders.Auto {
-		fmt.Printf("%9s:// | %s\n", m.Scheme, m.Help)
+		prettyPrint(m.Scheme, m.Help)
 	}
 	fmt.Printf("\n\n")
-	fmt.Printf("Available receivers:\n")
-	fmt.Printf("%9s:// | %s\n", "scheme", "Description")
-	fmt.Printf("%9s----+------------\n", "---------")
+	prettyHeader("receivers")
 	for _, m := range receivers.Auto {
-		fmt.Printf("%9s:// | %s\n", m.Scheme, m.Help)
+		prettyPrint(m.Scheme, m.Help)
 	}
+}
+
+func getUrls() (turl *url.URL, rurl *url.URL) {
+	var err error
+	turl, err = url.Parse(*ftarget)
+	if err != nil {
+		log.Print("Failed to parse target url: %v", err)
+		os.Exit(1)
+	}
+	rurl, err = url.Parse(*flisten)
+	if err != nil {
+		log.Print("Failed to parse receiver url: %v", err)
+		os.Exit(1)
+	}
+	return
 }
 
 func main() {
@@ -89,16 +146,8 @@ func main() {
 		help()
 		os.Exit(0)
 	}
-	turl, err := url.Parse(*ftarget)
-	if err != nil {
-		log.Print("Failed to parse target url: %v", err)
-		return
-	}
-	rurl, err := url.Parse(*flisten)
-	if err != nil {
-		log.Print("Failed to parse receiver url: %v", err)
-		return
-	}
+
+	turl, rurl := getUrls()
 
 	if senders.Auto[turl.Scheme] == nil {
 		log.Fatalf("Unknown target scheme: %s", turl.Scheme)

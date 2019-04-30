@@ -60,6 +60,9 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 func (tst *Tester) Start() error {
 	for {
 		c := tst.generate(time.Now())
+		for _, t := range tst.Handler.Transformers {
+			t.Transform(&c)
+		}
 		err := tst.Handler.Sender.Send(&c)
 		if err != nil {
 			log.Print(err)
@@ -77,15 +80,19 @@ NewTester returns a new Tester receiver, building values/metrics from URL.
 */
 func NewTester(ul url.URL, h skogul.Handler) skogul.Receiver {
 
-	var host int64
-	var path int64
-	n, err := fmt.Sscanf(ul.Host, "%d", &host)
-	if n != 1 || err != nil {
-		log.Fatalf("a Invalid URL for Tester %s (n: %d err: %v)", ul.Host, n, err)
+	var host int64 = 10
+	var path int64 = 50
+	if len(ul.Host) > 0 {
+		n, err := fmt.Sscanf(ul.Host, "%d", &host)
+		if n != 1 || err != nil {
+			log.Printf("Invalid URL for Tester %s (n: %d err: %v)", ul.Host, n, err)
+		}
 	}
-	n, err = fmt.Sscanf(ul.Path, "/%d", &path)
-	if n != 1 || err != nil {
-		log.Fatalf("a Invalid URL for Tester %s (n: %d err: %v)", ul.Path, n, err)
+	if len(ul.Path) > 0 {
+		n, err := fmt.Sscanf(ul.Path, "/%d", &path)
+		if n != 1 || err != nil {
+			log.Fatalf("a Invalid URL for Tester %s (n: %d err: %v)", ul.Path, n, err)
+		}
 	}
 
 	return &Tester{Metrics: host, Values: path, Handler: h}
