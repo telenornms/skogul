@@ -2,30 +2,81 @@
 Skogul - generic metric/data collector
 ======================================
 
-Skogul is a collector of various data, but unlike most similar tools, it
-does NOT provide a backend storage, and the aim is to provide a generic,
-reasonably future-proof API that can be built upon using various backend
-writers, transformers and more.
+Skogul is a generic tool for moving metric data around. It can serve as a
+collector of data, but is primarily designed to be a framework for building
+bridges between data collectors and storage engines.
 
-It is very much a work in progress, and is aimed to handle both simple
-installations where there's roughly a 1:1 between input sources and storage
-backends, and large enterprise installations where there can be hundreds of
-different input sources all being routed and transformed based on
-site-specific needs.
-
-The first use-case is expected to be Gondul
-(https://github.com/gathering/gondul), where it will provide a shim-layer
-between SNMP collectors, ping collectors and DHCP event data collectors;
-and postgresql and influxdb as storage backends.
+Unlike most APIs or collectors of metrics, Skogul does NOT have a
+preference when it comes to storage engine. It is explicitly designed to
+disconnect the task of how data is collected from how it is stored.
 
 The rationale is that the problem of writing an efficient snmp collector
 should not be tightly coupled to where you store the data. And where you
 store the data should not be tightly coupled with how you receive it, or
 what you do with it.
 
-At present time, it's not suited for much more than looking at the general
-development of the architecture. As such, build-instructions and more are
-explicitly left out.
+The simplest use of Skogul is to use the ``cmd/skogul-x2y`` package, which
+provides *limited* support for a number of "senders" and "receivers", which
+can be arbitrarily matched. This will allow you to receive Skogul-formated
+JSON data on HTTP, MQTT, local fifo, line-based TCP sockets and possibly
+other sources in the (near) future, and pass them on to an other Skogul
+instance over http, to influxdb, M&Rm or post it on a MQTT bus.
+
+An example of the help-screen of ``skogul-x2y`` gives an idea of what you
+can use it for::
+
+   Usage of cmd/skogul-x2y/skogul-x2y:
+     -help
+           Print extensive help/usage
+     -receiver string
+           Where to receive data from. See -help for details. (default "http://[::1]:8080")
+     -sender string
+           Where to send data. See -help for details. (default "debug://")
+
+   skogul-x2y sets up a skogul receiver, accepts data from it and passes it to the sender.
+
+   Available senders:
+     scheme:// | Description
+   ------------+------------
+        mnr:// | MNR sender sends M&R line format to an endpoint, optional DefaultGroup
+               | is provided as the path element.
+       mqtt:// | MQTT sender publishes received metrics to an MQTT broker/topic
+      debug:// | Debug sender prints received metrics to stdout
+       http:// | Post Skogul-formatted JSON to a HTTP endpoint
+     influx:// | Send InfluxDB data to a HTTP endpoint, using the first element of the
+               | path as db and second as measurement, e.g:
+               | influx://host/db/measurement
+
+
+   Available receivers:
+     scheme:// | Description
+   ------------+------------
+       http:// | Listen for Skogul-formatted JSON on a HTTP endpoint
+       fifo:// | Read from a FIFO on disk, reading one Skogul-formatted JSON per line.
+               | fifo:///var/skogul/foo
+       mqtt:// | Listen for Skogul-formatted JSON on a MQTT endpoint
+        tcp:// | Listen for Skogul-formatted JSON on a line-separate tcp socket
+       test:// | Generate dummy-data, each container contains $m metrics and each
+               | metric $v values, format: test://$m/$v
+
+While this 1-to-1 scenario is very useful and common, it is not really
+where Skogul shines the most. The core idea behind Skogul is building
+pipelines that starts with one or more receiver and builds a chain of
+multiple senders. Each sender comes in one of two forms: largely "internal"
+senders, and "terminal/external" senders. The latter is the most easily
+understood sender: One that transmits the data to an external data source -
+presumably for permanent storage. The internal sender will allow such
+things as duplicating a metric to multiple other senders (e.g.: Send the
+data to both influx and postgres), try sending first to one sender, then if
+that fails, push to an other (e.g.: fallback / ha), and so on.
+
+However, using these models will require specific binaries/packages to be
+written. Therefore, the writing of such tools is designed to be easy. See
+`cmd/skogul-demo` for an example.
+
+More discussion on architecture can be found in `docs/`.
+
+.. image:: https://goreportcard.com/badge/github.com/KristianLyng/skogul
 
 Performance
 -----------
