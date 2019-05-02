@@ -24,8 +24,8 @@
 package receiver
 
 import (
+	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
 	"github.com/KristianLyng/skogul/pkg"
-	skmqtt "github.com/KristianLyng/skogul/pkg/mqtt"
 	"log"
 	"net/url"
 	"time"

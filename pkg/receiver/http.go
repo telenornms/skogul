@@ -24,6 +24,7 @@
 package receiver
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/KristianLyng/skogul/pkg"
 	"io"
@@ -62,29 +63,59 @@ type receiver struct {
 // Address on each HTTP receiver....
 var defaultAddress = "[::1]:8080"
 
+type httpReturn struct {
+	Message string
+}
+
+func (handler receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
+	answer := "OK"
+
+	if inerr != nil {
+		answer = inerr.Error()
+	}
+
+	b, err := json.Marshal(httpReturn{Message: answer})
+	if err != nil {
+		log.Panic("Failed to marshal internal JSON")
+		return
+	}
+	w.WriteHeader(code)
+	fmt.Fprintf(w, "%s\n", b)
+}
+
+func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (oerr error, code int) {
+	if r.ContentLength == 0 {
+		oerr = skogul.Error{Source: "http receiver", Reason: "Missing input data"}
+		code = 400
+		return
+	}
+	b := make([]byte, r.ContentLength)
+	n, err := io.ReadFull(r.Body, b)
+	if err != nil {
+		log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
+		return skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}, 400
+	}
+	m, err := handler.Handler.Parser.Parse(b)
+	if err == nil {
+		err = m.Validate()
+	}
+	if err != nil {
+		return skogul.Error{Source: "http receiver", Reason: "failed to parse JSON", Next: err}, 400
+	}
+	for _, t := range handler.Handler.Transformers {
+		t.Transform(&m)
+	}
+	err = handler.Handler.Sender.Send(&m)
+	if err != nil {
+		return skogul.Error{Source: "http receiver", Reason: "failed to send data", Next: err}, 500
+	}
+	return nil, 200
+}
+
 // Core HTTP handler
 func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.ContentLength > 0 {
-		b := make([]byte, r.ContentLength)
-		n, err := io.ReadFull(r.Body, b)
-		if err != nil {
-			log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
-		}
-		m, err := handler.Handler.Parser.Parse(b)
-		if err == nil {
-			err = m.Validate()
-		}
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			fmt.Fprintf(w, "Unable to parse JSON: %s", err)
-			return
-		}
-		for _, t := range handler.Handler.Transformers {
-			t.Transform(&m)
-		}
-		handler.Handler.Sender.Send(&m)
-		fmt.Fprintf(w, "OK\n")
-	}
+	err, code := handler.handle(w, r)
+	handler.answer(w, r, code, err)
 }
 
 /*

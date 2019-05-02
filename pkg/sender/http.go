@@ -26,6 +26,7 @@ package sender
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
@@ -54,15 +55,17 @@ func NewHTTP(url url.URL) skogul.Sender {
 func (ht HTTP) Send(c *skogul.Container) error {
 	b, err := json.Marshal(*c)
 	if err != nil {
-		log.Printf("HTTP sender is unable to marshal JSON: %v", err)
-		return err
+		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
+		log.Print(e)
+		return e
 	}
 	var buffer bytes.Buffer
 	buffer.Write(b)
 	req, err := http.NewRequest("POST", ht.URL, &buffer)
 	if err != nil {
-		log.Printf("HTTP sender is unable to create new http request: %v", err)
-		return err
+		e := skogul.Error{Source: "http sender", Reason: "unable to create new HTTP request", Next: err}
+		log.Print(e)
+		return e
 	}
 	req.Header.Set("Content-Type", "application/json")
 	timeout := time.Duration(5 * time.Second)
@@ -71,11 +74,14 @@ func (ht HTTP) Send(c *skogul.Container) error {
 	}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Print(err)
-		return err
+		e := skogul.Error{Source: "http sender", Reason: "unable to Do request", Next: err}
+		log.Print(e)
+		return e
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		log.Print(resp)
+		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
+		log.Print(e)
+		return e
 	}
 	return nil
 }

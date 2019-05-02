@@ -61,6 +61,7 @@ for debug purposes.
 package skogul
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -128,14 +129,35 @@ type Receiver interface {
 }
 
 /*
-Error is a typical skogul error, but I'm not really sure
-this is actually needed....
+Error is a typical skogul error. All Skogul functions should provide Source
+and Reason. An optional "Private" string can be provided, which, when Error()
+is called, will be printed in the log, but not returned, and can thus be used
+to provide "sensitive" data to the log without risk of exposing it to clients.
+
+If the Next field is provided, error messages will recurse to the bottom, thus
+propagating errors from the bottom and up.
 */
 type Error struct {
-	Reason string
+	Reason  string
+	Private string
+	Source  string
+	Next    error
 }
 
+// Error for use in regular error messages. Also outputs to log.Print() if
+// the skogul.Error has a Private field with data. Will also include
+// e.Next, if present.
 func (e Error) Error() string {
-	log.Printf("Error: %v", e.Reason)
-	return e.Reason
+	src := "<nil>"
+	if e.Source != "" {
+		src = e.Source
+	}
+	tail := ""
+	if e.Next != nil {
+		tail = fmt.Sprint(": ", e.Next.Error())
+	}
+	if e.Private != "" {
+		log.Print("Error with private message: %s", e.Private)
+	}
+	return fmt.Sprintf("%s: %s%s", src, e.Reason, tail)
 }

@@ -22,28 +22,21 @@
  */
 
 /*
-Skogul is primarily a framework, where you use it to build your OWN
-binaries. This package is provided to satisfy the common deployment
-of using Skogul as a simple gateway from X to Y - it only utilizes a
-small subset of the possible senders and receivers provided by Skogul,
-but should prove sufficient for many scenarios.
+skogul-x2y exposes a subset of Skogul's metric receivers and senders
+in a single binary, supporting the most trivial use case of just moving
+data from A to B. This will allow you to move data from Skogul's
+HTTP API to influx, or read from file-mapped fifo and pass the data to
+M&R's "port collector", and so on.
 
-skogul-x2y will allow you to accept metrics from a single data source and
-forward it to an other. Since Skogul will parse the input data into an
-internal format, any "receiver" can be forwarded to any "sender", as long
-as said receiver and sender participate in the Auto-framework that allows
-semi-automatic configuration.
+skogul-x2y only scratches the surface of what Skogul can do, but will probably
+be sufficient for 95% of all deployments. Any sender or receiver in Skogul that
+participate in the "auto"-scheme of configuration is supported implicitly. See
+-help for an actual list.
 
-It also doesn't necessarily offer the full capabilities of the relevant
-senders and receivers, but authors of senders and receivers are encouraged
-to make it possible to expose as many features as possible in this fashion,
-through the senders.Auto and receivers.Auto mechanisms.
+A more advanced example of how to use Skogul is provided in cmd/skogul-demo,
+where multiple receivers, multiple senders, failover and more is covered.
 
-For a demonstration of more complex features, see pkg/cmd/skogul-demo, which
-tries to demonstrate how to chain multiple senders and set up a more
-complex receiver, for the sake of demonstration.
-
-What you are mainly missing with this package is advanced error-handling,
+What you are mainly missing with skogul-x2y is advanced error-handling,
 load balancing, graceful failure, etc.
 */
 package main

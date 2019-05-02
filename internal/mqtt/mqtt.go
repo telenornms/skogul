@@ -24,7 +24,8 @@
 /*
 Package mqtt provides a bit of glue common between Skogul's MQTT sender and
 receiver. Mostly providing mechanisms for setting up and maintaining a
-connection to a broker.
+connection to a broker. You really should not include this directly. Use
+the MQTT sender and receiver instead.
 */
 package mqtt
 

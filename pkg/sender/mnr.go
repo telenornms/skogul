@@ -106,7 +106,7 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 	d, err := net.Dial("tcp", mnr.Address)
 	if err != nil {
 		log.Printf("Failed to connect to MnR: %v", err)
-		return err
+		return skogul.Error{Source: "mnr sender", Reason: "unable to connect to MnR"}
 	}
 	for _, m := range c.Metrics {
 		var bufferpre bytes.Buffer
@@ -144,6 +144,10 @@ func init() {
 
 // NewMnR returns a MnR sender where default group is the path-element.
 func NewMnR(ul url.URL) skogul.Sender {
-	x := MnR{Address: ul.Host, DefaultGroup: ul.Path[1:len(ul.Path)]}
+	g := ""
+	if ul.Path != "" {
+		g = ul.Path[1:len(ul.Path)]
+	}
+	x := MnR{Address: ul.Host, DefaultGroup: g}
 	return &x
 }
