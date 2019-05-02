@@ -84,7 +84,7 @@ func (handler receiver) answer(w http.ResponseWriter, r *http.Request, code int,
 	fmt.Fprintf(w, "%s\n", b)
 }
 
-func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (oerr error, code int) {
+func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (code int, oerr error) {
 	if r.ContentLength == 0 {
 		oerr = skogul.Error{Source: "http receiver", Reason: "Missing input data"}
 		code = 400
@@ -94,28 +94,36 @@ func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (oerr err
 	n, err := io.ReadFull(r.Body, b)
 	if err != nil {
 		log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
-		return skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}, 400
+		code = 400
+		oerr = skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
+		return
 	}
 	m, err := handler.Handler.Parser.Parse(b)
 	if err == nil {
 		err = m.Validate()
 	}
 	if err != nil {
-		return skogul.Error{Source: "http receiver", Reason: "failed to parse JSON", Next: err}, 400
+		oerr = skogul.Error{Source: "http receiver", Reason: "failed to parse JSON", Next: err}
+		code = 400
+		return
 	}
 	for _, t := range handler.Handler.Transformers {
 		t.Transform(&m)
 	}
 	err = handler.Handler.Sender.Send(&m)
 	if err != nil {
-		return skogul.Error{Source: "http receiver", Reason: "failed to send data", Next: err}, 500
+		code = 500
+		oerr = skogul.Error{Source: "http receiver", Reason: "failed to send data", Next: err}
+		return
 	}
-	return nil, 200
+	oerr = nil
+	code = 200
+	return
 }
 
 // Core HTTP handler
 func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	err, code := handler.handle(w, r)
+	code, err := handler.handle(w, r)
 	handler.answer(w, r, code, err)
 }
 
