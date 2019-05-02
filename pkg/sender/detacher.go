@@ -24,10 +24,11 @@
 package sender
 
 import (
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"runtime"
 	"sync"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*

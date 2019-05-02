@@ -25,10 +25,11 @@ package receiver
 
 import (
 	"bufio"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/url"
 	"os"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 // LineFile will keep reading File over and over again, assuming one

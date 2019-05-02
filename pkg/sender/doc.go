@@ -43,9 +43,10 @@ if that fails, write a message to the log.
 package sender
 
 import (
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/url"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 // AutoSender is used to provide generic constructors by URL/Scheme.

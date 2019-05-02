@@ -44,15 +44,16 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/KristianLyng/skogul/pkg"
-	"github.com/KristianLyng/skogul/pkg/parser"
-	"github.com/KristianLyng/skogul/pkg/receiver"
-	"github.com/KristianLyng/skogul/pkg/sender"
-	"github.com/KristianLyng/skogul/pkg/transformer"
 	"log"
 	"net/url"
 	"os"
 	"strings"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul/pkg/parser"
+	"github.com/KristianLyng/skogul/pkg/receiver"
+	"github.com/KristianLyng/skogul/pkg/sender"
+	"github.com/KristianLyng/skogul/pkg/transformer"
 )
 
 var flisten = flag.String("receiver", "http://[::1]:8080", "Where to receive data from. See -help for details.")

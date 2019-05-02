@@ -31,11 +31,12 @@ package mqtt
 
 import (
 	"fmt"
-	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"log"
 	"math/rand"
 	"net/url"
 	"time"
+
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
 // MQTT shared data structure annd interal state

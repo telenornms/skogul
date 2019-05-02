@@ -25,11 +25,12 @@ package sender
 
 import (
 	"encoding/json"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"math/rand"
 	"net/url"
 	"time"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*

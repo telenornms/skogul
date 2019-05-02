@@ -25,11 +25,12 @@ package receiver
 
 import (
 	"fmt"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"math/rand"
 	"net/url"
 	"time"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 // Tester synthesise dummy data

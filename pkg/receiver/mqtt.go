@@ -24,11 +24,12 @@
 package receiver
 
 import (
-	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/url"
 	"time"
+
+	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
+	skogul "github.com/KristianLyng/skogul/pkg"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )

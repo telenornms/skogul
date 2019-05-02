@@ -25,7 +25,8 @@ package parser
 
 import (
 	"encoding/json"
-	"github.com/KristianLyng/skogul/pkg"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 // JSON parses a byte string-representation of a Container

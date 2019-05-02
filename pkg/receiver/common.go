@@ -28,9 +28,10 @@ execute a handler. They are the "inbound" API of Skogul.
 package receiver
 
 import (
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/url"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 // AutoReceiver is used to initialize and document a receiver based on URL

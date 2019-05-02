@@ -27,11 +27,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/http"
 	"net/url"
 	"time"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*

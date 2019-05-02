@@ -26,10 +26,11 @@ package sender
 import (
 	"database/sql"
 	"encoding/json"
-	"github.com/KristianLyng/skogul/pkg"
-	"github.com/lib/pq"
 	"log"
 	"sync"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/lib/pq"
 )
 
 /*

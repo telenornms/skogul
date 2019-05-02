@@ -26,11 +26,12 @@ package receiver
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/KristianLyng/skogul/pkg"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*

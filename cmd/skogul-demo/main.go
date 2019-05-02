@@ -52,12 +52,13 @@ The primary chain looks sort of like this:
 package main
 
 import (
-	"github.com/KristianLyng/skogul/pkg"
+	"time"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 	"github.com/KristianLyng/skogul/pkg/parser"
 	"github.com/KristianLyng/skogul/pkg/receiver"
 	"github.com/KristianLyng/skogul/pkg/sender"
 	"github.com/KristianLyng/skogul/pkg/transformer"
-	"time"
 )
 
 func main() {

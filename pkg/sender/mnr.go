@@ -26,10 +26,11 @@ package sender
 import (
 	"bytes"
 	"fmt"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net"
 	"net/url"
+
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*

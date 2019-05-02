@@ -25,11 +25,12 @@ package sender
 
 import (
 	"encoding/json"
-	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
-	"github.com/KristianLyng/skogul/pkg"
 	"log"
 	"net/url"
 	"sync"
+
+	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
+	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*
