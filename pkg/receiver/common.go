@@ -22,10 +22,10 @@
  */
 
 /*
-Package receivers provides various skogul Receivers that accept data and
+Package receiver provides various skogul Receivers that accept data and
 execute a handler. They are the "inbound" API of Skogul.
 */
-package receivers
+package receiver
 
 import (
 	"github.com/KristianLyng/skogul/pkg"

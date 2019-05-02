@@ -22,10 +22,10 @@
  */
 
 /*
-Package transformers provides the means to mutate a container as part of a
+Package transformer provides the means to mutate a container as part of a
 skogul.Handler, before it is passed on to a Sender.
 */
-package transformers
+package transformer
 
 import (
 	"github.com/KristianLyng/skogul/pkg"

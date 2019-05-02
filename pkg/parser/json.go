@@ -1,5 +1,5 @@
 /*
- * skogul, parser documentation
+ * skogul, json parser
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -21,12 +21,19 @@
  * 02110-1301  USA
  */
 
-/*
-Package parsers is responsible for interpreting raw byte data into
-Containers. Each parser is disconnected from how the byte data is received
-and what happens with it afterwards.
+package parser
 
-The simplest parser is probably the JSON parser, which simply assumes the
-byte slice is a JSON representation of a Skogul Container.
-*/
-package parsers
+import (
+	"encoding/json"
+	"github.com/KristianLyng/skogul/pkg"
+)
+
+// JSON parses a byte string-representation of a Container
+type JSON struct{}
+
+// Parse accepts a byte slice of JSON data and marshals it into a container
+func (x JSON) Parse(b []byte) (skogul.Container, error) {
+	container := skogul.Container{}
+	err := json.Unmarshal(b, &container)
+	return container, err
+}

@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package senders
+package sender
 
 import (
 	"github.com/KristianLyng/skogul/pkg"
@@ -33,11 +33,11 @@ Fallback sender tries each provided sender in turn before failing.
 
 E.g.:
 
-	primary := senders.InfluxDB{....}
-	secondary := senders.Queue{....} // Not implemented yet
-	emergency := senders.Debug{}
+	primary := sender.InfluxDB{....}
+	secondary := sender.Queue{....} // Not implemented yet
+	emergency := sender.Debug{}
 
-	fallback := senders.Fallback{}
+	fallback := sender.Fallback{}
 	fallback.Add(&primary)
 	fallback.Add(&secondary)
 	fallback.Add(&emergency)
@@ -88,7 +88,7 @@ func (dp Dupe) Send(c *skogul.Container) error {
 Log sender simply executes log.Print() on a predefined message.
 
 Intended use is in combination with other senders, e.g. to explain WHY
-senders.Debug() was used.
+sender.Debug() was used.
 */
 type Log struct {
 	Message string

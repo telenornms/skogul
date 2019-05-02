@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package receivers
+package receiver
 
 import (
 	"bufio"

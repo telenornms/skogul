@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package parsers
+package parser
 
 import "testing"
 

@@ -22,9 +22,12 @@
  */
 
 /*
-Skogul is primarily a framework, where you use it to build your OWN
-binaries. This package is provided to show-case a complete chain of
-Skogul.
+skogul-demo tries to showcase the Skogul frameworks more advanced
+functions. Since Skogul is primarily a framework used to build custom
+pipelines for metrics, you need to actually write your own binaries
+using the framework to build more complex chains. The most common
+and trivial use cases are covered by cmd/skogul-x2y, but skogul-demo
+tries to show a more complex example.
 
 While it is usually possible to write it "the right way up" - start with
 where we receive data and add senders - it's easier to write it "up-side-down"
@@ -50,24 +53,24 @@ package main
 
 import (
 	"github.com/KristianLyng/skogul/pkg"
-	"github.com/KristianLyng/skogul/pkg/parsers"
-	"github.com/KristianLyng/skogul/pkg/receivers"
-	"github.com/KristianLyng/skogul/pkg/senders"
-	"github.com/KristianLyng/skogul/pkg/transformers"
+	"github.com/KristianLyng/skogul/pkg/parser"
+	"github.com/KristianLyng/skogul/pkg/receiver"
+	"github.com/KristianLyng/skogul/pkg/sender"
+	"github.com/KristianLyng/skogul/pkg/transformer"
 	"time"
 )
 
 func main() {
 	// Let's start by setting up two "final" storage senders
-	influx := &senders.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
-	//postgres := &senders.Postgres{ConnStr: "user=postgres dbname=test host=localhost port=5432 sslmode=disable"}
+	influx := &sender.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
+	postgres := &sender.Postgres{ConnStr: "user=postgres dbname=test host=localhost port=5432 sslmode=disable"}
 	// Init is optional, see the skogul.senders.Postgres documentation
-	//postgres.Init()
+	postgres.Init()
 
 	// Set up a duplicator and hook influx and postgres up to it -
 	// Everything going to the duplicator will go to both influx and
 	// postgres.
-	dupe2 := senders.Dupe{Next: []skogul.Sender{influx}}
+	dupe2 := sender.Dupe{Next: []skogul.Sender{influx, postgres}}
 
 	// Set up a handler for where to send statistics. In this case, we
 	// just send it to influx.
@@ -80,25 +83,25 @@ func main() {
 	// influx). While it might seem strange to have a handler instead
 	// of just a Sender at first, this allows us to provide arbitrary
 	// transformers to the stats, e.g.: add metadata.
-	counter := &senders.Counter{Next: dupe2, Stats: countHandler, Period: 1 * time.Second}
+	counter := &sender.Counter{Next: dupe2, Stats: countHandler, Period: 1 * time.Second}
 
 	// Let's also inject a random delay for testing!
-	delay := senders.Sleeper{Next: counter, MaxDelay: 5000 * time.Millisecond, Verbose: false}
+	delay := sender.Sleeper{Next: counter, MaxDelay: 5000 * time.Millisecond, Verbose: false}
 
-	fanout := senders.Fanout{Next: &delay}
+	fanout := sender.Fanout{Next: &delay}
 
 	// Let's detach
-	detach := senders.Detacher{Next: &fanout}
+	detach := sender.Detacher{Next: &fanout}
 
 	// An other duplicator. This one just prints "The following failed"
 	// and then uses the Debug-sender to print the metrics.
-	dupe := senders.Dupe{Next: []skogul.Sender{senders.Log{Message: "The following failed"}, senders.Debug{}}}
+	dupe := sender.Dupe{Next: []skogul.Sender{sender.Log{Message: "The following failed"}, sender.Debug{}}}
 
 	// the Fallback sender tries to write to the delay-sender
 	// (delay->counter->dupe2->{postgres,influx}), but if this
 	// fails, it will write to the dupe-sender (print "the following
 	// failed" and the request).
-	fb := senders.Fallback{}
+	fb := sender.Fallback{}
 	fb.Add(&detach)
 	fb.Add(&dupe)
 
@@ -109,31 +112,31 @@ func main() {
 	// that's it. It also has a single transformer that - prior to
 	// sending the data on - expands any template provided.
 	h := skogul.Handler{
-		Parser:       parsers.JSON{},
+		Parser:       parser.JSON{},
 		Sender:       &fb,
-		Transformers: []skogul.Transformer{transformers.Templater{}}}
+		Transformers: []skogul.Transformer{transformer.Templater{}}}
 
 	// This is the same - but just print the request.
 	debugtemplate := skogul.Handler{
-		Parser:       parsers.JSON{},
-		Sender:       senders.Debug{},
-		Transformers: []skogul.Transformer{transformers.Templater{}}}
+		Parser:       parser.JSON{},
+		Sender:       sender.Debug{},
+		Transformers: []skogul.Transformer{transformer.Templater{}}}
 
 	// Print the request, but do NOT expand the template. Demonstrates
 	// what a template does and what the template transformer does.
 	debugnotemplate := skogul.Handler{
-		Parser:       parsers.JSON{},
-		Sender:       senders.Debug{},
+		Parser:       parser.JSON{},
+		Sender:       sender.Debug{},
 		Transformers: []skogul.Transformer{}}
 
 	// Set up a HTTP receiver
-	receiver := receivers.HTTP{Address: "[::1]:8080"}
+	rcvr := receiver.HTTP{Address: "[::1]:8080"}
 
 	// Add the various handlers to relevant paths.
-	receiver.Handle("/", &h)
-	receiver.Handle("/debug", &debugtemplate)
-	receiver.Handle("/debug/notemplate", &debugnotemplate)
+	rcvr.Handle("/", &h)
+	rcvr.Handle("/debug", &debugtemplate)
+	rcvr.Handle("/debug/notemplate", &debugnotemplate)
 
 	// Start it
-	receiver.Start()
+	rcvr.Start()
 }

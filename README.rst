@@ -1,6 +1,9 @@
 
 .. image:: https://goreportcard.com/badge/github.com/KristianLyng/skogul
 
+.. image:: https://godoc.org/github.com/KristianLyng/skogul?status.svg
+   :target: https://godoc.org/github.com/KristianLyng/skogul
+
 ======================================
 Skogul - generic metric/data collector
 ======================================

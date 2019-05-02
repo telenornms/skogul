@@ -21,7 +21,7 @@
  * 02110-1301  USA
  */
 
-package senders
+package sender
 
 import (
 	"encoding/json"
@@ -95,8 +95,8 @@ appropriate action.
 
 Example use:
 
-faf := senders.ForwardAndFail{Next: skogul.Debug{}}
-fb := senders.Fallback{Next: []skogul.Sender{influx, faf}}
+faf := sender.ForwardAndFail{Next: skogul.Debug{}}
+fb := sender.Fallback{Next: []skogul.Sender{influx, faf}}
 
 */
 type ForwardAndFail struct {

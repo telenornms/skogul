@@ -22,7 +22,7 @@
  */
 
 /*
-Package senders is a set of types that implement skogul.Sender. A Sender in
+Package sender is a set of types that implement skogul.Sender. A Sender in
 skogul is a simple primitive that receives skogul metrics and "does
 something with them".
 
@@ -40,7 +40,7 @@ send to a primary influxdb normally - if influx fails, write to local disk,
 if that fails, write a message to the log.
 
 */
-package senders
+package sender
 
 import (
 	"github.com/KristianLyng/skogul/pkg"

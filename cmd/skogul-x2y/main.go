@@ -52,10 +52,10 @@ import (
 	"flag"
 	"fmt"
 	"github.com/KristianLyng/skogul/pkg"
-	"github.com/KristianLyng/skogul/pkg/parsers"
-	"github.com/KristianLyng/skogul/pkg/receivers"
-	"github.com/KristianLyng/skogul/pkg/senders"
-	"github.com/KristianLyng/skogul/pkg/transformers"
+	"github.com/KristianLyng/skogul/pkg/parser"
+	"github.com/KristianLyng/skogul/pkg/receiver"
+	"github.com/KristianLyng/skogul/pkg/sender"
+	"github.com/KristianLyng/skogul/pkg/transformer"
 	"log"
 	"net/url"
 	"os"
@@ -115,12 +115,12 @@ func help() {
 	fmt.Print("skogul-x2y sets up a skogul receiver, accepts data from it and passes it to the sender.")
 	fmt.Printf("\n\n")
 	prettyHeader("senders")
-	for _, m := range senders.Auto {
+	for _, m := range sender.Auto {
 		prettyPrint(m.Scheme, m.Help)
 	}
 	fmt.Printf("\n\n")
 	prettyHeader("receivers")
-	for _, m := range receivers.Auto {
+	for _, m := range receiver.Auto {
 		prettyPrint(m.Scheme, m.Help)
 	}
 }
@@ -149,22 +149,22 @@ func main() {
 
 	turl, rurl := getUrls()
 
-	if senders.Auto[turl.Scheme] == nil {
+	if sender.Auto[turl.Scheme] == nil {
 		log.Fatalf("Unknown target scheme: %s", turl.Scheme)
 	}
 
-	target := senders.Auto[turl.Scheme].Init(*turl)
+	target := sender.Auto[turl.Scheme].Init(*turl)
 
 	h := skogul.Handler{
-		Parser:       parsers.JSON{},
+		Parser:       parser.JSON{},
 		Sender:       target,
-		Transformers: []skogul.Transformer{transformers.Templater{}}}
+		Transformers: []skogul.Transformer{transformer.Templater{}}}
 
-	if receivers.Auto[rurl.Scheme] == nil {
+	if receiver.Auto[rurl.Scheme] == nil {
 		log.Fatalf("Unknown receiver scheme: %s", rurl.Scheme)
 	}
 
-	receiver := receivers.Auto[rurl.Scheme].Init(*rurl, h)
+	receiver := receiver.Auto[rurl.Scheme].Init(*rurl, h)
 
 	receiver.Start()
 }
