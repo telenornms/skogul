@@ -28,7 +28,7 @@ import (
 	"github.com/KristianLyng/skogul/pkg"
 )
 
-// JSON parses a byte string-represetnation of a Container
+// JSON parses a byte string-representation of a Container
 type JSON struct{}
 
 // Parse accepts a byte slice of JSON data and marshals it into a container

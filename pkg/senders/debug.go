@@ -90,7 +90,7 @@ ForwardAndFail sender will pass the container to the Next sender, but
 always returns an error. The use-case for this is to allow the fallback
 Sender or similar to eventually send data to a sender that ALWAYS works,
 e.g. the Debug-sender og just printing a message in the log, but we still
-want to propogate the error upwards in the stack so clients can take
+want to propagate the error upwards in the stack so clients can take
 appropriate action.
 
 Example use:

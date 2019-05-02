@@ -31,7 +31,7 @@ import (
 Container is the top-level object for one or more metric.
 
 If a Template is provided, it will used as the initial value for each of
-the metrics - this is expanded by the transformers.Template transfromers,
+the metrics - this is expanded by the transformers.Template transformers,
 and internal code does not need to worry about this.
 
 A single Container instance is typically the result of a single POST to the

@@ -53,9 +53,17 @@ func NewHTTP(url url.URL) skogul.Sender {
 // Send POSTS data
 func (ht HTTP) Send(c *skogul.Container) error {
 	b, err := json.Marshal(*c)
+	if err != nil {
+		log.Printf("HTTP sender is unable to marshal JSON: %v", err)
+		return err
+	}
 	var buffer bytes.Buffer
 	buffer.Write(b)
 	req, err := http.NewRequest("POST", ht.URL, &buffer)
+	if err != nil {
+		log.Printf("HTTP sender is unable to create new http request: %v", err)
+		return err
+	}
 	req.Header.Set("Content-Type", "application/json")
 	timeout := time.Duration(5 * time.Second)
 	client := http.Client{
