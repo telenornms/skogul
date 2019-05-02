@@ -1,3 +1,6 @@
+
+.. image:: https://goreportcard.com/badge/github.com/KristianLyng/skogul
+
 ======================================
 Skogul - generic metric/data collector
 ======================================
@@ -75,8 +78,6 @@ written. Therefore, the writing of such tools is designed to be easy. See
 `cmd/skogul-demo` for an example.
 
 More discussion on architecture can be found in `docs/`.
-
-.. image:: https://goreportcard.com/badge/github.com/KristianLyng/skogul
 
 Performance
 -----------
