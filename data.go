@@ -24,6 +24,8 @@
 package skogul
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -148,6 +150,9 @@ func (m *Metric) validate() error {
 	if m.Data == nil {
 		return Error{Reason: "Missing data for metric"}
 	}
+	if len(m.Data) <= 0 {
+		return Error{Reason: "Missing data for metric"}
+	}
 	return nil
 }
 
@@ -165,14 +170,23 @@ func (c *Container) Validate() error {
 	if len(c.Metrics) <= 0 {
 		return Error{Reason: "Empty metrics[] data"}
 	}
-	for i := 0; i < len(c.Metrics); i++ {
-		if c.Metrics[i].Time == nil && c.Template.Time == nil {
+	for _, m := range c.Metrics {
+		if m.Time == nil && c.Template.Time == nil {
 			return Error{Reason: "Missing timestamp in both metric and container"}
 		}
-		err := c.Metrics[i].validate()
+		err := m.validate()
 		if err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func (c Container) String() string {
+	b, err := json.MarshalIndent(c, "", "  ")
+	if err != nil {
+		fmt.Println("unable to marshal JSON: ", err)
+		return ""
+	}
+	return fmt.Sprintf("%s", b)
 }
