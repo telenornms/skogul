@@ -157,7 +157,7 @@ func (e Error) Error() string {
 		tail = fmt.Sprint(": ", e.Next.Error())
 	}
 	if e.Private != "" {
-		log.Print("Error with private message: %s", e.Private)
+		log.Printf("Error with private message: %s", e.Private)
 	}
 	return fmt.Sprintf("%s: %s%s", src, e.Reason, tail)
 }
