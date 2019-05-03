@@ -33,7 +33,7 @@ import (
 	"sync"
 	"time"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 /*

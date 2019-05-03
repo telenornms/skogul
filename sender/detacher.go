@@ -28,7 +28,7 @@ import (
 	"runtime"
 	"sync"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 /*

@@ -30,7 +30,7 @@ import (
 	"net/url"
 	"time"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 // Tester synthesise dummy data

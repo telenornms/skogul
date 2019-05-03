@@ -29,7 +29,7 @@ import (
 	"log"
 	"sync"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 	"github.com/lib/pq"
 )
 

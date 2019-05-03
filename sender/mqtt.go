@@ -29,8 +29,8 @@ import (
 	"net/url"
 	"sync"
 
+	"github.com/KristianLyng/skogul"
 	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
-	skogul "github.com/KristianLyng/skogul/pkg"
 )
 
 /*

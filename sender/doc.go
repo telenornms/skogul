@@ -46,7 +46,7 @@ import (
 	"log"
 	"net/url"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 // AutoSender is used to provide generic constructors by URL/Scheme.

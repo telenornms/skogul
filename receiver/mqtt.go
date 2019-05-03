@@ -28,8 +28,8 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/KristianLyng/skogul"
 	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
-	skogul "github.com/KristianLyng/skogul/pkg"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )

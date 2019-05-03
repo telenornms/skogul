@@ -31,7 +31,7 @@ import (
 	"log"
 	"net/url"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 // AutoReceiver is used to initialize and document a receiver based on URL

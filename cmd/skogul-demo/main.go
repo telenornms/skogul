@@ -54,11 +54,11 @@ package main
 import (
 	"time"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
-	"github.com/KristianLyng/skogul/pkg/parser"
-	"github.com/KristianLyng/skogul/pkg/receiver"
-	"github.com/KristianLyng/skogul/pkg/sender"
-	"github.com/KristianLyng/skogul/pkg/transformer"
+	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/parser"
+	"github.com/KristianLyng/skogul/receiver"
+	"github.com/KristianLyng/skogul/sender"
+	"github.com/KristianLyng/skogul/transformer"
 )
 
 func main() {

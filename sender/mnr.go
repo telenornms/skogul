@@ -30,7 +30,7 @@ import (
 	"net"
 	"net/url"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 /*

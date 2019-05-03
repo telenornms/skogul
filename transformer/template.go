@@ -28,7 +28,7 @@ skogul.Handler, before it is passed on to a Sender.
 package transformer
 
 import (
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 /*

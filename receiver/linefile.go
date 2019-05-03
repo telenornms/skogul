@@ -29,7 +29,7 @@ import (
 	"net/url"
 	"os"
 
-	skogul "github.com/KristianLyng/skogul/pkg"
+	"github.com/KristianLyng/skogul"
 )
 
 // LineFile will keep reading File over and over again, assuming one
