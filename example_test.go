@@ -67,7 +67,6 @@ The primary chain looks sort of like this:
 		       `- dupe --> Log(print "the following failed")
 		               `-> debug(print json to stdout)
 */
-
 func Example_complex() {
 	// Let's start by setting up two "final" storage senders
 	influx := &sender.InfluxDB{URL: "http://127.0.0.1:8086/write?db=test", Measurement: "test"}
