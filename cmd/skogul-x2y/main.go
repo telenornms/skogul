@@ -126,7 +126,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	target, err  := sender.New(*ftarget)
+	target, err := sender.New(*ftarget)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -136,7 +136,7 @@ func main() {
 		Sender:       target,
 		Transformers: []skogul.Transformer{transformer.Templater{}}}
 
-	receiver, err  := receiver.New(*flisten, h)
+	receiver, err := receiver.New(*flisten, h)
 	if err != nil {
 		log.Fatal(err)
 	}

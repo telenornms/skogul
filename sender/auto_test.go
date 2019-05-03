@@ -24,36 +24,36 @@
 package sender_test
 
 import (
-	"testing"
 	"github.com/KristianLyng/skogul/sender"
+	"testing"
 )
 
 func testGeneric(t *testing.T, in string) {
-	x,err := sender.New(in)
+	x, err := sender.New(in)
 	if err != nil {
 		t.Errorf("New(%s): Failed to create sender automatically: %v", in, err)
 	}
 	if x == nil {
-		t.Errorf("New(%s) returned no sender",in)
+		t.Errorf("New(%s) returned no sender", in)
 	}
 }
 
 func testGenericNegative(t *testing.T, in string) {
-	x,err := sender.New(in)
+	x, err := sender.New(in)
 	if err == nil {
 		t.Errorf("New(%s): Supposed to fail, but worked.", in)
 	}
 	if x != nil {
-		t.Errorf("New(%s): Should fail, but returned sender: %v",in,x)
+		t.Errorf("New(%s): Should fail, but returned sender: %v", in, x)
 	}
 }
 
 func TestNew_debug(t *testing.T) {
-	testGeneric(t,"debug://")
+	testGeneric(t, "debug://")
 }
 
 func TestNew_nonexistent(t *testing.T) {
-	testGenericNegative(t,"nonexistent")
+	testGenericNegative(t, "nonexistent")
 }
 
 func TestNew_http(t *testing.T) {
@@ -64,13 +64,13 @@ func TestNew_http(t *testing.T) {
 		"http://[::1]",
 		"http://[::1]",
 		"http://[::1]/foo/bar"}
-	for _,url := range ok {
+	for _, url := range ok {
 		testGeneric(t, url)
 	}
 	bad := []string{
 		"http://[::",
 	}
-	for _,url := range bad {
+	for _, url := range bad {
 		testGenericNegative(t, url)
 	}
 }
@@ -83,13 +83,13 @@ func TestNew_mnr(t *testing.T) {
 		"mnr://[::1]",
 		"mnr://[::1]",
 		"mnr://[::1]/foobar"}
-	for _,url := range ok {
+	for _, url := range ok {
 		testGeneric(t, url)
 	}
 	bad := []string{
 		"mnr://[::",
 	}
-	for _,url := range bad {
+	for _, url := range bad {
 		testGenericNegative(t, url)
 	}
 }

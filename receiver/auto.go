@@ -28,15 +28,15 @@ execute a handler. They are the "inbound" API of Skogul.
 package receiver
 
 import (
-	"log"
 	"fmt"
+	"log"
 	"net/url"
 
 	"github.com/KristianLyng/skogul"
 )
 
 // New creates a new Receiver based on the url provided. Only receivers that
-// participate in the Auto-scheme are applicable, though that SHOULD be 
+// participate in the Auto-scheme are applicable, though that SHOULD be
 // most of them. However, some senders offer more functionality than what
 // can be expressed in a single URL, so review specific senders if
 // something is missing.
@@ -45,16 +45,16 @@ import (
 func New(in string, h skogul.Handler) (skogul.Receiver, error) {
 	u, err := url.Parse(in)
 	if err != nil {
-		return nil,skogul.Error{Source: "auto receiver", Reason: "unable to parse URL", Next: err}
+		return nil, skogul.Error{Source: "auto receiver", Reason: "unable to parse URL", Next: err}
 	}
 	if Auto[u.Scheme] == nil {
-		return nil,skogul.Error{Source: "auto receiver", Reason: fmt.Sprintf("no applicable receiver for scheme %s",u.Scheme)}
+		return nil, skogul.Error{Source: "auto receiver", Reason: fmt.Sprintf("no applicable receiver for scheme %s", u.Scheme)}
 	}
 	x := Auto[u.Scheme].Init(*u, h)
 	if x == nil {
-		return nil,skogul.Error{Source: "auto receiver", Reason: fmt.Sprintf("failed to initialize receiver for %s",u.Scheme)}
+		return nil, skogul.Error{Source: "auto receiver", Reason: fmt.Sprintf("failed to initialize receiver for %s", u.Scheme)}
 	}
-	return x,nil
+	return x, nil
 }
 
 // Auto maps schemas to AutoReceivers to allow skogul-x2y (and others?) to

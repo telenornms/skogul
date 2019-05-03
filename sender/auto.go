@@ -24,9 +24,9 @@
 package sender
 
 import (
+	"fmt"
 	"log"
 	"net/url"
-	"fmt"
 
 	"github.com/KristianLyng/skogul"
 )
@@ -37,16 +37,16 @@ import (
 func New(in string) (skogul.Sender, error) {
 	u, err := url.Parse(in)
 	if err != nil {
-		return nil,skogul.Error{Source: "auto sender", Reason: "unable to parse URL", Next: err}
+		return nil, skogul.Error{Source: "auto sender", Reason: "unable to parse URL", Next: err}
 	}
 	if Auto[u.Scheme] == nil {
-		return nil,skogul.Error{Source: "auto sender", Reason: fmt.Sprintf("no applicable sender for scheme %s",u.Scheme)}
+		return nil, skogul.Error{Source: "auto sender", Reason: fmt.Sprintf("no applicable sender for scheme %s", u.Scheme)}
 	}
 	x := Auto[u.Scheme].Init(*u)
 	if x == nil {
-		return nil,skogul.Error{Source: "auto sender", Reason: fmt.Sprintf("failed to initialize sender for %s",u.Scheme)}
+		return nil, skogul.Error{Source: "auto sender", Reason: fmt.Sprintf("failed to initialize sender for %s", u.Scheme)}
 	}
-	return x,nil
+	return x, nil
 }
 
 // AutoSender is used to provide generic constructors by URL/Scheme.
