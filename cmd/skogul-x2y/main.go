@@ -33,8 +33,9 @@ be sufficient for 95% of all deployments. Any sender or receiver in Skogul that
 participate in the "auto"-scheme of configuration is supported implicitly. See
 -help for an actual list.
 
-A more advanced example of how to use Skogul is provided in cmd/skogul-demo,
-where multiple receivers, multiple senders, failover and more is covered.
+A more advanced example of how to use Skogul is provided in the package
+documentation, where multiple receivers, multiple senders, failover and
+more is covered.
 
 What you are mainly missing with skogul-x2y is advanced error-handling,
 load balancing, graceful failure, etc.

@@ -77,9 +77,8 @@ things as duplicating a metric to multiple other senders (e.g.: Send the
 data to both influx and postgres), try sending first to one sender, then if
 that fails, push to an other (e.g.: fallback / ha), and so on.
 
-However, using these models will require specific binaries/packages to be
-written. Therefore, the writing of such tools is designed to be easy. See
-`cmd/skogul-demo` for an example.
+See the package documentation over at godoc for more usage:
+https://godoc.org/github.com/KristianLyng/skogul
 
 More discussion on architecture can be found in `docs/`.
 

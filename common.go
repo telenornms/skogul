@@ -48,15 +48,13 @@ transmit - through strong authentication - to two central Skogul servers
 that store the data to multiple influxdb instances based on sharding
 rules. Etc.
 
-A full blown example of Skogul is provided in cmd/skogul-demo/main.go,
-which is - as the file itself points out - meant as an EXAMPLE, not a final
-solution.
+A general-purpose command is provided under cmd/skogul-x2y, which provides
+a mechanism for starting a simplistic 1-to-1 receiver/sender chain, and
+should satisfy many common use-cases. E.g.: Accepting data from MQTT and
+passing it to influx. Or accepting from HTTP and printing to stdout for
+debug purposes.
 
-A general-purpose command is also provided under cmd/skogul-x2y, which
-provides a mechanism for starting a simplistic 1-to-1 receiver/sender chain,
-and should satisfy many common use-cases. E.g.: Accepting data from MQTT
-and passing it to influx. Or accepting from HTTP and printing to stdout
-for debug purposes.
+A more complete example is also provided further down.
 */
 package skogul
 
