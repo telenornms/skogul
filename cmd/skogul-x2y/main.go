@@ -46,7 +46,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net/url"
 	"os"
 	"strings"
 
@@ -120,21 +119,6 @@ func help() {
 	}
 }
 
-func getUrls() (turl *url.URL, rurl *url.URL) {
-	var err error
-	turl, err = url.Parse(*ftarget)
-	if err != nil {
-		log.Printf("Failed to parse target url: %v", err)
-		os.Exit(1)
-	}
-	rurl, err = url.Parse(*flisten)
-	if err != nil {
-		log.Printf("Failed to parse receiver url: %v", err)
-		os.Exit(1)
-	}
-	return
-}
-
 func main() {
 	flag.Parse()
 	if *fhelp {
@@ -142,24 +126,20 @@ func main() {
 		os.Exit(0)
 	}
 
-	turl, rurl := getUrls()
-
-	if sender.Auto[turl.Scheme] == nil {
-		log.Fatalf("Unknown target scheme: %s", turl.Scheme)
+	target, err  := sender.New(*ftarget)
+	if err != nil {
+		log.Fatal(err)
 	}
-
-	target := sender.Auto[turl.Scheme].Init(*turl)
 
 	h := skogul.Handler{
 		Parser:       parser.JSON{},
 		Sender:       target,
 		Transformers: []skogul.Transformer{transformer.Templater{}}}
 
-	if receiver.Auto[rurl.Scheme] == nil {
-		log.Fatalf("Unknown receiver scheme: %s", rurl.Scheme)
+	receiver, err  := receiver.New(*flisten, h)
+	if err != nil {
+		log.Fatal(err)
 	}
-
-	receiver := receiver.Auto[rurl.Scheme].Init(*rurl, h)
 
 	receiver.Start()
 }

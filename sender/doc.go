@@ -41,31 +41,3 @@ if that fails, write a message to the log.
 
 */
 package sender
-
-import (
-	"log"
-	"net/url"
-
-	"github.com/KristianLyng/skogul"
-)
-
-// AutoSender is used to provide generic constructors by URL/Scheme.
-// See Auto or cmd/skogul-x2y for more.
-type AutoSender struct {
-	Scheme string
-	Init   func(url url.URL) skogul.Sender
-	Help   string
-}
-
-// Auto maps schemas to senders and help text to make appropriate senders.
-var Auto map[string]*AutoSender
-
-func addAutoSender(scheme string, init func(url url.URL) skogul.Sender, help string) {
-	if Auto == nil {
-		Auto = make(map[string]*AutoSender)
-	}
-	if Auto[scheme] != nil {
-		log.Fatalf("BUG: Attempting to overwrite existing auto-add sender %v", scheme)
-	}
-	Auto[scheme] = &AutoSender{scheme, init, help}
-}
