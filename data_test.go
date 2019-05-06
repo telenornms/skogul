@@ -89,7 +89,6 @@ func TestValidate(t *testing.T) {
 
 	badMetrics := skogul.Container{}
 	metric := skogul.Metric{}
-	metric.Data = make(map[string]interface{})
 	badMetrics.Metrics = []skogul.Metric{metric}
 	err = badMetrics.Validate()
 	if err == nil {
@@ -115,11 +114,74 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
 
+	metric.Data = make(map[string]interface{})
+	notimeMetrics.Metrics = []skogul.Metric{metric}
+	err = notimeMetrics.Validate()
+	if err == nil {
+		t.Errorf("Validate() succeeded on an Container with no data")
+	}
+	got = fmt.Sprintf("%s", err)
+	want = "<nil>: Missing data for metric"
+	if got != want {
+		t.Errorf("Validate() expected reason %s, got %s", want, got)
+	}
 	metric.Data["test"] = "foo"
 	okc := skogul.Container{}
 	okc.Metrics = []skogul.Metric{metric}
 	err = okc.Validate()
 	if err != nil {
 		t.Errorf("Validate() failed when it should work: %v", err)
+	}
+}
+
+func TestString_invalid(t *testing.T) {
+	c := skogul.Container{}
+	metric1 := skogul.Metric{}
+	metric1.Data = make(map[string]interface{})
+	metric1.Data["ch"] = make(chan string)
+	c.Metrics = []skogul.Metric{metric1}
+
+	str := fmt.Sprintf("%s", c)
+	want := ""
+	if str != want {
+		t.Errorf("Invalid metrics marshalled successfully. Wanted %s, got %s", want, str)
+	}
+}
+
+func TestError(t *testing.T) {
+	e := skogul.Error{}
+
+	str := fmt.Sprintf("%s", e)
+
+	if str == "" {
+		t.Errorf("blank error gave blank text")
+	}
+	want := "<nil>: "
+	if str != want {
+		t.Errorf("blank error gave unexpected result. Wanted %s, got %s", want, str)
+	}
+
+	e.Source = "internal"
+	e.Private = "secret"
+
+	str = fmt.Sprintf("%s", e)
+
+	want = "internal: "
+	if str != want {
+		t.Errorf("error gave unexpected result. Wanted %s, got %s", want, str)
+	}
+
+	e.Private = ""
+	e.Reason = "outer error"
+
+	e2 := skogul.Error{Source: "inner", Reason: "inner message"}
+
+	e.Next = e2
+
+	str = fmt.Sprintf("%s", e)
+
+	want = "internal: outer error: inner: inner message"
+	if str != want {
+		t.Errorf("error gave unexpected result. Wanted %s, got %s", want, str)
 	}
 }
