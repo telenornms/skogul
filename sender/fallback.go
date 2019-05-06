@@ -47,20 +47,20 @@ This will send data to Influx normally. If Influx fails, it will send it to
 a queue. If that fails, it will print it to stdout.
 */
 type Fallback struct {
-	next []skogul.Sender
+	Next []skogul.Sender
 }
 
 /*
 Add an other Sender to the fallback sender.
 */
 func (fb *Fallback) Add(s skogul.Sender) error {
-	fb.next = append(fb.next, s)
+	fb.Next = append(fb.Next, s)
 	return nil
 }
 
 // Send sends data down stream
 func (fb *Fallback) Send(c *skogul.Container) error {
-	for _, s := range fb.next {
+	for _, s := range fb.Next {
 		err := s.Send(c)
 		if err == nil {
 			return nil

@@ -37,13 +37,20 @@ func TestTemplate(t *testing.T) {
 	metric.Data = make(map[string]interface{})
 	metric.Data["test"] = "foo"
 
+	metric2 := skogul.Metric{}
+	metric2.Metadata = make(map[string]interface{})
+	metric2.Metadata["test"] = "int"
+
 	template := skogul.Metric{}
 	template.Time = &now
 	template.Metadata = make(map[string]interface{})
+	template.Data = make(map[string]interface{})
 	template.Metadata["test"] = "foo"
+	template.Data["test"] = "temp"
+	template.Data["blank"] = "temp"
 
 	c := skogul.Container{}
-	c.Metrics = []skogul.Metric{metric}
+	c.Metrics = []skogul.Metric{metric, metric2}
 	c.Template = &template
 
 	templater := transformer.Templater{}
@@ -58,6 +65,44 @@ func TestTemplate(t *testing.T) {
 	}
 	if c.Metrics[0].Metadata["test"] != "foo" {
 		t.Errorf("Templater() did not expand Metadata correctly. Wanted Metadata[\"test\"]=\"foo\", got Metadata[\"test\"]=%v", c.Metrics[0].Metadata["test"])
+	}
+	if c.Metrics[0].Data["test"] != "foo" {
+		t.Errorf("Templater() Data[\"test\"]=\"foo\", got Data[\"test\"]=%v", c.Metrics[0].Data["test"])
+	}
+	if c.Metrics[0].Data["blank"] != "temp" {
+		t.Errorf("Templater() Data[\"blank\"]=\"temp\", got Data[\"blank\"]=%v", c.Metrics[0].Data["blank"])
+	}
+	if c.Metrics[1].Metadata["test"] != "int" {
+		t.Errorf("Templater() overwrote metric metadata Metrics[1].Metadata[\"test\"], expected \"int\", got \"%v\"", c.Metrics[1].Metadata["test"])
+	}
+	if c.Template != nil {
+		t.Errorf("Templater() left template intact: %v", c.Template)
+	}
+}
+
+func TestTemplate_blank(t *testing.T) {
+	now := time.Now()
+
+	metric := skogul.Metric{}
+	metric.Data = make(map[string]interface{})
+	metric.Data["test"] = "foo"
+	metric.Time = &now
+
+	c := skogul.Container{}
+	c.Metrics = []skogul.Metric{metric}
+
+	templater := transformer.Templater{}
+
+	err := templater.Transform(&c)
+
+	if err != nil {
+		t.Errorf("Templater() returned non-nil err: %v", err)
+	}
+	if c.Metrics[0].Time != &now {
+		t.Errorf("Templater() wanted %v got %v", &now, c.Metrics[0].Time)
+	}
+	if c.Metrics[0].Data["test"] != "foo" {
+		t.Errorf("Templater() Wanted Data[\"test\"]=\"foo\", got Data[\"test\"]=%v", c.Metrics[0].Metadata["test"])
 	}
 	if c.Template != nil {
 		t.Errorf("Templater() left template intact: %v", c.Template)

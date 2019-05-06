@@ -112,3 +112,11 @@ func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 	}
 	return err
 }
+
+// Null sender does nothing and returns nil - mainly for test-purposes
+type Null struct{}
+
+// Send just returns nil
+func (n *Null) Send(c *skogul.Container) error {
+	return nil
+}
