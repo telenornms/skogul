@@ -143,6 +143,7 @@ func (handler *MQTT) createClientOptions() error {
 	}
 	handler.opts.SetClientID(handler.clientID)
 	handler.opts.SetAutoReconnect(false)
+	handler.opts.SetPingTimeout(time.Duration(40 * time.Second))
 	handler.opts.SetConnectionLostHandler(handler.connLostHandler)
 	return nil
 }
