@@ -42,6 +42,7 @@ type Tester struct {
 
 func (tst *Tester) generate(t time.Time) skogul.Container {
 	c := skogul.Container{}
+	c.Template = &skogul.Metric{}
 	c.Template.Time = &t
 	c.Metrics = make([]skogul.Metric, tst.Metrics)
 	for i := int64(0); i < tst.Metrics; i++ {

@@ -40,7 +40,7 @@ A single Container instance is typically the result of a single POST to the
 HTTP receiver or similar.
 */
 type Container struct {
-	Template Metric   `json:"template,omitempty"`
+	Template *Metric  `json:"template,omitempty"`
 	Metrics  []Metric `json:"metrics"`
 }
 
@@ -171,7 +171,7 @@ func (c *Container) Validate() error {
 		return Error{Reason: "Empty metrics[] data"}
 	}
 	for _, m := range c.Metrics {
-		if m.Time == nil && c.Template.Time == nil {
+		if m.Time == nil && (c.Template == nil || c.Template.Time == nil) {
 			return Error{Reason: "Missing timestamp in both metric and container"}
 		}
 		err := m.validate()

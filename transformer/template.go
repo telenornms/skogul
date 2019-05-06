@@ -104,21 +104,29 @@ type Templater struct{}
 
 // Transform compiles/expands the template of a container
 func (t Templater) Transform(c *skogul.Container) error {
-	for mi, m := range c.Metrics {
-		if m.Time == nil && c.Template.Time != nil {
-			c.Metrics[mi].Time = c.Template.Time
-		}
-		for key, value := range c.Template.Metadata {
-			if c.Metrics[mi].Metadata[key] == nil {
-				c.Metrics[mi].Metadata[key] = value
+	if c.Template != nil {
+		for mi, m := range c.Metrics {
+			if m.Time == nil && c.Template.Time != nil {
+				c.Metrics[mi].Time = c.Template.Time
+			}
+			for key, value := range c.Template.Metadata {
+				if c.Metrics[mi].Metadata == nil {
+					c.Metrics[mi].Metadata = make(map[string]interface{})
+				}
+				if c.Metrics[mi].Metadata[key] == nil {
+					c.Metrics[mi].Metadata[key] = value
+				}
+			}
+			for key, value := range c.Template.Data {
+				if c.Metrics[mi].Data == nil {
+					c.Metrics[mi].Data = make(map[string]interface{})
+				}
+				if c.Metrics[mi].Data[key] == nil {
+					c.Metrics[mi].Data[key] = value
+				}
 			}
 		}
-		for key, value := range c.Template.Data {
-			if c.Metrics[mi].Data[key] == nil {
-				c.Metrics[mi].Data[key] = value
-			}
-		}
+		c.Template = nil
 	}
-	c.Template = skogul.Metric{}
 	return nil
 }
