@@ -50,9 +50,8 @@ The purpose is to smooth out reading.
 type Detacher struct {
 	Next  skogul.Sender
 	Depth int
-	init  bool
 	ch    chan *skogul.Container
-	mux   sync.Mutex
+	once  sync.Once
 }
 
 // consume is the detached go routine that picks up containers and passes
@@ -64,27 +63,20 @@ func (de *Detacher) consume() {
 }
 
 func (de *Detacher) doInit() {
-	if de.init {
-		return
-	}
-	de.mux.Lock()
-	defer de.mux.Unlock()
-	if de.init {
-		return
-	}
 	if de.Depth == 0 {
 		log.Print("No detach depth/queue depth set. Using default of 1000.")
 		de.Depth = 1000
 	}
 	de.ch = make(chan *skogul.Container, de.Depth)
 	go de.consume()
-	de.init = true
 }
 
 // Send ensures a consumer exists, then transmits the container on a
 // channel and returns immediately.
 func (de *Detacher) Send(c *skogul.Container) error {
-	de.doInit()
+	de.once.Do(func() {
+		de.doInit()
+	})
 	de.ch <- c
 	return nil
 }
@@ -107,20 +99,11 @@ There only settings provided is "Next" to provide the next sender, and
 type Fanout struct {
 	Next    skogul.Sender
 	Workers int
-	init    bool
-	mux     sync.Mutex
+	once    sync.Once
 	workers chan chan *skogul.Container
 }
 
 func (fo *Fanout) doInit() {
-	if fo.init {
-		return
-	}
-	fo.mux.Lock()
-	defer fo.mux.Unlock()
-	if fo.init {
-		return
-	}
 	if fo.Workers == 0 {
 		n := runtime.NumCPU()
 		log.Printf("No fanout size set. Using default of NumCPU: %v.", n)
@@ -130,13 +113,14 @@ func (fo *Fanout) doInit() {
 	for i := 0; i < fo.Workers; i++ {
 		go fo.worker()
 	}
-	fo.init = true
 }
 
 // Send ensures the workers are booted, then picks up a channel from
 // available workers and sends the container to that container.
 func (fo *Fanout) Send(c *skogul.Container) error {
-	fo.doInit()
+	fo.once.Do(func() {
+		fo.doInit()
+	})
 	x := <-fo.workers
 	x <- c
 	return nil

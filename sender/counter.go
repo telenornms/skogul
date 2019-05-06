@@ -44,7 +44,7 @@ type Counter struct {
 	Stats  skogul.Handler
 	Period time.Duration
 	ch     chan count
-	mux    sync.Mutex
+	once   sync.Once
 	up     bool
 }
 
@@ -67,20 +67,12 @@ func (co *Counter) init() {
 	go co.getIt()
 }
 
-func (co *Counter) checkInit() {
-	if !co.up {
-		co.mux.Lock()
-		if !co.up {
-			co.init()
-		}
-		co.mux.Unlock()
-	}
-}
-
 // Send counts metrics, sends the count on a channel, then executes
 // the next sender in the chain.
 func (co *Counter) Send(c *skogul.Container) error {
-	co.checkInit()
+	co.once.Do(func() {
+		co.init()
+	})
 	var tmpc count
 	tmpc.containers = 1
 	for _, m := range c.Metrics {

@@ -39,30 +39,18 @@ MQTT Sender publishes messages on a MQTT message bus.
 type MQTT struct {
 	Address string
 
-	init bool
-	mux  sync.Mutex
+	once sync.Once
 	mc   skmqtt.MQTT
-}
-
-func (handler *MQTT) testInit() {
-	if handler.init {
-		return
-	}
-	handler.mux.Lock()
-	defer handler.mux.Unlock()
-	if handler.init {
-		return
-	}
-	handler.mc.Address = handler.Address
-	handler.mc.Init()
-	handler.mc.Connect()
-	handler.init = true
 }
 
 // Send publishes the container in skogul JSON-encoded format on an MQTT
 // topic.
 func (handler *MQTT) Send(c *skogul.Container) error {
-	handler.testInit()
+	handler.once.Do(func() {
+		handler.mc.Address = handler.Address
+		handler.mc.Init()
+		handler.mc.Connect()
+	})
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {
 		log.Panicf("Unable to marshal json for debug output: %s", err)

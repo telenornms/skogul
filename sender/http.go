@@ -30,6 +30,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"sync"
 	"time"
 
 	"github.com/KristianLyng/skogul"
@@ -39,7 +40,9 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL string
+	URL    string
+	once   sync.Once
+	client *http.Client
 }
 
 func init() {
@@ -53,7 +56,7 @@ func NewHTTP(url url.URL) skogul.Sender {
 }
 
 // Send POSTS data
-func (ht HTTP) Send(c *skogul.Container) error {
+func (ht *HTTP) Send(c *skogul.Container) error {
 	b, err := json.Marshal(*c)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
@@ -69,11 +72,10 @@ func (ht HTTP) Send(c *skogul.Container) error {
 		return e
 	}
 	req.Header.Set("Content-Type", "application/json")
-	timeout := time.Duration(5 * time.Second)
-	client := http.Client{
-		Timeout: timeout,
-	}
-	resp, err := client.Do(req)
+	ht.once.Do(func() {
+		ht.client = &http.Client{Timeout: 5 * time.Second}
+	})
+	resp, err := ht.client.Do(req)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to Do request", Next: err}
 		log.Print(e)

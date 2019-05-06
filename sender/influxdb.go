@@ -44,7 +44,7 @@ type InfluxDB struct {
 	URL         string
 	Measurement string
 	client      *http.Client
-	mux         sync.Mutex
+	once        sync.Once
 }
 
 func init() {
@@ -80,14 +80,9 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		}
 		fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
 	}
-	if idb.client == nil {
-		idb.mux.Lock()
-		// Recheck after acquiring lock
-		if idb.client == nil {
-			idb.client = &http.Client{Timeout: 5 * time.Second}
-		}
-		idb.mux.Unlock()
-	}
+	idb.once.Do(func() {
+		idb.client = &http.Client{Timeout: 5 * time.Second}
+	})
 	resp, err := idb.client.Post(idb.URL, "text/plain", &buffer)
 	if err != nil {
 		e := skogul.Error{Source: "influxdb sender", Reason: "unable to POST data", Next: err}
