@@ -86,13 +86,15 @@ func NewTester(ul url.URL, h skogul.Handler) skogul.Receiver {
 	if len(ul.Host) > 0 {
 		n, err := fmt.Sscanf(ul.Host, "%d", &host)
 		if n != 1 || err != nil {
-			log.Printf("Invalid URL for Tester %s (n: %d err: %v)", ul.Host, n, err)
+			log.Printf("Invalid host element in URL for Tester \"%s\" (n: %d err: %v)", ul.Host, n, err)
+			return nil
 		}
 	}
 	if len(ul.Path) > 0 {
 		n, err := fmt.Sscanf(ul.Path, "/%d", &path)
 		if n != 1 || err != nil {
-			log.Fatalf("a Invalid URL for Tester %s (n: %d err: %v)", ul.Path, n, err)
+			log.Printf("Invalid path element in URL for Tester \"%s\" (n: %d err: %v)", ul.Path, n, err)
+			return nil
 		}
 	}
 
