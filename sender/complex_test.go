@@ -62,6 +62,22 @@ func TestHttp_stack(t *testing.T) {
 		t.Errorf("hs.Send() failed: %v", err)
 	}
 	if one.received != 1 {
-		t.Errorf("hs.Send() ok, but not received. Expcted 1 received, got %d", one.received)
+		t.Errorf("hs.Send() not received. Expcted 1 received, got %d", one.received)
+	}
+	one.received = 0
+	blank := skogul.Container{}
+	err = hs.Send(&blank)
+	if err == nil {
+		t.Errorf("hs.Send(&blank) succeeded?")
+	}
+	if one.received != 0 {
+		t.Errorf("hs.Send(&blank), but data received on other side. Expcted 0 received, got %d", one.received)
+	}
+
+	hs2 := sender.HTTP{URL: "http://[::1]:1/foobar"}
+
+	err = hs2.Send(&validContainer)
+	if err == nil {
+		t.Errorf("hs2.Send() to invalid url did not fail.")
 	}
 }
