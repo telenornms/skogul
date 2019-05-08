@@ -26,6 +26,7 @@ package sender
 import (
 	"fmt"
 	"log"
+	"runtime"
 	"sync"
 	"time"
 
@@ -48,6 +49,7 @@ type Batch struct {
 	metrics   int
 	timer     *time.Timer
 	cont      *skogul.Container
+	out       chan *skogul.Container
 }
 
 func (bat *Batch) setup() {
@@ -60,6 +62,13 @@ func (bat *Batch) setup() {
 	}
 	slack := int(bat.Threshold / 5)
 	bat.allocSize = bat.Threshold + slack
+	if bat.allocSize < 100 {
+		bat.allocSize = 100
+	}
+	bat.out = make(chan *skogul.Container)
+	for i := 0; i < runtime.NumCPU(); i++ {
+		go bat.flusher()
+	}
 	go bat.run()
 }
 
@@ -90,11 +99,18 @@ func (bat *Batch) add(c *skogul.Container) {
 	copy(bat.cont.Metrics[cl:nl], c.Metrics)
 }
 
-func (bat *Batch) flush() {
-	err := bat.Next.Send(bat.cont)
-	if err != nil {
-		log.Print(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
+func (bat *Batch) flusher() {
+	for {
+		c := <-bat.out
+		err := bat.Next.Send(c)
+		if err != nil {
+			log.Print(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
+		}
 	}
+}
+
+func (bat *Batch) flush() {
+	bat.out <- bat.cont
 	bat.cont = nil
 }
 
