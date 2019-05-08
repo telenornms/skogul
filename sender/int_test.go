@@ -27,6 +27,7 @@ import (
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/sender"
 	"testing"
+	"time"
 )
 
 type testSender struct {
@@ -36,6 +37,22 @@ type testSender struct {
 func (ts *testSender) Send(c *skogul.Container) error {
 	ts.received++
 	return nil
+}
+
+func (rcv *testSender) testTime(t *testing.T, sender skogul.Sender, c *skogul.Container, received int, delay time.Duration) {
+	rcv.received = 0
+	err := sender.Send(c)
+	if err != nil {
+		t.Errorf("sending on %v failed: %v", sender, err)
+	}
+	time.Sleep(delay)
+	if rcv.received != received {
+		t.Errorf("sending on %v: wanted %d received, got %d", sender, received, rcv.received)
+	}
+}
+
+func (rcv *testSender) testQuick(t *testing.T, sender skogul.Sender, c *skogul.Container, received int) {
+	rcv.testTime(t, sender, c, received, time.Duration(5*time.Millisecond))
 }
 
 func TestNull(t *testing.T) {

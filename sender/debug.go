@@ -72,17 +72,18 @@ The purpose is testing.
 type Sleeper struct {
 	Next     skogul.Sender
 	MaxDelay time.Duration
+	Base     time.Duration
 	Verbose  bool
 }
 
 // Send sleeps a random duration according to Sleeper spec, then passes the
 // data to the next sender.
 func (sl *Sleeper) Send(c *skogul.Container) error {
-	d := rand.Float64() * float64(sl.MaxDelay)
+	d := sl.Base + time.Duration(rand.Float64()*float64(sl.MaxDelay))
 	if sl.Verbose {
-		log.Printf("Sleeping for %v", time.Duration(d))
+		log.Printf("Sleeping for %v", d)
 	}
-	time.Sleep(time.Duration(d))
+	time.Sleep(d)
 	return sl.Next.Send(c)
 }
 

@@ -32,15 +32,18 @@ import (
 )
 
 /*
-XXX: The senders in detacher.go should probably be ignored for now. There are some
-conceptual issues here that need to be resolved. E.g.: Should "fanout" even
-exist? Should "detacher" just use "go next.Send(...)" - if so, how to avoid
-exploding? etc.
+These senders are somewhat controversial, as they affect the fanout/fan-in
+behavior of Skogul. If you use detacher on a receiver that already does multiple
+go routines, you end up with fan-in. You could couple it with the Fanout sender
+to go back to multiple go routines, but yeah.... this is not without its drawbacks.
+
+However, they ARE useful, just make sure you think through side effects of using
+these senders.
 */
 
 /*
 Detacher accepts a message, sends it to a channel, then picks it up on the
-other end in a separate go routine. This, unfortunately, leades to fan-in:
+other end in a separate go routine. This, unfortunately, leads to fan-in:
 if used in conjunction with HTTP receiver, for example, you end up going from
 multiple independent go routines to a single one, which is probably not what
 you want.

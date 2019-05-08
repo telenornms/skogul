@@ -23,8 +23,6 @@
 
 package sender
 
-// BUG(kly): The interval for the batch sender is really a timeout, not an
-// interval at the moment.
 import (
 	"fmt"
 	"log"
@@ -48,6 +46,7 @@ type Batch struct {
 	ch        chan *skogul.Container
 	once      sync.Once
 	metrics   int
+	timer     *time.Timer
 	cont      *skogul.Container
 }
 
@@ -99,15 +98,25 @@ func (bat *Batch) flush() {
 	bat.cont = nil
 }
 
+func (bat *Batch) timerReschedule() {
+	if !bat.timer.Stop() {
+		<-bat.timer.C
+	}
+	bat.timer = time.NewTimer(bat.Interval)
+}
+
 func (bat *Batch) run() {
+	bat.timer = time.NewTimer(bat.Interval)
 	for {
 		select {
 		case c := <-bat.ch:
 			bat.add(c)
 			if len(bat.cont.Metrics) >= bat.Threshold {
 				bat.flush()
+				bat.timerReschedule()
 			}
-		case <-time.After(bat.Interval):
+		case <-bat.timer.C:
+			bat.timer = time.NewTimer(bat.Interval)
 			bat.flush()
 		}
 	}

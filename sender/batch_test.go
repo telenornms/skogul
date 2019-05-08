@@ -1,3 +1,26 @@
+/*
+ * skogul, batch sender - tests
+ *
+ * Copyright (c) 2019 Telenor Norge AS
+ * Author(s):
+ *  - Kristian Lyngstøl <kly@kly.no>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301  USA
+ */
+
 package sender_test
 
 import (
@@ -10,82 +33,39 @@ import (
 func TestBatch(t *testing.T) {
 	c := skogul.Container{}
 	m := skogul.Metric{}
-	n := time.Now()
-	m.Time = &n
-	m.Metadata = make(map[string]interface{})
-	m.Data = make(map[string]interface{})
-	m.Data["test"] = 5
-	m.Metadata["key"] = "value"
+	// batcher doesn't really worry about the internals of metrics,
+	// so we just leave them blank and reuse the same metric.
 
 	c.Metrics = []*skogul.Metric{&m}
-
 	one := &(testSender{})
+	batch := &(sender.Batch{Next: one})
 
-	batch := sender.Batch{Next: one}
-
+	// Test that sending 9 metrics doesn't pass anything on
 	for i := 0; i < 9; i++ {
-		err := batch.Send(&c)
-		if err != nil {
-			t.Errorf("batch.Send() failed: %v", err)
-		}
-		if one.received != 0 {
-			t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 0, one.received)
-		}
-	}
-	err := batch.Send(&c)
-	if err != nil {
-		t.Errorf("batch.Send() failed: %v", err)
-	}
-	time.Sleep(time.Duration(100 * time.Millisecond))
-	if one.received != 1 {
-		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 1, one.received)
+		one.testQuick(t, batch, &c, 0)
 	}
 
+	// but the 10th does....
+	one.testQuick(t, batch, &c, 1)
+
+	// Rinse and repeat to ensure state is reset
 	for i := 0; i < 9; i++ {
-		err := batch.Send(&c)
-		if err != nil {
-			t.Errorf("batch.Send() failed: %v", err)
-		}
-		if one.received != 1 {
-			t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 1, one.received)
-		}
+		one.testQuick(t, batch, &c, 0)
 	}
-	err = batch.Send(&c)
-	if err != nil {
-		t.Errorf("batch.Send() failed: %v", err)
-	}
-	time.Sleep(time.Duration(100 * time.Millisecond))
-	if one.received != 2 {
-		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 2, one.received)
-	}
-	err = batch.Send(&c)
-	if err != nil {
-		t.Errorf("batch.Send() failed: %v", err)
-	}
-	time.Sleep(time.Duration(100 * time.Millisecond))
-	if one.received != 2 {
-		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 2, one.received)
-	}
+	one.testQuick(t, batch, &c, 1)
+
+	// Test that a single metric wont be passed on instantly...
+	one.testQuick(t, batch, &c, 0)
+
+	// but that it will after the timer expires
 	time.Sleep(time.Duration(1 * time.Second))
-	if one.received != 3 {
-		t.Errorf("batch.Send(), expected %d recevied, got %d after expected interval expiry", 3, one.received)
+	if one.received != 1 {
+		t.Errorf("batch.Send(), no data sent after timeout expired. Expected %d, got %d", 1, one.received)
 	}
 
+	// Ensure we don't botch the resize - send containers with multiple
+	// metrics and see how that works.
 	c.Metrics = []*skogul.Metric{&m, &m, &m, &m, &m, &m, &m, &m, &m}
-	err = batch.Send(&c)
-	if err != nil {
-		t.Errorf("batch.Send() failed: %v", err)
-	}
-	time.Sleep(time.Duration(5 * time.Millisecond))
-	if one.received != 3 {
-		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 3, one.received)
-	}
-	err = batch.Send(&c)
-	if err != nil {
-		t.Errorf("batch.Send() failed: %v", err)
-	}
-	time.Sleep(time.Duration(5 * time.Millisecond))
-	if one.received != 4 {
-		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 4, one.received)
-	}
+	one.testQuick(t, batch, &c, 0)
+	one.testQuick(t, batch, &c, 1)
 }
