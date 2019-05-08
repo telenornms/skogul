@@ -25,6 +25,7 @@ package sender
 
 import (
 	"log"
+	"net/url"
 	"sync"
 	"time"
 
@@ -46,6 +47,21 @@ type Counter struct {
 	ch     chan count
 	once   sync.Once
 	up     bool
+}
+
+func init() {
+	addAutoSender("count", NewCounter, "Count sender discards the metrics but peridocally prints statistics")
+}
+
+/*
+NewCount creates a count sender
+*/
+func NewCounter(url url.URL) skogul.Sender {
+	x := Counter{}
+	x.Next = &Null{}
+	h := skogul.Handler{Sender: Debug{}}
+	x.Stats = h
+	return &x
 }
 
 // Internal count,

@@ -117,7 +117,9 @@ func (bat *Batch) run() {
 			}
 		case <-bat.timer.C:
 			bat.timer = time.NewTimer(bat.Interval)
-			bat.flush()
+			if bat.cont != nil {
+				bat.flush()
+			}
 		}
 	}
 }
