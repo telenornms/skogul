@@ -40,8 +40,8 @@ A single Container instance is typically the result of a single POST to the
 HTTP receiver or similar.
 */
 type Container struct {
-	Template *Metric  `json:"template,omitempty"`
-	Metrics  []Metric `json:"metrics"`
+	Template *Metric   `json:"template,omitempty"`
+	Metrics  []*Metric `json:"metrics"`
 }
 
 /*

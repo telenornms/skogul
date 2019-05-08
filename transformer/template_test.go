@@ -50,7 +50,7 @@ func TestTemplate(t *testing.T) {
 	template.Data["blank"] = "temp"
 
 	c := skogul.Container{}
-	c.Metrics = []skogul.Metric{metric, metric2}
+	c.Metrics = []*skogul.Metric{&metric, &metric2}
 	c.Template = &template
 
 	templater := transformer.Templater{}
@@ -89,7 +89,7 @@ func TestTemplate_blank(t *testing.T) {
 	metric.Time = &now
 
 	c := skogul.Container{}
-	c.Metrics = []skogul.Metric{metric}
+	c.Metrics = []*skogul.Metric{&metric}
 
 	templater := transformer.Templater{}
 

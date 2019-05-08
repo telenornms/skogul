@@ -44,7 +44,7 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 	c := skogul.Container{}
 	c.Template = &skogul.Metric{}
 	c.Template.Time = &t
-	c.Metrics = make([]skogul.Metric, tst.Metrics)
+	c.Metrics = make([]*skogul.Metric, tst.Metrics)
 	for i := int64(0); i < tst.Metrics; i++ {
 		m := skogul.Metric{}
 		m.Metadata = map[string]interface{}{}
@@ -53,7 +53,7 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 		for key := int64(0); key < tst.Values; key++ {
 			m.Data[fmt.Sprintf("metric%d", key)] = rand.Int63()
 		}
-		c.Metrics[i] = m
+		c.Metrics[i] = &m
 	}
 	return c
 }

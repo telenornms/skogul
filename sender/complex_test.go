@@ -44,7 +44,7 @@ func init() {
 	m.Data = make(map[string]interface{})
 	m.Metadata["foo"] = "bar"
 	m.Data["tall"] = 5
-	validContainer.Metrics = []skogul.Metric{m}
+	validContainer.Metrics = []*skogul.Metric{&m}
 }
 
 // Tests http receiver, sender and JSON parser implicitly

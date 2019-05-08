@@ -111,7 +111,7 @@ func (co *Counter) getIt() {
 			metric.Metadata = make(map[string]interface{})
 			metric.Data = make(map[string]interface{})
 			metric.Metadata["skogul"] = "counter"
-			container.Metrics = append(container.Metrics, metric)
+			container.Metrics = []*skogul.Metric{&metric}
 			total.containers += current.containers
 			total.metrics += current.metrics
 			total.values += current.values

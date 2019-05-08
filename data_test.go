@@ -76,7 +76,7 @@ func TestValidate(t *testing.T) {
 	}
 
 	noMetrics := skogul.Container{}
-	noMetrics.Metrics = []skogul.Metric{}
+	noMetrics.Metrics = []*skogul.Metric{}
 	err = noMetrics.Validate()
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
@@ -89,7 +89,7 @@ func TestValidate(t *testing.T) {
 
 	badMetrics := skogul.Container{}
 	metric := skogul.Metric{}
-	badMetrics.Metrics = []skogul.Metric{metric}
+	badMetrics.Metrics = []*skogul.Metric{&metric}
 	err = badMetrics.Validate()
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
@@ -103,7 +103,7 @@ func TestValidate(t *testing.T) {
 	now := time.Now()
 	metric.Time = &now
 	notimeMetrics := skogul.Container{}
-	notimeMetrics.Metrics = []skogul.Metric{metric}
+	notimeMetrics.Metrics = []*skogul.Metric{&metric}
 	err = notimeMetrics.Validate()
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with no data")
@@ -115,7 +115,7 @@ func TestValidate(t *testing.T) {
 	}
 
 	metric.Data = make(map[string]interface{})
-	notimeMetrics.Metrics = []skogul.Metric{metric}
+	notimeMetrics.Metrics = []*skogul.Metric{&metric}
 	err = notimeMetrics.Validate()
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with no data")
@@ -127,7 +127,7 @@ func TestValidate(t *testing.T) {
 	}
 	metric.Data["test"] = "foo"
 	okc := skogul.Container{}
-	okc.Metrics = []skogul.Metric{metric}
+	okc.Metrics = []*skogul.Metric{&metric}
 	err = okc.Validate()
 	if err != nil {
 		t.Errorf("Validate() failed when it should work: %v", err)
@@ -139,7 +139,7 @@ func TestString_invalid(t *testing.T) {
 	metric1 := skogul.Metric{}
 	metric1.Data = make(map[string]interface{})
 	metric1.Data["ch"] = make(chan string)
-	c.Metrics = []skogul.Metric{metric1}
+	c.Metrics = []*skogul.Metric{&metric1}
 
 	str := fmt.Sprintf("%s", c)
 	want := ""
