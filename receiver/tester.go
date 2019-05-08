@@ -37,6 +37,7 @@ import (
 type Tester struct {
 	Metrics int64
 	Values  int64
+	Threads int
 	Handler skogul.Handler
 }
 
@@ -60,6 +61,14 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 
 // Start never returns.
 func (tst *Tester) Start() error {
+	for i := 1; i < tst.Threads; i++ {
+		go tst.run()
+	}
+	tst.run()
+	return nil
+}
+
+func (tst *Tester) run() {
 	for {
 		c := tst.generate(time.Now())
 		for _, t := range tst.Handler.Transformers {
@@ -73,7 +82,7 @@ func (tst *Tester) Start() error {
 }
 
 func init() {
-	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, format: test://$m/$v")
+	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. Format: test://$t/$m/$v")
 }
 
 /*
@@ -83,20 +92,29 @@ func NewTester(ul url.URL, h skogul.Handler) skogul.Receiver {
 
 	var host int64 = 10
 	var path int64 = 50
+	threads := 0
 	if len(ul.Host) > 0 {
-		n, err := fmt.Sscanf(ul.Host, "%d", &host)
+		n, err := fmt.Sscanf(ul.Host, "%d", &threads)
 		if n != 1 || err != nil {
 			log.Printf("Invalid host element in URL for Tester \"%s\" (n: %d err: %v)", ul.Host, n, err)
 			return nil
 		}
 	}
 	if len(ul.Path) > 0 {
-		n, err := fmt.Sscanf(ul.Path, "/%d", &path)
+		n, err := fmt.Sscanf(ul.Path, "/%d", &host)
 		if n != 1 || err != nil {
+			log.Printf("Invalid poath element in URL for Tester \"%s\" (n: %d err: %v)", ul.Path, n, err)
+			return nil
+		}
+	}
+	if len(ul.Path) > 0 {
+		var dummy int
+		n, err := fmt.Sscanf(ul.Path, "/%d/%d", &dummy, &path)
+		if n != 2 || err != nil {
 			log.Printf("Invalid path element in URL for Tester \"%s\" (n: %d err: %v)", ul.Path, n, err)
 			return nil
 		}
 	}
 
-	return &Tester{Metrics: host, Values: path, Handler: h}
+	return &Tester{Metrics: host, Values: path, Threads: threads, Handler: h}
 }
