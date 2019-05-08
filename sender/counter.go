@@ -54,7 +54,7 @@ func init() {
 }
 
 /*
-NewCount creates a count sender
+NewCounter creates a count sender that discards all data, but outputs stats to stdout
 */
 func NewCounter(url url.URL) skogul.Sender {
 	x := Counter{}
