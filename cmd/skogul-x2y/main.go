@@ -60,6 +60,7 @@ var flisten = flag.String("receiver", "http://[::1]:8080", "Where to receive dat
 var ftarget = flag.String("sender", "debug://", "Where to send data. See -help for details.")
 var fhelp = flag.Bool("help", false, "Print extensive help/usage")
 var fbatch = flag.Int("batch", 0, "Number of messages to batch up before passing them on as a single entity.")
+var fcount = flag.Bool("count", false, "Print periodic stats using the count sender in addition to regular sender")
 
 // Max width of help text before wrapping, should be some number lower than
 // expected terminal size.
@@ -140,6 +141,11 @@ func main() {
 		s = target
 	}
 
+	if *fcount {
+		ch := skogul.Handler{Sender: sender.Debug{}}
+		c := sender.Counter{Next: s, Stats: ch}
+		s = &c
+	}
 	h := skogul.Handler{
 		Parser:       parser.JSON{},
 		Sender:       s,
