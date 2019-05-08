@@ -70,4 +70,22 @@ func TestBatch(t *testing.T) {
 	if one.received != 3 {
 		t.Errorf("batch.Send(), expected %d recevied, got %d after expected interval expiry", 3, one.received)
 	}
+
+	c.Metrics = []*skogul.Metric{&m, &m, &m, &m, &m, &m, &m, &m, &m}
+	err = batch.Send(&c)
+	if err != nil {
+		t.Errorf("batch.Send() failed: %v", err)
+	}
+	time.Sleep(time.Duration(5 * time.Millisecond))
+	if one.received != 3 {
+		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 3, one.received)
+	}
+	err = batch.Send(&c)
+	if err != nil {
+		t.Errorf("batch.Send() failed: %v", err)
+	}
+	time.Sleep(time.Duration(5 * time.Millisecond))
+	if one.received != 4 {
+		t.Errorf("batch.Send(), sender 1 expected %d recevied, got %d", 4, one.received)
+	}
 }

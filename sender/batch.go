@@ -72,7 +72,12 @@ func (bat *Batch) add(c *skogul.Container) {
 	nl := len(c.Metrics) + cl
 
 	if nl > cc {
-		x := make([]*skogul.Metric, bat.MaxMetrics)
+		newlen := bat.MaxMetrics
+		// It's allowed to exceed MaxMetrics - but only once.
+		if newlen < nl {
+			newlen = nl
+		}
+		x := make([]*skogul.Metric, newlen)
 		copy(x, bat.cont.Metrics)
 		bat.cont.Metrics = x
 	}
