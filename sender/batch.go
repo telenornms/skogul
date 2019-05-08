@@ -26,6 +26,7 @@ package sender
 // BUG(kly): The interval for the batch sender is really a timeout, not an
 // interval at the moment.
 import (
+	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -34,34 +35,37 @@ import (
 )
 
 /*
-Batch sender collects a maximum of MaxMetrics, then passes them on as a
-single skogul.Container. In case MaxMetrics is "never" reached, it will
-periodically flush metrics if no message has been received in Interval
-time.
+Batch sender collects metrics into a single container then passes them on
+after Threshold number of metrics are collected. In case Threshold is
+"never" reached, it will periodically flush metrics if no message has been
+received in Interval time.
 */
 type Batch struct {
-	Next       skogul.Sender
-	Interval   time.Duration
-	MaxMetrics int
-	ch         chan *skogul.Container
-	once       sync.Once
-	metrics    int
-	cont       *skogul.Container
+	Next      skogul.Sender
+	Interval  time.Duration
+	Threshold int
+	allocSize int
+	ch        chan *skogul.Container
+	once      sync.Once
+	metrics   int
+	cont      *skogul.Container
 }
 
 func (bat *Batch) setup() {
-	if bat.MaxMetrics == 0 {
-		bat.MaxMetrics = 10
+	if bat.Threshold == 0 {
+		bat.Threshold = 10
 	}
 	bat.ch = make(chan *skogul.Container, 10)
 	if bat.Interval == 0 {
 		bat.Interval = time.Duration(1 * time.Second)
 	}
+	slack := int(bat.Threshold / 5)
+	bat.allocSize = bat.Threshold + slack
 	go bat.run()
 }
 
 // add is a custom-written append(), so to speak, since we know that the
-// maximum size of the relevant slice is MaxMetrics.
+// maximum size of the relevant slice is Threshold.
 func (bat *Batch) add(c *skogul.Container) {
 	if bat.cont == nil {
 		bat.cont = &skogul.Container{}
@@ -72,10 +76,11 @@ func (bat *Batch) add(c *skogul.Container) {
 	nl := len(c.Metrics) + cl
 
 	if nl > cc {
-		newlen := bat.MaxMetrics
-		// It's allowed to exceed MaxMetrics - but only once.
+		newlen := bat.allocSize
+		// It's allowed to exceed Threshold - but only once.
 		if newlen < nl {
 			newlen = nl
+			log.Print((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 20%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
 		}
 		x := make([]*skogul.Metric, newlen)
 		copy(x, bat.cont.Metrics)
@@ -99,7 +104,7 @@ func (bat *Batch) run() {
 		select {
 		case c := <-bat.ch:
 			bat.add(c)
-			if len(bat.cont.Metrics) >= bat.MaxMetrics {
+			if len(bat.cont.Metrics) >= bat.Threshold {
 				bat.flush()
 			}
 		case <-time.After(bat.Interval):

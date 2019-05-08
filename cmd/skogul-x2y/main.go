@@ -134,7 +134,7 @@ func main() {
 
 	var s skogul.Sender
 	if *fbatch > 0 {
-		b := sender.Batch{MaxMetrics: *fbatch, Next: target}
+		b := sender.Batch{Threshold: *fbatch, Next: target}
 		s = &b
 	} else {
 		s = target
