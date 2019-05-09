@@ -27,33 +27,7 @@ import (
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/sender"
 	"testing"
-	"time"
 )
-
-type testSender struct {
-	received int
-}
-
-func (ts *testSender) Send(c *skogul.Container) error {
-	ts.received++
-	return nil
-}
-
-func (rcv *testSender) testTime(t *testing.T, sender skogul.Sender, c *skogul.Container, received int, delay time.Duration) {
-	rcv.received = 0
-	err := sender.Send(c)
-	if err != nil {
-		t.Errorf("sending on %v failed: %v", sender, err)
-	}
-	time.Sleep(delay)
-	if rcv.received != received {
-		t.Errorf("sending on %v: wanted %d received, got %d", sender, received, rcv.received)
-	}
-}
-
-func (rcv *testSender) testQuick(t *testing.T, sender skogul.Sender, c *skogul.Container, received int) {
-	rcv.testTime(t, sender, c, received, time.Duration(5*time.Millisecond))
-}
 
 func TestNull(t *testing.T) {
 	c := skogul.Container{}
@@ -67,45 +41,45 @@ func TestNull(t *testing.T) {
 
 func TestDupe(t *testing.T) {
 	c := skogul.Container{}
-	one := &(testSender{})
-	two := &(testSender{})
+	one := &(sender.Test{})
+	two := &(sender.Test{})
 	dupe := sender.Dupe{Next: []skogul.Sender{one, two}}
 
 	err := dupe.Send(&c)
 	if err != nil {
 		t.Errorf("dupe.Send() failed: %v", err)
 	}
-	if one.received != 1 {
-		t.Errorf("dupe.Send(), sender 1 expected %d recevied, got %d", 1, one.received)
+	if one.Received != 1 {
+		t.Errorf("dupe.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
 	}
-	if two.received != 1 {
-		t.Errorf("dupe.Send(), sender 2 expected %d recevied, got %d", 1, two.received)
+	if two.Received != 1 {
+		t.Errorf("dupe.Send(), sender 2 expected %d recevied, got %d", 1, two.Received)
 	}
 }
 
 func TestFallback(t *testing.T) {
 	c := skogul.Container{}
-	one := &(testSender{})
-	two := &(testSender{})
+	one := &(sender.Test{})
+	two := &(sender.Test{})
 	fb := sender.Fallback{Next: []skogul.Sender{one, two}}
 
 	err := fb.Send(&c)
 	if err != nil {
 		t.Errorf("fallback.Send() failed: %v", err)
 	}
-	if one.received != 1 {
-		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.received)
+	if one.Received != 1 {
+		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
 	}
-	if two.received != 0 {
-		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 0, two.received)
+	if two.Received != 0 {
+		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 0, two.Received)
 	}
 }
 
 func TestFallback_fail(t *testing.T) {
 	c := skogul.Container{}
-	one := &(testSender{})
-	two := &(testSender{})
-	three := &(testSender{})
+	one := &(sender.Test{})
+	two := &(sender.Test{})
+	three := &(sender.Test{})
 	faf := &(sender.ForwardAndFail{Next: one})
 	fb := sender.Fallback{Next: []skogul.Sender{faf, two}}
 
@@ -115,27 +89,27 @@ func TestFallback_fail(t *testing.T) {
 	if err != nil {
 		t.Errorf("fallback.Send() failed: %v", err)
 	}
-	if one.received != 1 {
-		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.received)
+	if one.Received != 1 {
+		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
 	}
-	if two.received != 1 {
-		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 1, two.received)
+	if two.Received != 1 {
+		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 1, two.Received)
 	}
-	if three.received != 0 {
-		t.Errorf("fallback.Send(), sender 3 expected %d recevied, got %d", 0, two.received)
+	if three.Received != 0 {
+		t.Errorf("fallback.Send(), sender 3 expected %d recevied, got %d", 0, two.Received)
 	}
 }
 
 func TestForwardAndFail(t *testing.T) {
 	c := skogul.Container{}
-	one := &(testSender{})
+	one := &(sender.Test{})
 	faf := sender.ForwardAndFail{Next: one}
 
 	err := faf.Send(&c)
 	if err == nil {
 		t.Errorf("forwardandfail.Send() .... failed to fail (returned true)")
 	}
-	if one.received != 1 {
-		t.Errorf("forwardandfail.Send(), sender 1 expected %d recevied, got %d", 1, one.received)
+	if one.Received != 1 {
+		t.Errorf("forwardandfail.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
 	}
 }

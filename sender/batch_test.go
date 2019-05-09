@@ -37,35 +37,35 @@ func TestBatch(t *testing.T) {
 	// so we just leave them blank and reuse the same metric.
 
 	c.Metrics = []*skogul.Metric{&m}
-	one := &(testSender{})
+	one := &(sender.Test{})
 	batch := &(sender.Batch{Next: one})
 
 	// Test that sending 9 metrics doesn't pass anything on
 	for i := 0; i < 9; i++ {
-		one.testQuick(t, batch, &c, 0)
+		one.TestQuick(t, batch, &c, 0)
 	}
 
 	// but the 10th does....
-	one.testQuick(t, batch, &c, 1)
+	one.TestQuick(t, batch, &c, 1)
 
 	// Rinse and repeat to ensure state is reset
 	for i := 0; i < 9; i++ {
-		one.testQuick(t, batch, &c, 0)
+		one.TestQuick(t, batch, &c, 0)
 	}
-	one.testQuick(t, batch, &c, 1)
+	one.TestQuick(t, batch, &c, 1)
 
 	// Test that a single metric wont be passed on instantly...
-	one.testQuick(t, batch, &c, 0)
+	one.TestQuick(t, batch, &c, 0)
 
 	// but that it will after the timer expires
 	time.Sleep(time.Duration(1 * time.Second))
-	if one.received != 1 {
-		t.Errorf("batch.Send(), no data sent after timeout expired. Expected %d, got %d", 1, one.received)
+	if one.Received != 1 {
+		t.Errorf("batch.Send(), no data sent after timeout expired. Expected %d, got %d", 1, one.Received)
 	}
 
 	// Ensure we don't botch the resize - send containers with multiple
 	// metrics and see how that works.
 	c.Metrics = []*skogul.Metric{&m, &m, &m, &m, &m, &m, &m, &m, &m}
-	one.testQuick(t, batch, &c, 0)
-	one.testQuick(t, batch, &c, 1)
+	one.TestQuick(t, batch, &c, 0)
+	one.TestQuick(t, batch, &c, 1)
 }

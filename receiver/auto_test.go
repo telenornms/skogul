@@ -21,12 +21,14 @@
  * 02110-1301  USA
  */
 
-package receiver_test
+package receiver
 
 import (
 	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/receiver"
+	//	"github.com/KristianLyng/skogul/receiver"
+	"fmt"
 	"github.com/KristianLyng/skogul/sender"
+	"net/url"
 	"testing"
 )
 
@@ -37,7 +39,7 @@ func init() {
 }
 
 func testGeneric(t *testing.T, in string) {
-	x, err := receiver.New(in, h)
+	x, err := New(in, h)
 	if err != nil {
 		t.Errorf("New(%s): Failed to create receiver automatically: %v", in, err)
 	}
@@ -47,7 +49,7 @@ func testGeneric(t *testing.T, in string) {
 }
 
 func testGenericNegative(t *testing.T, in string) {
-	x, err := receiver.New(in, h)
+	x, err := New(in, h)
 	if err == nil {
 		t.Errorf("New(%s): Supposed to fail, but worked.", in)
 	}
@@ -84,4 +86,19 @@ func TestNew_http(t *testing.T) {
 	for _, url := range bad {
 		testGenericNegative(t, url)
 	}
+}
+
+func intTest(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()
+	d := func(url url.URL, h skogul.Handler) skogul.Receiver { return nil }
+	addAutoReceiver("http", d, "foo")
+	t.Errorf("addAutoReceiver() on existing sender didn't fail?")
+}
+
+func Test_addAutoReceiver(t *testing.T) {
+	intTest(t)
 }

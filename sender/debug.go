@@ -28,6 +28,7 @@ import (
 	"log"
 	"math/rand"
 	"net/url"
+	"testing"
 	"time"
 
 	"github.com/KristianLyng/skogul"
@@ -120,4 +121,37 @@ type Null struct{}
 // Send just returns nil
 func (n *Null) Send(c *skogul.Container) error {
 	return nil
+}
+
+type Test struct {
+	Received int
+}
+
+func (ts *Test) Send(c *skogul.Container) error {
+	ts.Received++
+	return nil
+}
+
+func (rcv *Test) TestTime(t *testing.T, s skogul.Sender, c *skogul.Container, received int, delay time.Duration) {
+	rcv.Received = 0
+	err := s.Send(c)
+	if err != nil {
+		t.Errorf("sending on %v failed: %v", s, err)
+	}
+	time.Sleep(delay)
+	if rcv.Received != received {
+		t.Errorf("sending on %v: wanted %d received, got %d", s, received, rcv.Received)
+	}
+}
+
+func (rcv *Test) TestNegative(t *testing.T, s skogul.Sender, c *skogul.Container) {
+	rcv.Received = 0
+	err := s.Send(c)
+	if err == nil {
+		t.Errorf("sending on %v expected to fail, but didn't.", s)
+	}
+}
+
+func (rcv *Test) TestQuick(t *testing.T, sender skogul.Sender, c *skogul.Container, received int) {
+	rcv.TestTime(t, sender, c, received, time.Duration(5*time.Millisecond))
 }

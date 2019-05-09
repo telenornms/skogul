@@ -75,7 +75,7 @@ func addAutoReceiver(scheme string, init func(url url.URL, h skogul.Handler) sko
 		Auto = make(map[string]*AutoReceiver)
 	}
 	if Auto[scheme] != nil {
-		log.Fatalf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
+		log.Panicf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
 	}
 	Auto[scheme] = &AutoReceiver{scheme, init, help}
 }
