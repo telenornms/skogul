@@ -123,15 +123,21 @@ func (n *Null) Send(c *skogul.Container) error {
 	return nil
 }
 
+// Test sender is used to facilitate tests, and discards any metrics, but
+// increments the Received counter.
 type Test struct {
 	Received int
 }
 
-func (ts *Test) Send(c *skogul.Container) error {
-	ts.Received++
+// Send discards data and increments the Received counter
+func (rcv *Test) Send(c *skogul.Container) error {
+	rcv.Received++
 	return nil
 }
 
+// TestTime sends the container on the specified sender, waits delay period
+// of time, then verifies that rcv has received the expected number of
+// containers.
 func (rcv *Test) TestTime(t *testing.T, s skogul.Sender, c *skogul.Container, received int, delay time.Duration) {
 	rcv.Received = 0
 	err := s.Send(c)
@@ -144,6 +150,7 @@ func (rcv *Test) TestTime(t *testing.T, s skogul.Sender, c *skogul.Container, re
 	}
 }
 
+// TestNegative sends data on s and expects to fail.
 func (rcv *Test) TestNegative(t *testing.T, s skogul.Sender, c *skogul.Container) {
 	rcv.Received = 0
 	err := s.Send(c)
@@ -152,6 +159,8 @@ func (rcv *Test) TestNegative(t *testing.T, s skogul.Sender, c *skogul.Container
 	}
 }
 
+// TestQuick sends data on the sender and waits 5 milliseconds before
+// checking that the data was received on the other end.
 func (rcv *Test) TestQuick(t *testing.T, sender skogul.Sender, c *skogul.Container, received int) {
 	rcv.TestTime(t, sender, c, received, time.Duration(5*time.Millisecond))
 }
