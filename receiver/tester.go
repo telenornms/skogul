@@ -82,39 +82,48 @@ func (tst *Tester) run() {
 }
 
 func init() {
-	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. Format: test://$t/$m/$v")
+	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. All parameters are optional. Example: test:///?threads=4&metrics=2&values=12")
+}
+
+type myval struct {
+	v url.Values
+}
+
+func (m myval) getDefault(key string, def int) (int, error) {
+	values := m.v
+	str := values.Get(key)
+	result := def
+	if str != "" {
+		n, err := fmt.Sscanf(str, "%d", &result)
+		if n != 1 || err != nil {
+			return def, skogul.Error{Source: "tester sender", Reason: fmt.Sprintf("invalid parameter \"%s\". Value is %s", key, str), Next: err}
+		}
+	}
+	return result, nil
 }
 
 /*
 NewTester returns a new Tester receiver, building values/metrics from URL.
 */
 func NewTester(ul url.URL, h skogul.Handler) skogul.Receiver {
-
-	var host int64 = 10
-	var path int64 = 50
-	threads := 0
-	if len(ul.Host) > 0 {
-		n, err := fmt.Sscanf(ul.Host, "%d", &threads)
-		if n != 1 || err != nil {
-			log.Printf("Invalid host element in URL for Tester \"%s\" (n: %d err: %v)", ul.Host, n, err)
-			return nil
-		}
+	values := myval{v: ul.Query()}
+	var metrics, vals, threads int
+	var err error
+	metrics, err = values.getDefault("metrics", 10)
+	if err != nil {
+		log.Print(err)
+		return nil
 	}
-	if len(ul.Path) > 0 {
-		n, err := fmt.Sscanf(ul.Path, "/%d", &host)
-		if n != 1 || err != nil {
-			log.Printf("Invalid poath element in URL for Tester \"%s\" (n: %d err: %v)", ul.Path, n, err)
-			return nil
-		}
+	vals, err = values.getDefault("values", 50)
+	if err != nil {
+		log.Print(err)
+		return nil
 	}
-	if len(ul.Path) > 0 {
-		var dummy int
-		n, err := fmt.Sscanf(ul.Path, "/%d/%d", &dummy, &path)
-		if n != 2 || err != nil {
-			log.Printf("Invalid path element in URL for Tester \"%s\" (n: %d err: %v)", ul.Path, n, err)
-			return nil
-		}
+	threads, err = values.getDefault("threads", 4)
+	if err != nil {
+		log.Print(err)
+		return nil
 	}
 
-	return &Tester{Metrics: host, Values: path, Threads: threads, Handler: h}
+	return &Tester{Metrics: int64(metrics), Values: int64(vals), Threads: threads, Handler: h}
 }

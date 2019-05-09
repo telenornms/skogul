@@ -57,9 +57,10 @@ func testGenericNegative(t *testing.T, in string) {
 }
 
 func TestNew_test(t *testing.T) {
-	testGeneric(t, "test://15/1")
+	testGeneric(t, "test:///?threads=15&values=1")
+	testGeneric(t, "test:///?threads=15")
 	testGeneric(t, "test://")
-	testGenericNegative(t, "test://x/y")
+	testGenericNegative(t, "test:///?threads=x/y")
 }
 
 func TestNew_nonexistent(t *testing.T) {
