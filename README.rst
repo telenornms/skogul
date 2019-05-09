@@ -13,6 +13,13 @@ Skogul is a generic tool for moving metric data around. It can serve as a
 collector of data, but is primarily designed to be a framework for building
 bridges between data collectors and storage engines.
 
+A skogul chain is built from one or more independent receivers which
+receive data and pass it on to a sender. A sender can either transmit data
+to an external source (including an other Skogul instance), or make
+internal changes to data before passing it on to one or more other senders.
+
+.. image:: docs/basic.png
+
 Unlike most APIs or collectors of metrics, Skogul does NOT have a
 preference when it comes to storage engine. It is explicitly designed to
 disconnect the task of how data is collected from how it is stored.
@@ -66,6 +73,14 @@ can use it for::
        test:// | Generate dummy-data, each container contains $m metrics and each
                | metric $v values, format: test://$m/$v
 
+skogul-x2y can also be used to test Skogul. Here's a very simple example
+where data is moved from one Skogul instance to an other over HTTP, using
+the "test receiver" to generate dummy data and the "counter receiver" to
+instrument it on the other side. Similar can also be used to pipe data to
+influx or M&R or any other sender.
+
+.. image:: docs/self-test.png
+
 While this 1-to-1 scenario is very useful and common, it is not really
 where Skogul shines the most. The core idea behind Skogul is building
 pipelines that starts with one or more receiver and builds a chain of
@@ -112,10 +127,6 @@ drops.
 Name
 ----
 
-Skogul is a Valkyrie. After extensive research (5 minutes on wikipedia with
+Skogul is a Valkyrie. After extensive research (5 minutes on Wikipedia with
 a cross-check on duckduckgo), this name was selected because it is
-reasonably unique and is also a valkyrie, like Gondul, a sister-project.
-
-Being a whole week old, a name change was due, so you might find references
-to Gollector here and there, if I suck at grep(1).
-
+reasonably unique and is also a Valkyrie, like Gondul, a sister-project.
