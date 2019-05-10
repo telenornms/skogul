@@ -47,7 +47,16 @@ func TestLinefile(t *testing.T) {
 	defer deleteFile(t, file)
 
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	rcv := receiver.LineFile{File: file, Handler: h}
+	rcv, err := receiver.New(fmt.Sprintf("fifo:///%s", file), h)
+	if err != nil {
+		t.Errorf("receiver.New() failed: %v", err)
+		return
+	}
+	if rcv == nil {
+		t.Errorf("receiver.New() returned err == nil, but also no receiver")
+		return
+	}
+
 	go rcv.Start()
 	b, err := json.Marshal(validContainer)
 	if err != nil {
@@ -71,5 +80,10 @@ func TestLinefile(t *testing.T) {
 	time.Sleep(time.Duration(10 * time.Millisecond))
 	if one.Received != 2 {
 		t.Errorf("Didn't receive thing on other end!")
+	}
+	one.Received = 0
+	f.WriteString(fmt.Sprintf("bad idea♥\n"))
+	if one.Received != 0 {
+		t.Errorf("Receive thing on other end despite bogus data")
 	}
 }
