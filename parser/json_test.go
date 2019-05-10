@@ -28,7 +28,7 @@ import "testing"
 // TestJSONParse tests parsing of a simple JSON document to skogul
 // container
 func TestJSONParse(t *testing.T) {
-	var b []byte = []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
+	b := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
 	x := JSON{}
 	_, err := x.Parse(b)
 	if err != nil {
