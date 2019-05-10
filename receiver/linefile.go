@@ -25,11 +25,10 @@ package receiver
 
 import (
 	"bufio"
+	"github.com/KristianLyng/skogul"
 	"log"
 	"net/url"
 	"os"
-
-	"github.com/KristianLyng/skogul"
 )
 
 // LineFile will keep reading File over and over again, assuming one
@@ -51,7 +50,6 @@ func (lf *LineFile) Start() error {
 		scanner := bufio.NewScanner(f)
 		for scanner.Scan() {
 			bytes := scanner.Bytes()
-			log.Printf("Read %s", bytes)
 			m, err := lf.Handler.Parser.Parse(bytes)
 			if err == nil {
 				err = m.Validate()

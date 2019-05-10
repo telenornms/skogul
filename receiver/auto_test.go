@@ -25,8 +25,6 @@ package receiver
 
 import (
 	"github.com/KristianLyng/skogul"
-	//	"github.com/KristianLyng/skogul/receiver"
-	"fmt"
 	"github.com/KristianLyng/skogul/sender"
 	"net/url"
 	"testing"
@@ -90,9 +88,7 @@ func TestNew_http(t *testing.T) {
 
 func intTest(t *testing.T) {
 	defer func() {
-		if r := recover(); r != nil {
-			fmt.Println("Recovered in f", r)
-		}
+		recover()
 	}()
 	d := func(url url.URL, h skogul.Handler) skogul.Receiver { return nil }
 	addAutoReceiver("http", d, "foo")
