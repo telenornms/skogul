@@ -38,6 +38,7 @@ type Tester struct {
 	Metrics int64
 	Values  int64
 	Threads int
+	Delay   time.Duration
 	Handler skogul.Handler
 }
 
@@ -78,11 +79,14 @@ func (tst *Tester) run() {
 		if err != nil {
 			log.Print(err)
 		}
+		if tst.Delay != 0 {
+			time.Sleep(tst.Delay)
+		}
 	}
 }
 
 func init() {
-	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. All parameters are optional. Example: test:///?threads=4&metrics=2&values=12")
+	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. A delay of $d is inserted between \"runs\". All parameters are optional. Example: test:///?threads=4&metrics=2&values=12&delay=1s")
 }
 
 type myval struct {
@@ -125,5 +129,15 @@ func NewTester(ul url.URL, h skogul.Handler) skogul.Receiver {
 		return nil
 	}
 
-	return &Tester{Metrics: int64(metrics), Values: int64(vals), Threads: threads, Handler: h}
+	dstr := values.v.Get("delay")
+	var d time.Duration
+	if dstr != "" {
+		d, err = time.ParseDuration(dstr)
+		if err != nil {
+			log.Print(err)
+			return nil
+		}
+	}
+
+	return &Tester{Metrics: int64(metrics), Values: int64(vals), Threads: threads, Handler: h, Delay: d}
 }
