@@ -63,8 +63,8 @@ var fbatch = flag.Int("batch", 0, "Number of messages to batch up before passing
 var fcount = flag.Bool("count", false, "Print periodic stats using the count sender in addition to regular sender")
 
 // Max width of help text before wrapping, should be some number lower than
-// expected terminal size.
-const helpWidth = 70
+// expected terminal size. 66 is nice for 80x25 terminals.
+const helpWidth = 66
 
 /*
 Print a table of scheme | desc, wrapping the description at helpWidth.
