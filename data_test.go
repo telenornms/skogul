@@ -134,6 +134,21 @@ func TestValidate(t *testing.T) {
 	}
 }
 
+func BenchmarkValidate(b *testing.B) {
+
+	now := time.Now()
+	metric := skogul.Metric{}
+	metric.Data = make(map[string]interface{})
+	metric.Data["test"] = "foo"
+	metric.Time = &now
+	okc := skogul.Container{}
+	okc.Metrics = []*skogul.Metric{&metric}
+	for i := 0; i < b.N; i++ {
+		okc.Validate()
+	}
+
+}
+
 func TestString_invalid(t *testing.T) {
 	c := skogul.Container{}
 	metric1 := skogul.Metric{}
