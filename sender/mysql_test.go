@@ -1,6 +1,7 @@
 package sender
 
 import (
+	"fmt"
 	"github.com/KristianLyng/skogul"
 	"testing"
 	"time"
@@ -34,7 +35,19 @@ func TestMysql(t *testing.T) {
 	}
 }
 
+// Basic MySQL example, using user root (bad idea) and password "lol"
+// (voted most secure password of 2019), connecting to the database
+// "skogul". Also demonstrates printing of the query.
+//
+// Will, obviously, require a database to be running.
 func ExampleMysql() {
-	m := skogul.Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "user:password@/db"}
-	// Actual query to be prepared will be INSERT INTO test VALUES(?, // ?, ?, ?);
+	m := Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
+	m.Init()
+	str, err := m.GetQuery()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(str)
+	// Output:
+	// INSERT INTO test VALUES(?,?,?,?);
 }

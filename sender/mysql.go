@@ -25,13 +25,12 @@ package sender
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 	"sync"
 
 	"github.com/KristianLyng/skogul"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 )
 
 const (
@@ -63,9 +62,11 @@ type Mysql struct {
 	once    sync.Once
 }
 
+/*
+prep parses my.Query into q and populates my.list acordingly
+*/
 func (my *Mysql) prep() {
 	//str := "INSERT INTO lol VALUES($date, $name, $foo)"
-	fmt.Printf("Original query: \"%s\"\n", my.Query)
 
 	mlen := len("metadata.")
 
@@ -82,10 +83,21 @@ func (my *Mysql) prep() {
 	my.q = os.Expand(my.Query, expander)
 }
 
-/*
-Init will connect to the database, ping it and set things up.
-*/
+// GetQuery returns the parsed query, assuming there is one.
+func (my *Mysql) GetQuery() (string, error) {
+	if my.Query == "" {
+		return "", skogul.Error{Source: "mysql sender", Reason: "No Query set, but GetQuery() called"}
+	}
+	err := my.Init()
+	if err != nil {
+		return "", skogul.Error{Source: "mysql sender", Reason: "Mysql.Init failed during GetQuery()", Next: err}
+	}
+	return my.q, nil
+}
 
+/*
+Init will connect to the database, ping it and set things up. But only once.
+*/
 func (my *Mysql) Init() error {
 	var er error
 	my.once.Do(func() {
@@ -122,7 +134,6 @@ func (my *Mysql) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 			vals = append(vals, m.Data[e.key])
 		}
 	}
-	fmt.Println(vals)
 	_, err := stmt.Exec(vals...)
 	return err
 }
