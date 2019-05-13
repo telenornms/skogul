@@ -46,7 +46,7 @@ type dbElement struct {
 
 /*
 Mysql sender accepts a ConnStr according to
-https://github.com/go-sql-driver/mysql/, and a query which is expeanded
+https://github.com/go-sql-driver/mysql/, and a query which is expanded
 using os.Expand(), allowing arbitrary queries to be executed.
 
 Variable expansion is done through ${foo}, ${timestamp.timestamp} and
@@ -63,7 +63,7 @@ type Mysql struct {
 }
 
 /*
-prep parses my.Query into q and populates my.list acordingly
+prep parses my.Query into q and populates my.list accordingly
 */
 func (my *Mysql) prep() {
 	//str := "INSERT INTO lol VALUES($date, $name, $foo)"
