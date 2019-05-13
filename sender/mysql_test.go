@@ -1,3 +1,26 @@
+/*
+ * skogul, mysql tests
+ *
+ * Copyright (c) 2019 Telenor Norge AS
+ * Author(s):
+ *  - Kristian Lyngstøl <kly@kly.no>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301  USA
+ */
+
 package sender
 
 import (
@@ -7,15 +30,59 @@ import (
 	"time"
 )
 
+func mysqlTestAuto(t *testing.T, url string) {
+	m, err := New(url)
+	if m == nil {
+		t.Errorf("New(\"%s\" failed", url)
+	}
+	if err != nil {
+		t.Errorf("New(\"%s\" failed: %v", url, err)
+	}
+}
+func mysqlTestAutoNeg(t *testing.T, url string) {
+	m, err := New(url)
+	if m != nil {
+		t.Errorf("New(\"%s\" succeeded, but expected failure. Val: %v", url, m)
+	}
+	if err == nil {
+		t.Errorf("New(\"%s\" succeeded, but expected failure. Val: %v", url, m)
+	}
+}
+
+func TestMysql_auto(t *testing.T) {
+	mysqlTestAutoNeg(t, "mysql:///")
+	mysqlTestAutoNeg(t, "mysql:///?connstr=something")
+	mysqlTestAutoNeg(t, "mysql:///?query=something")
+	mysqlTestAutoNeg(t, "mysql://")
+	mysqlTestAuto(t, "mysql://?connstr=something&query=blatti")
+	mysqlTestAuto(t, "mysql:///?connstr=something&query=blatti")
+	mysqlTestAuto(t, "mysql:///?connstr=foo:bar@/blatt&query=foo%20bar")
+}
 func TestMysql(t *testing.T) {
-	m := Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
-	err := m.Init()
+	m := Mysql{}
+	s, err := m.GetQuery()
+	if err == nil {
+		t.Errorf("m.GetQuery() succeeded despite query not being created")
+	}
+	if s != "" {
+		t.Errorf("m.GetQuery() returned data despite query not being created. Got %s.", s)
+	}
+	m = Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
+	err = m.Init()
 	if err != nil {
 		t.Errorf("Mysql.Init failed: %v", err)
 	}
 	want := "INSERT INTO test VALUES(?,?,?,?);"
 	if want != m.q {
 		t.Errorf("Mysql.Init wanted %s got %s", want, m.q)
+	}
+	var got string
+	got, err = m.GetQuery()
+	if err != nil {
+		t.Errorf("Mysql.getQuery() failed: %v", err)
+	}
+	if want != got {
+		t.Errorf("Mysql.Init wanted %s got %s", want, got)
 	}
 
 	c := skogul.Container{}
@@ -29,6 +96,17 @@ func TestMysql(t *testing.T) {
 	me.Data["data"] = "something"
 	c.Metrics = []*skogul.Metric{&me}
 
+	err = m.Send(&c)
+	if err != nil {
+		t.Errorf("Mysql.Send failed: %v", err)
+	}
+	me.Data = make(map[string]interface{})
+	me.Data["name"] = "Foo Bar"
+	err = m.Send(&c)
+	if err != nil {
+		t.Errorf("Mysql.Send failed: %v", err)
+	}
+	me.Time = nil
 	err = m.Send(&c)
 	if err != nil {
 		t.Errorf("Mysql.Send failed: %v", err)
