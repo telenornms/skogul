@@ -41,13 +41,13 @@ type Debug struct {
 }
 
 func init() {
-	addAutoSender("debug", NewDebug, "Debug sender prints received metrics to stdout")
+	addAutoSender("debug", newDebug, "Debug sender prints received metrics to stdout")
 }
 
 /*
-NewDebug creates a new Debug sender, ignoring the URL.
+newDebug creates a new Debug sender, ignoring the URL.
 */
-func NewDebug(url url.URL) skogul.Sender {
+func newDebug(url url.URL) skogul.Sender {
 	x := Debug{}
 	return x
 }

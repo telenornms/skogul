@@ -108,13 +108,13 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 }
 
 func init() {
-	addAutoReceiver("tcp", NewTCPLine, "Listen for Skogul-formatted JSON on a line-separate tcp socket")
+	addAutoReceiver("tcp", newTCPLine, "Listen for Skogul-formatted JSON on a line-separate tcp socket")
 }
 
 /*
-NewTCPLine returns a new TCPLine receiver built from the url. Correct format is
+newTCPLine returns a new TCPLine receiver built from the url. Correct format is
 tcp://ip:port
 */
-func NewTCPLine(ul url.URL, h skogul.Handler) skogul.Receiver {
+func newTCPLine(ul url.URL, h skogul.Handler) skogul.Receiver {
 	return &TCPLine{Address: ul.String(), Handler: &h}
 }

@@ -46,11 +46,11 @@ type HTTP struct {
 }
 
 func init() {
-	addAutoSender("http", NewHTTP, "Post Skogul-formatted JSON to a HTTP endpoint")
+	addAutoSender("http", newHTTP, "Post Skogul-formatted JSON to a HTTP endpoint")
 }
 
-// NewHTTP creates a new HTTP sender
-func NewHTTP(url url.URL) skogul.Sender {
+// newHTTP creates a new HTTP sender
+func newHTTP(url url.URL) skogul.Sender {
 	x := HTTP{URL: url.String()}
 	return &x
 }

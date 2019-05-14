@@ -60,13 +60,13 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 	return nil
 }
 func init() {
-	addAutoSender("mqtt", NewMQTT, "MQTT sender publishes received metrics to an MQTT broker/topic")
+	addAutoSender("mqtt", newMQTT, "MQTT sender publishes received metrics to an MQTT broker/topic")
 }
 
 /*
-NewMQTT creates a new MQTT sender
+newMQTT creates a new MQTT sender
 */
-func NewMQTT(url url.URL) skogul.Sender {
+func newMQTT(url url.URL) skogul.Sender {
 	x := MQTT{Address: url.String()}
 	return &x
 }

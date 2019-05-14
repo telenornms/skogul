@@ -29,7 +29,6 @@ import (
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
 	"github.com/KristianLyng/skogul/transformer"
-	"net/url"
 	"time"
 )
 
@@ -37,8 +36,10 @@ import (
 func Example() {
 	s := sender.Debug{}
 	h := skogul.Handler{Parser: parser.JSON{}, Sender: s}
-	u, _ := url.Parse("http://localhost:1234")
-	r := receiver.NewHTTP(*u, h)
+	r, err := receiver.New("http://localhost:1234", h)
+	if err != nil {
+		panic(err)
+	}
 	r.Start()
 }
 

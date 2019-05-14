@@ -35,14 +35,9 @@ import (
 )
 
 /*
-HTTP accepts HTTP connections on the Address specified.
-
-Set it up similar to net/http:
-
-        rcv := receiver.HTTP{Address: "localhost:8080"}
-        rcv.Handle("/", foo)
-        rcv.Handle("/blatti", bar)
-
+HTTP accepts HTTP connections on the Address specified, and requires at
+least one handler to be set up, using Handle. This is done implicitly
+if the HTTP receiver is created using New()
 */
 type HTTP struct {
 	Address  string
@@ -163,14 +158,14 @@ func (handler *HTTP) Start() error {
 }
 
 func init() {
-	addAutoReceiver("http", NewHTTP, "Listen for Skogul-formatted JSON on a HTTP endpoint")
+	addAutoReceiver("http", newHTTP, "Listen for Skogul-formatted JSON on a HTTP endpoint")
 }
 
 /*
-NewHTTP returns a HTTP receiver, with the Path of the url being the one to
+newHTTP returns a HTTP receiver, with the Path of the url being the one to
 listen to.
 */
-func NewHTTP(ul url.URL, h skogul.Handler) skogul.Receiver {
+func newHTTP(ul url.URL, h skogul.Handler) skogul.Receiver {
 	hl := HTTP{Address: ul.Host}
 	hl.Handle(fmt.Sprintf("/%s", ul.Path), &h)
 	return &hl

@@ -140,11 +140,11 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 }
 
 func init() {
-	addAutoSender("mnr", NewMnR, "MNR sender sends M&R line format to an endpoint, optional DefaultGroup is provided as the path element.")
+	addAutoSender("mnr", newMnR, "MNR sender sends M&R line format to an endpoint, optional DefaultGroup is provided as the path element.")
 }
 
-// NewMnR returns a MnR sender where default group is the path-element.
-func NewMnR(ul url.URL) skogul.Sender {
+// newMnR returns a MnR sender where default group is the path-element.
+func newMnR(ul url.URL) skogul.Sender {
 	g := ""
 	if ul.Path != "" {
 		g = ul.Path[1:len(ul.Path)]

@@ -86,7 +86,7 @@ func (tst *Tester) run() {
 }
 
 func init() {
-	addAutoReceiver("test", NewTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. A delay of $d is inserted between \"runs\". All parameters are optional. Example: test:///?threads=4&metrics=2&values=12&delay=1s")
+	addAutoReceiver("test", newTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. A delay of $d is inserted between \"runs\". All parameters are optional. Example: test:///?threads=4&metrics=2&values=12&delay=1s")
 }
 
 type myval struct {
@@ -107,9 +107,9 @@ func (m myval) getDefault(key string, def int) (int, error) {
 }
 
 /*
-NewTester returns a new Tester receiver, building values/metrics from URL.
+newTester returns a new Tester receiver, building values/metrics from URL.
 */
-func NewTester(ul url.URL, h skogul.Handler) skogul.Receiver {
+func newTester(ul url.URL, h skogul.Handler) skogul.Receiver {
 	values := myval{v: ul.Query()}
 	var metrics, vals, threads int
 	var err error

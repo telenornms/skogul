@@ -81,14 +81,14 @@ func (handler *MQTT) Start() error {
 }
 
 func init() {
-	addAutoReceiver("mqtt", NewMQTT, "Listen for Skogul-formatted JSON on a MQTT endpoint")
+	addAutoReceiver("mqtt", newMQTT, "Listen for Skogul-formatted JSON on a MQTT endpoint")
 }
 
 /*
-NewMQTT returns a new MQTT receiver built from provided URL, using
+newMQTT returns a new MQTT receiver built from provided URL, using
 the path as the topic to subscribe to.
 */
-func NewMQTT(ul url.URL, h skogul.Handler) skogul.Receiver {
+func newMQTT(ul url.URL, h skogul.Handler) skogul.Receiver {
 	n := MQTT{Address: ul.String(), Handler: &h}
 	return &n
 }

@@ -50,13 +50,13 @@ type Counter struct {
 }
 
 func init() {
-	addAutoSender("count", NewCounter, "Count sender discards the metrics but peridocally prints statistics")
+	addAutoSender("count", newCounter, "Count sender discards the metrics but peridocally prints statistics")
 }
 
 /*
-NewCounter creates a count sender that discards all data, but outputs stats to stdout
+newCounter creates a count sender that discards all data, but outputs stats to stdout
 */
-func NewCounter(url url.URL) skogul.Sender {
+func newCounter(url url.URL) skogul.Sender {
 	x := Counter{}
 	x.Next = &Null{}
 	h := skogul.Handler{Sender: Debug{}}

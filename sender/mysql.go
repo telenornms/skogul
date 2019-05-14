@@ -35,11 +35,11 @@ import (
 )
 
 func init() {
-	addAutoSender("mysql", NewMysql, "Write to a MySQL database, use parameters connstr for connection string, and query for... query. E.g.: mysql:///?connstr=root:lol@/skogul&query=INSERT%20INTO%20test%20VALUES%28%24%7Btimestamp%2Etimestamp%7D%2C%27hei%27%2C%24%7Bmetadata%2Ekey1%7D%2C%24%7Bmetric1%7D%29")
+	addAutoSender("mysql", newMysql, "Write to a MySQL database, use parameters connstr for connection string, and query for... query. E.g.: mysql:///?connstr=root:lol@/skogul&query=INSERT%20INTO%20test%20VALUES%28%24%7Btimestamp%2Etimestamp%7D%2C%27hei%27%2C%24%7Bmetadata%2Ekey1%7D%2C%24%7Bmetric1%7D%29")
 }
 
-// NewMysql creates a new Mysql sender
-func NewMysql(ul url.URL) skogul.Sender {
+// newMysql creates a new Mysql sender
+func newMysql(ul url.URL) skogul.Sender {
 	x := Mysql{}
 	values := ul.Query()
 	query := values.Get("query")
