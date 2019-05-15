@@ -62,8 +62,8 @@ three distinct paths and handlers/chains: / sends to the primary handler,
 The primary chain looks sort of like this:
 
 	http -> fallback -> detach -> fanout -> delay -> counter ->  dupe2 -> postgres
-	            \                             \             `-> influx
-	             \			           `------------/
+	            \                                        \             `-> influx
+	             \			                      `------------/
 		      \
 		       `- dupe --> Log(print "the following failed")
 		               `-> debug(print json to stdout)
