@@ -33,7 +33,16 @@ Alternatively, you can use ``go install`` instead of ``go build`` to
 install to ``$GOPATH/bin``, which is typically ``~/go/bin``.
 
 To use the locally imported/vendored packages instead of downloading them
-directly, e.g. if a system does not have direct internet access::
+directly, e.g. if a system does not have direct internet access. First make
+a vendored copy on an internet-attached computer - checksums in the repo
+will be verified::
+
+   $ cd skogul
+   $ go mod vendor
+   $
+   ( skogul/vendor is now populated after a while )
+
+Copy repo/directory to relevant computer, then run::
 
    $ cd skogul/cmd/skogul-x2y
    $ go build -mod vendor
