@@ -129,7 +129,7 @@ func helpReceiver(s string) {
 	}
 	m := receiver.Auto[s]
 	fmt.Printf("%s: %s\n\n", s, m.Help)
-	fmt.Printf("Additional URL paramaters for %s:\n\n", s)
+	fmt.Printf("Additional URL parameters for %s:\n\n", s)
 	if m.Flags != nil {
 		x := m.Flags()
 		x.VisitAll(func(f *flag.Flag) {

@@ -36,7 +36,7 @@ import (
 	"github.com/KristianLyng/skogul"
 )
 
-// URLParse parses a url's "GET parameteres" into the provided FlagSet.
+// URLParse parses a url's "GET parameters" into the provided FlagSet.
 func URLParse(u url.URL, fs *flag.FlagSet) error {
 	vs := u.Query()
 	for i, v := range vs {
