@@ -21,17 +21,21 @@
  * 02110-1301  USA
  */
 
-package sender
+package sender_test
 
 import (
+	"flag"
 	"fmt"
 	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/sender"
 	"testing"
 	"time"
 )
 
+var ftestMysql = flag.Bool("test.mysql", false, "Enable integration tests for mysql")
+
 func mysqlTestAuto(t *testing.T, url string) {
-	m, err := New(url)
+	m, err := sender.New(url)
 	if m == nil {
 		t.Errorf("New(\"%s\" failed", url)
 	}
@@ -40,7 +44,7 @@ func mysqlTestAuto(t *testing.T, url string) {
 	}
 }
 func mysqlTestAutoNeg(t *testing.T, url string) {
-	m, err := New(url)
+	m, err := sender.New(url)
 	if m != nil {
 		t.Errorf("New(\"%s\" succeeded, but expected failure. Val: %v", url, m)
 	}
@@ -59,7 +63,11 @@ func TestMysql_auto(t *testing.T) {
 	mysqlTestAuto(t, "mysql:///?connstr=foo:bar@/blatt&query=foo%20bar")
 }
 func TestMysql(t *testing.T) {
-	m := Mysql{}
+	if *ftestMysql != true {
+		fmt.Printf("WARNING: Skipping MySQL integration tests\n")
+		return
+	}
+	m := sender.Mysql{}
 	s, err := m.GetQuery()
 	if err == nil {
 		t.Errorf("m.GetQuery() succeeded despite query not being created")
@@ -67,15 +75,12 @@ func TestMysql(t *testing.T) {
 	if s != "" {
 		t.Errorf("m.GetQuery() returned data despite query not being created. Got %s.", s)
 	}
-	m = Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
+	m = sender.Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
 	err = m.Init()
 	if err != nil {
 		t.Errorf("Mysql.Init failed: %v", err)
 	}
 	want := "INSERT INTO test VALUES(?,?,?,?);"
-	if want != m.q {
-		t.Errorf("Mysql.Init wanted %s got %s", want, m.q)
-	}
 	var got string
 	got, err = m.GetQuery()
 	if err != nil {
@@ -119,7 +124,7 @@ func TestMysql(t *testing.T) {
 //
 // Will, obviously, require a database to be running.
 func ExampleMysql() {
-	m := Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
+	m := sender.Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
 	m.Init()
 	str, err := m.GetQuery()
 	if err != nil {

@@ -13,6 +13,67 @@ Skogul is a generic tool for moving metric data around. It can serve as a
 collector of data, but is primarily designed to be a framework for building
 bridges between data collectors and storage engines.
 
+Quickstart
+----------
+
+Skogul is written in Go and thus requires Go. See https://golang.org/dl/
+for installing go to your local computer. If you follow this guide, you'll
+have go in your path.
+
+Building ``skogul-x2y``, including cloning::
+
+   $ git clone https://github.com/KristianLyng/skogul
+   (...)
+   $ cd skogul/cmd/skogul-x2y
+   $ go build
+   $ 
+   # (No output from go build is good)
+
+Alternatively, you can use ``go install`` instead of ``go build`` to
+install to ``$GOPATH/bin``, which is typically ``~/go/bin``.
+
+To use the locally imported/vendored packages instead of downloading them
+directly, e.g. if a system does not have direct internet access::
+
+   $ cd skogul/cmd/skogul-x2y
+   $ go build -mod vendor
+   $
+
+(or ``go install -mod vendor``)
+
+Testing
+.......
+
+To run test cases, ``go test`` can be run. This can be used either in
+individual directories, or at the top directory, with ``go test ./...``.
+
+To produce coverage analysis, use::
+
+   $ cd skogul
+   $ go test ./... -covermode=count -coverprofile=coverage.out
+   $ go tool cover -html coverage.out
+   // Opens a browser with coverage anlysis
+
+Be aware that the MySQL sender does not do integration testing by default,
+as that requires a working MySQL instance.
+
+Formatting etc
+..............
+
+The "go report" at the top of this document is a decent test of
+marginal OK-ish-ness.
+
+Tools you should use:
+
+- `gofmt`, to format code according to Go coding style. Use ``gofmt -d .``
+  see local diff, or ``gofmt -w .`` to fix it.
+- `golint` to lint your code. ``golint .``
+
+Installing these tools is left as an exercise to the reader.
+
+About
+-----
+
 A skogul chain is built from one or more independent receivers which
 receive data and pass it on to a sender. A sender can either transmit data
 to an external source (including an other Skogul instance), or make
