@@ -67,6 +67,14 @@ To produce coverage analysis, use::
 Be aware that the MySQL sender does not do integration testing by default,
 as that requires a working MySQL instance.
 
+Tests are extracted from ``*_test.go`` files, and start with the name
+``Test`` followed by a function or data structure, optionally followed by
+an underscore and an arbitrary name to support multiple tests of the same
+function/type. E.g. ``TestValidate()``, ``TestHTTP_foobar()`` etc.
+
+Runnable examples follow the same style, but are named Example, not Test.
+
+
 Formatting etc
 ..............
 
@@ -80,6 +88,21 @@ Tools you should use:
 - `golint` to lint your code. ``golint .``
 
 Installing these tools is left as an exercise to the reader.
+
+Documentation
+.............
+
+Documentation is written and maintained using code comments and runnable
+examples, following the ``godoc`` approach. Some architecture comments are
+kept in ``docs//``, but by and large, documentation should be consumed from
+godoc.
+
+See https://godoc.org/github.com/KristianLyng/skogul for the online
+version, or use ``go doc github.com/KristianLyng/skogul`` or similar,
+as you would any other go package.
+
+Examples are part of the test suite and thus extracted from ``*_test.go``
+where applicable.
 
 About
 -----
