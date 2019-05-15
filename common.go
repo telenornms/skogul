@@ -89,6 +89,11 @@ Senders are not allowed to modify the Container - there could be multiple
 goroutines running with same Container. If modification is required, the
 Sender needs to take a copy.
 
+A sender should assume that the container has been validated, and is
+non-null. Slightly counter to common sense, it is NOT recommended to
+verify the input data again, since multiple senders are likely chained
+and will thus likely redo the same verifications.
+
 While a single sender writing to a database is useful, the true power of
 the Sender-pattern is chaining multiple, tiny, senders together to build
 completely custom "sender chains" and thus provide site-specific handling

@@ -57,6 +57,7 @@ import (
 )
 
 var flisten = flag.String("receiver", "http://[::1]:8080", "Where to receive data from. See -help for details.")
+var frecvhelp = flag.String("receiver-help", "", "Print extra options for receiver")
 var ftarget = flag.String("sender", "debug://", "Where to send data. See -help for details.")
 var fhelp = flag.Bool("help", false, "Print extensive help/usage")
 var fbatch = flag.Int("batch", 0, "Number of messages to batch up before passing them on as a single entity.")
@@ -111,13 +112,29 @@ func help() {
 	fmt.Print("skogul-x2y sets up a skogul receiver, accepts data from it and passes it to the sender.")
 	fmt.Printf("\n\n")
 	prettyHeader("senders")
-	for _, m := range sender.Auto {
-		prettyPrint(m.Scheme, m.Help)
+	for s, m := range sender.Auto {
+		prettyPrint(s, m.Help)
 	}
 	fmt.Printf("\n\n")
 	prettyHeader("receivers")
-	for _, m := range receiver.Auto {
-		prettyPrint(m.Scheme, m.Help)
+	for s, m := range receiver.Auto {
+		prettyPrint(s, m.Help)
+	}
+}
+
+func helpReceiver(s string) {
+	if receiver.Auto[s] == nil {
+		fmt.Printf("No such sender %s\n", s)
+		return
+	}
+	m := receiver.Auto[s]
+	fmt.Printf("%s: %s\n\n", s, m.Help)
+	fmt.Printf("Additional URL paramaters for %s:\n\n", s)
+	if m.Flags != nil {
+		x := m.Flags()
+		x.VisitAll(func(f *flag.Flag) {
+			fmt.Printf("%s [%s]: %s\n", f.Name, f.DefValue, f.Usage)
+		})
 	}
 }
 
@@ -125,6 +142,10 @@ func main() {
 	flag.Parse()
 	if *fhelp {
 		help()
+		os.Exit(0)
+	}
+	if *frecvhelp != "" {
+		helpReceiver(*frecvhelp)
 		os.Exit(0)
 	}
 

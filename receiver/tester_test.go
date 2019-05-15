@@ -35,7 +35,10 @@ import (
 func TestTester_stack(t *testing.T) {
 	one := &(sender.Test{})
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	rcv := receiver.Tester{Metrics: 10, Values: 5, Threads: 2, Handler: h}
+	tm := int64(10)
+	tv := int64(5)
+	tt := int(2)
+	rcv := receiver.Tester{Metrics: &tm, Values: &tv, Threads: &tt, Handler: h}
 	go rcv.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
 
@@ -68,5 +71,17 @@ func TestTester_auto(t *testing.T) {
 	}
 	if x != nil {
 		t.Errorf("Receiver created with test:///?metrics=fem url: %v", x)
+	}
+	x, err = receiver.New("test:///?delay=1s", h)
+	if err != nil {
+		t.Errorf("receiver.New(\"test:///?delay=1s\") gave error: %v", err)
+	}
+	if x == nil {
+		t.Errorf("no receiver created with default test:// url")
+	}
+	go x.Start()
+	time.Sleep(time.Duration(100 * time.Millisecond))
+	if one.Received < 1 {
+		t.Errorf("receiver.New(\"test:///?delay=1s\"), x.Start() failed to receive data. Expected some data, got 0.")
 	}
 }

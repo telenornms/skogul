@@ -28,12 +28,27 @@ execute a handler. They are the "inbound" API of Skogul.
 package receiver
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/url"
 
 	"github.com/KristianLyng/skogul"
 )
+
+// URLParse parses a url's "GET parameteres" into the provided FlagSet.
+func URLParse(u url.URL, fs *flag.FlagSet) error {
+	vs := u.Query()
+	for i, v := range vs {
+		for _, e := range v {
+			err := fs.Set(i, e)
+			if err != nil {
+				return skogul.Error{Source: "auto receiver", Reason: fmt.Sprintf("failed to parse argument %s value %s", i, e), Next: err}
+			}
+		}
+	}
+	return nil
+}
 
 // New creates a new Receiver based on the url provided. Only receivers that
 // participate in the Auto-scheme are applicable, though that SHOULD be
@@ -63,9 +78,20 @@ var Auto map[string]*AutoReceiver
 
 // AutoReceiver is used to initialize and document a receiver based on URL
 type AutoReceiver struct {
-	Scheme string
-	Init   func(url url.URL, h skogul.Handler) skogul.Receiver
-	Help   string
+	Init  func(url url.URL, h skogul.Handler) skogul.Receiver
+	Help  string
+	Flags func() *flag.FlagSet
+}
+
+func newAutoReceiver(scheme string, r *AutoReceiver) error {
+	if Auto == nil {
+		Auto = make(map[string]*AutoReceiver)
+	}
+	if Auto[scheme] != nil {
+		log.Panicf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
+	}
+	Auto[scheme] = r
+	return nil
 }
 
 // addAutoReceiver is used by receiver-implementations to "participate" in
@@ -77,5 +103,5 @@ func addAutoReceiver(scheme string, init func(url url.URL, h skogul.Handler) sko
 	if Auto[scheme] != nil {
 		log.Panicf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
 	}
-	Auto[scheme] = &AutoReceiver{scheme, init, help}
+	Auto[scheme] = &AutoReceiver{Init: init, Help: help, Flags: nil}
 }

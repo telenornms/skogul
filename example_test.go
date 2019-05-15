@@ -47,7 +47,7 @@ func Example() {
 A complex skogul example, using multiple storage services, internal
 accounting, fallback methods and more. This still just demonstrate
 one way to implement a Skogul chain. Most trivial use-cases are covered
-by cmd/skogul-x2y
+by skogul-x2y, see http://godoc.org/github.com/KristianLyng/skogul/cmd/skogul-x2y
 
 While it is usually possible to write it "the right way up" - start with
 where we receive data and add senders - it's easier to write it "up-side-down"
@@ -61,9 +61,9 @@ three distinct paths and handlers/chains: / sends to the primary handler,
 
 The primary chain looks sort of like this:
 
-	http -> fallback -> delay -> counter ->  dupe2 -> postgres
-	            \                    \             `-> influx
-	             \			 `------------/
+	http -> fallback -> detach -> fanout -> delay -> counter ->  dupe2 -> postgres
+	            \                             \             `-> influx
+	             \			           `------------/
 		      \
 		       `- dupe --> Log(print "the following failed")
 		               `-> debug(print json to stdout)

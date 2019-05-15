@@ -24,6 +24,7 @@
 package receiver
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"math/rand"
@@ -33,12 +34,13 @@ import (
 	"github.com/KristianLyng/skogul"
 )
 
-// Tester synthesise dummy data
+// Tester synthesise dummy data. Use New("tester:///?metrics=foo) to create it.
 type Tester struct {
-	Metrics int64
-	Values  int64
-	Threads int
-	Delay   time.Duration
+	flags   *flag.FlagSet
+	Metrics *int64
+	Values  *int64
+	Threads *int
+	Delay   *time.Duration
 	Handler skogul.Handler
 }
 
@@ -46,13 +48,13 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 	c := skogul.Container{}
 	c.Template = &skogul.Metric{}
 	c.Template.Time = &t
-	c.Metrics = make([]*skogul.Metric, tst.Metrics)
-	for i := int64(0); i < tst.Metrics; i++ {
+	c.Metrics = make([]*skogul.Metric, *tst.Metrics)
+	for i := int64(0); i < *tst.Metrics; i++ {
 		m := skogul.Metric{}
 		m.Metadata = map[string]interface{}{}
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}
-		for key := int64(0); key < tst.Values; key++ {
+		for key := int64(0); key < *tst.Values; key++ {
 			m.Data[fmt.Sprintf("metric%d", key)] = rand.Int63()
 		}
 		c.Metrics[i] = &m
@@ -62,7 +64,10 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 
 // Start never returns.
 func (tst *Tester) Start() error {
-	for i := 1; i < tst.Threads; i++ {
+	if tst.flags == nil {
+		tst.flags = testerFlags()
+	}
+	for i := 1; i < *tst.Threads; i++ {
 		go tst.run()
 	}
 	tst.run()
@@ -79,65 +84,47 @@ func (tst *Tester) run() {
 		if err != nil {
 			log.Print(err)
 		}
-		if tst.Delay != 0 {
-			time.Sleep(tst.Delay)
+		if tst.Delay != nil && *tst.Delay != 0 {
+			time.Sleep(*tst.Delay)
 		}
 	}
 }
 
 func init() {
-	addAutoReceiver("test", newTester, "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. A delay of $d is inserted between \"runs\". All parameters are optional. Example: test:///?threads=4&metrics=2&values=12&delay=1s")
-}
-
-type myval struct {
-	v url.Values
-}
-
-func (m myval) getDefault(key string, def int) (int, error) {
-	values := m.v
-	str := values.Get(key)
-	result := def
-	if str != "" {
-		n, err := fmt.Sscanf(str, "%d", &result)
-		if n != 1 || err != nil {
-			return def, skogul.Error{Source: "tester sender", Reason: fmt.Sprintf("invalid parameter \"%s\". Value is %s", key, str), Next: err}
-		}
+	n := AutoReceiver{
+		Init:  newTester,
+		Help:  "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. A delay of $d is inserted between \"runs\". All parameters are optional. Example: test:///?threads=4&metrics=2&values=12&delay=1s",
+		Flags: testerFlags,
 	}
-	return result, nil
+	newAutoReceiver("test", &n)
+}
+
+func testerFlags() *flag.FlagSet {
+	x := allocTester()
+	return x.flags
+}
+
+func allocTester() *Tester {
+	t := Tester{}
+	fs := flag.NewFlagSet("tester", flag.ExitOnError)
+	t.Metrics = fs.Int64("metrics", 10, "Number of metrics per container")
+	t.Values = fs.Int64("values", 50, "Number of values per metric")
+	t.Threads = fs.Int("threads", 4, "Number of go routines to run in parallel")
+	t.Delay = fs.Duration("delay", 0, "Delay between containers are produced")
+	t.flags = fs
+	return &t
 }
 
 /*
 newTester returns a new Tester receiver, building values/metrics from URL.
 */
 func newTester(ul url.URL, h skogul.Handler) skogul.Receiver {
-	values := myval{v: ul.Query()}
-	var metrics, vals, threads int
-	var err error
-	metrics, err = values.getDefault("metrics", 10)
+	t := allocTester()
+	err := URLParse(ul, t.flags)
 	if err != nil {
-		log.Print(err)
+		log.Printf("%v", err)
 		return nil
 	}
-	vals, err = values.getDefault("values", 50)
-	if err != nil {
-		log.Print(err)
-		return nil
-	}
-	threads, err = values.getDefault("threads", 4)
-	if err != nil {
-		log.Print(err)
-		return nil
-	}
-
-	dstr := values.v.Get("delay")
-	var d time.Duration
-	if dstr != "" {
-		d, err = time.ParseDuration(dstr)
-		if err != nil {
-			log.Print(err)
-			return nil
-		}
-	}
-
-	return &Tester{Metrics: int64(metrics), Values: int64(vals), Threads: threads, Handler: h, Delay: d}
+	t.Handler = h
+	return t
 }
