@@ -45,7 +45,8 @@ Testing
 .......
 
 To run test cases, ``go test`` can be run. This can be used either in
-individual directories, or at the top directory, with ``go test ./...``.
+individual directories, or at the top directory, with ``go test ./...``
+(note the triple dots. This is a go-ism for recursive behavior).
 
 To produce coverage analysis, use::
 
