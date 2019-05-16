@@ -24,10 +24,17 @@
 package sender_test
 
 import (
+	"bytes"
 	"github.com/KristianLyng/skogul/sender"
+	"log"
 	"testing"
 )
 
+var logBuffer bytes.Buffer
+
+func init() {
+	log.SetOutput(&logBuffer)
+}
 func testGeneric(t *testing.T, in string) {
 	x, err := sender.New(in)
 	if err != nil {

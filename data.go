@@ -26,6 +26,7 @@ package skogul
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -185,7 +186,7 @@ func (c *Container) Validate() error {
 func (c Container) String() string {
 	b, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {
-		fmt.Println("unable to marshal JSON: ", err)
+		log.Print("unable to marshal JSON: ", err)
 		return ""
 	}
 	return fmt.Sprintf("%s", b)

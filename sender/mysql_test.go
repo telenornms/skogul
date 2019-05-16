@@ -64,7 +64,7 @@ func TestMysql_auto(t *testing.T) {
 }
 func TestMysql(t *testing.T) {
 	if *ftestMysql != true {
-		fmt.Printf("WARNING: Skipping MySQL integration tests\n")
+		fmt.Printf("WARNING: Skipping MySQL integration tests. Use -test.mysql to execute them.\n")
 		return
 	}
 	m := sender.Mysql{}

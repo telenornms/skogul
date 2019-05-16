@@ -16,9 +16,8 @@ bridges between data collectors and storage engines.
 Quickstart
 ----------
 
-Skogul is written in Go and thus requires Go. See https://golang.org/dl/
-for installing go to your local computer. If you follow this guide, you'll
-have go in your path.
+You need to install a recent/decent version of Go. Either from your
+favorite Linux distro, or through https://golang.org/dl/ .
 
 Building ``skogul-x2y``, including cloning::
 
@@ -33,9 +32,10 @@ Alternatively, you can use ``go install`` instead of ``go build`` to
 install to ``$GOPATH/bin``, which is typically ``~/go/bin``.
 
 To use the locally imported/vendored packages instead of downloading them
-directly, e.g. if a system does not have direct internet access. First make
-a vendored copy on an internet-attached computer - checksums in the repo
-will be verified::
+directly, e.g. if a system does not have direct internet access or you wish
+to take a local copy of the code in its entirety, including dependencies.
+First make a vendored copy on an internet-attached computer - checksums in
+the repo will be verified::
 
    $ cd skogul
    $ go mod vendor
@@ -50,59 +50,6 @@ Copy repo/directory to relevant computer, then run::
 
 (or ``go install -mod vendor``)
 
-Testing
-.......
-
-To run test cases, ``go test`` can be run. This can be used either in
-individual directories, or at the top directory, with ``go test ./...``
-(note the triple dots. This is a go-ism for recursive behavior).
-
-To produce coverage analysis, use::
-
-   $ cd skogul
-   $ go test ./... -covermode=count -coverprofile=coverage.out
-   $ go tool cover -html coverage.out
-   // Opens a browser with coverage anlysis
-
-Be aware that the MySQL sender does not do integration testing by default,
-as that requires a working MySQL instance.
-
-Tests are extracted from ``*_test.go`` files, and start with the name
-``Test`` followed by a function or data structure, optionally followed by
-an underscore and an arbitrary name to support multiple tests of the same
-function/type. E.g. ``TestValidate()``, ``TestHTTP_foobar()`` etc.
-
-Runnable examples follow the same style, but are named Example, not Test.
-
-
-Formatting etc
-..............
-
-The "go report" at the top of this document is a decent test of
-marginal OK-ish-ness.
-
-Tools you should use:
-
-- `gofmt`, to format code according to Go coding style. Use ``gofmt -d .``
-  see local diff, or ``gofmt -w .`` to fix it.
-- `golint` to lint your code. ``golint .``
-
-Installing these tools is left as an exercise to the reader.
-
-Documentation
-.............
-
-Documentation is written and maintained using code comments and runnable
-examples, following the ``godoc`` approach. Some architecture comments are
-kept in ``docs//``, but by and large, documentation should be consumed from
-godoc.
-
-See https://godoc.org/github.com/KristianLyng/skogul for the online
-version, or use ``go doc github.com/KristianLyng/skogul`` or similar,
-as you would any other go package.
-
-Examples are part of the test suite and thus extracted from ``*_test.go``
-where applicable.
 
 About
 -----
@@ -224,3 +171,71 @@ Name
 Skogul is a Valkyrie. After extensive research (5 minutes on Wikipedia with
 a cross-check on duckduckgo), this name was selected because it is
 reasonably unique and is also a Valkyrie, like Gondul, a sister-project.
+
+Hacking
+-------
+
+There is little "exotic" about Skogul hacking, so the following sections
+are aimed mostly at people who are unfamiliar with Go.
+
+
+.. note::
+   
+   The majority of all documentation is kept in godoc source comments, and
+   available either in the code directly, through ``go doc
+   github.com/KristianLyng/skogul`` or  through the web, at
+   https://godoc.org/github.com/KristianLyng/skogul . This includes, but is
+   not limited to example code and API documentation.
+
+Testing
+.......
+
+To run test cases, ``go test`` can be run. This can be used either in
+individual directories, or at the top directory, with ``go test ./...``
+(note the triple dots. This is a go-ism for recursive behavior).
+
+To produce coverage analysis, use::
+
+   $ cd skogul
+   $ go test ./... -covermode=count -coverprofile=coverage.out
+   $ go tool cover -html coverage.out
+   // Opens a browser with coverage anlysis
+
+Be aware that the MySQL sender does not do integration testing by default,
+as that requires a working MySQL instance.
+
+Tests are extracted from ``*_test.go`` files, and start with the name
+``Test`` followed by a function or data structure, optionally followed by
+an underscore and an arbitrary name to support multiple tests of the same
+function/type. E.g. ``TestValidate()``, ``TestHTTP_foobar()`` etc.
+
+Runnable examples follow the same style, but are named Example, not Test.
+
+Formatting etc
+..............
+
+The "go report" at the top of this document is a decent test of
+marginal OK-ish-ness.
+
+Tools you should use:
+
+- `gofmt`, to format code according to Go coding style. Use ``gofmt -d .``
+  see local diff, or ``gofmt -w .`` to fix it.
+- `golint` to lint your code. ``golint .``
+
+Installing these tools is left as an exercise to the reader.
+
+Documentation
+.............
+
+Documentation is written and maintained using code comments and runnable
+examples, following the ``godoc`` approach. Some architecture comments are
+kept in ``docs//``, but by and large, documentation should be consumed from
+godoc.
+
+See https://godoc.org/github.com/KristianLyng/skogul for the online
+version, or use ``go doc github.com/KristianLyng/skogul`` or similar,
+as you would any other go package.
+
+Examples are part of the test suite and thus extracted from ``*_test.go``
+where applicable.

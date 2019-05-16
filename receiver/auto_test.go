@@ -24,16 +24,20 @@
 package receiver
 
 import (
+	"bytes"
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/sender"
+	"log"
 	"net/url"
 	"testing"
 )
 
 var h skogul.Handler
+var logBuffer bytes.Buffer
 
 func init() {
 	h = skogul.Handler{Sender: sender.Debug{}}
+	log.SetOutput(&logBuffer)
 }
 
 func testGeneric(t *testing.T, in string) {

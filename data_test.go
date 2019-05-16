@@ -24,12 +24,20 @@
 package skogul_test
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/parser"
+	"log"
 	"testing"
 	"time"
 )
+
+var logBuffer bytes.Buffer
+
+func init() {
+	log.SetOutput(&logBuffer)
+}
 
 // Test the String() capability of containers. Unfortunately, this depends
 // on marshaling happening in a predictable order, which there is no
@@ -177,7 +185,6 @@ func TestError(t *testing.T) {
 	}
 
 	e.Source = "internal"
-	e.Private = "secret"
 
 	str = fmt.Sprintf("%s", e)
 
@@ -186,7 +193,6 @@ func TestError(t *testing.T) {
 		t.Errorf("error gave unexpected result. Wanted %s, got %s", want, str)
 	}
 
-	e.Private = ""
 	e.Reason = "outer error"
 
 	e2 := skogul.Error{Source: "inner", Reason: "inner message"}
