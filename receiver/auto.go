@@ -36,20 +36,6 @@ import (
 	"github.com/KristianLyng/skogul"
 )
 
-// URLParse parses a url's "GET parameters" into the provided FlagSet.
-func URLParse(u url.URL, fs *flag.FlagSet) error {
-	vs := u.Query()
-	for i, v := range vs {
-		for _, e := range v {
-			err := fs.Set(i, e)
-			if err != nil {
-				return skogul.Error{Source: "auto receiver", Reason: fmt.Sprintf("failed to parse argument %s value %s", i, e), Next: err}
-			}
-		}
-	}
-	return nil
-}
-
 // New creates a new Receiver based on the url provided. Only receivers that
 // participate in the Auto-scheme are applicable, though that SHOULD be
 // most of them. However, some senders offer more functionality than what

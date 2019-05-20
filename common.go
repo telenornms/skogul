@@ -59,7 +59,9 @@ A more complete example is also provided further down.
 package skogul
 
 import (
+	"flag"
 	"fmt"
+	"net/url"
 )
 
 /*
@@ -155,4 +157,18 @@ func (e Error) Error() string {
 		tail = fmt.Sprint(": ", e.Next.Error())
 	}
 	return fmt.Sprintf("%s: %s%s", src, e.Reason, tail)
+}
+
+// URLParse parses a url's "GET parameters" into the provided FlagSet.
+func URLParse(u url.URL, fs *flag.FlagSet) error {
+	vs := u.Query()
+	for i, v := range vs {
+		for _, e := range v {
+			err := fs.Set(i, e)
+			if err != nil {
+				return Error{Source: "auto receiver", Reason: fmt.Sprintf("failed to parse argument %s value %s", i, e), Next: err}
+			}
+		}
+	}
+	return nil
 }

@@ -25,6 +25,7 @@ package sender
 
 import (
 	"database/sql"
+	"flag"
 	"log"
 	"net/url"
 	"os"
@@ -35,22 +36,41 @@ import (
 )
 
 func init() {
-	addAutoSender("mysql", newMysql, "Write to a MySQL database, use parameters connstr for connection string, and query for... query. E.g.: mysql:///?connstr=root:lol@/skogul&query=INSERT%20INTO%20test%20VALUES%28%24%7Btimestamp%2Etimestamp%7D%2C%27hei%27%2C%24%7Bmetadata%2Ekey1%7D%2C%24%7Bmetric1%7D%29")
+	n := AutoSender{
+		Init:  newMysql,
+		Help:  "Write to a MySQL database. The connstr and query paramater is required. Also see detailed sender help.",
+		Flags: mysqlFlags,
+	}
+	newAutoSender("mysql", &n)
+}
+
+func mysqlFlags() *flag.FlagSet {
+	x := allocMysql()
+	return x.flags
+}
+
+func allocMysql() *Mysql {
+	t := Mysql{}
+	fs := flag.NewFlagSet("mysql", flag.ExitOnError)
+	t.Query = fs.String("query", "", "Query to run per metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name \"KEY\", other ${foo} will be expanded to data[foo]. Example: INSERT%20INTO%20test%20VALUES%28%24%7Btimestamp%2Etimestamp%7D%2C%27hei%27%2C%24%7Bmetadata%2Ekey1%7D%2C%24%7Bmetric1%7D%29")
+	t.ConnStr = fs.String("connstr", "", "Connection string to use. Follows the syntax of \"user:password@host/database\". Example for localhost: root:lol@/mydb")
+	t.flags = fs
+	return &t
 }
 
 // newMysql creates a new Mysql sender
 func newMysql(ul url.URL) skogul.Sender {
-	x := Mysql{}
-	values := ul.Query()
-	query := values.Get("query")
-	conn := values.Get("connstr")
-	if query == "" || conn == "" {
+	t := allocMysql()
+	err := skogul.URLParse(ul, t.flags)
+	if err != nil {
+		log.Printf("%v", err)
+		return nil
+	}
+	if *t.Query == "" || *t.ConnStr == "" {
 		log.Printf("Invalid url for mysql. Need connstr and query.")
 		return nil
 	}
-	x.Query = query
-	x.ConnStr = conn
-	return &x
+	return t
 }
 
 const (
@@ -74,8 +94,9 @@ ${metadata.foo}. This is done using a prepared statement and is thus
 safe and relatively fast.
 */
 type Mysql struct {
-	ConnStr string
-	Query   string
+	ConnStr *string
+	Query   *string
+	flags   *flag.FlagSet
 	q       string
 	list    []dbElement
 	db      *sql.DB
@@ -100,12 +121,15 @@ func (my *Mysql) prep() {
 		}
 		return "?"
 	}
-	my.q = os.Expand(my.Query, expander)
+	my.q = os.Expand(*my.Query, expander)
 }
 
 // GetQuery returns the parsed query, assuming there is one.
 func (my *Mysql) GetQuery() (string, error) {
-	if my.Query == "" {
+	if my.Query == nil {
+		return "", skogul.Error{Source: "mysql sender", Reason: "No Query set, but GetQuery() called"}
+	}
+	if *my.Query == "" {
 		return "", skogul.Error{Source: "mysql sender", Reason: "No Query set, but GetQuery() called"}
 	}
 	err := my.Init()
@@ -128,12 +152,7 @@ func (my *Mysql) Init() error {
 
 func (my *Mysql) init() error {
 	var err error
-	my.db, err = sql.Open("mysql", my.ConnStr)
-	if err != nil {
-		log.Print(err)
-		return err
-	}
-	err = my.db.Ping()
+	my.db, err = sql.Open("mysql", *my.ConnStr)
 	if err != nil {
 		log.Print(err)
 		return err

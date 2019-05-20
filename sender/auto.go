@@ -24,6 +24,7 @@
 package sender
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/url"
@@ -54,10 +55,22 @@ type AutoSender struct {
 	Scheme string
 	Init   func(url url.URL) skogul.Sender
 	Help   string
+	Flags  func() *flag.FlagSet
 }
 
 // Auto maps schemas to senders and help text to make appropriate senders.
 var Auto map[string]*AutoSender
+
+func newAutoSender(scheme string, r *AutoSender) error {
+	if Auto == nil {
+		Auto = make(map[string]*AutoSender)
+	}
+	if Auto[scheme] != nil {
+		log.Panicf("BUG: Attempting to overwrite existing auto-add sender %v", scheme)
+	}
+	Auto[scheme] = r
+	return nil
+}
 
 func addAutoSender(scheme string, init func(url url.URL) skogul.Sender, help string) {
 	if Auto == nil {
@@ -66,5 +79,5 @@ func addAutoSender(scheme string, init func(url url.URL) skogul.Sender, help str
 	if Auto[scheme] != nil {
 		log.Fatalf("BUG: Attempting to overwrite existing auto-add sender %v", scheme)
 	}
-	Auto[scheme] = &AutoSender{scheme, init, help}
+	Auto[scheme] = &AutoSender{Scheme: scheme, Init: init, Help: help}
 }

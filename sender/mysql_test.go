@@ -63,10 +63,6 @@ func TestMysql_auto(t *testing.T) {
 	mysqlTestAuto(t, "mysql:///?connstr=foo:bar@/blatt&query=foo%20bar")
 }
 func TestMysql(t *testing.T) {
-	if *ftestMysql != true {
-		fmt.Printf("WARNING: Skipping MySQL integration tests. Use -test.mysql to execute them.\n")
-		return
-	}
 	m := sender.Mysql{}
 	s, err := m.GetQuery()
 	if err == nil {
@@ -75,7 +71,9 @@ func TestMysql(t *testing.T) {
 	if s != "" {
 		t.Errorf("m.GetQuery() returned data despite query not being created. Got %s.", s)
 	}
-	m = sender.Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
+	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
+	connStr := "root:lol@/skogul"
+	m = sender.Mysql{Query: &query, ConnStr: &connStr}
 	err = m.Init()
 	if err != nil {
 		t.Errorf("Mysql.Init failed: %v", err)
@@ -90,6 +88,10 @@ func TestMysql(t *testing.T) {
 		t.Errorf("Mysql.Init wanted %s got %s", want, got)
 	}
 
+	if *ftestMysql != true {
+		fmt.Printf("WARNING: Skipping MySQL integration tests. Use -test.mysql to execute them.\n")
+		return
+	}
 	c := skogul.Container{}
 	me := skogul.Metric{}
 	n := time.Now()
@@ -124,7 +126,9 @@ func TestMysql(t *testing.T) {
 //
 // Will, obviously, require a database to be running.
 func ExampleMysql() {
-	m := sender.Mysql{Query: "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});", ConnStr: "root:lol@/skogul"}
+	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
+	connStr := "root:lol@/skogul"
+	m := sender.Mysql{Query: &query, ConnStr: &connStr}
 	m.Init()
 	str, err := m.GetQuery()
 	if err != nil {

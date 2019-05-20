@@ -93,7 +93,7 @@ func (tst *Tester) run() {
 func init() {
 	n := AutoReceiver{
 		Init:  newTester,
-		Help:  "Generate dummy-data, each container contains $m metrics and each metric $v values, multiplied by $t threads. A delay of $d is inserted between \"runs\". All parameters are optional. Example: test:///?threads=4&metrics=2&values=12&delay=1s",
+		Help:  "Generate dummy-data. See detailed help for paramaters. Example: test:///?threads=4&metrics=2&values=12&delay=1s",
 		Flags: testerFlags,
 	}
 	newAutoReceiver("test", &n)
@@ -120,7 +120,7 @@ newTester returns a new Tester receiver, building values/metrics from URL.
 */
 func newTester(ul url.URL, h skogul.Handler) skogul.Receiver {
 	t := allocTester()
-	err := URLParse(ul, t.flags)
+	err := skogul.URLParse(ul, t.flags)
 	if err != nil {
 		log.Printf("%v", err)
 		return nil
