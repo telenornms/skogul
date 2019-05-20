@@ -93,7 +93,7 @@ func (tst *Tester) run() {
 func init() {
 	n := AutoReceiver{
 		Init:  newTester,
-		Help:  "Generate dummy-data. See detailed help for paramaters. Example: test:///?threads=4&metrics=2&values=12&delay=1s",
+		Help:  "Generate dummy-data. See detailed help for parameters. Example: test:///?threads=4&metrics=2&values=12&delay=1s",
 		Flags: testerFlags,
 	}
 	newAutoReceiver("test", &n)
