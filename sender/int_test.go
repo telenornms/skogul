@@ -49,11 +49,11 @@ func TestDupe(t *testing.T) {
 	if err != nil {
 		t.Errorf("dupe.Send() failed: %v", err)
 	}
-	if one.Received != 1 {
-		t.Errorf("dupe.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
+	if one.Received() != 1 {
+		t.Errorf("dupe.Send(), sender 1 expected %d recevied, got %d", 1, one.Received())
 	}
-	if two.Received != 1 {
-		t.Errorf("dupe.Send(), sender 2 expected %d recevied, got %d", 1, two.Received)
+	if two.Received() != 1 {
+		t.Errorf("dupe.Send(), sender 2 expected %d recevied, got %d", 1, two.Received())
 	}
 }
 
@@ -67,11 +67,11 @@ func TestFallback(t *testing.T) {
 	if err != nil {
 		t.Errorf("fallback.Send() failed: %v", err)
 	}
-	if one.Received != 1 {
-		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
+	if one.Received() != 1 {
+		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received())
 	}
-	if two.Received != 0 {
-		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 0, two.Received)
+	if two.Received() != 0 {
+		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 0, two.Received())
 	}
 }
 
@@ -89,14 +89,14 @@ func TestFallback_fail(t *testing.T) {
 	if err != nil {
 		t.Errorf("fallback.Send() failed: %v", err)
 	}
-	if one.Received != 1 {
-		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
+	if one.Received() != 1 {
+		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received())
 	}
-	if two.Received != 1 {
-		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 1, two.Received)
+	if two.Received() != 1 {
+		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 1, two.Received())
 	}
-	if three.Received != 0 {
-		t.Errorf("fallback.Send(), sender 3 expected %d recevied, got %d", 0, two.Received)
+	if three.Received() != 0 {
+		t.Errorf("fallback.Send(), sender 3 expected %d recevied, got %d", 0, two.Received())
 	}
 }
 
@@ -109,7 +109,7 @@ func TestForwardAndFail(t *testing.T) {
 	if err == nil {
 		t.Errorf("forwardandfail.Send() .... failed to fail (returned true)")
 	}
-	if one.Received != 1 {
-		t.Errorf("forwardandfail.Send(), sender 1 expected %d recevied, got %d", 1, one.Received)
+	if one.Received() != 1 {
+		t.Errorf("forwardandfail.Send(), sender 1 expected %d recevied, got %d", 1, one.Received())
 	}
 }

@@ -28,6 +28,7 @@ import (
 	"log"
 	"math/rand"
 	"net/url"
+	"sync/atomic"
 	"time"
 
 	"github.com/KristianLyng/skogul"
@@ -125,12 +126,12 @@ func (n *Null) Send(c *skogul.Container) error {
 // Test sender is used to facilitate tests, and discards any metrics, but
 // increments the Received counter.
 type Test struct {
-	Received int
+	received uint64
 }
 
 // Send discards data and increments the Received counter
 func (rcv *Test) Send(c *skogul.Container) error {
-	rcv.Received++
+	atomic.AddUint64(&rcv.received, 1)
 	return nil
 }
 
@@ -141,21 +142,29 @@ type failer interface {
 // TestTime sends the container on the specified sender, waits delay period
 // of time, then verifies that rcv has received the expected number of
 // containers.
-func (rcv *Test) TestTime(t failer, s skogul.Sender, c *skogul.Container, received int, delay time.Duration) {
-	rcv.Received = 0
+func (rcv *Test) TestTime(t failer, s skogul.Sender, c *skogul.Container, received uint64, delay time.Duration) {
+	rcv.Set(0)
 	err := s.Send(c)
 	if err != nil {
 		t.Errorf("sending on %v failed: %v", s, err)
 	}
 	time.Sleep(delay)
-	if rcv.Received != received {
+
+	if rcv.Received() != received {
 		t.Errorf("sending on %v: wanted %d received, got %d", s, received, rcv.Received)
 	}
 }
 
+func (rcv *Test) Set(v uint64) {
+	atomic.StoreUint64(&rcv.received, v)
+}
+func (rcv *Test) Received() uint64 {
+	return atomic.LoadUint64(&rcv.received)
+}
+
 // TestNegative sends data on s and expects to fail.
 func (rcv *Test) TestNegative(t failer, s skogul.Sender, c *skogul.Container) {
-	rcv.Received = 0
+	rcv.Set(0)
 	err := s.Send(c)
 	if err == nil {
 		t.Errorf("sending on %v expected to fail, but didn't.", s)
@@ -164,6 +173,6 @@ func (rcv *Test) TestNegative(t failer, s skogul.Sender, c *skogul.Container) {
 
 // TestQuick sends data on the sender and waits 5 milliseconds before
 // checking that the data was received on the other end.
-func (rcv *Test) TestQuick(t failer, sender skogul.Sender, c *skogul.Container, received int) {
+func (rcv *Test) TestQuick(t failer, sender skogul.Sender, c *skogul.Container, received uint64) {
 	rcv.TestTime(t, sender, c, received, time.Duration(5*time.Millisecond))
 }

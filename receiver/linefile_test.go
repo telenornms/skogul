@@ -96,17 +96,17 @@ func TestLinefile(t *testing.T) {
 	}()
 	f.WriteString(fmt.Sprintf("%s\n", b))
 	time.Sleep(time.Duration(10 * time.Millisecond))
-	if one.Received != 1 {
+	if one.Received() != 1 {
 		t.Errorf("Didn't receive thing on other end!")
 	}
 	f.WriteString(fmt.Sprintf("%s\n", b))
 	time.Sleep(time.Duration(10 * time.Millisecond))
-	if one.Received != 2 {
+	if one.Received() != 2 {
 		t.Errorf("Didn't receive thing on other end!")
 	}
-	one.Received = 0
+	one.Set(0)
 	f.WriteString(fmt.Sprintf("bad idea♥\n"))
-	if one.Received != 0 {
+	if one.Received() != 0 {
 		t.Errorf("Receive thing on other end despite bogus data")
 	}
 }

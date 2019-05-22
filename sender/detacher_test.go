@@ -47,8 +47,8 @@ func TestDetacher(t *testing.T) {
 		t.Errorf("Took too long sending to the detach-sender. Took more than 20ms (%v). Should be ~instant.", diff)
 	}
 	time.Sleep(200 * time.Millisecond)
-	if tst.Received != 1 {
-		t.Errorf("Didn't get the event after time expired? Wanted %d containers, got %d", 1, tst.Received)
+	if tst.Received() != 1 {
+		t.Errorf("Didn't get the event after time expired? Wanted %d containers, got %d", 1, tst.Received())
 	}
 }
 
@@ -73,8 +73,8 @@ func TestFanout(t *testing.T) {
 		t.Errorf("Took too long sending to the fanout-sender. Took more than 20ms (%v). Should be ~instant.", diff)
 	}
 	time.Sleep(200 * time.Millisecond)
-	if tst.Received != 3 {
-		t.Errorf("Didn't get the event after time expired? Wanted %d containers, got %d", 1, tst.Received)
+	if tst.Received() != 3 {
+		t.Errorf("Didn't get the event after time expired? Wanted %d containers, got %d", 1, tst.Received())
 	}
 
 	start = time.Now()
@@ -95,7 +95,7 @@ func TestFanout(t *testing.T) {
 	}
 	time.Sleep(200 * time.Millisecond)
 	// Now all should be done...
-	if tst.Received != 4 {
-		t.Errorf("Fanout: Expected 4 received events after timer(s) expired. Got %d", tst.Received)
+	if tst.Received() != 4 {
+		t.Errorf("Fanout: Expected 4 received events after timer(s) expired. Got %d", tst.Received())
 	}
 }

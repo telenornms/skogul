@@ -59,8 +59,8 @@ func TestBatch(t *testing.T) {
 
 	// but that it will after the timer expires
 	time.Sleep(time.Duration(1 * time.Second))
-	if one.Received != 1 {
-		t.Errorf("batch.Send(), no data sent after timeout expired. Expected %d, got %d", 1, one.Received)
+	if one.Received() != 1 {
+		t.Errorf("batch.Send(), no data sent after timeout expired. Expected %d, got %d", 1, one.Received())
 	}
 
 	// Ensure we don't botch the resize - send containers with multiple

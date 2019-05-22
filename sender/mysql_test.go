@@ -24,15 +24,12 @@
 package sender_test
 
 import (
-	"flag"
 	"fmt"
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/sender"
 	"testing"
 	"time"
 )
-
-var ftestMysql = flag.Bool("test.mysql", false, "Enable integration tests for mysql")
 
 func mysqlTestAuto(t *testing.T, url string) {
 	m, err := sender.New(url)
@@ -88,9 +85,14 @@ func TestMysql(t *testing.T) {
 		t.Errorf("Mysql.Init wanted %s got %s", want, got)
 	}
 
-	if *ftestMysql != true {
-		fmt.Printf("WARNING: Skipping MySQL integration tests. Use -test.mysql to execute them.\n")
+	createTable := "create table test (timestamp varchar(100), src varchar(100), name varchar(100), data varchar(100));"
+	if testing.Short() == true {
+		t.Log("WARNING: Skipping MySQL integration tests with -testing.short on.")
 		return
+	} else {
+		t.Logf("Using MySQL connection string %s", connStr)
+		t.Logf("Assuming database name skogul and table ala: %s", createTable)
+		t.Logf("If you don't have a suitable MySQL db running, use -test.short")
 	}
 	c := skogul.Container{}
 	me := skogul.Metric{}

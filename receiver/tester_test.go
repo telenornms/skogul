@@ -40,10 +40,16 @@ func TestTester_stack(t *testing.T) {
 	tt := int(2)
 	rcv := receiver.Tester{Metrics: &tm, Values: &tv, Threads: &tt, Handler: h}
 	go rcv.Start()
-	time.Sleep(time.Duration(100 * time.Millisecond))
 
-	if one.Received < 1000 {
-		t.Errorf("Less than 1000 received events after 100 miliseconds of tester running")
+	zzz := 300 * time.Millisecond
+	time.Sleep(time.Duration(zzz))
+
+	// With atomic covermode and race condition testing, this is pretty
+	// slow, hence the modest values
+	got := one.Received()
+	want := uint64(500)
+	if got < want {
+		t.Errorf("Less than %d received events after %v of tester running. Got %d", want, zzz, got)
 	}
 }
 
@@ -81,7 +87,7 @@ func TestTester_auto(t *testing.T) {
 	}
 	go x.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
-	if one.Received < 1 {
+	if one.Received() < 1 {
 		t.Errorf("receiver.New(\"test:///?delay=1s\"), x.Start() failed to receive data. Expected some data, got 0.")
 	}
 }
