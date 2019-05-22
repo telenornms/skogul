@@ -155,9 +155,12 @@ func (rcv *Test) TestTime(t failer, s skogul.Sender, c *skogul.Container, receiv
 	}
 }
 
+// Set atomicly sets the received counter to v
 func (rcv *Test) Set(v uint64) {
 	atomic.StoreUint64(&rcv.received, v)
 }
+
+// Received returns the amount of containers received
 func (rcv *Test) Received() uint64 {
 	return atomic.LoadUint64(&rcv.received)
 }
