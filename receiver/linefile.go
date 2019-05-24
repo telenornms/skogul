@@ -76,21 +76,28 @@ func (lf *LineFile) Start() error {
 	}
 }
 
-// Stdin reads from standard input, a single JSON object per line, and
+// File reads from a FILE, a single JSON object per line, and
 // exits at EOF.
-type Stdin struct {
+type File struct {
 	lf LineFile
 }
 
 // Start never stops badum dum tsh.
-func (s *Stdin) Start() error {
+func (s *File) Start() error {
 	s.lf.read()
 	return nil
 }
 
 func newStdio(ul url.URL, h skogul.Handler) skogul.Receiver {
-	s := Stdin{}
+	s := File{}
 	s.lf.File = "/dev/stdin"
+	s.lf.Handler = h
+	return &s
+}
+
+func newFile(ul url.URL, h skogul.Handler) skogul.Receiver {
+	s := File{}
+	s.lf.File = ul.Path
 	s.lf.Handler = h
 	return &s
 }
@@ -98,6 +105,7 @@ func newStdio(ul url.URL, h skogul.Handler) skogul.Receiver {
 func init() {
 	addAutoReceiver("fifo", newLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
 	addAutoReceiver("stdin", newStdio, "Read from standard input, one json-object per line")
+	addAutoReceiver("file", newFile, "Read from a file, one json-object per line, exit at EOF.")
 }
 
 // newLineFile returns a LineFile receiver reading from the Path-element of
