@@ -24,10 +24,12 @@
 package sender_test
 
 import (
+	"fmt"
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/parser"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
+	"math/rand"
 	"testing"
 	"time"
 )
@@ -37,6 +39,7 @@ var validContainer = skogul.Container{}
 func init() {
 
 	now := time.Now()
+	rand.Seed(now.Unix())
 
 	m := skogul.Metric{}
 	m.Time = &now
@@ -51,12 +54,14 @@ func init() {
 func TestHttp_stack(t *testing.T) {
 	one := &(sender.Test{})
 
+	port := 1337 + rand.Intn(100)
+	adr := fmt.Sprintf("[::1]:%d", port)
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	rcv := receiver.HTTP{Address: "[::1]:1339"}
+	rcv := receiver.HTTP{Address: adr}
 	rcv.Handle("/", &h)
 	go rcv.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
-	hs := sender.HTTP{URL: "http://[::1]:1339"}
+	hs := sender.HTTP{URL: fmt.Sprintf("http://%s", adr)}
 	one.TestQuick(t, &hs, &validContainer, 1)
 	blank := skogul.Container{}
 	one.TestNegative(t, &hs, &blank)
