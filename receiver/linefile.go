@@ -39,39 +39,65 @@ type LineFile struct {
 	Handler skogul.Handler
 }
 
+// Common routine for both fifo and stdin
+func (lf *LineFile) read() error {
+	f, err := os.Open(lf.File)
+	if err != nil {
+		log.Printf("Unable to open file: %s", err)
+		return err
+	}
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		bytes := scanner.Bytes()
+		m, err := lf.Handler.Parser.Parse(bytes)
+		if err == nil {
+			err = m.Validate()
+		}
+		if err != nil {
+			log.Printf("Unable to parse JSON: %s", err)
+			continue
+		}
+		for _, t := range lf.Handler.Transformers {
+			t.Transform(&m)
+		}
+		lf.Handler.Sender.Send(&m)
+	}
+	if err := scanner.Err(); err != nil {
+		log.Printf("Error reading file: %s", err)
+		return skogul.Error{Reason: "Error reading file"}
+	}
+	return nil
+}
+
 // Start never returns.
 func (lf *LineFile) Start() error {
 	for {
-		f, err := os.Open(lf.File)
-		if err != nil {
-			log.Printf("Unable to open file: %s", err)
-			return err
-		}
-		scanner := bufio.NewScanner(f)
-		for scanner.Scan() {
-			bytes := scanner.Bytes()
-			m, err := lf.Handler.Parser.Parse(bytes)
-			if err == nil {
-				err = m.Validate()
-			}
-			if err != nil {
-				log.Printf("Unable to parse JSON: %s", err)
-				continue
-			}
-			for _, t := range lf.Handler.Transformers {
-				t.Transform(&m)
-			}
-			lf.Handler.Sender.Send(&m)
-		}
-		if err := scanner.Err(); err != nil {
-			log.Printf("Error reading file: %s", err)
-			return skogul.Error{Reason: "Error reading file"}
-		}
+		lf.read()
 	}
+}
+
+// Stdin reads from standard input, a single JSON object per line, and
+// exits at EOF.
+type Stdin struct {
+	lf LineFile
+}
+
+// Start never stops badum dum tsh.
+func (s *Stdin) Start() error {
+	s.lf.read()
+	return nil
+}
+
+func newStdio(ul url.URL, h skogul.Handler) skogul.Receiver {
+	s := Stdin{}
+	s.lf.File = "/dev/stdin"
+	s.lf.Handler = h
+	return &s
 }
 
 func init() {
 	addAutoReceiver("fifo", newLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
+	addAutoReceiver("stdin", newStdio, "Read from standard input, one json-object per line")
 }
 
 // newLineFile returns a LineFile receiver reading from the Path-element of
