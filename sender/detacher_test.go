@@ -58,7 +58,7 @@ func TestFanout(t *testing.T) {
 
 	c.Metrics = []*skogul.Metric{&m}
 	tst := &(sender.Test{})
-	delay := &(sender.Sleeper{Base: time.Duration(100 * time.Millisecond), MaxDelay: time.Duration(100 * time.Millisecond), Next: tst})
+	delay := &(sender.Sleeper{Base: time.Duration(300 * time.Millisecond), MaxDelay: time.Duration(1 * time.Millisecond), Next: tst})
 	fanout := &(sender.Fanout{Next: delay, Workers: 3})
 
 	start := time.Now()
@@ -72,19 +72,26 @@ func TestFanout(t *testing.T) {
 	if diff > (20 * time.Millisecond) {
 		t.Errorf("Took too long sending to the fanout-sender. Took more than 20ms (%v). Should be ~instant.", diff)
 	}
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(400 * time.Millisecond)
 	if tst.Received() != 3 {
-		t.Errorf("Didn't get the event after time expired? Wanted %d containers, got %d", 1, tst.Received())
+		t.Errorf("Didn't get the event after time expired? Wanted %d containers, got %d", 3, tst.Received())
 	}
 
 	start = time.Now()
+
+	// need a delay between them to avoid race condition when reading
+	// the first non-blocking. Otherwise the testquick after these
+	// three would SOME times return rcv.Received() == 2, since two
+	// delays finished and same time
 	tst.TestQuick(t, fanout, &c, 0)
+	time.Sleep(50 * time.Millisecond)
 	tst.TestQuick(t, fanout, &c, 0)
+	time.Sleep(50 * time.Millisecond)
 	tst.TestQuick(t, fanout, &c, 0)
 
 	diff = time.Since(start)
-	if diff > (20 * time.Millisecond) {
-		t.Errorf("Took too long sending to the fanout-sender. Took more than 20ms (%v). Should be ~instant.", diff)
+	if diff > (120 * time.Millisecond) {
+		t.Errorf("Took too long sending to the fanout-sender. Took more than 120ms (%v). Should be ~100ms.", diff)
 	}
 	// Should block, have 1 received as one worker clears up.
 	tst.TestQuick(t, fanout, &c, 1)
@@ -93,7 +100,7 @@ func TestFanout(t *testing.T) {
 	if diff < (100 * time.Millisecond) {
 		t.Errorf("Unexpectedly fast. Expected to block.Took less than 100ms (%v).", diff)
 	}
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(400 * time.Millisecond)
 	// Now all should be done...
 	if tst.Received() != 4 {
 		t.Errorf("Fanout: Expected 4 received events after timer(s) expired. Got %d", tst.Received())
