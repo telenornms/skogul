@@ -137,12 +137,14 @@ func (rcv *Test) Send(c *skogul.Container) error {
 
 type failer interface {
 	Errorf(string, ...interface{})
+	Helper()
 }
 
 // TestTime sends the container on the specified sender, waits delay period
 // of time, then verifies that rcv has received the expected number of
 // containers.
 func (rcv *Test) TestTime(t failer, s skogul.Sender, c *skogul.Container, received uint64, delay time.Duration) {
+	t.Helper()
 	rcv.Set(0)
 	err := s.Send(c)
 	if err != nil {
@@ -150,8 +152,9 @@ func (rcv *Test) TestTime(t failer, s skogul.Sender, c *skogul.Container, receiv
 	}
 	time.Sleep(delay)
 
-	if rcv.Received() != received {
-		t.Errorf("sending on %v: wanted %d received, got %d", s, received, rcv.Received)
+	r := rcv.Received()
+	if r != received {
+		t.Errorf("sending on %v: wanted %d received, got %d", s, received, r)
 	}
 }
 
@@ -167,6 +170,7 @@ func (rcv *Test) Received() uint64 {
 
 // TestNegative sends data on s and expects to fail.
 func (rcv *Test) TestNegative(t failer, s skogul.Sender, c *skogul.Container) {
+	t.Helper()
 	rcv.Set(0)
 	err := s.Send(c)
 	if err == nil {
@@ -177,5 +181,6 @@ func (rcv *Test) TestNegative(t failer, s skogul.Sender, c *skogul.Container) {
 // TestQuick sends data on the sender and waits 5 milliseconds before
 // checking that the data was received on the other end.
 func (rcv *Test) TestQuick(t failer, sender skogul.Sender, c *skogul.Container, received uint64) {
+	t.Helper()
 	rcv.TestTime(t, sender, c, received, time.Duration(5*time.Millisecond))
 }
