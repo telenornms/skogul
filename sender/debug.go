@@ -135,6 +135,7 @@ type ErrDiverter struct {
 	RetErr bool
 }
 
+// Send data to the next sender. If it fails, use the Err sender.
 func (ed *ErrDiverter) Send(c *skogul.Container) error {
 	err := ed.Next.Send(c)
 	if err == nil {
