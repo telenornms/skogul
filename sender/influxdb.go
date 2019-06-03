@@ -26,7 +26,6 @@ package sender
 import (
 	"bytes"
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"path"
@@ -86,12 +85,10 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	resp, err := idb.client.Post(idb.URL, "text/plain", &buffer)
 	if err != nil {
 		e := skogul.Error{Source: "influxdb sender", Reason: "unable to POST data", Next: err}
-		log.Print(e)
 		return e
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response code from InfluxDB: %d", resp.StatusCode)}
-		log.Print(e)
 		return e
 	}
 	return nil
