@@ -29,6 +29,7 @@ import (
 	"net/http"
 	"net/url"
 	"path"
+	"strings"
 	"sync"
 	"time"
 
@@ -43,6 +44,7 @@ type InfluxDB struct {
 	URL         string
 	Measurement string
 	client      *http.Client
+	replacer    *strings.Replacer
 	once        sync.Once
 }
 
@@ -66,29 +68,37 @@ func newInflux(ul url.URL) skogul.Sender {
 // Send data to Influx, re-using idb.client.
 func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
+	idb.once.Do(func() {
+		idb.replacer = strings.NewReplacer("\\", "\\\\", " ", "\\ ", ",", "\\,", "=", "\\=")
+		idb.client = &http.Client{Timeout: 5 * time.Second}
+	})
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)
 		for key, value := range m.Metadata {
-			fmt.Fprintf(&buffer, ",%s=%#v", key, value)
+			var field interface{}
+			v, ok := value.(string)
+			if ok {
+				field = idb.replacer.Replace(v)
+			} else {
+				field = value
+			}
+			fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), field)
 		}
 		fmt.Fprintf(&buffer, " ")
 		comma := ""
 		for key, value := range m.Data {
-			fmt.Fprintf(&buffer, "%s%s=%#v", comma, key, value)
+			fmt.Fprintf(&buffer, "%s%s=%#v", comma, idb.replacer.Replace(key), value)
 			comma = ","
 		}
 		fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
 	}
-	idb.once.Do(func() {
-		idb.client = &http.Client{Timeout: 5 * time.Second}
-	})
 	resp, err := idb.client.Post(idb.URL, "text/plain", &buffer)
 	if err != nil {
 		e := skogul.Error{Source: "influxdb sender", Reason: "unable to POST data", Next: err}
 		return e
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response code from InfluxDB: %d", resp.StatusCode)}
+		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response from InfluxDB: %s", resp.Status)}
 		return e
 	}
 	return nil
