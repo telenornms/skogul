@@ -77,8 +77,8 @@ func (co *Counter) init() {
 	co.ch = make(chan count, 100)
 	co.up = true
 	if co.Period == 0 {
-		log.Print("No Period set for Counter-sender. Using 5 second intervals.")
-		co.Period = 5 * time.Second
+		log.Print("No Period set for Counter-sender. Using 1 second intervals.")
+		co.Period = 1 * time.Second
 	}
 	go co.getIt()
 }
