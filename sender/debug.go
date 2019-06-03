@@ -43,6 +43,7 @@ type Debug struct {
 
 func init() {
 	addAutoSender("debug", newDebug, "Debug sender prints received metrics to stdout")
+	addAutoSender("null", newNull, "Null discards the data")
 }
 
 /*
@@ -51,6 +52,12 @@ newDebug creates a new Debug sender, ignoring the URL.
 func newDebug(url url.URL) skogul.Sender {
 	x := Debug{}
 	return x
+}
+
+// newNull creates a Null sender that discards data
+func newNull(url url.URL) skogul.Sender {
+	x := Null{}
+	return &x
 }
 
 // Send prints the JSON-formatted container to stdout
@@ -113,6 +120,39 @@ func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 		return skogul.Error{Reason: "Forced failure"}
 	}
 	return err
+}
+
+// ErrDiverter calls the Next sender, but if it fails, it will convert the
+// error to a Container and send that to Err.
+type ErrDiverter struct {
+	// The ordinary sender to use
+	Next skogul.Sender
+	// If Next.Send() fails, create a container from the error and send
+	// it to Err
+	Err skogul.Sender
+	// If true, the original error from Next will be returned, if false
+	// both Next AND Err has to fail for Send to return an error.
+	RetErr bool
+}
+
+func (ed *ErrDiverter) Send(c *skogul.Container) error {
+	err := ed.Next.Send(c)
+	if err == nil {
+		return nil
+	}
+	cerr, ok := err.(skogul.Error)
+	if !ok {
+		cerr = skogul.Error{Source: "errdiverter sender", Reason: "downstream error", Next: err}
+	}
+	container := cerr.Container()
+	newerr := ed.Err.Send(&container)
+	if newerr != nil {
+		return newerr
+	}
+	if ed.RetErr {
+		return err
+	}
+	return nil
 }
 
 // Null sender does nothing and returns nil - mainly for test-purposes

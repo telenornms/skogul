@@ -63,6 +63,7 @@ var ftarget = flag.String("sender", "debug://", "Where to send data. See -help f
 var fhelp = flag.Bool("help", false, "Print extensive help/usage")
 var fbatch = flag.Int("batch", 0, "Number of messages to batch up before passing them on as a single entity.")
 var fcount = flag.String("count", "", "Print periodic stats using the count sender in addition to regular sender - same syntax as -sender (tip: -count debug://)")
+var ferr = flag.String("errors", "null://", "Sender to divert errors to.")
 
 // Max width of help text before wrapping, should be some number lower than
 // expected terminal size. 66 is nice for 80x25 terminals.
@@ -169,17 +170,23 @@ func main() {
 		os.Exit(0)
 	}
 
-	target, err := sender.New(*ftarget)
+	s, err := sender.New(*ftarget)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var s skogul.Sender
+	errors := sender.ErrDiverter{}
+	errors.Next = s
+	errors.Err, err = sender.New(*ferr)
+	if err != nil {
+		log.Fatal("Failed to create sender where errors are diverted")
+	}
+
+	s = &errors
+
 	if *fbatch > 0 {
-		b := sender.Batch{Threshold: *fbatch, Next: target}
+		b := sender.Batch{Threshold: *fbatch, Next: s}
 		s = &b
-	} else {
-		s = target
 	}
 
 	if *fcount != "" {
@@ -191,6 +198,7 @@ func main() {
 		c := sender.Counter{Next: s, Stats: ch}
 		s = &c
 	}
+
 	h := skogul.Handler{
 		Parser:       parser.JSON{},
 		Sender:       s,

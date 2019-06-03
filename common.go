@@ -62,6 +62,7 @@ import (
 	"flag"
 	"fmt"
 	"net/url"
+	"time"
 )
 
 /*
@@ -157,6 +158,22 @@ func (e Error) Error() string {
 		tail = fmt.Sprint(": ", e.Next.Error())
 	}
 	return fmt.Sprintf("%s: %s%s", src, e.Reason, tail)
+}
+
+// Container returns a skogul container representing the error
+func (e Error) Container() Container {
+	c := Container{}
+	now := time.Now()
+	c.Metrics = make([]*Metric, 1)
+	m := Metric{}
+	m.Metadata = make(map[string]interface{})
+	m.Data = make(map[string]interface{})
+	m.Time = &now
+	m.Metadata["source"] = e.Source
+	m.Data["reason"] = e.Reason
+	m.Data["description"] = e.Error()
+	c.Metrics[0] = &m
+	return c
 }
 
 // URLParse parses a url's "GET parameters" into the provided FlagSet.
