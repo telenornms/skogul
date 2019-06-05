@@ -72,8 +72,8 @@ func (db Debug) Send(c *skogul.Container) error {
 }
 
 /*
-The Sleeper sender injects a random delay between 0 and MaxDelay before
-passing execution over to the Next sender.
+The Sleeper sender injects a random delay between Base and Base+MaxDelay
+before passing execution over to the Next sender.
 
 The purpose is testing.
 */

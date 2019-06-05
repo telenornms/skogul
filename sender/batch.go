@@ -38,6 +38,25 @@ Batch sender collects metrics into a single container then passes them on
 after Threshold number of metrics are collected. In case Threshold is
 "never" reached, it will periodically flush metrics if no message has been
 received in Interval time.
+
+Internally, the Batch sender consists of three parts. The first part is
+the Send() part, which just pushes the received container onto a channel.
+
+The second part, which is a single, dedicated go routine, picks up said
+container and adds it to a batch-container. When the batch container is
+"full" (e.g.: exceeds Threshold) - or a timeout is reached - the batch
+container is pushed onto a second channel and a new, empty, batch container
+is created.
+
+The third part picks up the ready-to-send containers and issues Next.Send()
+on them. This is a separate go routine, one per NumCPU.
+
+This means that:
+
+1. Batch sender will both do a "fan-in" from potentially multiple Send()
+   calls.
+2. ... and do a fan-out afterwards.
+3. Send() will only block if two channels are full.
 */
 type Batch struct {
 	Next      skogul.Sender
@@ -60,12 +79,16 @@ func (bat *Batch) setup() {
 	if bat.Interval == 0 {
 		bat.Interval = time.Duration(1 * time.Second)
 	}
-	slack := int(bat.Threshold / 5)
+	// The slack is just an array of pointers, so it's more important
+	// to avoid unnecessary allocation than save a few bytes. With a
+	// 1000-size threshold, the allocation would be for 1500 - or
+	// around 6kB.
+	slack := int(bat.Threshold / 2)
 	bat.allocSize = bat.Threshold + slack
 	if bat.allocSize < 100 {
 		bat.allocSize = 100
 	}
-	bat.out = make(chan *skogul.Container)
+	bat.out = make(chan *skogul.Container, runtime.NumCPU())
 	for i := 0; i < runtime.NumCPU(); i++ {
 		go bat.flusher()
 	}
@@ -88,7 +111,7 @@ func (bat *Batch) add(c *skogul.Container) {
 		// It's allowed to exceed Threshold - but only once.
 		if newlen < nl {
 			newlen = nl
-			log.Print((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 20%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
+			log.Print((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
 		}
 		x := make([]*skogul.Metric, newlen)
 		copy(x, bat.cont.Metrics)
@@ -99,6 +122,8 @@ func (bat *Batch) add(c *skogul.Container) {
 	copy(bat.cont.Metrics[cl:nl], c.Metrics)
 }
 
+// flusher fetches a ready-to-ship container and issues send(). One flusher
+// is run per NumCPU
 func (bat *Batch) flusher() {
 	for {
 		c := <-bat.out
@@ -121,6 +146,9 @@ func (bat *Batch) timerReschedule() {
 	bat.timer = time.NewTimer(bat.Interval)
 }
 
+// run runs forever, listening for containers, doing the actual batching,
+// and triggering a flush if either the timer or threshold is reached. The
+// actual sending is done in the flusher() go routines.
 func (bat *Batch) run() {
 	bat.timer = time.NewTimer(bat.Interval)
 	for {
