@@ -48,6 +48,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/parser"
@@ -64,6 +65,8 @@ var fhelp = flag.Bool("help", false, "Print extensive help/usage")
 var fbatch = flag.Int("batch", 0, "Number of messages to batch up before passing them on as a single entity.")
 var fcount = flag.String("count", "", "Print periodic stats using the count sender in addition to regular sender - same syntax as -sender (tip: -count debug://)")
 var ferr = flag.String("errors", "null://", "Sender to divert errors to.")
+var fretries = flag.Int("retries", 0, "Number of retries before giving up")
+var fretrydelay = flag.Duration("retry-delay", time.Second, "Initial delay between retries. Retry time is exponential, so first retry iis retry-delay, second is 2xretry-delay, etc")
 
 // Max width of help text before wrapping, should be some number lower than
 // expected terminal size. 66 is nice for 80x25 terminals.
@@ -175,6 +178,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if *fretries > 0 {
+		ret := sender.Backoff{Next: s, Retries: *fretries, Base: *fretrydelay}
+		s = &ret
+	}
 	errors := sender.ErrDiverter{}
 	errors.Next = s
 	errors.Err, err = sender.New(*ferr)
