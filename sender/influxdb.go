@@ -43,6 +43,7 @@ line format over HTTP.
 type InfluxDB struct {
 	URL         string
 	Measurement string
+	Timeout     time.Duration
 	client      *http.Client
 	replacer    *strings.Replacer
 	once        sync.Once
@@ -70,7 +71,10 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	idb.once.Do(func() {
 		idb.replacer = strings.NewReplacer("\\", "\\\\", " ", "\\ ", ",", "\\,", "=", "\\=")
-		idb.client = &http.Client{Timeout: 5 * time.Second}
+		if idb.Timeout == 0 {
+			idb.Timeout = 20 * time.Second
+		}
+		idb.client = &http.Client{Timeout: idb.Timeout}
 	})
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)

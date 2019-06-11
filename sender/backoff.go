@@ -25,6 +25,7 @@ package sender
 
 import (
 	"github.com/KristianLyng/skogul"
+	"sync/atomic"
 	"time"
 )
 
@@ -33,18 +34,27 @@ import (
 type Backoff struct {
 	Next    skogul.Sender
 	Base    time.Duration
-	Retries int
+	Retries uint64
+	holdoff uint64
 }
 
 // Send with a delay
 func (bo *Backoff) Send(c *skogul.Container) error {
 	var err error
 	delay := bo.Base
-	for i := 1; i <= bo.Retries; i++ {
+	t := atomic.LoadUint64(&bo.holdoff)
+	if t > 0 {
+		time.Sleep(delay)
+	}
+	for i := uint64(1); i <= bo.Retries; i++ {
 		err = bo.Next.Send(c)
 		if err == nil {
+			if i > 1 {
+				atomic.AddUint64(&bo.holdoff, 1-i)
+			}
 			return nil
 		}
+		atomic.AddUint64(&bo.holdoff, 1)
 		time.Sleep(delay)
 		delay = delay * 2
 	}

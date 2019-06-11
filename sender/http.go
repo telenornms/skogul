@@ -40,9 +40,10 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL    string
-	once   sync.Once
-	client *http.Client
+	URL     string
+	Timeout time.Duration
+	once    sync.Once
+	client  *http.Client
 }
 
 func init() {
@@ -73,7 +74,10 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	ht.once.Do(func() {
-		ht.client = &http.Client{Timeout: 5 * time.Second}
+		if ht.Timeout == 0 {
+			ht.Timeout = 20 * time.Second
+		}
+		ht.client = &http.Client{Timeout: ht.Timeout}
 	})
 	resp, err := ht.client.Do(req)
 	if err != nil {
