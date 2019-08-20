@@ -32,14 +32,26 @@ import (
 	"time"
 )
 
-// Example of the simples Skogul chain possible
+// Example of the simplest Skogul chain possible
 func Example() {
+	// Create a debug-sender. A Debug-sender just prints the metric to
+	// stdout.
 	s := sender.Debug{}
+
+	// A handler is used to inform a receiver how to treat incoming
+	// data. This one will parse it using the JSON parser, then send it
+	// on to the above sender.
 	h := skogul.Handler{Parser: parser.JSON{}, Sender: s}
+
+	// Create a receiver. The receiver.New() will parse a URL to find
+	// an underlying receiver that implements the schema. In this case,
+	// it will use the HTTP receiver.
 	r, err := receiver.New("http://localhost:1234", h)
 	if err != nil {
 		panic(err)
 	}
+
+	// Finally, start the receiver.
 	r.Start()
 }
 
