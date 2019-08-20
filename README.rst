@@ -13,6 +13,16 @@ Skogul is a generic tool for moving metric data around. It can serve as a
 collector of data, but is primarily designed to be a framework for building
 bridges between data collectors and storage engines.
 
+This repository contains the Skogul library/package, and ``skogul-x2y``, a
+binary that leverages the Skogul library to provide a bridge from X to Y,
+e.g. from a HTTP receiver to an InfluxDB sender. ``skogul-x2y`` supports
+most Skogul receivers and senders, but more complex chains can also be
+created.
+
+.. contents:: Table of contents
+   :depth: 2
+   :local:
+
 Quickstart
 ----------
 
@@ -54,7 +64,7 @@ Copy repo/directory to relevant computer, then run::
 About
 -----
 
-A skogul chain is built from one or more independent receivers which
+A Skogul chain is built from one or more independent receivers which
 receive data and pass it on to a sender. A sender can either transmit data
 to an external source (including an other Skogul instance), or make
 internal changes to data before passing it on to one or more other senders.
@@ -239,3 +249,17 @@ as you would any other go package.
 
 Examples are part of the test suite and thus extracted from ``*_test.go``
 where applicable.
+
+Roadmap
+-------
+
+At present, the big missing piece is decent TLS-support. This is not
+particularly hard code-wise, since golang provides all the support we need,
+but has been delayed mainly for UX reasons: Experimentation with how to
+provide options both for skogul-x2y and within the library in a manner
+where each receiver/sender only require a minimal amount of boilerplate
+code has taken some precedence.
+
+Other than that, there are no huge plans beyond what the issues denote. New
+receivers and senders will be added as needed (patches are welcome), and
+the code will be maintained as it's more widely deployed.
