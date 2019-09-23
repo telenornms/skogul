@@ -59,7 +59,8 @@ newCounter creates a count sender that discards all data, but outputs stats to s
 func newCounter(url url.URL) skogul.Sender {
 	x := Counter{}
 	x.Next = &Null{}
-	h := skogul.Handler{Sender: Debug{}}
+	deb := Debug{}
+	h := skogul.Handler{Sender: &deb}
 	x.Stats = h
 	return &x
 }

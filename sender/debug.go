@@ -42,16 +42,11 @@ type Debug struct {
 }
 
 func init() {
-	addAutoSender("debug", newDebug, "Debug sender prints received metrics to stdout")
+	newAutoSender("debug", &AutoSender{
+		Alloc: func() skogul.Sender { return &Debug{} },
+		Help:  "Debug sender prints received metrics to stdout",
+	})
 	addAutoSender("null", newNull, "Null discards the data")
-}
-
-/*
-newDebug creates a new Debug sender, ignoring the URL.
-*/
-func newDebug(url url.URL) skogul.Sender {
-	x := Debug{}
-	return x
 }
 
 // newNull creates a Null sender that discards data
@@ -61,7 +56,7 @@ func newNull(url url.URL) skogul.Sender {
 }
 
 // Send prints the JSON-formatted container to stdout
-func (db Debug) Send(c *skogul.Container) error {
+func (db *Debug) Send(c *skogul.Container) error {
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {
 		log.Panicf("Unable to marshal json for debug output: %s", err)

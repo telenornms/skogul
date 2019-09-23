@@ -51,6 +51,7 @@ import (
 	"time"
 
 	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/parser"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
@@ -147,15 +148,8 @@ func helpSender(s string) {
 		fmt.Printf("No such sender %s\n", s)
 		return
 	}
-	m := sender.Auto[s]
-	fmt.Printf("%s: %s\n\n", s, m.Help)
-	fmt.Printf("Additional URL parameters for %s:\n\n", s)
-	if m.Flags != nil {
-		x := m.Flags()
-		x.VisitAll(func(f *flag.Flag) {
-			fmt.Printf("%s [%s]: %s\n", f.Name, f.DefValue, f.Usage)
-		})
-	}
+	sh, _ := config.HelpSender(s)
+	sh.Print()
 }
 
 func main() {
@@ -192,7 +186,8 @@ func main() {
 	s = &errors
 
 	if *fbatch > 0 {
-		b := sender.Batch{Threshold: *fbatch, Next: s}
+		b := sender.Batch{Threshold: *fbatch}
+		b.Next(s)
 		s = &b
 	}
 

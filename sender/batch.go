@@ -48,7 +48,7 @@ container and adds it to a batch-container. When the batch container is
 container is pushed onto a second channel and a new, empty, batch container
 is created.
 
-The third part picks up the ready-to-send containers and issues Next.Send()
+The third part picks up the ready-to-send containers and issues next.Send()
 on them. This is a separate go routine, one per NumCPU.
 
 This means that:
@@ -59,9 +59,9 @@ This means that:
 3. Send() will only block if two channels are full.
 */
 type Batch struct {
-	Next      skogul.Sender
-	Interval  time.Duration
-	Threshold int
+	next      skogul.Sender
+	Interval  skogul.Duration `doc:"Flush the bucket after this duration regardless of how full it is"`
+	Threshold int             `doc:"Flush the bucket after reaching this amount of metrics"`
 	allocSize int
 	ch        chan *skogul.Container
 	once      sync.Once
@@ -71,13 +71,25 @@ type Batch struct {
 	out       chan *skogul.Container
 }
 
+func init() {
+	newAutoSender("batch", &AutoSender{
+		Alloc: func() skogul.Sender { return &Batch{} },
+		Help:  "Batch multiple metrics into a container.",
+	})
+}
+
+// Next sets the sender that will get the batched data
+func (bat *Batch) Next(n skogul.Sender) {
+	bat.next = n
+}
+
 func (bat *Batch) setup() {
 	if bat.Threshold == 0 {
 		bat.Threshold = 10
 	}
 	bat.ch = make(chan *skogul.Container, 10)
-	if bat.Interval == 0 {
-		bat.Interval = time.Duration(1 * time.Second)
+	if bat.Interval.Duration == 0 {
+		bat.Interval.Duration = time.Duration(1 * time.Second)
 	}
 	// The slack is just an array of pointers, so it's more important
 	// to avoid unnecessary allocation than save a few bytes. With a
@@ -127,7 +139,7 @@ func (bat *Batch) add(c *skogul.Container) {
 func (bat *Batch) flusher() {
 	for {
 		c := <-bat.out
-		err := bat.Next.Send(c)
+		err := bat.next.Send(c)
 		if err != nil {
 			log.Print(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
 		}
@@ -143,14 +155,14 @@ func (bat *Batch) timerReschedule() {
 	if !bat.timer.Stop() {
 		<-bat.timer.C
 	}
-	bat.timer = time.NewTimer(bat.Interval)
+	bat.timer = time.NewTimer(bat.Interval.Duration)
 }
 
 // run runs forever, listening for containers, doing the actual batching,
 // and triggering a flush if either the timer or threshold is reached. The
 // actual sending is done in the flusher() go routines.
 func (bat *Batch) run() {
-	bat.timer = time.NewTimer(bat.Interval)
+	bat.timer = time.NewTimer(bat.Interval.Duration)
 	for {
 		select {
 		case c := <-bat.ch:
@@ -160,7 +172,7 @@ func (bat *Batch) run() {
 				bat.timerReschedule()
 			}
 		case <-bat.timer.C:
-			bat.timer = time.NewTimer(bat.Interval)
+			bat.timer = time.NewTimer(bat.Interval.Duration)
 			if bat.cont != nil {
 				bat.flush()
 			}

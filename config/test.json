@@ -1,0 +1,23 @@
+{
+  "senders": {
+    "mysql": {
+      "type": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "Select foo from bar"
+    },
+    "batch": {
+      "type": "batch",
+      "next": ["mysql"],
+      "interval": "5s"
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "parser": "json",
+      "sender": "batch"
+    }
+  }
+}
+
+

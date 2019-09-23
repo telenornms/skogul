@@ -109,6 +109,11 @@ type Sender interface {
 	Send(c *Container) error
 }
 
+type SenderNext interface {
+	Send(c *Container) error
+	Next(s Sender)
+}
+
 /*
 Transformer mutates a collection before it is passed to a sender. Transformers
 should be very fast, but are the only means to modifying the data.
