@@ -60,7 +60,11 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 	return nil
 }
 func init() {
-	addAutoSender("mqtt", newMQTT, "MQTT sender publishes received metrics to an MQTT broker/topic")
+	Add(Sender{
+		Name:  "mqtt",
+		Alloc: func() skogul.Sender { return &MQTT{} },
+		Help:  "MQTT sender publishes received metrics to an MQTT broker/topic",
+	})
 }
 
 /*

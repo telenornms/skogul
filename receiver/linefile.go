@@ -103,9 +103,11 @@ func newFile(ul url.URL, h skogul.Handler) skogul.Receiver {
 }
 
 func init() {
-	addAutoReceiver("fifo", newLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
-	addAutoReceiver("stdin", newStdio, "Read from standard input, one json-object per line")
-	addAutoReceiver("file", newFile, "Read from a file, one json-object per line, exit at EOF.")
+	/*
+		addAutoReceiver("fifo", newLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
+		addAutoReceiver("stdin", newStdio, "Read from standard input, one json-object per line")
+		addAutoReceiver("file", newFile, "Read from a file, one json-object per line, exit at EOF.")
+	*/
 }
 
 // newLineFile returns a LineFile receiver reading from the Path-element of

@@ -37,7 +37,7 @@ func TestDetacher(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&m}
 	tst := &(sender.Test{})
 	delay := &(sender.Sleeper{Base: time.Duration(100 * time.Millisecond), MaxDelay: time.Duration(100 * time.Millisecond), Next: tst})
-	detach := &(sender.Detacher{Next: delay})
+	detach := &(sender.Detacher{Next: skogul.SenderRef{S: delay}})
 
 	start := time.Now()
 	tst.TestQuick(t, detach, &c, 0)

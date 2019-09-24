@@ -52,8 +52,7 @@ func TestHttp_stack(t *testing.T) {
 	one := &(sender.Test{})
 
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	rcv := receiver.HTTP{Address: "[::1]:1339"}
-	rcv.Handle("/foo", &h)
+	rcv := receiver.HTTP{Address: "[::1]:1339", Handlers: map[string]*skogul.HandlerRef{"/foo": &skogul.HandlerRef{H: &h}}}
 	go rcv.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
 	hs := sender.HTTP{URL: "http://[::1]:1339/foo"}

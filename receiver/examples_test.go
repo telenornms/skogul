@@ -36,21 +36,11 @@ HTTP can have different skogul.Handler's for different paths, with potentially d
 */
 func ExampleHTTP() {
 	h := receiver.HTTP{Address: "localhost:8080"}
-	template := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{transformer.Templater{}}, Sender: sender.Debug{}}
-	noTemplate := skogul.Handler{Parser: parser.JSON{}, Sender: sender.Debug{}}
-	h.Handle("/template", &template)
-	h.Handle("/notemplate", &noTemplate)
-	h.Start()
-}
-
-/*
-Using New() sets up a single handler on the specified path. This is the same as
-*/
-func ExampleHTTP_new() {
-	handler := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{transformer.Templater{}}, Sender: sender.Debug{}}
-	h, err := receiver.New("http://localhost:8080/foobar", handler)
-	if err != nil {
-		panic(err)
+	template := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{transformer.Templater{}}, Sender: &sender.Debug{}}
+	noTemplate := skogul.Handler{Parser: parser.JSON{}, Sender: &sender.Debug{}}
+	h.Handlers = map[string]*skogul.HandlerRef{
+		"/template":   &skogul.HandlerRef{H: &template},
+		"/notemplate": &skogul.HandlerRef{H: &noTemplate},
 	}
 	h.Start()
 }

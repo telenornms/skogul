@@ -24,63 +24,34 @@
 package sender
 
 import (
-	"flag"
-	"fmt"
 	"log"
-	"net/url"
 
 	"github.com/KristianLyng/skogul"
 )
 
-// New creates a new Sender based on the url provided. Only senders that
-// participate in the Auto-scheme are applicable, mostly senders that
-// actually store data. See cmd/skogul-x2y for usage and a list.
-func New(in string) (skogul.Sender, error) {
-	u, err := url.Parse(in)
-	if err != nil {
-		return nil, skogul.Error{Source: "auto sender", Reason: "unable to parse URL", Next: err}
-	}
-	if Auto[u.Scheme] == nil {
-		return nil, skogul.Error{Source: "auto sender", Reason: fmt.Sprintf("no applicable sender for scheme %s", u.Scheme)}
-	}
-	x := Auto[u.Scheme].Init(*u)
-	if x == nil {
-		return nil, skogul.Error{Source: "auto sender", Reason: fmt.Sprintf("failed to initialize sender for %s", u.Scheme)}
-	}
-	return x, nil
+// Sender provides a framework that all sender-implementations should
+// follow, and allows auto-initialization.
+type Sender struct {
+	Name  string
+	Alloc func() skogul.Sender
+	Help  string
 }
 
-// AutoSender is used to provide generic constructors by URL/Scheme.
-type AutoSender struct {
-	Scheme string
-	Alloc  func() skogul.Sender
-	Init   func(url url.URL) skogul.Sender
-	Help   string
-	Flags  func() *flag.FlagSet
-}
+// Auto maps sender-names to sender implementation, used for auto
+// configuration.
+var Auto map[string]*Sender
 
-// Auto maps schemas to senders and help text to make appropriate senders.
-var Auto map[string]*AutoSender
-
-func newAutoSender(scheme string, r *AutoSender) error {
+// Add announces the existence of a sender to the world at large.
+func Add(s Sender) error {
 	if Auto == nil {
-		Auto = make(map[string]*AutoSender)
+		Auto = make(map[string]*Sender)
 	}
-	if Auto[scheme] != nil {
-		log.Panicf("BUG: Attempting to overwrite existing auto-add sender %v", scheme)
+	if Auto[s.Name] != nil {
+		log.Panicf("BUG: Attempting to overwrite existing auto-add sender %v", s.Name)
 	}
-	if r.Alloc == nil {
-		log.Printf("No alloc function for %s", scheme)
-		r.Alloc = func() skogul.Sender {
-			url := url.URL{}
-			return r.Init(url)
-		}
+	if s.Alloc == nil {
+		log.Printf("No alloc function for %s", s.Name)
 	}
-	Auto[scheme] = r
+	Auto[s.Name] = &s
 	return nil
-}
-
-func addAutoSender(scheme string, init func(url url.URL) skogul.Sender, help string) {
-	f := AutoSender{Scheme: scheme, Init: init, Help: help}
-	newAutoSender(scheme, &f)
 }

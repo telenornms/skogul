@@ -25,7 +25,6 @@ package sender
 
 import (
 	"log"
-	"net/url"
 	"sync"
 	"time"
 
@@ -41,28 +40,19 @@ stats are sent over a channel to a separate goroutine that does the
 actual aggregation and calculation.
 */
 type Counter struct {
-	Next   skogul.Sender
-	Stats  skogul.Handler
-	Period time.Duration
+	Next   skogul.SenderRef  `doc:"Reference to the next sender in the chain"`
+	Stats  skogul.HandlerRef `doc:"Handler that will receive the stats periodically"`
+	Period skogul.Duration   `doc:"How often to emit stats" example:"5s"`
 	ch     chan count
 	once   sync.Once
 	up     bool
 }
 
 func init() {
-	addAutoSender("count", newCounter, "Count sender discards the metrics but peridocally prints statistics")
-}
-
-/*
-newCounter creates a count sender that discards all data, but outputs stats to stdout
-*/
-func newCounter(url url.URL) skogul.Sender {
-	x := Counter{}
-	x.Next = &Null{}
-	deb := Debug{}
-	h := skogul.Handler{Sender: &deb}
-	x.Stats = h
-	return &x
+	Add(Sender{Name: "counter",
+		Alloc: func() skogul.Sender { return &Counter{} },
+		Help:  "Passes the metrics on to the Next sender, but every Period it will send statistics on how much data it has seen to Stats",
+	})
 }
 
 // Internal count,
@@ -77,9 +67,9 @@ type count struct {
 func (co *Counter) init() {
 	co.ch = make(chan count, 100)
 	co.up = true
-	if co.Period == 0 {
+	if co.Period.Duration == 0 {
 		log.Print("No Period set for Counter-sender. Using 1 second intervals.")
-		co.Period = 1 * time.Second
+		co.Period.Duration = 1 * time.Second
 	}
 	go co.getIt()
 }
@@ -101,7 +91,7 @@ func (co *Counter) Send(c *skogul.Container) error {
 	x := time.Now()
 	tmpc.ts = &x
 	co.ch <- tmpc
-	return co.Next.Send(c)
+	return co.Next.S.Send(c)
 }
 
 // Eat count-objects, once co.Period has passed, send them on.
@@ -122,7 +112,7 @@ func (co *Counter) getIt() {
 		current.containers += m.containers
 		current.metrics += m.metrics
 		current.values += m.values
-		if m.ts.Sub(last) > co.Period {
+		if m.ts.Sub(last) > co.Period.Duration {
 			container := skogul.Container{}
 			metric := skogul.Metric{}
 			metric.Metadata = make(map[string]interface{})
@@ -143,10 +133,10 @@ func (co *Counter) getIt() {
 			container.Metrics[0].Data["rate_containers"] = rate.containers
 			container.Metrics[0].Data["rate_metrics"] = rate.metrics
 			container.Metrics[0].Data["rate_values"] = rate.values
-			for _, t := range co.Stats.Transformers {
+			for _, t := range co.Stats.H.Transformers {
 				t.Transform(&container)
 			}
-			co.Stats.Sender.Send(&container)
+			co.Stats.H.Sender.Send(&container)
 			current = count{nil, 0, 0, 0}
 			last = *m.ts
 		}

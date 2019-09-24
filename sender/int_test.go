@@ -43,7 +43,7 @@ func TestDupe(t *testing.T) {
 	c := skogul.Container{}
 	one := &(sender.Test{})
 	two := &(sender.Test{})
-	dupe := sender.Dupe{Next: []skogul.Sender{one, two}}
+	dupe := sender.Dupe{Next: []skogul.SenderRef{skogul.SenderRef{S: one}, skogul.SenderRef{S: two}}}
 
 	err := dupe.Send(&c)
 	if err != nil {

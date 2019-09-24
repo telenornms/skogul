@@ -28,7 +28,6 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"net/url"
 
 	"github.com/KristianLyng/skogul"
 )
@@ -140,15 +139,9 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 }
 
 func init() {
-	addAutoSender("mnr", newMnR, "MNR sender sends M&R line format to an endpoint, optional DefaultGroup is provided as the path element.")
-}
-
-// newMnR returns a MnR sender where default group is the path-element.
-func newMnR(ul url.URL) skogul.Sender {
-	g := ""
-	if ul.Path != "" {
-		g = ul.Path[1:len(ul.Path)]
-	}
-	x := MnR{Address: ul.Host, DefaultGroup: g}
-	return &x
+	Add(Sender{
+		Name:  "mnr",
+		Alloc: func() skogul.Sender { return &MnR{} },
+		Help:  "MNR sender sends M&R line format to an endpoint, optional DefaultGroup is provided as the path element.",
+	})
 }

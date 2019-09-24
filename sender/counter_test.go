@@ -36,7 +36,7 @@ func TestCounter(t *testing.T) {
 	two := &(sender.Test{})
 
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	cnt := sender.Counter{Next: two, Stats: h, Period: time.Duration(50 * time.Millisecond)}
+	cnt := sender.Counter{Next: skogul.SenderRef{S: two}, Stats: skogul.HandlerRef{H: &h}, Period: skogul.Duration{Duration: time.Duration(50 * time.Millisecond)}}
 	two.TestQuick(t, &cnt, &validContainer, 1)
 	if one.Received() != 0 {
 		t.Errorf("Stats received too early.")

@@ -72,7 +72,7 @@ type Batch struct {
 }
 
 func init() {
-	newAutoSender("batch", &AutoSender{
+	Add(Sender{Name: "batch",
 		Alloc: func() skogul.Sender { return &Batch{} },
 		Help:  "Batch multiple metrics into a container.",
 	})

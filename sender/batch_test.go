@@ -38,7 +38,7 @@ func TestBatch(t *testing.T) {
 
 	c.Metrics = []*skogul.Metric{&m}
 	one := &(sender.Test{})
-	batch := &(sender.Batch{Next: one})
+	batch := &(sender.Batch{Next: skogul.SenderRef{S: one}})
 
 	// Test that sending 9 metrics doesn't pass anything on
 	for i := 0; i < 9; i++ {

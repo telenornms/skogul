@@ -75,9 +75,15 @@ type Dupe struct {
 }
 
 func init() {
-	newAutoSender("dupe", &AutoSender{
+	Add(Sender{
+		Name:  "dupe",
 		Alloc: func() skogul.Sender { return &Dupe{} },
 		Help:  "Duplicate metrics to all provided next-senders.",
+	})
+	Add(Sender{
+		Name:  "log",
+		Alloc: func() skogul.Sender { return &Log{} },
+		Help:  "Log a message",
 	})
 }
 

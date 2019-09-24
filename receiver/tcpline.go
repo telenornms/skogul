@@ -27,7 +27,6 @@ import (
 	"bufio"
 	"log"
 	"net"
-	"net/url"
 
 	"github.com/KristianLyng/skogul"
 )
@@ -108,13 +107,9 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 }
 
 func init() {
-	addAutoReceiver("tcp", newTCPLine, "Listen for Skogul-formatted JSON on a line-separate tcp socket")
-}
-
-/*
-newTCPLine returns a new TCPLine receiver built from the url. Correct format is
-tcp://ip:port
-*/
-func newTCPLine(ul url.URL, h skogul.Handler) skogul.Receiver {
-	return &TCPLine{Address: ul.String(), Handler: &h}
+	Add(Receiver{
+		Name:  "tcp",
+		Alloc: func() skogul.Receiver { return &TCPLine{} },
+		Help:  "Listen for Skogul-formatted JSON on a line-separate tcp socket",
+	})
 }

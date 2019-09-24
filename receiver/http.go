@@ -39,8 +39,8 @@ least one handler to be set up, using Handle. This is done implicitly
 if the HTTP receiver is created using New()
 */
 type HTTP struct {
-	Address  string
-	Handlers map[string]*skogul.HandlerRef
+	Address  string                        `doc:"Address to listen to"`
+	Handlers map[string]*skogul.HandlerRef `doc:"Map of urls to handlers" example:"{\"/\": \"someHandler\" }"`
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -137,7 +137,8 @@ func (htt *HTTP) Start() error {
 }
 
 func init() {
-	newAutoReceiver("http", &AutoReceiver{
+	Add(Receiver{
+		Name:  "http",
 		Alloc: func() skogul.Receiver { return &HTTP{} },
 		Help:  "Listen for metrics on HTTP",
 	})

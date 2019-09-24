@@ -27,8 +27,6 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
-	"net/url"
-	"path"
 	"strings"
 	"sync"
 	"time"
@@ -50,20 +48,11 @@ type InfluxDB struct {
 }
 
 func init() {
-	addAutoSender("influx", newInflux, "Send InfluxDB data to a HTTP endpoint, using the first element of the path as db and second as measurement, e.g: influx://host/db/measurement")
-}
-
-/*
-newInflux returns a new InfluxDB sender, parsing the URL more than the regular
-InfluxDB.URL field. Since it is mapped to the "influx" schema, the url
-provided is not used as-is, and instead follows the spec of
-influx://host[:port]/database/measurement
-*/
-func newInflux(ul url.URL) skogul.Sender {
-	db, measurement := path.Split(ul.Path)
-	t := fmt.Sprintf("http://%s/write?db=%s", ul.Host, db[1:len(db)-1])
-	x := InfluxDB{URL: t, Measurement: measurement}
-	return &x
+	Add(Sender{
+		Name:  "influx",
+		Alloc: func() skogul.Sender { return &InfluxDB{} },
+		Help:  "Send to a InfluxDB HTTP endpoint",
+	})
 }
 
 // Send data to Influx, re-using idb.client.

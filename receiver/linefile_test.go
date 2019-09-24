@@ -23,6 +23,8 @@
 
 package receiver_test
 
+/*
+
 import (
 	"encoding/json"
 	"fmt"
@@ -43,6 +45,7 @@ func deleteFile(t *testing.T, file string) {
 		t.Errorf("Failed to remove old test file %s: %v", file, err)
 	}
 }
+
 func TestLinefile(t *testing.T) {
 	rand.Seed(int64(time.Now().Nanosecond()))
 	one := &(sender.Test{})
@@ -110,3 +113,4 @@ func TestLinefile(t *testing.T) {
 		t.Errorf("Receive thing on other end despite bogus data")
 	}
 }
+*/

@@ -27,7 +27,6 @@ import (
 	"encoding/json"
 	"log"
 	"math/rand"
-	"net/url"
 	"sync/atomic"
 	"time"
 
@@ -42,17 +41,16 @@ type Debug struct {
 }
 
 func init() {
-	newAutoSender("debug", &AutoSender{
+	Add(Sender{
+		Name:  "debug",
 		Alloc: func() skogul.Sender { return &Debug{} },
 		Help:  "Debug sender prints received metrics to stdout",
 	})
-	addAutoSender("null", newNull, "Null discards the data")
-}
-
-// newNull creates a Null sender that discards data
-func newNull(url url.URL) skogul.Sender {
-	x := Null{}
-	return &x
+	Add(Sender{
+		Name:  "null",
+		Alloc: func() skogul.Sender { return &Null{} },
+		Help:  "Null discards the data",
+	})
 }
 
 // Send prints the JSON-formatted container to stdout

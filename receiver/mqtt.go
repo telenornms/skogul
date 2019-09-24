@@ -25,7 +25,6 @@ package receiver
 
 import (
 	"log"
-	"net/url"
 	"time"
 
 	"github.com/KristianLyng/skogul"
@@ -39,7 +38,7 @@ MQTT connects to a MQTT broker and listens for messages on a topic.
 */
 type MQTT struct {
 	Address  string
-	Handler  *skogul.Handler
+	Handler  *skogul.HandlerRef
 	Password string
 	Username string
 
@@ -48,7 +47,7 @@ type MQTT struct {
 
 // Handle a received message.
 func (handler *MQTT) receiver(msg mqtt.Message) {
-	m, err := handler.Handler.Parser.Parse(msg.Payload())
+	m, err := handler.Handler.H.Parser.Parse(msg.Payload())
 	if err == nil {
 		err = m.Validate()
 	}
@@ -56,10 +55,10 @@ func (handler *MQTT) receiver(msg mqtt.Message) {
 		log.Printf("Unable to parse payload: %s", err)
 		return
 	}
-	for _, t := range handler.Handler.Transformers {
+	for _, t := range handler.Handler.H.Transformers {
 		t.Transform(&m)
 	}
-	handler.Handler.Sender.Send(&m)
+	handler.Handler.H.Sender.Send(&m)
 }
 
 // Start MQTT receiver.
@@ -81,14 +80,9 @@ func (handler *MQTT) Start() error {
 }
 
 func init() {
-	addAutoReceiver("mqtt", newMQTT, "Listen for Skogul-formatted JSON on a MQTT endpoint")
-}
-
-/*
-newMQTT returns a new MQTT receiver built from provided URL, using
-the path as the topic to subscribe to.
-*/
-func newMQTT(ul url.URL, h skogul.Handler) skogul.Receiver {
-	n := MQTT{Address: ul.String(), Handler: &h}
-	return &n
+	Add(Receiver{
+		Name:  "mqtt",
+		Alloc: func() skogul.Receiver { return &MQTT{} },
+		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",
+	})
 }

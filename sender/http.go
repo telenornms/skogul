@@ -46,7 +46,8 @@ type HTTP struct {
 }
 
 func init() {
-	newAutoSender("http", &AutoSender{
+	Add(Sender{
+		Name:  "http",
 		Alloc: func() skogul.Sender { return &HTTP{} },
 		Help:  "POST Skogul-formatted JSON to a HTTP endpoint.",
 	})

@@ -33,35 +33,77 @@ import (
 	"os"
 
 	"github.com/KristianLyng/skogul/config"
+	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
 )
 
 var ffile = flag.String("file", "~/.config/skogul.json", "Path to skogul config to read.")
+var fhelp = flag.Bool("help", false, "Print more help")
 var frecvhelp = flag.String("receiver-help", "", "Print extra options for receiver")
 var fsendhelp = flag.String("sender-help", "", "Print extra options for sender")
 
-func helpSender(s string) {
-	if sender.Auto[s] == nil {
-		fmt.Printf("No such sender %s\n", s)
-		return
-	}
-	sh, _ := config.HelpSender(s)
-	sh.Print()
-}
+func help() {
+	flag.Usage()
+	fmt.Println(`
+The config file needs to specify three items as a minimum: senders,
+receivers and handlers, each with at least one item. Data is received
+(or generated) in a receiver, which then uses a handler to first parse
+the data and optionally transform it. At present, only JSON-parsing
+is implemented, and only templating for transformation. This will change
+on demand.
 
-func helpReceiver(s string) {
-	if sender.Auto[s] == nil {
-		fmt.Printf("No such sender %s\n", s)
-		return
+Each receiver/sender needs to specify a type, and to find documentation for
+that type, use -receiver-help <type> or -sender-help <type>.
+
+Semi-complete example:
+
+{
+  "senders": {
+    "print": {
+      "type": "debug"
+    }
+  },
+  "receivers": {
+    "api": {
+      "type": "http",
+      "handlers": {
+	"/": "api_handler"
+      }
+    }
+  },
+  "handlers": {
+    "api_handler": {
+      "parser": "json",
+      "transformers": ["templater"],
+      "sender": "print"
+    }
+  }
+}
+`)
+	fmt.Println("\nSenders:")
+	for idx, sen := range sender.Auto {
+		fmt.Printf("%-12s %s\n", idx, sen.Help)
 	}
-	sh, _ := config.HelpSender(s)
-	sh.Print()
+	fmt.Println("\nReceivers:")
+	for idx, rcv := range receiver.Auto {
+		fmt.Printf("%-12s %s\n", idx, rcv.Help)
+	}
 }
 
 func main() {
 	flag.Parse()
+	if *fhelp {
+		help()
+		os.Exit(0)
+	}
 	if *fsendhelp != "" {
-		helpSender(*fsendhelp)
+		sh, _ := config.HelpSender(*fsendhelp)
+		sh.Print()
+		os.Exit(0)
+	}
+	if *frecvhelp != "" {
+		sh, _ := config.HelpReceiver(*frecvhelp)
+		sh.Print()
 		os.Exit(0)
 	}
 

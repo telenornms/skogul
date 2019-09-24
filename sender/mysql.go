@@ -34,11 +34,11 @@ import (
 )
 
 func init() {
-	n := AutoSender{
+	Add(Sender{
+		Name:  "mysql",
 		Alloc: func() skogul.Sender { return &Mysql{} },
 		Help:  "Write to a MySQL database. The connstr and query paramater is required. Also see detailed sender help.",
-	}
-	newAutoSender("mysql", &n)
+	})
 }
 
 const (

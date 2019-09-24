@@ -58,7 +58,8 @@ type Detacher struct {
 }
 
 func init() {
-	newAutoSender("detacher", &AutoSender{
+	Add(Sender{
+		Name:  "detacher",
 		Alloc: func() skogul.Sender { return &Detacher{} },
 		Help:  "Returns OK without waiting for the next sender to finish.",
 	})
