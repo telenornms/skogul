@@ -66,8 +66,6 @@ type Mysql struct {
 prep parses my.Query into q and populates my.list accordingly
 */
 func (my *Mysql) prep() {
-	//str := "INSERT INTO lol VALUES($date, $name, $foo)"
-
 	mlen := len("metadata.")
 
 	expander := func(element string) string {

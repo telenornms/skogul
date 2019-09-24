@@ -39,9 +39,9 @@ InfluxDB posts data to the provided URL and measurement, using the InfluxDB
 line format over HTTP.
 */
 type InfluxDB struct {
-	URL         string
-	Measurement string
-	Timeout     time.Duration
+	URL         string `doc:"URL to InfluxDB API"`
+	Measurement string `doc:"Measurement name to write to"`
+	Timeout     skogul.Duration `doc:"HTTP timeout"`
 	client      *http.Client
 	replacer    *strings.Replacer
 	once        sync.Once
@@ -52,10 +52,10 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	idb.once.Do(func() {
 		idb.replacer = strings.NewReplacer("\\", "\\\\", " ", "\\ ", ",", "\\,", "=", "\\=")
-		if idb.Timeout == 0 {
-			idb.Timeout = 20 * time.Second
+		if idb.Timeout.Duration == 0 {
+			idb.Timeout.Duration = 20 * time.Second
 		}
-		idb.client = &http.Client{Timeout: idb.Timeout}
+		idb.client = &http.Client{Timeout: idb.Timeout.Duration}
 	})
 	for _, m := range c.Metrics {
 		fmt.Fprintf(&buffer, "%s", idb.Measurement)

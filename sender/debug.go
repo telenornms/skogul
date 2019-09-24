@@ -59,9 +59,9 @@ The purpose is testing.
 */
 type Sleeper struct {
 	Next     skogul.Sender
-	MaxDelay time.Duration
-	Base     time.Duration
-	Verbose  bool
+	MaxDelay time.Duration `doc:"The maximum delay we will suffer"`
+	Base     time.Duration `doc:"The baseline - or minimum - delay"`
+	Verbose  bool `doc:"If set to true, will log delay durations"`
 }
 
 // Send sleeps a random duration according to Sleeper spec, then passes the
@@ -105,19 +105,14 @@ func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 // ErrDiverter calls the Next sender, but if it fails, it will convert the
 // error to a Container and send that to Err.
 type ErrDiverter struct {
-	// The ordinary sender to use
-	Next skogul.Sender
-	// If Next.Send() fails, create a container from the error and send
-	// it to Err
-	Err skogul.Sender
-	// If true, the original error from Next will be returned, if false
-	// both Next AND Err has to fail for Send to return an error.
-	RetErr bool
+	Next skogul.SenderRef `doc:"Send normal metrics here"`
+	Err skogul.SenderRef `doc:"If the sender under Next fails, convert the error to a metric and send it here"`
+	RetErr bool `doc:"If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error."`
 }
 
 // Send data to the next sender. If it fails, use the Err sender.
 func (ed *ErrDiverter) Send(c *skogul.Container) error {
-	err := ed.Next.Send(c)
+	err := ed.Next.S.Send(c)
 	if err == nil {
 		return nil
 	}
@@ -126,7 +121,7 @@ func (ed *ErrDiverter) Send(c *skogul.Container) error {
 		cerr = skogul.Error{Source: "errdiverter sender", Reason: "downstream error", Next: err}
 	}
 	container := cerr.Container()
-	newerr := ed.Err.Send(&container)
+	newerr := ed.Err.S.Send(&container)
 	if newerr != nil {
 		return newerr
 	}

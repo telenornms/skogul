@@ -51,8 +51,8 @@ you want.
 The purpose is to smooth out reading.
 */
 type Detacher struct {
-	Next  skogul.SenderRef `json:"rnext"`
-	Depth int
+	Next  skogul.SenderRef
+	Depth int `doc:"How many containers can be pending delivery before we start blocking. Defaults to 1000."`
 	ch    chan *skogul.Container
 	once  sync.Once
 }
@@ -100,8 +100,8 @@ There only settings provided is "Next" to provide the next sender, and
 
 */
 type Fanout struct {
-	Next    skogul.Sender
-	Workers int
+	Next    skogul.SenderRef
+	Workers int `doc:"Number of worker threads in use. To _fan_in_ you can set this to 1."`
 	once    sync.Once
 	workers chan chan *skogul.Container
 }
@@ -136,6 +136,6 @@ func (fo *Fanout) worker() {
 	for {
 		fo.workers <- c
 		con := <-c
-		fo.Next.Send(con)
+		fo.Next.S.Send(con)
 	}
 }
