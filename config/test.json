@@ -1,21 +1,44 @@
 {
   "senders": {
-    "mysql": {
+    "tnet_alarms": {
       "type": "mysql",
       "ConnStr": "root:lol@/mydb",
-      "Query": "Select foo from bar"
+      "Query": "INSERT INTO tnet_Alarms values(${foo})"
+    },
+    "mysql_log": {
+      "type": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INSERT INTO liksomlog VALUES(${timestmap.timestamp},${metadata.name},${key})"
+    },
+    "forward": {
+	    "type": "http",
+	    "url": "http://localhost:8888"
+    },
+    "duplicate": {
+	    "type": "dupe",
+	    "next": ["forward","mysql_log","tnet_alarms"]
     },
     "batch": {
       "type": "batch",
-      "next": ["mysql"],
+      "next": "duplicate",
       "interval": "5s"
+    },
+    "det": {
+	    "type": "detacher",
+	    "next": "batch"
+    }
+  },
+  "handlers": {
+    "plain": {
+      "parser": "json",
+      "sender": "batch",
+      "transformers": []
     }
   },
   "receivers": {
     "http": {
       "type": "http",
-      "parser": "json",
-      "sender": "batch"
+      "handler": "plain"
     }
   }
 }

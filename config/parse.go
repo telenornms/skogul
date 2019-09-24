@@ -30,146 +30,76 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"reflect"
-	"strings"
-	"unicode"
 
-	//"github.com/KristianLyng/skogul/parser"
 	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/parser"
+	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
+	"github.com/KristianLyng/skogul/transformer"
 )
 
 type Sender struct {
-	Type   string `json:"type,omitempty"`
-	Next   []string
-	Sender skogul.Sender
+	Type   string
+	Sender skogul.Sender `json:"-"`
 }
+
 type Receiver struct {
-	Type     string `json:"type,omitempty"`
-	Receiver skogul.Receiver
+	Type     string
+	Receiver skogul.Receiver `json:"-"`
+}
+type Handler struct {
+	Parser       string
+	Transformers []string
+	Sender       skogul.SenderRef
+	Handler      skogul.Handler
 }
 type Config struct {
-	Receivers map[string]Receiver
-	Senders   map[string]Sender
+	Handlers  map[string]*Handler
+	Receivers map[string]*Receiver
+	Senders   map[string]*Sender
 }
 
-type typeAndNextOnly struct {
-	Type string
-	Next []string
-}
-
-func (s *Sender) UnmarshalJSON(b []byte) error {
-	to := typeAndNextOnly{}
-	if err := json.Unmarshal(b, &to); err != nil {
+func (r *Receiver) UnmarshalJSON(b []byte) error {
+	type t_Type struct {
+		Type string
+	}
+	var t t_Type
+	if err := json.Unmarshal(b, &t); err != nil {
 		return err
 	}
-	if sender.Auto[to.Type] == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown sender %v", to.Type)}
+	r.Type = t.Type
+	if receiver.Auto[r.Type] == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown receiver %v", r.Type)}
 	}
-	if sender.Auto[to.Type].Alloc == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad sender %v", to.Type)}
+	if receiver.Auto[r.Type].Alloc == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad receiver %v", r.Type)}
 	}
-	ns := sender.Auto[to.Type].Alloc()
-	if err := json.Unmarshal(b, &ns); err != nil {
+	r.Receiver = receiver.Auto[r.Type].Alloc()
+	if err := json.Unmarshal(b, &r.Receiver); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
-	s.Sender = ns
-	s.Next = to.Next
 	return nil
 }
-
-type fieldDoc struct {
-	Doc     string
-	Example string
-	Type    string
-}
-
-type SenderHelp struct {
-	Name   string
-	Doc    string
-	Fields map[string]fieldDoc
-}
-
-func HelpSender(s string) (SenderHelp, error) {
-	if sender.Auto[s] == nil {
-		return SenderHelp{}, skogul.Error{Source: "config parser", Reason: "No such sender"}
+func (s *Sender) UnmarshalJSON(b []byte) error {
+	type t_Type struct {
+		Type string
 	}
-	sh := SenderHelp{}
-	sh.Name = s
-	sh.Doc = sender.Auto[s].Help
-	sh.Fields = make(map[string]fieldDoc)
-	news := sender.Auto[s].Alloc()
-	st := reflect.TypeOf(news)
-	if st.Kind() == reflect.Ptr {
-		st = st.Elem()
+	var t t_Type
+	if err := json.Unmarshal(b, &t); err != nil {
+		return err
 	}
-
-	for i := 0; i < st.NumField(); i++ {
-		field := st.Field(i)
-		if !unicode.IsUpper(rune(field.Name[0])) {
-			continue
-		}
-		fielddoc := fieldDoc{}
-		fielddoc.Type = fmt.Sprintf("%v", field.Type.Kind())
-		if doc, ok := field.Tag.Lookup("doc"); ok {
-			fielddoc.Doc = doc
-			if ex, ok := field.Tag.Lookup("example"); ok {
-				fielddoc.Example = fmt.Sprintf("Example: %s", ex)
-			}
-		}
-		sh.Fields[field.Name] = fielddoc
+	s.Type = t.Type
+	if sender.Auto[s.Type] == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown sender %v", s.Type)}
 	}
-	return sh, nil
-}
-
-const helpWidth = 66
-
-/*
-Print a table of scheme | desc, wrapping the description at helpWidth.
-
-E.g. assuming small helpWidth value:
-
-Without prettyPrint:
-
-foo:// | A very long line will be wrapped
-
-With:
-
-foo:// | A very long
-       | line will
-       | be wrapped
-
-We wrap at word boundaries to avoid splitting words.
-*/
-func prettyPrint(scheme string, desc string) {
-	fmt.Printf("%11s |", scheme)
-	fields := strings.Fields(desc)
-	l := 0
-	for _, w := range fields {
-		if (l + len(w)) > helpWidth {
-			l = 0
-			fmt.Printf("\n%11s |", "")
-		}
-		fmt.Printf(" %s", w)
-		l += len(w) + 1
+	if sender.Auto[s.Type].Alloc == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad sender %v", s.Type)}
 	}
-	fmt.Printf("\n")
-}
-
-func (sh SenderHelp) Print() {
-	fmt.Printf("%s - %s\n", sh.Name, sh.Doc)
-	fmt.Printf("Variables:\n")
-	for n, f := range sh.Fields {
-		prettyPrint(n, fmt.Sprintf("Type: %s", f.Type))
-		if f.Doc != "" {
-			prettyPrint("", f.Doc)
-		}
-		if f.Example != "" {
-			prettyPrint("", "")
-			prettyPrint("", f.Example)
-			prettyPrint("", "")
-		}
+	s.Sender = sender.Auto[s.Type].Alloc()
+	if err := json.Unmarshal(b, &s.Sender); err != nil {
+		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
+	return nil
 }
 
 func File(f string) (*Config, error) {
@@ -177,22 +107,53 @@ func File(f string) (*Config, error) {
 	if err != nil {
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
+	var c *Config
+	c, err = Bytes(dat)
+	return c, err
+}
 
-	rawc := Config{}
-	err = json.Unmarshal(dat, &rawc)
+func Bytes(b []byte) (*Config, error) {
+	c := Config{}
+	err := json.Unmarshal(b, &c)
 	if err != nil {
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
-	for _, s := range rawc.Senders {
-		for _, next := range s.Next {
-			realNext := rawc.Senders[next]
-			sendN, ok := s.Sender.(skogul.SenderNext)
-			if ok {
-				sendN.Next(realNext.Sender)
+	for _, s := range skogul.SenderMap {
+		if c.Senders[s.Name] == nil {
+			return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
+		}
+		s.S = c.Senders[s.Name].Sender
+	}
+	skogul.SenderMap = skogul.SenderMap[0:0]
+	for _, h := range c.Handlers {
+		h.Handler.Sender = h.Sender.S
+		h.Handler.Transformers = make([]skogul.Transformer, 0)
+		if h.Parser == "json" {
+			h.Handler.Parser = parser.JSON{}
+		} else {
+			return nil, skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
+		}
+		for _, t := range h.Transformers {
+			if t == "templater" {
+				h.Handler.Transformers = append(h.Handler.Transformers, transformer.Templater{})
+			} else {
+				return nil, skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
 			}
 		}
 	}
-
-	return &rawc, nil
+	for _, h := range skogul.HandlerMap {
+		if c.Handlers[h.Name] == nil {
+			return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved handler reference %s", h.Name)}
+		}
+		h.H = &(c.Handlers[h.Name].Handler)
+	}
+	skogul.HandlerMap = skogul.HandlerMap[0:0]
+	for _, h := range c.Handlers {
+		e := h.Handler.Verify()
+		if e != nil {
+			return nil, skogul.Error{Source: "config", Reason: "Handler corrupt", Next: e}
+		}
+	}
+	return &c, nil
 }

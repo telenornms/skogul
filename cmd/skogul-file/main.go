@@ -39,12 +39,6 @@ import (
 var ffile = flag.String("file", "~/.config/skogul.json", "Path to skogul config to read.")
 var frecvhelp = flag.String("receiver-help", "", "Print extra options for receiver")
 var fsendhelp = flag.String("sender-help", "", "Print extra options for sender")
-var ftarget = flag.String("sender", "debug://", "Where to send data. See -help for details.")
-var fhelp = flag.Bool("help", false, "Print extensive help/usage")
-
-func help() {
-	flag.Usage()
-}
 
 func helpSender(s string) {
 	if sender.Auto[s] == nil {
@@ -55,20 +49,28 @@ func helpSender(s string) {
 	sh.Print()
 }
 
+func helpReceiver(s string) {
+	if sender.Auto[s] == nil {
+		fmt.Printf("No such sender %s\n", s)
+		return
+	}
+	sh, _ := config.HelpSender(s)
+	sh.Print()
+}
+
 func main() {
 	flag.Parse()
-	if *fhelp {
-		help()
-		os.Exit(0)
-	}
 	if *fsendhelp != "" {
 		helpSender(*fsendhelp)
 		os.Exit(0)
 	}
 
-	_, err := config.File(*ffile)
+	c, err := config.File(*ffile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	for _, r := range c.Receivers {
+		r.Receiver.Start()
+	}
 }

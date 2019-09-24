@@ -29,7 +29,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"net/url"
 
 	"github.com/KristianLyng/skogul"
 )
@@ -41,7 +40,7 @@ if the HTTP receiver is created using New()
 */
 type HTTP struct {
 	Address  string
-	handlers map[string]*skogul.Handler
+	Handlers map[string]*skogul.HandlerRef
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -63,7 +62,7 @@ type httpReturn struct {
 	Message string
 }
 
-func (handler receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
+func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
 	answer := "OK"
 
 	if inerr != nil {
@@ -79,7 +78,7 @@ func (handler receiver) answer(w http.ResponseWriter, r *http.Request, code int,
 	fmt.Fprintf(w, "%s\n", b)
 }
 
-func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (code int, oerr error) {
+func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (code int, oerr error) {
 	if r.ContentLength == 0 {
 		oerr = skogul.Error{Source: "http receiver", Reason: "Missing input data"}
 		code = 400
@@ -93,7 +92,7 @@ func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (code int
 		oerr = skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
 		return
 	}
-	m, err := handler.Handler.Parser.Parse(b)
+	m, err := rcvr.Handler.Parser.Parse(b)
 	if err == nil {
 		err = m.Validate()
 	}
@@ -102,10 +101,10 @@ func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (code int
 		code = 400
 		return
 	}
-	for _, t := range handler.Handler.Transformers {
+	for _, t := range rcvr.Handler.Transformers {
 		t.Transform(&m)
 	}
-	err = handler.Handler.Sender.Send(&m)
+	err = rcvr.Handler.Sender.Send(&m)
 	if err != nil {
 		code = 500
 		oerr = skogul.Error{Source: "http receiver", Reason: "failed to send data", Next: err}
@@ -117,56 +116,29 @@ func (handler receiver) handle(w http.ResponseWriter, r *http.Request) (code int
 }
 
 // Core HTTP handler
-func (handler receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	code, err := handler.handle(w, r)
-	handler.answer(w, r, code, err)
-}
-
-/*
-Handle adds a handler to a URL-pattern (same as net/http). Mostly
-a convenience function to get less-ugly assignements.
-
-Example:
-
-        rcv := receiver.HTTP{Address: "localhost:8080"}
-        rcv.Handle("/", foo)
-        rcv.Handle("/blatti", bar)
-*/
-func (handler *HTTP) Handle(idx string, h *skogul.Handler) {
-	if handler.handlers == nil {
-		handler.handlers = make(map[string]*skogul.Handler)
-	}
-	if handler.handlers[idx] != nil {
-		log.Fatalf("Error: Refusing to overwrite existing handler for %s", idx)
-	}
-	handler.handlers[idx] = h
+func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	code, err := rcvr.handle(w, r)
+	rcvr.answer(w, r, code, err)
 }
 
 // Start never returns.
-func (handler *HTTP) Start() error {
-	for idx, h := range handler.handlers {
+func (htt *HTTP) Start() error {
+	for idx, h := range htt.Handlers {
 		log.Printf("Adding handler for %v", idx)
-		http.Handle(idx, receiver{h})
+		http.Handle(idx, receiver{h.H})
 	}
-	if handler.Address == "" {
+	if htt.Address == "" {
 		log.Printf("HTTP: No listen-address specified. Using %s", defaultAddress)
-		handler.Address = defaultAddress
+		htt.Address = defaultAddress
 	}
-	log.Printf("Starting http receiver at http://%s", handler.Address)
-	log.Fatal(http.ListenAndServe(handler.Address, nil))
+	log.Printf("Starting http receiver at http://%s", htt.Address)
+	log.Fatal(http.ListenAndServe(htt.Address, nil))
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
 
 func init() {
-	addAutoReceiver("http", newHTTP, "Listen for Skogul-formatted JSON on a HTTP endpoint")
-}
-
-/*
-newHTTP returns a HTTP receiver, with the Path of the url being the one to
-listen to.
-*/
-func newHTTP(ul url.URL, h skogul.Handler) skogul.Receiver {
-	hl := HTTP{Address: ul.Host}
-	hl.Handle(fmt.Sprintf("/%s", ul.Path), &h)
-	return &hl
+	newAutoReceiver("http", &AutoReceiver{
+		Alloc: func() skogul.Receiver { return &HTTP{} },
+		Help:  "Listen for metrics on HTTP",
+	})
 }

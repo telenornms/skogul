@@ -59,6 +59,7 @@ A more complete example is also provided further down.
 package skogul
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"net/url"
@@ -75,6 +76,24 @@ type Handler struct {
 	Parser       Parser
 	Transformers []Transformer
 	Sender       Sender
+}
+
+func (h Handler) Verify() error {
+	if h.Parser == nil {
+		return Error{Reason: "Missing parser for Handler"}
+	}
+	if h.Transformers == nil {
+		return Error{Reason: "Missing parser for Handler"}
+	}
+	for _, t := range h.Transformers {
+		if t == nil {
+			return Error{Reason: "nil-transformer for Handler"}
+		}
+	}
+	if h.Sender == nil {
+		return Error{Reason: "Missing parser for Handler"}
+	}
+	return nil
 }
 
 // Parser is the interface for parsing arbitrary data into a Container
@@ -109,9 +128,59 @@ type Sender interface {
 	Send(c *Container) error
 }
 
-type SenderNext interface {
-	Send(c *Container) error
-	Next(s Sender)
+/*
+SenderRef is a reference to a named sender. This is required to allow
+references to be resolved after all senders are loaded. Wherever a
+Sender is loaded from configuration, a SenderRef should be used in its
+place. The maintenance of the sender is handled in the configuration
+system.
+*/
+type SenderRef struct {
+	S    Sender
+	Name string
+}
+
+/*
+SenderMap is a list of all referenced senders. This is used during
+configuration loading and should not be used afterwards. However,
+it needs to be exported so skogul.config can reach it, and it
+needs to be outside of skogul.config to avoid circular dependencies.
+*/
+var SenderMap []*SenderRef
+
+/*
+UnmarshalJSON will unmarshal a sender reference by creating a
+SenderRef object and putting it on the SenderMap list. The
+configuration system in question needs to iterate over SenderMap
+after it has completed the first pass of configuration
+*/
+func (sr *SenderRef) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	sr.Name = s
+	sr.S = nil
+	SenderMap = append(SenderMap, sr)
+	return nil
+}
+
+type HandlerRef struct {
+	H    *Handler
+	Name string
+}
+
+var HandlerMap []*HandlerRef
+
+func (sr *HandlerRef) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	sr.Name = s
+	sr.H = nil
+	HandlerMap = append(HandlerMap, sr)
+	return nil
 }
 
 /*

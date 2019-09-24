@@ -71,13 +71,20 @@ func (fb *Fallback) Send(c *skogul.Container) error {
 
 // Dupe sender executes all provided senders in turn.
 type Dupe struct {
-	Next []skogul.Sender
+	Next []skogul.SenderRef
+}
+
+func init() {
+	newAutoSender("dupe", &AutoSender{
+		Alloc: func() skogul.Sender { return &Dupe{} },
+		Help:  "Duplicate metrics to all provided next-senders.",
+	})
 }
 
 // Send sends data down stream
-func (dp Dupe) Send(c *skogul.Container) error {
+func (dp *Dupe) Send(c *skogul.Container) error {
 	for _, s := range dp.Next {
-		err := s.Send(c)
+		err := s.S.Send(c)
 		if err != nil {
 			return err
 		}

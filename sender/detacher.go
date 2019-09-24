@@ -51,17 +51,24 @@ you want.
 The purpose is to smooth out reading.
 */
 type Detacher struct {
-	Next  skogul.Sender
+	Next  skogul.SenderRef `json:"rnext"`
 	Depth int
 	ch    chan *skogul.Container
 	once  sync.Once
+}
+
+func init() {
+	newAutoSender("detacher", &AutoSender{
+		Alloc: func() skogul.Sender { return &Detacher{} },
+		Help:  "Returns OK without waiting for the next sender to finish.",
+	})
 }
 
 // consume is the detached go routine that picks up containers and passes
 // them on.
 func (de *Detacher) consume() {
 	for c := range de.ch {
-		de.Next.Send(c)
+		de.Next.S.Send(c)
 	}
 }
 

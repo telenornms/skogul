@@ -29,7 +29,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"net/url"
 	"sync"
 	"time"
 
@@ -40,20 +39,17 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL     string
-	Timeout time.Duration
+	URL     string          `doc:"Fully qualified URL to send data to",example:"http://localhost:6081/"`
+	Timeout skogul.Duration `doc:"Timeout on POST"`
 	once    sync.Once
 	client  *http.Client
 }
 
 func init() {
-	addAutoSender("http", newHTTP, "Post Skogul-formatted JSON to a HTTP endpoint")
-}
-
-// newHTTP creates a new HTTP sender
-func newHTTP(url url.URL) skogul.Sender {
-	x := HTTP{URL: url.String()}
-	return &x
+	newAutoSender("http", &AutoSender{
+		Alloc: func() skogul.Sender { return &HTTP{} },
+		Help:  "POST Skogul-formatted JSON to a HTTP endpoint.",
+	})
 }
 
 // Send POSTS data
@@ -74,10 +70,10 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	ht.once.Do(func() {
-		if ht.Timeout == 0 {
-			ht.Timeout = 20 * time.Second
+		if ht.Timeout.Duration == 0 {
+			ht.Timeout.Duration = 20 * time.Second
 		}
-		ht.client = &http.Client{Timeout: ht.Timeout}
+		ht.client = &http.Client{Timeout: ht.Timeout.Duration}
 	})
 	resp, err := ht.client.Do(req)
 	if err != nil {

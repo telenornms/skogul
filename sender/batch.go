@@ -59,7 +59,7 @@ This means that:
 3. Send() will only block if two channels are full.
 */
 type Batch struct {
-	next      skogul.Sender
+	Next      skogul.SenderRef
 	Interval  skogul.Duration `doc:"Flush the bucket after this duration regardless of how full it is"`
 	Threshold int             `doc:"Flush the bucket after reaching this amount of metrics"`
 	allocSize int
@@ -76,11 +76,6 @@ func init() {
 		Alloc: func() skogul.Sender { return &Batch{} },
 		Help:  "Batch multiple metrics into a container.",
 	})
-}
-
-// Next sets the sender that will get the batched data
-func (bat *Batch) Next(n skogul.Sender) {
-	bat.next = n
 }
 
 func (bat *Batch) setup() {
@@ -139,7 +134,7 @@ func (bat *Batch) add(c *skogul.Container) {
 func (bat *Batch) flusher() {
 	for {
 		c := <-bat.out
-		err := bat.next.Send(c)
+		err := bat.Next.S.Send(c)
 		if err != nil {
 			log.Print(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
 		}

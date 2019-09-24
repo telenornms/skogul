@@ -65,6 +65,7 @@ var Auto map[string]*AutoReceiver
 // AutoReceiver is used to initialize and document a receiver based on URL
 type AutoReceiver struct {
 	Init  func(url url.URL, h skogul.Handler) skogul.Receiver
+	Alloc func() skogul.Receiver
 	Help  string
 	Flags func() *flag.FlagSet
 }
@@ -76,6 +77,13 @@ func newAutoReceiver(scheme string, r *AutoReceiver) error {
 	if Auto[scheme] != nil {
 		log.Panicf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
 	}
+	if r.Alloc == nil {
+		log.Printf("No alloc function for %s", scheme)
+		r.Alloc = func() skogul.Receiver {
+			url := url.URL{}
+			return r.Init(url, skogul.Handler{})
+		}
+	}
 	Auto[scheme] = r
 	return nil
 }
@@ -83,11 +91,6 @@ func newAutoReceiver(scheme string, r *AutoReceiver) error {
 // addAutoReceiver is used by receiver-implementations to "participate" in
 // the Auto-scheme described here.
 func addAutoReceiver(scheme string, init func(url url.URL, h skogul.Handler) skogul.Receiver, help string) {
-	if Auto == nil {
-		Auto = make(map[string]*AutoReceiver)
-	}
-	if Auto[scheme] != nil {
-		log.Panicf("BUG: Attempting to overwrite existing auto-add receiver %v", scheme)
-	}
-	Auto[scheme] = &AutoReceiver{Init: init, Help: help, Flags: nil}
+	f := AutoReceiver{Init: init, Help: help}
+	newAutoReceiver(scheme, &f)
 }
