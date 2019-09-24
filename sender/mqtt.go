@@ -26,7 +26,6 @@ package sender
 import (
 	"encoding/json"
 	"log"
-	"net/url"
 	"sync"
 
 	"github.com/KristianLyng/skogul"
@@ -58,19 +57,4 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 	}
 	handler.mc.Client.Publish(handler.mc.Topic, 0, false, b)
 	return nil
-}
-func init() {
-	Add(Sender{
-		Name:  "mqtt",
-		Alloc: func() skogul.Sender { return &MQTT{} },
-		Help:  "MQTT sender publishes received metrics to an MQTT broker/topic",
-	})
-}
-
-/*
-newMQTT creates a new MQTT sender
-*/
-func newMQTT(url url.URL) skogul.Sender {
-	x := MQTT{Address: url.String()}
-	return &x
 }

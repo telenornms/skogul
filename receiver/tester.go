@@ -83,11 +83,3 @@ func (tst *Tester) run() {
 		}
 	}
 }
-
-func init() {
-	Add(Receiver{
-		Name:  "test",
-		Alloc: func() skogul.Receiver { return &Tester{} },
-		Help:  "Generate dummy-data.",
-	})
-}

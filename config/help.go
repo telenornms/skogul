@@ -99,7 +99,7 @@ Print a table of scheme | desc, wrapping the description at helpWidth.
 
 E.g. assuming small helpWidth value:
 
-Without prettyPrint:
+Without PrettyPrint:
 
 foo:// | A very long line will be wrapped
 
@@ -111,7 +111,7 @@ foo:// | A very long
 
 We wrap at word boundaries to avoid splitting words.
 */
-func prettyPrint(scheme string, desc string) {
+func PrettyPrint(scheme string, desc string) {
 	fmt.Printf("%11s |", scheme)
 	fields := strings.Fields(desc)
 	l := 0
@@ -135,11 +135,11 @@ func (sh Help) Print() {
 			t = fmt.Sprintf("[%s] ", f.Type)
 		}
 		d := fmt.Sprintf("%s%s", t, f.Doc)
-		prettyPrint(n, d)
+		PrettyPrint(n, d)
 		if f.Example != "" {
-			prettyPrint("", "")
-			prettyPrint("", f.Example)
-			prettyPrint("", "")
+			PrettyPrint("", "")
+			PrettyPrint("", f.Example)
+			PrettyPrint("", "")
 		}
 	}
 }

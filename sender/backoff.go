@@ -32,22 +32,22 @@ import (
 // Backoff sender will send to Next, but retry up to Retries times, with
 // exponential backoff, starting with time.Duration
 type Backoff struct {
-	Next    skogul.Sender
-	Base    time.Duration
-	Retries uint64
+	Next    skogul.SenderRef `doc:"The sender to try"`
+	Base    skogul.Duration  `doc:"Initial delay after a failure. Will double for each retry"`
+	Retries uint64           `doc:"Number of retries before giving up"`
 	holdoff uint64
 }
 
 // Send with a delay
 func (bo *Backoff) Send(c *skogul.Container) error {
 	var err error
-	delay := bo.Base
+	delay := bo.Base.Duration
 	t := atomic.LoadUint64(&bo.holdoff)
 	if t > 0 {
 		time.Sleep(delay)
 	}
 	for i := uint64(1); i <= bo.Retries; i++ {
-		err = bo.Next.Send(c)
+		err = bo.Next.S.Send(c)
 		if err == nil {
 			if i > 1 {
 				atomic.AddUint64(&bo.holdoff, 1-i)

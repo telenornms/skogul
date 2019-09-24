@@ -137,11 +137,3 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 	d.Close()
 	return nil
 }
-
-func init() {
-	Add(Sender{
-		Name:  "mnr",
-		Alloc: func() skogul.Sender { return &MnR{} },
-		Help:  "MNR sender sends M&R line format to an endpoint, optional DefaultGroup is provided as the path element.",
-	})
-}

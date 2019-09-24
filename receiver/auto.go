@@ -44,6 +44,8 @@ type Receiver struct {
 	Help  string
 }
 
+// Add is used to announce a receiver-implementation to the world, so to
+// speak. It is exported to allow out-of-package senders to exist.
 func Add(r Receiver) error {
 	if Auto == nil {
 		Auto = make(map[string]*Receiver)
@@ -56,4 +58,42 @@ func Add(r Receiver) error {
 	}
 	Auto[r.Name] = &r
 	return nil
+}
+
+func init() {
+	Add(Receiver{
+		Name:  "http",
+		Alloc: func() skogul.Receiver { return &HTTP{} },
+		Help:  "Listen for metrics on HTTP",
+	})
+	Add(Receiver{
+		Name:  "file",
+		Alloc: func() skogul.Receiver { return &File{} },
+		Help:  "Reads from a file, then stops. Assumes one collection per line.",
+	})
+	Add(Receiver{
+		Name:  "fifo",
+		Alloc: func() skogul.Receiver { return &LineFile{} },
+		Help:  "Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.",
+	})
+	Add(Receiver{
+		Name:  "mqtt",
+		Alloc: func() skogul.Receiver { return &MQTT{} },
+		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",
+	})
+	Add(Receiver{
+		Name:  "stdin",
+		Alloc: func() skogul.Receiver { return &Stdin{} },
+		Help:  "Reads from standard input, one collection per line, allowing you to pipe collections to Skogul on a command line or similar.",
+	})
+	Add(Receiver{
+		Name:  "test",
+		Alloc: func() skogul.Receiver { return &Tester{} },
+		Help:  "Generate dummy-data.",
+	})
+	Add(Receiver{
+		Name:  "tcp",
+		Alloc: func() skogul.Receiver { return &TCPLine{} },
+		Help:  "Listen for Skogul-formatted JSON on a line-separate tcp socket",
+	})
 }

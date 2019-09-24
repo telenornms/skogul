@@ -39,18 +39,10 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL     string          `doc:"Fully qualified URL to send data to",example:"http://localhost:6081/"`
+	URL     string          `doc:"Fully qualified URL to send data to" example:"http://localhost:6081/"`
 	Timeout skogul.Duration `doc:"Timeout on POST"`
 	once    sync.Once
 	client  *http.Client
-}
-
-func init() {
-	Add(Sender{
-		Name:  "http",
-		Alloc: func() skogul.Sender { return &HTTP{} },
-		Help:  "POST Skogul-formatted JSON to a HTTP endpoint.",
-	})
 }
 
 // Send POSTS data

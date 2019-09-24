@@ -47,14 +47,6 @@ type InfluxDB struct {
 	once        sync.Once
 }
 
-func init() {
-	Add(Sender{
-		Name:  "influx",
-		Alloc: func() skogul.Sender { return &InfluxDB{} },
-		Help:  "Send to a InfluxDB HTTP endpoint",
-	})
-}
-
 // Send data to Influx, re-using idb.client.
 func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer

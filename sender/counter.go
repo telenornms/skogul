@@ -48,13 +48,6 @@ type Counter struct {
 	up     bool
 }
 
-func init() {
-	Add(Sender{Name: "counter",
-		Alloc: func() skogul.Sender { return &Counter{} },
-		Help:  "Passes the metrics on to the Next sender, but every Period it will send statistics on how much data it has seen to Stats",
-	})
-}
-
 // Internal count,
 type count struct {
 	ts         *time.Time

@@ -78,11 +78,3 @@ func (handler *MQTT) Start() error {
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
-
-func init() {
-	Add(Receiver{
-		Name:  "mqtt",
-		Alloc: func() skogul.Receiver { return &MQTT{} },
-		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",
-	})
-}

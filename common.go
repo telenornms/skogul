@@ -78,6 +78,7 @@ type Handler struct {
 	Sender       Sender
 }
 
+// Verify the basic integrity of a handler. Quite shallow.
 func (h Handler) Verify() error {
 	if h.Parser == nil {
 		return Error{Reason: "Missing parser for Handler"}
@@ -165,13 +166,29 @@ func (sr *SenderRef) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+// MarshalJSON for a reference just prints the name
+func (sr *SenderRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
+}
+
+// HandlerRef references a named handler. Used whenever a handler is
+// defined by configuration.
 type HandlerRef struct {
 	H    *Handler
 	Name string
 }
 
+// HandlerMap keeps track of which named handlers exists. A configuration
+// engine needs to iterate over this and back-fill the real handlers.
 var HandlerMap []*HandlerRef
 
+// MarshalJSON just returns the Name of the handler reference.
+func (sr *HandlerRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
+}
+
+// UnmarshalJSON will create an entry on the HandlerMap for the parsed
+// handler reference, so the real handler can be substituted later.
 func (sr *HandlerRef) UnmarshalJSON(b []byte) error {
 	var s string
 	if err := json.Unmarshal(b, &s); err != nil {

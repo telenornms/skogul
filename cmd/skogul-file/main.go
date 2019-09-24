@@ -27,6 +27,7 @@ skogul-file parses a json-based config file and starts skogul.
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -41,6 +42,7 @@ var ffile = flag.String("file", "~/.config/skogul.json", "Path to skogul config 
 var fhelp = flag.Bool("help", false, "Print more help")
 var frecvhelp = flag.String("receiver-help", "", "Print extra options for receiver")
 var fsendhelp = flag.String("sender-help", "", "Print extra options for sender")
+var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 
 func help() {
 	flag.Usage()
@@ -82,11 +84,11 @@ Semi-complete example:
 `)
 	fmt.Println("\nSenders:")
 	for idx, sen := range sender.Auto {
-		fmt.Printf("%-12s %s\n", idx, sen.Help)
+		config.PrettyPrint(idx, sen.Help)
 	}
 	fmt.Println("\nReceivers:")
 	for idx, rcv := range receiver.Auto {
-		fmt.Printf("%-12s %s\n", idx, rcv.Help)
+		config.PrettyPrint(idx, rcv.Help)
 	}
 }
 
@@ -110,6 +112,15 @@ func main() {
 	c, err := config.File(*ffile)
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	if *fconf {
+		out, err := json.MarshalIndent(c, "", "  ")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(out))
+		os.Exit(0)
 	}
 
 	for _, r := range c.Receivers {

@@ -33,14 +33,6 @@ import (
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 )
 
-func init() {
-	Add(Sender{
-		Name:  "mysql",
-		Alloc: func() skogul.Sender { return &Mysql{} },
-		Help:  "Write to a MySQL database. The connstr and query paramater is required. Also see detailed sender help.",
-	})
-}
-
 const (
 	timestamp = iota
 	metadata  = iota

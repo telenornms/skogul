@@ -57,14 +57,6 @@ type Detacher struct {
 	once  sync.Once
 }
 
-func init() {
-	Add(Sender{
-		Name:  "detacher",
-		Alloc: func() skogul.Sender { return &Detacher{} },
-		Help:  "Returns OK without waiting for the next sender to finish.",
-	})
-}
-
 // consume is the detached go routine that picks up containers and passes
 // them on.
 func (de *Detacher) consume() {

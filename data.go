@@ -195,7 +195,7 @@ func (c Container) String() string {
 
 /*
 Duration provides a wrapper around time.Duration to add JSON marshalling
-and unmarshalling. It is used whenever time.Duration needs to be expoed in
+and unmarshalling. It is used whenever time.Duration needs to be exposed in
 configuration.
 */
 type Duration struct {
@@ -207,7 +207,7 @@ func (d Duration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d.String())
 }
 
-// UnmarshalJson provides JSON unmrashalling for Duration
+// UnmarshalJSON provides JSON unmrashalling for Duration
 func (d *Duration) UnmarshalJSON(b []byte) error {
 	var v interface{}
 	if err := json.Unmarshal(b, &v); err != nil {

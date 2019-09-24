@@ -27,7 +27,6 @@ import (
 	"bufio"
 	"github.com/KristianLyng/skogul"
 	"log"
-	"net/url"
 	"os"
 )
 
@@ -36,7 +35,7 @@ import (
 // allow you to 'cat' stuff to Skogul.
 type LineFile struct {
 	File    string
-	Handler skogul.Handler
+	Handler skogul.HandlerRef
 }
 
 // Common routine for both fifo and stdin
@@ -49,7 +48,7 @@ func (lf *LineFile) read() error {
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
-		m, err := lf.Handler.Parser.Parse(bytes)
+		m, err := lf.Handler.H.Parser.Parse(bytes)
 		if err == nil {
 			err = m.Validate()
 		}
@@ -57,10 +56,10 @@ func (lf *LineFile) read() error {
 			log.Printf("Unable to parse JSON: %s", err)
 			continue
 		}
-		for _, t := range lf.Handler.Transformers {
+		for _, t := range lf.Handler.H.Transformers {
 			t.Transform(&m)
 		}
-		lf.Handler.Sender.Send(&m)
+		lf.Handler.H.Sender.Send(&m)
 	}
 	if err := scanner.Err(); err != nil {
 		log.Printf("Error reading file: %s", err)
@@ -79,40 +78,27 @@ func (lf *LineFile) Start() error {
 // File reads from a FILE, a single JSON object per line, and
 // exits at EOF.
 type File struct {
-	lf LineFile
+	File    string
+	Handler skogul.HandlerRef
+	lf      LineFile
 }
 
-// Start never stops badum dum tsh.
+// Start reads a file once, then returns.
 func (s *File) Start() error {
-	s.lf.read()
-	return nil
+	s.lf.File = s.File
+	s.lf.Handler = s.Handler
+	return s.lf.read()
 }
 
-func newStdio(ul url.URL, h skogul.Handler) skogul.Receiver {
-	s := File{}
+// Stdin reads from /dev/stdin
+type Stdin struct {
+	Handler skogul.HandlerRef
+	lf      LineFile
+}
+
+// Start reads from stdin until EOF, then returns
+func (s *Stdin) Start() error {
 	s.lf.File = "/dev/stdin"
-	s.lf.Handler = h
-	return &s
-}
-
-func newFile(ul url.URL, h skogul.Handler) skogul.Receiver {
-	s := File{}
-	s.lf.File = ul.Path
-	s.lf.Handler = h
-	return &s
-}
-
-func init() {
-	/*
-		addAutoReceiver("fifo", newLineFile, "Read from a FIFO on disk, reading one Skogul-formatted JSON per line. fifo:///var/skogul/foo")
-		addAutoReceiver("stdin", newStdio, "Read from standard input, one json-object per line")
-		addAutoReceiver("file", newFile, "Read from a file, one json-object per line, exit at EOF.")
-	*/
-}
-
-// newLineFile returns a LineFile receiver reading from the Path-element of
-// the provided URL
-func newLineFile(ul url.URL, h skogul.Handler) skogul.Receiver {
-	log.Printf("File: %s", ul.Path)
-	return &LineFile{File: ul.Path, Handler: h}
+	s.lf.Handler = s.Handler
+	return s.lf.read()
 }

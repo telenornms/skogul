@@ -51,12 +51,25 @@ type Handler struct {
 	Parser       string
 	Transformers []string
 	Sender       skogul.SenderRef
-	Handler      skogul.Handler
+	Handler      skogul.Handler `json:"-"`
 }
 type Config struct {
 	Handlers  map[string]*Handler
 	Receivers map[string]*Receiver
 	Senders   map[string]*Sender
+}
+
+func (r *Receiver) MarshalJSON() ([]byte, error) {
+	nest, err := json.Marshal(r.Receiver)
+	if err != nil {
+		return nil, err
+	}
+	var merged map[string]interface{}
+	if err := json.Unmarshal(nest, &merged); err != nil {
+		return nil, err
+	}
+	merged["type"] = r.Type
+	return json.Marshal(merged)
 }
 
 func (r *Receiver) UnmarshalJSON(b []byte) error {
@@ -79,6 +92,18 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
 	return nil
+}
+func (s *Sender) MarshalJSON() ([]byte, error) {
+	nest, err := json.Marshal(s.Sender)
+	if err != nil {
+		return nil, err
+	}
+	var merged map[string]interface{}
+	if err := json.Unmarshal(nest, &merged); err != nil {
+		return nil, err
+	}
+	merged["type"] = s.Type
+	return json.Marshal(merged)
 }
 func (s *Sender) UnmarshalJSON(b []byte) error {
 	type t_Type struct {

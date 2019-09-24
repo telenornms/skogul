@@ -105,11 +105,3 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	}
 	return nil
 }
-
-func init() {
-	Add(Receiver{
-		Name:  "tcp",
-		Alloc: func() skogul.Receiver { return &TCPLine{} },
-		Help:  "Listen for Skogul-formatted JSON on a line-separate tcp socket",
-	})
-}

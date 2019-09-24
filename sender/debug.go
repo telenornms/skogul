@@ -40,19 +40,6 @@ stdout.
 type Debug struct {
 }
 
-func init() {
-	Add(Sender{
-		Name:  "debug",
-		Alloc: func() skogul.Sender { return &Debug{} },
-		Help:  "Debug sender prints received metrics to stdout",
-	})
-	Add(Sender{
-		Name:  "null",
-		Alloc: func() skogul.Sender { return &Null{} },
-		Help:  "Null discards the data",
-	})
-}
-
 // Send prints the JSON-formatted container to stdout
 func (db *Debug) Send(c *skogul.Container) error {
 	b, err := json.MarshalIndent(*c, "", "  ")

@@ -71,13 +71,6 @@ type Batch struct {
 	out       chan *skogul.Container
 }
 
-func init() {
-	Add(Sender{Name: "batch",
-		Alloc: func() skogul.Sender { return &Batch{} },
-		Help:  "Batch multiple metrics into a container.",
-	})
-}
-
 func (bat *Batch) setup() {
 	if bat.Threshold == 0 {
 		bat.Threshold = 10

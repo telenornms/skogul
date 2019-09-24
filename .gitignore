@@ -1,3 +1,4 @@
-skogul-x2y
+cmd/skogul-x2y/skogul-x2y
+cmd/skogul-file/skogul-file
 .*swp
 coverage.out

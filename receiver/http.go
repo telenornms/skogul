@@ -135,11 +135,3 @@ func (htt *HTTP) Start() error {
 	log.Fatal(http.ListenAndServe(htt.Address, nil))
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
-
-func init() {
-	Add(Receiver{
-		Name:  "http",
-		Alloc: func() skogul.Receiver { return &HTTP{} },
-		Help:  "Listen for metrics on HTTP",
-	})
-}

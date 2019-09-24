@@ -23,8 +23,8 @@ func (bt *BackTester) Send(c *skogul.Container) error {
 // TestBackoff tests if backoff works at least a little bit
 func TestBackoff(t *testing.T) {
 	te := BackTester{fails: 1}
-	bo := sender.Backoff{Next: &te,
-		Base:    time.Duration(time.Millisecond * 10),
+	bo := sender.Backoff{Next: skogul.SenderRef{S: &te},
+		Base:    skogul.Duration{Duration: time.Duration(time.Millisecond * 10)},
 		Retries: 2}
 	err := bo.Send(&validContainer)
 	if err != nil {
