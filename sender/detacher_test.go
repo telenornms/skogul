@@ -59,7 +59,7 @@ func TestFanout(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&m}
 	tst := &(sender.Test{})
 	delay := &(sender.Sleeper{Base: time.Duration(300 * time.Millisecond), MaxDelay: time.Duration(1 * time.Millisecond), Next: tst})
-	fanout := &(sender.Fanout{Next: delay, Workers: 3})
+	fanout := &(sender.Fanout{Next: skogul.SenderRef{S:delay}, Workers: 3})
 
 	start := time.Now()
 	// With a work queue of 3, we can send 3 at the same time and not
