@@ -41,6 +41,11 @@ if the HTTP receiver is created using New()
 type HTTP struct {
 	Address  string                        `doc:"Address to listen to"`
 	Handlers map[string]*skogul.HandlerRef `doc:"Map of urls to handlers" example:"{\"/\": \"someHandler\" }"`
+	Username string                        `doc:"Username for basic authentication. No authentication is required if left blank."`
+	Password string                        `doc:"Password for basic authentication."`
+	Certfile string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
+	Keyfile  string                        `doc:"Path to key file for TLS."`
+	auth     bool
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -48,7 +53,8 @@ type HTTP struct {
 // FIXME: This should almost certianly have a more descriptive name to
 // avoid collisions and confusion.
 type receiver struct {
-	Handler *skogul.Handler
+	Handler  *skogul.Handler
+	settings *HTTP
 }
 
 // defaultAddress is the address used if none is provided to the HTTP
@@ -117,21 +123,40 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (code int, o
 
 // Core HTTP handler
 func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if rcvr.settings.auth {
+		user, pass, ok := r.BasicAuth()
+		if !ok || user != rcvr.settings.Username || pass != rcvr.settings.Password {
+			rcvr.answer(w, r, 401, skogul.Error{Source: "http receiver", Reason: "Authentication failed"})
+			return
+		}
+
+	}
 	code, err := rcvr.handle(w, r)
 	rcvr.answer(w, r, code, err)
 }
 
 // Start never returns.
 func (htt *HTTP) Start() error {
+	if htt.Username != "" {
+		log.Printf("Enforcing basic authentication for user `%s'", htt.Username)
+		htt.auth = true
+	} else {
+		htt.auth = false
+	}
 	for idx, h := range htt.Handlers {
 		log.Printf("Adding handler for %v", idx)
-		http.Handle(idx, receiver{h.H})
+		http.Handle(idx, receiver{Handler: h.H, settings: htt})
 	}
 	if htt.Address == "" {
 		log.Printf("HTTP: No listen-address specified. Using %s", defaultAddress)
 		htt.Address = defaultAddress
 	}
-	log.Printf("Starting http receiver at http://%s", htt.Address)
-	log.Fatal(http.ListenAndServe(htt.Address, nil))
+	if htt.Certfile != "" {
+		log.Printf("Starting http receiver with TLS at %s", htt.Address)
+		log.Fatal(http.ListenAndServeTLS(htt.Address, htt.Certfile, htt.Keyfile, nil))
+	} else {
+		log.Printf("Starting INSECURE http receiver (no TLS) at %s", htt.Address)
+		log.Fatal(http.ListenAndServe(htt.Address, nil))
+	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }

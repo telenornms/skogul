@@ -59,7 +59,7 @@ func Add(s Sender) error {
 func init() {
 	Add(Sender{
 		Name:  "backoff",
-		Alloc: func() skogul.Sender { return &Batch{} },
+		Alloc: func() skogul.Sender { return &Backoff{} },
 		Help:  "Passes data on, but will retry up to Retries times, with an exponential delay between retries.",
 	})
 	Add(Sender{

@@ -39,8 +39,8 @@ InfluxDB posts data to the provided URL and measurement, using the InfluxDB
 line format over HTTP.
 */
 type InfluxDB struct {
-	URL         string          `doc:"URL to InfluxDB API"`
-	Measurement string          `doc:"Measurement name to write to"`
+	URL         string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
+	Measurement string          `doc:"Measurement name to write to."`
 	Timeout     skogul.Duration `doc:"HTTP timeout"`
 	client      *http.Client
 	replacer    *strings.Replacer

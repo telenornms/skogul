@@ -25,6 +25,7 @@ package sender
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -39,10 +40,11 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL     string          `doc:"Fully qualified URL to send data to" example:"http://localhost:6081/"`
-	Timeout skogul.Duration `doc:"Timeout on POST"`
-	once    sync.Once
-	client  *http.Client
+	URL      string          `doc:"Fully qualified URL to send data to" example:"http://localhost:6081/"`
+	Timeout  skogul.Duration `doc:"Timeout on POST"`
+	Insecure bool            `doc:"Disable TLS certificate validation"`
+	once     sync.Once
+	client   *http.Client
 }
 
 // Send POSTS data
@@ -66,7 +68,11 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		if ht.Timeout.Duration == 0 {
 			ht.Timeout.Duration = 20 * time.Second
 		}
-		ht.client = &http.Client{Timeout: ht.Timeout.Duration}
+		if ht.Insecure {
+			log.Print("Warning: Disabeling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+		}
+		tran := http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: ht.Insecure}}
+		ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
 	})
 	resp, err := ht.client.Do(req)
 	if err != nil {

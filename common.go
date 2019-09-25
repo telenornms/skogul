@@ -48,13 +48,10 @@ transmit - through strong authentication - to two central Skogul servers
 that store the data to multiple influxdb instances based on sharding
 rules. Etc.
 
-A general-purpose command is provided under cmd/skogul-x2y, which provides
-a mechanism for starting a simplistic 1-to-1 receiver/sender chain, and
-should satisfy many common use-cases. E.g.: Accepting data from MQTT and
-passing it to influx. Or accepting from HTTP and printing to stdout for
-debug purposes.
-
-A more complete example is also provided further down.
+The cmd/skogul uses json-based configuration files to expose the relevant
+internals. The json is unmarshalled directly onto the implementations, so
+as long as the underlying data structure supports JSON unmarshalling, it
+can be configured.
 */
 package skogul
 

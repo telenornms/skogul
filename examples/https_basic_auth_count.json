@@ -1,0 +1,45 @@
+{
+  "receivers": {
+      "api": {
+        "type": "http",
+        "address": "[::1]:8080",
+        "handlers": {
+          "/": "jsontemplating"
+        },
+	"username": "me",
+	"password": "hunter2",
+	"certfile": "cacert.pem",
+	"keyfile": "privkey.pem"
+      }
+  },
+  "handlers": {
+    "jsontemplating": {
+      "parser": "json",
+      "transformers": [ "templater" ],
+      "sender": "batch"
+    },
+    "debugger": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "print"
+    }
+  },
+  "senders": {
+    "batch": {
+      "type": "batch",
+      "threshold": 1000,
+      "next": "count"
+    },
+    "count": {
+      "type": "counter",
+      "stats": "debugger",
+      "next": "nil"
+    },
+    "nil": {
+      "type": "null"
+    },
+    "print": {
+      "type": "debug"
+    }
+  }
+}

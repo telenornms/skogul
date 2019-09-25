@@ -1,0 +1,25 @@
+{
+  "receivers": {
+      "api": {
+        "type": "http",
+        "address": "[::1]:8080",
+        "handlers": {
+          "/": "jsontemplating"
+        },
+	"username": "me",
+	"password": "hunter2"
+      }
+  },
+  "handlers": {
+    "jsontemplating": {
+      "parser": "json",
+      "transformers": [ "templater" ],
+      "sender": "print"
+    }
+  },
+  "senders": {
+    "print": {
+      "type": "debug"
+    }
+  }
+}
