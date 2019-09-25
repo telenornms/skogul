@@ -23,7 +23,6 @@
 
 package receiver_test
 
-/*
 import (
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/parser"
@@ -54,39 +53,21 @@ func TestTester_stack(t *testing.T) {
 func TestTester_auto(t *testing.T) {
 	one := &(sender.Test{})
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	x, err := receiver.New("test://", h)
-	if err != nil {
-		t.Errorf("receiver.New(\"test://\") gave error: %v", err)
-	}
-	if x == nil {
-		t.Errorf("no receiver created with default test:// url")
-	}
-
-	x, err = receiver.New("test:///?values=fem", h)
-	if err == nil {
-		t.Errorf("receiver.New(\"test:///?values=fem\") gave no error.")
-	}
-	if x != nil {
-		t.Errorf("Receiver created with test:///?values=fem url: %v", x)
-	}
-	x, err = receiver.New("test:///?metrics=fem", h)
-	if err == nil {
-		t.Errorf("receiver.New(\"test:///?metrics=fem\") gave no error.")
-	}
-	if x != nil {
-		t.Errorf("Receiver created with test:///?metrics=fem url: %v", x)
-	}
-	x, err = receiver.New("test:///?delay=1s", h)
-	if err != nil {
-		t.Errorf("receiver.New(\"test:///?delay=1s\") gave error: %v", err)
-	}
-	if x == nil {
-		t.Errorf("no receiver created with default test:// url")
+	parsedD, _ := time.ParseDuration("1s")
+	x := receiver.Tester{
+		Handler: skogul.HandlerRef{H: &h},
+		Metrics: 1,
+		Values:  1,
+		Threads: 2,
+		Delay:   skogul.Duration{Duration: parsedD},
 	}
 	go x.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
-	if one.Received() < 1 {
-		t.Errorf("receiver.New(\"test:///?delay=1s\"), x.Start() failed to receive data. Expected some data, got 0.")
+	got := one.Received()
+	if got < 1 {
+		t.Errorf("receiver.Tester{}, x.Start() failed to receive data. Expected some data, got 0.")
+	}
+	if got > 2 {
+		t.Errorf("Started tester with 2 threads and 1s delay, expected 2 items sent after 100ms, got %d", got)
 	}
 }
-*/

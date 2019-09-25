@@ -27,6 +27,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"runtime"
 	"time"
 
 	"github.com/KristianLyng/skogul"
@@ -61,6 +62,18 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 
 // Start never returns.
 func (tst *Tester) Start() error {
+	if tst.Threads == 0 {
+		tst.Threads = runtime.NumCPU()
+		log.Printf("No threads set, defaulting to runtime.NumCPU() (%d)", tst.Threads)
+	}
+	if tst.Metrics < 1 {
+		tst.Metrics = 10
+		log.Printf("No Metrics specified for testing, defaulting to %d", tst.Metrics)
+	}
+	if tst.Values < 1 {
+		tst.Values = 50
+		log.Printf("No Values specified for testing, defaulting to %d", tst.Values)
+	}
 	for i := 1; i < tst.Threads; i++ {
 		go tst.run()
 	}
