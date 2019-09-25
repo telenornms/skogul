@@ -21,3 +21,45 @@ data at the same time, instead of many small chunks.
 
 The next sender is the influxdb-sender, which writes to influxdb over HTTP
 and the line protocol of InfluxDB.
+
+http_basic_auth.json
+--------------------
+
+Demonstrates basic authentication - unencrypted.
+
+https_basic_auth_count.json
+---------------------------
+
+Demonstrates basic authentication with TLS, sends data to a batch sender,
+then counter, then discards it. The counter periodically emits data to the
+"debugger" handler - which uses the "print" sender to simply output the
+data.
+
+In other words: Accepts data on basic-auth protected HTTPS and emits
+performance statistics without ever storing the data.
+
+https_basic_auth.json
+---------------------
+
+Accepts data on basic-auth protected HTTPS and prints it to stdout.
+
+https_influx.json
+-----------------
+
+Accepts data on HTTPS, protected by basic authentication and TLS, collects
+up to 1000 metrics for up to 5 seconds, then writes the data to InfluxDB.
+
+http_to_influx.json
+-------------------
+
+Accepts data on plain-text, unencrypted HTTP, batches it and saves it to
+influx.
+
+tester_to_http.json
+-------------------
+
+Generates test-data - 500 metrics, each with 10 key/values. Then batches up
+to 1000 metrics for up to 5 seconds. The backoff sender will send data
+immediately, but if it fails, it will wait for 100ms, then 200ms, then
+400ms, etc, for up to 10 attempts. Data is sent to a basic auth-protected
+HTTPS endpoint, but certificates are not verified.
