@@ -102,8 +102,7 @@ Semi-complete example:
       "sender": "print"
     }
   }
-}
-`)
+}`)
 	fmt.Println("\nSenders:")
 	for idx, sen := range sender.Auto {
 		config.PrettyPrint(idx, sen.Help)
