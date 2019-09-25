@@ -72,8 +72,8 @@ func TestByte_ok(t *testing.T) {
 	if c == nil {
 		t.Errorf("Bytes() returned nil config")
 	}
-	bad_data := []byte(`{ "senders": { "x": { "type": "mysql", "ConnStr": 5 } } }`)
-	c, err = Bytes(bad_data)
+	badData := []byte(`{ "senders": { "x": { "type": "mysql", "ConnStr": 5 } } }`)
+	c, err = Bytes(badData)
 	if err == nil {
 		t.Errorf("Bytes() test 2 failed, sent bad data, didn't get error.")
 	}
