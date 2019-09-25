@@ -16,8 +16,8 @@ func TestFile(t *testing.T) {
 }
 
 func TestByte_ok(t *testing.T) {
-	var ok_data []byte
-	ok_data = []byte(`
+	var okData []byte
+	okData = []byte(`
 {
   "senders": {
     "tnet_alarms": {
@@ -65,7 +65,7 @@ func TestByte_ok(t *testing.T) {
   }
 }
 `)
-	c, err := Bytes(ok_data)
+	c, err := Bytes(okData)
 	if err != nil {
 		t.Errorf("Bytes() failed: %v", err)
 	}

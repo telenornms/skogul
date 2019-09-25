@@ -38,27 +38,38 @@ import (
 	"github.com/KristianLyng/skogul/transformer"
 )
 
+// Sender wraps the skogul.Sender for configuration parsing.
 type Sender struct {
 	Type   string
 	Sender skogul.Sender `json:"-"`
 }
 
+// Receiver wraps the skogul.Receiver for configuration parsing.
 type Receiver struct {
 	Type     string
 	Receiver skogul.Receiver `json:"-"`
 }
+
+// Handler wraps skogul.Handler for configuration parsing.
 type Handler struct {
 	Parser       string
 	Transformers []string
 	Sender       skogul.SenderRef
 	Handler      skogul.Handler `json:"-"`
 }
+
+// Config encapsulates all configuration for Skogul, and represent the
+// top-level configuration object.
 type Config struct {
 	Handlers  map[string]*Handler
 	Receivers map[string]*Receiver
 	Senders   map[string]*Sender
 }
 
+// MarshalJSON for a receiver marshals the actual instantiated receiver,
+// then merges it to add "type". Probably not the most efficient
+// implementation, since it does marshal-unmarshal-merge-marshal, but since
+// this isn't really performance sensitive, that's ok.
 func (r *Receiver) MarshalJSON() ([]byte, error) {
 	nest, err := json.Marshal(r.Receiver)
 	if err != nil {
@@ -72,11 +83,13 @@ func (r *Receiver) MarshalJSON() ([]byte, error) {
 	return json.Marshal(merged)
 }
 
+// UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
+// that receiver, than unmarshals the remaining configuration onto that.
 func (r *Receiver) UnmarshalJSON(b []byte) error {
-	type t_Type struct {
+	type tType struct {
 		Type string
 	}
-	var t t_Type
+	var t tType
 	if err := json.Unmarshal(b, &t); err != nil {
 		return err
 	}
@@ -93,6 +106,9 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	}
 	return nil
 }
+
+// MarshalJSON marshals Sender config. See MarshalJSON for receiver - same
+// same.
 func (s *Sender) MarshalJSON() ([]byte, error) {
 	nest, err := json.Marshal(s.Sender)
 	if err != nil {
@@ -105,11 +121,13 @@ func (s *Sender) MarshalJSON() ([]byte, error) {
 	merged["type"] = s.Type
 	return json.Marshal(merged)
 }
+
+// UnmarshalJSON for Sender. See UnmarshalJSON for Receiver - same same.
 func (s *Sender) UnmarshalJSON(b []byte) error {
-	type t_Type struct {
+	type tType struct {
 		Type string
 	}
-	var t t_Type
+	var t tType
 	if err := json.Unmarshal(b, &t); err != nil {
 		return err
 	}
@@ -127,6 +145,8 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+// File opens a config file and parses it, then returns the valid
+// configuration.
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
@@ -137,6 +157,11 @@ func File(f string) (*Config, error) {
 	return c, err
 }
 
+// Bytes parses json in the provided byte array and returns a
+// configuration. To avoid dependency loops, the config parsing is,
+// unfortunately, dependent on global variables in the skogul top-level
+// package - this means Bytes() will change state of skogul.SenderMap and
+// skogul.HandlerMap
 func Bytes(b []byte) (*Config, error) {
 	c := Config{}
 	err := json.Unmarshal(b, &c)

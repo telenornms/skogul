@@ -28,8 +28,8 @@ type Help struct {
 	Fields map[string]fieldDoc
 }
 
-// Generate help for Senders. This and HelpReceiver should really be
-// merged.
+// HelpSender looks up documentation for a named sender and provides a
+// help-structure. Should probably be merged with HelpReceiver somewhat.
 func HelpSender(s string) (Help, error) {
 	if sender.Auto[s] == nil {
 		return Help{}, skogul.Error{Source: "config parser", Reason: "No such sender"}
@@ -62,6 +62,7 @@ func HelpSender(s string) (Help, error) {
 	return sh, nil
 }
 
+// HelpReceiver looks up documentation for a named receiver.
 func HelpReceiver(r string) (Help, error) {
 	if receiver.Auto[r] == nil {
 		return Help{}, skogul.Error{Source: "config parser", Reason: "No such receiver"}
@@ -95,17 +96,17 @@ func HelpReceiver(r string) (Help, error) {
 }
 
 /*
-Print a table of scheme | desc, wrapping the description at helpWidth.
-
-E.g. assuming small helpWidth value:
+PrettyPrint is used to print a table with a header and wrapping the
+description to fit a terminal nicely. Uses helpWidth to determine the size
+of the "terminal".
 
 Without PrettyPrint:
 
-foo:// | A very long line will be wrapped
+foo    | A very long line will be wrapped
 
 With:
 
-foo:// | A very long
+foo    | A very long
        | line will
        | be wrapped
 
@@ -126,6 +127,7 @@ func PrettyPrint(scheme string, desc string) {
 	fmt.Printf("\n")
 }
 
+// Print uses PrettyPrint to output help for a sender or receiver.
 func (sh Help) Print() {
 	fmt.Printf("%s - %s\n", sh.Name, sh.Doc)
 	fmt.Printf("Variables:\n")
