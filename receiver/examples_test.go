@@ -39,8 +39,8 @@ func ExampleHTTP() {
 	template := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{transformer.Templater{}}, Sender: &sender.Debug{}}
 	noTemplate := skogul.Handler{Parser: parser.JSON{}, Sender: &sender.Debug{}}
 	h.Handlers = map[string]*skogul.HandlerRef{
-		"/template":   &skogul.HandlerRef{H: &template},
-		"/notemplate": &skogul.HandlerRef{H: &noTemplate},
+		"/template":   {H: &template},
+		"/notemplate": {H: &noTemplate},
 	}
 	h.Start()
 }

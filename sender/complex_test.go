@@ -57,7 +57,7 @@ func TestHttp_stack(t *testing.T) {
 	port := 1337 + rand.Intn(100)
 	adr := fmt.Sprintf("[::1]:%d", port)
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	rcv := receiver.HTTP{Address: adr, Handlers: map[string]*skogul.HandlerRef{"/": &skogul.HandlerRef{H: &h}}}
+	rcv := receiver.HTTP{Address: adr, Handlers: map[string]*skogul.HandlerRef{"/": {H: &h}}}
 	//	rcv.Handle("/", &h)
 	go rcv.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
