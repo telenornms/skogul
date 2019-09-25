@@ -61,7 +61,7 @@ func TestFallback(t *testing.T) {
 	c := skogul.Container{}
 	one := &(sender.Test{})
 	two := &(sender.Test{})
-	fb := sender.Fallback{Next: []skogul.Sender{one, two}}
+	fb := sender.Fallback{Next: []skogul.SenderRef{{S: one}, {S: two}}}
 
 	err := fb.Send(&c)
 	if err != nil {
@@ -80,10 +80,8 @@ func TestFallback_fail(t *testing.T) {
 	one := &(sender.Test{})
 	two := &(sender.Test{})
 	three := &(sender.Test{})
-	faf := &(sender.ForwardAndFail{Next: one})
-	fb := sender.Fallback{Next: []skogul.Sender{faf, two}}
-
-	fb.Add(three)
+	faf := &(sender.ForwardAndFail{Next: skogul.SenderRef{S: one}})
+	fb := sender.Fallback{Next: []skogul.SenderRef{{S: faf}, {S: two}, {S: three}}}
 
 	err := fb.Send(&c)
 	if err != nil {
@@ -103,7 +101,7 @@ func TestFallback_fail(t *testing.T) {
 func TestForwardAndFail(t *testing.T) {
 	c := skogul.Container{}
 	one := &(sender.Test{})
-	faf := sender.ForwardAndFail{Next: one}
+	faf := sender.ForwardAndFail{Next: skogul.SenderRef{S: one}}
 
 	err := faf.Send(&c)
 	if err == nil {

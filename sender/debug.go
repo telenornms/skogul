@@ -58,21 +58,21 @@ before passing execution over to the Next sender.
 The purpose is testing.
 */
 type Sleeper struct {
-	Next     skogul.Sender
-	MaxDelay time.Duration `doc:"The maximum delay we will suffer"`
-	Base     time.Duration `doc:"The baseline - or minimum - delay"`
-	Verbose  bool          `doc:"If set to true, will log delay durations"`
+	Next     skogul.SenderRef
+	MaxDelay skogul.Duration `doc:"The maximum delay we will suffer"`
+	Base     skogul.Duration `doc:"The baseline - or minimum - delay"`
+	Verbose  bool            `doc:"If set to true, will log delay durations"`
 }
 
 // Send sleeps a random duration according to Sleeper spec, then passes the
 // data to the next sender.
 func (sl *Sleeper) Send(c *skogul.Container) error {
-	d := sl.Base + time.Duration(rand.Float64()*float64(sl.MaxDelay))
+	d := sl.Base.Duration + time.Duration(rand.Float64()*float64(sl.MaxDelay.Duration))
 	if sl.Verbose {
 		log.Printf("Sleeping for %v", d)
 	}
 	time.Sleep(d)
-	return sl.Next.Send(c)
+	return sl.Next.S.Send(c)
 }
 
 /*
@@ -90,12 +90,12 @@ fb := sender.Fallback{Next: []skogul.Sender{influx, faf}}
 
 */
 type ForwardAndFail struct {
-	Next skogul.Sender
+	Next skogul.SenderRef
 }
 
 // Send forwards the data to the next sender and always returns an error.
 func (faf *ForwardAndFail) Send(c *skogul.Container) error {
-	err := faf.Next.Send(c)
+	err := faf.Next.S.Send(c)
 	if err == nil {
 		return skogul.Error{Reason: "Forced failure"}
 	}

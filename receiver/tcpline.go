@@ -46,7 +46,7 @@ skogul.senders.HTTP to forward over a more sensible channel.
 */
 type TCPLine struct {
 	Address string
-	Handler *skogul.Handler
+	Handler skogul.HandlerRef
 }
 
 /*
@@ -86,7 +86,7 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		log.Printf("Read %s", bytes)
-		m, err := tl.Handler.Parser.Parse(bytes)
+		m, err := tl.Handler.H.Parser.Parse(bytes)
 		if err == nil {
 			err = m.Validate()
 		}
@@ -94,10 +94,10 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 			log.Printf("Unable to parse JSON: %s", err)
 			continue
 		}
-		for _, t := range tl.Handler.Transformers {
+		for _, t := range tl.Handler.H.Transformers {
 			t.Transform(&m)
 		}
-		tl.Handler.Sender.Send(&m)
+		tl.Handler.H.Sender.Send(&m)
 	}
 	if err := scanner.Err(); err != nil {
 		log.Printf("Error reading: %s", err)
