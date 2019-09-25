@@ -2,6 +2,9 @@
 Skogul configuration examples
 =============================
 
+This directory contains various Skogul configuration examples. Some are
+provided to demonstrate core Skogul functionality, some to serve as a
+template which can be used almost verbatim for production.
 
 http_to_influx.json
 ===================
@@ -22,11 +25,6 @@ data at the same time, instead of many small chunks.
 The next sender is the influxdb-sender, which writes to influxdb over HTTP
 and the line protocol of InfluxDB.
 
-http_basic_auth.json
---------------------
-
-Demonstrates basic authentication - unencrypted.
-
 https_basic_auth_count.json
 ---------------------------
 
@@ -38,22 +36,11 @@ data.
 In other words: Accepts data on basic-auth protected HTTPS and emits
 performance statistics without ever storing the data.
 
-https_basic_auth.json
----------------------
-
-Accepts data on basic-auth protected HTTPS and prints it to stdout.
-
 https_influx.json
 -----------------
 
 Accepts data on HTTPS, protected by basic authentication and TLS, collects
 up to 1000 metrics for up to 5 seconds, then writes the data to InfluxDB.
-
-http_to_influx.json
--------------------
-
-Accepts data on plain-text, unencrypted HTTP, batches it and saves it to
-influx.
 
 tester_to_http.json
 -------------------
