@@ -13,11 +13,8 @@ Skogul is a generic tool for moving metric data around. It can serve as a
 collector of data, but is primarily designed to be a framework for building
 bridges between data collectors and storage engines.
 
-This repository contains the Skogul library/package, and ``skogul-x2y``, a
-binary that leverages the Skogul library to provide a bridge from X to Y,
-e.g. from a HTTP receiver to an InfluxDB sender. ``skogul-x2y`` supports
-most Skogul receivers and senders, but more complex chains can also be
-created.
+This repository contains the Skogul library/package, and ``cmd/skogul``,
+which parses a JSON-config to set up Skogul.
 
 .. contents:: Table of contents
    :depth: 2
@@ -29,11 +26,11 @@ Quickstart
 You need to install a recent/decent version of Go. Either from your
 favorite Linux distro, or through https://golang.org/dl/ .
 
-Building ``skogul-x2y``, including cloning::
+Building ``skogul``, including cloning::
 
    $ git clone https://github.com/KristianLyng/skogul
    (...)
-   $ cd skogul/cmd/skogul-x2y
+   $ cd skogul/cmd/skogul
    $ go build
    $ 
    # (No output from go build is good)
@@ -54,7 +51,7 @@ the repo will be verified::
 
 Copy repo/directory to relevant computer, then run::
 
-   $ cd skogul/cmd/skogul-x2y
+   $ cd skogul/cmd/skogul
    $ go build -mod vendor
    $
 
@@ -80,68 +77,9 @@ should not be tightly coupled to where you store the data. And where you
 store the data should not be tightly coupled with how you receive it, or
 what you do with it.
 
-The simplest use of Skogul is to use the ``cmd/skogul-x2y`` package, which
-provides *limited* support for a number of "senders" and "receivers", which
-can be arbitrarily matched. This will allow you to receive Skogul-formated
-JSON data on HTTP, MQTT, local fifo, line-based TCP sockets and possibly
-other sources in the (near) future, and pass them on to an other Skogul
-instance over http, to influxdb, M&Rm or post it on a MQTT bus.
-
-An example of the help-screen of ``skogul-x2y`` gives an idea of what you
-can use it for::
-
-   Usage of cmd/skogul-x2y/skogul-x2y:
-     -help
-           Print extensive help/usage
-     -receiver string
-           Where to receive data from. See -help for details. (default "http://[::1]:8080")
-     -sender string
-           Where to send data. See -help for details. (default "debug://")
-
-   skogul-x2y sets up a skogul receiver, accepts data from it and passes it to the sender.
-
-   Available senders:
-     scheme:// | Description
-   ------------+------------
-        mnr:// | MNR sender sends M&R line format to an endpoint, optional DefaultGroup
-               | is provided as the path element.
-       mqtt:// | MQTT sender publishes received metrics to an MQTT broker/topic
-      debug:// | Debug sender prints received metrics to stdout
-       http:// | Post Skogul-formatted JSON to a HTTP endpoint
-     influx:// | Send InfluxDB data to a HTTP endpoint, using the first element of the
-               | path as db and second as measurement, e.g:
-               | influx://host/db/measurement
-
-
-   Available receivers:
-     scheme:// | Description
-   ------------+------------
-       http:// | Listen for Skogul-formatted JSON on a HTTP endpoint
-       fifo:// | Read from a FIFO on disk, reading one Skogul-formatted JSON per line.
-               | fifo:///var/skogul/foo
-       mqtt:// | Listen for Skogul-formatted JSON on a MQTT endpoint
-        tcp:// | Listen for Skogul-formatted JSON on a line-separate tcp socket
-       test:// | Generate dummy-data, each container contains $m metrics and each
-               | metric $v values, format: test://$m/$v
-
-skogul-x2y can also be used to test Skogul. Here's a very simple example
-where data is moved from one Skogul instance to an other over HTTP, using
-the "test receiver" to generate dummy data and the "counter receiver" to
-instrument it on the other side. Similar can also be used to pipe data to
-influx or M&R or any other sender.
-
-.. image:: docs/self-test.png
-
-While this 1-to-1 scenario is very useful and common, it is not really
-where Skogul shines the most. The core idea behind Skogul is building
-pipelines that starts with one or more receiver and builds a chain of
-multiple senders. Each sender comes in one of two forms: largely "internal"
-senders, and "terminal/external" senders. The latter is the most easily
-understood sender: One that transmits the data to an external data source -
-presumably for permanent storage. The internal sender will allow such
-things as duplicating a metric to multiple other senders (e.g.: Send the
-data to both influx and postgres), try sending first to one sender, then if
-that fails, push to an other (e.g.: fallback / ha), and so on.
+Extra care has been put into making it trivial to write senders and
+receivers. For example, an author of a new sender only has to add tags
+to their data structure to have that exposed as documentation.
 
 See the package documentation over at godoc for more usage:
 https://godoc.org/github.com/KristianLyng/skogul
@@ -174,6 +112,12 @@ As future work will introduce buffers and "batch aggregators" to make it
 better equipped to handle irregular traffic, it's is expected and
 acceptable that performance dips when the number of values per container
 drops.
+
+Update:
+
+As of September 2019, TLS was enabled and Skogul was tested again, just for
+TLS. Skogul was seen sending roughly 2 million key:values/s over HTTPS on
+the same laptop. The batch sender has also proven to be very valuable.
 
 Name
 ----
@@ -253,13 +197,26 @@ where applicable.
 Roadmap
 -------
 
-At present, the big missing piece is decent TLS-support. This is not
-particularly hard code-wise, since golang provides all the support we need,
-but has been delayed mainly for UX reasons: Experimentation with how to
-provide options both for skogul-x2y and within the library in a manner
-where each receiver/sender only require a minimal amount of boilerplate
-code has taken some precedence.
+The configuration backend was just introduced. It took a few iterations,
+and will most likely be updated slightly. This is the groundwork that is
+required to ensure a healthy development environment.
 
-Other than that, there are no huge plans beyond what the issues denote. New
-receivers and senders will be added as needed (patches are welcome), and
-the code will be maintained as it's more widely deployed.
+This introduced a shift in focus. Previously, ``skogul-x2y`` was provided
+as a binary to set up simple, but commonly used Skogul-chains. As Skogul
+grew, this became a bottleneck, because exposing more complex configuration
+was hard. As such, the idea was to write custom-binaries for more complex
+chains.
+
+With the new JSON-based configuration, this seems redundant. As such, focus
+will be on simplifying the ``cmd/skogul`` binary user experience, and
+streamlining development.
+
+Immediately, that means work on documentation, re-writing a number of now
+broken tests, and generally tweaking things to see how it works.
+
+One thing that needs to be done, however, is provide better feedback on
+invalid configuration. Including when options are provided that are not
+used.
+
+Time-wise, we hope to do a release in 2019 when we feel Skogul is mature
+enough. It is already in use.

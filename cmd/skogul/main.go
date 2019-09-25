@@ -22,7 +22,7 @@
  */
 
 /*
-skogul-file parses a json-based config file and starts skogul.
+cmd/skogul parses a json-based config file and starts skogul.
 */
 package main
 
@@ -47,15 +47,37 @@ var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of st
 func help() {
 	flag.Usage()
 	fmt.Println(`
-The config file needs to specify three items as a minimum: senders,
-receivers and handlers, each with at least one item. Data is received
-(or generated) in a receiver, which then uses a handler to first parse
-the data and optionally transform it. At present, only JSON-parsing
-is implemented, and only templating for transformation. This will change
-on demand.
+Skogul provides a set of receivers and senders of time-based data, and is
+intended to bridge different systems together. In its simplest form, it will
+read from, e.g. HTTP, and write to a database like InfluxDB. But it can also
+be configured for considerably more complex chains, including failover, data
+duplication, retries, batching of multiple data sets, and more.
 
-Each receiver/sender needs to specify a type, and to find documentation for
-that type, use -receiver-help <type> or -sender-help <type>.
+It is designed to be very fast, and flexible.
+
+To start skogul, you need to specify a chain. A chain starts with a
+receiver - this is where data originates as far as Skogul is concerned.
+Each receiver references one or more handler. A handler defines how
+the raw data is parsed (currently only a JSON parser is supported),
+any transformations of data (e.g.: filtering? Today, only templating
+is supported) and the sender that will receive the data.
+
+A sender accepts containers of metrics and Does Something With Them.
+The most traditional senders will just write the data to a database.
+Several databases are supported, including InfluxDB, MySQL, M&R and
+more.
+
+Other senders are meant to provide configuration options. For example,
+you might want to write data to both MySQL and InfluxDB - this can be
+achieved by sending to a "dupe" sender, which in turn will pass data
+to both an InfluxDB-sender and a MySQL-sender. Other senders can be
+used to batch data together before it is forwarded to storage, or
+provide alternate paths if the preferred sender fails, etc. The list is
+long.
+
+A small example of a simple chain is provided here. See the individual
+senders and receivers for more help, e.g. using -sender-help and
+-receiver-help.
 
 Semi-complete example:
 
