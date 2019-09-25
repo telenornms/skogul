@@ -1,0 +1,32 @@
+{
+  "receivers": {
+      "api": {
+        "type": "http",
+        "address": "[::1]:8080",
+        "handlers": {
+          "/": "jsontemplating"
+        }
+      }
+  },
+  "handlers": {
+    "jsontemplating": {
+      "parser": "json",
+      "transformers": [ "templater" ],
+      "sender": "batch"
+    }
+  },
+  "senders": {
+    "batch": {
+      "type": "batch",
+      "interval": "5s",
+      "threshold": 1000,
+      "next": "influx"
+    },
+    "influx": {
+      "type": "influx",
+      "URL": "http://[::1]:8086/write?db=testdb",
+      "measurement": "demo",
+      "Timeout": "10s"
+    }
+  }
+}

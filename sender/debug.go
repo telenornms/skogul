@@ -61,7 +61,7 @@ type Sleeper struct {
 	Next     skogul.Sender
 	MaxDelay time.Duration `doc:"The maximum delay we will suffer"`
 	Base     time.Duration `doc:"The baseline - or minimum - delay"`
-	Verbose  bool `doc:"If set to true, will log delay durations"`
+	Verbose  bool          `doc:"If set to true, will log delay durations"`
 }
 
 // Send sleeps a random duration according to Sleeper spec, then passes the
@@ -105,9 +105,9 @@ func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 // ErrDiverter calls the Next sender, but if it fails, it will convert the
 // error to a Container and send that to Err.
 type ErrDiverter struct {
-	Next skogul.SenderRef `doc:"Send normal metrics here"`
-	Err skogul.SenderRef `doc:"If the sender under Next fails, convert the error to a metric and send it here"`
-	RetErr bool `doc:"If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error."`
+	Next   skogul.SenderRef `doc:"Send normal metrics here"`
+	Err    skogul.SenderRef `doc:"If the sender under Next fails, convert the error to a metric and send it here"`
+	RetErr bool             `doc:"If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error."`
 }
 
 // Send data to the next sender. If it fails, use the Err sender.
