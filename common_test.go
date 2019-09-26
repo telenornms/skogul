@@ -32,10 +32,10 @@ import (
 
 func TestHandler(t *testing.T) {
 	h1 := skogul.Handler{}
-	h2 := skogul.Handler{ Parser: parser.JSON{} }
-	h3 := skogul.Handler{ Parser: parser.JSON{}, Transformers: []skogul.Transformer{}}
-	h4 := skogul.Handler{ Parser: parser.JSON{}, Transformers: []skogul.Transformer{}, Sender: &(sender.Test{}) }
-	h5 := skogul.Handler{ Parser: parser.JSON{}, Transformers: []skogul.Transformer{nil}, Sender: &(sender.Test{}) }
+	h2 := skogul.Handler{Parser: parser.JSON{}}
+	h3 := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{}}
+	h4 := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{}, Sender: &(sender.Test{})}
+	h5 := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{nil}, Sender: &(sender.Test{})}
 
 	err := h1.Verify()
 	if err == nil {

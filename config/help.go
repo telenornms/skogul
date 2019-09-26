@@ -6,12 +6,8 @@ import (
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
 	"reflect"
-	"strings"
 	"unicode"
 )
-
-// Console width :D
-const helpWidth = 66
 
 // fieldDoc is a structured representation of the documentation of a single
 // field in a struct, used for both senders and receivers (and more?)
@@ -66,7 +62,7 @@ func HelpSender(s string) (Help, error) {
 		if doc, ok := field.Tag.Lookup("doc"); ok {
 			fielddoc.Doc = doc
 			if ex, ok := field.Tag.Lookup("example"); ok {
-				fielddoc.Example = fmt.Sprintf("Example: %s", ex)
+				fielddoc.Example = ex
 			}
 		}
 		sh.Fields[field.Name] = fielddoc
@@ -110,59 +106,10 @@ func HelpReceiver(r string) (Help, error) {
 		if doc, ok := field.Tag.Lookup("doc"); ok {
 			fielddoc.Doc = doc
 			if ex, ok := field.Tag.Lookup("example"); ok {
-				fielddoc.Example = fmt.Sprintf("Example: %s", ex)
+				fielddoc.Example = ex
 			}
 		}
 		sh.Fields[field.Name] = fielddoc
 	}
 	return sh, nil
-}
-
-/*
-PrettyPrint is used to print a table with a header and wrapping the
-description to fit a terminal nicely. Uses helpWidth to determine the size
-of the "terminal".
-
-Without PrettyPrint:
-
-foo    | A very long line will be wrapped
-
-With:
-
-foo    | A very long
-       | line will
-       | be wrapped
-
-We wrap at word boundaries to avoid splitting words.
-*/
-func PrettyPrint(scheme string, desc string) {
-	fmt.Printf("%11s |", scheme)
-	fields := strings.Fields(desc)
-	l := 0
-	for _, w := range fields {
-		if (l + len(w)) > helpWidth {
-			l = 0
-			fmt.Printf("\n%11s |", "")
-		}
-		fmt.Printf(" %s", w)
-		l += len(w) + 1
-	}
-	fmt.Printf("\n")
-}
-
-// Print uses PrettyPrint to output help for a sender or receiver.
-func (sh Help) Print() {
-	fmt.Printf("%s - %s\n", sh.Name, sh.Doc)
-	fmt.Printf("Variables:\n")
-	for n, f := range sh.Fields {
-		t := ""
-		t = fmt.Sprintf("[%s] ", f.Type)
-		d := fmt.Sprintf("%s%s", t, f.Doc)
-		PrettyPrint(n, d)
-		if f.Example != "" {
-			PrettyPrint("", "")
-			PrettyPrint("", f.Example)
-			PrettyPrint("", "")
-		}
-	}
 }

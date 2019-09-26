@@ -84,9 +84,8 @@ func TestByte_ok(t *testing.T) {
 }
 
 func TestHelpSender(t *testing.T) {
-	doc, err := HelpSender("mysql")
+	_, err := HelpSender("mysql")
 	if err != nil {
 		t.Errorf("HelpSender(\"mysql\") didn't work: %v", err)
 	}
-	doc.Print()
 }

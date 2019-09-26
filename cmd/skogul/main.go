@@ -42,11 +42,17 @@ import (
 
 var ffile = flag.String("file", "~/.config/skogul.json", "Path to skogul config to read.")
 var fhelp = flag.Bool("help", false, "Print more help")
-var frecvhelp = flag.String("receiver-help", "", "Print extra options for receiver")
-var fsendhelp = flag.String("sender-help", "", "Print extra options for sender")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
 
+// man generates an RST document suited for converting to a manual page
+// using rst2man. The RST document itself is also valid, but some short
+// cuts have been made, e.g., cutting long lines is not done, so the
+// raw rst document might seem a bit rough, but translated to a manual page
+// it looks fine.
+//
+// Also includes help for all senders and receivers, and uses flag to print
+// the command line flag options as well.
 func man() {
 	fmt.Print(`
 ======
@@ -65,8 +71,9 @@ SYNOPSIS
 
 ::
 
-	skogul -file config-file [-help] [-sender-help sender] 
-	       [-receiver-help receiver] [-show] [-make-man]
+	skogul -file config-file [-show]
+	
+	skogul [-help | -show | -make-man]
 
 DESCRIPTION
 ===========
@@ -80,15 +87,15 @@ will forward the processed data to a sender.
 Senders come in two distinct but interchangable variants: Storage-oriented
 senders are used to send the data to some external resource, e.g., a time series
 database like InfluxDB. Utility-oriented senders are used to do things like
-route data two multiple senders (e.g.: store it in InfluxDB locally, but also
+route data to multiple senders (e.g.: store it in InfluxDB locally, but also
 forward it to a remote database), handle failures by adding retry-mechanics or
 fallback logic, and much more.
 
 The simplest possible example is to receive data over HTTP, parse it as JSON and
-store it to InfluxDB. A more valuable example is to receive data over insecure
-HTTP locally, batch together a collection of data, then forward it over a
-TLS-encrypted and authenticated HTTPS channel to an other skogul instance in
-a different security domain, which can then store it to disk.
+store it to InfluxDB. A more interesting example is to receive data over
+insecure HTTP locally, batch together a collection of data, then forward it
+over a TLS-encrypted and authenticated HTTPS channel to an other skogul
+instance in a different security domain, which can then store it to disk.
 
 There are more examples in the the "examples/" directory.
 
@@ -175,7 +182,7 @@ either ensure data is stored, or forward it according to some internal logic to 
 other sender with that goal.
 
 The following senders exist. A list can also be retrieved by using the "-help"
-option, and -sender-help or -receiver-help.
+option.
 
 `)
 	senders := []string{}
@@ -338,42 +345,73 @@ happens to be GPLv2 (or later). See LICENSE for details.
 
 * Copyright (c) 2019 - Telenor Norge AS
 
-
 `)
 
 }
 
+// thingMan is thus named because of reasons. It prints RST-formatted
+// documentation for a sender or receiver, whatever config.Help has.
 func thingMan(thing config.Help) {
 	fmt.Printf("%s\n", thing.Name)
 	for l := len(thing.Name); l > 0; l-- {
 		fmt.Print("-")
 	}
 	fmt.Printf("\n\n")
+	fmt.Printf("%s\n\n", thing.Doc)
 	if thing.Aliases != "" {
 		fmt.Printf("Aliases: %s\n\n", thing.Aliases)
 	}
-	fmt.Printf("%s\n\nSettings:\n\n", thing.Doc)
 	fields := []string{}
+	doit := false
 	for n := range thing.Fields {
 		fields = append(fields, n)
+		doit = true
+
+	}
+	if doit {
+		fmt.Printf("Settings:\n\n")
 	}
 	sort.Strings(fields)
 	for _, n := range fields {
 		f := thing.Fields[n]
 		fmt.Printf("``%s [%s]``\n\t", strings.ToLower(n), f.Type)
-		fmt.Printf("%s %s\n\n", f.Doc, f.Example)
+		fmt.Printf("%s\n\n", f.Doc)
+		if f.Example != "" {
+			fmt.Printf("\tExample(s): %s\n\n", f.Example)
+		}
 	}
 }
 
+// Console width :D
+const helpWidth = 66
+
+// prettyPrint is a relic that wraps lines in a table.
+func prettyPrint(scheme string, desc string) {
+	fmt.Printf("%11s |", scheme)
+	fields := strings.Fields(desc)
+	l := 0
+	for _, w := range fields {
+		if (l + len(w)) > helpWidth {
+			l = 0
+			fmt.Printf("\n%11s |", "")
+		}
+		fmt.Printf(" %s", w)
+		l += len(w) + 1
+	}
+	fmt.Printf("\n")
+}
+
+// help prints the regular command line usage, and lists all receivers and
+// senders.
 func help() {
 	flag.Usage()
 	fmt.Println("\nSenders:")
 	for idx, sen := range sender.Auto {
-		config.PrettyPrint(idx, sen.Help)
+		prettyPrint(idx, sen.Help)
 	}
 	fmt.Println("\nReceivers:")
 	for idx, rcv := range receiver.Auto {
-		config.PrettyPrint(idx, rcv.Help)
+		prettyPrint(idx, rcv.Help)
 	}
 	fmt.Println("\nYou can also see the skogul manual page. It can be generated with `./skogul -make-man > foo; rst2man < foo > skogul.1; man ./skogul.1'.")
 }
@@ -386,16 +424,6 @@ func main() {
 	}
 	if *fman {
 		man()
-		os.Exit(0)
-	}
-	if *fsendhelp != "" {
-		sh, _ := config.HelpSender(*fsendhelp)
-		sh.Print()
-		os.Exit(0)
-	}
-	if *frecvhelp != "" {
-		sh, _ := config.HelpReceiver(*frecvhelp)
-		sh.Print()
 		os.Exit(0)
 	}
 

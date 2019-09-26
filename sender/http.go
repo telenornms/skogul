@@ -40,9 +40,9 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL      string          `doc:"Fully qualified URL to send data to" example:"http://localhost:6081/"`
-	Timeout  skogul.Duration `doc:"Timeout on POST"`
-	Insecure bool            `doc:"Disable TLS certificate validation"`
+	URL      string          `doc:"Fully qualified URL to send data to." example:"http://localhost:6081/ https://user:password@[::1]:6082/"`
+	Timeout  skogul.Duration `doc:"HTTP timeout."`
+	Insecure bool            `doc:"Disable TLS certificate validation."`
 	once     sync.Once
 	client   *http.Client
 }
