@@ -163,5 +163,10 @@ func init() {
 		Alloc: func() skogul.Sender { return &Sleeper{} },
 		Help:  "Injects a random delay before passing data on.",
 	})
+	Add(Sender{
+		Name:  "test",
+		Alloc: func() skogul.Sender { return &Test{} },
+		Help:  "Used for internal testing. Basically just discards data but provides an internal counter of received data",
+	})
 
 }

@@ -25,6 +25,7 @@ package sender_test
 
 import (
 	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/sender"
 	"testing"
 )
@@ -59,19 +60,45 @@ func TestDupe(t *testing.T) {
 
 func TestFallback(t *testing.T) {
 	c := skogul.Container{}
-	one := &(sender.Test{})
-	two := &(sender.Test{})
-	fb := sender.Fallback{Next: []skogul.SenderRef{{S: one}, {S: two}}}
+	conf, err := config.Bytes([]byte(`
+{
+   "senders": {
+      "foo": { 
+        "type": "fallback",
+        "next": ["fail","ok","ignore" ]
+      },
+      "fail": { 
+          "type": "forwardfail",
+          "next": "fake-fail"
+      },
+      "fake-fail": {"type": "test" },
+      "ok": {"type": "test" },
+      "ignore": {"type": "test" }
+   }
+}
+`))
+	if err != nil {
+		t.Errorf("Failed to load config for fallback test: %v", err)
+		return
+	}
 
-	err := fb.Send(&c)
+	one := conf.Senders["fake-fail"].Sender.(*sender.Test)
+	two := conf.Senders["ok"].Sender.(*sender.Test)
+	three := conf.Senders["ignore"].Sender.(*sender.Test)
+	fb := conf.Senders["foo"].Sender.(*sender.Fallback)
+
+	err = fb.Send(&c)
 	if err != nil {
 		t.Errorf("fallback.Send() failed: %v", err)
 	}
 	if one.Received() != 1 {
 		t.Errorf("fallback.Send(), sender 1 expected %d recevied, got %d", 1, one.Received())
 	}
-	if two.Received() != 0 {
-		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 0, two.Received())
+	if two.Received() != 1 {
+		t.Errorf("fallback.Send(), sender 2 expected %d recevied, got %d", 1, two.Received())
+	}
+	if three.Received() != 0 {
+		t.Errorf("fallback.Send(), sender 3 expected %d recevied, got %d", 0, three.Received())
 	}
 }
 
