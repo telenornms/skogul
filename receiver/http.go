@@ -137,6 +137,9 @@ func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // Start never returns.
 func (htt *HTTP) Start() error {
+	server := http.Server{}
+	serveMux := http.NewServeMux()
+	server.Handler = serveMux
 	if htt.Username != "" {
 		log.Printf("Enforcing basic authentication for user `%s'", htt.Username)
 		htt.auth = true
@@ -145,18 +148,19 @@ func (htt *HTTP) Start() error {
 	}
 	for idx, h := range htt.Handlers {
 		log.Printf("Adding handler for %v", idx)
-		http.Handle(idx, receiver{Handler: h.H, settings: htt})
+		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt})
 	}
 	if htt.Address == "" {
 		log.Printf("HTTP: No listen-address specified. Using %s", defaultAddress)
 		htt.Address = defaultAddress
 	}
+	server.Addr = htt.Address
 	if htt.Certfile != "" {
 		log.Printf("Starting http receiver with TLS at %s", htt.Address)
-		log.Fatal(http.ListenAndServeTLS(htt.Address, htt.Certfile, htt.Keyfile, nil))
+		log.Fatal(server.ListenAndServeTLS(htt.Certfile, htt.Keyfile))
 	} else {
 		log.Printf("Starting INSECURE http receiver (no TLS) at %s", htt.Address)
-		log.Fatal(http.ListenAndServe(htt.Address, nil))
+		log.Fatal(server.ListenAndServe())
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
