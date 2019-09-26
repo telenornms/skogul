@@ -39,8 +39,8 @@ least one handler to be set up, using Handle. This is done implicitly
 if the HTTP receiver is created using New()
 */
 type HTTP struct {
-	Address  string                        `doc:"Address to listen to"`
-	Handlers map[string]*skogul.HandlerRef `doc:"Map of urls to handlers" example:"{\"/\": \"someHandler\" }"`
+	Address  string                        `doc:"Address to listen to." example:"[::1]:80 [2001:db8::1]:443"`
+	Handlers map[string]*skogul.HandlerRef `doc:"Paths to handlers. Need at least one." example:"{\"/\": \"someHandler\" }"`
 	Username string                        `doc:"Username for basic authentication. No authentication is required if left blank."`
 	Password string                        `doc:"Password for basic authentication."`
 	Certfile string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
@@ -56,13 +56,6 @@ type receiver struct {
 	Handler  *skogul.Handler
 	settings *HTTP
 }
-
-// defaultAddress is the address used if none is provided to the HTTP
-// instance. It doesn't really make much sense to change it, since you
-// wont be able to start multiple HTTP receivers on the same address
-// anyway, so it's a const, not var. If you want to try: Just set the same
-// Address on each HTTP receiver....
-var defaultAddress = "[::1]:8080"
 
 type httpReturn struct {
 	Message string
@@ -142,8 +135,14 @@ func (htt *HTTP) Start() error {
 	server.Handler = serveMux
 	if htt.Username != "" {
 		log.Printf("Enforcing basic authentication for user `%s'", htt.Username)
+		if htt.Password == "" {
+			log.Fatal("HTTP receiver has a Username provided, but not a password? Probably a mistake.")
+		}
 		htt.auth = true
 	} else {
+		if htt.Password != "" {
+			log.Fatal("Password provided for HTTP receiver, but not a username? Probably a mistake.")
+		}
 		htt.auth = false
 	}
 	for idx, h := range htt.Handlers {
@@ -151,8 +150,7 @@ func (htt *HTTP) Start() error {
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt})
 	}
 	if htt.Address == "" {
-		log.Printf("HTTP: No listen-address specified. Using %s", defaultAddress)
-		htt.Address = defaultAddress
+		log.Printf("HTTP: No listen-address specified. Using go default (probably :http or :https?)")
 	}
 	server.Addr = htt.Address
 	if htt.Certfile != "" {

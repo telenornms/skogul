@@ -68,24 +68,24 @@ func init() {
 		Name:    "backoff",
 		Aliases: []string{"retry"},
 		Alloc:   func() skogul.Sender { return &Backoff{} },
-		Help:    "Passes data on, but will retry up to Retries times, with an exponential delay between retries.",
+		Help:    "Forwards data to the next sender, retrying after a delay upon failure. For each retry, the delay is doubled. Gives up after the set number of retries.",
 	})
 	Add(Sender{
 		Name:    "batch",
 		Aliases: []string{"batcher"},
 		Alloc:   func() skogul.Sender { return &Batch{} },
-		Help:    "Collects multiple metrics into a single container before sending them on in a batch. Data is sent when either a treshold of metrics or a timeout is reached, whichever comes first.",
+		Help:    "Accepts metrics and puts them in a shared container. When the container either has a set number of metrics (Threshold), or a timeout occurs, the entire container is forwarded. This allows down-stream senders to work with larger batches of metrics at a time, which is frequently more efficient. A side effect of this is that down-stream errors are not propogated upstream. That means any errors need to be dealt with down stream, or they will be ignored.",
 	})
 	Add(Sender{
 		Name:    "counter",
 		Aliases: []string{"count"},
 		Alloc:   func() skogul.Sender { return &Counter{} },
-		Help:    "Passes the metrics on to the Next sender, but every Period it will send statistics on how much data it has seen to Stats",
+		Help:    "Accepts metrics, counts them and passes them on. Then emits statistics to the Stats-handler on an interval.",
 	})
 	Add(Sender{
 		Name:  "debug",
 		Alloc: func() skogul.Sender { return &Debug{} },
-		Help:  "Prints received metrics to stdout",
+		Help:  "Prints received metrics to stdout.",
 	})
 	Add(Sender{
 		Name:    "detacher",
@@ -103,7 +103,7 @@ func init() {
 		Name:    "errdiverter",
 		Aliases: []string{"errordiverter", "errdivert", "errordivert"},
 		Alloc:   func() skogul.Sender { return &ErrDiverter{} },
-		Help:    "Calles the next sender, but if that fails, the error itself will be converted to a Container and sent to Err, allowing error handling or stats of errors",
+		Help:    "Forwards data to next sender. If an error is returned, the error is converted into a Skogul container and sent to the err-handler. This provides the means of logging errors through regular skogul-chains.",
 	})
 	Add(Sender{
 		Name:  "fanout",
@@ -118,19 +118,19 @@ func init() {
 	Add(Sender{
 		Name:  "forwardfail",
 		Alloc: func() skogul.Sender { return &ForwardAndFail{} },
-		Help:  "Forwards metrics, but always returns failure. Useful in complex failure handling involving e.g. fallback sender, where it might be used to write log or stats on failure while still propogating a failure upward",
+		Help:  "Forwards metrics, but always returns failure. Useful in complex failure handling involving e.g. fallback sender, where it might be used to write log or stats on failure while still propogating a failure upward.",
 	})
 	Add(Sender{
 		Name:    "http",
 		Aliases: []string{"https"},
 		Alloc:   func() skogul.Sender { return &HTTP{} },
-		Help:    "Sends Skogul-formatted JSON-data to a HTTP endpoint (e.g.: an other Skogul instance?)",
+		Help:    "Sends Skogul-formatted JSON-data to a HTTP endpoint (e.g.: an other Skogul instance?). Highly useful in scenarios with multiple data collection methods spread over several servers.",
 	})
 	Add(Sender{
 		Name:    "influx",
 		Aliases: []string{"influxdb"},
 		Alloc:   func() skogul.Sender { return &InfluxDB{} },
-		Help:    "Send to a InfluxDB HTTP endpoint",
+		Help:    "Send to a InfluxDB HTTP endpoint.",
 	})
 	Add(Sender{
 		Name:  "log",
@@ -141,17 +141,17 @@ func init() {
 		Name:    "mnr",
 		Aliases: []string{"m&r"},
 		Alloc:   func() skogul.Sender { return &MnR{} },
-		Help:    "Sends M&R line format to a TCP endpoint",
+		Help:    "Sends M&R line format to a TCP endpoint.",
 	})
 	Add(Sender{
 		Name:  "mqtt",
 		Alloc: func() skogul.Sender { return &MQTT{} },
-		Help:  "Publishes received metrics to an MQTT broker/topic",
+		Help:  "Publishes received metrics to an MQTT broker/topic.",
 	})
 	Add(Sender{
 		Name:  "mysql",
 		Alloc: func() skogul.Sender { return &Mysql{} },
-		Help:  "Execute a MySQL query for each received metric, using a template.",
+		Help:  "Execute a MySQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance.",
 	})
 	Add(Sender{
 		Name:  "null",
@@ -161,7 +161,7 @@ func init() {
 	Add(Sender{
 		Name:  "sleep",
 		Alloc: func() skogul.Sender { return &Sleeper{} },
-		Help:  "Injects a random delay before passing data on.",
+		Help:  "Injects a random delay before passing data on. Mainly for testing.",
 	})
 	Add(Sender{
 		Name:  "test",

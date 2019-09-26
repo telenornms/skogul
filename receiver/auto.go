@@ -72,7 +72,7 @@ func init() {
 		Name:    "http",
 		Aliases: []string{"https"},
 		Alloc:   func() skogul.Receiver { return &HTTP{} },
-		Help:    "Listen for metrics on HTTP",
+		Help:    "Listen for metrics on HTTP or HTTPS. Optionally requiring authentication. Each request received is passed to the handler.",
 	})
 	Add(Receiver{
 		Name:  "file",
@@ -97,11 +97,11 @@ func init() {
 	Add(Receiver{
 		Name:  "test",
 		Alloc: func() skogul.Receiver { return &Tester{} },
-		Help:  "Generate dummy-data.",
+		Help:  "Generate dummy-data. Useful for testing, including in combination with the http sender to send dummy-data to an other skogul instance.",
 	})
 	Add(Receiver{
 		Name:  "tcp",
 		Alloc: func() skogul.Receiver { return &TCPLine{} },
-		Help:  "Listen for Skogul-formatted JSON on a line-separate tcp socket",
+		Help:  "Listen for Skogul-formatted JSON on a tcp socket, reading one collection per line.",
 	})
 }
