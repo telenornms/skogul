@@ -32,6 +32,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/KristianLyng/skogul/config"
@@ -100,7 +101,7 @@ OPTIONS
 
 	f := flag.CommandLine
 	f.VisitAll(func(fl *flag.Flag) {
-		s := fmt.Sprintf("-%s", fl.Name)
+		s := fmt.Sprintf("``-%s``", fl.Name)
 		name, usage := flag.UnquoteUsage(fl)
 		if len(name) > 0 {
 			s += " " + name
@@ -114,6 +115,58 @@ OPTIONS
 	})
 
 	fmt.Print(`
+CONFIGURATION
+=============
+
+Configuration of skogul is done with a json config file, referenced with
+the -file option. You need to specify at least one receiver, handler and
+sender to make something sensible.
+
+The base configuration set is::
+
+  {
+    "receivers": {
+      "xxx": {
+        "type": "type-of-receiver",
+        type-specific-options
+      },
+      "other-receiver...": ...
+    },
+    "handlers": {
+      "yyy": {
+        "parser": "json", // other options might come
+        "transformers": [...], // only valid option today is [] or ["templater"]
+        "sender": "reference-to-sender"
+      }
+    },
+    "senders": {
+      "zzz": {
+        "type": "type-of-sender",
+        type-specific-options
+      },
+      "qqq": {
+        "type": "type-of-sender",
+        type-specific-options
+      },
+      ...
+    }
+  }
+
+In the above pseudo-config, "xxx", "yyy", "zzz" and "qqq" are arbitrary
+names you chose that are how to reference that specific item within the same
+configuration. The "type" field referneces what implementation to use - the list
+of different sender-types and receiver-types are below. Each type of sender
+and receiver require different options (e.g.: MySQL sender will require a
+connection string, while InfluxDB sender will require a URL).
+
+At present time, there is only a single parser and a single transformer, so
+handlers mainly serve to name the next/initial sender for a receiver.
+
+The documentation for each sender and receiver also lists all options. In
+general, you do not need to specify all options. For formatting, the settings
+use whatever JSON unmarshalling logic that Go provides, but it should be self
+explanatory or explained in the documentation for the relevant option.
+
 SENDERS
 =======
 
@@ -125,8 +178,13 @@ The following senders exist. A list can also be retrieved by using the "-help"
 option, and -sender-help or -receiver-help.
 
 `)
+	senders := []string{}
 	for idx := range sender.Auto {
-		sh, _ := config.HelpSender(idx)
+		senders = append(senders, idx)
+	}
+	sort.Strings(senders)
+	for _, s := range senders {
+		sh, _ := config.HelpSender(s)
 		thingMan(sh)
 	}
 	fmt.Print(`
@@ -141,8 +199,13 @@ to a handler.
 The following receivers exist.
 
 `)
+	receivers := []string{}
 	for idx := range receiver.Auto {
-		sh, _ := config.HelpReceiver(idx)
+		receivers = append(receivers, idx)
+	}
+	sort.Strings(receivers)
+	for _, r := range receivers {
+		sh, _ := config.HelpReceiver(r)
 		thingMan(sh)
 	}
 	fmt.Print(`
@@ -164,33 +227,33 @@ JSON FORMAT
 Data sent to Skogul will be parsed to fit the internal data model of Skogul. The
 JSON representation is roughly thus::
 
-	{
-		"template": { 
-			"timestamp": "iso8601-time",
-			"metadata": { 
-				"key": value, 
-				...
-			},
-			"data": {
-				"key": value,
-				...
-			}
-		},
-		"metrics": [
-			{
-				"timestamp": "iso8601-time",
-				"metadata": { 
-					"key": value, 
-					...
-				},
-				"data": {
-					"key": value,
-					...
-				}
-			},
-			{ ...}
-		]
-	}
+  {
+    "template": { 
+      "timestamp": "iso8601-time",
+      "metadata": { 
+        "key": value, 
+        ...
+      },
+      "data": {
+        "key": value,
+        ...
+      }
+    },
+    "metrics": [
+      {
+        "timestamp": "iso8601-time",
+        "metadata": { 
+          "key": value, 
+          ...
+        },
+        "data": {
+          "key": value,
+          ...
+        }
+      },
+      { ...}
+    ]
+  }
 
 The entire "template" is optional. If the "templater" transformer is
 applied, all metrics will start with whatever value is present in the
@@ -203,51 +266,44 @@ and it will depend on storage engines. Typically this means the name
 of a server is metadata, but the load average is data. Skogul itself
 does not much care.
 
-CONFIGURATION
-=============
-
-Configuration of skogul is done with a json config file, referenced with
-the -file option. You need to specify at least one receiver, handler and
-sender to make something sensible.
-
 EXAMPLES
 ========
 
 The following specifies an insecure HTTP-based receiver that will wait up
 to 5 seconds or 1000 metrics before writing data to InfluxDB::
 
-	{
-	  "receivers": {
-	      "api": {
-		"type": "http",
-		"address": "[::1]:8080",
-		"handlers": {
-		  "/": "jsontemplating"
-		}
-	      }
-	  },
-	  "handlers": {
-	    "jsontemplating": {
-	      "parser": "json",
-	      "transformers": [ "templater" ],
-	      "sender": "batch"
-	    }
-	  },
-	  "senders": {
-	    "batch": {
-	      "type": "batch",
-	      "interval": "5s",
-	      "threshold": 1000,
-	      "next": "influx"
-	    },
-	    "influx": {
-	      "type": "influx",
-	      "URL": "http://[::1]:8086/write?db=testdb",
-	      "measurement": "demo",
-	      "Timeout": "10s"
-	    }
-	  }
-	}
+  {
+    "receivers": {
+      "api": {
+        "type": "http",
+        "address": "[::1]:8080",
+        "handlers": {
+          "/": "jsontemplating"
+        }
+      }
+    },
+    "handlers": {
+      "jsontemplating": {
+        "parser": "json",
+        "transformers": [ "templater" ],
+        "sender": "batch"
+      }
+    },
+    "senders": {
+      "batch": {
+        "type": "batch",
+        "interval": "5s",
+        "threshold": 1000,
+        "next": "influx"
+      },
+      "influx": {
+        "type": "influx",
+        "URL": "http://[::1]:8086/write?db=testdb",
+        "measurement": "demo",
+        "Timeout": "10s"
+      }
+    }
+  }
 
 More examples are provided in the examples/ directory of the Skogul source
 package.
@@ -286,10 +342,16 @@ func thingMan(thing config.Help) {
 	for l := len(thing.Name); l > 0; l-- {
 		fmt.Print("-")
 	}
-	fmt.Printf("\n\n%s\nSettings:\n\n", thing.Doc)
-	for n, f := range thing.Fields {
+	fmt.Printf("\n\n%s\n\nSettings:\n\n", thing.Doc)
+	fields := []string{}
+	for n := range thing.Fields {
+		fields = append(fields, n)
+	}
+	sort.Strings(fields)
+	for _, n := range fields {
+		f := thing.Fields[n]
 		fmt.Printf("%s\n\t", n)
-		fmt.Printf("[%s] ", f.Type)
+		fmt.Printf("[``%s``] ", f.Type)
 		fmt.Printf("%s %s\n\n", f.Doc, f.Example)
 	}
 }

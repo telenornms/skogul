@@ -50,7 +50,15 @@ func HelpSender(s string) (Help, error) {
 			continue
 		}
 		fielddoc := fieldDoc{}
-		fielddoc.Type = fmt.Sprintf("%v", field.Type.Kind())
+		t := fmt.Sprintf("%v", field.Type.Kind())
+		typeName := field.Type.Name()
+		typeString := field.Type.String()
+		if typeName != "" {
+			t = typeName
+		} else if typeString != "" {
+			t = typeString
+		}
+		fielddoc.Type = fmt.Sprintf("%s", t)
 		if doc, ok := field.Tag.Lookup("doc"); ok {
 			fielddoc.Doc = doc
 			if ex, ok := field.Tag.Lookup("example"); ok {
@@ -83,7 +91,15 @@ func HelpReceiver(r string) (Help, error) {
 			continue
 		}
 		fielddoc := fieldDoc{}
-		fielddoc.Type = fmt.Sprintf("%v", field.Type.Kind())
+		t := fmt.Sprintf("%v", field.Type.Kind())
+		typeName := field.Type.Name()
+		typeString := field.Type.String()
+		if typeName != "" {
+			t = typeName
+		} else if typeString != "" {
+			t = typeString
+		}
+		fielddoc.Type = fmt.Sprintf("%s", t)
 		if doc, ok := field.Tag.Lookup("doc"); ok {
 			fielddoc.Doc = doc
 			if ex, ok := field.Tag.Lookup("example"); ok {
@@ -133,9 +149,7 @@ func (sh Help) Print() {
 	fmt.Printf("Variables:\n")
 	for n, f := range sh.Fields {
 		t := ""
-		if f.Type != "map" && f.Type != "struct" && f.Type != "ptr" {
-			t = fmt.Sprintf("[%s] ", f.Type)
-		}
+		t = fmt.Sprintf("[%s] ", f.Type)
 		d := fmt.Sprintf("%s%s", t, f.Doc)
 		PrettyPrint(n, d)
 		if f.Example != "" {
