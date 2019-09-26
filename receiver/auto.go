@@ -39,9 +39,10 @@ var Auto map[string]*Receiver
 // Receiver is the generic data for all receivers, used for
 // auto-configuration and more.
 type Receiver struct {
-	Name  string
-	Alloc func() skogul.Receiver
-	Help  string
+	Name    string
+	Aliases []string
+	Alloc   func() skogul.Receiver
+	Help    string
 }
 
 // Add is used to announce a receiver-implementation to the world, so to
@@ -56,15 +57,22 @@ func Add(r Receiver) error {
 	if r.Alloc == nil {
 		log.Panicf("No alloc function for %s", r.Name)
 	}
+	for _, alias := range r.Aliases {
+		if Auto[alias] != nil {
+			log.Panicf("BUG: An alias(%s) for receiver %s overlaps an existing receiver %s", alias, r.Name, Auto[alias].Name)
+		}
+		Auto[alias] = &r
+	}
 	Auto[r.Name] = &r
 	return nil
 }
 
 func init() {
 	Add(Receiver{
-		Name:  "http",
-		Alloc: func() skogul.Receiver { return &HTTP{} },
-		Help:  "Listen for metrics on HTTP",
+		Name:    "http",
+		Aliases: []string{"https"},
+		Alloc:   func() skogul.Receiver { return &HTTP{} },
+		Help:    "Listen for metrics on HTTP",
 	})
 	Add(Receiver{
 		Name:  "file",

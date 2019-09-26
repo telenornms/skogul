@@ -23,9 +23,10 @@ type fieldDoc struct {
 
 // Help is the relevant help for a single sender/receiver
 type Help struct {
-	Name   string
-	Doc    string
-	Fields map[string]fieldDoc
+	Name    string
+	Aliases string
+	Doc     string
+	Fields  map[string]fieldDoc
 }
 
 // HelpSender looks up documentation for a named sender and provides a
@@ -37,6 +38,9 @@ func HelpSender(s string) (Help, error) {
 	sh := Help{}
 	sh.Name = s
 	sh.Doc = sender.Auto[s].Help
+	for _, alias := range sender.Auto[s].Aliases {
+		sh.Aliases = fmt.Sprintf("%s %s", alias, sh.Aliases)
+	}
 	sh.Fields = make(map[string]fieldDoc)
 	news := sender.Auto[s].Alloc()
 	st := reflect.TypeOf(news)
@@ -78,6 +82,9 @@ func HelpReceiver(r string) (Help, error) {
 	sh := Help{}
 	sh.Name = r
 	sh.Doc = receiver.Auto[r].Help
+	for _, alias := range receiver.Auto[r].Aliases {
+		sh.Aliases = fmt.Sprintf("%s %s", alias, sh.Aliases)
+	}
 	sh.Fields = make(map[string]fieldDoc)
 	news := receiver.Auto[r].Alloc()
 	st := reflect.TypeOf(news)

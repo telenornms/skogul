@@ -32,9 +32,10 @@ import (
 // Sender provides a framework that all sender-implementations should
 // follow, and allows auto-initialization.
 type Sender struct {
-	Name  string
-	Alloc func() skogul.Sender
-	Help  string
+	Name    string
+	Aliases []string
+	Alloc   func() skogul.Sender
+	Help    string
 }
 
 // Auto maps sender-names to sender implementation, used for auto
@@ -53,23 +54,33 @@ func Add(s Sender) error {
 		log.Printf("No alloc function for %s", s.Name)
 	}
 	Auto[s.Name] = &s
+	for _, alias := range s.Aliases {
+		if Auto[alias] != nil {
+			log.Panicf("BUG: An alias(%s) for sender %s overlaps an existing sender %s", alias, s.Name, Auto[alias].Name)
+		}
+		Auto[alias] = &s
+	}
 	return nil
 }
 
 func init() {
 	Add(Sender{
-		Name:  "backoff",
-		Alloc: func() skogul.Sender { return &Backoff{} },
-		Help:  "Passes data on, but will retry up to Retries times, with an exponential delay between retries.",
+		Name:    "backoff",
+		Aliases: []string{"retry"},
+		Alloc:   func() skogul.Sender { return &Backoff{} },
+		Help:    "Passes data on, but will retry up to Retries times, with an exponential delay between retries.",
 	})
 	Add(Sender{
-		Name:  "batch",
-		Alloc: func() skogul.Sender { return &Batch{} },
-		Help:  "Collects multiple metrics into a single container before sending them on in a batch. Data is sent when either a treshold of metrics or a timeout is reached, whichever comes first.",
+		Name:    "batch",
+		Aliases: []string{"batcher"},
+		Alloc:   func() skogul.Sender { return &Batch{} },
+		Help:    "Collects multiple metrics into a single container before sending them on in a batch. Data is sent when either a treshold of metrics or a timeout is reached, whichever comes first.",
 	})
-	Add(Sender{Name: "counter",
-		Alloc: func() skogul.Sender { return &Counter{} },
-		Help:  "Passes the metrics on to the Next sender, but every Period it will send statistics on how much data it has seen to Stats",
+	Add(Sender{
+		Name:    "counter",
+		Aliases: []string{"count"},
+		Alloc:   func() skogul.Sender { return &Counter{} },
+		Help:    "Passes the metrics on to the Next sender, but every Period it will send statistics on how much data it has seen to Stats",
 	})
 	Add(Sender{
 		Name:  "debug",
@@ -77,19 +88,22 @@ func init() {
 		Help:  "Prints received metrics to stdout",
 	})
 	Add(Sender{
-		Name:  "detacher",
-		Alloc: func() skogul.Sender { return &Detacher{} },
-		Help:  "Returns OK without waiting for the next sender to finish.",
+		Name:    "detacher",
+		Aliases: []string{"detach"},
+		Alloc:   func() skogul.Sender { return &Detacher{} },
+		Help:    "Returns OK without waiting for the next sender to finish.",
 	})
 	Add(Sender{
-		Name:  "dupe",
-		Alloc: func() skogul.Sender { return &Dupe{} },
-		Help:  "Sends the same metrics to all senders listed in Next.",
+		Name:    "dupe",
+		Aliases: []string{"dup", "duplicate"},
+		Alloc:   func() skogul.Sender { return &Dupe{} },
+		Help:    "Sends the same metrics to all senders listed in Next.",
 	})
 	Add(Sender{
-		Name:  "errdiverter",
-		Alloc: func() skogul.Sender { return &ErrDiverter{} },
-		Help:  "Calles the next sender, but if that fails, the error itself will be converted to a Container and sent to Err, allowing error handling or stats of errors",
+		Name:    "errdiverter",
+		Aliases: []string{"errordiverter", "errdivert", "errordivert"},
+		Alloc:   func() skogul.Sender { return &ErrDiverter{} },
+		Help:    "Calles the next sender, but if that fails, the error itself will be converted to a Container and sent to Err, allowing error handling or stats of errors",
 	})
 	Add(Sender{
 		Name:  "fanout",
@@ -107,14 +121,16 @@ func init() {
 		Help:  "Forwards metrics, but always returns failure. Useful in complex failure handling involving e.g. fallback sender, where it might be used to write log or stats on failure while still propogating a failure upward",
 	})
 	Add(Sender{
-		Name:  "http",
-		Alloc: func() skogul.Sender { return &HTTP{} },
-		Help:  "Sends Skogul-formatted JSON-data to a HTTP endpoint (e.g.: an other Skogul instance?)",
+		Name:    "http",
+		Aliases: []string{"https"},
+		Alloc:   func() skogul.Sender { return &HTTP{} },
+		Help:    "Sends Skogul-formatted JSON-data to a HTTP endpoint (e.g.: an other Skogul instance?)",
 	})
 	Add(Sender{
-		Name:  "influx",
-		Alloc: func() skogul.Sender { return &InfluxDB{} },
-		Help:  "Send to a InfluxDB HTTP endpoint",
+		Name:    "influx",
+		Aliases: []string{"influxdb"},
+		Alloc:   func() skogul.Sender { return &InfluxDB{} },
+		Help:    "Send to a InfluxDB HTTP endpoint",
 	})
 	Add(Sender{
 		Name:  "log",
@@ -122,9 +138,10 @@ func init() {
 		Help:  "Logs a message, mainly useful for enriching debug information in conjunction with, for example, dupe and debug.",
 	})
 	Add(Sender{
-		Name:  "mnr",
-		Alloc: func() skogul.Sender { return &MnR{} },
-		Help:  "Sends M&R line format to a TCP endpoint",
+		Name:    "mnr",
+		Aliases: []string{"m&r"},
+		Alloc:   func() skogul.Sender { return &MnR{} },
+		Help:    "Sends M&R line format to a TCP endpoint",
 	})
 	Add(Sender{
 		Name:  "mqtt",

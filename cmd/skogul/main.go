@@ -180,6 +180,9 @@ option, and -sender-help or -receiver-help.
 `)
 	senders := []string{}
 	for idx := range sender.Auto {
+		if sender.Auto[idx].Name != idx {
+			continue // alias
+		}
 		senders = append(senders, idx)
 	}
 	sort.Strings(senders)
@@ -201,6 +204,9 @@ The following receivers exist.
 `)
 	receivers := []string{}
 	for idx := range receiver.Auto {
+		if receiver.Auto[idx].Name != idx {
+			continue // alias
+		}
 		receivers = append(receivers, idx)
 	}
 	sort.Strings(receivers)
@@ -342,7 +348,11 @@ func thingMan(thing config.Help) {
 	for l := len(thing.Name); l > 0; l-- {
 		fmt.Print("-")
 	}
-	fmt.Printf("\n\n%s\n\nSettings:\n\n", thing.Doc)
+	fmt.Printf("\n\n")
+	if thing.Aliases != "" {
+		fmt.Printf("Aliases: %s\n\n", thing.Aliases)
+	}
+	fmt.Printf("%s\n\nSettings:\n\n", thing.Doc)
 	fields := []string{}
 	for n := range thing.Fields {
 		fields = append(fields, n)
@@ -350,8 +360,7 @@ func thingMan(thing config.Help) {
 	sort.Strings(fields)
 	for _, n := range fields {
 		f := thing.Fields[n]
-		fmt.Printf("%s\n\t", n)
-		fmt.Printf("[``%s``] ", f.Type)
+		fmt.Printf("``%s [%s]``\n\t", strings.ToLower(n), f.Type)
 		fmt.Printf("%s %s\n\n", f.Doc, f.Example)
 	}
 }

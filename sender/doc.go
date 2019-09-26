@@ -39,5 +39,19 @@ senders and tries each one in order until one succeeds, allowing you to
 send to a primary influxdb normally - if influx fails, write to local disk,
 if that fails, write a message to the log.
 
+The only thing a sender "must" do is implement Send(c *skogul.Container),
+and it is disallowed to modify the container in Send(), since multiple
+senders might be working on it at the same time.
+
+To make a sender configurable, simply ensure data types in the type
+definition can be Unmarshalled from JSON. A small note on that is that
+it is necessary to use "SenderRef" and "HandlerRef" objects instead of
+Sender and Handler directly for now. This is to let the config engine
+track references that haven't resolved yet.
+
+It also means certain data types need to be avoided or worked around.
+Currently, time.Duration is such an example, as it is missing a JSON
+unmrashaller. For such data types, a simple wrapper will do the trick,
+e.g. skogul.Duration wraps time.Duration.
 */
 package sender
