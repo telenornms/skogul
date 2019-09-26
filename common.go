@@ -57,9 +57,7 @@ package skogul
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
-	"net/url"
 	"time"
 )
 
@@ -262,18 +260,4 @@ func (e Error) Container() Container {
 	m.Data["description"] = e.Error()
 	c.Metrics[0] = &m
 	return c
-}
-
-// URLParse parses a url's "GET parameters" into the provided FlagSet.
-func URLParse(u url.URL, fs *flag.FlagSet) error {
-	vs := u.Query()
-	for i, v := range vs {
-		for _, e := range v {
-			err := fs.Set(i, e)
-			if err != nil {
-				return Error{Source: "auto receiver", Reason: fmt.Sprintf("failed to parse argument %s value %s", i, e), Next: err}
-			}
-		}
-	}
-	return nil
 }
