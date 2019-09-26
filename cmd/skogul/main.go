@@ -413,7 +413,19 @@ func main() {
 		os.Exit(0)
 	}
 
+	// I know there's a simpler way of saying "start these things and
+	// wait", but I really can't be bothered to look it up right this
+	// moment.
+	foo := make([]chan int, len(c.Receivers))
+	i := 0
 	for _, r := range c.Receivers {
-		r.Receiver.Start()
+		i++
+		go func(r *config.Receiver, i int) {
+			r.Receiver.Start()
+			foo[i] <- 1
+		}(r, i)
+	}
+	for ii := 0; ii < len(foo); ii++ {
+		<-foo[ii]
 	}
 }
