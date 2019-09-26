@@ -84,7 +84,7 @@ and sender. A receiver will accept (or in special cases: generate) data, it
 will then use a handler to prosess that data, e.g. parse JSON data. The handler
 will forward the processed data to a sender.
 
-Senders come in two distinct but interchangable variants: Storage-oriented
+Senders come in two distinct but interchangeable variants: Storage-oriented
 senders are used to send the data to some external resource, e.g., a time series
 database like InfluxDB. Utility-oriented senders are used to do things like
 route data to multiple senders (e.g.: store it in InfluxDB locally, but also
@@ -161,10 +161,10 @@ The base configuration set is::
 
 In the above pseudo-config, "xxx", "yyy", "zzz" and "qqq" are arbitrary
 names you chose that are how to reference that specific item within the same
-configuration. The "type" field referneces what implementation to use - the list
-of different sender-types and receiver-types are below. Each type of sender
-and receiver require different options (e.g.: MySQL sender will require a
-connection string, while InfluxDB sender will require a URL).
+configuration. The "type" field references what implementation to use - the
+list of different sender-types and receiver-types are below. Each type of
+sender and receiver require different options (e.g.: MySQL sender will
+require a connection string, while InfluxDB sender will require a URL).
 
 At present time, there is only a single parser and a single transformer, so
 handlers mainly serve to name the next/initial sender for a receiver.
@@ -331,7 +331,7 @@ BUGS
 
 The biggest known issue right now is that the configuration engine is a bit
 horrible at giving constructive error message, and will silently ignore
-unkown (or misspelled) variable names. Work in progress.
+unknown (or misspelled) variable names. Work in progress.
 
 A tip for working around this is to compare your configuration with what
 skogul outputs when you run it with -show, as that is a representation of
