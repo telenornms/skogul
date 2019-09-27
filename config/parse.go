@@ -206,11 +206,20 @@ func Bytes(b []byte) (*Config, error) {
 		}
 	}
 	for idx, s := range c.Senders {
-		sv, ok := s.Sender.(skogul.SenderVerification)
+		sv, ok := s.Sender.(skogul.Verifier)
 		if ok {
 			err := sv.Verify()
 			if err != nil {
 				return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("sender %s isn't valid", idx), Next: err}
+			}
+		}
+	}
+	for idx, r := range c.Receivers {
+		rv, ok := r.Receiver.(skogul.Verifier)
+		if ok {
+			err := rv.Verify()
+			if err != nil {
+				return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("receiver %s isn't valid", idx), Next: err}
 			}
 		}
 	}

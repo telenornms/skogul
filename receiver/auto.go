@@ -85,6 +85,11 @@ func init() {
 		Help:  "Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.",
 	})
 	Add(Receiver{
+		Name:  "log",
+		Alloc: func() skogul.Receiver { return &Log{} },
+		Help:  "Log attaches to the internal logging of Skogul and diverts log messages.",
+	})
+	Add(Receiver{
 		Name:  "mqtt",
 		Alloc: func() skogul.Receiver { return &MQTT{} },
 		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",

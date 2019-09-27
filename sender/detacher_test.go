@@ -36,7 +36,7 @@ func TestDetacher(t *testing.T) {
 
 	c.Metrics = []*skogul.Metric{&m}
 	tst := &(sender.Test{})
-	delay := &(sender.Sleeper{Base: skogul.Duration{time.Duration(100 * time.Millisecond)}, MaxDelay: skogul.Duration{time.Duration(100 * time.Millisecond)}, Next: skogul.SenderRef{S: tst}})
+	delay := &(sender.Sleeper{Base: skogul.Duration{Duration: time.Duration(100 * time.Millisecond)}, MaxDelay: skogul.Duration{Duration: time.Duration(100 * time.Millisecond)}, Next: skogul.SenderRef{S: tst}})
 	detach := &(sender.Detacher{Next: skogul.SenderRef{S: delay}})
 
 	start := time.Now()
@@ -58,7 +58,7 @@ func TestFanout(t *testing.T) {
 
 	c.Metrics = []*skogul.Metric{&m}
 	tst := &(sender.Test{})
-	delay := &(sender.Sleeper{Base: skogul.Duration{time.Duration(300 * time.Millisecond)}, MaxDelay: skogul.Duration{time.Duration(1 * time.Millisecond)}, Next: skogul.SenderRef{S: tst}})
+	delay := &(sender.Sleeper{Base: skogul.Duration{Duration: time.Duration(300 * time.Millisecond)}, MaxDelay: skogul.Duration{Duration: time.Duration(1 * time.Millisecond)}, Next: skogul.SenderRef{S: tst}})
 	fanout := &(sender.Fanout{Next: skogul.SenderRef{S: delay}, Workers: 3})
 
 	start := time.Now()

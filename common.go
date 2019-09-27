@@ -74,16 +74,6 @@ type Sender interface {
 }
 
 /*
-SenderVerification is an *optional* interface for senders. If a sender
-implements it, the configuration engine will issue Verify() after all
-configuration is parsed. The sender should never modify state upon
-Verify(), but should simply check that internal state is usable.
-*/
-type SenderVerification interface {
-	Verify() error
-}
-
-/*
 Transformer mutates a collection before it is passed to a sender. Transformers
 should be very fast, but are the only means to modifying the data.
 */
@@ -98,6 +88,16 @@ This ensures that how data is transported is not bound by how it is parsed.
 */
 type Receiver interface {
 	Start() error
+}
+
+/*
+Verifier is an *optional* interface for senders and receivers. If
+implemented, the configuration engine will issue Verify() after all
+configuration is parsed. The sender/receiver should never modify state upon
+Verify(), but should simply check that internal state is usable.
+*/
+type Verifier interface {
+	Verify() error
 }
 
 /*

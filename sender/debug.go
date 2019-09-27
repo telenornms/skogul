@@ -25,6 +25,7 @@ package sender
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"math/rand"
 	"sync/atomic"
@@ -38,6 +39,7 @@ Debug sender simply prints the metrics in json-marshalled format to
 stdout.
 */
 type Debug struct {
+	Prefix string `doc:"Prefix to print before any metric"`
 }
 
 // Send prints the JSON-formatted container to stdout
@@ -47,7 +49,7 @@ func (db *Debug) Send(c *skogul.Container) error {
 		log.Panicf("Unable to marshal json for debug output: %s", err)
 		return err
 	}
-	log.Printf("Debug: \n%s", b)
+	fmt.Printf("%s%s\n", db.Prefix, b)
 	return nil
 }
 
