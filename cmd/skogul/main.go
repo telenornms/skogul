@@ -89,9 +89,9 @@ channel, if that fails, write to a local queue and retry periodically.
 
 To facilitate this, Skogul has three core components:
 
-1. A receiver is how Skogul gets data
-2. A handler is how Skogul inteprets that data
-3. A sender is what Skogul does with the data
+1. Receivers acquire raw data
+2. Handlers turns raw data into meaningful content
+3. Senders determine what happens to the data
 
 A single instance of Skogul must have at least one receiver, but can have
 multiple. It also, typically, must have at least one handler and sender.
