@@ -78,28 +78,31 @@ SYNOPSIS
 DESCRIPTION
 ===========
 
-Skogul is a framework for normalising and transporting event-oriented data
-between different systems. It operates using a concept of a receiver, handler
-and sender. A receiver will accept (or in special cases: generate) data, it
-will then use a handler to prosess that data, e.g. parse JSON data. The handler
-will forward the processed data to a sender.
+Skogul is a generic tool for moving metric data around. It can serve as a
+collector of data, but is primarily designed to be a framework for building
+bridges between data collectors and storage engines.
+
+These bridges can be simple - accept data on HTTP, write to influxdb - or
+complex: Accept data on unencrypted http, batch data together, forward it
+to a remote skogul-instance over a password-protected, encrypted HTTPS
+channel, if that fails, write to a local queue and retry periodically.
+
+To facilitate this, Skogul has three core components:
+
+1. A receiver is how Skogul gets data
+2. A handler is how Skogul inteprets that data
+3. A sender is what Skogul does with the data
+
+A single instance of Skogul must have at least one receiver, but can have
+multiple. It also, typically, must have at least one handler and sender.
 
 Senders come in two distinct but interchangeable variants: Storage-oriented
-senders are used to send the data to some external resource, e.g., a time series
-database like InfluxDB. Utility-oriented senders are used to do things like
-route data to multiple senders (e.g.: store it in InfluxDB locally, but also
-forward it to a remote database), handle failures by adding retry-mechanics or
-fallback logic, and much more.
-
-The simplest possible example is to receive data over HTTP, parse it as JSON and
-store it to InfluxDB. A more interesting example is to receive data over
-insecure HTTP locally, batch together a collection of data, then forward it
-over a TLS-encrypted and authenticated HTTPS channel to an other skogul
-instance in a different security domain, which can then store it to disk.
+senders are used to send the data to some external resource, e.g., a time
+series database like InfluxDB. Utility-oriented senders are used to add
+logic, such as error handling or duplicating data to multiple storage
+systems.
 
 There are more examples in the the "examples/" directory.
-
-Configuration is written as JSON as well, and dynamically parsed.
 
 OPTIONS
 =======
@@ -161,10 +164,16 @@ The base configuration set is::
 
 In the above pseudo-config, "xxx", "yyy", "zzz" and "qqq" are arbitrary
 names you chose that are how to reference that specific item within the same
-configuration. The "type" field references what implementation to use - the
-list of different sender-types and receiver-types are below. Each type of
-sender and receiver require different options (e.g.: MySQL sender will
-require a connection string, while InfluxDB sender will require a URL).
+configuration. The "type" field references what implementation to use - each
+implementation have different configuration options. You can specify as many
+senders, receivers and handlers as you want, and they can cross-reference
+each other.
+
+Upon start-up, all receivers are started.
+
+It is valid to have multiple receivers use the same handler. It is also
+valid for multiple senders to reference the same sender. It is up to the
+operator to avoid setting up feedback loops.
 
 At present time, there is only a single parser and a single transformer, so
 handlers mainly serve to name the next/initial sender for a receiver.
@@ -177,12 +186,7 @@ explanatory or explained in the documentation for the relevant option.
 SENDERS
 =======
 
-Senders move parsed data around according to internal logic. A sender will typically
-either ensure data is stored, or forward it according to some internal logic to an
-other sender with that goal.
-
-The following senders exist. A list can also be retrieved by using the "-help"
-option.
+The following senders exist.
 
 `)
 	senders := []string{}
@@ -200,11 +204,6 @@ option.
 	fmt.Print(`
 RECEIVERS
 =========
-
-Receivers accept data from the outside world - or in special cases,
-generate the data themself. Receivers do not typically deal with how
-individual collections of data is handled, but leaves that specific task
-to a handler.
 
 The following receivers exist.
 
@@ -232,7 +231,90 @@ receive the parsed container(s).
 Currently the only valid parser is "json" and the only valid transformer is
 "templating".
 
-FIXME: Templating
+Templating
+----------
+
+The templating-transformer is useful for adding identical fields to all
+metrics in a collection. If a template is provided, and the
+templater-transformer is applied, all metrics are initialized with whatever
+value the template came with.
+
+This is inteded for when you are sending multiple metrics that share
+certain attributes, e.g, they are all from the same machine and all
+collected at the same time. Or they are all from the same data center
+or region.
+
+Templates are shallow. If your metric has nested fields, they will not
+be merged with what the template provides. For example::
+
+   {
+     "template": {
+       "timestamp": "2019-09-27T15:42:00Z",
+       "metadata": {
+         "site": "naboo",
+         "machine": {
+           "os": "Debian"
+         }
+       }
+     },
+     "metrics": [
+       {
+         "metadata": {
+           "machine": {
+             "hostname": "r2d2"
+           }
+         },
+         "data": {
+           "something": "blah"
+         }
+       },
+       {
+         "metadata": {
+           "machine": {
+             "hostname": "c3po"
+           }
+         },
+         "data": {
+           "something": "duck"
+         }
+       }
+     ]
+   }
+
+Here, the template provides three items: a timestamp, the "site" field and
+the "machine" field of metadata. Once transformed, the result will be::
+
+   {
+     "metrics": [
+       {
+         "timestamp": "2019-09-27T15:42:00Z",
+         "metadata": {
+           "site": "naboo",
+           "machine": {
+             "hostname": "r2d2"
+           }
+         },
+         "data": {
+           "something": "blah"
+         }
+       },
+       {
+         "timestamp": "2019-09-27T15:42:00Z",
+         "metadata": {
+           "site": "naboo",
+           "machine": {
+             "hostname": "c3po"
+           }
+         },
+         "data": {
+           "something": "duck"
+         }
+       }
+     ]
+   }
+
+Since each metric also provided a "machine"-field, it overwrote the value
+from the template, even if there were no overlapping fields.
 
 JSON FORMAT
 ===========
@@ -268,11 +350,8 @@ JSON representation is roughly thus::
     ]
   }
 
-The entire "template" is optional. If the "templater" transformer is
-applied, all metrics will start with whatever value is present in the
-template, and then overwrite with "local" variables. E.g.: If all your
-metrics share timestamp in a collection, you can specify that in the
-template. Or if they share some metadata.
+The "template" is optional, see the "Templater"-documentation above for an
+in-depth description.
 
 The primary difference between metadata and data is searchability,
 and it will depend on storage engines. Typically this means the name
@@ -281,6 +360,31 @@ does not much care.
 
 EXAMPLES
 ========
+
+A minimalistic example that accepts data on HTTP and prints it to standard
+output::
+
+  { 
+    "receivers": { 
+      "api": { 
+        "type": "http", 
+        "address": ":8080", 
+        "handlers": { "/": "myhandler" }
+      }
+    },
+    "handlers": {
+      "myhandler": {
+        "parser": "json", 
+        "transformers": ["templater"], 
+        "sender": "mysender"
+      }
+    },
+    "senders": {
+      "mysender": {
+        "type": "debug"
+      }
+    }
+  }
 
 The following specifies an insecure HTTP-based receiver that will wait up
 to 5 seconds or 1000 metrics before writing data to InfluxDB::
@@ -329,13 +433,10 @@ https://github.com/KristianLyng/skogul
 BUGS
 ====
 
-The biggest known issue right now is that the configuration engine is a bit
-horrible at giving constructive error message, and will silently ignore
-unknown (or misspelled) variable names. Work in progress.
+Configuration parsing doesn't provide very helpful errors, and silently
+ignores keys/variables that are not used in a specific context.
 
-A tip for working around this is to compare your configuration with what
-skogul outputs when you run it with -show, as that is a representation of
-the parsed configuration.
+Workaround: Use the "-show" option to display the parsed configuration.
 
 COPYRIGHT
 =========

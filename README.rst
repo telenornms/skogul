@@ -16,6 +16,9 @@ bridges between data collectors and storage engines.
 This repository contains the Skogul library/package, and ``cmd/skogul``,
 which parses a JSON-config to set up Skogul.
 
+A copy of the auto-generated manual for skogul is also provided, which is
+aimed at end-users. See ``skogul.rst`` (or ``man ./skogul.1``).
+
 .. contents:: Table of contents
    :depth: 2
    :local:
@@ -61,10 +64,18 @@ Copy repo/directory to relevant computer, then run::
 About
 -----
 
+Skogul is written to solve a myriad of issues that typically arise when
+dealing with metric data and complex systems. It can be used for very
+simple setups, and expanded to large, multi-datacenter infrastructures with
+a mixture of new and old systems attached to it.
+
+To accomplish this, you set up chains that define how data is received, how
+it is treated, where it goes and what happens if something goes wrong.
+
 A Skogul chain is built from one or more independent receivers which
 receive data and pass it on to a sender. A sender can either transmit data
-to an external source (including an other Skogul instance), or make
-internal changes to data before passing it on to one or more other senders.
+to an external source (including an other Skogul instance), or add some
+internal routing logic before passing it on to one or more other senders.
 
 .. image:: docs/basic.png
 
@@ -77,28 +88,41 @@ should not be tightly coupled to where you store the data. And where you
 store the data should not be tightly coupled with how you receive it, or
 what you do with it.
 
+This enables an organization to gradually shift from older to newer stacks,
+as Skogul can both receive data on old and new transport mechanisms,
+and store it both in new and old systems. That way, older collectors can
+continue working how they always how worked, but send data to Skogul.
+During testing/maturing, Skogul can store the data in both legacy system
+and replacement system. When the legacy system is removed, no change is
+needed on the side of the collector.
+
 Extra care has been put into making it trivial to write senders and
 receivers. For example, an author of a new sender only has to add tags
 to their data structure to have that exposed as documentation.
 
-See the package documentation over at godoc for more usage:
+See the package documentation over at godoc for development-related
+documentation: 
 https://godoc.org/github.com/KristianLyng/skogul
+
+End-user documentation is found in the manual page, which Skogul can
+generate on demand, or you can review a copy on github: 
+https://github.com/KristianLyng/skogul/blob/master/skogul.rst
 
 More discussion on architecture can be found in `docs/`.
 
 Performance
 -----------
 
-Skogul is meant to scale well. At present time, there are known flaws in
-the implementation, but still, simple local testing on a laptop is able to
-produce decent results.
+Skogul is meant to scale well. Early tests on a laptop proved to work very
+well:
 
 .. image:: docs/skogul-rates.png
 
 The above graph is from a very simple test on a laptop (with a quad core
 i7), using the provided tester to write data to influxdb. It demonstrates
-that despite well-known weaknesses (specially in the influx-writer), we're
-able to push roughly 600-800k values/s through Skogul.
+that despite well-known weaknesses at the time (specially in the
+influx-writer), we're able to push roughly 600-800k values/s through
+Skogul. This has since been exceeded.
 
 The laptop in question was using about 150-190% CPU for skogul and 400% for
 InfluxDB, the rest went to the testers. No real attempt at tuning was done,
@@ -107,11 +131,6 @@ but a few different scenarios were tested.
 Note that the general values/s is decent both with a ton of values for each
 metric, and just a handful of values per metric, but tons of metrics per
 containers.
-
-As future work will introduce buffers and "batch aggregators" to make it
-better equipped to handle irregular traffic, it's is expected and
-acceptable that performance dips when the number of values per container
-drops.
 
 Update:
 
@@ -132,9 +151,11 @@ Hacking
 There is little "exotic" about Skogul hacking, so the following sections
 are aimed mostly at people who are unfamiliar with Go.
 
+The first place to start is the top-level ``doc.go`` documentation, aimed
+at developers.
 
 .. note::
-   
+
    The majority of all documentation is kept in godoc source comments, and
    available either in the code directly, through ``go doc
    github.com/KristianLyng/skogul`` or  through the web, at
@@ -182,10 +203,16 @@ Installing these tools is left as an exercise to the reader.
 Documentation
 .............
 
-Documentation is written and maintained using code comments and runnable
-examples, following the ``godoc`` approach. Some architecture comments are
-kept in ``docs//``, but by and large, documentation should be consumed from
-godoc.
+Documentation comes in two forms. One is aimed at end-users. This is
+provided mainly by adding proper labels to your data structures (see any
+sender or receiver implementation), and through hard-coded text found in
+``cmd/skogul/main.go``. In addition to this, stand-alone examples of setups
+are provided in the ``examples/`` directory.
+
+For development, documentation is written and maintained using code
+comments and runnable examples, following the ``godoc`` approach. Some
+architecture comments are kept in ``docs//``, but by and large,
+documentation should be consumed from godoc.
 
 See https://godoc.org/github.com/KristianLyng/skogul for the online
 version, or use ``go doc github.com/KristianLyng/skogul`` or similar,
@@ -198,25 +225,20 @@ Roadmap
 -------
 
 The configuration backend was just introduced. It took a few iterations,
-and will most likely be updated slightly. This is the groundwork that is
-required to ensure a healthy development environment.
+but I don't anticipate noteworthy changes in the architecture going
+forward.
 
-This introduced a shift in focus. Previously, ``skogul-x2y`` was provided
-as a binary to set up simple, but commonly used Skogul-chains. As Skogul
-grew, this became a bottleneck, because exposing more complex configuration
-was hard. As such, the idea was to write custom-binaries for more complex
-chains.
+The new configuration backend obsoleted a previous philosophy where complex
+chains would only be available by writing the ``main``-function yourself,
+while simple chains could be access through ``skogul-x2y``, which only
+supported a small subset of senders/receivers.
 
-With the new JSON-based configuration, this seems redundant. As such, focus
-will be on simplifying the ``cmd/skogul`` binary user experience, and
-streamlining development.
+This shift has meant that some documentation need to be changed. Things
+that were exposed as godoc in the past was partially aimed at end-users,
+and that is simply no longer the case.
 
-Immediately, that means work on documentation, re-writing a number of now
-broken tests, and generally tweaking things to see how it works.
-
-One thing that needs to be done, however, is provide better feedback on
-invalid configuration. Including when options are provided that are not
-used.
+An other thing that is sorely lacking is feedback to the end user when an
+invalid configuration is provided. It is, at best, cryptic.
 
 Time-wise, we hope to do a release in 2019 when we feel Skogul is mature
 enough. It is already in use.
