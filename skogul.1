@@ -57,11 +57,11 @@ channel, if that fails, write to a local queue and retry periodically.
 To facilitate this, Skogul has three core components:
 .INDENT 0.0
 .IP 1. 3
-A receiver is how Skogul gets data
+Receivers acquire raw data
 .IP 2. 3
-A handler is how Skogul inteprets that data
+Handlers turns raw data into meaningful content
 .IP 3. 3
-A sender is what Skogul does with the data
+Senders determine what happens to the data
 .UNINDENT
 .sp
 A single instance of Skogul must have at least one receiver, but can have
