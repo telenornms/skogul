@@ -87,3 +87,11 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	}
 	return nil
 }
+
+// Verify checks that configuration is sensible
+func (ht *HTTP) Verify() error {
+	if ht.URL == "" {
+		return skogul.Error{Source: "http sender", Reason: "no URL specified"}
+	}
+	return nil
+}

@@ -80,6 +80,14 @@ func TestByte_ok(t *testing.T) {
 	if c != nil {
 		t.Errorf("Bytes() with bad data returned valid config.")
 	}
+	noURL := []byte(`{ "senders": { "x" : { "type": "http" }}}`)
+	c, err = Bytes(noURL)
+	if err == nil {
+		t.Errorf("Bytes() test 3 failed, http sender with no URL didn't get error.")
+	}
+	if c != nil {
+		t.Errorf("Bytes() with bad data returned valid config.")
+	}
 
 }
 

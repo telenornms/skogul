@@ -205,5 +205,14 @@ func Bytes(b []byte) (*Config, error) {
 			return nil, skogul.Error{Source: "config", Reason: "Handler corrupt", Next: e}
 		}
 	}
+	for idx, s := range c.Senders {
+		sv, ok := s.Sender.(skogul.SenderVerification)
+		if ok {
+			err := sv.Verify()
+			if err != nil {
+				return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("sender %s isn't valid", idx), Next: err}
+			}
+		}
+	}
 	return &c, nil
 }

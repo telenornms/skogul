@@ -21,42 +21,9 @@
  * 02110-1301  USA
  */
 
-/*
-Package skogul is a framework for receiving, processing and forwarding
-data, typically metric data or event-oriented data, at high throughput.
-
-It is designed to be as agnostic as possible with regards to how it
-transmits data and how it receives it, and the processors in between
-need not worry about how the data got there or how it will be treated in
-the next chain.
-
-This means you can use Skogul to receive data on a influxdb-like
-line-based TCP interface and send it on to postgres - or influxdb -
-without having to write explicit support, just set up the chain.
-
-The guiding principles of Skogul is:
-
-- Make as few assumptions as possible about how data is received
-
-- Be stupid fast
-
-In the most simple setup, you can use Skogul simply to receive data from
-a random shell script and send it to influxdb. In a more complex setup,
-you can have multiple Skogul servers, each in different security zones
-receiving subsets of a total data set, write it to a local queue, then
-transmit - through strong authentication - to two central Skogul servers
-that store the data to multiple influxdb instances based on sharding
-rules. Etc.
-
-The cmd/skogul uses json-based configuration files to expose the relevant
-internals. The json is unmarshalled directly onto the implementations, so
-as long as the underlying data structure supports JSON unmarshalling, it
-can be configured.
-*/
 package skogul
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 )
@@ -66,30 +33,18 @@ Handler determines what a receiver will do with data received. It requires
 a parser to interperet the raw data, 0 or more transformers to mutate
 Containers, and a sender to call after data is parsed and mutated and ready
 to be dealt with.
+
+Whenever a new Container is created, it should pass that to a Handler, not
+directly to a Sender. This goes for artificially created data too, e.g. if
+a sender wants to emit statistics. This ensures that transformers can be
+used in the future.
+
+To make it configurable, a HandlerRef should be used.
 */
 type Handler struct {
 	Parser       Parser
 	Transformers []Transformer
 	Sender       Sender
-}
-
-// Verify the basic integrity of a handler. Quite shallow.
-func (h Handler) Verify() error {
-	if h.Parser == nil {
-		return Error{Reason: "Missing parser for Handler"}
-	}
-	if h.Transformers == nil {
-		return Error{Reason: "Missing parser for Handler"}
-	}
-	for _, t := range h.Transformers {
-		if t == nil {
-			return Error{Reason: "nil-transformer for Handler"}
-		}
-	}
-	if h.Sender == nil {
-		return Error{Reason: "Missing parser for Handler"}
-	}
-	return nil
 }
 
 // Parser is the interface for parsing arbitrary data into a Container
@@ -111,17 +66,51 @@ non-null. Slightly counter to common sense, it is NOT recommended to
 verify the input data again, since multiple senders are likely chained
 and will thus likely redo the same verifications.
 
-While a single sender writing to a database is useful, the true power of
-the Sender-pattern is chaining multiple, tiny, senders together to build
-completely custom "sender chains" and thus provide site-specific handling
-of data.
-
-E.g.: The fallback sender is set up using a list of "down stream"
-senders and will accept data and try the first sender on the list,
-if that fail, try the next, and so on.
+Senders that pass data off to other senders should use a SenderRef instead,
+to facilitate configuration.
 */
 type Sender interface {
 	Send(c *Container) error
+}
+
+/*
+SenderVerification is an *optional* interface for senders. If a sender
+implements it, the configuration engine will issue Verify() after all
+configuration is parsed. The sender should never modify state upon
+Verify(), but should simply check that internal state is usable.
+*/
+type SenderVerification interface {
+	Verify() error
+}
+
+/*
+Transformer mutates a collection before it is passed to a sender. Transformers
+should be very fast, but are the only means to modifying the data.
+*/
+type Transformer interface {
+	Transform(c *Container) error
+}
+
+/*
+Receiver is how we get data. Receivers are responsible for getting raw data and the
+outer boundaries of a Container, but should explicitly avoid parsing raw data.
+This ensures that how data is transported is not bound by how it is parsed.
+*/
+type Receiver interface {
+	Start() error
+}
+
+/*
+Error is a typical skogul error. All Skogul functions should provide Source
+and Reason. I'm not entirely sure why, except that it allows chaining errors?
+
+If the Next field is provided, error messages will recurse to the bottom, thus
+propagating errors from the bottom and up.
+*/
+type Error struct {
+	Reason string
+	Source string
+	Next   error
 }
 
 /*
@@ -136,100 +125,11 @@ type SenderRef struct {
 	Name string
 }
 
-/*
-SenderMap is a list of all referenced senders. This is used during
-configuration loading and should not be used afterwards. However,
-it needs to be exported so skogul.config can reach it, and it
-needs to be outside of skogul.config to avoid circular dependencies.
-*/
-var SenderMap []*SenderRef
-
-/*
-UnmarshalJSON will unmarshal a sender reference by creating a
-SenderRef object and putting it on the SenderMap list. The
-configuration system in question needs to iterate over SenderMap
-after it has completed the first pass of configuration
-*/
-func (sr *SenderRef) UnmarshalJSON(b []byte) error {
-	var s string
-	if err := json.Unmarshal(b, &s); err != nil {
-		return err
-	}
-	sr.Name = s
-	sr.S = nil
-	SenderMap = append(SenderMap, sr)
-	return nil
-}
-
-// MarshalJSON for a reference just prints the name
-func (sr *SenderRef) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
-}
-
 // HandlerRef references a named handler. Used whenever a handler is
 // defined by configuration.
 type HandlerRef struct {
 	H    *Handler
 	Name string
-}
-
-// HandlerMap keeps track of which named handlers exists. A configuration
-// engine needs to iterate over this and back-fill the real handlers.
-var HandlerMap []*HandlerRef
-
-// MarshalJSON just returns the Name of the handler reference.
-func (sr *HandlerRef) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
-}
-
-// UnmarshalJSON will create an entry on the HandlerMap for the parsed
-// handler reference, so the real handler can be substituted later.
-func (sr *HandlerRef) UnmarshalJSON(b []byte) error {
-	var s string
-	if err := json.Unmarshal(b, &s); err != nil {
-		return err
-	}
-	sr.Name = s
-	sr.H = nil
-	HandlerMap = append(HandlerMap, sr)
-	return nil
-}
-
-/*
-Transformer mutates a collection before it is passed to a sender. Transformers
-should be very fast, but are the only means to modifying the data.
-
-Currently, the only transformer is the template transformer, that expands a
-template in a Container so underlying senders need not worry about the
-existence of a template or not.
-*/
-type Transformer interface {
-	Transform(c *Container) error
-}
-
-/*
-Receiver is how we get data. At the point of this writing, a HTTP
-receiver, line-based TCP receiver, line-based FIFO receiver, MQTT receiver
-and "tester"-receiver exists. A receiver uses a Handler to deal with
-data, including how to parse it. Meaning: The HTTP receiver could support
-both Skogul JSON-data and other formats, and the same goes for any other
-receiver.
-*/
-type Receiver interface {
-	Start() error
-}
-
-/*
-Error is a typical skogul error. All Skogul functions should provide Source
-and Reason.
-
-If the Next field is provided, error messages will recurse to the bottom, thus
-propagating errors from the bottom and up.
-*/
-type Error struct {
-	Reason string
-	Source string
-	Next   error
 }
 
 // Error for use in regular error messages. Also outputs to log.Print().
@@ -260,4 +160,23 @@ func (e Error) Container() Container {
 	m.Data["description"] = e.Error()
 	c.Metrics[0] = &m
 	return c
+}
+
+// Verify the basic integrity of a handler. Quite shallow.
+func (h Handler) Verify() error {
+	if h.Parser == nil {
+		return Error{Reason: "Missing parser for Handler"}
+	}
+	if h.Transformers == nil {
+		return Error{Reason: "Missing parser for Handler"}
+	}
+	for _, t := range h.Transformers {
+		if t == nil {
+			return Error{Reason: "nil-transformer for Handler"}
+		}
+	}
+	if h.Sender == nil {
+		return Error{Reason: "Missing parser for Handler"}
+	}
+	return nil
 }
