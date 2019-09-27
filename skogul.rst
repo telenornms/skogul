@@ -1,0 +1,659 @@
+
+======
+skogul
+======
+
+------
+Skogul
+------
+
+:Manual section: 1
+:Authors: Kristian Lyngstøl <kly@kly.no>
+
+SYNOPSIS
+========
+
+::
+
+	skogul -file config-file [-show]
+	
+	skogul [-help | -show | -make-man]
+
+DESCRIPTION
+===========
+
+Skogul is a framework for normalising and transporting event-oriented data
+between different systems. It operates using a concept of a receiver, handler
+and sender. A receiver will accept (or in special cases: generate) data, it
+will then use a handler to prosess that data, e.g. parse JSON data. The handler
+will forward the processed data to a sender.
+
+Senders come in two distinct but interchangeable variants: Storage-oriented
+senders are used to send the data to some external resource, e.g., a time series
+database like InfluxDB. Utility-oriented senders are used to do things like
+route data to multiple senders (e.g.: store it in InfluxDB locally, but also
+forward it to a remote database), handle failures by adding retry-mechanics or
+fallback logic, and much more.
+
+The simplest possible example is to receive data over HTTP, parse it as JSON and
+store it to InfluxDB. A more interesting example is to receive data over
+insecure HTTP locally, batch together a collection of data, then forward it
+over a TLS-encrypted and authenticated HTTPS channel to an other skogul
+instance in a different security domain, which can then store it to disk.
+
+There are more examples in the the "examples/" directory.
+
+Configuration is written as JSON as well, and dynamically parsed.
+
+OPTIONS
+=======
+
+``-file`` string
+	Path to skogul config to read. (default ~/.config/skogul.json)
+
+``-help``
+	Print more help (default false)
+
+``-make-man``
+	Output RST documentation suited for rst2man (default false)
+
+``-show``
+	Print the parsed JSON config instead of starting (default false)
+
+
+CONFIGURATION
+=============
+
+Configuration of skogul is done with a json config file, referenced with
+the -file option. You need to specify at least one receiver, handler and
+sender to make something sensible.
+
+The base configuration set is::
+
+  {
+    "receivers": {
+      "xxx": {
+        "type": "type-of-receiver",
+        type-specific-options
+      },
+      "other-receiver...": ...
+    },
+    "handlers": {
+      "yyy": {
+        "parser": "json", // other options might come
+        "transformers": [...], // only valid option today is [] or ["templater"]
+        "sender": "reference-to-sender"
+      }
+    },
+    "senders": {
+      "zzz": {
+        "type": "type-of-sender",
+        type-specific-options
+      },
+      "qqq": {
+        "type": "type-of-sender",
+        type-specific-options
+      },
+      ...
+    }
+  }
+
+In the above pseudo-config, "xxx", "yyy", "zzz" and "qqq" are arbitrary
+names you chose that are how to reference that specific item within the same
+configuration. The "type" field references what implementation to use - the
+list of different sender-types and receiver-types are below. Each type of
+sender and receiver require different options (e.g.: MySQL sender will
+require a connection string, while InfluxDB sender will require a URL).
+
+At present time, there is only a single parser and a single transformer, so
+handlers mainly serve to name the next/initial sender for a receiver.
+
+The documentation for each sender and receiver also lists all options. In
+general, you do not need to specify all options. For formatting, the settings
+use whatever JSON unmarshalling logic that Go provides, but it should be self
+explanatory or explained in the documentation for the relevant option.
+
+SENDERS
+=======
+
+Senders move parsed data around according to internal logic. A sender will typically
+either ensure data is stored, or forward it according to some internal logic to an
+other sender with that goal.
+
+The following senders exist. A list can also be retrieved by using the "-help"
+option.
+
+backoff
+-------
+
+Forwards data to the next sender, retrying after a delay upon failure. For each retry, the delay is doubled. Gives up after the set number of retries.
+
+Aliases: retry 
+
+Settings:
+
+``base [Duration]``
+	Initial delay after a failure. Will double for each retry
+
+``next [SenderRef]``
+	The sender to try
+
+``retries [uint64]``
+	Number of retries before giving up
+
+batch
+-----
+
+Accepts metrics and puts them in a shared container. When the container either has a set number of metrics (Threshold), or a timeout occurs, the entire container is forwarded. This allows down-stream senders to work with larger batches of metrics at a time, which is frequently more efficient. A side effect of this is that down-stream errors are not propogated upstream. That means any errors need to be dealt with down stream, or they will be ignored.
+
+Aliases: batcher 
+
+Settings:
+
+``interval [Duration]``
+	Flush the bucket after this duration regardless of how full it is
+
+``next [SenderRef]``
+	
+
+``threshold [int]``
+	Flush the bucket after reaching this amount of metrics
+
+counter
+-------
+
+Accepts metrics, counts them and passes them on. Then emits statistics to the Stats-handler on an interval.
+
+Aliases: count 
+
+Settings:
+
+``next [SenderRef]``
+	Reference to the next sender in the chain
+
+``period [Duration]``
+	How often to emit stats
+
+	Example(s): 5s
+
+``stats [HandlerRef]``
+	Handler that will receive the stats periodically
+
+debug
+-----
+
+Prints received metrics to stdout.
+
+Settings:
+
+``prefix [string]``
+	Prefix to print before any metric
+
+detacher
+--------
+
+Returns OK without waiting for the next sender to finish.
+
+Aliases: detach 
+
+Settings:
+
+``depth [int]``
+	How many containers can be pending delivery before we start blocking. Defaults to 1000.
+
+``next [SenderRef]``
+	
+
+dupe
+----
+
+Sends the same metrics to all senders listed in Next.
+
+Aliases: duplicate dup 
+
+Settings:
+
+``next [[]skogul.SenderRef]``
+	
+
+errdiverter
+-----------
+
+Forwards data to next sender. If an error is returned, the error is converted into a Skogul container and sent to the err-handler. This provides the means of logging errors through regular skogul-chains.
+
+Aliases: errordivert errdivert errordiverter 
+
+Settings:
+
+``err [SenderRef]``
+	If the sender under Next fails, convert the error to a metric and send it here
+
+``next [SenderRef]``
+	Send normal metrics here
+
+``reterr [bool]``
+	If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error.
+
+fallback
+--------
+
+Tries the senders provided in Next, in order. E.g.: if the first responds OK, the second will never get data. Useful for diverting traffic to alternate paths upon failure.
+
+Settings:
+
+``next [[]skogul.SenderRef]``
+	
+
+fanout
+------
+
+Fanout to a fixed number of threads before passing data on. This is rarely needed, as receivers should do this.
+
+Settings:
+
+``next [SenderRef]``
+	
+
+``workers [int]``
+	Number of worker threads in use. To _fan_in_ you can set this to 1.
+
+forwardfail
+-----------
+
+Forwards metrics, but always returns failure. Useful in complex failure handling involving e.g. fallback sender, where it might be used to write log or stats on failure while still propogating a failure upward.
+
+Settings:
+
+``next [SenderRef]``
+	
+
+http
+----
+
+Sends Skogul-formatted JSON-data to a HTTP endpoint (e.g.: an other Skogul instance?). Highly useful in scenarios with multiple data collection methods spread over several servers.
+
+Aliases: https 
+
+Settings:
+
+``insecure [bool]``
+	Disable TLS certificate validation.
+
+``timeout [Duration]``
+	HTTP timeout.
+
+``url [string]``
+	Fully qualified URL to send data to.
+
+	Example(s): http://localhost:6081/ https://user:password@[::1]:6082/
+
+influx
+------
+
+Send to a InfluxDB HTTP endpoint.
+
+Aliases: influxdb 
+
+Settings:
+
+``measurement [string]``
+	Measurement name to write to.
+
+``timeout [Duration]``
+	HTTP timeout
+
+``url [string]``
+	URL to InfluxDB API. Must include write end-point and database to write to.
+
+	Example(s): http://[::1]:8086/write?db=foo
+
+log
+---
+
+Logs a message, mainly useful for enriching debug information in conjunction with, for example, dupe and debug.
+
+Settings:
+
+``message [string]``
+	
+
+mnr
+---
+
+Sends M&R line format to a TCP endpoint.
+
+Aliases: m&r 
+
+Settings:
+
+``address [string]``
+	
+
+``defaultgroup [string]``
+	
+
+mqtt
+----
+
+Publishes received metrics to an MQTT broker/topic.
+
+Settings:
+
+``address [string]``
+	
+
+mysql
+-----
+
+Execute a MySQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance.
+
+Settings:
+
+``connstr [string]``
+	Connection string to use for MySQL. Typically user:password@host/database.
+
+	Example(s): root:lol@/mydb
+
+``query [string]``
+	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
+
+	Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
+
+null
+----
+
+Discards all data. Mainly useful for testing.
+
+sleep
+-----
+
+Injects a random delay before passing data on. Mainly for testing.
+
+Settings:
+
+``base [Duration]``
+	The baseline - or minimum - delay
+
+``maxdelay [Duration]``
+	The maximum delay we will suffer
+
+``next [SenderRef]``
+	
+
+``verbose [bool]``
+	If set to true, will log delay durations
+
+test
+----
+
+Used for internal testing. Basically just discards data but provides an internal counter of received data
+
+
+RECEIVERS
+=========
+
+Receivers accept data from the outside world - or in special cases,
+generate the data themself. Receivers do not typically deal with how
+individual collections of data is handled, but leaves that specific task
+to a handler.
+
+The following receivers exist.
+
+fifo
+----
+
+Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.
+
+Settings:
+
+``file [string]``
+	
+
+``handler [HandlerRef]``
+	
+
+file
+----
+
+Reads from a file, then stops. Assumes one collection per line.
+
+Settings:
+
+``file [string]``
+	
+
+``handler [HandlerRef]``
+	
+
+http
+----
+
+Listen for metrics on HTTP or HTTPS. Optionally requiring authentication. Each request received is passed to the handler.
+
+Aliases: https 
+
+Settings:
+
+``address [string]``
+	Address to listen to.
+
+	Example(s): [::1]:80 [2001:db8::1]:443
+
+``certfile [string]``
+	Path to certificate file for TLS. If left blank, un-encrypted HTTP is used.
+
+``handlers [map[string]*skogul.HandlerRef]``
+	Paths to handlers. Need at least one.
+
+	Example(s): {"/": "someHandler" }
+
+``keyfile [string]``
+	Path to key file for TLS.
+
+``password [string]``
+	Password for basic authentication.
+
+``username [string]``
+	Username for basic authentication. No authentication is required if left blank.
+
+log
+---
+
+Log attaches to the internal logging of Skogul and diverts log messages.
+
+Settings:
+
+``echo [bool]``
+	Logs are also echoed to stdout.
+
+``handler [HandlerRef]``
+	Reference to a handler where the data is sent.
+
+mqtt
+----
+
+Listen for Skogul-formatted JSON on a MQTT endpoint
+
+Settings:
+
+``address [string]``
+	
+
+``handler [*skogul.HandlerRef]``
+	
+
+``password [string]``
+	
+
+``username [string]``
+	
+
+stdin
+-----
+
+Reads from standard input, one collection per line, allowing you to pipe collections to Skogul on a command line or similar.
+
+Settings:
+
+``handler [HandlerRef]``
+	
+
+tcp
+---
+
+Listen for Skogul-formatted JSON on a tcp socket, reading one collection per line.
+
+Settings:
+
+``address [string]``
+	
+
+``handler [HandlerRef]``
+	
+
+test
+----
+
+Generate dummy-data. Useful for testing, including in combination with the http sender to send dummy-data to an other skogul instance.
+
+Settings:
+
+``delay [Duration]``
+	Sleep time between each metric is generated, if any.
+
+``handler [HandlerRef]``
+	Reference to a handler where the data is sent
+
+``metrics [int64]``
+	Number of metrics in each container
+
+``threads [int]``
+	Threads to spawn
+
+``values [int64]``
+	Number of unique values for each metric
+
+
+HANDLERS
+========
+
+There is only one type of handler. It accepts three arguments: A parser to
+parse data, a list of optional transformers, and the first sender that will
+receive the parsed container(s).
+
+Currently the only valid parser is "json" and the only valid transformer is
+"templating".
+
+FIXME: Templating
+
+JSON FORMAT
+===========
+
+Data sent to Skogul will be parsed to fit the internal data model of Skogul. The
+JSON representation is roughly thus::
+
+  {
+    "template": { 
+      "timestamp": "iso8601-time",
+      "metadata": { 
+        "key": value, 
+        ...
+      },
+      "data": {
+        "key": value,
+        ...
+      }
+    },
+    "metrics": [
+      {
+        "timestamp": "iso8601-time",
+        "metadata": { 
+          "key": value, 
+          ...
+        },
+        "data": {
+          "key": value,
+          ...
+        }
+      },
+      { ...}
+    ]
+  }
+
+The entire "template" is optional. If the "templater" transformer is
+applied, all metrics will start with whatever value is present in the
+template, and then overwrite with "local" variables. E.g.: If all your
+metrics share timestamp in a collection, you can specify that in the
+template. Or if they share some metadata.
+
+The primary difference between metadata and data is searchability,
+and it will depend on storage engines. Typically this means the name
+of a server is metadata, but the load average is data. Skogul itself
+does not much care.
+
+EXAMPLES
+========
+
+The following specifies an insecure HTTP-based receiver that will wait up
+to 5 seconds or 1000 metrics before writing data to InfluxDB::
+
+  {
+    "receivers": {
+      "api": {
+        "type": "http",
+        "address": "[::1]:8080",
+        "handlers": {
+          "/": "jsontemplating"
+        }
+      }
+    },
+    "handlers": {
+      "jsontemplating": {
+        "parser": "json",
+        "transformers": [ "templater" ],
+        "sender": "batch"
+      }
+    },
+    "senders": {
+      "batch": {
+        "type": "batch",
+        "interval": "5s",
+        "threshold": 1000,
+        "next": "influx"
+      },
+      "influx": {
+        "type": "influx",
+        "URL": "http://[::1]:8086/write?db=testdb",
+        "measurement": "demo",
+        "Timeout": "10s"
+      }
+    }
+  }
+
+More examples are provided in the examples/ directory of the Skogul source
+package.
+
+SEE ALSO
+========
+
+https://github.com/KristianLyng/skogul
+
+BUGS
+====
+
+The biggest known issue right now is that the configuration engine is a bit
+horrible at giving constructive error message, and will silently ignore
+unknown (or misspelled) variable names. Work in progress.
+
+A tip for working around this is to compare your configuration with what
+skogul outputs when you run it with -show, as that is a representation of
+the parsed configuration.
+
+COPYRIGHT
+=========
+
+This document is licensed under the same license as Skogul itself, which
+happens to be GPLv2 (or later). See LICENSE for details.
+
+* Copyright (c) 2019 - Telenor Norge AS
+
