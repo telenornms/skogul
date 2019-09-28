@@ -5,6 +5,7 @@ import (
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
+	"github.com/KristianLyng/skogul/transformer"
 	"reflect"
 	"unicode"
 )
@@ -103,6 +104,49 @@ func HelpReceiver(r string) (Help, error) {
 			t = typeString
 		}
 		fielddoc.Type = fmt.Sprintf("%s", t)
+		if doc, ok := field.Tag.Lookup("doc"); ok {
+			fielddoc.Doc = doc
+			if ex, ok := field.Tag.Lookup("example"); ok {
+				fielddoc.Example = ex
+			}
+		}
+		sh.Fields[field.Name] = fielddoc
+	}
+	return sh, nil
+}
+
+func HelpTransformer(t string) (Help, error) {
+	if transformer.Auto[t] == nil {
+		return Help{}, skogul.Error{Source: "config parser", Reason: "No such transformer"}
+	}
+	sh := Help{}
+	sh.Name = t
+	sh.Doc = transformer.Auto[t].Help
+	for _, alias := range transformer.Auto[t].Aliases {
+		sh.Aliases = fmt.Sprintf("%s %s", alias, sh.Aliases)
+	}
+	sh.Fields = make(map[string]fieldDoc)
+	news := transformer.Auto[t].Alloc()
+	st := reflect.TypeOf(news)
+	if st.Kind() == reflect.Ptr {
+		st = st.Elem()
+	}
+
+	for i := 0; i < st.NumField(); i++ {
+		field := st.Field(i)
+		if !unicode.IsUpper(rune(field.Name[0])) {
+			continue
+		}
+		fielddoc := fieldDoc{}
+		ty := fmt.Sprintf("%v", field.Type.Kind())
+		typeName := field.Type.Name()
+		typeString := field.Type.String()
+		if typeName != "" {
+			ty = typeName
+		} else if typeString != "" {
+			ty = typeString
+		}
+		fielddoc.Type = fmt.Sprintf("%s", ty)
 		if doc, ok := field.Tag.Lookup("doc"); ok {
 			fielddoc.Doc = doc
 			if ex, ok := field.Tag.Lookup("example"); ok {

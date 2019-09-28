@@ -38,6 +38,7 @@ import (
 	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
+	"github.com/KristianLyng/skogul/transformer"
 )
 
 var ffile = flag.String("file", "~/.config/skogul.json", "Path to skogul config to read.")
@@ -145,8 +146,14 @@ The base configuration set is::
     "handlers": {
       "yyy": {
         "parser": "json", // other options might come
-        "transformers": [...], // only valid option today is [] or ["templater"]
+        "transformers": [...],
         "sender": "reference-to-sender"
+      }
+    },
+    "transformers": {
+      "rrr": {
+        "type": "type-of-transformer",
+        type-specific-options
       }
     },
     "senders": {
@@ -162,12 +169,12 @@ The base configuration set is::
     }
   }
 
-In the above pseudo-config, "xxx", "yyy", "zzz" and "qqq" are arbitrary
-names you chose that are how to reference that specific item within the same
-configuration. The "type" field references what implementation to use - each
-implementation have different configuration options. You can specify as many
-senders, receivers and handlers as you want, and they can cross-reference
-each other.
+In the above pseudo-config, "xxx", "yyy", "zzz", "rrr", and "qqq" are
+arbitrary names you chose that are how to reference that specific item
+within the same configuration. The "type" field references what
+implementation to use - each implementation have different configuration
+options. You can specify as many senders, receivers and handlers as you
+want, and they can cross-reference each other.
 
 Upon start-up, all receivers are started.
 
@@ -175,8 +182,9 @@ It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
 operator to avoid setting up feedback loops.
 
-At present time, there is only a single parser and a single transformer, so
-handlers mainly serve to name the next/initial sender for a receiver.
+The only parser available today is the JSON parser. Only two transformers
+exists, and to simplify configuration, the "templater" transformer does
+not have to be explicitly defined to be referenced.
 
 The documentation for each sender and receiver also lists all options. In
 general, you do not need to specify all options. For formatting, the settings
@@ -221,6 +229,29 @@ The following receivers exist.
 		thingMan(sh)
 	}
 	fmt.Print(`
+
+TRANSFORMERS
+============
+
+Transformers are the only tools that can actively modify a metric. See the
+"HANDLERS" section for more discussion. Note that the "templater" transformer
+does not need to be defined - if a handler lists "templater", one will be
+created behind the scenes. The available transformers are:
+
+`)
+	transformers := []string{}
+	for idx := range transformer.Auto {
+		if transformer.Auto[idx].Name != idx {
+			continue // alias
+		}
+		transformers = append(transformers, idx)
+	}
+	sort.Strings(transformers)
+	for _, r := range transformers {
+		sh, _ := config.HelpTransformer(r)
+		thingMan(sh)
+	}
+	fmt.Print(`
 HANDLERS
 ========
 
@@ -228,8 +259,52 @@ There is only one type of handler. It accepts three arguments: A parser to
 parse data, a list of optional transformers, and the first sender that will
 receive the parsed container(s).
 
-Currently the only valid parser is "json" and the only valid transformer is
-"templating".
+Currently the only valid parser is "json" and only two transformers exist.
+The "templating" transformer does not need to be explicitly defined to be
+referenced, since it has no settings.
+
+JSON parsing
+------------
+
+If the "json" parser is used (Currently the only one available), data sent
+to Skogul will be parsed to fit the internal data model of Skogul. The JSON
+representation is roughly thus::
+
+  {
+    "template": { 
+      "timestamp": "iso8601-time",
+      "metadata": { 
+        "key": value, 
+        ...
+      },
+      "data": {
+        "key": value,
+        ...
+      }
+    },
+    "metrics": [
+      {
+        "timestamp": "iso8601-time",
+        "metadata": { 
+          "key": value, 
+          ...
+        },
+        "data": {
+          "key": value,
+          ...
+        }
+      },
+      { ...}
+    ]
+  }
+
+The "template" is optional, see the "Templater"-documentation above for an
+in-depth description.
+
+The primary difference between metadata and data is searchability,
+and it will depend on storage engines. Typically this means the name
+of a server is metadata, but the load average is data. Skogul itself
+does not much care.
 
 Templating
 ----------
@@ -316,47 +391,6 @@ the "machine" field of metadata. Once transformed, the result will be::
 Since each metric also provided a "machine"-field, it overwrote the value
 from the template, even if there were no overlapping fields.
 
-JSON FORMAT
-===========
-
-Data sent to Skogul will be parsed to fit the internal data model of Skogul. The
-JSON representation is roughly thus::
-
-  {
-    "template": { 
-      "timestamp": "iso8601-time",
-      "metadata": { 
-        "key": value, 
-        ...
-      },
-      "data": {
-        "key": value,
-        ...
-      }
-    },
-    "metrics": [
-      {
-        "timestamp": "iso8601-time",
-        "metadata": { 
-          "key": value, 
-          ...
-        },
-        "data": {
-          "key": value,
-          ...
-        }
-      },
-      { ...}
-    ]
-  }
-
-The "template" is optional, see the "Templater"-documentation above for an
-in-depth description.
-
-The primary difference between metadata and data is searchability,
-and it will depend on storage engines. Typically this means the name
-of a server is metadata, but the load average is data. Skogul itself
-does not much care.
 
 EXAMPLES
 ========
@@ -417,6 +451,50 @@ to 5 seconds or 1000 metrics before writing data to InfluxDB::
         "type": "influx",
         "URL": "http://[::1]:8086/write?db=testdb",
         "measurement": "demo",
+        "Timeout": "10s"
+      }
+    }
+  }
+
+To add a metadata field to signal where data came from before passing it on
+to a central instance::
+
+  {
+    "receivers": {
+      "local": {
+        "type": "http",
+        "address": "[::1]:8080",
+        "handlers": {
+          "/": "jsontemplating"
+        }
+      }
+    },
+    "transformers": {
+      "origin": {
+        "type": "metadata",
+        "set": {
+          "dc": "bergen1",
+          "collector": "serverX"
+        }
+      }
+    },
+    "handlers": {
+      "jsontemplating": {
+        "parser": "json",
+        "transformers": [ "templater","metadata" ],
+        "sender": "batch"
+      }
+    },
+    "senders": {
+      "batch": {
+        "type": "batch",
+        "interval": "5s",
+        "threshold": 1000,
+        "next": "central"
+      },
+      "central": {
+        "type": "http",
+        "url": "https://bergen1X:hunter2@central-skogul.example.com/",
         "Timeout": "10s"
       }
     }
