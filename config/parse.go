@@ -145,83 +145,114 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-// File opens a config file and parses it, then returns the valid
+// Bytes parses json in the provided byte array and returns a
 // configuration.
+//
+// It does this by first doing a pass where it just does JSON
+// unmarshalling, which also updates sender and handler reference tables
+// globally (unfortunately...), then calling secondPass(), which resolves
+// references and does a final validation.
+func Bytes(b []byte) (*Config, error) {
+	c := Config{}
+	if err := json.Unmarshal(b, &c); err != nil {
+		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
+	}
+
+	return secondPass(&c)
+}
+
+// File opens a config file and parses it, then returns the valid
+// configuration, using Bytes()
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
-	var c *Config
-	c, err = Bytes(dat)
-	return c, err
+	return Bytes(dat)
 }
 
-// Bytes parses json in the provided byte array and returns a
-// configuration. To avoid dependency loops, the config parsing is,
-// unfortunately, dependent on global variables in the skogul top-level
-// package - this means Bytes() will change state of skogul.SenderMap and
-// skogul.HandlerMap
-func Bytes(b []byte) (*Config, error) {
-	c := Config{}
-	err := json.Unmarshal(b, &c)
-	if err != nil {
-		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
-	}
-
+// resolveSenders iterates over the skogul.SenderMap and resolves senders,
+// using the provided configuration. It zeroes the senderMap upon
+// completion.
+func resolveSenders(c *Config) error {
 	for _, s := range skogul.SenderMap {
 		if c.Senders[s.Name] == nil {
-			return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
+			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
 		}
 		s.S = c.Senders[s.Name].Sender
 	}
 	skogul.SenderMap = skogul.SenderMap[0:0]
+	return nil
+}
+
+// resolveHandlers iterates over handlers and instantiates them, since
+// there is no unmarshaller (or need for one) that does this. It then
+// iterates of the skogul.HandlerMap and resolves the handler references to
+// the actual handlers.
+//
+// It then zeroes the skogul.HandlerMap
+func resolveHandlers(c *Config) error {
 	for _, h := range c.Handlers {
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
-		if h.Parser == "json" {
-			h.Handler.Parser = parser.JSON{}
-		} else {
-			return nil, skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
+		if h.Parser != "json" && h.Parser != "" {
+			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
 		}
+		h.Handler.Parser = parser.JSON{}
 		for _, t := range h.Transformers {
-			if t == "templater" {
-				h.Handler.Transformers = append(h.Handler.Transformers, transformer.Templater{})
-			} else {
-				return nil, skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
+			if t != "templater" {
+				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
 			}
+			h.Handler.Transformers = append(h.Handler.Transformers, transformer.Templater{})
 		}
 	}
 	for _, h := range skogul.HandlerMap {
 		if c.Handlers[h.Name] == nil {
-			return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved handler reference %s", h.Name)}
+			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved handler reference %s", h.Name)}
 		}
 		h.H = &(c.Handlers[h.Name].Handler)
 	}
 	skogul.HandlerMap = skogul.HandlerMap[0:0]
-	for _, h := range c.Handlers {
-		e := h.Handler.Verify()
-		if e != nil {
-			return nil, skogul.Error{Source: "config", Reason: "Handler corrupt", Next: e}
+	return nil
+}
+
+// secondPass accepts a parsed configuration as input and resolves the
+// references in it, and verifies basic integrity.
+func secondPass(c *Config) (*Config, error) {
+	if err := resolveSenders(c); err != nil {
+		return nil, err
+	}
+	if err := resolveHandlers(c); err != nil {
+		return nil, err
+	}
+	for idx, h := range c.Handlers {
+		if err := verifyItem("handler", idx, h.Handler); err != nil {
+			return nil, err
 		}
 	}
 	for idx, s := range c.Senders {
-		sv, ok := s.Sender.(skogul.Verifier)
-		if ok {
-			err := sv.Verify()
-			if err != nil {
-				return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("sender %s isn't valid", idx), Next: err}
-			}
+		if err := verifyItem("sender", idx, s.Sender); err != nil {
+			return nil, err
 		}
 	}
 	for idx, r := range c.Receivers {
-		rv, ok := r.Receiver.(skogul.Verifier)
-		if ok {
-			err := rv.Verify()
-			if err != nil {
-				return nil, skogul.Error{Source: "config parser", Reason: fmt.Sprintf("receiver %s isn't valid", idx), Next: err}
-			}
+		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
+			return nil, err
 		}
 	}
-	return &c, nil
+	return c, nil
+}
+
+// verifyItem checks if the item implements Verifier and if so, verifies
+// the item. Otherwise, returns nil.
+func verifyItem(family string, name string, item interface{}) error {
+	i, ok := item.(skogul.Verifier)
+	if !ok {
+		return nil
+	}
+	err := i.Verify()
+	if err != nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
+	}
+	return nil
 }

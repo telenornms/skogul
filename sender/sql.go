@@ -23,13 +23,12 @@
 
 package sender
 
-
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 	"sync"
-	"fmt"
 
 	"github.com/KristianLyng/skogul"
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
@@ -48,7 +47,7 @@ type dbElement struct {
 }
 
 /*
-Sql sender connects to a SQL Database, currently either MySQL(or Mariadb I
+SQL sender connects to a SQL Database, currently either MySQL(or Mariadb I
 suppose) or Postgres. The Connection String for MySQL is specified at
 https://github.com/go-sql-driver/mysql/ and postgres at
 http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
@@ -61,7 +60,7 @@ VLAUES(${timestamp.timestamp},${metadata.foo},${someData})
 to foo("INSERT INTO foo VALUES(?,?,?)", timestamp, foo, someData), so they
 will be sensibly escaped.
 */
-type Sql struct {
+type SQL struct {
 	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
 	Query   string `doc:"Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name \"KEY\", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe." example:"INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})"`
 	Driver  string `doc:"Database driver/system. Currently suported: mysql and postgres."`
@@ -72,61 +71,61 @@ type Sql struct {
 }
 
 /*
-prep parses my.Query into q and populates my.list accordingly
+prep parses sq.Query into q and populates sq.list accordingly
 */
-func (my *Sql) prep() {
+func (sq *SQL) prep() {
 	mlen := len("metadata.")
 
 	expander := func(element string) string {
 		if element == "timestamp.timestamp" {
-			my.list = append(my.list, dbElement{timestamp, element})
+			sq.list = append(sq.list, dbElement{timestamp, element})
 		} else if len(element) > mlen && element[0:mlen] == "metadata." {
-			my.list = append(my.list, dbElement{metadata, element[mlen:]})
+			sq.list = append(sq.list, dbElement{metadata, element[mlen:]})
 		} else {
-			my.list = append(my.list, dbElement{data, element})
+			sq.list = append(sq.list, dbElement{data, element})
 		}
 		return "?"
 	}
-	my.q = os.Expand(my.Query, expander)
+	sq.q = os.Expand(sq.Query, expander)
 }
 
 // GetQuery returns the parsed query, assuming there is one.
-func (my *Sql) GetQuery() (string, error) {
-	if my.Query == "" {
-		return "", skogul.Error{Source: "mysql sender", Reason: "No Query set, but GetQuery() called"}
+func (sq *SQL) GetQuery() (string, error) {
+	if sq.Query == "" {
+		return "", skogul.Error{Source: "sql sender", Reason: "No Query set, but GetQuery() called"}
 	}
-	err := my.Init()
+	err := sq.Init()
 	if err != nil {
-		return "", skogul.Error{Source: "mysql sender", Reason: "Sql.Init failed during GetQuery()", Next: err}
+		return "", skogul.Error{Source: "sql sender", Reason: "SQL.Init failed during GetQuery()", Next: err}
 	}
-	return my.q, nil
+	return sq.q, nil
 }
 
 /*
 Init will connect to the database, ping it and set things up. But only once.
 */
-func (my *Sql) Init() error {
+func (sq *SQL) Init() error {
 	var er error
-	my.once.Do(func() {
-		er = my.init()
+	sq.once.Do(func() {
+		er = sq.init()
 	})
 	return er
 }
 
-func (my *Sql) init() error {
+func (sq *SQL) init() error {
 	var err error
-	my.db, err = sql.Open(my.Driver, my.ConnStr)
+	sq.db, err = sql.Open(sq.Driver, sq.ConnStr)
 	if err != nil {
 		log.Print(err)
 		return err
 	}
-	my.prep()
+	sq.prep()
 	return nil
 }
 
-func (my *Sql) exec(stmt *sql.Stmt, m *skogul.Metric) error {
+func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 	var vals []interface{}
-	for _, e := range my.list {
+	for _, e := range sq.list {
 		switch e.family {
 		case timestamp:
 			vals = append(vals, m.Time)
@@ -144,26 +143,25 @@ func (my *Sql) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 Send will send to the database, after first ensuring
 the connection is OK.
 */
-func (my *Sql) Send(c *skogul.Container) error {
-	er := my.Init()
-	if er != nil {
+func (sq *SQL) Send(c *skogul.Container) error {
+	if er := sq.Init(); er != nil {
 		log.Print(er)
 		return er
 	}
-	txn, err := my.db.Begin()
+	txn, err := sq.db.Begin()
 	if err != nil {
 		log.Print(err)
 		return err
 	}
 
-	stmt, err := txn.Prepare(my.q)
+	stmt, err := txn.Prepare(sq.q)
 	if err != nil {
 		log.Print(err)
 		return err
 	}
 
 	for _, m := range c.Metrics {
-		err = my.exec(stmt, m)
+		err = sq.exec(stmt, m)
 		if err != nil {
 			log.Print(err)
 			txn.Rollback()
@@ -187,18 +185,20 @@ func (my *Sql) Send(c *skogul.Container) error {
 	return nil
 }
 
-func (sq *Sql) Verify() error {
+// Verify ensures options are set, but currently doesn't check very well,
+// since it is disallowed from connecting to a database and such.
+func (sq *SQL) Verify() error {
 	if sq.ConnStr == "" {
-		return skogul.Error{Source:"sql sender", Reason: "ConnStr is empty"}
+		return skogul.Error{Source: "sql sender", Reason: "ConnStr is empty"}
 	}
 	if sq.Query == "" {
-		return skogul.Error{Source:"sql sender", Reason: "Query is empty"}
+		return skogul.Error{Source: "sql sender", Reason: "Query is empty"}
 	}
 	if sq.Driver == "" {
-		return skogul.Error{Source:"sql sender", Reason: "Driver is empty"}
+		return skogul.Error{Source: "sql sender", Reason: "Driver is empty"}
 	}
 	if sq.Driver != "mysql" && sq.Driver != "postgres" {
-		return skogul.Error{Source:"sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'",sq.Driver)}
+		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)}
 	}
 	return nil
 }

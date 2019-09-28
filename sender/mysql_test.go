@@ -131,10 +131,10 @@ func TestSql(t *testing.T) {
 // "skogul". Also demonstrates printing of the query.
 //
 // Will, obviously, require a database to be running.
-func ExampleSql() {
+func ExampleSQL() {
 	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
 	connStr := "root:lol@/skogul"
-	m := sender.Sql{Query: query, ConnStr: connStr, Driver: "mysql"}
+	m := sender.SQL{Query: query, ConnStr: connStr, Driver: "mysql"}
 	m.Init()
 	str, err := m.GetQuery()
 	if err != nil {
