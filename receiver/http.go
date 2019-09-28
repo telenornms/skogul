@@ -101,7 +101,12 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (code int, o
 		return
 	}
 	for _, t := range rcvr.Handler.Transformers {
-		t.Transform(&m)
+		e := t.Transform(&m)
+		if e != nil {
+			code = 400
+			oerr = e
+			return
+		}
 	}
 	err = rcvr.Handler.Sender.Send(&m)
 	if err != nil {

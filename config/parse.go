@@ -58,12 +58,19 @@ type Handler struct {
 	Handler      skogul.Handler `json:"-"`
 }
 
+// Transformer wraps skogul.Transformer
+type Transformer struct {
+	Type        string
+	Transformer skogul.Transformer `json:"-"`
+}
+
 // Config encapsulates all configuration for Skogul, and represent the
 // top-level configuration object.
 type Config struct {
-	Handlers  map[string]*Handler
-	Receivers map[string]*Receiver
-	Senders   map[string]*Sender
+	Handlers     map[string]*Handler
+	Receivers    map[string]*Receiver
+	Senders      map[string]*Sender
+	Transformers map[string]*Transformer
 }
 
 // MarshalJSON for a receiver marshals the actual instantiated receiver,
@@ -81,6 +88,30 @@ func (r *Receiver) MarshalJSON() ([]byte, error) {
 	}
 	merged["type"] = r.Type
 	return json.Marshal(merged)
+}
+
+// UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
+// that receiver, than unmarshals the remaining configuration onto that.
+func (t *Transformer) UnmarshalJSON(b []byte) error {
+	type tType struct {
+		Type string
+	}
+	var myt tType
+	if err := json.Unmarshal(b, &myt); err != nil {
+		return err
+	}
+	t.Type = myt.Type
+	if transformer.Auto[t.Type] == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown transformer %v", t.Type)}
+	}
+	if transformer.Auto[t.Type].Alloc == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad transformer %v", t.Type)}
+	}
+	t.Transformer = transformer.Auto[t.Type].Alloc()
+	if err := json.Unmarshal(b, &t.Transformer); err != nil {
+		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
+	}
+	return nil
 }
 
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
@@ -200,10 +231,15 @@ func resolveHandlers(c *Config) error {
 		}
 		h.Handler.Parser = parser.JSON{}
 		for _, t := range h.Transformers {
-			if t != "templater" {
+			var nextT skogul.Transformer
+			if c.Transformers[t] != nil {
+				nextT = c.Transformers[t].Transformer
+			} else if t == "templater" {
+				nextT = transformer.Templater{}
+			} else {
 				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
 			}
-			h.Handler.Transformers = append(h.Handler.Transformers, transformer.Templater{})
+			h.Handler.Transformers = append(h.Handler.Transformers, nextT)
 		}
 	}
 	for _, h := range skogul.HandlerMap {
