@@ -53,7 +53,7 @@ func mysqlTestAutoNeg(t *testing.T, url string) {
 	}
 }
 
-func TestMysql_auto(t *testing.T) {
+func TestSql_auto(t *testing.T) {
 	mysqlTestAutoNeg(t, "mysql:///")
 	mysqlTestAutoNeg(t, "mysql:///?connstr=something")
 	mysqlTestAutoNeg(t, "mysql:///?query=something")
@@ -62,8 +62,8 @@ func TestMysql_auto(t *testing.T) {
 	mysqlTestAuto(t, "mysql:///?connstr=something&query=blatti")
 	mysqlTestAuto(t, "mysql:///?connstr=foo:bar@/blatt&query=foo%20bar")
 }
-func TestMysql(t *testing.T) {
-	m := sender.Mysql{}
+func TestSql(t *testing.T) {
+	m := sender.Sql{}
 	s, err := m.GetQuery()
 	if err == nil {
 		t.Errorf("m.GetQuery() succeeded despite query not being created")
@@ -73,19 +73,19 @@ func TestMysql(t *testing.T) {
 	}
 	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
 	connStr := "root:lol@/skogul"
-	m = sender.Mysql{Query: query, ConnStr: connStr}
+	m = sender.Sql{Query: query, ConnStr: connStr}
 	err = m.Init()
 	if err != nil {
-		t.Errorf("Mysql.Init failed: %v", err)
+		t.Errorf("Sql.Init failed: %v", err)
 	}
 	want := "INSERT INTO test VALUES(?,?,?,?);"
 	var got string
 	got, err = m.GetQuery()
 	if err != nil {
-		t.Errorf("Mysql.getQuery() failed: %v", err)
+		t.Errorf("Sql.getQuery() failed: %v", err)
 	}
 	if want != got {
-		t.Errorf("Mysql.Init wanted %s got %s", want, got)
+		t.Errorf("Sql.Init wanted %s got %s", want, got)
 	}
 
 	createTable := "create table test (timestamp varchar(100), src varchar(100), name varchar(100), data varchar(100));"
@@ -110,18 +110,18 @@ func TestMysql(t *testing.T) {
 
 	err = m.Send(&c)
 	if err != nil {
-		t.Errorf("Mysql.Send failed: %v", err)
+		t.Errorf("Sql.Send failed: %v", err)
 	}
 	me.Data = make(map[string]interface{})
 	me.Data["name"] = "Foo Bar"
 	err = m.Send(&c)
 	if err != nil {
-		t.Errorf("Mysql.Send failed: %v", err)
+		t.Errorf("Sql.Send failed: %v", err)
 	}
 	me.Time = nil
 	err = m.Send(&c)
 	if err != nil {
-		t.Errorf("Mysql.Send failed: %v", err)
+		t.Errorf("Sql.Send failed: %v", err)
 	}
 }
 
@@ -131,10 +131,10 @@ func TestMysql(t *testing.T) {
 // "skogul". Also demonstrates printing of the query.
 //
 // Will, obviously, require a database to be running.
-func ExampleMysql() {
+func ExampleSql() {
 	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
 	connStr := "root:lol@/skogul"
-	m := sender.Mysql{Query: query, ConnStr: connStr}
+	m := sender.Sql{Query: query, ConnStr: connStr, Driver: "mysql"}
 	m.Init()
 	str, err := m.GetQuery()
 	if err != nil {

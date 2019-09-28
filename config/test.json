@@ -1,12 +1,14 @@
 {
   "senders": {
     "tnet_alarms": {
-      "type": "mysql",
+      "type": "sql",
+      "driver": "mysql",
       "ConnStr": "root:lol@/mydb",
       "Query": "INSERT INTO tnet_Alarms values(${foo})"
     },
     "mysql_log": {
-      "type": "mysql",
+      "type": "sql",
+      "driver": "mysql",
       "ConnStr": "root:lol@/mydb",
       "Query": "INSERT INTO liksomlog VALUES(${timestmap.timestamp},${metadata.name},${key})"
     },

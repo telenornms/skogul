@@ -21,12 +21,14 @@ func TestByte_ok(t *testing.T) {
 {
   "senders": {
     "tnet_alarms": {
-      "type": "mysql",
+      "type": "sql",
+      "Driver": "mysql",
       "ConnStr": "root:lol@/mydb",
       "Query": "INERT INTO tnet_Alarms values(${foo})"
     },
     "mysql_log": {
-      "type": "mysql",
+      "type": "sql",
+      "Driver": "mysql",
       "ConnStr": "root:lol@/mydb",
       "Query": "INSERT INTO liksomlog VALUES(${timestmap.timestamp},${metadata.name},${key})"
     },
@@ -72,7 +74,7 @@ func TestByte_ok(t *testing.T) {
 	if c == nil {
 		t.Errorf("Bytes() returned nil config")
 	}
-	badData := []byte(`{ "senders": { "x": { "type": "mysql", "ConnStr": 5 } } }`)
+	badData := []byte(`{ "senders": { "x": { "type": "sql", "ConnStr": 5 } } }`)
 	c, err = Bytes(badData)
 	if err == nil {
 		t.Errorf("Bytes() test 2 failed, sent bad data, didn't get error.")
@@ -92,8 +94,8 @@ func TestByte_ok(t *testing.T) {
 }
 
 func TestHelpSender(t *testing.T) {
-	_, err := HelpSender("mysql")
+	_, err := HelpSender("sql")
 	if err != nil {
-		t.Errorf("HelpSender(\"mysql\") didn't work: %v", err)
+		t.Errorf("HelpSender(\"sql\") didn't work: %v", err)
 	}
 }

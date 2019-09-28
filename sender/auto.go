@@ -149,9 +149,9 @@ func init() {
 		Help:  "Publishes received metrics to an MQTT broker/topic.",
 	})
 	Add(Sender{
-		Name:  "mysql",
-		Alloc: func() skogul.Sender { return &Mysql{} },
-		Help:  "Execute a MySQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance.",
+		Name:  "sql",
+		Alloc: func() skogul.Sender { return &Sql{} },
+		Help:  "Execute a SQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance. Supported engines are MySQL/MariaDB and Postgres.",
 	})
 	Add(Sender{
 		Name:  "null",

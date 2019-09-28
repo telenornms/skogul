@@ -346,23 +346,6 @@ Settings:
 ``address [string]``
 	
 
-mysql
------
-
-Execute a MySQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance.
-
-Settings:
-
-``connstr [string]``
-	Connection string to use for MySQL. Typically user:password@host/database.
-
-	Example(s): root:lol@/mydb
-
-``query [string]``
-	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
-
-	Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
-
 null
 ----
 
@@ -386,6 +369,26 @@ Settings:
 
 ``verbose [bool]``
 	If set to true, will log delay durations
+
+sql
+---
+
+Execute a SQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance. Supported engines are MySQL/MariaDB and Postgres.
+
+Settings:
+
+``connstr [string]``
+	Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database.
+
+	Example(s): mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'
+
+``driver [string]``
+	Database driver/system. Currently suported: mysql and postgres.
+
+``query [string]``
+	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
+
+	Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
 
 test
 ----

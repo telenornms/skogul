@@ -1,5 +1,5 @@
 /*
- * skogul, mysql sender
+ * skogul, sql sender
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -23,14 +23,17 @@
 
 package sender
 
+
 import (
 	"database/sql"
 	"log"
 	"os"
 	"sync"
+	"fmt"
 
 	"github.com/KristianLyng/skogul"
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -45,17 +48,23 @@ type dbElement struct {
 }
 
 /*
-Mysql sender accepts a ConnStr according to
-https://github.com/go-sql-driver/mysql/, and a query which is expanded
-using os.Expand(), allowing arbitrary queries to be executed.
+Sql sender connects to a SQL Database, currently either MySQL(or Mariadb I
+suppose) or Postgres. The Connection String for MySQL is specified at
+https://github.com/go-sql-driver/mysql/ and postgres at
+http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
+.
 
-Variable expansion is done through ${foo}, ${timestamp.timestamp} and
-${metadata.foo}. This is done using a prepared statement and is thus
-safe and relatively fast.
+The query is expanded using os.Expand() and will fill in
+timestamp/metadata/data. The sender will prep the query and
+essentially covert INSERT INTO foo
+VLAUES(${timestamp.timestamp},${metadata.foo},${someData})
+to foo("INSERT INTO foo VALUES(?,?,?)", timestamp, foo, someData), so they
+will be sensibly escaped.
 */
-type Mysql struct {
-	ConnStr string `doc:"Connection string to use for MySQL. Typically user:password@host/database." example:"root:lol@/mydb"`
+type Sql struct {
+	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
 	Query   string `doc:"Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name \"KEY\", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe." example:"INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})"`
+	Driver  string `doc:"Database driver/system. Currently suported: mysql and postgres."`
 	q       string
 	list    []dbElement
 	db      *sql.DB
@@ -65,7 +74,7 @@ type Mysql struct {
 /*
 prep parses my.Query into q and populates my.list accordingly
 */
-func (my *Mysql) prep() {
+func (my *Sql) prep() {
 	mlen := len("metadata.")
 
 	expander := func(element string) string {
@@ -82,13 +91,13 @@ func (my *Mysql) prep() {
 }
 
 // GetQuery returns the parsed query, assuming there is one.
-func (my *Mysql) GetQuery() (string, error) {
+func (my *Sql) GetQuery() (string, error) {
 	if my.Query == "" {
 		return "", skogul.Error{Source: "mysql sender", Reason: "No Query set, but GetQuery() called"}
 	}
 	err := my.Init()
 	if err != nil {
-		return "", skogul.Error{Source: "mysql sender", Reason: "Mysql.Init failed during GetQuery()", Next: err}
+		return "", skogul.Error{Source: "mysql sender", Reason: "Sql.Init failed during GetQuery()", Next: err}
 	}
 	return my.q, nil
 }
@@ -96,7 +105,7 @@ func (my *Mysql) GetQuery() (string, error) {
 /*
 Init will connect to the database, ping it and set things up. But only once.
 */
-func (my *Mysql) Init() error {
+func (my *Sql) Init() error {
 	var er error
 	my.once.Do(func() {
 		er = my.init()
@@ -104,9 +113,9 @@ func (my *Mysql) Init() error {
 	return er
 }
 
-func (my *Mysql) init() error {
+func (my *Sql) init() error {
 	var err error
-	my.db, err = sql.Open("mysql", my.ConnStr)
+	my.db, err = sql.Open(my.Driver, my.ConnStr)
 	if err != nil {
 		log.Print(err)
 		return err
@@ -115,7 +124,7 @@ func (my *Mysql) init() error {
 	return nil
 }
 
-func (my *Mysql) exec(stmt *sql.Stmt, m *skogul.Metric) error {
+func (my *Sql) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 	var vals []interface{}
 	for _, e := range my.list {
 		switch e.family {
@@ -132,10 +141,10 @@ func (my *Mysql) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 }
 
 /*
-Send will send to the MySQL database, after first ensuring
+Send will send to the database, after first ensuring
 the connection is OK.
 */
-func (my *Mysql) Send(c *skogul.Container) error {
+func (my *Sql) Send(c *skogul.Container) error {
 	er := my.Init()
 	if er != nil {
 		log.Print(er)
@@ -174,6 +183,22 @@ func (my *Mysql) Send(c *skogul.Container) error {
 		log.Print(err)
 		txn.Rollback()
 		return err
+	}
+	return nil
+}
+
+func (sq *Sql) Verify() error {
+	if sq.ConnStr == "" {
+		return skogul.Error{Source:"sql sender", Reason: "ConnStr is empty"}
+	}
+	if sq.Query == "" {
+		return skogul.Error{Source:"sql sender", Reason: "Query is empty"}
+	}
+	if sq.Driver == "" {
+		return skogul.Error{Source:"sql sender", Reason: "Driver is empty"}
+	}
+	if sq.Driver != "mysql" && sq.Driver != "postgres" {
+		return skogul.Error{Source:"sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'",sq.Driver)}
 	}
 	return nil
 }

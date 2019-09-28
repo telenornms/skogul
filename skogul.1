@@ -355,23 +355,6 @@ Publishes received metrics to an MQTT broker/topic.
 Settings:
 .sp
 \fBaddress [string]\fP
-.SS mysql
-.sp
-Execute a MySQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch\-sender will greatly increase performance.
-.sp
-Settings:
-.INDENT 0.0
-.TP
-.B \fBconnstr [string]\fP
-Connection string to use for MySQL. Typically user:password@host/database.
-.sp
-Example(s): root:lol@/mydb
-.TP
-.B \fBquery [string]\fP
-Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
-.sp
-Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
-.UNINDENT
 .SS null
 .sp
 Discards all data. Mainly useful for testing.
@@ -394,6 +377,26 @@ The maximum delay we will suffer
 .TP
 .B \fBverbose [bool]\fP
 If set to true, will log delay durations
+.UNINDENT
+.SS sql
+.sp
+Execute a SQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch\-sender will greatly increase performance. Supported engines are MySQL/MariaDB and Postgres.
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBconnstr [string]\fP
+Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database.
+.sp
+Example(s): mysql: \(aqroot:lol@/mydb\(aq postgres: \(aquser=pqgotest dbname=pqgotest sslmode=verify\-full\(aq
+.TP
+.B \fBdriver [string]\fP
+Database driver/system. Currently suported: mysql and postgres.
+.TP
+.B \fBquery [string]\fP
+Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
+.sp
+Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
 .UNINDENT
 .SS test
 .sp
