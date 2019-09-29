@@ -47,6 +47,7 @@ Adding new logic to Skogul should also be fairly easy. New developers should
 focus on understanding two things:
 
 1. The skogul.Container data structure - which is the heart of Skogul.
+
 2. The relationship from receiver to handler to sender.
 
 The Container is documented in this very package.
@@ -68,8 +69,11 @@ transformer then applies to all metrics.
 Other examples of transformations that make sense are:
 
 - Adding a metadata field
+
 - Removing a metadata field
+
 - Removing all but a specific set of fields
+
 - Converting nested metrics to multiple metrics or flatten them
 
 Once a handler has done its deed, it sends the Container to the sender,

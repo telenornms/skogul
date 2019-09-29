@@ -156,11 +156,13 @@ at developers.
 
 .. note::
 
-   The majority of all documentation is kept in godoc source comments, and
-   available either in the code directly, through ``go doc
-   github.com/KristianLyng/skogul`` or  through the web, at
-   https://godoc.org/github.com/KristianLyng/skogul . This includes, but is
-   not limited to example code and API documentation.
+   End-user documentation is kept in ``cmd/skogul/main.go``, and source
+   code annotations for senders, receivers and transformers.
+   
+   Developer documentation is kept in-line in the source code, following
+   godoc conventions. It is available either in the code directly, through
+   ``go doc github.com/KristianLyng/skogul`` or  through the web, at
+   https://godoc.org/github.com/KristianLyng/skogul .
 
 Testing
 .......
