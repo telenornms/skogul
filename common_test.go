@@ -59,3 +59,19 @@ func TestHandler(t *testing.T) {
 		t.Errorf("Handler verification didn't spot nil-transformer")
 	}
 }
+
+func TestContainer(t *testing.T) {
+	orig := skogul.Error{Source: "int", Reason: "fordi"}
+	c := orig.Container()
+	if c.Metrics[0] == nil {
+		t.Errorf("Failed to get a metric from errror.Container")
+	}
+	if c.Metrics[0].Metadata["source"] != "int" {
+		t.Errorf("error.Container() returned invalid source. Wanted %s got %s", "int", c.Metrics[0].Metadata["source"])
+	}
+	want := "fordi"
+	got := c.Metrics[0].Data["reason"]
+	if want != got {
+		t.Errorf("error.Container() returned unexpected data/reason. Wanted %s got %s", want, got)
+	}
+}

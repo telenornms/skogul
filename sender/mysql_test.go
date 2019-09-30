@@ -23,47 +23,76 @@
 
 package sender_test
 
+// These tests require mariadb or MySQL to run, with a database "skogul",
+// user root and password "lol" (....). To get that up and running, the
+// simplest solution is a docker container with mariadb:
+//
+// Working test-setup for MySQL/Mariadb tests:
+// docker run -ti -e MYSQL_ROOT_PASSWORD=lol -n kek --network=host mariadb
+// docker exec -ti kek mysql
+// MariaDB [(none)]> create database skogul
+// MariaDB [(none)]> use skogul
+// MariaDB [skogul]> create table test (timestamp varchar(100), src varchar(100), name varchar(100), data varchar(100));
+
 import (
+	"flag"
 	"fmt"
+	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/sender"
+	"os"
+	"testing"
+	"time"
 )
 
-/*
-
-FIXME: This needs to be re-done now that New() is gone in favor of json.
-Should be fairly  trivial to do New(`{ "type": "mysql", "ConnStr": ...`),
-but I'm not sure if we/I want to go down that road just yet.
+var mysqlBase = `
+{
+	"senders": {
+		"mysql": {
+			"type": "sql",
+			"driver": "mysql"
+			%s
+		}
+	}
+}`
 
 func mysqlTestAuto(t *testing.T, url string) {
-	m, err := sender.New(url)
-	if m == nil {
-		t.Errorf("New(\"%s\" failed", url)
+	conf, err := config.Bytes([]byte(fmt.Sprintf(mysqlBase, url)))
+	if conf == nil {
+		t.Errorf("Bytes(\"%s\" failed", url)
 	}
 	if err != nil {
-		t.Errorf("New(\"%s\" failed: %v", url, err)
-	}
-}
-func mysqlTestAutoNeg(t *testing.T, url string) {
-	m, err := sender.New(url)
-	if m != nil {
-		t.Errorf("New(\"%s\" succeeded, but expected failure. Val: %v", url, m)
-	}
-	if err == nil {
-		t.Errorf("New(\"%s\" succeeded, but expected failure. Val: %v", url, m)
+		t.Errorf("Bytes(\"%s\" failed: %v", url, err)
 	}
 }
 
-func TestSql_auto(t *testing.T) {
-	mysqlTestAutoNeg(t, "mysql:///")
-	mysqlTestAutoNeg(t, "mysql:///?connstr=something")
-	mysqlTestAutoNeg(t, "mysql:///?query=something")
-	mysqlTestAutoNeg(t, "mysql://")
-	mysqlTestAuto(t, "mysql://?connstr=something&query=blatti")
-	mysqlTestAuto(t, "mysql:///?connstr=something&query=blatti")
-	mysqlTestAuto(t, "mysql:///?connstr=foo:bar@/blatt&query=foo%20bar")
+var flag_mysql = flag.Bool("mysql", false, "Test mysql")
+
+func TestMain(m *testing.M) {
+	flag.Parse()
+	// call flag.Parse() here if TestMain uses flags
+	os.Exit(m.Run())
 }
-func TestSql(t *testing.T) {
-	m := sender.Sql{}
+func mysqlTestAutoNeg(t *testing.T, url string) {
+	conf, err := config.Bytes([]byte(fmt.Sprintf(mysqlBase, url)))
+	if conf != nil {
+		t.Errorf("Bytes(\"%s\" succeeded, but expected failure. Val: %v", url, conf)
+	}
+	if err == nil {
+		t.Errorf("Bytes(\"%s\" succeeded, but expected failure. Val: %v", url, conf)
+	}
+}
+
+func TestSQL_auto(t *testing.T) {
+	mysqlTestAutoNeg(t, ``)
+	mysqlTestAutoNeg(t, `,"connstr": "something"`)
+	mysqlTestAutoNeg(t, `,"query": "something"`)
+	mysqlTestAuto(t, `,"connstr":"something","query": "blatti"`)
+	mysqlTestAuto(t, `,"connstr":"foo:bar@/blatt", "query":"foo%20bar"`)
+}
+
+func TestSQL(t *testing.T) {
+	m := sender.SQL{}
 	s, err := m.GetQuery()
 	if err == nil {
 		t.Errorf("m.GetQuery() succeeded despite query not being created")
@@ -73,30 +102,29 @@ func TestSql(t *testing.T) {
 	}
 	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
 	connStr := "root:lol@/skogul"
-	m = sender.Sql{Query: query, ConnStr: connStr}
+	m = sender.SQL{Query: query, ConnStr: connStr, Driver: "mysql"}
 	err = m.Init()
 	if err != nil {
-		t.Errorf("Sql.Init failed: %v", err)
+		t.Errorf("SQL.Init failed: %v", err)
 	}
 	want := "INSERT INTO test VALUES(?,?,?,?);"
 	var got string
 	got, err = m.GetQuery()
 	if err != nil {
-		t.Errorf("Sql.getQuery() failed: %v", err)
+		t.Errorf("SQL.getQuery() failed: %v", err)
 	}
 	if want != got {
-		t.Errorf("Sql.Init wanted %s got %s", want, got)
+		t.Errorf("SQL.Init wanted %s got %s", want, got)
 	}
 
 	createTable := "create table test (timestamp varchar(100), src varchar(100), name varchar(100), data varchar(100));"
-	if testing.Short() == true {
-		t.Log("WARNING: Skipping MySQL integration tests with -testing.short on.")
+	if *flag_mysql == false {
+		t.Log("WARNING: Skipping MySQL integration tests. Use `go test -mysql' to run them.")
 		return
-	} else {
-		t.Logf("Using MySQL connection string %s", connStr)
-		t.Logf("Assuming database name skogul and table ala: %s", createTable)
-		t.Logf("If you don't have a suitable MySQL db running, use -test.short")
 	}
+	t.Logf("Using MySQL connection string %s", connStr)
+	t.Logf("Assuming database name skogul and table ala: %s", createTable)
+
 	c := skogul.Container{}
 	me := skogul.Metric{}
 	n := time.Now()
@@ -110,37 +138,17 @@ func TestSql(t *testing.T) {
 
 	err = m.Send(&c)
 	if err != nil {
-		t.Errorf("Sql.Send failed: %v", err)
+		t.Errorf("SQL.Send failed: %v", err)
 	}
 	me.Data = make(map[string]interface{})
 	me.Data["name"] = "Foo Bar"
 	err = m.Send(&c)
 	if err != nil {
-		t.Errorf("Sql.Send failed: %v", err)
+		t.Errorf("SQL.Send failed: %v", err)
 	}
 	me.Time = nil
 	err = m.Send(&c)
 	if err != nil {
-		t.Errorf("Sql.Send failed: %v", err)
+		t.Errorf("SQL.Send failed: %v", err)
 	}
-}
-
-*/
-// Basic MySQL example, using user root (bad idea) and password "lol"
-// (voted most secure password of 2019), connecting to the database
-// "skogul". Also demonstrates printing of the query.
-//
-// Will, obviously, require a database to be running.
-func ExampleSQL() {
-	query := "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"
-	connStr := "root:lol@/skogul"
-	m := sender.SQL{Query: query, ConnStr: connStr, Driver: "mysql"}
-	m.Init()
-	str, err := m.GetQuery()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(str)
-	// Output:
-	// INSERT INTO test VALUES(?,?,?,?);
 }

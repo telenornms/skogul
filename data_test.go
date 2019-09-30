@@ -25,6 +25,7 @@ package skogul_test
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/parser"
@@ -205,4 +206,40 @@ func TestError(t *testing.T) {
 	if str != want {
 		t.Errorf("error gave unexpected result. Wanted %s, got %s", want, str)
 	}
+}
+
+func durationOK(t *testing.T, s string, check time.Duration) {
+	t.Helper()
+	d := skogul.Duration{}
+	err := json.Unmarshal([]byte(s), &d)
+	if err != nil {
+		t.Errorf("Failed to unmarshal duration `%s'. Error: %v", s, err)
+	}
+	if check == 0 {
+		return
+	}
+	if d.Duration != check {
+		t.Errorf("Duration %s unmarshalled ok. But got %v and expected %v", s, d.Duration, check)
+	}
+}
+
+func durationBAD(t *testing.T, s string) {
+	t.Helper()
+	d := skogul.Duration{}
+	err := json.Unmarshal([]byte(s), &d)
+	if err == nil {
+		t.Errorf("Successfully unmarshalled bogus duration `%s' to %v", s, d)
+	}
+}
+
+func TestDuration(t *testing.T) {
+	durationOK(t, `"5h"`, time.Hour*5)
+	durationOK(t, `"1ms"`, time.Millisecond)
+	durationOK(t, `500`, time.Nanosecond*500)
+	durationBAD(t, `chicken`)
+	durationBAD(t, `"2019-09-12T15:00:00Z"`)
+	durationBAD(t, "four score and seven years ago")
+	durationBAD(t, `null`)
+	durationBAD(t, `{`)
+	durationBAD(t, `"two",fifty{"`)
 }
