@@ -41,7 +41,7 @@ import (
 	"github.com/KristianLyng/skogul/transformer"
 )
 
-var ffile = flag.String("file", "~/.config/skogul.json", "Path to skogul config to read.")
+var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to read.")
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
@@ -72,7 +72,7 @@ SYNOPSIS
 
 ::
 
-	skogul -file config-file [-show]
+	skogul -f config-file [-show]
 	
 	skogul [-help | -show | -make-man]
 
@@ -130,7 +130,7 @@ CONFIGURATION
 =============
 
 Configuration of skogul is done with a json config file, referenced with
-the -file option. You need to specify at least one receiver, handler and
+the -f option. You need to specify at least one receiver, handler and
 sender to make something sensible.
 
 The base configuration set is::

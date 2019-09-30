@@ -36,7 +36,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .sp
 .nf
 .ft C
-skogul \-file config\-file [\-show]
+skogul \-f config\-file [\-show]
 
 skogul [\-help | \-show | \-make\-man]
 .ft P
@@ -77,7 +77,7 @@ There are more examples in the the "examples/" directory.
 .SH OPTIONS
 .INDENT 0.0
 .TP
-.B \fB\-file\fP string
+.B \fB\-f\fP string
 Path to skogul config to read. (default ~/.config/skogul.json)
 .TP
 .B \fB\-help\fP
@@ -92,7 +92,7 @@ Print the parsed JSON config instead of starting (default false)
 .SH CONFIGURATION
 .sp
 Configuration of skogul is done with a json config file, referenced with
-the \-file option. You need to specify at least one receiver, handler and
+the \-f option. You need to specify at least one receiver, handler and
 sender to make something sensible.
 .sp
 The base configuration set is:

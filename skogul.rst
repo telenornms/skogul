@@ -15,7 +15,7 @@ SYNOPSIS
 
 ::
 
-	skogul -file config-file [-show]
+	skogul -f config-file [-show]
 	
 	skogul [-help | -show | -make-man]
 
@@ -51,7 +51,7 @@ There are more examples in the the "examples/" directory.
 OPTIONS
 =======
 
-``-file`` string
+``-f`` string
 	Path to skogul config to read. (default ~/.config/skogul.json)
 
 ``-help``
@@ -68,7 +68,7 @@ CONFIGURATION
 =============
 
 Configuration of skogul is done with a json config file, referenced with
-the -file option. You need to specify at least one receiver, handler and
+the -f option. You need to specify at least one receiver, handler and
 sender to make something sensible.
 
 The base configuration set is::
