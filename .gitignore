@@ -1,3 +1,4 @@
 cmd/skogul/skogul
 .*swp
 coverage.out
+/skogul
