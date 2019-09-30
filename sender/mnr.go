@@ -86,8 +86,8 @@ default group is "group". Meaning:
 
 */
 type MnR struct {
-	Address      string
-	DefaultGroup string
+	Address      string `doc:"Address to send data to" example:"192.168.1.99:1234"`
+	DefaultGroup string `doc:"Default group to use if the metadatafield group is missing."`
 }
 
 /*

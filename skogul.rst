@@ -165,7 +165,7 @@ Settings:
 	Flush the bucket after this duration regardless of how full it is
 
 ``next [SenderRef]``
-	
+	Sender that will receive batched metrics
 
 ``threshold [int]``
 	Flush the bucket after reaching this amount of metrics
@@ -213,7 +213,7 @@ Settings:
 	How many containers can be pending delivery before we start blocking. Defaults to 1000.
 
 ``next [SenderRef]``
-	
+	Sender that receives the metrics.
 
 dupe
 ----
@@ -225,7 +225,7 @@ Aliases: duplicate dup
 Settings:
 
 ``next [[]skogul.SenderRef]``
-	
+	List of senders that will receive metrics, in order.
 
 errdiverter
 -----------
@@ -253,7 +253,7 @@ Tries the senders provided in Next, in order. E.g.: if the first responds OK, th
 Settings:
 
 ``next [[]skogul.SenderRef]``
-	
+	Ordered list of senders that will potentially receive metrics.
 
 fanout
 ------
@@ -263,7 +263,7 @@ Fanout to a fixed number of threads before passing data on. This is rarely neede
 Settings:
 
 ``next [SenderRef]``
-	
+	Sender receiving the metrics
 
 ``workers [int]``
 	Number of worker threads in use. To _fan_in_ you can set this to 1.
@@ -276,7 +276,7 @@ Forwards metrics, but always returns failure. Useful in complex failure handling
 Settings:
 
 ``next [SenderRef]``
-	
+	Sender receiving the metrics
 
 http
 ----
@@ -326,7 +326,7 @@ Logs a message, mainly useful for enriching debug information in conjunction wit
 Settings:
 
 ``message [string]``
-	
+	Message to print.
 
 mnr
 ---
@@ -338,10 +338,12 @@ Aliases: m&r
 Settings:
 
 ``address [string]``
-	
+	Address to send data to
+
+	Example(s): 192.168.1.99:1234
 
 ``defaultgroup [string]``
-	
+	Default group to use if the metadatafield group is missing.
 
 mqtt
 ----
@@ -351,7 +353,9 @@ Publishes received metrics to an MQTT broker/topic.
 Settings:
 
 ``address [string]``
-	
+	URL-encoded address.
+
+	Example(s): mqtt://user:password@server/topic
 
 null
 ----
@@ -372,7 +376,7 @@ Settings:
 	The maximum delay we will suffer
 
 ``next [SenderRef]``
-	
+	Sender that will receive delayed metrics
 
 ``verbose [bool]``
 	If set to true, will log delay durations

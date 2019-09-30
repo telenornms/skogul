@@ -47,7 +47,7 @@ This will send data to Influx normally. If Influx fails, it will send it to
 a queue. If that fails, it will print it to stdout.
 */
 type Fallback struct {
-	Next []skogul.SenderRef
+	Next []skogul.SenderRef `doc:"Ordered list of senders that will potentially receive metrics."`
 }
 
 // Send sends data down stream
@@ -63,18 +63,19 @@ func (fb *Fallback) Send(c *skogul.Container) error {
 
 // Dupe sender executes all provided senders in turn.
 type Dupe struct {
-	Next []skogul.SenderRef
+	Next []skogul.SenderRef `doc:"List of senders that will receive metrics, in order."`
 }
 
 // Send sends data down stream
 func (dp *Dupe) Send(c *skogul.Container) error {
+	var e error
 	for _, s := range dp.Next {
 		err := s.S.Send(c)
-		if err != nil {
-			return err
+		if err != nil && e != nil {
+			e = err
 		}
 	}
-	return nil
+	return e
 }
 
 /*
@@ -84,7 +85,7 @@ Intended use is in combination with other senders, e.g. to explain WHY
 sender.Debug() was used.
 */
 type Log struct {
-	Message string
+	Message string `doc:"Message to print."`
 }
 
 // Send logs a message and does no further processing

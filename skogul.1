@@ -192,10 +192,9 @@ Settings:
 .TP
 .B \fBinterval [Duration]\fP
 Flush the bucket after this duration regardless of how full it is
-.UNINDENT
-.sp
-\fBnext [SenderRef]\fP
-.INDENT 0.0
+.TP
+.B \fBnext [SenderRef]\fP
+Sender that will receive batched metrics
 .TP
 .B \fBthreshold [int]\fP
 Flush the bucket after reaching this amount of metrics
@@ -241,9 +240,10 @@ Settings:
 .TP
 .B \fBdepth [int]\fP
 How many containers can be pending delivery before we start blocking. Defaults to 1000.
+.TP
+.B \fBnext [SenderRef]\fP
+Sender that receives the metrics.
 .UNINDENT
-.sp
-\fBnext [SenderRef]\fP
 .SS dupe
 .sp
 Sends the same metrics to all senders listed in Next.
@@ -251,8 +251,11 @@ Sends the same metrics to all senders listed in Next.
 Aliases: duplicate dup
 .sp
 Settings:
-.sp
-\fBnext [[]skogul.SenderRef]\fP
+.INDENT 0.0
+.TP
+.B \fBnext [[]skogul.SenderRef]\fP
+List of senders that will receive metrics, in order.
+.UNINDENT
 .SS errdiverter
 .sp
 Forwards data to next sender. If an error is returned, the error is converted into a Skogul container and sent to the err\-handler. This provides the means of logging errors through regular skogul\-chains.
@@ -276,16 +279,20 @@ If true, the original error from Next will be returned, if false, both Next AND 
 Tries the senders provided in Next, in order. E.g.: if the first responds OK, the second will never get data. Useful for diverting traffic to alternate paths upon failure.
 .sp
 Settings:
-.sp
-\fBnext [[]skogul.SenderRef]\fP
+.INDENT 0.0
+.TP
+.B \fBnext [[]skogul.SenderRef]\fP
+Ordered list of senders that will potentially receive metrics.
+.UNINDENT
 .SS fanout
 .sp
 Fanout to a fixed number of threads before passing data on. This is rarely needed, as receivers should do this.
 .sp
 Settings:
-.sp
-\fBnext [SenderRef]\fP
 .INDENT 0.0
+.TP
+.B \fBnext [SenderRef]\fP
+Sender receiving the metrics
 .TP
 .B \fBworkers [int]\fP
 Number of worker threads in use. To _fan_in_ you can set this to 1.
@@ -295,8 +302,11 @@ Number of worker threads in use. To _fan_in_ you can set this to 1.
 Forwards metrics, but always returns failure. Useful in complex failure handling involving e.g. fallback sender, where it might be used to write log or stats on failure while still propogating a failure upward.
 .sp
 Settings:
-.sp
-\fBnext [SenderRef]\fP
+.INDENT 0.0
+.TP
+.B \fBnext [SenderRef]\fP
+Sender receiving the metrics
+.UNINDENT
 .SS http
 .sp
 Sends Skogul\-formatted JSON\-data to a HTTP endpoint (e.g.: an other Skogul instance?). Highly useful in scenarios with multiple data collection methods spread over several servers.
@@ -342,8 +352,11 @@ Example(s): \fI\%http://[::1]:8086/write?db=foo\fP
 Logs a message, mainly useful for enriching debug information in conjunction with, for example, dupe and debug.
 .sp
 Settings:
-.sp
-\fBmessage [string]\fP
+.INDENT 0.0
+.TP
+.B \fBmessage [string]\fP
+Message to print.
+.UNINDENT
 .SS mnr
 .sp
 Sends M&R line format to a TCP endpoint.
@@ -351,17 +364,28 @@ Sends M&R line format to a TCP endpoint.
 Aliases: m&r
 .sp
 Settings:
+.INDENT 0.0
+.TP
+.B \fBaddress [string]\fP
+Address to send data to
 .sp
-\fBaddress [string]\fP
-.sp
-\fBdefaultgroup [string]\fP
+Example(s): 192.168.1.99:1234
+.TP
+.B \fBdefaultgroup [string]\fP
+Default group to use if the metadatafield group is missing.
+.UNINDENT
 .SS mqtt
 .sp
 Publishes received metrics to an MQTT broker/topic.
 .sp
 Settings:
+.INDENT 0.0
+.TP
+.B \fBaddress [string]\fP
+URL\-encoded address.
 .sp
-\fBaddress [string]\fP
+Example(s): mqtt://user:password@server/topic
+.UNINDENT
 .SS null
 .sp
 Discards all data. Mainly useful for testing.
@@ -377,10 +401,9 @@ The baseline \- or minimum \- delay
 .TP
 .B \fBmaxdelay [Duration]\fP
 The maximum delay we will suffer
-.UNINDENT
-.sp
-\fBnext [SenderRef]\fP
-.INDENT 0.0
+.TP
+.B \fBnext [SenderRef]\fP
+Sender that will receive delayed metrics
 .TP
 .B \fBverbose [bool]\fP
 If set to true, will log delay durations

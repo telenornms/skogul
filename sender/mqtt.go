@@ -34,9 +34,12 @@ import (
 
 /*
 MQTT Sender publishes messages on a MQTT message bus.
+
+FIXME: The MQTT-sender and receiver should be updated to not use the
+url-encoded scheme.
 */
 type MQTT struct {
-	Address string
+	Address string `doc:"URL-encoded address." example:"mqtt://user:password@server/topic"`
 
 	once sync.Once
 	mc   skmqtt.MQTT

@@ -59,9 +59,9 @@ This means that:
 3. Send() will only block if two channels are full.
 */
 type Batch struct {
-	Next      skogul.SenderRef
-	Interval  skogul.Duration `doc:"Flush the bucket after this duration regardless of how full it is"`
-	Threshold int             `doc:"Flush the bucket after reaching this amount of metrics"`
+	Next      skogul.SenderRef `doc:"Sender that will receive batched metrics"`
+	Interval  skogul.Duration  `doc:"Flush the bucket after this duration regardless of how full it is"`
+	Threshold int              `doc:"Flush the bucket after reaching this amount of metrics"`
 	allocSize int
 	ch        chan *skogul.Container
 	once      sync.Once

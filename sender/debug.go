@@ -60,10 +60,10 @@ before passing execution over to the Next sender.
 The purpose is testing.
 */
 type Sleeper struct {
-	Next     skogul.SenderRef
-	MaxDelay skogul.Duration `doc:"The maximum delay we will suffer"`
-	Base     skogul.Duration `doc:"The baseline - or minimum - delay"`
-	Verbose  bool            `doc:"If set to true, will log delay durations"`
+	Next     skogul.SenderRef `doc:"Sender that will receive delayed metrics"`
+	MaxDelay skogul.Duration  `doc:"The maximum delay we will suffer"`
+	Base     skogul.Duration  `doc:"The baseline - or minimum - delay"`
+	Verbose  bool             `doc:"If set to true, will log delay durations"`
 }
 
 // Send sleeps a random duration according to Sleeper spec, then passes the
@@ -92,7 +92,7 @@ fb := sender.Fallback{Next: []skogul.Sender{influx, faf}}
 
 */
 type ForwardAndFail struct {
-	Next skogul.SenderRef
+	Next skogul.SenderRef `doc:"Sender receiving the metrics"`
 }
 
 // Send forwards the data to the next sender and always returns an error.
