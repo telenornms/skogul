@@ -439,19 +439,27 @@ The following receivers exist.
 Reads continuously from a file. Can technically read from any file, but since it will re\-open and re\-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.
 .sp
 Settings:
-.sp
-\fBfile [string]\fP
-.sp
-\fBhandler [HandlerRef]\fP
+.INDENT 0.0
+.TP
+.B \fBfile [string]\fP
+Path to the fifo or file from which to read from repeatedly.
+.TP
+.B \fBhandler [HandlerRef]\fP
+Handler used to parse and transform and send data.
+.UNINDENT
 .SS file
 .sp
 Reads from a file, then stops. Assumes one collection per line.
 .sp
 Settings:
-.sp
-\fBfile [string]\fP
-.sp
-\fBhandler [HandlerRef]\fP
+.INDENT 0.0
+.TP
+.B \fBfile [string]\fP
+Path to the file to read from once.
+.TP
+.B \fBhandler [HandlerRef]\fP
+Handler used to parse, transform and send data.
+.UNINDENT
 .SS http
 .sp
 Listen for metrics on HTTP or HTTPS. Optionally requiring authentication. Each request received is passed to the handler.
@@ -501,30 +509,45 @@ Reference to a handler where the data is sent.
 Listen for Skogul\-formatted JSON on a MQTT endpoint
 .sp
 Settings:
-.sp
-\fBaddress [string]\fP
-.sp
-\fBhandler [*skogul.HandlerRef]\fP
-.sp
-\fBpassword [string]\fP
-.sp
-\fBusername [string]\fP
+.INDENT 0.0
+.TP
+.B \fBaddress [string]\fP
+Address to connect to.
+.TP
+.B \fBhandler [*skogul.HandlerRef]\fP
+Handler used to parse, transform and send data.
+.TP
+.B \fBpassword [string]\fP
+Username for authenticating to the broker.
+.TP
+.B \fBusername [string]\fP
+Password for authenticating.
+.UNINDENT
 .SS stdin
 .sp
 Reads from standard input, one collection per line, allowing you to pipe collections to Skogul on a command line or similar.
 .sp
 Settings:
-.sp
-\fBhandler [HandlerRef]\fP
+.INDENT 0.0
+.TP
+.B \fBhandler [HandlerRef]\fP
+Handler used to parse, transform and send data.
+.UNINDENT
 .SS tcp
 .sp
 Listen for Skogul\-formatted JSON on a tcp socket, reading one collection per line.
 .sp
 Settings:
+.INDENT 0.0
+.TP
+.B \fBaddress [string]\fP
+Address and port to listen to.
 .sp
-\fBaddress [string]\fP
-.sp
-\fBhandler [HandlerRef]\fP
+Example(s): [::1]:3306
+.TP
+.B \fBhandler [HandlerRef]\fP
+Handler used to parse, transform and send data.
+.UNINDENT
 .SS test
 .sp
 Generate dummy\-data. Useful for testing, including in combination with the http sender to send dummy\-data to an other skogul instance.

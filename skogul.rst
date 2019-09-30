@@ -420,10 +420,10 @@ Reads continuously from a file. Can technically read from any file, but since it
 Settings:
 
 ``file [string]``
-	
+	Path to the fifo or file from which to read from repeatedly.
 
 ``handler [HandlerRef]``
-	
+	Handler used to parse and transform and send data.
 
 file
 ----
@@ -433,10 +433,10 @@ Reads from a file, then stops. Assumes one collection per line.
 Settings:
 
 ``file [string]``
-	
+	Path to the file to read from once.
 
 ``handler [HandlerRef]``
-	
+	Handler used to parse, transform and send data.
 
 http
 ----
@@ -490,16 +490,16 @@ Listen for Skogul-formatted JSON on a MQTT endpoint
 Settings:
 
 ``address [string]``
-	
+	Address to connect to.
 
 ``handler [*skogul.HandlerRef]``
-	
+	Handler used to parse, transform and send data.
 
 ``password [string]``
-	
+	Username for authenticating to the broker.
 
 ``username [string]``
-	
+	Password for authenticating.
 
 stdin
 -----
@@ -509,7 +509,7 @@ Reads from standard input, one collection per line, allowing you to pipe collect
 Settings:
 
 ``handler [HandlerRef]``
-	
+	Handler used to parse, transform and send data.
 
 tcp
 ---
@@ -519,10 +519,12 @@ Listen for Skogul-formatted JSON on a tcp socket, reading one collection per lin
 Settings:
 
 ``address [string]``
-	
+	Address and port to listen to.
+
+	Example(s): [::1]:3306
 
 ``handler [HandlerRef]``
-	
+	Handler used to parse, transform and send data.
 
 test
 ----

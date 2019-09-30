@@ -34,8 +34,8 @@ import (
 // collection per line. Best suited for pointing at a FIFO, which will
 // allow you to 'cat' stuff to Skogul.
 type LineFile struct {
-	File    string
-	Handler skogul.HandlerRef
+	File    string            `doc:"Path to the fifo or file from which to read from repeatedly."`
+	Handler skogul.HandlerRef `doc:"Handler used to parse and transform and send data."`
 }
 
 // Common routine for both fifo and stdin
@@ -78,8 +78,8 @@ func (lf *LineFile) Start() error {
 // File reads from a FILE, a single JSON object per line, and
 // exits at EOF.
 type File struct {
-	File    string
-	Handler skogul.HandlerRef
+	File    string            `doc:"Path to the file to read from once."`
+	Handler skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
 	lf      LineFile
 }
 
@@ -92,7 +92,7 @@ func (s *File) Start() error {
 
 // Stdin reads from /dev/stdin
 type Stdin struct {
-	Handler skogul.HandlerRef
+	Handler skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
 	lf      LineFile
 }
 

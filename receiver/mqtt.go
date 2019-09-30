@@ -37,10 +37,10 @@ import (
 MQTT connects to a MQTT broker and listens for messages on a topic.
 */
 type MQTT struct {
-	Address  string
-	Handler  *skogul.HandlerRef
-	Password string
-	Username string
+	Address  string             `doc:"Address to connect to."`
+	Handler  *skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Password string             `doc:"Username for authenticating to the broker."`
+	Username string             `doc:"Password for authenticating."`
 
 	mc skmqtt.MQTT
 }

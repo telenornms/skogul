@@ -45,8 +45,8 @@ receiver on the same box that needs to write to it, combined with
 skogul.senders.HTTP to forward over a more sensible channel.
 */
 type TCPLine struct {
-	Address string
-	Handler skogul.HandlerRef
+	Address string            `doc:"Address and port to listen to." example:"[::1]:3306"`
+	Handler skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
 }
 
 /*
