@@ -77,46 +77,23 @@ func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, in
 	fmt.Fprintf(w, "%s\n", b)
 }
 
-func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (code int, oerr error) {
+func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error) {
 	if r.ContentLength == 0 {
-		oerr = skogul.Error{Source: "http receiver", Reason: "Missing input data"}
-		code = 400
-		return
+		return 400, skogul.Error{Source: "http receiver", Reason: "Missing input data"}
 	}
+
 	b := make([]byte, r.ContentLength)
-	n, err := io.ReadFull(r.Body, b)
-	if err != nil {
+
+	if n, err := io.ReadFull(r.Body, b); err != nil {
 		log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
-		code = 400
-		oerr = skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
-		return
+		return 400, skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
 	}
-	m, err := rcvr.Handler.Parser.Parse(b)
-	if err == nil {
-		err = m.Validate()
+
+	if err := rcvr.Handler.Handle(b); err != nil {
+		return 400, err
 	}
-	if err != nil {
-		oerr = skogul.Error{Source: "http receiver", Reason: "failed to parse JSON", Next: err}
-		code = 400
-		return
-	}
-	for _, t := range rcvr.Handler.Transformers {
-		e := t.Transform(&m)
-		if e != nil {
-			code = 400
-			oerr = e
-			return
-		}
-	}
-	err = rcvr.Handler.Sender.Send(&m)
-	if err != nil {
-		code = 500
-		oerr = skogul.Error{Source: "http receiver", Reason: "failed to send data", Next: err}
-		return
-	}
-	oerr = nil
-	code = 200
-	return
+
+	return 200, nil
 }
 
 // Core HTTP handler

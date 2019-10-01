@@ -107,9 +107,9 @@ func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 // ErrDiverter calls the Next sender, but if it fails, it will convert the
 // error to a Container and send that to Err.
 type ErrDiverter struct {
-	Next   skogul.SenderRef `doc:"Send normal metrics here"`
-	Err    skogul.SenderRef `doc:"If the sender under Next fails, convert the error to a metric and send it here"`
-	RetErr bool             `doc:"If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error."`
+	Next   skogul.SenderRef  `doc:"Send normal metrics here."`
+	Err    skogul.HandlerRef `doc:"If the sender under Next fails, convert the error to a metric and send it here."`
+	RetErr bool              `doc:"If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error."`
 }
 
 // Send data to the next sender. If it fails, use the Err sender.
@@ -123,7 +123,7 @@ func (ed *ErrDiverter) Send(c *skogul.Container) error {
 		cerr = skogul.Error{Source: "errdiverter sender", Reason: "downstream error", Next: err}
 	}
 	container := cerr.Container()
-	newerr := ed.Err.S.Send(&container)
+	newerr := ed.Err.H.TransformAndSend(&container)
 	if newerr != nil {
 		return newerr
 	}

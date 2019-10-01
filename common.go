@@ -162,6 +162,47 @@ func (e Error) Container() Container {
 	return c
 }
 
+// Transform runs all available transformers in order and enforce any rules
+func (h *Handler) Transform(c *Container) error {
+	for _, t := range h.Transformers {
+		if err := t.Transform(c); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// Handle parses the byte array using the configured parser, issues
+// transformers and sends the data off.
+func (h *Handler) Handle(b []byte) error {
+	c, err := h.Parser.Parse(b)
+	if err != nil {
+		return Error{Source: "handler", Reason: "parsing bytestream failed", Next: err}
+	}
+	if err = c.Validate(); err != nil {
+		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
+	}
+	if err = h.Transform(&c); err != nil {
+		return Error{Source: "handler", Reason: "transforming metrics failed", Next: err}
+	}
+	if err = h.Sender.Send(&c); err != nil {
+		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+	}
+	return nil
+}
+
+// TransformAndSend transforms the already parsed container and sends the
+// data off.
+func (h *Handler) TransformAndSend(c *Container) error {
+	if err := h.Transform(c); err != nil {
+		return Error{Source: "handler", Reason: "transforming metrics failed", Next: err}
+	}
+	if err := h.Sender.Send(c); err != nil {
+		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+	}
+	return nil
+}
+
 // Verify the basic integrity of a handler. Quite shallow.
 func (h Handler) Verify() error {
 	if h.Parser == nil {

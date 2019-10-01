@@ -47,21 +47,10 @@ type MQTT struct {
 
 // Handle a received message.
 func (handler *MQTT) receiver(msg mqtt.Message) {
-	m, err := handler.Handler.H.Parser.Parse(msg.Payload())
-	if err == nil {
-		err = m.Validate()
-	}
+	err := handler.Handler.H.Handle(msg.Payload())
 	if err != nil {
-		log.Printf("Unable to parse payload: %s", err)
-		return
+		log.Printf("Unable to handle payload: %s", err)
 	}
-	for _, t := range handler.Handler.H.Transformers {
-		if e := t.Transform(&m); e != nil {
-			log.Printf("failed to transform mqtt message: %v", e)
-			return
-		}
-	}
-	handler.Handler.H.Sender.Send(&m)
 }
 
 // Start MQTT receiver.

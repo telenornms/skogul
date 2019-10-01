@@ -126,10 +126,9 @@ func (co *Counter) getIt() {
 			container.Metrics[0].Data["rate_containers"] = rate.containers
 			container.Metrics[0].Data["rate_metrics"] = rate.metrics
 			container.Metrics[0].Data["rate_values"] = rate.values
-			for _, t := range co.Stats.H.Transformers {
-				t.Transform(&container)
+			if err := co.Stats.H.TransformAndSend(&container); err != nil {
+				log.Printf("Unable to transform and send counter stats: %v", err)
 			}
-			co.Stats.H.Sender.Send(&container)
 			current = count{nil, 0, 0, 0}
 			last = *m.ts
 		}
