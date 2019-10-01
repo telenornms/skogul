@@ -57,7 +57,7 @@ func logContainer(s string) (*skogul.Metric, error) {
 
 // Parse implements a skogul.Parser logic by parsing the byte array as
 // received by log. Each non-empty line results in a single metric.
-func (l *Log) Parse(b []byte) (skogul.Container, error) {
+func (lg *Log) Parse(b []byte) (skogul.Container, error) {
 	c := skogul.Container{}
 	c.Metrics = make([]*skogul.Metric, 0)
 	cpy := string(b)
@@ -65,7 +65,7 @@ func (l *Log) Parse(b []byte) (skogul.Container, error) {
 		if line == "" {
 			continue
 		}
-		if l.Echo {
+		if lg.Echo {
 			fmt.Println(line)
 		}
 		m, err := logContainer(line)

@@ -115,6 +115,7 @@ func HelpReceiver(r string) (Help, error) {
 	return sh, nil
 }
 
+// HelpTransformer looks up documentation for a named transformer.
 func HelpTransformer(t string) (Help, error) {
 	if transformer.Auto[t] == nil {
 		return Help{}, skogul.Error{Source: "config parser", Reason: "No such transformer"}
