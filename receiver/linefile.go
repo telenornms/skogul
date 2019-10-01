@@ -46,6 +46,7 @@ func (lf *LineFile) read() error {
 		return err
 	}
 	scanner := bufio.NewScanner(f)
+ScanLoop:
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		m, err := lf.Handler.H.Parser.Parse(bytes)
@@ -57,9 +58,14 @@ func (lf *LineFile) read() error {
 			continue
 		}
 		for _, t := range lf.Handler.H.Transformers {
-			t.Transform(&m)
+			if e := t.Transform(&m); e != nil {
+				log.Printf("Unable to transform metric: %v", err)
+				continue ScanLoop
+			}
 		}
-		lf.Handler.H.Sender.Send(&m)
+		if e := lf.Handler.H.Sender.Send(&m); e != nil {
+			log.Printf("Failed to send metric: %v", e)
+		}
 	}
 	if err := scanner.Err(); err != nil {
 		log.Printf("Error reading file: %s", err)

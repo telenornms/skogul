@@ -83,6 +83,7 @@ func (tl *TCPLine) Start() error {
 
 func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	scanner := bufio.NewScanner(conn)
+ScanLoop:
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		log.Printf("Read %s", bytes)
@@ -95,7 +96,10 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 			continue
 		}
 		for _, t := range tl.Handler.H.Transformers {
-			t.Transform(&m)
+			if e := t.Transform(&m); e != nil {
+				log.Printf("Unable to transform metric: %v", e)
+				continue ScanLoop
+			}
 		}
 		tl.Handler.H.Sender.Send(&m)
 	}

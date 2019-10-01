@@ -66,6 +66,7 @@ func logContainer(s string) (*skogul.Container, error) {
 // want to trigger a feedback loop, so we can't use log.P... internally.
 func (lg *Log) Write(p []byte) (n int, err error) {
 	cpy := string(p)
+ScanLoop:
 	for _, line := range strings.Split(cpy, "\n") {
 		if line == "" {
 			continue
@@ -74,6 +75,12 @@ func (lg *Log) Write(p []byte) (n int, err error) {
 			fmt.Println(line)
 		}
 		c, err := logContainer(line)
+		for _, t := range lg.Handler.H.Transformers {
+			if e := t.Transform(c); e != nil {
+				fmt.Printf("Failed to transform container for log receiver. Transform error: %v\nOriginal log message: %v\n", e, line)
+				continue ScanLoop
+			}
+		}
 		if err == nil {
 			lg.Handler.H.Sender.Send(c)
 		} else {

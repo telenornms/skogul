@@ -81,18 +81,32 @@ func (tst *Tester) Start() error {
 	return nil
 }
 
+// innerRun is a single iteration of generating metrics and sending them.
+// It is separated from run() to simplify defer/delay. Without it, it's
+// easy to introduce bugs where the delay isn't executed on transform
+// failure.
+func (tst *Tester) innerRun() {
+	if tst.Delay.Duration != 0 {
+		defer func(d time.Duration) {
+			time.Sleep(d)
+		}(tst.Delay.Duration)
+	}
+	c := tst.generate(time.Now())
+	for _, t := range tst.Handler.H.Transformers {
+		if e := t.Transform(&c); e != nil {
+			log.Printf("Failed to transform test-metric: %v", e)
+			return
+		}
+	}
+	err := tst.Handler.H.Sender.Send(&c)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+// run() is a signle thread of the tester that runs for ever.
 func (tst *Tester) run() {
 	for {
-		c := tst.generate(time.Now())
-		for _, t := range tst.Handler.H.Transformers {
-			t.Transform(&c)
-		}
-		err := tst.Handler.H.Sender.Send(&c)
-		if err != nil {
-			log.Print(err)
-		}
-		if tst.Delay.Duration != 0 {
-			time.Sleep(tst.Delay.Duration)
-		}
+		tst.innerRun()
 	}
 }

@@ -56,7 +56,10 @@ func (handler *MQTT) receiver(msg mqtt.Message) {
 		return
 	}
 	for _, t := range handler.Handler.H.Transformers {
-		t.Transform(&m)
+		if e := t.Transform(&m); e != nil {
+			log.Printf("failed to transform mqtt message: %v", e)
+			return
+		}
 	}
 	handler.Handler.H.Sender.Send(&m)
 }
