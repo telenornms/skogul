@@ -265,11 +265,11 @@ Aliases: errordivert errdivert errordiverter
 Settings:
 .INDENT 0.0
 .TP
-.B \fBerr [SenderRef]\fP
-If the sender under Next fails, convert the error to a metric and send it here
+.B \fBerr [HandlerRef]\fP
+If the sender under Next fails, convert the error to a metric and send it here.
 .TP
 .B \fBnext [SenderRef]\fP
-Send normal metrics here
+Send normal metrics here.
 .TP
 .B \fBreterr [bool]\fP
 If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error.
@@ -502,7 +502,7 @@ Settings:
 Logs are also echoed to stdout.
 .TP
 .B \fBhandler [HandlerRef]\fP
-Reference to a handler where the data is sent.
+Reference to a handler where the data is sent. Parser will be overwritten.
 .UNINDENT
 .SS mqtt
 .sp

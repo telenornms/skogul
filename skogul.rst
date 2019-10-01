@@ -236,11 +236,11 @@ Aliases: errordivert errdivert errordiverter
 
 Settings:
 
-``err [SenderRef]``
-	If the sender under Next fails, convert the error to a metric and send it here
+``err [HandlerRef]``
+	If the sender under Next fails, convert the error to a metric and send it here.
 
 ``next [SenderRef]``
-	Send normal metrics here
+	Send normal metrics here.
 
 ``reterr [bool]``
 	If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error.
@@ -480,7 +480,7 @@ Settings:
 	Logs are also echoed to stdout.
 
 ``handler [HandlerRef]``
-	Reference to a handler where the data is sent.
+	Reference to a handler where the data is sent. Parser will be overwritten.
 
 mqtt
 ----
