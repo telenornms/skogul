@@ -125,9 +125,39 @@ exists, and to simplify configuration, the "templater" transformer does
 not have to be explicitly defined to be referenced.
 
 The documentation for each sender and receiver also lists all options. In
-general, you do not need to specify all options. For formatting, the settings
-use whatever JSON unmarshalling logic that Go provides, but it should be self
-explanatory or explained in the documentation for the relevant option.
+general, you do not need to specify all options.
+
+CONFIGURATION DATA TYPES
+========================
+
+Data types are parsed into Go types. In most cases, the the type is self
+explanatory (e.g: a "string" is a typical text string, "int" is an integer,
+and so on).
+
+However, here are some examples that might not be obvious.
+
+HandlerRef
+	This is a text string referencing a named handler, specified in
+	"handlers".
+
+SenderRef
+	A text string referencing a named sender, specified in "senders".
+
+[]string
+	An array of text strings. E.g. ["foo","bar"].
+
+[]*skogul.HandlerRef
+	An array of SenderRef, so similar to the above ["foo", "bar"], where "foo"
+	and "bar" are senders named in the "senders" section of the configuration.
+
+map[string]*skogul.HandlerRef
+	This is a map of strings to handler references. For example, { "/some/path": "aHandler",
+	"/other/path": "bHandler"}.
+
+interface{}
+	This is a generic "anything"-structure that can hold any arbitrary
+	value. Can be any structure or variable, including nested
+	variables. Used in the data/metadata transformers, among others.
 
 SENDERS
 =======
@@ -143,13 +173,13 @@ Aliases: retry
 
 Settings:
 
-``base [Duration]``
+``base - Duration``
 	Initial delay after a failure. Will double for each retry
 
-``next [SenderRef]``
+``next - SenderRef``
 	The sender to try
 
-``retries [uint64]``
+``retries - uint64``
 	Number of retries before giving up
 
 batch
@@ -161,13 +191,13 @@ Aliases: batcher
 
 Settings:
 
-``interval [Duration]``
+``interval - Duration``
 	Flush the bucket after this duration regardless of how full it is
 
-``next [SenderRef]``
+``next - SenderRef``
 	Sender that will receive batched metrics
 
-``threshold [int]``
+``threshold - int``
 	Flush the bucket after reaching this amount of metrics
 
 counter
@@ -179,15 +209,15 @@ Aliases: count
 
 Settings:
 
-``next [SenderRef]``
+``next - SenderRef``
 	Reference to the next sender in the chain
 
-``period [Duration]``
+``period - Duration``
 	How often to emit stats
 
 	Example(s): 5s
 
-``stats [HandlerRef]``
+``stats - HandlerRef``
 	Handler that will receive the stats periodically
 
 debug
@@ -197,7 +227,7 @@ Prints received metrics to stdout.
 
 Settings:
 
-``prefix [string]``
+``prefix - string``
 	Prefix to print before any metric
 
 detacher
@@ -209,10 +239,10 @@ Aliases: detach
 
 Settings:
 
-``depth [int]``
+``depth - int``
 	How many containers can be pending delivery before we start blocking. Defaults to 1000.
 
-``next [SenderRef]``
+``next - SenderRef``
 	Sender that receives the metrics.
 
 dupe
@@ -224,7 +254,7 @@ Aliases: duplicate dup
 
 Settings:
 
-``next [[]skogul.SenderRef]``
+``next - []skogul.SenderRef``
 	List of senders that will receive metrics, in order.
 
 errdiverter
@@ -236,13 +266,13 @@ Aliases: errordivert errdivert errordiverter
 
 Settings:
 
-``err [HandlerRef]``
+``err - HandlerRef``
 	If the sender under Next fails, convert the error to a metric and send it here.
 
-``next [SenderRef]``
+``next - SenderRef``
 	Send normal metrics here.
 
-``reterr [bool]``
+``reterr - bool``
 	If true, the original error from Next will be returned, if false, both Next AND Err has to fail for Send to return an error.
 
 fallback
@@ -252,7 +282,7 @@ Tries the senders provided in Next, in order. E.g.: if the first responds OK, th
 
 Settings:
 
-``next [[]skogul.SenderRef]``
+``next - []skogul.SenderRef``
 	Ordered list of senders that will potentially receive metrics.
 
 fanout
@@ -262,10 +292,10 @@ Fanout to a fixed number of threads before passing data on. This is rarely neede
 
 Settings:
 
-``next [SenderRef]``
+``next - SenderRef``
 	Sender receiving the metrics
 
-``workers [int]``
+``workers - int``
 	Number of worker threads in use. To _fan_in_ you can set this to 1.
 
 forwardfail
@@ -275,7 +305,7 @@ Forwards metrics, but always returns failure. Useful in complex failure handling
 
 Settings:
 
-``next [SenderRef]``
+``next - SenderRef``
 	Sender receiving the metrics
 
 http
@@ -287,13 +317,13 @@ Aliases: https
 
 Settings:
 
-``insecure [bool]``
+``insecure - bool``
 	Disable TLS certificate validation.
 
-``timeout [Duration]``
+``timeout - Duration``
 	HTTP timeout.
 
-``url [string]``
+``url - string``
 	Fully qualified URL to send data to.
 
 	Example(s): http://localhost:6081/ https://user:password@[::1]:6082/
@@ -307,13 +337,13 @@ Aliases: influxdb
 
 Settings:
 
-``measurement [string]``
+``measurement - string``
 	Measurement name to write to.
 
-``timeout [Duration]``
+``timeout - Duration``
 	HTTP timeout
 
-``url [string]``
+``url - string``
 	URL to InfluxDB API. Must include write end-point and database to write to.
 
 	Example(s): http://[::1]:8086/write?db=foo
@@ -325,7 +355,7 @@ Logs a message, mainly useful for enriching debug information in conjunction wit
 
 Settings:
 
-``message [string]``
+``message - string``
 	Message to print.
 
 mnr
@@ -337,12 +367,12 @@ Aliases: m&r
 
 Settings:
 
-``address [string]``
+``address - string``
 	Address to send data to
 
 	Example(s): 192.168.1.99:1234
 
-``defaultgroup [string]``
+``defaultgroup - string``
 	Default group to use if the metadatafield group is missing.
 
 mqtt
@@ -352,7 +382,7 @@ Publishes received metrics to an MQTT broker/topic.
 
 Settings:
 
-``address [string]``
+``address - string``
 	URL-encoded address.
 
 	Example(s): mqtt://user:password@server/topic
@@ -369,16 +399,16 @@ Injects a random delay before passing data on. Mainly for testing.
 
 Settings:
 
-``base [Duration]``
+``base - Duration``
 	The baseline - or minimum - delay
 
-``maxdelay [Duration]``
+``maxdelay - Duration``
 	The maximum delay we will suffer
 
-``next [SenderRef]``
+``next - SenderRef``
 	Sender that will receive delayed metrics
 
-``verbose [bool]``
+``verbose - bool``
 	If set to true, will log delay durations
 
 sql
@@ -388,15 +418,15 @@ Execute a SQL query for each received metric, using a template. Any query can be
 
 Settings:
 
-``connstr [string]``
+``connstr - string``
 	Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database.
 
 	Example(s): mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'
 
-``driver [string]``
+``driver - string``
 	Database driver/system. Currently suported: mysql and postgres.
 
-``query [string]``
+``query - string``
 	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
 
 	Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
@@ -419,10 +449,10 @@ Reads continuously from a file. Can technically read from any file, but since it
 
 Settings:
 
-``file [string]``
+``file - string``
 	Path to the fifo or file from which to read from repeatedly.
 
-``handler [HandlerRef]``
+``handler - HandlerRef``
 	Handler used to parse and transform and send data.
 
 file
@@ -432,10 +462,10 @@ Reads from a file, then stops. Assumes one collection per line.
 
 Settings:
 
-``file [string]``
+``file - string``
 	Path to the file to read from once.
 
-``handler [HandlerRef]``
+``handler - HandlerRef``
 	Handler used to parse, transform and send data.
 
 http
@@ -447,26 +477,26 @@ Aliases: https
 
 Settings:
 
-``address [string]``
+``address - string``
 	Address to listen to.
 
 	Example(s): [::1]:80 [2001:db8::1]:443
 
-``certfile [string]``
+``certfile - string``
 	Path to certificate file for TLS. If left blank, un-encrypted HTTP is used.
 
-``handlers [map[string]*skogul.HandlerRef]``
+``handlers - map[string]*skogul.HandlerRef``
 	Paths to handlers. Need at least one.
 
 	Example(s): {"/": "someHandler" }
 
-``keyfile [string]``
+``keyfile - string``
 	Path to key file for TLS.
 
-``password [string]``
+``password - string``
 	Password for basic authentication.
 
-``username [string]``
+``username - string``
 	Username for basic authentication. No authentication is required if left blank.
 
 log
@@ -476,10 +506,10 @@ Log attaches to the internal logging of Skogul and diverts log messages.
 
 Settings:
 
-``echo [bool]``
+``echo - bool``
 	Logs are also echoed to stdout.
 
-``handler [HandlerRef]``
+``handler - HandlerRef``
 	Reference to a handler where the data is sent. Parser will be overwritten.
 
 mqtt
@@ -489,16 +519,16 @@ Listen for Skogul-formatted JSON on a MQTT endpoint
 
 Settings:
 
-``address [string]``
+``address - string``
 	Address to connect to.
 
-``handler [*skogul.HandlerRef]``
+``handler - *skogul.HandlerRef``
 	Handler used to parse, transform and send data.
 
-``password [string]``
+``password - string``
 	Username for authenticating to the broker.
 
-``username [string]``
+``username - string``
 	Password for authenticating.
 
 stdin
@@ -508,7 +538,7 @@ Reads from standard input, one collection per line, allowing you to pipe collect
 
 Settings:
 
-``handler [HandlerRef]``
+``handler - HandlerRef``
 	Handler used to parse, transform and send data.
 
 tcp
@@ -518,12 +548,12 @@ Listen for Skogul-formatted JSON on a tcp socket, reading one collection per lin
 
 Settings:
 
-``address [string]``
+``address - string``
 	Address and port to listen to.
 
 	Example(s): [::1]:3306
 
-``handler [HandlerRef]``
+``handler - HandlerRef``
 	Handler used to parse, transform and send data.
 
 test
@@ -533,19 +563,19 @@ Generate dummy-data. Useful for testing, including in combination with the http 
 
 Settings:
 
-``delay [Duration]``
+``delay - Duration``
 	Sleep time between each metric is generated, if any.
 
-``handler [HandlerRef]``
+``handler - HandlerRef``
 	Reference to a handler where the data is sent
 
-``metrics [int64]``
+``metrics - int64``
 	Number of metrics in each container
 
-``threads [int]``
+``threads - int``
 	Threads to spawn
 
-``values [int64]``
+``values - int64``
 	Number of unique values for each metric
 
 
@@ -565,16 +595,16 @@ Enforces custom-rules for data fields of metrics.
 
 Settings:
 
-``ban [[]string]``
+``ban - []string``
 	Fail if any of these data fields are present
 
-``remove [[]string]``
+``remove - []string``
 	Remove these data fields.
 
-``require [[]string]``
+``require - []string``
 	Require the pressence of these data fields.
 
-``set [map[string]interface {}]``
+``set - map[string]interface {}``
 	Set data fields to specific values.
 
 metadata
@@ -584,16 +614,16 @@ Enforces custom-rules on metadata of metrics.
 
 Settings:
 
-``ban [[]string]``
+``ban - []string``
 	Fail if any of these fields are present
 
-``remove [[]string]``
+``remove - []string``
 	Remove these metadata fields.
 
-``require [[]string]``
+``require - []string``
 	Require the pressence of these fields.
 
-``set [map[string]interface {}]``
+``set - map[string]interface {}``
 	Set metadata fields to specific values.
 
 templater

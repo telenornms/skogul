@@ -187,9 +187,39 @@ exists, and to simplify configuration, the "templater" transformer does
 not have to be explicitly defined to be referenced.
 
 The documentation for each sender and receiver also lists all options. In
-general, you do not need to specify all options. For formatting, the settings
-use whatever JSON unmarshalling logic that Go provides, but it should be self
-explanatory or explained in the documentation for the relevant option.
+general, you do not need to specify all options.
+
+CONFIGURATION DATA TYPES
+========================
+
+Data types are parsed into Go types. In most cases, the the type is self
+explanatory (e.g: a "string" is a typical text string, "int" is an integer,
+and so on).
+
+However, here are some examples that might not be obvious.
+
+HandlerRef
+	This is a text string referencing a named handler, specified in
+	"handlers".
+
+SenderRef
+	A text string referencing a named sender, specified in "senders".
+
+[]string
+	An array of text strings. E.g. ["foo","bar"].
+
+[]*skogul.HandlerRef
+	An array of SenderRef, so similar to the above ["foo", "bar"], where "foo"
+	and "bar" are senders named in the "senders" section of the configuration.
+
+map[string]*skogul.HandlerRef
+	This is a map of strings to handler references. For example, { "/some/path": "aHandler",
+	"/other/path": "bHandler"}.
+
+interface{}
+	This is a generic "anything"-structure that can hold any arbitrary
+	value. Can be any structure or variable, including nested
+	variables. Used in the data/metadata transformers, among others.
 
 SENDERS
 =======
@@ -553,7 +583,7 @@ func thingMan(thing config.Help) {
 	sort.Strings(fields)
 	for _, n := range fields {
 		f := thing.Fields[n]
-		fmt.Printf("``%s [%s]``\n\t", strings.ToLower(n), f.Type)
+		fmt.Printf("``%s - %s``\n\t", strings.ToLower(n), f.Type)
 		fmt.Printf("%s\n\n", f.Doc)
 		if f.Example != "" {
 			fmt.Printf("\tExample(s): %s\n\n", f.Example)
