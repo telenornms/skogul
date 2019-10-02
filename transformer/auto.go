@@ -52,4 +52,10 @@ func init() {
 		Alloc:   func() skogul.Transformer { return &Metadata{} },
 		Help:    "Enforces custom-rules on metadata of metrics.",
 	})
+	Add(Transformer{
+		Name:    "data",
+		Aliases: []string{},
+		Alloc:   func() skogul.Transformer { return &Data{} },
+		Help:    "Enforces custom-rules for data fields of metrics.",
+	})
 }

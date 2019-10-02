@@ -576,6 +576,25 @@ Transformers are the only tools that can actively modify a metric. See the
 "HANDLERS" section for more discussion. Note that the "templater" transformer
 does not need to be defined \- if a handler lists "templater", one will be
 created behind the scenes. The available transformers are:
+.SS data
+.sp
+Enforces custom\-rules for data fields of metrics.
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBban [[]string]\fP
+Fail if any of these data fields are present
+.TP
+.B \fBremove [[]string]\fP
+Remove these data fields.
+.TP
+.B \fBrequire [[]string]\fP
+Require the pressence of these data fields.
+.TP
+.B \fBset [map[string]interface {}]\fP
+Set data fields to specific values.
+.UNINDENT
 .SS metadata
 .sp
 Enforces custom\-rules on metadata of metrics.

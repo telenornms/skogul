@@ -68,3 +68,44 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 	}
 	return nil
 }
+
+// Data enforces a set of rules on data in all metrics, potentially
+// changing the metric data.
+type Data struct {
+	Set     map[string]interface{} `doc:"Set data fields to specific values."`
+	Require []string               `doc:"Require the pressence of these data fields."`
+	Remove  []string               `doc:"Remove these data fields."`
+	Ban     []string               `doc:"Fail if any of these data fields are present"`
+}
+
+// Transform enforces the Metadata rules
+func (data *Data) Transform(c *skogul.Container) error {
+	for mi := range c.Metrics {
+		for key, value := range data.Set {
+			if c.Metrics[mi].Data == nil {
+				c.Metrics[mi].Data = make(map[string]interface{})
+			}
+			c.Metrics[mi].Data[key] = value
+		}
+		for _, value := range data.Require {
+			if c.Metrics[mi].Data == nil || c.Metrics[mi].Data[value] == nil {
+				return skogul.Error{Source: "datadata transformer", Reason: fmt.Sprintf("missing required datadata field %s", value)}
+			}
+		}
+		for _, value := range data.Remove {
+			if c.Metrics[mi].Data == nil {
+				continue
+			}
+			delete(c.Metrics[mi].Data, value)
+		}
+		for _, value := range data.Ban {
+			if c.Metrics[mi].Data == nil {
+				continue
+			}
+			if c.Metrics[mi].Data[value] != nil {
+				return skogul.Error{Source: "datadata transformer", Reason: fmt.Sprintf("illegal/banned datadata field %s present", value)}
+			}
+		}
+	}
+	return nil
+}

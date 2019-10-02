@@ -558,6 +558,25 @@ Transformers are the only tools that can actively modify a metric. See the
 does not need to be defined - if a handler lists "templater", one will be
 created behind the scenes. The available transformers are:
 
+data
+----
+
+Enforces custom-rules for data fields of metrics.
+
+Settings:
+
+``ban [[]string]``
+	Fail if any of these data fields are present
+
+``remove [[]string]``
+	Remove these data fields.
+
+``require [[]string]``
+	Require the pressence of these data fields.
+
+``set [map[string]interface {}]``
+	Set data fields to specific values.
+
 metadata
 --------
 
