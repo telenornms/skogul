@@ -584,7 +584,7 @@ func thingMan(thing config.Help) {
 	for _, n := range fields {
 		f := thing.Fields[n]
 		fmt.Printf("``%s - %s``\n\t", strings.ToLower(n), f.Type)
-		fmt.Printf("%s\n\n", f.Doc)
+		fmt.Printf("%s\n\n", strings.Replace(f.Doc, "\n", "\n\t", -1))
 		if f.Example != "" {
 			fmt.Printf("\tExample(s): %s\n\n", f.Example)
 		}

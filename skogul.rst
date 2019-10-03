@@ -427,7 +427,11 @@ Settings:
 	Database driver/system. Currently suported: mysql and postgres.
 
 ``query - string``
-	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
+	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. 
+	
+	In addition, ${json.data} and ${json.metadata} will be expanded to the json-encoded representation of the data and metadata respectively.
+	
+	Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
 
 	Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
 

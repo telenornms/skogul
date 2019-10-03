@@ -25,6 +25,7 @@ package sender
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -36,9 +37,11 @@ import (
 )
 
 const (
-	timestamp = iota
-	metadata  = iota
-	data      = iota
+	timestamp   = iota
+	metadata    = iota
+	data        = iota
+	marshalData = iota
+	marshalMeta = iota
 )
 
 type dbElement struct {
@@ -62,7 +65,7 @@ will be sensibly escaped.
 */
 type SQL struct {
 	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
-	Query   string `doc:"Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name \"KEY\", other ${foo} will be expanded to data[foo]. Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe." example:"INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})"`
+	Query   string `doc:"Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name \"KEY\", other ${foo} will be expanded to data[foo]. \n\nIn addition, ${json.data} and ${json.metadata} will be expanded to the json-encoded representation of the data and metadata respectively.\n\nNote that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe." example:"INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})"`
 	Driver  string `doc:"Database driver/system. Currently suported: mysql and postgres."`
 	q       string
 	list    []dbElement
@@ -81,6 +84,10 @@ func (sq *SQL) prep() {
 			sq.list = append(sq.list, dbElement{timestamp, element})
 		} else if len(element) > mlen && element[0:mlen] == "metadata." {
 			sq.list = append(sq.list, dbElement{metadata, element[mlen:]})
+		} else if element == "json.metadata" {
+			sq.list = append(sq.list, dbElement{marshalMeta, ""})
+		} else if element == "json.data" {
+			sq.list = append(sq.list, dbElement{marshalData, ""})
 		} else {
 			sq.list = append(sq.list, dbElement{data, element})
 		}
@@ -133,6 +140,18 @@ func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 			vals = append(vals, m.Metadata[e.key])
 		case data:
 			vals = append(vals, m.Data[e.key])
+		case marshalMeta:
+			meta, err := json.Marshal(m.Metadata)
+			if err != nil {
+				return skogul.Error{Source: "db sender", Reason: "unable to marshal metadata into json", Next: err}
+			}
+			vals = append(vals, meta)
+		case marshalData:
+			data, err := json.Marshal(m.Data)
+			if err != nil {
+				return skogul.Error{Source: "db sender", Reason: "unable to marshal data into json", Next: err}
+			}
+			vals = append(vals, data)
 		}
 	}
 	_, err := stmt.Exec(vals...)
