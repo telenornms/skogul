@@ -2,3 +2,7 @@ cmd/skogul/skogul
 .*swp
 coverage.out
 /skogul
+vendor
+
+# MacOS temp file
+.DS_Store
