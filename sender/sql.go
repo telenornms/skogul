@@ -59,14 +59,15 @@ http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRIN
 The query is expanded using os.Expand() and will fill in
 timestamp/metadata/data. The sender will prep the query and
 essentially covert INSERT INTO foo
-VLAUES(${timestamp.timestamp},${metadata.foo},${someData})
+VLAUES(${timestamp},${metadata.foo},${someData})
 to foo("INSERT INTO foo VALUES(?,?,?)", timestamp, foo, someData), so they
 will be sensibly escaped.
 */
 type SQL struct {
 	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
-	Query   string `doc:"Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name \"KEY\", other ${foo} will be expanded to data[foo]. \n\nIn addition, ${json.data} and ${json.metadata} will be expanded to the json-encoded representation of the data and metadata respectively.\n\nNote that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe." example:"INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})"`
+	Query   string `doc:"Query run for each metric. The following expansions are made:\n\n${timestamp} is expanded to the actual metric timestamp.\n\n${metadata.KEY} will be expanded to the metadata with key name \"KEY\".\n\n${data.KEY} will be expanded to data[foo].\n\n${json.metadata} will be expanded to a json representation of all metadata.\n\n${json.data} will be expanded to a json representation of all data.\n\nFinally, ${KEY} is a shorthand for ${data.KEY}. Both methods are provided, to allow referencing data fields named \"metadata.\". E.g.: ${data.metadata.x} will match data[\"metadata.x\"], while ${metadata.x} will match metadata[\"x\"]." example:"INSERT INTO test VALUES(${timestamp},${hei},${metadata.key1})"`
 	Driver  string `doc:"Database driver/system. Currently suported: mysql and postgres."`
+	initErr error
 	q       string
 	list    []dbElement
 	db      *sql.DB
@@ -88,10 +89,11 @@ I love humans.
 */
 func (sq *SQL) prep() {
 	mlen := len("metadata.")
+	dlen := len("data.")
 
 	nElement := 0
 	expander := func(element string) string {
-		if element == "timestamp.timestamp" {
+		if element == "timestamp" {
 			sq.list = append(sq.list, dbElement{timestamp, element})
 		} else if len(element) > mlen && element[0:mlen] == "metadata." {
 			sq.list = append(sq.list, dbElement{metadata, element[mlen:]})
@@ -99,39 +101,27 @@ func (sq *SQL) prep() {
 			sq.list = append(sq.list, dbElement{marshalMeta, ""})
 		} else if element == "json.data" {
 			sq.list = append(sq.list, dbElement{marshalData, ""})
+		} else if len(element) > dlen && element[0:dlen] == "data." {
+			sq.list = append(sq.list, dbElement{data, element[dlen:]})
 		} else {
 			sq.list = append(sq.list, dbElement{data, element})
 		}
 		if sq.Driver == "mysql" {
 			return "?"
-		} else {
-			nElement++
-			return fmt.Sprintf("$%d", nElement)
 		}
+		nElement++
+		return fmt.Sprintf("$%d", nElement)
 	}
 	sq.q = os.Expand(sq.Query, expander)
 }
 
-/*
-Init will connect to the database, ping it and set things up. But only once.
-*/
-func (sq *SQL) Init() error {
-	var er error
-	sq.once.Do(func() {
-		er = sq.init()
-	})
-	return er
-}
-
-func (sq *SQL) init() error {
-	var err error
-	sq.db, err = sql.Open(sq.Driver, sq.ConnStr)
-	if err != nil {
-		log.Print(err)
-		return err
+func (sq *SQL) init() {
+	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
+	if sq.initErr != nil {
+		log.Print(sq.initErr)
+		return
 	}
 	sq.prep()
-	return nil
 }
 
 func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
@@ -167,9 +157,12 @@ Send will send to the database, after first ensuring
 the connection is OK.
 */
 func (sq *SQL) Send(c *skogul.Container) error {
-	if er := sq.Init(); er != nil {
-		log.Print(er)
-		return er
+	sq.once.Do(func() {
+		sq.init()
+	})
+	if sq.initErr != nil {
+		log.Print(sq.initErr)
+		return sq.initErr
 	}
 	txn, err := sq.db.Begin()
 	if err != nil {

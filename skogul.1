@@ -416,6 +416,21 @@ URL\-encoded address.
 .sp
 Example(s): mqtt://user:password@server/topic
 .UNINDENT
+.SS net
+.sp
+Sends json data to a network endpoint.
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBaddress \- string\fP
+Address to send data to
+.sp
+Example(s): 192.168.1.99:1234
+.TP
+.B \fBnetwork \- string\fP
+Network, according to net.Dial. Typically udp or tcp.
+.UNINDENT
 .SS null
 .sp
 Discards all data. Mainly useful for testing.
@@ -454,13 +469,21 @@ Example(s): mysql: \(aqroot:lol@/mydb\(aq postgres: \(aquser=pqgotest dbname=pqg
 Database driver/system. Currently suported: mysql and postgres.
 .TP
 .B \fBquery \- string\fP
-Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo].
+Query run for each metric. The following expansions are made:
 .sp
-In addition, ${json.data} and ${json.metadata} will be expanded to the json\-encoded representation of the data and metadata respectively.
+${timestamp} is expanded to the actual metric timestamp.
 .sp
-Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
+${metadata.KEY} will be expanded to the metadata with key name "KEY".
 .sp
-Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
+${data.KEY} will be expanded to data[foo].
+.sp
+${json.metadata} will be expanded to a json representation of all metadata.
+.sp
+${json.data} will be expanded to a json representation of all data.
+.sp
+Finally, ${KEY} is a shorthand for ${data.KEY}. Both methods are provided, to allow referencing data fields named "metadata.". E.g.: ${data.metadata.x} will match data["metadata.x"], while ${metadata.x} will match metadata["x"].
+.sp
+Example(s): INSERT INTO test VALUES(${timestamp},${hei},${metadata.key1})
 .UNINDENT
 .SS test
 .sp
@@ -474,6 +497,9 @@ Reads continuously from a file. Can technically read from any file, but since it
 .sp
 Settings:
 .INDENT 0.0
+.TP
+.B \fBdelay \- Duration\fP
+Delay before re\-opening the file, if any.
 .TP
 .B \fBfile \- string\fP
 Path to the fifo or file from which to read from repeatedly.

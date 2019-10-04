@@ -23,13 +23,10 @@
 
 package receiver_test
 
-/*
-
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/parser"
+	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
 	"math/rand"
@@ -46,40 +43,80 @@ func deleteFile(t *testing.T, file string) {
 	}
 }
 
-func TestLinefile(t *testing.T) {
+func lfMakeFile(t *testing.T) (string, error) {
+	t.Helper()
 	rand.Seed(int64(time.Now().Nanosecond()))
-	one := &(sender.Test{})
-
 	file := fmt.Sprintf("%s/skogul-linefiletest-%d-%d", os.TempDir(), os.Getpid(), rand.Int())
 
 	_, err := os.Stat(file)
 
 	if err != nil && !os.IsNotExist(err) {
 		t.Errorf("Error statting tmp file %s: %v", file, err)
-		return
+		return "", err
 	}
 
 	if !os.IsNotExist(err) {
 		t.Errorf("File possibly exists already: %s", file)
-		return
+		return "", err
 	}
 
 	err = syscall.Mkfifo(file, 0600)
 
 	if err != nil {
 		t.Errorf("Unable to make fifo %s: %v", file, err)
+		return "", err
+	}
+	t.Logf("Tmp file: %s", file)
+	return file, nil
+}
+
+func TestLineFile(t *testing.T) {
+	file, err := lfMakeFile(t)
+	if err != nil {
 		return
 	}
 	defer deleteFile(t, file)
 
-	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
-	rcv, err := receiver.New(fmt.Sprintf("fifo:///%s", file), h)
+	// Note the delay. Since we do not stop the receiver when we're
+	// done, but we DO remove the file, it will throw errors
+	// continuously, trashing the log and other tests (such as the Log
+	// receiver)
+	sconf := fmt.Sprintf(`
+{
+  "receivers": {
+    "linefile": {
+      "type": "fifo",
+      "file": "%s",
+      "handler": "h",
+      "delay": "1h"
+    }
+  },
+  "handlers": {
+    "h": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "test"
+    }
+  },
+  "senders": {
+    "test": {
+      "type": "test"
+    }
+  }
+}`, file)
+
+	conf, err := config.Bytes([]byte(sconf))
+
 	if err != nil {
-		t.Errorf("receiver.New() failed: %v", err)
+		t.Errorf("Failed to load config: %v", err)
 		return
 	}
+
+	sTest := conf.Senders["test"].Sender.(*sender.Test)
+	rcv := conf.Receivers["linefile"].Receiver.(*receiver.LineFile)
+
 	if rcv == nil {
-		t.Errorf("receiver.New() returned err == nil, but also no receiver")
+		t.Errorf("failed to get receiver")
 		return
 	}
 
@@ -99,18 +136,17 @@ func TestLinefile(t *testing.T) {
 	}()
 	f.WriteString(fmt.Sprintf("%s\n", b))
 	time.Sleep(time.Duration(10 * time.Millisecond))
-	if one.Received() != 1 {
+	if sTest.Received() != 1 {
 		t.Errorf("Didn't receive thing on other end!")
 	}
 	f.WriteString(fmt.Sprintf("%s\n", b))
 	time.Sleep(time.Duration(10 * time.Millisecond))
-	if one.Received() != 2 {
+	if sTest.Received() != 2 {
 		t.Errorf("Didn't receive thing on other end!")
 	}
-	one.Set(0)
+	sTest.Set(0)
 	f.WriteString(fmt.Sprintf("bad idea♥\n"))
-	if one.Received() != 0 {
+	if sTest.Received() != 0 {
 		t.Errorf("Receive thing on other end despite bogus data")
 	}
 }
-*/

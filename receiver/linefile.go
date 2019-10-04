@@ -28,6 +28,7 @@ import (
 	"github.com/KristianLyng/skogul"
 	"log"
 	"os"
+	"time"
 )
 
 // LineFile will keep reading File over and over again, assuming one
@@ -36,6 +37,7 @@ import (
 type LineFile struct {
 	File    string            `doc:"Path to the fifo or file from which to read from repeatedly."`
 	Handler skogul.HandlerRef `doc:"Handler used to parse and transform and send data."`
+	Delay   skogul.Duration   `doc:"Delay before re-opening the file, if any."`
 }
 
 // Common routine for both fifo and stdin
@@ -63,6 +65,9 @@ func (lf *LineFile) read() error {
 func (lf *LineFile) Start() error {
 	for {
 		lf.read()
+		if lf.Delay.Duration != 0 {
+			time.Sleep(lf.Delay.Duration)
+		}
 	}
 }
 

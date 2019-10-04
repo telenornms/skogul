@@ -91,6 +91,7 @@ func sqlTestAutoNeg(t *testing.T, url string) {
 }
 
 func sqlSender(t *testing.T, conf string) *sender.SQL {
+	t.Helper()
 	cnf := sqlTestAuto(t, conf)
 	if cnf == nil {
 		t.Errorf("Failed to build configuration")
@@ -128,59 +129,72 @@ func TestSQL_auto(t *testing.T) {
 	sqlTestAuto(t, `"driver":"postgres","connstr":"something","query": "blatti"`)
 }
 
-func TestSQL_mysql(t *testing.T) {
-	s := sqlSender(t, `"driver":"mysql","connstr": "root:lol@/skogul", "query": "INSERT INTO test VALUES(${timestamp.timestamp},${metadata.src},${name},${data});"`)
+func TestSQL_mysql_basic(t *testing.T) {
+	s := sqlSender(t, `"driver":"mysql","connstr": "root:lol@/skogul", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
 	if s == nil {
 		t.Errorf("Failed to get sender")
-		return
 	}
-	err := s.Init()
-	if err != nil {
-		t.Errorf("SQL.Init failed: %v", err)
-	}
+}
 
+func TestSQL_postgres_basic(t *testing.T) {
+	s := sqlSender(t, `"driver":"postgres","connstr":"database=skogul sslmode=disable user=postgres password=finnlandshette","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
+	if s == nil {
+		t.Errorf("Failed to get sender")
+	}
+}
+
+func TestSQL_mysql_connect(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Short test: Not connecting to a MySQL database")
+	}
 	createTable := "create table test (timestamp varchar(100) not null, src varchar(100) not null, name varchar(100) not null, data varchar(100) not null);"
 	t.Logf("Assuming database name skogul and table ala: %s", createTable)
+	s := sqlSender(t, `"driver":"mysql","connstr": "root:lol@/skogul", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
 
 	container := getValidContainer()
 
-	if err = s.Send(container); err != nil {
+	if err := s.Send(container); err != nil {
 		t.Errorf("SQL.Send failed: %v", err)
 	}
 
 	container.Metrics[0].Data = make(map[string]interface{})
 	container.Metrics[0].Data["name"] = "Foo Bar"
-	if err = s.Send(container); err == nil {
+	if err := s.Send(container); err == nil {
 		t.Errorf("SQL.Send succeeded with missing data field")
 	}
 
 	container.Metrics[0].Time = nil
-	if err = s.Send(container); err == nil {
+	if err := s.Send(container); err == nil {
 		t.Errorf("SQL.Send succeeded with missing timestamp")
 	}
 }
 
 func TestSQL_mysql_json(t *testing.T) {
-	s := sqlSender(t, `"driver":"mysql","connstr":"root:lol@/skogul","query":"INSERT INTO test VALUES(${timestamp.timestamp},'foo',${json.metadata},${json.data})"`)
+	if testing.Short() {
+		t.Skip("Short test: Not connecting to a MySQL database")
+	}
+	s := sqlSender(t, `"driver":"mysql","connstr":"root:lol@/skogul","query":"INSERT INTO test VALUES(${timestamp},'foo',${json.metadata},${json.data})"`)
 	if s == nil {
 		t.Errorf("Failed to get sender")
-		return
+		t.Skip("Can't proceed without a sender")
 	}
 	container := getValidContainer()
-	err := s.Send(container)
-	if err != nil {
+	if err := s.Send(container); err != nil {
 		t.Errorf("Failed to send to mysql: %v", err)
 	}
 }
 
 func TestSQL_postgres_json(t *testing.T) {
-	s := sqlSender(t, `"driver":"postgres","connstr":"database=skogul sslmode=disable user=postgres password=finnlandshette","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp.timestamp},${json.metadata},${json.data})"`)
+	if testing.Short() {
+		t.Skip("Short test: Not connecting to a MySQL database")
+	}
+	s := sqlSender(t, `"driver":"postgres","connstr":"database=skogul sslmode=disable user=postgres password=finnlandshette","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
 	if s == nil {
-		return
+		t.Errorf("Failed to get sender")
+		t.Skip("Can't proceed without a sender")
 	}
 	container := getValidContainer()
-	err := s.Send(container)
-	if err != nil {
+	if err := s.Send(container); err != nil {
 		t.Errorf("Failed to send to postgres: %v", err)
 	}
 }

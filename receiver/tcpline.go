@@ -85,7 +85,7 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
-		log.Printf("Read %s", bytes)
+		//log.Printf("Read %s", bytes)
 		if err := tl.Handler.H.Handle(bytes); err != nil {
 			log.Printf("Unable to parse JSON: %s", err)
 		}

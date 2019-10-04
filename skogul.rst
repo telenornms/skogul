@@ -387,6 +387,21 @@ Settings:
 
 	Example(s): mqtt://user:password@server/topic
 
+net
+---
+
+Sends json data to a network endpoint.
+
+Settings:
+
+``address - string``
+	Address to send data to
+
+	Example(s): 192.168.1.99:1234
+
+``network - string``
+	Network, according to net.Dial. Typically udp or tcp.
+
 null
 ----
 
@@ -427,13 +442,21 @@ Settings:
 	Database driver/system. Currently suported: mysql and postgres.
 
 ``query - string``
-	Query run for each metric. ${timestamp.timestamp} is expanded to the actual metric timestamp. ${metadata.KEY} will be expanded to the metadata with key name "KEY", other ${foo} will be expanded to data[foo]. 
+	Query run for each metric. The following expansions are made:
 	
-	In addition, ${json.data} and ${json.metadata} will be expanded to the json-encoded representation of the data and metadata respectively.
+	${timestamp} is expanded to the actual metric timestamp.
 	
-	Note that this is sensibly escaped, so while it might seem like it is vulnerable to SQL injection, it should be safe.
+	${metadata.KEY} will be expanded to the metadata with key name "KEY".
+	
+	${data.KEY} will be expanded to data[foo].
+	
+	${json.metadata} will be expanded to a json representation of all metadata.
+	
+	${json.data} will be expanded to a json representation of all data.
+	
+	Finally, ${KEY} is a shorthand for ${data.KEY}. Both methods are provided, to allow referencing data fields named "metadata.". E.g.: ${data.metadata.x} will match data["metadata.x"], while ${metadata.x} will match metadata["x"].
 
-	Example(s): INSERT INTO test VALUES(${timestamp.timestamp},${hei},${metadata.key1})
+	Example(s): INSERT INTO test VALUES(${timestamp},${hei},${metadata.key1})
 
 test
 ----
@@ -452,6 +475,9 @@ fifo
 Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.
 
 Settings:
+
+``delay - Duration``
+	Delay before re-opening the file, if any.
 
 ``file - string``
 	Path to the fifo or file from which to read from repeatedly.

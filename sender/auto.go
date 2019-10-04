@@ -164,6 +164,11 @@ func init() {
 		Help:  "Injects a random delay before passing data on. Mainly for testing.",
 	})
 	Add(Sender{
+		Name:  "net",
+		Alloc: func() skogul.Sender { return &Net{} },
+		Help:  "Sends json data to a network endpoint.",
+	})
+	Add(Sender{
 		Name:  "test",
 		Alloc: func() skogul.Sender { return &Test{} },
 		Help:  "Used for internal testing. Basically just discards data but provides an internal counter of received data",

@@ -1,5 +1,5 @@
 /*
- * skogul, log tests
+ * skogul, tcpline tests
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
@@ -24,50 +24,69 @@
 package receiver_test
 
 import (
+	"fmt"
 	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
-	"log"
 	"testing"
 	"time"
 )
 
-func TestLog(t *testing.T) {
-	config, err := config.Bytes([]byte(`
+func TestTCPLine(t *testing.T) {
+	sconf := fmt.Sprintf(`
 {
-	"receivers": {
-		"log": {
-			"type": "log",
-			"handler": "test_h"
-		}
-	},
-	"handlers": {
-		"test_h": {
-			"parser": "json",
-			"transformers": [],
-			"sender": "test"
-		}
-	},
-	"senders": {
-		"test": {
-			"type": "test"
-		}
-	}
-}`))
+  "receivers": {
+    "tcpline": {
+      "type": "tcp",
+      "address": "[::1]:1337",
+      "handler": "h"
+    }
+  },
+  "handlers": {
+    "h": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "test"
+    }
+  },
+  "senders": {
+    "test": {
+      "type": "test"
+    },
+    "net": {
+      "type": "net",
+      "address": "[::1]:1337",
+      "network": "tcp"
+    }
+  }
+}`)
+
+	conf, err := config.Bytes([]byte(sconf))
 
 	if err != nil {
 		t.Errorf("Failed to load config: %v", err)
 		return
 	}
 
-	sTest := config.Senders["test"].Sender.(*sender.Test)
-	rLog := config.Receivers["log"].Receiver.(*receiver.Log)
-	go rLog.Start()
-	time.Sleep(time.Duration(100 * time.Millisecond))
-	log.Printf("This works!")
+	sTest := conf.Senders["test"].Sender.(*sender.Test)
+	sNet := conf.Senders["net"].Sender
+	rcv := conf.Receivers["tcpline"].Receiver.(*receiver.TCPLine)
+
+	if rcv == nil {
+		t.Errorf("failed to get receiver")
+		return
+	}
+
+	go rcv.Start()
 	time.Sleep(time.Duration(10 * time.Millisecond))
-	got := sTest.Received()
-	if got != 1 {
-		t.Errorf("receiver.Tester{}, x.Start() failed to receive data. Expected some data, got 0.")
+	sNet.Send(&validContainer)
+	time.Sleep(time.Duration(10 * time.Millisecond))
+	if sTest.Received() != 1 {
+		t.Errorf("Didn't receive thing on other end!")
+	}
+	sNet.Send(&validContainer)
+	time.Sleep(time.Duration(10 * time.Millisecond))
+	if sTest.Received() != 2 {
+		t.Errorf("Didn't receive thing on other end!")
 	}
 }
