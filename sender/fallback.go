@@ -71,7 +71,7 @@ func (dp *Dupe) Send(c *skogul.Container) error {
 	var e error
 	for _, s := range dp.Next {
 		err := s.S.Send(c)
-		if err != nil && e != nil {
+		if err != nil && e == nil {
 			e = err
 		}
 	}
