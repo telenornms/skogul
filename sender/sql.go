@@ -74,11 +74,22 @@ type SQL struct {
 }
 
 /*
-prep parses sq.Query into q and populates sq.list accordingly
+prep parses sq.Query into q and populates sq.list accordingly.
+
+It works by using os.Expand, with a custom function. For each element, we
+always return ?/$x, thus building VALUES(?,?,?....), but it also records the
+type of database element and the key in sq.list, so upon execution, we can
+iterate over sq.list quickly to build the argument list.
+
+Conveniently, the mysql driver doesn't understand $1, $2, $3 and the postgres
+driver doesn't understand ?, ?, ?.
+
+I love humans.
 */
 func (sq *SQL) prep() {
 	mlen := len("metadata.")
 
+	nElement := 0
 	expander := func(element string) string {
 		if element == "timestamp.timestamp" {
 			sq.list = append(sq.list, dbElement{timestamp, element})
@@ -91,7 +102,12 @@ func (sq *SQL) prep() {
 		} else {
 			sq.list = append(sq.list, dbElement{data, element})
 		}
-		return "?"
+		if sq.Driver == "mysql" {
+			return "?"
+		} else {
+			nElement++
+			return fmt.Sprintf("$%d", nElement)
+		}
 	}
 	sq.q = os.Expand(sq.Query, expander)
 }

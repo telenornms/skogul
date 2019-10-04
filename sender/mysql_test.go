@@ -32,7 +32,10 @@ package sender_test
 // docker exec -ti kek mysql
 // MariaDB [(none)]> create database skogul
 // MariaDB [(none)]> use skogul
-// MariaDB [skogul]> create table test (timestamp varchar(100), src varchar(100), name varchar(100), data varchar(100));
+// MariaDB [skogul]> create table test (timestamp varchar(100) not null, src varchar(100) not null, name varchar(100) not null, data varchar(100) not null);
+//
+// The "not null" bit is important: Some tests explicitly try sending data
+// with missing fields to ensure that errors are caught.
 
 import (
 	"flag"
@@ -56,7 +59,7 @@ var mysqlBase = `
 	}
 }`
 
-func mysqlTestAuto(t *testing.T, url string) {
+func mysqlTestAuto(t *testing.T, url string) *config.Config {
 	conf, err := config.Bytes([]byte(fmt.Sprintf(mysqlBase, url)))
 	if conf == nil {
 		t.Errorf("Bytes(\"%s\" failed", url)
@@ -64,6 +67,7 @@ func mysqlTestAuto(t *testing.T, url string) {
 	if err != nil {
 		t.Errorf("Bytes(\"%s\" failed: %v", url, err)
 	}
+	return conf
 }
 
 var flag_mysql = flag.Bool("mysql", false, "Test mysql")
@@ -143,12 +147,44 @@ func TestSQL(t *testing.T) {
 	me.Data = make(map[string]interface{})
 	me.Data["name"] = "Foo Bar"
 	err = m.Send(&c)
-	if err != nil {
-		t.Errorf("SQL.Send failed: %v", err)
+	if err == nil {
+		t.Errorf("SQL.Send succeeded with missing data field")
 	}
 	me.Time = nil
 	err = m.Send(&c)
+	if err == nil {
+		t.Errorf("SQL.Send succeeded with missing timestamp")
+	}
+}
+
+func getValidContainer() *skogul.Container {
+	c := skogul.Container{}
+	me := skogul.Metric{}
+	n := time.Now()
+	me.Time = &n
+	me.Metadata = make(map[string]interface{})
+	me.Data = make(map[string]interface{})
+	me.Metadata["src"] = "Test"
+	me.Data["name"] = "Foo Bar"
+	me.Data["data"] = "something"
+	c.Metrics = []*skogul.Metric{&me}
+	return &c
+}
+
+func TestSQL_json(t *testing.T) {
+	cnf := mysqlTestAuto(t, `,"connstr":"root:lol@/skogul","query":"INSERT INTO test VALUES(${timestamp.timestamp},'foo',${json.metadata},${json.data})"`)
+	if cnf == nil {
+		t.Errorf("Failed to build configuration")
+		return
+	}
+	s, ok := cnf.Senders["mysql"].Sender.(*sender.SQL)
+	if !ok {
+		t.Errorf("Failed to cast mysql sender to SQL sender?")
+		return
+	}
+	container := getValidContainer()
+	err := s.Send(container)
 	if err != nil {
-		t.Errorf("SQL.Send failed: %v", err)
+		t.Errorf("Failed to send to mysql: %v", err)
 	}
 }
