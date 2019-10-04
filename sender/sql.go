@@ -112,18 +112,6 @@ func (sq *SQL) prep() {
 	sq.q = os.Expand(sq.Query, expander)
 }
 
-// GetQuery returns the parsed query, assuming there is one.
-func (sq *SQL) GetQuery() (string, error) {
-	if sq.Query == "" {
-		return "", skogul.Error{Source: "sql sender", Reason: "No Query set, but GetQuery() called"}
-	}
-	err := sq.Init()
-	if err != nil {
-		return "", skogul.Error{Source: "sql sender", Reason: "SQL.Init failed during GetQuery()", Next: err}
-	}
-	return sq.q, nil
-}
-
 /*
 Init will connect to the database, ping it and set things up. But only once.
 */
@@ -188,33 +176,29 @@ func (sq *SQL) Send(c *skogul.Container) error {
 		log.Print(err)
 		return err
 	}
+	defer func() {
+		if err != nil {
+			log.Print(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err})
+			txn.Rollback()
+		}
+	}()
 
 	stmt, err := txn.Prepare(sq.q)
 	if err != nil {
-		log.Print(err)
 		return err
 	}
 
 	for _, m := range c.Metrics {
-		err = sq.exec(stmt, m)
-		if err != nil {
-			log.Print(err)
-			txn.Rollback()
+		if err = sq.exec(stmt, m); err != nil {
 			return err
 		}
 	}
 
-	err = stmt.Close()
-	if err != nil {
-		log.Print(err)
-		txn.Rollback()
+	if err = stmt.Close(); err != nil {
 		return err
 	}
 
-	err = txn.Commit()
-	if err != nil {
-		log.Print(err)
-		txn.Rollback()
+	if err = txn.Commit(); err != nil {
 		return err
 	}
 	return nil
