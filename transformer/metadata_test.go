@@ -21,10 +21,12 @@
  * 02110-1301  USA
  */
 
-package transformer
+package transformer_test
 
 import (
 	"github.com/KristianLyng/skogul"
+	"github.com/KristianLyng/skogul/config"
+	"github.com/KristianLyng/skogul/transformer"
 	"testing"
 )
 
@@ -34,6 +36,7 @@ func check(t *testing.T, m *skogul.Metric, field string, want interface{}) {
 		t.Errorf("Metadata transformer failed to enforce rule for field \"%s\". Wanted \"%v\", got \"%v\"", field, want, m.Metadata[field])
 	}
 }
+
 func TestMetadata(t *testing.T) {
 	//now := time.Now()
 
@@ -45,7 +48,7 @@ func TestMetadata(t *testing.T) {
 	c := skogul.Container{}
 	c.Metrics = []*skogul.Metric{&metric}
 
-	metadata := Metadata{
+	metadata := transformer.Metadata{
 		Set:     map[string]interface{}{"set": "new"},
 		Require: []string{"require"},
 		Remove:  []string{"remove"},
@@ -62,4 +65,68 @@ func TestMetadata(t *testing.T) {
 	check(t, c.Metrics[0], "require", "present")
 	check(t, c.Metrics[0], "remove", nil)
 	check(t, c.Metrics[0], "ban", nil)
+}
+
+func TestMetadata_config(t *testing.T) {
+	testConfOk(t, `
+	{
+		"transformers": {
+			"ok": {
+				"type": "metadata",
+				"set": {
+					"this": "to that",
+					"foo": "is bar"
+				},
+				"require": [ "reqthis" ],
+				"remove": [ "gruff" ],
+				"ban": [ "trash" ]
+			}
+		}
+	}`)
+	testConfOk(t, `
+	{
+		"transformers": {
+			"ok": {
+				"type": "metadata",
+				"set": { },
+				"require": [],
+				"remove": [ ],
+				"ban": [  ]
+			}
+		}
+	}`)
+	testConfBad(t, `
+	{
+		"transformers": {
+			"ok": {
+				"type": "metadata",
+				"set": 5
+				"require": [ "reqthis" ],
+				"remove": [ "gruff" ],
+				"ban": [ "trash" ]
+			}
+		}
+	}`)
+}
+
+func testConfOk(t *testing.T, rawconf string) {
+	t.Helper()
+	conf, err := config.Bytes([]byte(rawconf))
+	if err != nil {
+		t.Errorf("failed to parse valid transformer config: %v", err)
+	}
+	if conf == nil {
+		t.Errorf("failed to get valid config for transformer")
+	}
+}
+
+func testConfBad(t *testing.T, rawconf string) {
+	t.Helper()
+	conf, err := config.Bytes([]byte(rawconf))
+	if err == nil {
+		t.Errorf("Didn't catch invalid config")
+	}
+	if conf != nil {
+		t.Errorf("got config from invalid source config")
+	}
 }
