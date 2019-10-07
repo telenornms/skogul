@@ -67,8 +67,6 @@ func (x ProtoBuf) Parse(b []byte) (skogul.Container, error) {
 
 	container.Metrics = containerMetrics
 
-	log.Printf("Parsed protobuf as container: %+v", container)
-
 	return container, err
 }
 
@@ -113,7 +111,6 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 
 	var out bytes.Buffer
 	err := pbjsonmarshaler.Marshal(&out, telemetry)
-	log.Printf("Protocol buffer json as byte string (err: %v): %v", err, out)
 
 	var metrics map[string]interface{}
 	err = json.Unmarshal(out.Bytes(), &metrics)
