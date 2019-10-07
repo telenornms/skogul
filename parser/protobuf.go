@@ -26,6 +26,7 @@ package parser
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"log"
 	"time"
 
@@ -60,6 +61,10 @@ func (x ProtoBuf) Parse(b []byte) (skogul.Container, error) {
 		Time:     &protobufTimestamp,
 		Metadata: createMetadata(parsedProtoBuf),
 		Data:     createData(parsedProtoBuf),
+	}
+
+	if metric.Metadata == nil || metric.Data == nil {
+		return container, errors.New("Metric metadata or data was nil; aborting")
 	}
 
 	containerMetrics := make([]*skogul.Metric, 1)
@@ -112,7 +117,18 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	var out bytes.Buffer
 	err := pbjsonmarshaler.Marshal(&out, telemetry)
 
+	if err != nil {
+		log.Printf("Marshalling protocol buffer data to JSON failed: %s", err)
+		return nil
+	}
+
 	var metrics map[string]interface{}
 	err = json.Unmarshal(out.Bytes(), &metrics)
+
+	if err != nil {
+		log.Printf("Unmarshalling JSON data to string/interface map failed: %s", err)
+		return nil
+	}
+
 	return metrics
 }
