@@ -30,11 +30,13 @@ import (
 	"github.com/KristianLyng/skogul"
 )
 
+// UDP contains the configuration for the receiver
 type UDP struct {
 	Address string            `doc:"Address and port to listen to." example:"[::1]:3306"`
 	Handler skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
 }
 
+// Start starts listening for incoming UDP messages on the configured address
 func (ud *UDP) Start() error {
 	udpip, err := net.ResolveUDPAddr("udp", ud.Address)
 	if err != nil {
