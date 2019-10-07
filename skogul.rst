@@ -608,6 +608,21 @@ Settings:
 ``values - int64``
 	Number of unique values for each metric
 
+udp
+---
+
+Accept UDP messages, parsed by specified handler. E.g.: Protobuf.
+
+Settings:
+
+``address - string``
+	Address and port to listen to.
+
+	Example(s): [::1]:3306
+
+``handler - HandlerRef``
+	Handler used to parse, transform and send data.
+
 
 
 TRANSFORMERS

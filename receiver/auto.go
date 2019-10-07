@@ -109,4 +109,9 @@ func init() {
 		Alloc: func() skogul.Receiver { return &TCPLine{} },
 		Help:  "Listen for Skogul-formatted JSON on a tcp socket, reading one collection per line.",
 	})
+	Add(Receiver{
+		Name:  "udp",
+		Alloc: func() skogul.Receiver { return &UDP{} },
+		Help:  "Accept UDP messages, parsed by specified handler. E.g.: Protobuf.",
+	})
 }

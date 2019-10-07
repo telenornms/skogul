@@ -630,6 +630,21 @@ Threads to spawn
 .B \fBvalues \- int64\fP
 Number of unique values for each metric
 .UNINDENT
+.SS udp
+.sp
+Accept UDP messages, parsed by specified handler. E.g.: Protobuf.
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBaddress \- string\fP
+Address and port to listen to.
+.sp
+Example(s): [::1]:3306
+.TP
+.B \fBhandler \- HandlerRef\fP
+Handler used to parse, transform and send data.
+.UNINDENT
 .SH TRANSFORMERS
 .sp
 Transformers are the only tools that can actively modify a metric. See the
