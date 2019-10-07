@@ -111,9 +111,6 @@ it back in to a string-interface map.
 func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	pbjsonmarshaler := jsonpb.Marshaler{}
 
-	// pbjsoned, err := pbjsonmarshaler.MarshalToString(telemetry)
-	// log.Printf("Protocol buffer as json string (err: %v): %v", err, pbjsoned)
-
 	var out bytes.Buffer
 	err := pbjsonmarshaler.Marshal(&out, telemetry)
 
