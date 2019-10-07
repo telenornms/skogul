@@ -54,12 +54,13 @@ func (ud *UDP) Start() error {
 			log.Printf("Unable to read UDP message: %v", err)
 			continue
 		}
+		newbytes := bytes[0:n]
 		if n == 0 {
 			log.Printf("read 0 bytes")
 			continue
 		}
 		go func() {
-			if err := ud.Handler.H.Handle(bytes); err != nil {
+			if err := ud.Handler.H.Handle(newbytes); err != nil {
 				log.Printf("Unable to handle UDP message: %s", err)
 			}
 		}()
