@@ -226,7 +226,7 @@ func resolveHandlers(c *Config) error {
 	for _, h := range c.Handlers {
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
-		if h.Parser == "protbuf" {
+		if h.Parser == "protobuf" {
 			h.Handler.Parser = parser.ProtoBuf{}
 		} else if h.Parser == "json" || h.Parser == "" {
 			h.Handler.Parser = parser.JSON{}
