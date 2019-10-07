@@ -47,8 +47,8 @@ func (ud *UDP) Start() error {
 		return err
 	}
 	for {
-		bytes := make([]byte, 2000)
-		oob := make([]byte, 2000)
+		bytes := make([]byte, 9000)
+		oob := make([]byte, 9000)
 		n, _, _, _, err := ln.ReadMsgUDP(bytes, oob)
 		if err != nil {
 			log.Printf("Unable to read UDP message: %v", err)
