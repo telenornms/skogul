@@ -25,6 +25,7 @@ package receiver
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"net"
 
@@ -57,18 +58,13 @@ We close the write-side of the connection leaving it to the other side to
 finish up. We should probably add a read-timeout in the future.
 */
 func (tl *TCPLine) Start() error {
-	if tl.Address == "" {
-		tl.Address = "[::1]:1234"
-	}
 	tcpip, err := net.ResolveTCPAddr("tcp", tl.Address)
 	if err != nil {
-		log.Printf("Can't resolve %s: %v", tl.Address, err)
-		return err
+		return skogul.Error{Source: "tcp receiver", Reason: fmt.Sprintf("unable to resolve address %s", tl.Address), Next: err}
 	}
 	ln, err := net.ListenTCP("tcp", tcpip)
 	if err != nil {
-		log.Printf("Can't listen on %s: %v", tl.Address, err)
-		return err
+		return skogul.Error{Source: "tcp receiver", Reason: fmt.Sprintf("unable to to listen on %s", tl.Address), Next: err}
 	}
 	for {
 		conn, err := ln.AcceptTCP()
@@ -85,7 +81,6 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
-		//log.Printf("Read %s", bytes)
 		if err := tl.Handler.H.Handle(bytes); err != nil {
 			log.Printf("Unable to parse JSON: %s", err)
 		}

@@ -34,6 +34,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"sync"
 
 	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/receiver"
@@ -644,25 +645,28 @@ func main() {
 	if *fconf {
 		out, err := json.MarshalIndent(c, "", "  ")
 		if err != nil {
-			panic(err)
+			fmt.Println("Configuration failed to marshal:", err)
+			os.Exit(1)
 		}
 		fmt.Println(string(out))
 		os.Exit(0)
 	}
 
-	// I know there's a simpler way of saying "start these things and
-	// wait", but I really can't be bothered to look it up right this
-	// moment.
-	foo := make([]chan int, len(c.Receivers))
-	i := 0
-	for _, r := range c.Receivers {
-		i++
-		go func(r *config.Receiver, i int) {
-			r.Receiver.Start()
-			foo[i] <- 1
-		}(r, i)
+	var exitInt = 0
+	var wg sync.WaitGroup
+	for name, r := range c.Receivers {
+		wg.Add(1)
+		go func(r *config.Receiver) {
+			if err := r.Receiver.Start(); err != nil {
+				exitInt = 1
+				fmt.Printf("Receiver \"%s\" failed: %v\n", name, err)
+			} else {
+				fmt.Printf("Receiver \"%s\" returned successfully.\n", name)
+			}
+			wg.Done()
+		}(r)
 	}
-	for ii := 0; ii < len(foo); ii++ {
-		<-foo[ii]
-	}
+
+	wg.Wait()
+	os.Exit(exitInt)
 }
