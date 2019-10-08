@@ -656,15 +656,15 @@ func main() {
 	var wg sync.WaitGroup
 	for name, r := range c.Receivers {
 		wg.Add(1)
-		go func(r *config.Receiver) {
-			if err := r.Receiver.Start(); err != nil {
+		go func(name string, r *config.Receiver) {
+			if inerr := r.Receiver.Start(); inerr != nil {
 				exitInt = 1
-				fmt.Printf("Receiver \"%s\" failed: %v\n", name, err)
+				fmt.Printf("Receiver \"%s\" failed: %v\n", name, inerr)
 			} else {
 				fmt.Printf("Receiver \"%s\" returned successfully.\n", name)
 			}
 			wg.Done()
-		}(r)
+		}(name, r)
 	}
 
 	wg.Wait()
