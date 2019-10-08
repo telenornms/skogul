@@ -2,3 +2,10 @@ cmd/skogul/skogul
 .*swp
 coverage.out
 /skogul
+vendor
+
+# Editor tmp files
+.vscode
+
+# MacOS temp file
+.DS_Store
