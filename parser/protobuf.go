@@ -27,6 +27,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"time"
 
@@ -42,13 +43,11 @@ type ProtoBuf struct{}
 
 // Parse accepts a byte slice of protobuf data and marshals it into a container
 func (x ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
-	container := skogul.Container{}
 
 	parsedProtoBuf, err := parseTelemetryStream(b)
 
 	if err != nil {
-		log.Printf("Failed to parse protocol buffer (err: %s)", err)
-		return nil, err
+		return nil, errors.New(fmt.Sprintf("Failed to parse protocol buffer (err: %s)", err))
 	}
 
 	protobufTimestamp := time.Unix(int64(*parsedProtoBuf.Timestamp/1000), int64(*parsedProtoBuf.Timestamp%1000)*1000000)
@@ -63,10 +62,9 @@ func (x ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 		return nil, errors.New("Metric metadata or data was nil; aborting")
 	}
 
-	containerMetrics := make([]*skogul.Metric, 1)
-	containerMetrics[0] = &metric
-
-	container.Metrics = containerMetrics
+	container := skogul.Container{}
+	container.Metrics = make([]*skogul.Metric, 1)
+	container.Metrics[0] = &metric
 
 	return &container, err
 }
@@ -104,7 +102,6 @@ it back in to a string-interface map.
 */
 func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	pbjsonmarshaler := jsonpb.Marshaler{}
-
 	var out bytes.Buffer
 	if err := pbjsonmarshaler.Marshal(&out, telemetry); err != nil {
 		log.Printf("Marshalling protocol buffer data to JSON failed: %s", err)
