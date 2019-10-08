@@ -49,7 +49,7 @@ type Handler struct {
 
 // Parser is the interface for parsing arbitrary data into a Container
 type Parser interface {
-	Parse(data []byte) (Container, error)
+	Parse(data []byte) (*Container, error)
 }
 
 /*
@@ -182,10 +182,10 @@ func (h *Handler) Handle(b []byte) error {
 	if err = c.Validate(); err != nil {
 		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
 	}
-	if err = h.Transform(&c); err != nil {
+	if err = h.Transform(c); err != nil {
 		return Error{Source: "handler", Reason: "transforming metrics failed", Next: err}
 	}
-	if err = h.Sender.Send(&c); err != nil {
+	if err = h.Sender.Send(c); err != nil {
 		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
 	}
 	return nil

@@ -33,8 +33,8 @@ import (
 type JSON struct{}
 
 // Parse accepts a byte slice of JSON data and marshals it into a container
-func (x JSON) Parse(b []byte) (skogul.Container, error) {
+func (x JSON) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	err := json.Unmarshal(b, &container)
-	return container, err
+	return &container, err
 }

@@ -41,21 +41,17 @@ import (
 type ProtoBuf struct{}
 
 // Parse accepts a byte slice of protobuf data and marshals it into a container
-func (x ProtoBuf) Parse(b []byte) (skogul.Container, error) {
-	log.Println("Parsing some protobuf")
+func (x ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 
 	parsedProtoBuf, err := parseTelemetryStream(b)
 
 	if err != nil {
 		log.Printf("Failed to parse protocol buffer (err: %s)", err)
-		return container, err
+		return nil, err
 	}
 
-	log.Printf("Parsed protocol buffer: %v", parsedProtoBuf)
-
-	// protobuf timestamp is milliseconds, unix timestamp is seconds
-	var protobufTimestamp time.Time = time.Unix(int64(*parsedProtoBuf.Timestamp/1000), 0)
+	protobufTimestamp := time.Unix(int64(*parsedProtoBuf.Timestamp/1000), int64(*parsedProtoBuf.Timestamp%1000)*1000000)
 
 	metric := skogul.Metric{
 		Time:     &protobufTimestamp,
@@ -64,7 +60,7 @@ func (x ProtoBuf) Parse(b []byte) (skogul.Container, error) {
 	}
 
 	if metric.Metadata == nil || metric.Data == nil {
-		return container, errors.New("Metric metadata or data was nil; aborting")
+		return nil, errors.New("Metric metadata or data was nil; aborting")
 	}
 
 	containerMetrics := make([]*skogul.Metric, 1)
@@ -72,7 +68,7 @@ func (x ProtoBuf) Parse(b []byte) (skogul.Container, error) {
 
 	container.Metrics = containerMetrics
 
-	return container, err
+	return &container, err
 }
 
 // parseTelemetryStream parses a protocol buffer with the Juniper TelemetryStream
@@ -89,17 +85,15 @@ func parseTelemetryStream(protobuffer []byte) (*pb.TelemetryStream, error) {
 	return telemetrystream, nil
 }
 
-const telemetryMetadataSystemID = "systemId"
-const telemetryMetadataSensorName = "sensorName"
-
 // createMetadata extracts the fields containing metadata from the protocol buffer
 // and stores them in a string-interface map to be consumed at a later stage.
 func createMetadata(telemetry *pb.TelemetryStream) map[string]interface{} {
 	var metadata = make(map[string]interface{})
 
-	metadata[telemetryMetadataSystemID] = telemetry.GetSystemId()
-	metadata[telemetryMetadataSensorName] = telemetry.GetSensorName()
-
+	metadata["systemId"] = telemetry.GetSystemId()
+	metadata["sensorName"] = telemetry.GetSensorName()
+	metadata["componentId"] = telemetry.GetComponentId()
+	metadata["subComponentId"] = telemetry.GetSubComponentId()
 	return metadata
 }
 
@@ -122,6 +116,9 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 		log.Printf("Unmarshalling JSON data to string/interface map failed: %s", err)
 		return nil
 	}
-
+	delete(metrics, "timestamp")
+	delete(metrics, "sensorName")
+	delete(metrics, "componentId")
+	delete(metrics, "subComponentId")
 	return metrics
 }
