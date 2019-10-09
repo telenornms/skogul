@@ -34,20 +34,6 @@ import (
 	"time"
 )
 
-var validContainer = skogul.Container{}
-
-func init() {
-
-	now := time.Now()
-	m := skogul.Metric{}
-	m.Time = &now
-	m.Metadata = make(map[string]interface{})
-	m.Data = make(map[string]interface{})
-	m.Metadata["foo"] = "bar"
-	m.Data["tall"] = 5
-	validContainer.Metrics = []*skogul.Metric{&m}
-}
-
 // Tests http receiver, sender and JSON parser implicitly
 func TestHttp_stack(t *testing.T) {
 	config, err := config.Bytes([]byte(`
@@ -293,8 +279,8 @@ func TestMain(m *testing.M) {
 func BenchmarkHttp(b *testing.B) {
 	sPlainOrigin := bConfig.Senders["plain_origin"].Sender.(*sender.HTTP)
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
-
+	sCommon.SetSync(true)
 	for i := 0; i < b.N; i++ {
-		sCommon.TestTime(b, sPlainOrigin, &validContainer, 1, time.Duration(0*time.Microsecond))
+		sCommon.TestSync(b, sPlainOrigin, &validContainer, 10, 10)
 	}
 }

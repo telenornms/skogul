@@ -145,11 +145,16 @@ func (n *Null) Send(c *skogul.Container) error {
 // increments the Received counter.
 type Test struct {
 	received uint64
+	sync     bool
+	syncChan chan int
 }
 
 // Send discards data and increments the Received counter
 func (rcv *Test) Send(c *skogul.Container) error {
 	atomic.AddUint64(&rcv.received, 1)
+	if rcv.sync {
+		rcv.syncChan <- 1
+	}
 	return nil
 }
 
@@ -176,9 +181,37 @@ func (rcv *Test) TestTime(t failer, s skogul.Sender, c *skogul.Container, receiv
 	}
 }
 
+// SetSync sets the tester up for synchronized testing. Probably should be
+// the default from now on....
+func (rcv *Test) SetSync(v bool) {
+	rcv.sync = v
+	if v {
+		rcv.syncChan = make(chan int, 10000)
+	}
+}
+
 // Set atomicly sets the received counter to v
 func (rcv *Test) Set(v uint64) {
 	atomic.StoreUint64(&rcv.received, v)
+}
+
+// TestSync sends items on and waits until an ack of reception has been
+// seen from the other end. send and received are usually the same, but not
+// always, e.g., for the batch sender.
+//
+// FIXME: Should/must add a select here to handle timeouts.
+func (rcv *Test) TestSync(t failer, s skogul.Sender, c *skogul.Container, send int, received int) {
+	go func() {
+		for i := 0; i < send; i++ {
+			err := s.Send(c)
+			if err != nil {
+				t.Errorf("sending on %v failed: %v", s, err)
+			}
+		}
+	}()
+	for i := 0; i < received; i++ {
+		<-rcv.syncChan
+	}
 }
 
 // Received returns the amount of containers received

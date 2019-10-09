@@ -50,19 +50,13 @@ func (ud *UDP) Start() error {
 	}
 	for {
 		bytes := make([]byte, 9000)
-		oob := make([]byte, 9000)
-		n, _, _, _, err := ln.ReadMsgUDP(bytes, oob)
-		if err != nil {
-			log.Printf("Unable to read UDP message: %v", err)
-			continue
-		}
-		newbytes := bytes[0:n]
-		if n == 0 {
-			log.Printf("read 0 bytes")
+		n, err := ln.Read(bytes)
+		if err != nil || n == 0 {
+			log.Printf("Unable to read UDP message. Got %d bytes. Error: %v", n, err)
 			continue
 		}
 		go func() {
-			if err := ud.Handler.H.Handle(newbytes); err != nil {
+			if err := ud.Handler.H.Handle(bytes[0:n]); err != nil {
 				log.Printf("Unable to handle UDP message: %s", err)
 			}
 		}()
