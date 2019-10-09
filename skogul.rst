@@ -317,6 +317,12 @@ Aliases: https
 
 Settings:
 
+``connsperhost - int``
+	Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited.
+
+``idleconnsperhost - int``
+	Mas idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU.
+
 ``insecure - bool``
 	Disable TLS certificate validation.
 

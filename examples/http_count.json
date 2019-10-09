@@ -5,18 +5,14 @@
         "address": "[::1]:8080",
         "handlers": {
           "/": "jsontemplating"
-        },
-	"username": "me",
-	"password": "hunter2",
-	"certfile": "cacert-snakeoil.pem",
-	"keyfile": "privkey-snakeoil.pem"
+        }
       }
   },
   "handlers": {
     "jsontemplating": {
       "parser": "json",
-      "transformers": [ "templater" ],
-      "sender": "batch"
+      "transformers": [  ],
+      "sender": "count"
     },
     "debugger": {
       "parser": "json",

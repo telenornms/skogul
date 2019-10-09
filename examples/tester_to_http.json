@@ -3,34 +3,23 @@
       "test": {
         "type": "test",
 	"handler": "json",
-	"metrics": 500,
-	"values": 10
+	"metrics": 100,
+	"values": 100,
+	"threas": 30
       }
   },
   "handlers": {
     "json": {
       "parser": "json",
       "transformers": [ "templater" ],
-      "sender": "batch"
+      "sender": "http"
     }
   },
   "senders": {
-    "batch": {
-      "type": "batch",
-      "threshold": 1000,
-      "interval": "5s",
-      "next": "backoff"
-    },
-    "backoff": {
-      "type": "backoff",
-      "next": "http",
-      "base": "100ms",
-      "retries": 10
-    },
     "http": {
       "type": "http",
-      "insecure": true,
-      "URL": "https://me:hunter2@[::1]:8080/"
+      "idleconsperhost": 30,
+      "URL": "http://[::1]:8080/"
     }
   }
 }

@@ -64,6 +64,10 @@ type httpReturn struct {
 func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
 	answer := "OK"
 
+	w.WriteHeader(code)
+	if code == 204 {
+		return
+	}
 	if inerr != nil {
 		answer = inerr.Error()
 	}
@@ -73,7 +77,6 @@ func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, in
 		log.Panic("Failed to marshal internal JSON")
 		return
 	}
-	w.WriteHeader(code)
 	fmt.Fprintf(w, "%s\n", b)
 }
 
@@ -93,7 +96,7 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 		return 400, err
 	}
 
-	return 200, nil
+	return 204, nil
 }
 
 // Core HTTP handler

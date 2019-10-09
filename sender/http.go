@@ -28,8 +28,10 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"runtime"
 	"sync"
 	"time"
 
@@ -40,11 +42,13 @@ import (
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL      string          `doc:"Fully qualified URL to send data to." example:"http://localhost:6081/ https://user:password@[::1]:6082/"`
-	Timeout  skogul.Duration `doc:"HTTP timeout."`
-	Insecure bool            `doc:"Disable TLS certificate validation."`
-	once     sync.Once
-	client   *http.Client
+	URL              string          `doc:"Fully qualified URL to send data to." example:"http://localhost:6081/ https://user:password@[::1]:6082/"`
+	Timeout          skogul.Duration `doc:"HTTP timeout."`
+	Insecure         bool            `doc:"Disable TLS certificate validation."`
+	ConnsPerHost     int             `doc:"Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited."`
+	IdleConnsPerHost int             `doc:"Mas idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU."`
+	once             sync.Once
+	client           *http.Client
 }
 
 // Send POSTS data
@@ -57,13 +61,6 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	}
 	var buffer bytes.Buffer
 	buffer.Write(b)
-	req, err := http.NewRequest("POST", ht.URL, &buffer)
-	if err != nil {
-		e := skogul.Error{Source: "http sender", Reason: "unable to create new HTTP request", Next: err}
-		log.Print(e)
-		return e
-	}
-	req.Header.Set("Content-Type", "application/json")
 	ht.once.Do(func() {
 		if ht.Timeout.Duration == 0 {
 			ht.Timeout.Duration = 20 * time.Second
@@ -71,14 +68,33 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		if ht.Insecure {
 			log.Print("Warning: Disabeling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
 		}
-		tran := http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: ht.Insecure}}
+		iconsph := ht.IdleConnsPerHost
+
+		if iconsph == 0 {
+			iconsph = 2 + runtime.NumCPU()
+		}
+		tran := http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: ht.Insecure,
+			},
+			MaxConnsPerHost:     ht.ConnsPerHost,
+			MaxIdleConnsPerHost: iconsph,
+		}
 		ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
 	})
-	resp, err := ht.client.Do(req)
+	resp, err := ht.client.Post(ht.URL, "application/json", &buffer)
 	if err != nil {
-		e := skogul.Error{Source: "http sender", Reason: "unable to Do request", Next: err}
+		e := skogul.Error{Source: "http sender", Reason: "unable to POST request", Next: err}
 		log.Print(e)
 		return e
+	}
+	if resp.ContentLength > 0 {
+		tmp := make([]byte, resp.ContentLength)
+		if n, err := io.ReadFull(resp.Body, tmp); err != nil {
+			log.Printf("Read %d of %d bytes, returned: %v", n, resp.ContentLength, err)
+			resp.Body.Close()
+			return err
+		}
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}

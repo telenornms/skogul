@@ -24,10 +24,12 @@
 package receiver_test
 
 import (
+	"fmt"
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/receiver"
 	"github.com/KristianLyng/skogul/sender"
+	"os"
 	"testing"
 	"time"
 )
@@ -232,5 +234,67 @@ func TestHttp_stack(t *testing.T) {
 	sCommon.TestQuick(t, sSSLAuthOk1, &validContainer, 1)
 	sCommon.TestNegative(t, sSSLAuthBad6, &validContainer)
 	sCommon.TestQuick(t, sSSLAuthOk1, &validContainer, 1)
+}
 
+var bConfig *config.Config
+
+func TestMain(m *testing.M) {
+	var err error
+	bConfig, err = config.Bytes([]byte(`
+{
+	"senders": {
+		"plain_origin": {
+			"type": "http",
+			"url": "http://[::1]:1349",
+			"connsperhost": 300
+		},
+		"common": {
+			"type": "test"
+		}
+	},
+	"receivers": {
+		"plain": {
+			"type": "http",
+			"address": "[::1]:1349",
+			"handlers": { "/": "common"}
+		}
+	},
+	"handlers": {
+		"common": {
+			"parser": "json",
+			"transformers": [],
+			"sender": "common"
+		}
+	}
+}`))
+
+	if err != nil {
+		fmt.Printf("Failed to load config: %v", err)
+		os.Exit(1)
+	}
+
+	rPlain := bConfig.Receivers["plain"].Receiver.(*receiver.HTTP)
+
+	go rPlain.Start()
+	time.Sleep(time.Duration(10 * time.Millisecond))
+	os.Exit(m.Run())
+}
+
+// BenchmarkHttp relies on the bConfig structure and TestMain having
+// started a http receiver to be tested. It ends up benchmarking:
+//
+// - The HTTP sender
+//
+// - The HTTP receiver
+//
+// - The JSON parser
+//
+// It is also affected heavily by your TCP stack.
+func BenchmarkHttp(b *testing.B) {
+	sPlainOrigin := bConfig.Senders["plain_origin"].Sender.(*sender.HTTP)
+	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
+
+	for i := 0; i < b.N; i++ {
+		sCommon.TestTime(b, sPlainOrigin, &validContainer, 1, time.Duration(0*time.Microsecond))
+	}
 }

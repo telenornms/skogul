@@ -1,0 +1,36 @@
+{
+  "receivers": {
+      "test": {
+        "type": "test",
+	"handler": "json",
+	"metrics": 10,
+	"values": 10
+      }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [ "templater" ],
+      "sender": "batch"
+    }
+  },
+  "senders": {
+    "batch": {
+      "type": "batch",
+      "threshold": 1000,
+      "interval": "5s",
+      "next": "backoff"
+    },
+    "backoff": {
+      "type": "backoff",
+      "next": "http",
+      "base": "100ms",
+      "retries": 10
+    },
+    "http": {
+      "type": "http",
+      "insecure": true,
+      "URL": "https://me:hunter2@[::1]:8080/"
+    }
+  }
+}

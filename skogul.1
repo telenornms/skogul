@@ -346,6 +346,12 @@ Aliases: https
 Settings:
 .INDENT 0.0
 .TP
+.B \fBconnsperhost \- int\fP
+Max concurrent connections per host. Should reflect ulimit \-n. Defaults to unlimited.
+.TP
+.B \fBidleconnsperhost \- int\fP
+Mas idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU.
+.TP
 .B \fBinsecure \- bool\fP
 Disable TLS certificate validation.
 .TP
