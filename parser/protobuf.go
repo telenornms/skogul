@@ -103,9 +103,45 @@ it back in to a string-interface map.
 func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	pbjsonmarshaler := jsonpb.Marshaler{}
 	var out bytes.Buffer
-	if err := pbjsonmarshaler.Marshal(&out, telemetry); err != nil {
-		log.Printf("Marshalling protocol buffer data to JSON failed: %s", err)
+	ex, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
+	if err != nil {
+		log.Printf("couldn't get juniper extension")
 		return nil
+	}
+	rex, ok := ex.(proto.Message)
+	if !ok {
+		log.Printf("failed to cast to message")
+		return nil
+	}
+	regextensionsraw := proto.RegisteredExtensions(rex)
+	found := false
+	if err != nil {
+		log.Printf("Unable to get extensions from message: %v", err)
+		return nil
+	}
+	regextensions := make([]*proto.ExtensionDesc, 0, 20)
+	for _, ext := range regextensionsraw {
+		regextensions = append(regextensions, ext)
+	}
+	extensions, err := proto.GetExtensions(rex, regextensions)
+	for _, ext := range extensions {
+		if ext == nil {
+			continue
+		}
+		if found {
+			log.Printf("Multiple extensions found, don't know what to do!")
+			return nil
+		}
+		rex2, ok := ext.(proto.Message)
+		if !ok {
+			log.Printf("failed to cast to message orig: %v", ext)
+			return nil
+		}
+		if err := pbjsonmarshaler.Marshal(&out, rex2); err != nil {
+			log.Printf("Marshalling protocol buffer data to JSON failed: %s", err)
+			return nil
+		}
+		found = true
 	}
 
 	var metrics map[string]interface{}
