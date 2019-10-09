@@ -30,6 +30,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"reflect"
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 
@@ -186,13 +188,19 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 // globally (unfortunately...), then calling secondPass(), which resolves
 // references and does a final validation.
 func Bytes(b []byte) (*Config, error) {
+	var jsonData map[string]interface{}
+
+	if err := json.Unmarshal(b, &jsonData); err != nil {
+		log.WithError(err).Fatal("The JSON configuration is improperly formatted JSON")
+	}
+
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
 		log.WithError(err).Fatal("The JSON configuration is improperly formatted JSON")
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
-	return secondPass(&c)
+	return secondPass(&c, &jsonData)
 }
 
 // File opens a config file and parses it, then returns the valid
@@ -274,7 +282,7 @@ func resolveHandlers(c *Config) error {
 
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
-func secondPass(c *Config) (*Config, error) {
+func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 	if err := resolveSenders(c); err != nil {
 		return nil, err
 	}
@@ -298,6 +306,10 @@ func secondPass(c *Config) (*Config, error) {
 		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
 			return nil, err
 		}
+
+		var udpT receiver.UDP
+		findMissingRequiredConfigProps(jsonData, "receivers", reflect.TypeOf(udpT))
+		verifyOnlyRequiredConfigProps(jsonData, "receivers", reflect.TypeOf(udpT))
 	}
 	return c, nil
 }
@@ -311,7 +323,82 @@ func verifyItem(family string, name string, item interface{}) error {
 	}
 	err := i.Verify()
 	if err != nil {
+		log.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
 	}
 	return nil
+}
+
+func findFieldsOfStruct(T reflect.Type) []string {
+	log.WithField("type", T.Name()).Debug("Finding required fields for type")
+	requiredProps := make([]string, 0)
+	switch T.Kind() {
+	case reflect.Struct:
+		for i := 0; i < T.NumField(); i++ {
+			field := T.Field(i)
+			jsonTag := field.Tag.Get("json")
+
+			property := field.Name
+			if jsonTag != "" {
+				property = jsonTag
+			}
+			requiredProps = append(requiredProps, property)
+		}
+	}
+
+	return requiredProps
+}
+
+func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
+	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
+}
+
+func findMissingRequiredConfigProps(rawConfig *map[string]interface{}, family string, T reflect.Type) {
+	requiredProps := findFieldsOfStruct(T)
+	log.Debugf("Required fields: %v", requiredProps)
+
+	// @ToDo: Requires same casing as in config file (between type and config)
+	// Fetch type from field inside, not the name of the config element (as it may differ)
+	relevantConfig := getRelevantRawConfigSection(rawConfig, family, strings.ToLower(T.Name()))
+	// log.Debugf("Relevant configuration: %+v", relevantConfig)
+
+	for _, requiredProp := range requiredProps {
+		if relevantConfig[strings.ToLower(requiredProp)] == nil {
+			log.WithField("property", strings.ToLower(requiredProp)).Error("Missing required configuration property")
+		}
+	}
+}
+
+func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family string, T reflect.Type) {
+	requiredProps := findFieldsOfStruct(T)
+	log.Debugf("Required fields: %v", requiredProps)
+
+	// @ToDo: Requires same casing as in config file (between type and config)
+	// Fetch type from field inside, not the name of the config element (as it may differ)
+	relevantConfig := getRelevantRawConfigSection(rawConfig, family, strings.ToLower(T.Name()))
+	// log.Debugf("Relevant configuration: %+v", relevantConfig)
+
+	for prop := range relevantConfig {
+		propertyDefined := false
+
+		if prop == "type" {
+			// @ToDo: Should we define the type internally?
+			continue
+		}
+
+		for _, requiredProp := range requiredProps {
+			// log.WithFields(log.Fields{
+			// 	"prop":    prop,
+			// 	"reqProp": requiredProp,
+			// 	"equal":   prop == requiredProp,
+			// }).Debug("Comparing")
+			if strings.ToLower(prop) == strings.ToLower(requiredProp) {
+				propertyDefined = true
+				break
+			}
+		}
+		if !propertyDefined {
+			log.WithField("property", prop).Warn("Property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
+		}
+	}
 }
