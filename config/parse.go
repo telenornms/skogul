@@ -211,7 +211,10 @@ func File(f string) (*Config, error) {
 // completion.
 func resolveSenders(c *Config) error {
 	for _, s := range skogul.SenderMap {
+		log.WithField("sender", s.Name).Debug("Resolving sender")
+
 		if c.Senders[s.Name] == nil {
+			log.WithField("sender", s.Name).Error("Unresolved sender reference")
 			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
 		}
 		s.S = c.Senders[s.Name].Sender
@@ -228,22 +231,32 @@ func resolveSenders(c *Config) error {
 // It then zeroes the skogul.HandlerMap
 func resolveHandlers(c *Config) error {
 	for _, h := range c.Handlers {
+		logger := log.WithField("parser", h.Parser)
+
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
 		if h.Parser == "protobuf" {
+			logger.Debug("Using protobuf parser")
 			h.Handler.Parser = parser.ProtoBuf{}
 		} else if h.Parser == "json" || h.Parser == "" {
+			logger.Debug("Using JSON parser")
 			h.Handler.Parser = parser.JSON{}
 		} else {
+			logger.Error("Unknown parser")
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
 		}
 		for _, t := range h.Transformers {
+			logger = logger.WithField("transformer", t)
+
 			var nextT skogul.Transformer
 			if c.Transformers[t] != nil {
+				logger.Debug("Using predefined transformer")
 				nextT = c.Transformers[t].Transformer
 			} else if t == "templater" {
+				logger.Debug("Using templating transformer")
 				nextT = transformer.Templater{}
 			} else {
+				logger.Error("Unknown transformer")
 				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
 			}
 			h.Handler.Transformers = append(h.Handler.Transformers, nextT)
@@ -269,16 +282,19 @@ func secondPass(c *Config) (*Config, error) {
 		return nil, err
 	}
 	for idx, h := range c.Handlers {
+		log.WithField("handler", idx).Debug("Verifying handler configuration")
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
 			return nil, err
 		}
 	}
 	for idx, s := range c.Senders {
+		log.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
 			return nil, err
 		}
 	}
 	for idx, r := range c.Receivers {
+		log.WithField("receiver", idx).Debug("Verifying receiver configuration")
 		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
 			return nil, err
 		}
