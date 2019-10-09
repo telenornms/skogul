@@ -31,6 +31,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
@@ -186,6 +188,7 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 func Bytes(b []byte) (*Config, error) {
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
+		log.WithError(err).Fatal("The JSON configuration is improperly formatted JSON")
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
@@ -197,6 +200,7 @@ func Bytes(b []byte) (*Config, error) {
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
+		log.WithError(err).Fatal("Failed to read config file")
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
 	return Bytes(dat)
