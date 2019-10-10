@@ -24,14 +24,12 @@
 package parser
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
 	"time"
 
-	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 
 	"github.com/KristianLyng/skogul"
@@ -96,13 +94,10 @@ func createMetadata(telemetry *pb.TelemetryStream) map[string]interface{} {
 }
 
 /* createData creates a string-interface map of skogul.Metric type Data
-by first marshalling the raw protobuf data into json and then parsing
+by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
-@ToDo: Make this cheaper
 */
 func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
-	pbjsonmarshaler := jsonpb.Marshaler{}
-	var out bytes.Buffer
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
 		log.Printf("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
@@ -124,6 +119,7 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 
 	availableExtensions, err := proto.GetExtensions(enterpriseExtension, regextensions)
 
+	var jsonMessage []byte
 	found := false
 	for _, ext := range availableExtensions {
 		if ext == nil {
@@ -140,8 +136,10 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 			log.Printf("Failed to cast to message: %v", ext)
 			return nil
 		}
-		if err := pbjsonmarshaler.Marshal(&out, messageOnly); err != nil {
-			log.Printf("Marshalling protocol buffer data to JSON failed: %s", err)
+
+		jsonMessage, err = json.Marshal(messageOnly)
+		if err != nil {
+			log.Fatalf("Failed to marshal to JSON: %v", err)
 			return nil
 		}
 
@@ -149,7 +147,7 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	}
 
 	var metrics map[string]interface{}
-	if err := json.Unmarshal(out.Bytes(), &metrics); err != nil {
+	if err := json.Unmarshal(jsonMessage, &metrics); err != nil {
 		log.Printf("Unmarshalling JSON data to string/interface map failed: %s", err)
 		return nil
 	}
