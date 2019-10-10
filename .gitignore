@@ -1,11 +1,19 @@
 cmd/skogul/skogul
-.*swp
-coverage.out
 /skogul
+
+# Don't check vendored files in
 vendor
 
 # Editor tmp files
 .vscode
+.*swp
 
 # MacOS temp file
 .DS_Store
+
+# Ignore testfiles
+*.test
+
+# Ignore typical profiling and coverage artefacts
+*.prof
+coverage.out
