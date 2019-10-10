@@ -24,14 +24,12 @@
 package parser
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
 	"time"
 
-	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 
 	"github.com/KristianLyng/skogul"
@@ -47,7 +45,7 @@ func (x ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 	parsedProtoBuf, err := parseTelemetryStream(b)
 
 	if err != nil {
-		return nil, errors.New(fmt.Sprintf("Failed to parse protocol buffer (err: %s)", err))
+		return nil, fmt.Errorf("Failed to parse protocol buffer (err: %s)", err)
 	}
 
 	protobufTimestamp := time.Unix(int64(*parsedProtoBuf.Timestamp/1000), int64(*parsedProtoBuf.Timestamp%1000)*1000000)
@@ -96,23 +94,64 @@ func createMetadata(telemetry *pb.TelemetryStream) map[string]interface{} {
 }
 
 /* createData creates a string-interface map of skogul.Metric type Data
-by first marshalling the raw protobuf data into json and then parsing
+by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
-@ToDo: Make this cheaper
 */
 func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
-	pbjsonmarshaler := jsonpb.Marshaler{}
-	var out bytes.Buffer
-	if err := pbjsonmarshaler.Marshal(&out, telemetry); err != nil {
-		log.Printf("Marshalling protocol buffer data to JSON failed: %s", err)
+	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
+	if err != nil {
+		log.Printf("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
 		return nil
 	}
 
+	enterpriseExtension, ok := extension.(proto.Message)
+	if !ok {
+		log.Printf("Failed to cast to juniper message")
+		return nil
+	}
+
+	registeredExtensions := proto.RegisteredExtensions(enterpriseExtension)
+
+	var regextensions []*proto.ExtensionDesc
+	for _, ext := range registeredExtensions {
+		regextensions = append(regextensions, ext)
+	}
+
+	availableExtensions, err := proto.GetExtensions(enterpriseExtension, regextensions)
+
+	var jsonMessage []byte
+	found := false
+	for _, ext := range availableExtensions {
+		if ext == nil {
+			continue
+		}
+
+		if found {
+			log.Printf("Multiple extensions found, don't know what to do!")
+			return nil
+		}
+
+		messageOnly, ok := ext.(proto.Message)
+		if !ok {
+			log.Printf("Failed to cast to message: %v", ext)
+			return nil
+		}
+
+		jsonMessage, err = json.Marshal(messageOnly)
+		if err != nil {
+			log.Fatalf("Failed to marshal to JSON: %v", err)
+			return nil
+		}
+
+		found = true
+	}
+
 	var metrics map[string]interface{}
-	if err := json.Unmarshal(out.Bytes(), &metrics); err != nil {
+	if err := json.Unmarshal(jsonMessage, &metrics); err != nil {
 		log.Printf("Unmarshalling JSON data to string/interface map failed: %s", err)
 		return nil
 	}
+
 	delete(metrics, "timestamp")
 	delete(metrics, "sensorName")
 	delete(metrics, "componentId")
