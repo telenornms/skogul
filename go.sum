@@ -1,5 +1,7 @@
 github.com/eclipse/paho.mqtt.golang v1.2.0 h1:1F8mhG9+aO5/xpdtFkW4SxOJB67ukuDC3t2y2qayIX0=
 github.com/eclipse/paho.mqtt.golang v1.2.0/go.mod h1:H9keYFcgq3Qr5OUJm/JZI/i6U7joQ8SYLhZwfeOo6Ts=
+github.com/getlantern/deepcopy v0.0.0-20160317154340-7f45deb8130a h1:yU/FENpkHYISWsQrbr3pcZOBj0EuRjPzNc1+dTCLu44=
+github.com/getlantern/deepcopy v0.0.0-20160317154340-7f45deb8130a/go.mod h1:AEugkNu3BjBxyz958nJ5holD9PRjta6iprcoUauDbU4=
 github.com/go-sql-driver/mysql v1.4.1 h1:g24URVg0OFbNUTx9qqY1IRZ9D9z3iPyi5zKhQZpNwpA=
 github.com/go-sql-driver/mysql v1.4.1/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
