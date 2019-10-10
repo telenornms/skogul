@@ -35,8 +35,9 @@ import (
 // changing the metric metadata.
 type Metadata struct {
 	Set     map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Split   []string               `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element)."`
+	Split   []string               `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element). Also sets this field as Metadata."`
 	Require []string               `doc:"Require the pressence of these fields."`
+	Extract [][]string             `doc:"Extract a set of fields from Data and add it to Metadata. The field will be removed from Data."`
 	Remove  []string               `doc:"Remove these metadata fields."`
 	Ban     []string               `doc:"Fail if any of these fields are present"`
 }
@@ -45,7 +46,16 @@ type Metadata struct {
 func (meta *Metadata) Transform(c *skogul.Container) error {
 	metrics := c.Metrics
 
+	// If Split is defined, add the property to split on to Extract
 	if meta.Split != nil {
+		splitValueKey := meta.Split[1]
+
+		// @ToDo: Warn if having set extract field when using split
+		if meta.Extract == nil {
+			meta.Extract = make([][]string, 0)
+		}
+		meta.Extract = append(meta.Extract, []string{splitValueKey})
+
 		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
 		if err != nil {
 			return fmt.Errorf("failed to split metrics: %v", err)
@@ -65,6 +75,17 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			if c.Metrics[mi].Metadata == nil || c.Metrics[mi].Metadata[value] == nil {
 				return skogul.Error{Source: "metadata transformer", Reason: fmt.Sprintf("missing required metadata field %s", value)}
 			}
+		}
+		for _, extract := range meta.Extract {
+			extractKey := extract[0]
+			extractName := extract[0]
+
+			if len(extract) == 2 {
+				extractName = extract[1]
+			}
+
+			c.Metrics[mi].Metadata[extractKey] = c.Metrics[mi].Data[extractName]
+			delete(c.Metrics[mi].Data, extractKey)
 		}
 		for _, value := range meta.Remove {
 			if c.Metrics[mi].Metadata == nil {
