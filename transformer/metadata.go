@@ -32,6 +32,7 @@ import (
 // changing the metric metadata.
 type Metadata struct {
 	Set     map[string]interface{} `doc:"Set metadata fields to specific values."`
+	Split   []string               `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element)."`
 	Require []string               `doc:"Require the pressence of these fields."`
 	Remove  []string               `doc:"Remove these metadata fields."`
 	Ban     []string               `doc:"Fail if any of these fields are present"`
@@ -39,6 +40,17 @@ type Metadata struct {
 
 // Transform enforces the Metadata rules
 func (meta *Metadata) Transform(c *skogul.Container) error {
+	metrics := c.Metrics
+
+	if meta.Split != nil {
+		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
+		if err != nil {
+			return fmt.Errorf("failed to split metrics: %v", err)
+		}
+
+		c.Metrics = splitMetrics
+	}
+
 	for mi := range c.Metrics {
 		for key, value := range meta.Set {
 			if c.Metrics[mi].Metadata == nil {
@@ -67,6 +79,31 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 		}
 	}
 	return nil
+}
+
+// splitMetricsByObjectKey splits the metrics into multiple metrics based on a key in a list of sub-metrics
+func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*skogul.Metric, error) {
+	origMetrics := *metrics
+	var newMetrics []*skogul.Metric
+
+	// @ToDo: Parse this to a path if more than one element deep (i.e. my.nested.json.structure should unfurl)
+	splitPath := metadata.Split[0]
+
+	for mi := range origMetrics {
+		metricObj := origMetrics[mi].Data[splitPath]
+
+		for _, obj := range metricObj.([]interface{}) {
+			metricsData := obj.(map[string]interface{})
+
+			// Create a new metrics object as a copy of the original one, then reassign the data field
+			newMetric := *origMetrics[mi]
+			newMetric.Data = metricsData
+
+			newMetrics = append(newMetrics, &newMetric)
+		}
+	}
+
+	return newMetrics, nil
 }
 
 // Data enforces a set of rules on data in all metrics, potentially
