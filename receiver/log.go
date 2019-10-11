@@ -39,20 +39,20 @@ type Log struct {
 }
 
 // logContainer returns a container representing the log message in s.
-func logContainer(s string) (*skogul.Metric, error) {
+func logContainer(s string) *skogul.Metric {
 	now := time.Now()
 	m := skogul.Metric{}
 	m.Metadata = make(map[string]interface{})
 	m.Data = make(map[string]interface{})
 	m.Time = &now
 	splat := strings.Split(s, ":")
-	if len(splat) < 3 {
-		return nil, skogul.Error{Source: "log receiver", Reason: "Log message does not follow expected format"}
-	}
+	// There's no valid way to handle this - we're basically screwed if
+	// the format in log changes.
+	skogul.Assert(len(splat) >= 3)
 	m.Metadata["file"] = splat[0]
 	m.Metadata["line"] = splat[1]
 	m.Data["message"] = strings.Join(splat[2:], ":")[1:]
-	return &m, nil
+	return &m
 }
 
 // Parse implements a skogul.Parser logic by parsing the byte array as
@@ -68,11 +68,7 @@ func (lg *Log) Parse(b []byte) (*skogul.Container, error) {
 		if lg.Echo {
 			fmt.Println(line)
 		}
-		m, err := logContainer(line)
-		if err != nil {
-			fmt.Printf("Failed to parse log line, error: %v, log line: %s\n", err, line)
-			return nil, err
-		}
+		m := logContainer(line)
 		c.Metrics = append(c.Metrics, m)
 	}
 	return &c, nil

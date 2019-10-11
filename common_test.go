@@ -75,3 +75,30 @@ func TestContainer(t *testing.T) {
 		t.Errorf("error.Container() returned unexpected data/reason. Wanted %s got %s", want, got)
 	}
 }
+
+func TestAssert(t *testing.T) {
+	skogul.Assert(true)
+	skogul.Assert(1+1 != 0)
+	skogul.Assert(t != nil)
+	skogul.Assert(true, "foo")
+}
+
+func TestAssert_fail(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Log("Recovered from assert: ", r)
+		}
+	}()
+	skogul.Assert(false)
+	t.Errorf("skogul.Error(false,\"test\") called, but execution continued.")
+}
+
+func TestAssert_fail_arg(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Log("Recovered from assert: ", r)
+		}
+	}()
+	skogul.Assert(false, "something")
+	t.Errorf("skogul.Error(false,\"test\") called, but execution continued.")
+}

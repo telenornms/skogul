@@ -24,8 +24,6 @@
 package sender
 
 import (
-	"log"
-
 	"github.com/KristianLyng/skogul"
 )
 
@@ -47,17 +45,11 @@ func Add(s Sender) error {
 	if Auto == nil {
 		Auto = make(map[string]*Sender)
 	}
-	if Auto[s.Name] != nil {
-		log.Panicf("BUG: Attempting to overwrite existing auto-add sender %v", s.Name)
-	}
-	if s.Alloc == nil {
-		log.Printf("No alloc function for %s", s.Name)
-	}
+	skogul.Assert(Auto[s.Name] == nil)
+	skogul.Assert(s.Alloc != nil)
 	Auto[s.Name] = &s
 	for _, alias := range s.Aliases {
-		if Auto[alias] != nil {
-			log.Panicf("BUG: An alias(%s) for sender %s overlaps an existing sender %s", alias, s.Name, Auto[alias].Name)
-		}
+		skogul.Assert(Auto[alias] == nil)
 		Auto[alias] = &s
 	}
 	return nil

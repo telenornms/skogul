@@ -72,13 +72,14 @@ func (tl *TCPLine) Start() error {
 			log.Printf("Unable to accept connection: %v", err)
 			continue
 		}
-		conn.CloseWrite()
 		go tl.handleConnection(conn)
 	}
 }
 
 func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	scanner := bufio.NewScanner(conn)
+	conn.CloseWrite()
+	defer conn.CloseRead()
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		if err := tl.Handler.H.Handle(bytes); err != nil {

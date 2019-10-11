@@ -2,7 +2,6 @@ package transformer
 
 import (
 	"github.com/KristianLyng/skogul"
-	"log"
 )
 
 // Auto maps names to Transformers to allow auto configuration
@@ -23,16 +22,10 @@ func Add(r Transformer) error {
 	if Auto == nil {
 		Auto = make(map[string]*Transformer)
 	}
-	if Auto[r.Name] != nil {
-		log.Panicf("BUG: Attempting to overwrite existing auto-add transformer %v", r.Name)
-	}
-	if r.Alloc == nil {
-		log.Panicf("No alloc function for %s", r.Name)
-	}
+	skogul.Assert(Auto[r.Name] == nil)
+	skogul.Assert(r.Alloc != nil)
 	for _, alias := range r.Aliases {
-		if Auto[alias] != nil {
-			log.Panicf("BUG: An alias(%s) for transformer %s overlaps an existing transformer %s", alias, r.Name, Auto[alias].Name)
-		}
+		skogul.Assert(Auto[alias] == nil)
 		Auto[alias] = &r
 	}
 	Auto[r.Name] = &r

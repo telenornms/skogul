@@ -25,6 +25,7 @@ package skogul
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 )
 
@@ -220,4 +221,17 @@ func (h Handler) Verify() error {
 		return Error{Reason: "Missing parser for Handler"}
 	}
 	return nil
+}
+
+// Assert panics if x is false, useful mainly for doing error-checking for
+// "impossible scenarios" we can't really handle anyway.
+func Assert(x bool, v ...interface{}) {
+	if !x {
+		out := "assertion failed"
+		pc, file, line, ok := runtime.Caller(1)
+		if ok {
+			out = fmt.Sprintf("%X:%s:%d assertion failed", pc, file, line)
+		}
+		panic(fmt.Sprintf("%s %s", out, fmt.Sprint(v...)))
+	}
 }

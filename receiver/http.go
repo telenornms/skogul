@@ -73,10 +73,7 @@ func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, in
 	}
 
 	b, err := json.Marshal(httpReturn{Message: answer})
-	if err != nil {
-		log.Panic("Failed to marshal internal JSON")
-		return
-	}
+	skogul.Assert(err != nil, err)
 	fmt.Fprintf(w, "%s\n", b)
 }
 

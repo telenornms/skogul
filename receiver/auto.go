@@ -28,8 +28,6 @@ execute a handler. They are the "inbound" API of Skogul.
 package receiver
 
 import (
-	"log"
-
 	"github.com/KristianLyng/skogul"
 )
 
@@ -51,16 +49,10 @@ func Add(r Receiver) error {
 	if Auto == nil {
 		Auto = make(map[string]*Receiver)
 	}
-	if Auto[r.Name] != nil {
-		log.Panicf("BUG: Attempting to overwrite existing auto-add receiver %v", r.Name)
-	}
-	if r.Alloc == nil {
-		log.Panicf("No alloc function for %s", r.Name)
-	}
+	skogul.Assert(Auto[r.Name] == nil)
+	skogul.Assert(r.Alloc != nil)
 	for _, alias := range r.Aliases {
-		if Auto[alias] != nil {
-			log.Panicf("BUG: An alias(%s) for receiver %s overlaps an existing receiver %s", alias, r.Name, Auto[alias].Name)
-		}
+		skogul.Assert(Auto[alias] == nil)
 		Auto[alias] = &r
 	}
 	Auto[r.Name] = &r
