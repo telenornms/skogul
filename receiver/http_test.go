@@ -234,6 +234,23 @@ func TestMain(m *testing.M) {
 			"url": "http://[::1]:1349",
 			"connsperhost": 300
 		},
+		"plain_batch": {
+			"type": "batch",
+			"next": "plain_origin",
+			"interval": "1h",
+			"threshold": 100
+		},
+		"ssl_auth": {
+			"type": "http",
+			"url": "https://god:hunter2@[::1]:5449",
+			"insecure": true
+		},
+		"ssl_auth_batch": {
+			"type": "batch",
+			"next": "ssl_auth",
+			"interval": "1h",
+			"threshold": 100
+		},
 		"common": {
 			"type": "test"
 		}
@@ -243,6 +260,15 @@ func TestMain(m *testing.M) {
 			"type": "http",
 			"address": "[::1]:1349",
 			"handlers": { "/": "common"}
+		},
+		"ssl_auth": {
+			"type": "http",
+			"address": "[::1]:5449",
+			"handlers": { "/": "common"},
+			"certfile": "../examples/cacert-snakeoil.pem",
+			"keyfile": "../examples/privkey-snakeoil.pem",
+			"username": "god",
+			"password": "hunter2"
 		}
 	},
 	"handlers": {
@@ -260,8 +286,10 @@ func TestMain(m *testing.M) {
 	}
 
 	rPlain := bConfig.Receivers["plain"].Receiver.(*receiver.HTTP)
+	rSSL := bConfig.Receivers["ssl_auth"].Receiver.(*receiver.HTTP)
 
 	go rPlain.Start()
+	go rSSL.Start()
 	time.Sleep(time.Duration(10 * time.Millisecond))
 	os.Exit(m.Run())
 }
@@ -276,11 +304,61 @@ func TestMain(m *testing.M) {
 // - The JSON parser
 //
 // It is also affected heavily by your TCP stack.
-func BenchmarkHttp(b *testing.B) {
+//
+// There are 6 variants. The first two are to compare http with https, and
+// both serve ten containers per iteration.
+//
+// The next four compare batching, non-batching and with and without SSL.
+func BenchmarkHttp_json(b *testing.B) {
 	sPlainOrigin := bConfig.Senders["plain_origin"].Sender.(*sender.HTTP)
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sPlainOrigin, &validContainer, 10, 10)
+	}
+}
+
+func BenchmarkHttp_ssl_json(b *testing.B) {
+	sPlainOrigin := bConfig.Senders["ssl_auth"].Sender.(*sender.HTTP)
+	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, sPlainOrigin, &validContainer, 10, 10)
+	}
+}
+
+func BenchmarkHttp_batch_json(b *testing.B) {
+	sPlainBatch := bConfig.Senders["plain_batch"].Sender
+	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, sPlainBatch, &validContainer, 100, 1)
+	}
+}
+
+func BenchmarkHttp_nobatch_json(b *testing.B) {
+	sPlainNoBatch := bConfig.Senders["plain_origin"].Sender
+	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, sPlainNoBatch, &validContainer, 100, 100)
+	}
+}
+
+func BenchmarkHttp_ssl_nobatch_json(b *testing.B) {
+	sSSL := bConfig.Senders["ssl_auth"].Sender
+	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, sSSL, &validContainer, 100, 100)
+	}
+}
+
+func BenchmarkHttp_ssl_batch_json(b *testing.B) {
+	sSSL := bConfig.Senders["ssl_auth_batch"].Sender
+	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, sSSL, &validContainer, 100, 1)
 	}
 }
