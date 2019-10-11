@@ -203,10 +203,12 @@ func (rcv *Test) Set(v uint64) {
 func (rcv *Test) TestSync(t failer, s skogul.Sender, c *skogul.Container, send int, received int) {
 	go func() {
 		for i := 0; i < send; i++ {
-			err := s.Send(c)
-			if err != nil {
-				t.Errorf("sending on %v failed: %v", s, err)
-			}
+			go func() {
+				err := s.Send(c)
+				if err != nil {
+					t.Errorf("sending on %v failed: %v", s, err)
+				}
+			}()
 		}
 	}()
 	for i := 0; i < received; i++ {
