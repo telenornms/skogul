@@ -149,7 +149,7 @@ func TestExtract(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	metadata := transformer.Metadata{
-		Extract: [][]string{[]string{extracted_value_key}},
+		ExtractFromData: []string{extracted_value_key},
 	}
 
 	err := metadata.Transform(&c)

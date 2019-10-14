@@ -32,12 +32,12 @@ import (
 // Metadata enforces a set of rules on metadata in all metrics, potentially
 // changing the metric metadata.
 type Metadata struct {
-	Set     map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Split   []string               `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element). Also sets this field as Metadata."`
-	Require []string               `doc:"Require the pressence of these fields."`
-	Extract [][]string             `doc:"Extract a set of fields from Data and add it to Metadata. The field will be removed from Data."`
-	Remove  []string               `doc:"Remove these metadata fields."`
-	Ban     []string               `doc:"Fail if any of these fields are present"`
+	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
+	Split           []string               `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element). Also sets this field as Metadata."`
+	Require         []string               `doc:"Require the pressence of these fields."`
+	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. The field will be removed from Data."`
+	Remove          []string               `doc:"Remove these metadata fields."`
+	Ban             []string               `doc:"Fail if any of these fields are present"`
 }
 
 // Transform enforces the Metadata rules
@@ -49,10 +49,10 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 		splitValueKey := meta.Split[1]
 
 		// @ToDo: Warn if having set extract field when using split
-		if meta.Extract == nil {
-			meta.Extract = make([][]string, 0)
+		if meta.ExtractFromData == nil {
+			meta.ExtractFromData = make([]string, 0)
 		}
-		meta.Extract = append(meta.Extract, []string{splitValueKey})
+		meta.ExtractFromData = append(meta.ExtractFromData, splitValueKey)
 
 		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
 		if err != nil {
@@ -74,15 +74,9 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 				return skogul.Error{Source: "metadata transformer", Reason: fmt.Sprintf("missing required metadata field %s", value)}
 			}
 		}
-		for _, extract := range meta.Extract {
-			extractKey := extract[0]
-			extractName := extract[0]
+		for _, extract := range meta.ExtractFromData {
 
-			if len(extract) == 2 {
-				extractName = extract[1]
-			}
-
-			c.Metrics[mi].Metadata[extractKey] = c.Metrics[mi].Data[extractName]
+			c.Metrics[mi].Metadata[extract] = c.Metrics[mi].Data[extract]
 			delete(c.Metrics[mi].Data, extractKey)
 		}
 		for _, value := range meta.Remove {
