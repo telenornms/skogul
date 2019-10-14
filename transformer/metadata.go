@@ -120,7 +120,12 @@ func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*
 
 		for _, obj := range metricObj {
 			// Create a new metrics object as a copy of the original one, then reassign the data field
-			metricsData := obj.(map[string]interface{})
+			metricsData, ok := obj.(map[string]interface{})
+
+			if !ok {
+				return nil, fmt.Errorf("Failed to cast '%v' to string/interface map", obj)
+			}
+
 			newMetric := *origMetrics[mi]
 			newMetric.Data = metricsData
 
