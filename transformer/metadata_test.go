@@ -24,10 +24,13 @@
 package transformer_test
 
 import (
+	"encoding/json"
+	"fmt"
+	"testing"
+
 	"github.com/KristianLyng/skogul"
 	"github.com/KristianLyng/skogul/config"
 	"github.com/KristianLyng/skogul/transformer"
-	"testing"
 )
 
 func check(t *testing.T, m *skogul.Metric, field string, want interface{}) {
@@ -128,5 +131,35 @@ func testConfBad(t *testing.T, rawconf string) {
 	}
 	if conf != nil {
 		t.Errorf("got config from invalid source config")
+	}
+}
+
+func TestExtract(t *testing.T) {
+	extracted_value_key := "extract-this"
+	extracted_value := "the value"
+
+	metric := skogul.Metric{}
+	metric.Metadata = make(map[string]interface{})
+	metric.Metadata["extract"] = extracted_value_key
+
+	metric.Data = make(map[string]interface{})
+	testData := fmt.Sprintf(`{"%s": "%s"}`, extracted_value_key, extracted_value)
+	json.Unmarshal([]byte(testData), &metric.Data)
+
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric}
+
+	metadata := transformer.Metadata{
+		Extract: [][]string{[]string{extracted_value_key}},
+	}
+
+	err := metadata.Transform(&c)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if c.Metrics[0].Metadata[extracted_value_key] != extracted_value {
+		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Metadata[extracted_value_key])
 	}
 }
