@@ -216,3 +216,71 @@ func TestSplit(t *testing.T) {
 		return
 	}
 }
+
+func TestSplitExtract(t *testing.T) {
+	split_path := "data"
+	testData := `{
+		"data": [
+			{
+				"splitField": "key1",
+				"data": "yes"
+			},
+			{
+				"splitField": "key2",
+				"data": "yes also"
+			}
+		]
+	}`
+
+	metric := skogul.Metric{}
+	metric.Metadata = make(map[string]interface{})
+
+	metric.Data = make(map[string]interface{})
+	json.Unmarshal([]byte(testData), &metric.Data)
+
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric}
+
+	metadata := transformer.Metadata{
+		Split:           []string{split_path},
+		ExtractFromData: []string{"splitField"},
+	}
+
+	err := metadata.Transform(&c)
+
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if len(c.Metrics) != 2 {
+		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
+		return
+	}
+
+	// Verify that the keys specified are extracted
+	if c.Metrics[0].Metadata["splitField"] != "key1" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "yes", c.Metrics[0].Metadata["splitField"])
+		fmt.Printf("Object:\n%+v\n", c)
+		return
+	}
+
+	if c.Metrics[1].Metadata["splitField"] != "key2" {
+		fmt.Printf("Object:\n%+v\n", c)
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "yes also", c.Metrics[1].Metadata["splitField"])
+		return
+	}
+
+	// Verify that the data is not the same in the two objects as it might differ
+	if c.Metrics[0].Data["data"] != "yes" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "yes", c.Metrics[0].Data["data"])
+		fmt.Printf("Object:\n%+v\n", c)
+		return
+	}
+
+	if c.Metrics[1].Data["data"] != "yes also" {
+		fmt.Printf("Object:\n%+v\n", c)
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "yes also", c.Metrics[1].Data["data"])
+		return
+	}
+}
