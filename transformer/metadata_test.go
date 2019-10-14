@@ -205,4 +205,10 @@ func TestSplit(t *testing.T) {
 		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
 		return
 	}
+
+	// Verify that the key has been extracted and put into Metadata
+	if c.Metrics[0].Metadata[split_key] != "key1" && c.Metrics[1].Metadata[split_key] != "key2" {
+		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
+		return
+	}
 }
