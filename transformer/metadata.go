@@ -114,9 +114,13 @@ func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*
 	splitPath := metadata.Split[0]
 
 	for mi := range origMetrics {
-		metricObj := origMetrics[mi].Data[splitPath]
+		metricObj, ok := origMetrics[mi].Data[splitPath].([]interface{})
 
-		for _, obj := range metricObj.([]interface{}) {
+		if !ok {
+			return nil, fmt.Errorf("Failed to cast '%v' to list of interfaces", origMetrics[mi].Data[splitPath])
+		}
+
+		for _, obj := range metricObj {
 			// Create a new metrics object as a copy of the original one, then reassign the data field
 			newMetric := skogul.Metric{}
 			deepcopy.Copy(&newMetric, &origMetrics[mi])
