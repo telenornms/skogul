@@ -207,8 +207,15 @@ func TestSplit(t *testing.T) {
 	}
 
 	// Verify that the key has been extracted and put into Metadata
-	if c.Metrics[0].Metadata[split_key] != "key1" && c.Metrics[1].Metadata[split_key] != "key2" {
-		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
+	if c.Metrics[0].Metadata[split_key] != "key1" {
+		t.Errorf(`Expected Metrics Metadata to contain key of val '%s' but got '%s'`, "key1", c.Metrics[0].Metadata[split_key])
+		fmt.Printf("Object:\n%+v\n", c)
+		return
+	}
+
+	if c.Metrics[1].Metadata[split_key] != "key2" {
+		fmt.Printf("Object:\n%+v\n", c)
+		t.Errorf(`Expected Metrics Metadata to contain key of val '%s' but got '%s'`, "key2", c.Metrics[1].Metadata[split_key])
 		return
 	}
 }
