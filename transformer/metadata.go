@@ -26,8 +26,6 @@ package transformer
 import (
 	"fmt"
 
-	"github.com/getlantern/deepcopy"
-
 	"github.com/KristianLyng/skogul"
 )
 
@@ -122,9 +120,9 @@ func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*
 
 		for _, obj := range metricObj {
 			// Create a new metrics object as a copy of the original one, then reassign the data field
-			newMetric := skogul.Metric{}
-			deepcopy.Copy(&newMetric, &origMetrics[mi])
-			newMetric.Data = obj.(map[string]interface{})
+			metricsData := obj.(map[string]interface{})
+			newMetric := *origMetrics[mi]
+			newMetric.Data = metricsData
 
 			newMetrics = append(newMetrics, &newMetric)
 		}

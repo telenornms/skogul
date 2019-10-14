@@ -4,7 +4,6 @@ go 1.12
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.2.0
-	github.com/getlantern/deepcopy v0.0.0-20160317154340-7f45deb8130a
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.1
 	github.com/lib/pq v1.2.0
