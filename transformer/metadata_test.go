@@ -163,3 +163,46 @@ func TestExtract(t *testing.T) {
 		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Metadata[extracted_value_key])
 	}
 }
+
+func TestSplit(t *testing.T) {
+	split_path := "data"
+	split_key := "splitField"
+	testData := `{
+		"data": [
+			{
+				"splitField": "key1",
+				"data": "yes"
+			},
+			{
+				"splitField": "key2",
+				"data": "yes also"
+			}
+		]
+	}`
+
+	metric := skogul.Metric{}
+	metric.Metadata = make(map[string]interface{})
+	metric.Metadata["split"] = []string{split_path, split_key}
+
+	metric.Data = make(map[string]interface{})
+	json.Unmarshal([]byte(testData), &metric.Data)
+
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric}
+
+	metadata := transformer.Metadata{
+		Split: []string{split_path, split_key},
+	}
+
+	err := metadata.Transform(&c)
+
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if len(c.Metrics) != 2 {
+		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
+		return
+	}
+}
