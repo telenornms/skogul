@@ -165,7 +165,6 @@ func TestExtract(t *testing.T) {
 
 func TestSplit(t *testing.T) {
 	split_path := "data"
-	split_key := "splitField"
 	testData := `{
 		"data": [
 			{
@@ -189,7 +188,7 @@ func TestSplit(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	metadata := transformer.Metadata{
-		Split: []string{split_path, split_key},
+		Split: split_path,
 	}
 
 	err := metadata.Transform(&c)
@@ -201,19 +200,6 @@ func TestSplit(t *testing.T) {
 
 	if len(c.Metrics) != 2 {
 		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
-		return
-	}
-
-	// Verify that the key has been extracted and put into Metadata
-	if c.Metrics[0].Metadata[split_key] != "key1" {
-		t.Errorf(`Expected Metrics Metadata to contain key of val '%s' but got '%s'`, "key1", c.Metrics[0].Metadata[split_key])
-		fmt.Printf("Object:\n%+v\n", c)
-		return
-	}
-
-	if c.Metrics[1].Metadata[split_key] != "key2" {
-		fmt.Printf("Object:\n%+v\n", c)
-		t.Errorf(`Expected Metrics Metadata to contain key of val '%s' but got '%s'`, "key2", c.Metrics[1].Metadata[split_key])
 		return
 	}
 

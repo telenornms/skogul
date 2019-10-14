@@ -33,7 +33,7 @@ import (
 // changing the metric metadata.
 type Metadata struct {
 	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Split           []string               `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element). Also sets this field as Metadata."`
+	Split           string                 `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element)."`
 	Require         []string               `doc:"Require the pressence of these fields."`
 	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. The field will be removed from Data."`
 	Remove          []string               `doc:"Remove these metadata fields."`
@@ -44,15 +44,7 @@ type Metadata struct {
 func (meta *Metadata) Transform(c *skogul.Container) error {
 	metrics := c.Metrics
 
-	// If Split is defined, add the property to split on to Extract
-	if meta.Split != nil {
-		splitValueKey := meta.Split[1]
-
-		// @ToDo: Warn if having set extract field when using split
-		if meta.ExtractFromData == nil {
-			meta.ExtractFromData = make([]string, 0)
-		}
-		meta.ExtractFromData = append(meta.ExtractFromData, splitValueKey)
+	if meta.Split != "" {
 
 		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
 		if err != nil {
@@ -102,13 +94,11 @@ func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*
 	var newMetrics []*skogul.Metric
 
 	// @ToDo: Parse this to a path if more than one element deep (i.e. my.nested.json.structure should unfurl)
-	splitPath := metadata.Split[0]
-
 	for mi := range origMetrics {
-		metricObj, ok := origMetrics[mi].Data[splitPath].([]interface{})
+		metricObj, ok := origMetrics[mi].Data[metadata.Split].([]interface{})
 
 		if !ok {
-			return nil, fmt.Errorf("Failed to cast '%v' to list of interfaces", origMetrics[mi].Data[splitPath])
+			return nil, fmt.Errorf("Failed to cast '%v' to list of interfaces", origMetrics[mi].Data[metadata.Split])
 		}
 
 		for _, obj := range metricObj {
