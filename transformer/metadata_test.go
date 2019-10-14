@@ -188,7 +188,7 @@ func TestSplit(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	metadata := transformer.Metadata{
-		Split: split_path,
+		Split: []string{split_path},
 	}
 
 	err := metadata.Transform(&c)

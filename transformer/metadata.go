@@ -33,7 +33,7 @@ import (
 // changing the metric metadata.
 type Metadata struct {
 	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Split           string                 `doc:"Split into multiple metrics based on this field (dot '.' denotes nested object element)."`
+	Split           []string               `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
 	Require         []string               `doc:"Require the pressence of these fields."`
 	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. The field will be removed from Data."`
 	Remove          []string               `doc:"Remove these metadata fields."`
@@ -44,8 +44,7 @@ type Metadata struct {
 func (meta *Metadata) Transform(c *skogul.Container) error {
 	metrics := c.Metrics
 
-	if meta.Split != "" {
-
+	if meta.Split != nil {
 		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
 		if err != nil {
 			return fmt.Errorf("failed to split metrics: %v", err)
@@ -88,20 +87,41 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 	return nil
 }
 
+// extractNestedObject extracts an object from a nested object structure. All intermediate objects has to map[string]interface{}
+func extractNestedObject(object map[string]interface{}, keys []string) (map[string]interface{}, error) {
+	fmt.Printf("%v && %v\n", keys, object)
+	if len(keys) == 1 {
+		return object, nil
+	}
+
+	next, ok := object[keys[0]].(map[string]interface{})
+
+	if !ok {
+		return nil, skogul.Error{Reason: "Failed to cast nested object to map[string]interface{}"}
+	}
+
+	return extractNestedObject(next, keys[1:])
+}
+
 // splitMetricsByObjectKey splits the metrics into multiple metrics based on a key in a list of sub-metrics
 func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*skogul.Metric, error) {
 	origMetrics := *metrics
 	var newMetrics []*skogul.Metric
 
-	// @ToDo: Parse this to a path if more than one element deep (i.e. my.nested.json.structure should unfurl)
 	for mi := range origMetrics {
-		metricObj, ok := origMetrics[mi].Data[metadata.Split].([]interface{})
+		splitObj, err := extractNestedObject(origMetrics[mi].Data, metadata.Split)
 
-		if !ok {
-			return nil, fmt.Errorf("Failed to cast '%v' to list of interfaces", origMetrics[mi].Data[metadata.Split])
+		if err != nil {
+			return nil, fmt.Errorf("Failed to extract nested obj '%v' from '%v' to string/interface map", metadata.Split, origMetrics[mi].Data)
 		}
 
-		for _, obj := range metricObj {
+		metrics, ok := splitObj[metadata.Split[len(metadata.Split)-1]].([]interface{})
+
+		if !ok {
+			return nil, fmt.Errorf("Failed to cast '%v' to string/interface map on '%s'", origMetrics[mi].Data, metadata.Split[0])
+		}
+
+		for _, obj := range metrics {
 			// Create a new metrics object as a copy of the original one, then reassign the data field
 			metricsData, ok := obj.(map[string]interface{})
 
