@@ -140,7 +140,6 @@ func TestExtract(t *testing.T) {
 
 	metric := skogul.Metric{}
 	metric.Metadata = make(map[string]interface{})
-	metric.Metadata["extract"] = extracted_value_key
 
 	metric.Data = make(map[string]interface{})
 	testData := fmt.Sprintf(`{"%s": "%s"}`, extracted_value_key, extracted_value)
@@ -182,7 +181,6 @@ func TestSplit(t *testing.T) {
 
 	metric := skogul.Metric{}
 	metric.Metadata = make(map[string]interface{})
-	metric.Metadata["split"] = []string{split_path, split_key}
 
 	metric.Data = make(map[string]interface{})
 	json.Unmarshal([]byte(testData), &metric.Data)
