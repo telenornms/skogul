@@ -128,6 +128,11 @@ func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*
 
 			newMetric := *origMetrics[mi]
 			newMetric.Data = metricsData
+			newMetric.Metadata = make(map[string]interface{})
+
+			for key, val := range origMetrics[mi].Metadata {
+				newMetric.Metadata[key] = val
+			}
 
 			newMetrics = append(newMetrics, &newMetric)
 		}
