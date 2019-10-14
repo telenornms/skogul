@@ -77,7 +77,6 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 		for _, extract := range meta.ExtractFromData {
 
 			c.Metrics[mi].Metadata[extract] = c.Metrics[mi].Data[extract]
-			delete(c.Metrics[mi].Data, extractKey)
 		}
 		for _, value := range meta.Remove {
 			if c.Metrics[mi].Metadata == nil {
