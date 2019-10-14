@@ -216,4 +216,17 @@ func TestSplit(t *testing.T) {
 		t.Errorf(`Expected Metrics Metadata to contain key of val '%s' but got '%s'`, "key2", c.Metrics[1].Metadata[split_key])
 		return
 	}
+
+	// Verify that the data is not the same in the two objects as it might differ
+	if c.Metrics[0].Data["data"] != "yes" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "yes", c.Metrics[0].Data["data"])
+		fmt.Printf("Object:\n%+v\n", c)
+		return
+	}
+
+	if c.Metrics[1].Data["data"] != "yes also" {
+		fmt.Printf("Object:\n%+v\n", c)
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "yes also", c.Metrics[1].Data["data"])
+		return
+	}
 }
