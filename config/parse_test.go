@@ -6,7 +6,7 @@ import (
 )
 
 func TestFile(t *testing.T) {
-	c, err := File("test.json")
+	c, err := File("testdata/test.json")
 	if err != nil {
 		t.Errorf("File() failed: %v", err)
 	}
