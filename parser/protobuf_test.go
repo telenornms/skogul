@@ -52,7 +52,7 @@ func readProtobufFile(t failer, file string) []byte {
 }
 
 func TestProtoBuf(t *testing.T) {
-	b := readProtobufFile(t, "protobuf-packet.bin")
+	b := readProtobufFile(t, "testdata/protobuf-packet.bin")
 	x := ProtoBuf{}
 	c, err := x.Parse(b)
 	if err != nil {
