@@ -183,9 +183,10 @@ It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
 operator to avoid setting up feedback loops.
 
-The only parser available today is the JSON parser. Only two transformers
-exists, and to simplify configuration, the "templater" transformer does
-not have to be explicitly defined to be referenced.
+Two parsers exist: the JSON parser and a Juniper Telemetry protobuf parser.
+Only three transformers exists, and to simplify configuration, the
+"templater" transformer does not have to be explicitly defined to be
+referenced.
 
 The documentation for each sender and receiver also lists all options. In
 general, you do not need to specify all options.
@@ -290,9 +291,9 @@ There is only one type of handler. It accepts three arguments: A parser to
 parse data, a list of optional transformers, and the first sender that will
 receive the parsed container(s).
 
-Currently the only valid parser is "json" and only two transformers exist.
-The "templating" transformer does not need to be explicitly defined to be
-referenced, since it has no settings.
+The only valid parsers are "json" and "protobuf". Only three transformers
+exist. The "templating" transformer does not need to be explicitly defined
+to be referenced, since it has no settings.
 
 JSON parsing
 ------------
