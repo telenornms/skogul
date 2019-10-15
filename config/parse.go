@@ -289,6 +289,9 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 	if err := resolveHandlers(c); err != nil {
 		return nil, err
 	}
+
+	missingConfigurationProperties := make([][]string, 0)
+
 	for idx, h := range c.Handlers {
 		log.WithField("handler", idx).Debug("Verifying handler configuration")
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
@@ -296,7 +299,10 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.TypeOf(h.Handler)
-		_ = findMissingRequiredConfigProps(jsonData, "handlers", idx, configStruct)
+		configErrors := findMissingRequiredConfigProps(jsonData, "handlers", idx, configStruct)
+		if len(configErrors) > 0 {
+			missingConfigurationProperties = append(missingConfigurationProperties, configErrors)
+		}
 		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
@@ -306,7 +312,10 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.ValueOf(s.Sender).Elem().Type()
-		_ = findMissingRequiredConfigProps(jsonData, "senders", idx, configStruct)
+		configErrors := findMissingRequiredConfigProps(jsonData, "senders", idx, configStruct)
+		if len(configErrors) > 0 {
+			missingConfigurationProperties = append(missingConfigurationProperties, configErrors)
+		}
 		verifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
@@ -315,10 +324,20 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 			return nil, err
 		}
 
-		receiverConfigStruct := reflect.ValueOf(r.Receiver).Elem().Type()
-		_ = findMissingRequiredConfigProps(jsonData, "receivers", idx, receiverConfigStruct)
-		verifyOnlyRequiredConfigProps(jsonData, "receivers", idx, receiverConfigStruct)
+		configStruct := reflect.ValueOf(r.Receiver).Elem().Type()
+		configErrors := findMissingRequiredConfigProps(jsonData, "receivers", idx, configStruct)
+		if len(configErrors) > 0 {
+			missingConfigurationProperties = append(missingConfigurationProperties, configErrors)
+		}
+		verifyOnlyRequiredConfigProps(jsonData, "receivers", idx, configStruct)
 	}
+
+	failOnConfigError := true
+
+	if failOnConfigError && len(missingConfigurationProperties) > 0 {
+		return nil, skogul.Error{Reason: "Missing required configuration parameters"}
+	}
+
 	return c, nil
 }
 
