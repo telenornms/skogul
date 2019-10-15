@@ -337,7 +337,7 @@ Settings:
 influx
 ------
 
-Send to a InfluxDB HTTP endpoint.
+Send to a InfluxDB HTTP endpoint. The sender can either always send the data to a single measurement, send it to a measurement extracted from the metadata of a metric, or a combination where the "measurement" serves as a default measurement to use if the metric doesn't have the key presented in "measurementfrommetadata".
 
 Aliases: influxdb 
 
@@ -345,6 +345,9 @@ Settings:
 
 ``measurement - string``
 	Measurement name to write to.
+
+``measurementfrommetadata - string``
+	Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found.
 
 ``timeout - Duration``
 	HTTP timeout

@@ -39,12 +39,13 @@ InfluxDB posts data to the provided URL and measurement, using the InfluxDB
 line format over HTTP.
 */
 type InfluxDB struct {
-	URL         string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
-	Measurement string          `doc:"Measurement name to write to."`
-	Timeout     skogul.Duration `doc:"HTTP timeout"`
-	client      *http.Client
-	replacer    *strings.Replacer
-	once        sync.Once
+	URL                     string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
+	Measurement             string          `doc:"Measurement name to write to."`
+	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
+	Timeout                 skogul.Duration `doc:"HTTP timeout"`
+	client                  *http.Client
+	replacer                *strings.Replacer
+	once                    sync.Once
 }
 
 // Send data to Influx, re-using idb.client.
@@ -58,7 +59,26 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		idb.client = &http.Client{Timeout: idb.Timeout.Duration}
 	})
 	for _, m := range c.Metrics {
-		fmt.Fprintf(&buffer, "%s", idb.Measurement)
+		measurement := idb.Measurement
+		if idb.MeasurementFromMetadata != "" {
+			measure, ok := m.Metadata[idb.MeasurementFromMetadata].(string)
+			if ok {
+				measurement = measure
+			}
+			// The reason this isn't an else-if is because now
+			// it also catches the scenario where the type cast
+			// is successful, but the key is empty.
+			if measurement == "" {
+				// XXX:
+				// How do we report issues of single
+				// metrics failing, but not the container
+				// in general? Failing the entire container
+				// for just one failed metric is not really
+				// acceptable...
+				continue
+			}
+		}
+		fmt.Fprintf(&buffer, "%s", measurement)
 		for key, value := range m.Metadata {
 			var field interface{}
 			v, ok := value.(string)
@@ -85,6 +105,17 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response from InfluxDB: %s", resp.Status)}
 		return e
+	}
+	return nil
+}
+
+// Verify does a shallow verification of settings
+func (idb *InfluxDB) Verify() error {
+	if idb.URL == "" {
+		return skogul.Error{Source: "influxdb sender", Reason: "no URL set"}
+	}
+	if idb.Measurement == "" && idb.MeasurementFromMetadata == "" {
+		return skogul.Error{Source: "influxdb sender", Reason: "no Measurement set or MeasurementFromMetadata"}
 	}
 	return nil
 }
