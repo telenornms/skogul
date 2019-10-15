@@ -46,11 +46,16 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 
 	if meta.Split != nil {
 		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
-		if err != nil {
-			return fmt.Errorf("failed to split metrics: %v", err)
-		}
+		if err == nil {
+			c.Metrics = splitMetrics
+		} else {
+			fmt.Println("failed to split metrics")
 
-		c.Metrics = splitMetrics
+			// dont hard fail metrics unless we really want to
+			if false {
+				return fmt.Errorf("failed to split metrics: %v", err)
+			}
+		}
 	}
 
 	for mi := range c.Metrics {
@@ -89,7 +94,6 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 
 // extractNestedObject extracts an object from a nested object structure. All intermediate objects has to map[string]interface{}
 func extractNestedObject(object map[string]interface{}, keys []string) (map[string]interface{}, error) {
-	fmt.Printf("%v && %v\n", keys, object)
 	if len(keys) == 1 {
 		return object, nil
 	}
