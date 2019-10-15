@@ -330,7 +330,7 @@ func verifyItem(family string, name string, item interface{}) error {
 }
 
 func findFieldsOfStruct(T reflect.Type) []string {
-	log.WithField("type", T.Name()).Debug("Finding required fields for type")
+	log.WithField("type", T.Name()).Debug("Finding defined fields for type")
 	requiredProps := make([]string, 0)
 	switch T.Kind() {
 	case reflect.Struct:
@@ -382,16 +382,11 @@ func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family str
 		propertyDefined := false
 
 		if prop == "type" {
-			// @ToDo: Should we define the type internally?
+			// Skip the type specifying what type this is
 			continue
 		}
 
 		for _, requiredProp := range requiredProps {
-			// log.WithFields(log.Fields{
-			// 	"prop":    prop,
-			// 	"reqProp": requiredProp,
-			// 	"equal":   prop == requiredProp,
-			// }).Debug("Comparing")
 			if strings.ToLower(prop) == strings.ToLower(requiredProp) {
 				propertyDefined = true
 				break
