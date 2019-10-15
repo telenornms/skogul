@@ -294,12 +294,20 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
 			return nil, err
 		}
+
+		configStruct := reflect.TypeOf(h.Handler)
+		_ = findMissingRequiredConfigProps(jsonData, "handlers", idx, configStruct)
+		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
 		log.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
 			return nil, err
 		}
+
+		configStruct := reflect.ValueOf(s.Sender).Elem().Type()
+		_ = findMissingRequiredConfigProps(jsonData, "senders", idx, configStruct)
+		verifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
 		log.WithField("receiver", idx).Debug("Verifying receiver configuration")
