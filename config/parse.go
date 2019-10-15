@@ -420,7 +420,7 @@ func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, ha
 			}
 		}
 		if !propertyDefined {
-			log.WithField("property", prop).Warn("Property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
+			log.WithField("property", prop).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
 		}
 	}
 }
