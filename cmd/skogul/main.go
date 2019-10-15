@@ -711,7 +711,7 @@ func help() {
 }
 
 func main() {
-	log2.SetLevel(log2.DebugLevel)
+	log2.SetLevel(log2.WarnLevel)
 
 	flag.Parse()
 	if *fhelp {
