@@ -36,6 +36,11 @@ import (
 
 // Tests http receiver, sender and JSON parser implicitly
 func TestHttp_stack(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("TestHttp encountered an assert errror")
+		}
+	}()
 	config, err := config.Bytes([]byte(`
 {
 	"senders": {

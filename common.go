@@ -223,8 +223,14 @@ func (h Handler) Verify() error {
 	return nil
 }
 
+// AssertErrors counts the number of assert errors
+var AssertErrors int
+
 // Assert panics if x is false, useful mainly for doing error-checking for
 // "impossible scenarios" we can't really handle anyway.
+//
+// Keep in mind that net/http steals panics, but you can check
+// AssertErrors, which is incremented with each assert error encountered.
 func Assert(x bool, v ...interface{}) {
 	if !x {
 		out := "assertion failed"
@@ -232,6 +238,7 @@ func Assert(x bool, v ...interface{}) {
 		if ok {
 			out = fmt.Sprintf("%X:%s:%d assertion failed", pc, file, line)
 		}
+		AssertErrors++
 		panic(fmt.Sprintf("%s %s", out, fmt.Sprint(v...)))
 	}
 }

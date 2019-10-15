@@ -73,7 +73,7 @@ func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, in
 	}
 
 	b, err := json.Marshal(httpReturn{Message: answer})
-	skogul.Assert(err != nil, err)
+	skogul.Assert(err == nil, err)
 	fmt.Fprintf(w, "%s\n", b)
 }
 
@@ -128,7 +128,7 @@ func (htt *HTTP) Start() error {
 		htt.auth = false
 	}
 	for idx, h := range htt.Handlers {
-		log.Printf("Adding handler for %v", idx)
+		log.Printf("Adding handler %v -> %v", idx, h.Name)
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt})
 	}
 	if htt.Address == "" {
@@ -143,4 +143,12 @@ func (htt *HTTP) Start() error {
 		log.Fatal(server.ListenAndServe())
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
+}
+
+// Verify ensures at least one handler exists for the HTTP receiver.
+func (htt *HTTP) Verify() error {
+	if htt.Handlers == nil || len(htt.Handlers) == 0 {
+		return skogul.Error{Source: "http receiver", Reason: "No handlers specified. Need at least one."}
+	}
+	return nil
 }

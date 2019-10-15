@@ -40,7 +40,9 @@
   "receivers": {
     "http": {
       "type": "http",
-      "handler": "plain"
+      "handlers": {
+	      "/": "plain"
+      }
     }
   }
 }

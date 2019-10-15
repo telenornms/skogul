@@ -1,11 +1,17 @@
 package config
 
 import (
+	"github.com/KristianLyng/skogul"
 	"testing"
 	//"fmt"
 )
 
 func TestFile(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("File() paniced")
+		}
+	}()
 	c, err := File("test.json")
 	if err != nil {
 		t.Errorf("File() failed: %v", err)
@@ -16,6 +22,11 @@ func TestFile(t *testing.T) {
 }
 
 func TestByte_ok(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Byte() paniced")
+		}
+	}()
 	var okData []byte
 	okData = []byte(`
 {
