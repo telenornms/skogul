@@ -307,9 +307,9 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 			return nil, err
 		}
 
-		var udpT receiver.UDP
-		findMissingRequiredConfigProps(jsonData, "receivers", reflect.TypeOf(udpT))
-		verifyOnlyRequiredConfigProps(jsonData, "receivers", reflect.TypeOf(udpT))
+		receiverConfigStruct := reflect.ValueOf(r.Receiver).Elem().Type()
+		_ = findMissingRequiredConfigProps(jsonData, "receivers", idx, receiverConfigStruct)
+		verifyOnlyRequiredConfigProps(jsonData, "receivers", idx, receiverConfigStruct)
 	}
 	return c, nil
 }
@@ -350,33 +350,33 @@ func findFieldsOfStruct(T reflect.Type) []string {
 }
 
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
+	// log.Debugf("Fetching config section '%s' for '%s' from %v", section, family, rawConfig)
 	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
 }
 
-func findMissingRequiredConfigProps(rawConfig *map[string]interface{}, family string, T reflect.Type) {
+func findMissingRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
 	requiredProps := findFieldsOfStruct(T)
 	log.Debugf("Required fields: %v", requiredProps)
 
-	// @ToDo: Requires same casing as in config file (between type and config)
-	// Fetch type from field inside, not the name of the config element (as it may differ)
-	relevantConfig := getRelevantRawConfigSection(rawConfig, family, strings.ToLower(T.Name()))
-	// log.Debugf("Relevant configuration: %+v", relevantConfig)
+	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
+
+	missingProps := make([]string, 0)
 
 	for _, requiredProp := range requiredProps {
 		if relevantConfig[strings.ToLower(requiredProp)] == nil {
 			log.WithField("property", strings.ToLower(requiredProp)).Error("Missing required configuration property")
+			missingProps = append(missingProps, requiredProp)
 		}
 	}
+
+	return missingProps
 }
 
-func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family string, T reflect.Type) {
+func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) {
 	requiredProps := findFieldsOfStruct(T)
 	log.Debugf("Required fields: %v", requiredProps)
 
-	// @ToDo: Requires same casing as in config file (between type and config)
-	// Fetch type from field inside, not the name of the config element (as it may differ)
-	relevantConfig := getRelevantRawConfigSection(rawConfig, family, strings.ToLower(T.Name()))
-	// log.Debugf("Relevant configuration: %+v", relevantConfig)
+	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
 
 	for prop := range relevantConfig {
 		propertyDefined := false
