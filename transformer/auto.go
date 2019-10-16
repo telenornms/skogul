@@ -1,7 +1,7 @@
 package transformer
 
 import (
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Auto maps names to Transformers to allow auto configuration

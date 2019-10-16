@@ -25,7 +25,7 @@ package receiver
 
 import (
 	"bufio"
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 	"log"
 	"os"
 	"time"

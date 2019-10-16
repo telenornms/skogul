@@ -26,7 +26,7 @@ package transformer
 import (
 	"fmt"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Split is the configuration for the split transformer

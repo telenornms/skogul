@@ -28,8 +28,8 @@ import (
 	"log"
 	"sync"
 
-	"github.com/KristianLyng/skogul"
-	skmqtt "github.com/KristianLyng/skogul/internal/mqtt"
+	"github.com/telenornms/skogul"
+	skmqtt "github.com/telenornms/skogul/internal/mqtt"
 )
 
 /*

@@ -26,7 +26,7 @@ package sender
 import (
 	"log"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 /*

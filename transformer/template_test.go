@@ -24,8 +24,8 @@
 package transformer_test
 
 import (
-	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/transformer"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/transformer"
 	"testing"
 	"time"
 )

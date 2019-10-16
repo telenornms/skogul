@@ -1,4 +1,4 @@
-module github.com/KristianLyng/skogul
+module github.com/telenornms/skogul
 
 go 1.12
 

@@ -36,10 +36,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/KristianLyng/skogul/config"
-	"github.com/KristianLyng/skogul/receiver"
-	"github.com/KristianLyng/skogul/sender"
-	"github.com/KristianLyng/skogul/transformer"
+	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/receiver"
+	"github.com/telenornms/skogul/sender"
+	"github.com/telenornms/skogul/transformer"
 )
 
 var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to read.")
@@ -619,7 +619,7 @@ package.
 SEE ALSO
 ========
 
-https://github.com/KristianLyng/skogul
+https://github.com/telenornms/skogul
 
 BUGS
 ====

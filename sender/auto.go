@@ -24,7 +24,7 @@
 package sender
 
 import (
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Sender provides a framework that all sender-implementations should

@@ -31,7 +31,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 /*

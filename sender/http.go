@@ -35,7 +35,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 /*

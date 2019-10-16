@@ -1,7 +1,7 @@
 package receiver_test
 
 import (
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 	"time"
 )
 

@@ -30,7 +30,7 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Tester synthesise dummy data.

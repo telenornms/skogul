@@ -28,9 +28,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/config"
-	"github.com/KristianLyng/skogul/transformer"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/transformer"
 )
 
 func check(t *testing.T, m *skogul.Metric, field string, want interface{}) {

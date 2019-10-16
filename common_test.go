@@ -24,9 +24,9 @@
 package skogul_test
 
 import (
-	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/parser"
-	"github.com/KristianLyng/skogul/sender"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/parser"
+	"github.com/telenornms/skogul/sender"
 	"testing"
 )
 

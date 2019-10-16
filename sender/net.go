@@ -29,7 +29,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Net sends metrics to a network address

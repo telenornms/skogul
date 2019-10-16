@@ -24,9 +24,9 @@
 package receiver_test
 
 import (
-	"github.com/KristianLyng/skogul/config"
-	"github.com/KristianLyng/skogul/receiver"
-	"github.com/KristianLyng/skogul/sender"
+	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/receiver"
+	"github.com/telenornms/skogul/sender"
 	"log"
 	"testing"
 	"time"

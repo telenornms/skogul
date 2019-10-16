@@ -27,7 +27,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // UDP contains the configuration for the receiver

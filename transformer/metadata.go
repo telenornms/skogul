@@ -26,7 +26,7 @@ package transformer
 import (
 	"fmt"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Metadata enforces a set of rules on metadata in all metrics, potentially

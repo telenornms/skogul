@@ -50,9 +50,9 @@ package sender_test
 
 import (
 	"fmt"
-	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/config"
-	"github.com/KristianLyng/skogul/sender"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/sender"
 	"testing"
 	"time"
 )

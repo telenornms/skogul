@@ -30,7 +30,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 /*

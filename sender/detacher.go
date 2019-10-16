@@ -28,7 +28,7 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 /*

@@ -31,9 +31,9 @@ import (
 	"os"
 	"sync"
 
-	"github.com/KristianLyng/skogul"
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
+	"github.com/telenornms/skogul"
 )
 
 const (

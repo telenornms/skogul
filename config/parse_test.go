@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 	"testing"
 	//"fmt"
 )

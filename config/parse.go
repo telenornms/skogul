@@ -31,11 +31,11 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/KristianLyng/skogul"
-	"github.com/KristianLyng/skogul/parser"
-	"github.com/KristianLyng/skogul/receiver"
-	"github.com/KristianLyng/skogul/sender"
-	"github.com/KristianLyng/skogul/transformer"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/parser"
+	"github.com/telenornms/skogul/receiver"
+	"github.com/telenornms/skogul/sender"
+	"github.com/telenornms/skogul/transformer"
 )
 
 // Sender wraps the skogul.Sender for configuration parsing.

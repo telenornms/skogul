@@ -32,8 +32,8 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
-	"github.com/KristianLyng/skogul"
-	pb "github.com/KristianLyng/skogul/gen"
+	"github.com/telenornms/skogul"
+	pb "github.com/telenornms/skogul/gen"
 )
 
 // ProtoBuf parses a byte string-representation of a Container

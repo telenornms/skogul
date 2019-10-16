@@ -29,7 +29,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Log redirects Skoguls log buffer to a handler

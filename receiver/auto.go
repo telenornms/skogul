@@ -28,7 +28,7 @@ execute a handler. They are the "inbound" API of Skogul.
 package receiver
 
 import (
-	"github.com/KristianLyng/skogul"
+	"github.com/telenornms/skogul"
 )
 
 // Auto maps names to Receivers to allow auto configuration
