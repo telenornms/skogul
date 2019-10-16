@@ -75,11 +75,53 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 	return nil
 }
 
+// flattenStructure copies a nested object/array to the root level
+func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
+	newPath := nestedPath[0]
+
+	if len(nestedPath) > 0 {
+		for _, p := range nestedPath[1:] {
+			newPath = fmt.Sprintf("%s__%s", newPath, p)
+		}
+	}
+
+	obj, err := skogul.ExtractNestedObject(metric.Data, nestedPath)
+
+	if err == nil {
+		nestedObj, ok := obj[nestedPath[len(nestedPath)-1]].(map[string]interface{})
+
+		if !ok {
+			fmt.Println("Failed to cast to map[str]intf, trying []interface{} instead")
+
+			nestedObjArray, ok := obj[nestedPath[len(nestedPath)-1]].([]interface{})
+			if !ok {
+				fmt.Println("Failed to cast to []interface{}, aborting transform")
+				return skogul.Error{Reason: "Failed cast"}
+			}
+
+			nestedObj = make(map[string]interface{})
+			for key, val := range nestedObjArray {
+				nestedObj[fmt.Sprintf("%d", key)] = val
+			}
+		}
+
+		for key, val := range nestedObj {
+			metric.Data[fmt.Sprintf("%s__%s", newPath, key)] = val
+		}
+	} else {
+		fmt.Printf("Tried to extract nested object but failed: %v\n", err)
+		return err
+	}
+
+	return nil
+}
+
 // Data enforces a set of rules on data in all metrics, potentially
 // changing the metric data.
 type Data struct {
 	Set     map[string]interface{} `doc:"Set data fields to specific values."`
 	Require []string               `doc:"Require the pressence of these data fields."`
+	Flatten [][]string             `doc:"Flatten nested structures down to the root level"`
 	Remove  []string               `doc:"Remove these data fields."`
 	Ban     []string               `doc:"Fail if any of these data fields are present"`
 }
@@ -92,6 +134,9 @@ func (data *Data) Transform(c *skogul.Container) error {
 				c.Metrics[mi].Data = make(map[string]interface{})
 			}
 			c.Metrics[mi].Data[key] = value
+		}
+		for _, nestedPath := range data.Flatten {
+			_ = flattenStructure(nestedPath, c.Metrics[mi])
 		}
 		for _, value := range data.Require {
 			if c.Metrics[mi].Data == nil || c.Metrics[mi].Data[value] == nil {
