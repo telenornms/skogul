@@ -33,7 +33,6 @@ import (
 // changing the metric metadata.
 type Metadata struct {
 	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Split           []string               `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
 	Require         []string               `doc:"Require the pressence of these fields."`
 	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata."`
 	Remove          []string               `doc:"Remove these metadata fields."`
@@ -42,22 +41,6 @@ type Metadata struct {
 
 // Transform enforces the Metadata rules
 func (meta *Metadata) Transform(c *skogul.Container) error {
-	metrics := c.Metrics
-
-	if meta.Split != nil {
-		splitMetrics, err := splitMetricsByObjectKey(&metrics, meta)
-		if err == nil {
-			c.Metrics = splitMetrics
-		} else {
-			fmt.Println("failed to split metrics")
-
-			// dont hard fail metrics unless we really want to
-			if false {
-				return fmt.Errorf("failed to split metrics: %v", err)
-			}
-		}
-	}
-
 	for mi := range c.Metrics {
 		for key, value := range meta.Set {
 			if c.Metrics[mi].Metadata == nil {
@@ -90,62 +73,6 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 		}
 	}
 	return nil
-}
-
-// extractNestedObject extracts an object from a nested object structure. All intermediate objects has to map[string]interface{}
-func extractNestedObject(object map[string]interface{}, keys []string) (map[string]interface{}, error) {
-	if len(keys) == 1 {
-		return object, nil
-	}
-
-	next, ok := object[keys[0]].(map[string]interface{})
-
-	if !ok {
-		return nil, skogul.Error{Reason: "Failed to cast nested object to map[string]interface{}"}
-	}
-
-	return extractNestedObject(next, keys[1:])
-}
-
-// splitMetricsByObjectKey splits the metrics into multiple metrics based on a key in a list of sub-metrics
-func splitMetricsByObjectKey(metrics *[]*skogul.Metric, metadata *Metadata) ([]*skogul.Metric, error) {
-	origMetrics := *metrics
-	var newMetrics []*skogul.Metric
-
-	for mi := range origMetrics {
-		splitObj, err := extractNestedObject(origMetrics[mi].Data, metadata.Split)
-
-		if err != nil {
-			return nil, fmt.Errorf("Failed to extract nested obj '%v' from '%v' to string/interface map", metadata.Split, origMetrics[mi].Data)
-		}
-
-		metrics, ok := splitObj[metadata.Split[len(metadata.Split)-1]].([]interface{})
-
-		if !ok {
-			return nil, fmt.Errorf("Failed to cast '%v' to string/interface map on '%s'", origMetrics[mi].Data, metadata.Split[0])
-		}
-
-		for _, obj := range metrics {
-			// Create a new metrics object as a copy of the original one, then reassign the data field
-			metricsData, ok := obj.(map[string]interface{})
-
-			if !ok {
-				return nil, fmt.Errorf("Failed to cast '%v' to string/interface map", obj)
-			}
-
-			newMetric := *origMetrics[mi]
-			newMetric.Data = metricsData
-			newMetric.Metadata = make(map[string]interface{})
-
-			for key, val := range origMetrics[mi].Metadata {
-				newMetric.Metadata[key] = val
-			}
-
-			newMetrics = append(newMetrics, &newMetric)
-		}
-	}
-
-	return newMetrics, nil
 }
 
 // Data enforces a set of rules on data in all metrics, potentially
