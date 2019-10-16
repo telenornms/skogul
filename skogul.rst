@@ -669,6 +669,9 @@ Settings:
 ``ban - []string``
 	Fail if any of these fields are present
 
+``extractfromdata - []string``
+	Extract a set of fields from Data and add it to Metadata.
+
 ``remove - []string``
 	Remove these metadata fields.
 
@@ -677,6 +680,19 @@ Settings:
 
 ``set - map[string]interface {}``
 	Set metadata fields to specific values.
+
+split
+-----
+
+Splits a metric into multiple metrics based on a field.
+
+Settings:
+
+``fail - bool``
+	Error the whole container if the split fails
+
+``field - []string``
+	Split into multiple metrics based on this field (each field denotes the path to a nested object element).
 
 templater
 ---------
@@ -1021,7 +1037,7 @@ package.
 SEE ALSO
 ========
 
-https://github.com/KristianLyng/skogul
+https://github.com/telenornms/skogul
 
 BUGS
 ====

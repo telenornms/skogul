@@ -1,9 +1,9 @@
 
-.. image:: https://goreportcard.com/badge/github.com/KristianLyng/skogul
-   :target: https://goreportcard.com/report/github.com/KristianLyng/skogul
+.. image:: https://goreportcard.com/badge/github.com/telenornms/skogul
+   :target: https://goreportcard.com/report/github.com/telenornms/skogul
 
-.. image:: https://godoc.org/github.com/KristianLyng/skogul?status.svg
-   :target: https://godoc.org/github.com/KristianLyng/skogul
+.. image:: https://godoc.org/github.com/telenornms/skogul?status.svg
+   :target: https://godoc.org/github.com/telenornms/skogul
 
 ======================================
 Skogul - generic metric/data collector
@@ -31,7 +31,7 @@ favorite Linux distro, or through https://golang.org/dl/ .
 
 Building ``skogul``, including cloning::
 
-   $ git clone https://github.com/KristianLyng/skogul
+   $ git clone https://github.com/telenornms/skogul
    (...)
    $ cd skogul/cmd/skogul
    $ go build
@@ -102,11 +102,11 @@ to their data structure to have that exposed as documentation.
 
 See the package documentation over at godoc for development-related
 documentation: 
-https://godoc.org/github.com/KristianLyng/skogul
+https://godoc.org/github.com/telenornms/skogul
 
 End-user documentation is found in the manual page, which Skogul can
 generate on demand, or you can review a copy on github: 
-https://github.com/KristianLyng/skogul/blob/master/skogul.rst
+https://github.com/telenornms/skogul/blob/master/skogul.rst
 
 More discussion on architecture can be found in `docs/`.
 
@@ -161,8 +161,8 @@ at developers.
    
    Developer documentation is kept in-line in the source code, following
    godoc conventions. It is available either in the code directly, through
-   ``go doc github.com/KristianLyng/skogul`` or  through the web, at
-   https://godoc.org/github.com/KristianLyng/skogul .
+   ``go doc github.com/telenornms/skogul`` or  through the web, at
+   https://godoc.org/github.com/telenornms/skogul .
 
 Testing
 .......
@@ -216,8 +216,8 @@ comments and runnable examples, following the ``godoc`` approach. Some
 architecture comments are kept in ``docs//``, but by and large,
 documentation should be consumed from godoc.
 
-See https://godoc.org/github.com/KristianLyng/skogul for the online
-version, or use ``go doc github.com/KristianLyng/skogul`` or similar,
+See https://godoc.org/github.com/telenornms/skogul for the online
+version, or use ``go doc github.com/telenornms/skogul`` or similar,
 as you would any other go package.
 
 Examples are part of the test suite and thus extracted from ``*_test.go``

@@ -687,6 +687,9 @@ Settings:
 .B \fBban \- []string\fP
 Fail if any of these fields are present
 .TP
+.B \fBextractfromdata \- []string\fP
+Extract a set of fields from Data and add it to Metadata.
+.TP
 .B \fBremove \- []string\fP
 Remove these metadata fields.
 .TP
@@ -695,6 +698,19 @@ Require the pressence of these fields.
 .TP
 .B \fBset \- map[string]interface {}\fP
 Set metadata fields to specific values.
+.UNINDENT
+.SS split
+.sp
+Splits a metric into multiple metrics based on a field.
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBfail \- bool\fP
+Error the whole container if the split fails
+.TP
+.B \fBfield \- []string\fP
+Split into multiple metrics based on this field (each field denotes the path to a nested object element).
 .UNINDENT
 .SS templater
 .sp
@@ -1094,7 +1110,7 @@ More examples are provided in the examples/ directory of the Skogul source
 package.
 .SH SEE ALSO
 .sp
-\fI\%https://github.com/KristianLyng/skogul\fP
+\fI\%https://github.com/telenornms/skogul\fP
 .SH BUGS
 .sp
 Configuration parsing doesn\(aqt provide very helpful errors, and silently
