@@ -195,8 +195,8 @@ func TestFlattenMap(t *testing.T) {
 	}
 
 	// Expect data to still be accessible at its original location
-	if c.Metrics[0].Data[path] != extracted_value {
-		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Data[path])
+	if c.Metrics[0].Data[path] == nil {
+		t.Errorf(`Expected %s but got %s in %+v`, extracted_value, c.Metrics[0].Data[path], c.Metrics[0].Data)
 	}
 
 	// Expect data unrelated to the flattening to still be accessible
