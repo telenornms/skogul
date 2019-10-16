@@ -183,9 +183,10 @@ It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
 operator to avoid setting up feedback loops.
 
-The only parser available today is the JSON parser. Only two transformers
-exists, and to simplify configuration, the "templater" transformer does
-not have to be explicitly defined to be referenced.
+Two parsers exist: the JSON parser and a Juniper Telemetry protobuf parser.
+Only three transformers exists, and to simplify configuration, the
+"templater" transformer does not have to be explicitly defined to be
+referenced.
 
 The documentation for each sender and receiver also lists all options. In
 general, you do not need to specify all options.
@@ -290,16 +291,16 @@ There is only one type of handler. It accepts three arguments: A parser to
 parse data, a list of optional transformers, and the first sender that will
 receive the parsed container(s).
 
-Currently the only valid parser is "json" and only two transformers exist.
-The "templating" transformer does not need to be explicitly defined to be
-referenced, since it has no settings.
+The only valid parsers are "json" and "protobuf". Only three transformers
+exist. The "templating" transformer does not need to be explicitly defined
+to be referenced, since it has no settings.
 
 JSON parsing
 ------------
 
-If the "json" parser is used (Currently the only one available), data sent
-to Skogul will be parsed to fit the internal data model of Skogul. The JSON
-representation is roughly thus::
+If the "json" parser is used , data sent to Skogul will be parsed to fit
+the internal data model of Skogul. The JSON representation is roughly
+thus::
 
   {
     "template": { 
@@ -336,6 +337,87 @@ The primary difference between metadata and data is searchability,
 and it will depend on storage engines. Typically this means the name
 of a server is metadata, but the load average is data. Skogul itself
 does not much care.
+
+Juniper Telemetry Parsing
+-------------------------
+
+If the "protobuf" parser is used, the Juniper Telemetry-specific protobuf
+parser is used to decode streaming telemetry from Juniper devices. Details
+on how to configure your Juniper device for streaming telemetry is outside
+the scope of this document.
+
+Since streaming telemetry is sent on UDP, you need to also use the UDP
+receiver. An example configuration::
+
+	{
+	  "receivers": {
+	      "udp": {
+		"type": "udp",
+		"address": ":5015",
+		"handler": "protobuf"
+	      }
+	  },
+	  "handlers": {
+	    "protobuf": {
+	      "parser": "protobuf",
+	      "transformers": [],
+	      "sender": "print"
+	    }
+	  },
+	  "senders": {
+	    "print": {
+	      "type": "debug"
+	    }
+	  }
+	}
+
+Since the protobuf data is typically nested, you may need to use one or
+more transformer before passing it on. However, senders such as the
+debug-sender, HTTP-sender and SQL-sender can be used.
+
+An example that writes to postgres::
+
+	{
+	  "receivers": {
+	      "udp": {
+		"type": "udp",
+		"address": ":5015",
+		"handler": "protobuf"
+	      }
+	  },
+	  "handlers": {
+	    "protobuf": {
+	      "parser": "protobuf",
+	      "transformers": [],
+	      "sender": "batch"
+	    }
+	  },
+	  "senders": {
+	    "batch": {
+	      "type": "batch",
+	      "interval": "2s",
+	      "threshold": 1000,
+	      "next": "psql"
+	    },
+	    "psql": {
+	      "type": "sql",
+	      "driver": "postgres",
+	      "connstr": "user=skogul password=hunter2 database=telemetry sslmode=disable",
+	      "query": "INSERT INTO telemetry VALUES(${timestamp}, ${json.metadata}, ${json.data})"
+	    }
+	  }
+	}
+
+Minimalistic schema::
+
+			       Table "public.telemetry"
+	  Column  |           Type           | Collation | Nullable | Default
+	----------+--------------------------+-----------+----------+---------
+	 ts       | timestamp with time zone |           |          |
+	 metadata | jsonb                    |           |          |
+	 data     | jsonb                    |           |          |
+
+
 
 Templating
 ----------
