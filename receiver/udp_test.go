@@ -102,7 +102,7 @@ func init() {
 		fmt.Printf("Failed to load config: %v", err)
 		os.Exit(1)
 	}
-	pFile = readProtobufFile("../parser/protobuf-packet.bin")
+	pFile = readProtobufFile("../parser/testdata/protobuf-packet.bin")
 	var udpAddr1 *net.UDPAddr
 	var udpAddr2 *net.UDPAddr
 	udpAddr1, err = net.ResolveUDPAddr("udp", "[::1]:1939")
