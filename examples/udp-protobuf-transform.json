@@ -9,15 +9,18 @@
   "handlers": {
     "protobuf": {
       "parser": "protobuf",
-      "transformers": ["metadata"],
+      "transformers": ["split", "extract"],
       "sender": "print"
     }
   },
   "transformers": {
-    "metadata": {
+    "split": {
+      "type": "split",
+      "field": ["interfaceExp_stats"]
+    },
+    "extract": {
       "type": "metadata",
-      "extractFromData": ["if_name"],
-      "split": ["interfaceExp_stats"]
+      "extractFromData": ["if_name"]
     }
   },
   "senders": {
