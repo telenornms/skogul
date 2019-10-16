@@ -32,6 +32,7 @@ import (
 // Split is the configuration for the split transformer
 type Split struct {
 	Field []string `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
+	Fail  bool     `doc:"Error the whole container if the split fails"`
 }
 
 // Transform splits the thing
@@ -46,8 +47,7 @@ func (split *Split) Transform(c *skogul.Container) error {
 		} else {
 			fmt.Println("failed to split metrics")
 
-			// dont hard fail metrics unless we really want to
-			if false {
+			if split.Fail {
 				return fmt.Errorf("failed to split metrics: %v", err)
 			}
 		}
