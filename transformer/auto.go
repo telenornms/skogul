@@ -51,4 +51,10 @@ func init() {
 		Alloc:   func() skogul.Transformer { return &Data{} },
 		Help:    "Enforces custom-rules for data fields of metrics.",
 	})
+	Add(Transformer{
+		Name:    "split",
+		Aliases: []string{},
+		Alloc:   func() skogul.Transformer { return &Split{} },
+		Help:    "Splits a metric into multiple metrics based on a field.",
+	})
 }

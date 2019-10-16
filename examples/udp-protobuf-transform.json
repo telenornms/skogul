@@ -1,0 +1,32 @@
+{
+  "receivers": {
+    "udp": {
+      "type": "udp",
+      "address": "[::1]:5015",
+      "handler": "protobuf"
+    }
+  },
+  "handlers": {
+    "protobuf": {
+      "parser": "protobuf",
+      "transformers": ["split", "extract"],
+      "sender": "print"
+    }
+  },
+  "transformers": {
+    "split": {
+      "type": "split",
+      "field": ["interfaceExp_stats"]
+    },
+    "extract": {
+      "type": "metadata",
+      "extractFromData": ["if_name"]
+    }
+  },
+  "senders": {
+    "print": {
+      "type": "debug",
+      "prefix": "DEBUG"
+    }
+  }
+}

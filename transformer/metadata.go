@@ -25,16 +25,18 @@ package transformer
 
 import (
 	"fmt"
+
 	"github.com/KristianLyng/skogul"
 )
 
 // Metadata enforces a set of rules on metadata in all metrics, potentially
 // changing the metric metadata.
 type Metadata struct {
-	Set     map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Require []string               `doc:"Require the pressence of these fields."`
-	Remove  []string               `doc:"Remove these metadata fields."`
-	Ban     []string               `doc:"Fail if any of these fields are present"`
+	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
+	Require         []string               `doc:"Require the pressence of these fields."`
+	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata."`
+	Remove          []string               `doc:"Remove these metadata fields."`
+	Ban             []string               `doc:"Fail if any of these fields are present"`
 }
 
 // Transform enforces the Metadata rules
@@ -50,6 +52,10 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			if c.Metrics[mi].Metadata == nil || c.Metrics[mi].Metadata[value] == nil {
 				return skogul.Error{Source: "metadata transformer", Reason: fmt.Sprintf("missing required metadata field %s", value)}
 			}
+		}
+		for _, extract := range meta.ExtractFromData {
+
+			c.Metrics[mi].Metadata[extract] = c.Metrics[mi].Data[extract]
 		}
 		for _, value := range meta.Remove {
 			if c.Metrics[mi].Metadata == nil {
