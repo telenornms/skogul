@@ -35,7 +35,7 @@ type Metadata struct {
 	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
 	Split           []string               `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
 	Require         []string               `doc:"Require the pressence of these fields."`
-	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. The field will be removed from Data."`
+	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata."`
 	Remove          []string               `doc:"Remove these metadata fields."`
 	Ban             []string               `doc:"Fail if any of these fields are present"`
 }
