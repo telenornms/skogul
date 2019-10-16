@@ -100,8 +100,22 @@ func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 			}
 
 			nestedObj = make(map[string]interface{})
-			for key, val := range nestedObjArray {
-				nestedObj[fmt.Sprintf("%d", key)] = val
+			for i, val := range nestedObjArray {
+				fmt.Printf("writing arr  i '%s' to new: %d = %+v\n", fmt.Sprintf("%d", i), i, val)
+
+				obj, isMap := val.(map[string]interface{})
+
+				// If the cast is successful, the array of items is a list of map[string]interface{},
+				// and we want to extract each key to its own key in the root, prefixed with the path
+				// Otherwise, the array is a list of a primitive construct and we
+				// simply prefix the key with the array index
+				if isMap {
+					for key, val := range obj {
+						nestedObj[fmt.Sprintf("%d__%s", i, key)] = val
+					}
+				} else {
+					nestedObj[fmt.Sprintf("%d", i)] = val
+				}
 			}
 		}
 
