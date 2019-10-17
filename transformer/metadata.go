@@ -79,7 +79,7 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 	newPath := nestedPath[0]
 
-	if len(nestedPath) > 0 {
+	if len(nestedPath) > 1 {
 		for _, p := range nestedPath[1:] {
 			newPath = fmt.Sprintf("%s__%s", newPath, p)
 		}
