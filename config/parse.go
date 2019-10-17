@@ -290,8 +290,6 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		return nil, err
 	}
 
-	missingConfigurationProperties := make([][]string, 0)
-
 	for idx, h := range c.Handlers {
 		log.WithField("handler", idx).Debug("Verifying handler configuration")
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
@@ -299,10 +297,6 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.TypeOf(h.Handler)
-		configErrors := findMissingRequiredConfigProps(jsonData, "handlers", idx, configStruct)
-		if len(configErrors) > 0 {
-			missingConfigurationProperties = append(missingConfigurationProperties, configErrors)
-		}
 		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
@@ -312,10 +306,6 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.ValueOf(s.Sender).Elem().Type()
-		configErrors := findMissingRequiredConfigProps(jsonData, "senders", idx, configStruct)
-		if len(configErrors) > 0 {
-			missingConfigurationProperties = append(missingConfigurationProperties, configErrors)
-		}
 		verifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
@@ -325,17 +315,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.ValueOf(r.Receiver).Elem().Type()
-		configErrors := findMissingRequiredConfigProps(jsonData, "receivers", idx, configStruct)
-		if len(configErrors) > 0 {
-			missingConfigurationProperties = append(missingConfigurationProperties, configErrors)
-		}
 		verifyOnlyRequiredConfigProps(jsonData, "receivers", idx, configStruct)
-	}
-
-	failOnConfigError := true
-
-	if failOnConfigError && len(missingConfigurationProperties) > 0 {
-		return nil, skogul.Error{Reason: "Missing required configuration parameters"}
 	}
 
 	return c, nil
@@ -379,24 +359,6 @@ func findFieldsOfStruct(T reflect.Type) []string {
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
 	// log.Debugf("Fetching config section '%s' for '%s' from %v", section, family, rawConfig)
 	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
-}
-
-func findMissingRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
-	requiredProps := findFieldsOfStruct(T)
-	log.Debugf("Required fields: %v", requiredProps)
-
-	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
-
-	missingProps := make([]string, 0)
-
-	for _, requiredProp := range requiredProps {
-		if relevantConfig[strings.ToLower(requiredProp)] == nil {
-			log.WithField("property", strings.ToLower(requiredProp)).Error("Missing required configuration property")
-			missingProps = append(missingProps, requiredProp)
-		}
-	}
-
-	return missingProps
 }
 
 func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) {
