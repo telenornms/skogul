@@ -196,7 +196,7 @@ func Bytes(b []byte) (*Config, error) {
 
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
-		log.WithError(err).Fatal("The JSON configuration is improperly formatted JSON")
+		log.WithError(err).Fatal("Failed to unmarshal the configuration into Skogul.")
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
