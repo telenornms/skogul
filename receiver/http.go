@@ -139,9 +139,7 @@ func (htt *HTTP) Start() error {
 		}).Debug("Adding handler")
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt})
 	}
-	if htt.Address == "" {
-		log.Printf("HTTP: No listen-address specified. Using go default (probably :http or :https?)")
-	}
+
 	server.Addr = htt.Address
 	if htt.Certfile != "" {
 		log.WithField("address", htt.Address).Info("Starting http receiver with TLS")
@@ -153,10 +151,16 @@ func (htt *HTTP) Start() error {
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
 
-// Verify ensures at least one handler exists for the HTTP receiver.
+// Verify verifies the configuration for the HTTP receiver
 func (htt *HTTP) Verify() error {
 	if htt.Handlers == nil || len(htt.Handlers) == 0 {
+		log.Error("No handlers specified. Need at least one.")
 		return skogul.Error{Source: "http receiver", Reason: "No handlers specified. Need at least one."}
 	}
+
+	if htt.Address == "" {
+		log.Warn("Missing listen address for http receiver, using Go default")
+	}
+
 	return nil
 }
