@@ -145,7 +145,7 @@ func (htt *HTTP) Start() error {
 		log.WithField("address", htt.Address).Info("Starting http receiver with TLS")
 		log.Fatal(server.ListenAndServeTLS(htt.Certfile, htt.Keyfile))
 	} else {
-		log.WithField("address", htt.Address).Debug("Starting INSECURE http receiver (no TLS)")
+		log.WithField("address", htt.Address).Info("Starting INSECURE http receiver (no TLS)")
 		log.Fatal(server.ListenAndServe())
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
