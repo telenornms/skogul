@@ -361,11 +361,13 @@ func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
 }
 
-func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) {
+func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
 	requiredProps := findFieldsOfStruct(T)
 	log.Debugf("Required fields: %v", requiredProps)
 
 	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
+
+	superfluousProperties := make([]string, 0)
 
 	for prop := range relevantConfig {
 		propertyDefined := false
@@ -382,7 +384,10 @@ func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, ha
 			}
 		}
 		if !propertyDefined {
+			superfluousProperties = append(superfluousProperties, prop)
 			log.WithField("property", prop).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
 		}
 	}
+
+	return superfluousProperties
 }
