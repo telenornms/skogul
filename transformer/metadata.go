@@ -91,17 +91,14 @@ func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 		nestedObj, ok := obj[nestedPath[len(nestedPath)-1]].(map[string]interface{})
 
 		if !ok {
-			fmt.Println("Failed to cast to map[str]intf, trying []interface{} instead")
 
 			nestedObjArray, ok := obj[nestedPath[len(nestedPath)-1]].([]interface{})
 			if !ok {
-				fmt.Println("Failed to cast to []interface{}, aborting transform")
 				return skogul.Error{Reason: "Failed cast"}
 			}
 
 			nestedObj = make(map[string]interface{})
 			for i, val := range nestedObjArray {
-				fmt.Printf("writing arr  i '%s' to new: %d = %+v\n", fmt.Sprintf("%d", i), i, val)
 
 				obj, isMap := val.(map[string]interface{})
 
@@ -123,7 +120,6 @@ func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 			metric.Data[fmt.Sprintf("%s__%s", newPath, key)] = val
 		}
 	} else {
-		fmt.Printf("Tried to extract nested object but failed: %v\n", err)
 		return err
 	}
 
