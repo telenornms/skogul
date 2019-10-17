@@ -30,13 +30,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"sort"
 	"strings"
 	"sync"
 
-	log2 "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
@@ -711,7 +710,7 @@ func help() {
 }
 
 func main() {
-	log2.SetLevel(log2.WarnLevel)
+	log.SetLevel(log.WarnLevel)
 
 	flag.Parse()
 	if *fhelp {
@@ -737,7 +736,7 @@ func main() {
 		fmt.Println(string(out))
 		os.Exit(0)
 	}
-	log2.Info("Starting skogul")
+	log.Info("Starting skogul")
 
 	var exitInt = 0
 	var wg sync.WaitGroup
