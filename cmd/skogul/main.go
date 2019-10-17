@@ -36,6 +36,8 @@ import (
 	"strings"
 	"sync"
 
+	log2 "github.com/sirupsen/logrus"
+
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
@@ -709,6 +711,8 @@ func help() {
 }
 
 func main() {
+	log2.SetLevel(log2.WarnLevel)
+
 	flag.Parse()
 	if *fhelp {
 		help()
@@ -733,6 +737,7 @@ func main() {
 		fmt.Println(string(out))
 		os.Exit(0)
 	}
+	log2.Info("Starting skogul")
 
 	var exitInt = 0
 	var wg sync.WaitGroup

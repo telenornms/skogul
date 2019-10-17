@@ -30,6 +30,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"reflect"
+	"strings"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/parser"
@@ -184,12 +188,19 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 // globally (unfortunately...), then calling secondPass(), which resolves
 // references and does a final validation.
 func Bytes(b []byte) (*Config, error) {
+	var jsonData map[string]interface{}
+
+	if err := json.Unmarshal(b, &jsonData); err != nil {
+		log.WithError(err).Fatal("The JSON configuration is improperly formatted JSON")
+	}
+
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
+		log.WithError(err).Fatal("Failed to unmarshal the configuration into Skogul.")
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
-	return secondPass(&c)
+	return secondPass(&c, &jsonData)
 }
 
 // File opens a config file and parses it, then returns the valid
@@ -197,6 +208,7 @@ func Bytes(b []byte) (*Config, error) {
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
+		log.WithError(err).Fatal("Failed to read config file")
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
 	return Bytes(dat)
@@ -207,7 +219,10 @@ func File(f string) (*Config, error) {
 // completion.
 func resolveSenders(c *Config) error {
 	for _, s := range skogul.SenderMap {
+		log.WithField("sender", s.Name).Debug("Resolving sender")
+
 		if c.Senders[s.Name] == nil {
+			log.WithField("sender", s.Name).Error("Unresolved sender reference")
 			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
 		}
 		s.S = c.Senders[s.Name].Sender
@@ -224,22 +239,32 @@ func resolveSenders(c *Config) error {
 // It then zeroes the skogul.HandlerMap
 func resolveHandlers(c *Config) error {
 	for _, h := range c.Handlers {
+		logger := log.WithField("parser", h.Parser)
+
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
 		if h.Parser == "protobuf" {
+			logger.Debug("Using protobuf parser")
 			h.Handler.Parser = parser.ProtoBuf{}
 		} else if h.Parser == "json" || h.Parser == "" {
+			logger.Debug("Using JSON parser")
 			h.Handler.Parser = parser.JSON{}
 		} else {
+			logger.Error("Unknown parser")
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
 		}
 		for _, t := range h.Transformers {
+			logger = logger.WithField("transformer", t)
+
 			var nextT skogul.Transformer
 			if c.Transformers[t] != nil {
+				logger.Debug("Using predefined transformer")
 				nextT = c.Transformers[t].Transformer
 			} else if t == "templater" {
+				logger.Debug("Using templating transformer")
 				nextT = transformer.Templater{}
 			} else {
+				logger.Error("Unknown transformer")
 				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
 			}
 			h.Handler.Transformers = append(h.Handler.Transformers, nextT)
@@ -257,28 +282,42 @@ func resolveHandlers(c *Config) error {
 
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
-func secondPass(c *Config) (*Config, error) {
+func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 	if err := resolveSenders(c); err != nil {
 		return nil, err
 	}
 	if err := resolveHandlers(c); err != nil {
 		return nil, err
 	}
+
 	for idx, h := range c.Handlers {
+		log.WithField("handler", idx).Debug("Verifying handler configuration")
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
 			return nil, err
 		}
+
+		configStruct := reflect.TypeOf(h.Handler)
+		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
+		log.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
 			return nil, err
 		}
+
+		configStruct := reflect.ValueOf(s.Sender).Elem().Type()
+		verifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
+		log.WithField("receiver", idx).Debug("Verifying receiver configuration")
 		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
 			return nil, err
 		}
+
+		configStruct := reflect.ValueOf(r.Receiver).Elem().Type()
+		verifyOnlyRequiredConfigProps(jsonData, "receivers", idx, configStruct)
 	}
+
 	return c, nil
 }
 
@@ -291,7 +330,64 @@ func verifyItem(family string, name string, item interface{}) error {
 	}
 	err := i.Verify()
 	if err != nil {
+		log.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
 	}
 	return nil
+}
+
+func findFieldsOfStruct(T reflect.Type) []string {
+	log.WithField("type", T.Name()).Debug("Finding defined fields for type")
+	requiredProps := make([]string, 0)
+	switch T.Kind() {
+	case reflect.Struct:
+		for i := 0; i < T.NumField(); i++ {
+			field := T.Field(i)
+			jsonTag := field.Tag.Get("json")
+
+			property := field.Name
+			if jsonTag != "" {
+				property = jsonTag
+			}
+			requiredProps = append(requiredProps, property)
+		}
+	}
+
+	return requiredProps
+}
+
+func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
+	// log.Debugf("Fetching config section '%s' for '%s' from %v", section, family, rawConfig)
+	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
+}
+
+func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
+	requiredProps := findFieldsOfStruct(T)
+	log.Debugf("Required fields: %v", requiredProps)
+
+	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
+
+	superfluousProperties := make([]string, 0)
+
+	for prop := range relevantConfig {
+		propertyDefined := false
+
+		if prop == "type" {
+			// Skip the type specifying what type this is
+			continue
+		}
+
+		for _, requiredProp := range requiredProps {
+			if strings.ToLower(prop) == strings.ToLower(requiredProp) {
+				propertyDefined = true
+				break
+			}
+		}
+		if !propertyDefined {
+			superfluousProperties = append(superfluousProperties, prop)
+			log.WithField("property", prop).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
+		}
+	}
+
+	return superfluousProperties
 }

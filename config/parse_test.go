@@ -1,9 +1,12 @@
 package config
 
 import (
-	"github.com/telenornms/skogul"
+	"encoding/json"
+	"reflect"
 	"testing"
-	//"fmt"
+	
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/receiver"
 )
 
 func TestFile(t *testing.T) {
@@ -108,5 +111,34 @@ func TestHelpSender(t *testing.T) {
 	_, err := HelpSender("sql")
 	if err != nil {
 		t.Errorf("HelpSender(\"sql\") didn't work: %v", err)
+	}
+}
+
+func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
+	rawConfig := []byte(`{"receivers": {
+		"foo": {
+		  "type": "udp",
+		  "address": "[::1]:5015",
+		  "superfluousField": "this is not needed"
+		}
+	  }
+	}`)
+
+	var config map[string]interface{}
+	err := json.Unmarshal(rawConfig, &config)
+
+	if err != nil {
+		t.Error("Failed to parse config")
+	}
+
+	configStruct := reflect.TypeOf(receiver.UDP{})
+	superfluousProperties := verifyOnlyRequiredConfigProps(&config, "receivers", "foo", configStruct)
+
+	if len(superfluousProperties) != 1 {
+		t.Errorf("Expected 1 superfluous property but got %d", len(superfluousProperties))
+	}
+
+	if superfluousProperties[0] != "superfluousField" {
+		t.Errorf("Expected to find '%s' in the superfluous fields list", "superfluousField")
 	}
 }

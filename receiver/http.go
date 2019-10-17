@@ -27,8 +27,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -85,7 +86,11 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 	b := make([]byte, r.ContentLength)
 
 	if n, err := io.ReadFull(r.Body, b); err != nil {
-		log.Printf("Read error from client %v, read %d bytes: %s", r.RemoteAddr, n, err)
+		log.WithFields(log.Fields{
+			"address":  r.RemoteAddr,
+			"error":    err,
+			"numbytes": n,
+		}).Error("Read error from client")
 		return 400, skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
 	}
 
@@ -116,7 +121,7 @@ func (htt *HTTP) Start() error {
 	serveMux := http.NewServeMux()
 	server.Handler = serveMux
 	if htt.Username != "" {
-		log.Printf("Enforcing basic authentication for user `%s'", htt.Username)
+		log.WithField("username", htt.Username).Debug("Enforcing basic authentication")
 		if htt.Password == "" {
 			log.Fatal("HTTP receiver has a Username provided, but not a password? Probably a mistake.")
 		}
@@ -128,27 +133,34 @@ func (htt *HTTP) Start() error {
 		htt.auth = false
 	}
 	for idx, h := range htt.Handlers {
-		log.Printf("Adding handler %v -> %v", idx, h.Name)
+		log.WithFields(log.Fields{
+			"configuredHandler": idx,
+			"selectedHandler":   h.Name,
+		}).Debug("Adding handler")
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt})
 	}
-	if htt.Address == "" {
-		log.Printf("HTTP: No listen-address specified. Using go default (probably :http or :https?)")
-	}
+
 	server.Addr = htt.Address
 	if htt.Certfile != "" {
-		log.Printf("Starting http receiver with TLS at %s", htt.Address)
+		log.WithField("address", htt.Address).Info("Starting http receiver with TLS")
 		log.Fatal(server.ListenAndServeTLS(htt.Certfile, htt.Keyfile))
 	} else {
-		log.Printf("Starting INSECURE http receiver (no TLS) at %s", htt.Address)
+		log.WithField("address", htt.Address).Info("Starting INSECURE http receiver (no TLS)")
 		log.Fatal(server.ListenAndServe())
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
 
-// Verify ensures at least one handler exists for the HTTP receiver.
+// Verify verifies the configuration for the HTTP receiver
 func (htt *HTTP) Verify() error {
 	if htt.Handlers == nil || len(htt.Handlers) == 0 {
+		log.Error("No handlers specified. Need at least one.")
 		return skogul.Error{Source: "http receiver", Reason: "No handlers specified. Need at least one."}
 	}
+
+	if htt.Address == "" {
+		log.Warn("Missing listen address for http receiver, using Go default")
+	}
+
 	return nil
 }
