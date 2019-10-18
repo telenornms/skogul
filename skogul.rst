@@ -653,6 +653,9 @@ Settings:
 ``ban - []string``
 	Fail if any of these data fields are present
 
+``flatten - [][]string``
+	Flatten nested structures down to the root level
+
 ``remove - []string``
 	Remove these data fields.
 

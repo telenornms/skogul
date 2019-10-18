@@ -24,7 +24,8 @@
 package sender_test
 
 import (
-	"github.com/KristianLyng/skogul/config"
+	log "github.com/sirupsen/logrus"
+	"github.com/telenornms/skogul/config"
 	"testing"
 )
 
@@ -57,6 +58,7 @@ func TestInfluxDB(t *testing.T) {
 }
 
 func TestInfluxDB_fail(t *testing.T) {
+	log.SetLevel(log.TraceLevel)
 	if _, err := config.Bytes([]byte(`
 {
    "senders": {

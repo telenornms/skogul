@@ -64,7 +64,7 @@ func TestProtoBuf(t *testing.T) {
 }
 
 func BenchmarkProtoBufParse(b *testing.B) {
-	by := readProtobufFile(b, "protobuf-packet.bin")
+	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
 	x := ProtoBuf{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)

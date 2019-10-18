@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"testing"
-	
+
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/receiver"
 )

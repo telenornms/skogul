@@ -189,14 +189,14 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 // references and does a final validation.
 func Bytes(b []byte) (*Config, error) {
 	var jsonData map[string]interface{}
-
 	if err := json.Unmarshal(b, &jsonData); err != nil {
-		log.WithError(err).Fatal("The JSON configuration is improperly formatted JSON")
+		log.WithError(err).Error("The JSON configuration is improperly formatted JSON")
+		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
-		log.WithError(err).Fatal("Failed to unmarshal the configuration into Skogul.")
+		log.WithError(err).Error("Failed to unmarshal the configuration into Skogul.")
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
@@ -326,6 +326,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 func verifyItem(family string, name string, item interface{}) error {
 	i, ok := item.(skogul.Verifier)
 	if !ok {
+		log.WithFields(log.Fields{"family": family, "name": name}).Trace("No verifier found")
 		return nil
 	}
 	err := i.Verify()
@@ -333,6 +334,7 @@ func verifyItem(family string, name string, item interface{}) error {
 		log.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
 	}
+	log.WithFields(log.Fields{"family": family, "name": name}).Trace("Verified OK")
 	return nil
 }
 
