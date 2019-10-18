@@ -122,7 +122,7 @@ func init() {
 		Name:    "influx",
 		Aliases: []string{"influxdb"},
 		Alloc:   func() skogul.Sender { return &InfluxDB{} },
-		Help:    "Send to a InfluxDB HTTP endpoint.",
+		Help:    "Send to a InfluxDB HTTP endpoint. The sender can either always send the data to a single measurement, send it to a measurement extracted from the metadata of a metric, or a combination where the \"measurement\" serves as a default measurement to use if the metric doesn't have the key presented in \"measurementfrommetadata\".",
 	})
 	Add(Sender{
 		Name:  "log",
