@@ -32,7 +32,7 @@ import (
 // Split is the configuration for the split transformer
 type Split struct {
 	Field []string `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
-	Fail  bool     `doc:"Error the whole container if the split fails"`
+	Fail  bool     `doc:"Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working."`
 }
 
 // Transform splits the thing
@@ -44,12 +44,8 @@ func (split *Split) Transform(c *skogul.Container) error {
 		splitMetrics, err := split.splitMetricsByObjectKey(&metrics)
 		if err == nil {
 			c.Metrics = splitMetrics
-		} else {
-			fmt.Println("failed to split metrics")
-
-			if split.Fail {
-				return fmt.Errorf("failed to split metrics: %v", err)
-			}
+		} else if split.Fail {
+			return fmt.Errorf("failed to split metrics: %v", err)
 		}
 	}
 
@@ -65,6 +61,9 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 		splitObj, err := skogul.ExtractNestedObject(origMetrics[mi].Data, split.Field)
 
 		if err != nil {
+			if !split.Fail {
+				continue
+			}
 			return nil, fmt.Errorf("Failed to extract nested obj '%v' from '%v' to string/interface map", split.Field, origMetrics[mi].Data)
 		}
 
