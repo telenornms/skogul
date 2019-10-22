@@ -180,6 +180,52 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+func printSyntaxError(b []byte, offset int, text string) {
+	start := offset
+	start2 := 0
+	lines := 0
+	// Start by finding where we want to start. Work from offset and
+	// decrement. start will represent "print start", start2 will
+	// represent the start of the problematic line
+	for i := offset; i >= 0 && lines < 3; i-- {
+		start = i
+		if len(b) <= i || b[i] == '\n' {
+			if lines == 0 || (lines == 1 && start2 == offset) {
+				start2 = start
+			}
+			lines++
+		}
+	}
+	end := offset
+	end2 := offset
+	lines = 0
+	// Next do things the other way around. End will be the actual end
+	// of what to display, while end2 will be the first line after
+	// "start2", e.g., the beginning of the line _after_ the
+	// problematic one.
+	for i := offset; i <= len(b) && lines < 3; i++ {
+		end = i
+		if i == len(b) || b[i] == '\n' {
+			if lines == 0 {
+				end2 = end
+			}
+			lines++
+		}
+	}
+	fmt.Printf("Unable to parse JSON configuration at byte offset %d.\nError: %s\nContext:\n", offset, text)
+	fmt.Println(string(b[start:end2]))
+	for i := start2; i < (offset - 2); i++ {
+		fmt.Print("-")
+	}
+	// We found the crappy part!
+	fmt.Println("💩")
+	end2++
+	if end2 > len(b) {
+		end2 = len(b)
+	}
+	fmt.Println(string(b[end2:end]))
+}
+
 // Bytes parses json in the provided byte array and returns a
 // configuration.
 //
@@ -190,13 +236,15 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 func Bytes(b []byte) (*Config, error) {
 	var jsonData map[string]interface{}
 	if err := json.Unmarshal(b, &jsonData); err != nil {
-		log.WithError(err).Error("The JSON configuration is improperly formatted JSON")
+		jerr, ok := err.(*json.SyntaxError)
+		if ok {
+			printSyntaxError(b, int(jerr.Offset), jerr.Error())
+		}
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
-		log.WithError(err).Error("Failed to unmarshal the configuration into Skogul.")
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
