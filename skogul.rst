@@ -322,10 +322,13 @@ Settings:
 	Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited.
 
 ``idleconnsperhost - int``
-	Mas idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU.
+	Max idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU.
 
 ``insecure - bool``
 	Disable TLS certificate validation.
+
+``rootca - string``
+	Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults.
 
 ``timeout - Duration``
 	HTTP timeout.

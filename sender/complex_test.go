@@ -26,6 +26,7 @@ package sender_test
 import (
 	"fmt"
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
@@ -71,5 +72,55 @@ func TestHttp_stack(t *testing.T) {
 	err := hs2.Send(&validContainer)
 	if err == nil {
 		t.Errorf("hs2.Send() to invalid url did not fail.")
+	}
+}
+
+func TestHttp_rootCa(t *testing.T) {
+	_, err := config.Bytes([]byte(`
+{
+   "senders": {
+     "ok1": {
+       "type": "http",
+       "url": "https://[::1]/write?db=foo",
+       "rootca": "testdata/cacert-snakeoil.pem"
+     }
+   }
+}`))
+	if err != nil {
+		t.Errorf("Failed to load config for http test: %v", err)
+		return
+	}
+}
+
+func TestHttp_rootCa_bad1(t *testing.T) {
+	_, err := config.Bytes([]byte(`
+{
+   "senders": {
+     "bad1": {
+       "type": "http",
+       "url": "https://[::1]/write?db=foo",
+       "rootca": "/dev/null"
+     }
+   }
+}`))
+	if err == nil {
+		t.Errorf("Successfully read invalid rootca /dev/null !")
+		return
+	}
+}
+func TestHttp_rootCa_bad2(t *testing.T) {
+	_, err := config.Bytes([]byte(`
+{
+   "senders": {
+     "bad2": {
+       "type": "http",
+       "url": "https://[::1]/write?db=foo",
+       "rootca": "/dev/no/proc/such/sys/file/run/lol/kek/why/are/you/still/reading/this"
+     }
+   }
+}`))
+	if err == nil {
+		t.Errorf("Successfully read invalid rootca from non-existent file!")
+		return
 	}
 }
