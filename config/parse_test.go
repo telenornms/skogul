@@ -114,6 +114,139 @@ func TestHelpSender(t *testing.T) {
 	}
 }
 
+func testBadConf(t *testing.T, badData string) {
+	t.Helper()
+	_, err := Bytes([]byte(badData))
+	if err == nil {
+		t.Errorf("Bytes() was ok, despite bad data")
+	}
+}
+
+// Useful for visual confirmation - e.g. - check that the arrow points at
+// the right thing. Important to test errors early in a config, in the
+// middle and towards the end.
+func Test_syntaxError(t *testing.T) {
+	testBadConf(t,
+		`{
+  "senders": {
+    "tnet_alarms":: {
+      "type": "sql",
+      "Driver": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INERT INTO tnet_Alarms values(${foo})"
+    }
+  }
+}`)
+
+	testBadConf(t,
+		`x{
+  "senders": {
+    "tnet_alarms":: {
+      "type": "sql",
+      "Driver": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INERT INTO tnet_Alarms values(${foo})"
+    }
+  }
+}`)
+	testBadConf(t,
+		`{
+  "senders": {
+    "tnet_alarms": {
+      "type": "sql",
+      "Driver": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INERT INTO tnet_Alarms values(${foo})"
+    },
+    "mysql_log": {
+      "type": "sql",
+      "Driver": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INSERT INTO liksomlog VALUES(${timestmap.timestamp},${metadata.name},${key})"
+    },
+    "forward": {
+	    "type": "http",
+	    "url": "http://localhost:8888"
+    },
+    "duplicate": {
+	    "type": "dupe",
+	    "next": ["forward","mysql_log","tnet_alarms"]
+    },
+    "batch": {
+      "type" "batch",
+      "next": "duplicate",
+      "interval": "5s"
+    },
+    "det": {
+	    "type": "detacher",
+	    "next": "batch"
+    }
+  },
+  "handlers": {
+    "plain": {
+      "parser": "json",
+      "sender": "batch",
+      "transformers": []
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+	      "/": "plain"
+      }
+    }
+  }
+}`)
+	testBadConf(t,
+		`{
+  "senders": {
+    "tnet_alarms": {
+      "type": "sql",
+      "Driver": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INERT INTO tnet_Alarms values(${foo})"
+    },
+    "mysql_log": {
+      "type": "sql",
+      "Driver": "mysql",
+      "ConnStr": "root:lol@/mydb",
+      "Query": "INSERT INTO liksomlog VALUES(${timestmap.timestamp},${metadata.name},${key})"
+    },
+    "forward": {
+	    "type": "http",
+	    "url": "http://localhost:8888"
+    },
+    "duplicate": {
+	    "type": "dupe",
+	    "next": ["forward","mysql_log","tnet_alarms"]
+    },
+    "batch": {
+      "type": "batch",
+      "next": "duplicate",
+      "interval": "5s"
+    },
+    "det": {
+	    "type": "detacher",
+	    "next": "batch"
+    }
+  },
+  "handlers": {
+    "plain": {
+      "parser": "json",
+      "sender": "batch",
+      "transformers": []
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+	      "/": "plain"
+      }
+    }
+  }`)
+}
 func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	rawConfig := []byte(`{"receivers": {
 		"foo": {
