@@ -351,10 +351,13 @@ Settings:
 Max concurrent connections per host. Should reflect ulimit \-n. Defaults to unlimited.
 .TP
 .B \fBidleconnsperhost \- int\fP
-Mas idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU.
+Max idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU.
 .TP
 .B \fBinsecure \- bool\fP
 Disable TLS certificate validation.
+.TP
+.B \fBrootca \- string\fP
+Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults.
 .TP
 .B \fBtimeout \- Duration\fP
 HTTP timeout.
