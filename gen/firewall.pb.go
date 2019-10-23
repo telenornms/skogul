@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -32,16 +34,17 @@ func (m *Firewall) Reset()         { *m = Firewall{} }
 func (m *Firewall) String() string { return proto.CompactTextString(m) }
 func (*Firewall) ProtoMessage()    {}
 func (*Firewall) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{0}
+	return fileDescriptor_00e54131a1710129, []int{0}
 }
+
 func (m *Firewall) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Firewall.Unmarshal(m, b)
 }
 func (m *Firewall) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Firewall.Marshal(b, m, deterministic)
 }
-func (dst *Firewall) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Firewall.Merge(dst, src)
+func (m *Firewall) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Firewall.Merge(m, src)
 }
 func (m *Firewall) XXX_Size() int {
 	return xxx_messageInfo_Firewall.Size(m)
@@ -81,16 +84,17 @@ func (m *FirewallStats) Reset()         { *m = FirewallStats{} }
 func (m *FirewallStats) String() string { return proto.CompactTextString(m) }
 func (*FirewallStats) ProtoMessage()    {}
 func (*FirewallStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{1}
+	return fileDescriptor_00e54131a1710129, []int{1}
 }
+
 func (m *FirewallStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FirewallStats.Unmarshal(m, b)
 }
 func (m *FirewallStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FirewallStats.Marshal(b, m, deterministic)
 }
-func (dst *FirewallStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FirewallStats.Merge(dst, src)
+func (m *FirewallStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FirewallStats.Merge(m, src)
 }
 func (m *FirewallStats) XXX_Size() int {
 	return xxx_messageInfo_FirewallStats.Size(m)
@@ -163,16 +167,17 @@ func (m *MemoryUsage) Reset()         { *m = MemoryUsage{} }
 func (m *MemoryUsage) String() string { return proto.CompactTextString(m) }
 func (*MemoryUsage) ProtoMessage()    {}
 func (*MemoryUsage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{2}
+	return fileDescriptor_00e54131a1710129, []int{2}
 }
+
 func (m *MemoryUsage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MemoryUsage.Unmarshal(m, b)
 }
 func (m *MemoryUsage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MemoryUsage.Marshal(b, m, deterministic)
 }
-func (dst *MemoryUsage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MemoryUsage.Merge(dst, src)
+func (m *MemoryUsage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MemoryUsage.Merge(m, src)
 }
 func (m *MemoryUsage) XXX_Size() int {
 	return xxx_messageInfo_MemoryUsage.Size(m)
@@ -216,16 +221,17 @@ func (m *CounterStats) Reset()         { *m = CounterStats{} }
 func (m *CounterStats) String() string { return proto.CompactTextString(m) }
 func (*CounterStats) ProtoMessage()    {}
 func (*CounterStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{3}
+	return fileDescriptor_00e54131a1710129, []int{3}
 }
+
 func (m *CounterStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CounterStats.Unmarshal(m, b)
 }
 func (m *CounterStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CounterStats.Marshal(b, m, deterministic)
 }
-func (dst *CounterStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CounterStats.Merge(dst, src)
+func (m *CounterStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CounterStats.Merge(m, src)
 }
 func (m *CounterStats) XXX_Size() int {
 	return xxx_messageInfo_CounterStats.Size(m)
@@ -278,16 +284,17 @@ func (m *PolicerStats) Reset()         { *m = PolicerStats{} }
 func (m *PolicerStats) String() string { return proto.CompactTextString(m) }
 func (*PolicerStats) ProtoMessage()    {}
 func (*PolicerStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{4}
+	return fileDescriptor_00e54131a1710129, []int{4}
 }
+
 func (m *PolicerStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PolicerStats.Unmarshal(m, b)
 }
 func (m *PolicerStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PolicerStats.Marshal(b, m, deterministic)
 }
-func (dst *PolicerStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PolicerStats.Merge(dst, src)
+func (m *PolicerStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PolicerStats.Merge(m, src)
 }
 func (m *PolicerStats) XXX_Size() int {
 	return xxx_messageInfo_PolicerStats.Size(m)
@@ -347,16 +354,17 @@ func (m *ExtendedPolicerStats) Reset()         { *m = ExtendedPolicerStats{} }
 func (m *ExtendedPolicerStats) String() string { return proto.CompactTextString(m) }
 func (*ExtendedPolicerStats) ProtoMessage()    {}
 func (*ExtendedPolicerStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{5}
+	return fileDescriptor_00e54131a1710129, []int{5}
 }
+
 func (m *ExtendedPolicerStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ExtendedPolicerStats.Unmarshal(m, b)
 }
 func (m *ExtendedPolicerStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ExtendedPolicerStats.Marshal(b, m, deterministic)
 }
-func (dst *ExtendedPolicerStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ExtendedPolicerStats.Merge(dst, src)
+func (m *ExtendedPolicerStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ExtendedPolicerStats.Merge(m, src)
 }
 func (m *ExtendedPolicerStats) XXX_Size() int {
 	return xxx_messageInfo_ExtendedPolicerStats.Size(m)
@@ -422,16 +430,17 @@ func (m *HierarchicalPolicerStats) Reset()         { *m = HierarchicalPolicerSta
 func (m *HierarchicalPolicerStats) String() string { return proto.CompactTextString(m) }
 func (*HierarchicalPolicerStats) ProtoMessage()    {}
 func (*HierarchicalPolicerStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_firewall_01a64b9aa81a9de8, []int{6}
+	return fileDescriptor_00e54131a1710129, []int{6}
 }
+
 func (m *HierarchicalPolicerStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_HierarchicalPolicerStats.Unmarshal(m, b)
 }
 func (m *HierarchicalPolicerStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_HierarchicalPolicerStats.Marshal(b, m, deterministic)
 }
-func (dst *HierarchicalPolicerStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HierarchicalPolicerStats.Merge(dst, src)
+func (m *HierarchicalPolicerStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HierarchicalPolicerStats.Merge(m, src)
 }
 func (m *HierarchicalPolicerStats) XXX_Size() int {
 	return xxx_messageInfo_HierarchicalPolicerStats.Size(m)
@@ -482,7 +491,7 @@ var E_JnprFirewallExt = &proto.ExtensionDesc{
 	ExtensionType: (*Firewall)(nil),
 	Field:         6,
 	Name:          "jnpr_firewall_ext",
-	Tag:           "bytes,6,opt,name=jnpr_firewall_ext,json=jnprFirewallExt",
+	Tag:           "bytes,6,opt,name=jnpr_firewall_ext",
 	Filename:      "firewall.proto",
 }
 
@@ -497,9 +506,9 @@ func init() {
 	proto.RegisterExtension(E_JnprFirewallExt)
 }
 
-func init() { proto.RegisterFile("firewall.proto", fileDescriptor_firewall_01a64b9aa81a9de8) }
+func init() { proto.RegisterFile("firewall.proto", fileDescriptor_00e54131a1710129) }
 
-var fileDescriptor_firewall_01a64b9aa81a9de8 = []byte{
+var fileDescriptor_00e54131a1710129 = []byte{
 	// 582 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x54, 0x4d, 0x6f, 0xd3, 0x40,
 	0x10, 0x95, 0xf3, 0x01, 0xcd, 0xc4, 0x49, 0x9a, 0x4d, 0x01, 0xb7, 0x1c, 0x88, 0x8c, 0x84, 0x22,

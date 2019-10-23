@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -33,16 +35,17 @@ func (m *SrStatsPerIfIngress) Reset()         { *m = SrStatsPerIfIngress{} }
 func (m *SrStatsPerIfIngress) String() string { return proto.CompactTextString(m) }
 func (*SrStatsPerIfIngress) ProtoMessage()    {}
 func (*SrStatsPerIfIngress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_stats_per_if_ingress_21e607b6e86cd0a5, []int{0}
+	return fileDescriptor_8f1873ec2738f097, []int{0}
 }
+
 func (m *SrStatsPerIfIngress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SrStatsPerIfIngress.Unmarshal(m, b)
 }
 func (m *SrStatsPerIfIngress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SrStatsPerIfIngress.Marshal(b, m, deterministic)
 }
-func (dst *SrStatsPerIfIngress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SrStatsPerIfIngress.Merge(dst, src)
+func (m *SrStatsPerIfIngress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SrStatsPerIfIngress.Merge(m, src)
 }
 func (m *SrStatsPerIfIngress) XXX_Size() int {
 	return xxx_messageInfo_SrStatsPerIfIngress.Size(m)
@@ -84,16 +87,17 @@ func (m *SegmentRoutingIngIfRecord) Reset()         { *m = SegmentRoutingIngIfRe
 func (m *SegmentRoutingIngIfRecord) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingIngIfRecord) ProtoMessage()    {}
 func (*SegmentRoutingIngIfRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_stats_per_if_ingress_21e607b6e86cd0a5, []int{1}
+	return fileDescriptor_8f1873ec2738f097, []int{1}
 }
+
 func (m *SegmentRoutingIngIfRecord) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingIngIfRecord.Unmarshal(m, b)
 }
 func (m *SegmentRoutingIngIfRecord) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingIngIfRecord.Marshal(b, m, deterministic)
 }
-func (dst *SegmentRoutingIngIfRecord) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingIngIfRecord.Merge(dst, src)
+func (m *SegmentRoutingIngIfRecord) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingIngIfRecord.Merge(m, src)
 }
 func (m *SegmentRoutingIngIfRecord) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingIngIfRecord.Size(m)
@@ -155,16 +159,17 @@ func (m *SegmentRoutingIngIfStats) Reset()         { *m = SegmentRoutingIngIfSta
 func (m *SegmentRoutingIngIfStats) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingIngIfStats) ProtoMessage()    {}
 func (*SegmentRoutingIngIfStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_stats_per_if_ingress_21e607b6e86cd0a5, []int{2}
+	return fileDescriptor_8f1873ec2738f097, []int{2}
 }
+
 func (m *SegmentRoutingIngIfStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingIngIfStats.Unmarshal(m, b)
 }
 func (m *SegmentRoutingIngIfStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingIngIfStats.Marshal(b, m, deterministic)
 }
-func (dst *SegmentRoutingIngIfStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingIngIfStats.Merge(dst, src)
+func (m *SegmentRoutingIngIfStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingIngIfStats.Merge(m, src)
 }
 func (m *SegmentRoutingIngIfStats) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingIngIfStats.Size(m)
@@ -208,7 +213,7 @@ var E_JnprSrStatsPerIfIngressExt = &proto.ExtensionDesc{
 	ExtensionType: (*SrStatsPerIfIngress)(nil),
 	Field:         19,
 	Name:          "jnpr_sr_stats_per_if_ingress_ext",
-	Tag:           "bytes,19,opt,name=jnpr_sr_stats_per_if_ingress_ext,json=jnprSrStatsPerIfIngressExt",
+	Tag:           "bytes,19,opt,name=jnpr_sr_stats_per_if_ingress_ext",
 	Filename:      "sr_stats_per_if_ingress.proto",
 }
 
@@ -219,11 +224,9 @@ func init() {
 	proto.RegisterExtension(E_JnprSrStatsPerIfIngressExt)
 }
 
-func init() {
-	proto.RegisterFile("sr_stats_per_if_ingress.proto", fileDescriptor_sr_stats_per_if_ingress_21e607b6e86cd0a5)
-}
+func init() { proto.RegisterFile("sr_stats_per_if_ingress.proto", fileDescriptor_8f1873ec2738f097) }
 
-var fileDescriptor_sr_stats_per_if_ingress_21e607b6e86cd0a5 = []byte{
+var fileDescriptor_8f1873ec2738f097 = []byte{
 	// 380 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0x41, 0x6f, 0x13, 0x31,
 	0x10, 0x85, 0xe5, 0x34, 0xa1, 0xed, 0xec, 0xd2, 0x83, 0x83, 0xc4, 0x36, 0x08, 0x58, 0xe5, 0x80,
