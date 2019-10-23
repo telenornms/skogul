@@ -64,22 +64,22 @@ type HTTP struct {
 // done to satisfy Verify()'s requirement of not modifying state and it
 // being optional. We also need Verify to actually test this, so the user
 // can be reasonably certain that a valid configuration is used.
-func getCertPool(f string) (*x509.CertPool, error) {
+func getCertPool(path string) (*x509.CertPool, error) {
 	// this means "use system default"
-	if f == "" {
+	if path == "" {
 		return nil, nil
 	}
 	cp := x509.NewCertPool()
-	fil, err := os.Open(f)
+	fd, err := os.Open(path)
 	if err != nil {
 		log.Printf("unable to open alternate root CA: %v", err)
 		return nil, skogul.Error{Source: "http sender", Reason: "unable to open custom root CA", Next: err}
 	}
 	defer func() {
-		fil.Close()
+		fd.Close()
 	}()
 	bytes := make([]byte, 1024000)
-	n, err := fil.Read(bytes)
+	n, err := fd.Read(bytes)
 	if err != nil {
 		log.Printf("unable to read root ca: %v", err)
 		return nil, skogul.Error{Source: "http sender", Reason: "unable to read custom root CA", Next: err}
