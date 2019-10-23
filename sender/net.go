@@ -26,8 +26,9 @@ package sender
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -42,7 +43,7 @@ type Net struct {
 func (n *Net) Send(c *skogul.Container) error {
 	d, err := net.Dial(n.Network, n.Address)
 	if err != nil {
-		log.Printf("Failed to connect to target %s: %v", n.Address, err)
+		log.WithError(err).WithField("address", n.Address).Error("Failed to connect to target")
 		return skogul.Error{Source: "net sender", Reason: "unable to connect to network address", Next: err}
 	}
 	// should almost certainly fix some method of retaining the

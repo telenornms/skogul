@@ -26,8 +26,9 @@ package receiver
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"net"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -69,7 +70,7 @@ func (tl *TCPLine) Start() error {
 	for {
 		conn, err := ln.AcceptTCP()
 		if err != nil {
-			log.Printf("Unable to accept connection: %v", err)
+			log.WithError(err).Error("Unable to accept connection")
 			continue
 		}
 		go tl.handleConnection(conn)
@@ -83,11 +84,11 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		if err := tl.Handler.H.Handle(bytes); err != nil {
-			log.Printf("Unable to parse JSON: %s", err)
+			log.WithError(err).Error("Unable to parse JSON")
 		}
 	}
 	if err := scanner.Err(); err != nil {
-		log.Printf("Error reading: %s", err)
+		log.WithError(err).Error("Error reading line")
 		return skogul.Error{Reason: "Error reading file"}
 	}
 	return nil

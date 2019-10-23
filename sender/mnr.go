@@ -26,8 +26,9 @@ package sender
 import (
 	"bytes"
 	"fmt"
-	"log"
 	"net"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -105,7 +106,7 @@ be negligible. But this should, of course, be fixed in the future.
 func (mnr *MnR) Send(c *skogul.Container) error {
 	d, err := net.Dial("tcp", mnr.Address)
 	if err != nil {
-		log.Printf("Failed to connect to MnR: %v", err)
+		log.WithError(err).WithField("address", mnr.Address).Error("Failed to connect to MnR")
 		return skogul.Error{Source: "mnr sender", Reason: "unable to connect to MnR"}
 	}
 	for _, m := range c.Metrics {

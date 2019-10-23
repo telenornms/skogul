@@ -24,9 +24,10 @@
 package sender
 
 import (
-	"log"
 	"runtime"
 	"sync"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -67,8 +68,8 @@ func (de *Detacher) consume() {
 
 func (de *Detacher) doInit() {
 	if de.Depth == 0 {
-		log.Print("No detach depth/queue depth set. Using default of 1000.")
 		de.Depth = 1000
+		log.WithField("depth", de.Depth).Debug("No detach depth/queue depth set. Using default value.")
 	}
 	de.ch = make(chan *skogul.Container, de.Depth)
 	go de.consume()
@@ -109,8 +110,8 @@ type Fanout struct {
 func (fo *Fanout) doInit() {
 	if fo.Workers == 0 {
 		n := runtime.NumCPU()
-		log.Printf("No fanout size set. Using default of NumCPU: %v.", n)
 		fo.Workers = n
+		log.WithField("fanout", fo.Workers).Debug("No fanout size set. Using default value")
 	}
 	fo.workers = make(chan chan *skogul.Container)
 	for i := 0; i < fo.Workers; i++ {

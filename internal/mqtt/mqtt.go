@@ -31,12 +31,12 @@ package mqtt
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"net/url"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
+	log "github.com/sirupsen/logrus"
 )
 
 // MQTT shared data structure annd interal state
@@ -59,7 +59,7 @@ type MessageHandler func(Message mqtt.Message)
 // Subscribe to a topic. callback is called whenever a message is received.
 // This also deals with re-subscribing when a reconnect takes place.
 func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
-	log.Printf("MQTT subscribing to %s", topic)
+	log.WithField("topic", topic).Debug("MQTT subscribed")
 	if handler.topics == nil {
 		handler.topics = make(map[string]*MessageHandler)
 	}
@@ -70,7 +70,10 @@ func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
 func (handler *MQTT) receiver(client mqtt.Client, msg mqtt.Message) {
 	t := msg.Topic()
 	if handler.topics[t] == nil {
-		log.Printf("Message received on unknown topic: %v", msg)
+		log.WithFields(log.Fields{
+			"topic": t,
+			"msg":   msg,
+		}).Debug("Message received on unknown topic")
 		return
 	}
 	(*handler.topics[t])(msg)
@@ -83,7 +86,7 @@ func (handler *MQTT) Connect() error {
 	for !token.WaitTimeout(3 * time.Second) {
 	}
 	if err := token.Error(); err != nil {
-		log.Printf("Failed to connect to MQTT broker: %v", err)
+		log.WithError(err).Error("Failed to connect to MQTT broker")
 		return err
 	}
 	for i := range handler.topics {
@@ -97,7 +100,7 @@ func (handler *MQTT) Init() error {
 	var err error
 	handler.uri, err = url.Parse(handler.Address)
 	if err != nil {
-		log.Fatal(err)
+		log.WithError(err).Fatal("Initialization of MQTT failed")
 	}
 	handler.Topic = handler.uri.Path[1:len(handler.uri.Path)]
 	if handler.Topic == "" {
@@ -110,14 +113,14 @@ func (handler *MQTT) Init() error {
 
 // Handle reconnects when the connection drops.
 func (handler *MQTT) connLostHandler(client mqtt.Client, e error) {
-	log.Printf("Connection lost... Auto-reconnecting and re-subscribing. Error: %v", e)
+	log.WithError(e).Debug("Connection lost... Auto-reconnecting and re-subscribing.")
 	for {
 		e := handler.Connect()
 		if e != nil {
-			log.Printf("Failed to re-connect to MQTT broker (%v). Retrying in 5 seconds", e)
+			log.WithError(e).Debug("Failed to re-connect to MQTT broker. Retrying in 5 seconds")
 			time.Sleep(time.Duration(5 * time.Second))
 		} else {
-			log.Printf("Reconnected to MQTT broker successfully.")
+			log.Debug("Reconnected to MQTT broker successfully.")
 			break
 		}
 	}

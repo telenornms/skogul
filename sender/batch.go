@@ -25,10 +25,11 @@ package sender
 
 import (
 	"fmt"
-	"log"
 	"runtime"
 	"sync"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -111,7 +112,7 @@ func (bat *Batch) add(c *skogul.Container) {
 		// It's allowed to exceed Threshold - but only once.
 		if newlen < nl {
 			newlen = nl
-			log.Print((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
+			log.Warning((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
 		}
 		x := make([]*skogul.Metric, newlen)
 		copy(x, bat.cont.Metrics)
@@ -129,7 +130,7 @@ func (bat *Batch) flusher() {
 		c := <-bat.out
 		err := bat.Next.S.Send(c)
 		if err != nil {
-			log.Print(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
+			log.WithError(err).Error(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
 		}
 	}
 }
