@@ -3,11 +3,9 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type PacketStatistics struct {
 	// List of stats aggregated across all forwarding engines
@@ -34,17 +32,16 @@ func (m *PacketStatistics) Reset()         { *m = PacketStatistics{} }
 func (m *PacketStatistics) String() string { return proto.CompactTextString(m) }
 func (*PacketStatistics) ProtoMessage()    {}
 func (*PacketStatistics) Descriptor() ([]byte, []int) {
-	return fileDescriptor_b21e52ae69b7e1b3, []int{0}
+	return fileDescriptor_packet_stats_b6b0a12cd6b465a6, []int{0}
 }
-
 func (m *PacketStatistics) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PacketStatistics.Unmarshal(m, b)
 }
 func (m *PacketStatistics) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PacketStatistics.Marshal(b, m, deterministic)
 }
-func (m *PacketStatistics) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PacketStatistics.Merge(m, src)
+func (dst *PacketStatistics) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PacketStatistics.Merge(dst, src)
 }
 func (m *PacketStatistics) XXX_Size() int {
 	return xxx_messageInfo_PacketStatistics.Size(m)
@@ -83,17 +80,16 @@ func (m *PacketStatsPacketForwardingEngine) Reset()         { *m = PacketStatsPa
 func (m *PacketStatsPacketForwardingEngine) String() string { return proto.CompactTextString(m) }
 func (*PacketStatsPacketForwardingEngine) ProtoMessage()    {}
 func (*PacketStatsPacketForwardingEngine) Descriptor() ([]byte, []int) {
-	return fileDescriptor_b21e52ae69b7e1b3, []int{1}
+	return fileDescriptor_packet_stats_b6b0a12cd6b465a6, []int{1}
 }
-
 func (m *PacketStatsPacketForwardingEngine) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PacketStatsPacketForwardingEngine.Unmarshal(m, b)
 }
 func (m *PacketStatsPacketForwardingEngine) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PacketStatsPacketForwardingEngine.Marshal(b, m, deterministic)
 }
-func (m *PacketStatsPacketForwardingEngine) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PacketStatsPacketForwardingEngine.Merge(m, src)
+func (dst *PacketStatsPacketForwardingEngine) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PacketStatsPacketForwardingEngine.Merge(dst, src)
 }
 func (m *PacketStatsPacketForwardingEngine) XXX_Size() int {
 	return xxx_messageInfo_PacketStatsPacketForwardingEngine.Size(m)
@@ -132,17 +128,16 @@ func (m *PacketStatsClass) Reset()         { *m = PacketStatsClass{} }
 func (m *PacketStatsClass) String() string { return proto.CompactTextString(m) }
 func (*PacketStatsClass) ProtoMessage()    {}
 func (*PacketStatsClass) Descriptor() ([]byte, []int) {
-	return fileDescriptor_b21e52ae69b7e1b3, []int{2}
+	return fileDescriptor_packet_stats_b6b0a12cd6b465a6, []int{2}
 }
-
 func (m *PacketStatsClass) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PacketStatsClass.Unmarshal(m, b)
 }
 func (m *PacketStatsClass) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PacketStatsClass.Marshal(b, m, deterministic)
 }
-func (m *PacketStatsClass) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PacketStatsClass.Merge(m, src)
+func (dst *PacketStatsClass) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PacketStatsClass.Merge(dst, src)
 }
 func (m *PacketStatsClass) XXX_Size() int {
 	return xxx_messageInfo_PacketStatsClass.Size(m)
@@ -190,17 +185,16 @@ func (m *PacketStatsCounter) Reset()         { *m = PacketStatsCounter{} }
 func (m *PacketStatsCounter) String() string { return proto.CompactTextString(m) }
 func (*PacketStatsCounter) ProtoMessage()    {}
 func (*PacketStatsCounter) Descriptor() ([]byte, []int) {
-	return fileDescriptor_b21e52ae69b7e1b3, []int{3}
+	return fileDescriptor_packet_stats_b6b0a12cd6b465a6, []int{3}
 }
-
 func (m *PacketStatsCounter) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PacketStatsCounter.Unmarshal(m, b)
 }
 func (m *PacketStatsCounter) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PacketStatsCounter.Marshal(b, m, deterministic)
 }
-func (m *PacketStatsCounter) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PacketStatsCounter.Merge(m, src)
+func (dst *PacketStatsCounter) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PacketStatsCounter.Merge(dst, src)
 }
 func (m *PacketStatsCounter) XXX_Size() int {
 	return xxx_messageInfo_PacketStatsCounter.Size(m)
@@ -244,7 +238,7 @@ var E_JnprPacketStatisticsExt = &proto.ExtensionDesc{
 	ExtensionType: (*PacketStatistics)(nil),
 	Field:         8,
 	Name:          "jnpr_packet_statistics_ext",
-	Tag:           "bytes,8,opt,name=jnpr_packet_statistics_ext",
+	Tag:           "bytes,8,opt,name=jnpr_packet_statistics_ext,json=jnprPacketStatisticsExt",
 	Filename:      "packet_stats.proto",
 }
 
@@ -256,9 +250,9 @@ func init() {
 	proto.RegisterExtension(E_JnprPacketStatisticsExt)
 }
 
-func init() { proto.RegisterFile("packet_stats.proto", fileDescriptor_b21e52ae69b7e1b3) }
+func init() { proto.RegisterFile("packet_stats.proto", fileDescriptor_packet_stats_b6b0a12cd6b465a6) }
 
-var fileDescriptor_b21e52ae69b7e1b3 = []byte{
+var fileDescriptor_packet_stats_b6b0a12cd6b465a6 = []byte{
 	// 351 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0x4f, 0x8b, 0xda, 0x40,
 	0x18, 0xc6, 0x49, 0x0c, 0xa8, 0xaf, 0xad, 0xd8, 0xf1, 0x60, 0x2a, 0x94, 0xc6, 0x40, 0x21, 0x97,

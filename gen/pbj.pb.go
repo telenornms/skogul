@@ -3,12 +3,10 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
+import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -19,7 +17,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type FieldType int32
 
@@ -38,7 +36,6 @@ var FieldType_name = map[int32]string{
 	2: "FT_STATIC",
 	3: "FT_IGNORE",
 }
-
 var FieldType_value = map[string]int32{
 	"FT_DEFAULT":  0,
 	"FT_CALLBACK": 1,
@@ -52,11 +49,9 @@ func (x FieldType) Enum() *FieldType {
 	*p = x
 	return p
 }
-
 func (x FieldType) String() string {
 	return proto.EnumName(FieldType_name, int32(x))
 }
-
 func (x *FieldType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(FieldType_value, data, "FieldType")
 	if err != nil {
@@ -65,9 +60,8 @@ func (x *FieldType) UnmarshalJSON(data []byte) error {
 	*x = FieldType(value)
 	return nil
 }
-
 func (FieldType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_adec4434a342376e, []int{0}
+	return fileDescriptor_pbj_74c8b148a78a7e13, []int{0}
 }
 
 // This is the inner options message, which basically defines options for
@@ -98,17 +92,16 @@ func (m *PBJOptions) Reset()         { *m = PBJOptions{} }
 func (m *PBJOptions) String() string { return proto.CompactTextString(m) }
 func (*PBJOptions) ProtoMessage()    {}
 func (*PBJOptions) Descriptor() ([]byte, []int) {
-	return fileDescriptor_adec4434a342376e, []int{0}
+	return fileDescriptor_pbj_74c8b148a78a7e13, []int{0}
 }
-
 func (m *PBJOptions) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PBJOptions.Unmarshal(m, b)
 }
 func (m *PBJOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PBJOptions.Marshal(b, m, deterministic)
 }
-func (m *PBJOptions) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PBJOptions.Merge(m, src)
+func (dst *PBJOptions) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PBJOptions.Merge(dst, src)
 }
 func (m *PBJOptions) XXX_Size() int {
 	return xxx_messageInfo_PBJOptions.Size(m)
@@ -179,7 +172,7 @@ var E_PbjFileOption = &proto.ExtensionDesc{
 	ExtensionType: (*PBJOptions)(nil),
 	Field:         1020,
 	Name:          "pbj_file_option",
-	Tag:           "bytes,1020,opt,name=pbj_file_option",
+	Tag:           "bytes,1020,opt,name=pbj_file_option,json=pbjFileOption",
 	Filename:      "pbj.proto",
 }
 
@@ -188,7 +181,7 @@ var E_PbjMessageOption = &proto.ExtensionDesc{
 	ExtensionType: (*PBJOptions)(nil),
 	Field:         1020,
 	Name:          "pbj_message_option",
-	Tag:           "bytes,1020,opt,name=pbj_message_option",
+	Tag:           "bytes,1020,opt,name=pbj_message_option,json=pbjMessageOption",
 	Filename:      "pbj.proto",
 }
 
@@ -197,7 +190,7 @@ var E_PbjEnumOption = &proto.ExtensionDesc{
 	ExtensionType: (*PBJOptions)(nil),
 	Field:         1020,
 	Name:          "pbj_enum_option",
-	Tag:           "bytes,1020,opt,name=pbj_enum_option",
+	Tag:           "bytes,1020,opt,name=pbj_enum_option,json=pbjEnumOption",
 	Filename:      "pbj.proto",
 }
 
@@ -206,22 +199,22 @@ var E_PbjFieldOption = &proto.ExtensionDesc{
 	ExtensionType: (*PBJOptions)(nil),
 	Field:         1020,
 	Name:          "pbj_field_option",
-	Tag:           "bytes,1020,opt,name=pbj_field_option",
+	Tag:           "bytes,1020,opt,name=pbj_field_option,json=pbjFieldOption",
 	Filename:      "pbj.proto",
 }
 
 func init() {
-	proto.RegisterEnum("FieldType", FieldType_name, FieldType_value)
 	proto.RegisterType((*PBJOptions)(nil), "PBJOptions")
+	proto.RegisterEnum("FieldType", FieldType_name, FieldType_value)
 	proto.RegisterExtension(E_PbjFileOption)
 	proto.RegisterExtension(E_PbjMessageOption)
 	proto.RegisterExtension(E_PbjEnumOption)
 	proto.RegisterExtension(E_PbjFieldOption)
 }
 
-func init() { proto.RegisterFile("pbj.proto", fileDescriptor_adec4434a342376e) }
+func init() { proto.RegisterFile("pbj.proto", fileDescriptor_pbj_74c8b148a78a7e13) }
 
-var fileDescriptor_adec4434a342376e = []byte{
+var fileDescriptor_pbj_74c8b148a78a7e13 = []byte{
 	// 445 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0x4f, 0x6f, 0xda, 0x40,
 	0x10, 0xc5, 0x6b, 0x02, 0x4d, 0x3c, 0x04, 0x70, 0xf7, 0xe4, 0xfe, 0x53, 0x51, 0x7b, 0x41, 0x1c,

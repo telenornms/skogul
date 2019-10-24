@@ -73,7 +73,20 @@ import "telemetry_top.proto";
 
 
  }
- 
+
+message ErrorResourceInfo {
+
+    // resource id e.g pfe identifier
+    optional uint32 id    = 1;
+
+    // resource type e.g pfe/pic
+    optional string type  = 2;
+
+    // resource state e.g enabled /disabled
+    optional uint32 state = 3;
+
+}
+
  //
  // Top-level CmerrorData message
  //
@@ -81,6 +94,14 @@ import "telemetry_top.proto";
  
      // collection of error items
      repeated ErrorData error_item = 1;
+
+     // Fru slot identifier
+     optional uint32 fru_slot = 2;
+     optional string fru_type = 3;
+
+     // collection of resource states from fru
+     repeated ErrorResourceInfo resource_item = 4;
+
  }
  
  

@@ -30,7 +30,7 @@ message SegmentRoutingRecord {
     // Name of the counter. This is useful when an SR label has multiple counters.
     // For some scenarios like routing restart, it is possible that a new counter is
     // created in the hardware.
-    required string      counter_name         = 3  [(telemetry_options).is_key = true];
+    optional string      counter_name         = 3  [(telemetry_options).is_key = true];
 
     // Ingress Traffic statistics
     optional SegmentRoutingStats ingress_stats = 4;

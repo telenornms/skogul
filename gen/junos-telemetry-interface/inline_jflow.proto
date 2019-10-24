@@ -84,6 +84,15 @@ message InlineJflow {
     // Status of use_extended_flow_memory knob
     optional bool use_extended_flow_memory                      = 22;
 
+    // Version of Bridge exported flow records (v10 or v9)
+    optional string bridge_flows_export_format                  = 23;
+
+    // Maximum number of flows supported for Bridge.
+    optional uint64 bridge_max_flows_count                      = 24;
+
+    // Value of Configured Observation Domain ID for Bridge
+    optional uint32 bridge_configured_observation_domain_id     = 25;
+
     // NPU level statistics
     repeated InlineJflowNpuStats npu_stats                      = 50;
 }
@@ -187,6 +196,24 @@ message InlineJflowNpuStats {
 
     optional float  mpls_flow_table_utilization                 = 213 [(telemetry_options).is_gauge = true];
     optional uint64 mpls_flow_insert_count                      = 214 [(telemetry_options).is_counter = true];
+
+    // BRIDGE NPU Stats
+    optional uint64 bridge_flow_packets                         = 251 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_flow_bytes                           = 252 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_total_flows                          = 253 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_active_flows                         = 254 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_flows_exported                       = 255 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_packets_exported                     = 256 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_flows_inactive_timed_out             = 257 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_flows_active_timed_out               = 258 [(telemetry_options).is_counter = true];
+
+    optional uint64 bridge_flow_create_failure                  = 259 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_route_lookup_failure                 = 260 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_autonomous_system_lookup_failure     = 261 [(telemetry_options).is_counter = true];
+    optional uint64 bridge_flow_packet_export_failure           = 262 [(telemetry_options).is_counter = true];
+
+    optional float  bridge_flow_table_utilization               = 263 [(telemetry_options).is_gauge = true];
+    optional uint64 bridge_flow_insert_count                    = 264 [(telemetry_options).is_counter = true];
 
 }
 

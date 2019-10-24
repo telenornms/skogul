@@ -3,11 +3,9 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 //
 // Top-level message
@@ -34,17 +32,16 @@ func (m *LogicalPort) Reset()         { *m = LogicalPort{} }
 func (m *LogicalPort) String() string { return proto.CompactTextString(m) }
 func (*LogicalPort) ProtoMessage()    {}
 func (*LogicalPort) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{0}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{0}
 }
-
 func (m *LogicalPort) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LogicalPort.Unmarshal(m, b)
 }
 func (m *LogicalPort) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LogicalPort.Marshal(b, m, deterministic)
 }
-func (m *LogicalPort) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LogicalPort.Merge(m, src)
+func (dst *LogicalPort) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LogicalPort.Merge(dst, src)
 }
 func (m *LogicalPort) XXX_Size() int {
 	return xxx_messageInfo_LogicalPort.Size(m)
@@ -101,17 +98,16 @@ func (m *LogicalInterfaceInfo) Reset()         { *m = LogicalInterfaceInfo{} }
 func (m *LogicalInterfaceInfo) String() string { return proto.CompactTextString(m) }
 func (*LogicalInterfaceInfo) ProtoMessage()    {}
 func (*LogicalInterfaceInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{1}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{1}
 }
-
 func (m *LogicalInterfaceInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LogicalInterfaceInfo.Unmarshal(m, b)
 }
 func (m *LogicalInterfaceInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LogicalInterfaceInfo.Marshal(b, m, deterministic)
 }
-func (m *LogicalInterfaceInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LogicalInterfaceInfo.Merge(m, src)
+func (dst *LogicalInterfaceInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LogicalInterfaceInfo.Merge(dst, src)
 }
 func (m *LogicalInterfaceInfo) XXX_Size() int {
 	return xxx_messageInfo_LogicalInterfaceInfo.Size(m)
@@ -235,17 +231,16 @@ func (m *IngressInterfaceStats) Reset()         { *m = IngressInterfaceStats{} }
 func (m *IngressInterfaceStats) String() string { return proto.CompactTextString(m) }
 func (*IngressInterfaceStats) ProtoMessage()    {}
 func (*IngressInterfaceStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{2}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{2}
 }
-
 func (m *IngressInterfaceStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IngressInterfaceStats.Unmarshal(m, b)
 }
 func (m *IngressInterfaceStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IngressInterfaceStats.Marshal(b, m, deterministic)
 }
-func (m *IngressInterfaceStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IngressInterfaceStats.Merge(m, src)
+func (dst *IngressInterfaceStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IngressInterfaceStats.Merge(dst, src)
 }
 func (m *IngressInterfaceStats) XXX_Size() int {
 	return xxx_messageInfo_IngressInterfaceStats.Size(m)
@@ -312,17 +307,16 @@ func (m *EgressInterfaceStats) Reset()         { *m = EgressInterfaceStats{} }
 func (m *EgressInterfaceStats) String() string { return proto.CompactTextString(m) }
 func (*EgressInterfaceStats) ProtoMessage()    {}
 func (*EgressInterfaceStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{3}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{3}
 }
-
 func (m *EgressInterfaceStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_EgressInterfaceStats.Unmarshal(m, b)
 }
 func (m *EgressInterfaceStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_EgressInterfaceStats.Marshal(b, m, deterministic)
 }
-func (m *EgressInterfaceStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EgressInterfaceStats.Merge(m, src)
+func (dst *EgressInterfaceStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EgressInterfaceStats.Merge(dst, src)
 }
 func (m *EgressInterfaceStats) XXX_Size() int {
 	return xxx_messageInfo_EgressInterfaceStats.Size(m)
@@ -376,17 +370,16 @@ func (m *OperationalState) Reset()         { *m = OperationalState{} }
 func (m *OperationalState) String() string { return proto.CompactTextString(m) }
 func (*OperationalState) ProtoMessage()    {}
 func (*OperationalState) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{4}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{4}
 }
-
 func (m *OperationalState) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OperationalState.Unmarshal(m, b)
 }
 func (m *OperationalState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OperationalState.Marshal(b, m, deterministic)
 }
-func (m *OperationalState) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OperationalState.Merge(m, src)
+func (dst *OperationalState) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OperationalState.Merge(dst, src)
 }
 func (m *OperationalState) XXX_Size() int {
 	return xxx_messageInfo_OperationalState.Size(m)
@@ -425,17 +418,16 @@ func (m *ForwardingClassAccounting) Reset()         { *m = ForwardingClassAccoun
 func (m *ForwardingClassAccounting) String() string { return proto.CompactTextString(m) }
 func (*ForwardingClassAccounting) ProtoMessage()    {}
 func (*ForwardingClassAccounting) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{5}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{5}
 }
-
 func (m *ForwardingClassAccounting) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ForwardingClassAccounting.Unmarshal(m, b)
 }
 func (m *ForwardingClassAccounting) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ForwardingClassAccounting.Marshal(b, m, deterministic)
 }
-func (m *ForwardingClassAccounting) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ForwardingClassAccounting.Merge(m, src)
+func (dst *ForwardingClassAccounting) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ForwardingClassAccounting.Merge(dst, src)
 }
 func (m *ForwardingClassAccounting) XXX_Size() int {
 	return xxx_messageInfo_ForwardingClassAccounting.Size(m)
@@ -511,17 +503,16 @@ func (m *LogicalInterfaceQueueStats) Reset()         { *m = LogicalInterfaceQueu
 func (m *LogicalInterfaceQueueStats) String() string { return proto.CompactTextString(m) }
 func (*LogicalInterfaceQueueStats) ProtoMessage()    {}
 func (*LogicalInterfaceQueueStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ed53654dcd9b9a05, []int{6}
+	return fileDescriptor_logical_port_cd04f6ec6dd079c7, []int{6}
 }
-
 func (m *LogicalInterfaceQueueStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LogicalInterfaceQueueStats.Unmarshal(m, b)
 }
 func (m *LogicalInterfaceQueueStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LogicalInterfaceQueueStats.Marshal(b, m, deterministic)
 }
-func (m *LogicalInterfaceQueueStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LogicalInterfaceQueueStats.Merge(m, src)
+func (dst *LogicalInterfaceQueueStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LogicalInterfaceQueueStats.Merge(dst, src)
 }
 func (m *LogicalInterfaceQueueStats) XXX_Size() int {
 	return xxx_messageInfo_LogicalInterfaceQueueStats.Size(m)
@@ -636,9 +627,9 @@ func init() {
 	proto.RegisterExtension(E_JnprLogicalInterfaceExt)
 }
 
-func init() { proto.RegisterFile("logical_port.proto", fileDescriptor_ed53654dcd9b9a05) }
+func init() { proto.RegisterFile("logical_port.proto", fileDescriptor_logical_port_cd04f6ec6dd079c7) }
 
-var fileDescriptor_ed53654dcd9b9a05 = []byte{
+var fileDescriptor_logical_port_cd04f6ec6dd079c7 = []byte{
 	// 895 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x56, 0x5d, 0x73, 0xdb, 0x44,
 	0x14, 0x1d, 0xb9, 0x75, 0x62, 0x5f, 0xd9, 0xa9, 0xb3, 0x8d, 0x13, 0x91, 0x0e, 0xd4, 0xe3, 0xe1,

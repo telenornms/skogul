@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional mpls_pfe_mpls_ldp_p2mp_if_ingress jnpr_mpls_pfe_mpls_ldp_p2mp_if_ingress_ext = 92;
+}
+
+message mpls_pfe_mpls_ldp_p2mp_if_ingress {
+   optional signaling_protocols_type signaling_protocols = 151;
+   message signaling_protocols_type {
+      optional ldp_type ldp = 151;
+      message ldp_type {
+         optional p2mp_interfaces_type p2mp_interfaces = 151;
+         message p2mp_interfaces_type {
+            message p2mp_interface_list {
+            }
+            repeated p2mp_interface_list p2mp_interface = 151;
+         }
+      }
+   }
+}

@@ -3,11 +3,9 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type IPsecVPN struct {
 	IpsecGlobalInfo      []*IPsecGlobalInfo    `protobuf:"bytes,1,rep,name=ipsec_global_info,json=ipsecGlobalInfo" json:"ipsec_global_info,omitempty"`
@@ -33,17 +31,16 @@ func (m *IPsecVPN) Reset()         { *m = IPsecVPN{} }
 func (m *IPsecVPN) String() string { return proto.CompactTextString(m) }
 func (*IPsecVPN) ProtoMessage()    {}
 func (*IPsecVPN) Descriptor() ([]byte, []int) {
-	return fileDescriptor_62544e4535d94422, []int{0}
+	return fileDescriptor_ipsec_telemetry_c3a587dc5133bb50, []int{0}
 }
-
 func (m *IPsecVPN) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IPsecVPN.Unmarshal(m, b)
 }
 func (m *IPsecVPN) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IPsecVPN.Marshal(b, m, deterministic)
 }
-func (m *IPsecVPN) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IPsecVPN.Merge(m, src)
+func (dst *IPsecVPN) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IPsecVPN.Merge(dst, src)
 }
 func (m *IPsecVPN) XXX_Size() int {
 	return xxx_messageInfo_IPsecVPN.Size(m)
@@ -109,17 +106,16 @@ func (m *IPsecGlobalInfo) Reset()         { *m = IPsecGlobalInfo{} }
 func (m *IPsecGlobalInfo) String() string { return proto.CompactTextString(m) }
 func (*IPsecGlobalInfo) ProtoMessage()    {}
 func (*IPsecGlobalInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_62544e4535d94422, []int{1}
+	return fileDescriptor_ipsec_telemetry_c3a587dc5133bb50, []int{1}
 }
-
 func (m *IPsecGlobalInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IPsecGlobalInfo.Unmarshal(m, b)
 }
 func (m *IPsecGlobalInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IPsecGlobalInfo.Marshal(b, m, deterministic)
 }
-func (m *IPsecGlobalInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IPsecGlobalInfo.Merge(m, src)
+func (dst *IPsecGlobalInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IPsecGlobalInfo.Merge(dst, src)
 }
 func (m *IPsecGlobalInfo) XXX_Size() int {
 	return xxx_messageInfo_IPsecGlobalInfo.Size(m)
@@ -240,17 +236,16 @@ func (m *IPsecPerSvcsetInfo) Reset()         { *m = IPsecPerSvcsetInfo{} }
 func (m *IPsecPerSvcsetInfo) String() string { return proto.CompactTextString(m) }
 func (*IPsecPerSvcsetInfo) ProtoMessage()    {}
 func (*IPsecPerSvcsetInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_62544e4535d94422, []int{2}
+	return fileDescriptor_ipsec_telemetry_c3a587dc5133bb50, []int{2}
 }
-
 func (m *IPsecPerSvcsetInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IPsecPerSvcsetInfo.Unmarshal(m, b)
 }
 func (m *IPsecPerSvcsetInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IPsecPerSvcsetInfo.Marshal(b, m, deterministic)
 }
-func (m *IPsecPerSvcsetInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IPsecPerSvcsetInfo.Merge(m, src)
+func (dst *IPsecPerSvcsetInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IPsecPerSvcsetInfo.Merge(dst, src)
 }
 func (m *IPsecPerSvcsetInfo) XXX_Size() int {
 	return xxx_messageInfo_IPsecPerSvcsetInfo.Size(m)
@@ -367,17 +362,16 @@ func (m *IPsecPerTunnelInfo) Reset()         { *m = IPsecPerTunnelInfo{} }
 func (m *IPsecPerTunnelInfo) String() string { return proto.CompactTextString(m) }
 func (*IPsecPerTunnelInfo) ProtoMessage()    {}
 func (*IPsecPerTunnelInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_62544e4535d94422, []int{3}
+	return fileDescriptor_ipsec_telemetry_c3a587dc5133bb50, []int{3}
 }
-
 func (m *IPsecPerTunnelInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IPsecPerTunnelInfo.Unmarshal(m, b)
 }
 func (m *IPsecPerTunnelInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IPsecPerTunnelInfo.Marshal(b, m, deterministic)
 }
-func (m *IPsecPerTunnelInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IPsecPerTunnelInfo.Merge(m, src)
+func (dst *IPsecPerTunnelInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IPsecPerTunnelInfo.Merge(dst, src)
 }
 func (m *IPsecPerTunnelInfo) XXX_Size() int {
 	return xxx_messageInfo_IPsecPerTunnelInfo.Size(m)
@@ -545,9 +539,11 @@ func init() {
 	proto.RegisterExtension(E_JnprIPsecVPNExt)
 }
 
-func init() { proto.RegisterFile("ipsec_telemetry.proto", fileDescriptor_62544e4535d94422) }
+func init() {
+	proto.RegisterFile("ipsec_telemetry.proto", fileDescriptor_ipsec_telemetry_c3a587dc5133bb50)
+}
 
-var fileDescriptor_62544e4535d94422 = []byte{
+var fileDescriptor_ipsec_telemetry_c3a587dc5133bb50 = []byte{
 	// 935 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x95, 0xd1, 0x6e, 0x1b, 0x45,
 	0x14, 0x86, 0xe5, 0x24, 0xb4, 0xc9, 0x38, 0x4d, 0x9c, 0x71, 0xd3, 0x2e, 0xe5, 0x82, 0x60, 0x09,

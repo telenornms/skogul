@@ -111,6 +111,23 @@ message Path {
     //   For event sensor, applicable when initial dump is over
     //     (same as EOS)
     bool need_eom                                           = 6;
+
+    // To denote if the path is from OC, IETF
+    // or some other standards
+    string origin                                           = 100;
+
+    // Allow the target to decide if the updates need to be sent
+    // periodically or on-change for the leaves under this path.
+    //   If this is set to true and sample_frequency is non-zero,
+    //     then whichever leaves support on-change will be
+    //     streamed on change and other leaves will be streamed
+    //     at the cadence requested as per sample_frequency.
+    //   If this is set to true and sample_frequency is zero,
+    //     then it will be considered as on-change only.
+    //   If this is set to false, then the streaming will be
+    //     will be periodic if sample_frequency is non-zero
+    //     and will be on-change if sample_frequency is zero.
+    bool target_defined                                     = 101;
 }
 
 // Configure subscription request additional features.
@@ -123,6 +140,9 @@ message SubscriptionAdditionalConfig {
 
     // EOS needed for this subscription?
     bool need_eos                                           = 3;
+
+    // Subscription mode (long-lived, one_off or poll)
+    SubscriptionMode mode                                   = 4;
 }
 
 // Message sent for a telemetry subscription request
@@ -316,4 +336,13 @@ enum EncodingType {
     XML                                                     = 1;
     JSON_IETF                                               = 2;
     PROTO3                                                  = 3;
+}
+
+// Subscription modes
+enum SubscriptionMode {
+    LONG_LIVED                                              = 0;
+    // Not supported
+    ONE_OFF                                                 = 1;
+    // Not supported
+    POLL                                                    = 2;
 }

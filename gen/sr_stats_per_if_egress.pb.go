@@ -3,11 +3,9 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 //
 // Top-level message
@@ -35,17 +33,16 @@ func (m *SrStatsPerIfEgress) Reset()         { *m = SrStatsPerIfEgress{} }
 func (m *SrStatsPerIfEgress) String() string { return proto.CompactTextString(m) }
 func (*SrStatsPerIfEgress) ProtoMessage()    {}
 func (*SrStatsPerIfEgress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d06dd05b32f9304e, []int{0}
+	return fileDescriptor_sr_stats_per_if_egress_5748946a777109e4, []int{0}
 }
-
 func (m *SrStatsPerIfEgress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SrStatsPerIfEgress.Unmarshal(m, b)
 }
 func (m *SrStatsPerIfEgress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SrStatsPerIfEgress.Marshal(b, m, deterministic)
 }
-func (m *SrStatsPerIfEgress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SrStatsPerIfEgress.Merge(m, src)
+func (dst *SrStatsPerIfEgress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SrStatsPerIfEgress.Merge(dst, src)
 }
 func (m *SrStatsPerIfEgress) XXX_Size() int {
 	return xxx_messageInfo_SrStatsPerIfEgress.Size(m)
@@ -87,17 +84,16 @@ func (m *SegmentRoutingInterfaceRecord) Reset()         { *m = SegmentRoutingInt
 func (m *SegmentRoutingInterfaceRecord) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingInterfaceRecord) ProtoMessage()    {}
 func (*SegmentRoutingInterfaceRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d06dd05b32f9304e, []int{1}
+	return fileDescriptor_sr_stats_per_if_egress_5748946a777109e4, []int{1}
 }
-
 func (m *SegmentRoutingInterfaceRecord) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingInterfaceRecord.Unmarshal(m, b)
 }
 func (m *SegmentRoutingInterfaceRecord) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingInterfaceRecord.Marshal(b, m, deterministic)
 }
-func (m *SegmentRoutingInterfaceRecord) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingInterfaceRecord.Merge(m, src)
+func (dst *SegmentRoutingInterfaceRecord) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingInterfaceRecord.Merge(dst, src)
 }
 func (m *SegmentRoutingInterfaceRecord) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingInterfaceRecord.Size(m)
@@ -159,17 +155,16 @@ func (m *SegmentRoutingIfStats) Reset()         { *m = SegmentRoutingIfStats{} }
 func (m *SegmentRoutingIfStats) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingIfStats) ProtoMessage()    {}
 func (*SegmentRoutingIfStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d06dd05b32f9304e, []int{2}
+	return fileDescriptor_sr_stats_per_if_egress_5748946a777109e4, []int{2}
 }
-
 func (m *SegmentRoutingIfStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingIfStats.Unmarshal(m, b)
 }
 func (m *SegmentRoutingIfStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingIfStats.Marshal(b, m, deterministic)
 }
-func (m *SegmentRoutingIfStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingIfStats.Merge(m, src)
+func (dst *SegmentRoutingIfStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingIfStats.Merge(dst, src)
 }
 func (m *SegmentRoutingIfStats) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingIfStats.Size(m)
@@ -213,7 +208,7 @@ var E_JnprSrStatsPerIfEgressExt = &proto.ExtensionDesc{
 	ExtensionType: (*SrStatsPerIfEgress)(nil),
 	Field:         17,
 	Name:          "jnpr_sr_stats_per_if_egress_ext",
-	Tag:           "bytes,17,opt,name=jnpr_sr_stats_per_if_egress_ext",
+	Tag:           "bytes,17,opt,name=jnpr_sr_stats_per_if_egress_ext,json=jnprSrStatsPerIfEgressExt",
 	Filename:      "sr_stats_per_if_egress.proto",
 }
 
@@ -224,9 +219,11 @@ func init() {
 	proto.RegisterExtension(E_JnprSrStatsPerIfEgressExt)
 }
 
-func init() { proto.RegisterFile("sr_stats_per_if_egress.proto", fileDescriptor_d06dd05b32f9304e) }
+func init() {
+	proto.RegisterFile("sr_stats_per_if_egress.proto", fileDescriptor_sr_stats_per_if_egress_5748946a777109e4)
+}
 
-var fileDescriptor_d06dd05b32f9304e = []byte{
+var fileDescriptor_sr_stats_per_if_egress_5748946a777109e4 = []byte{
 	// 384 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x92, 0x4f, 0x6f, 0xd4, 0x30,
 	0x10, 0xc5, 0xe5, 0xed, 0x2e, 0x6d, 0x27, 0xa1, 0x12, 0xae, 0x80, 0xf0, 0xaf, 0x8d, 0xf6, 0x80,

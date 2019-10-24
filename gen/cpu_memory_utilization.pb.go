@@ -3,11 +3,9 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 //
 // The top level message is CpuMemoryUtilization
@@ -34,17 +32,16 @@ func (m *CpuMemoryUtilization) Reset()         { *m = CpuMemoryUtilization{} }
 func (m *CpuMemoryUtilization) String() string { return proto.CompactTextString(m) }
 func (*CpuMemoryUtilization) ProtoMessage()    {}
 func (*CpuMemoryUtilization) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d3a983ae9003ef42, []int{0}
+	return fileDescriptor_cpu_memory_utilization_027bc4f6700b9325, []int{0}
 }
-
 func (m *CpuMemoryUtilization) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CpuMemoryUtilization.Unmarshal(m, b)
 }
 func (m *CpuMemoryUtilization) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CpuMemoryUtilization.Marshal(b, m, deterministic)
 }
-func (m *CpuMemoryUtilization) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CpuMemoryUtilization.Merge(m, src)
+func (dst *CpuMemoryUtilization) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CpuMemoryUtilization.Merge(dst, src)
 }
 func (m *CpuMemoryUtilization) XXX_Size() int {
 	return xxx_messageInfo_CpuMemoryUtilization.Size(m)
@@ -85,17 +82,16 @@ func (m *CpuMemoryUtilizationSummary) Reset()         { *m = CpuMemoryUtilizatio
 func (m *CpuMemoryUtilizationSummary) String() string { return proto.CompactTextString(m) }
 func (*CpuMemoryUtilizationSummary) ProtoMessage()    {}
 func (*CpuMemoryUtilizationSummary) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d3a983ae9003ef42, []int{1}
+	return fileDescriptor_cpu_memory_utilization_027bc4f6700b9325, []int{1}
 }
-
 func (m *CpuMemoryUtilizationSummary) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CpuMemoryUtilizationSummary.Unmarshal(m, b)
 }
 func (m *CpuMemoryUtilizationSummary) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CpuMemoryUtilizationSummary.Marshal(b, m, deterministic)
 }
-func (m *CpuMemoryUtilizationSummary) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CpuMemoryUtilizationSummary.Merge(m, src)
+func (dst *CpuMemoryUtilizationSummary) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CpuMemoryUtilizationSummary.Merge(dst, src)
 }
 func (m *CpuMemoryUtilizationSummary) XXX_Size() int {
 	return xxx_messageInfo_CpuMemoryUtilizationSummary.Size(m)
@@ -162,17 +158,16 @@ func (m *CpuMemoryUtilizationPerApplication) Reset()         { *m = CpuMemoryUti
 func (m *CpuMemoryUtilizationPerApplication) String() string { return proto.CompactTextString(m) }
 func (*CpuMemoryUtilizationPerApplication) ProtoMessage()    {}
 func (*CpuMemoryUtilizationPerApplication) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d3a983ae9003ef42, []int{2}
+	return fileDescriptor_cpu_memory_utilization_027bc4f6700b9325, []int{2}
 }
-
 func (m *CpuMemoryUtilizationPerApplication) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CpuMemoryUtilizationPerApplication.Unmarshal(m, b)
 }
 func (m *CpuMemoryUtilizationPerApplication) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CpuMemoryUtilizationPerApplication.Marshal(b, m, deterministic)
 }
-func (m *CpuMemoryUtilizationPerApplication) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CpuMemoryUtilizationPerApplication.Merge(m, src)
+func (dst *CpuMemoryUtilizationPerApplication) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CpuMemoryUtilizationPerApplication.Merge(dst, src)
 }
 func (m *CpuMemoryUtilizationPerApplication) XXX_Size() int {
 	return xxx_messageInfo_CpuMemoryUtilizationPerApplication.Size(m)
@@ -223,7 +218,7 @@ var E_CpuMemoryUtilExt = &proto.ExtensionDesc{
 	ExtensionType: (*CpuMemoryUtilization)(nil),
 	Field:         1,
 	Name:          "cpu_memory_util_ext",
-	Tag:           "bytes,1,opt,name=cpu_memory_util_ext",
+	Tag:           "bytes,1,opt,name=cpu_memory_util_ext,json=cpuMemoryUtilExt",
 	Filename:      "cpu_memory_utilization.proto",
 }
 
@@ -234,9 +229,11 @@ func init() {
 	proto.RegisterExtension(E_CpuMemoryUtilExt)
 }
 
-func init() { proto.RegisterFile("cpu_memory_utilization.proto", fileDescriptor_d3a983ae9003ef42) }
+func init() {
+	proto.RegisterFile("cpu_memory_utilization.proto", fileDescriptor_cpu_memory_utilization_027bc4f6700b9325)
+}
 
-var fileDescriptor_d3a983ae9003ef42 = []byte{
+var fileDescriptor_cpu_memory_utilization_027bc4f6700b9325 = []byte{
 	// 328 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0xc1, 0x4a, 0x3b, 0x31,
 	0x10, 0xc6, 0x49, 0xbb, 0x7b, 0xf8, 0xa7, 0xf0, 0x57, 0xd3, 0x6a, 0x17, 0xed, 0x61, 0x59, 0x0f,

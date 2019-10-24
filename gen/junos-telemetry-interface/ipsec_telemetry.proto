@@ -22,7 +22,7 @@
 // Shibu Piriyath 2017-09-11
 //
 // This file defines the messages in Protocol Buffers used by
-// the interface sensor. The top-level message is IPsecVPN.
+// the IPSec sensor. The top-level message is IPsecVPN.
 //
 
 syntax = "proto2";
@@ -38,7 +38,6 @@ extend JuniperNetworksSensors {
 
 //
 // Top-level message
-//
 //
 
 message IPsecVPN {

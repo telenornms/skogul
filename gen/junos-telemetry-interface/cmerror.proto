@@ -88,6 +88,19 @@ message Error {
 
 }
 
+message GlobalErrorConfiguration {
+
+    // configuration bucket identifier
+    optional string scope    = 1;
+    optional string category = 2;
+    optional string severity = 3;
+
+    // configured parameters for this bucket.
+    optional uint32 threshold = 4;
+    optional uint32 action    = 5;
+
+}
+
 // 
 // Top-level Cmerror message 
 // 
@@ -101,6 +114,13 @@ message Cmerror {
 
     /* This will toggle at start of every wrap cycle */
     optional bool wrap_cycle_marker = 3;
+
+    // Fru slot identifier
+    optional uint32 fru_slot = 4;
+    optional string fru_type = 5;
+
+    // Collection of global configuration items
+    repeated GlobalErrorConfiguration global_configuration_item = 6;
 }
 
 

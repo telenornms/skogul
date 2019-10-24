@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional mpls_pfe_mpls_ldp_p2mp_lsp_branch jnpr_mpls_pfe_mpls_ldp_p2mp_lsp_branch_ext = 90;
+}
+
+message mpls_pfe_mpls_ldp_p2mp_lsp_branch {
+   optional signaling_protocols_type signaling_protocols = 151;
+   message signaling_protocols_type {
+      optional ldp_type ldp = 151;
+      message ldp_type {
+         optional p2mp_lsp_branches_type p2mp_lsp_branches = 151;
+         message p2mp_lsp_branches_type {
+            message p2mp_lsp_branch_list {
+               optional state_type state = 151;
+               message state_type {
+                  message counters_list {
+                  }
+                  repeated counters_list counters = 151;
+               }
+            }
+            repeated p2mp_lsp_branch_list p2mp_lsp_branch = 151;
+         }
+      }
+   }
+}

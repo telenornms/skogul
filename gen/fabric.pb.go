@@ -3,11 +3,9 @@
 
 package gen
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type FabricMessageSensorLocation int32
 
@@ -31,7 +29,6 @@ var FabricMessageSensorLocation_name = map[int32]string{
 	1: "Linecard",
 	2: "Switch_Fabric",
 }
-
 var FabricMessageSensorLocation_value = map[string]int32{
 	"Linecard":      1,
 	"Switch_Fabric": 2,
@@ -42,11 +39,9 @@ func (x FabricMessageSensorLocation) Enum() *FabricMessageSensorLocation {
 	*p = x
 	return p
 }
-
 func (x FabricMessageSensorLocation) String() string {
 	return proto.EnumName(FabricMessageSensorLocation_name, int32(x))
 }
-
 func (x *FabricMessageSensorLocation) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(FabricMessageSensorLocation_value, data, "FabricMessageSensorLocation")
 	if err != nil {
@@ -55,9 +50,8 @@ func (x *FabricMessageSensorLocation) UnmarshalJSON(data []byte) error {
 	*x = FabricMessageSensorLocation(value)
 	return nil
 }
-
 func (FabricMessageSensorLocation) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_284efff686d8e9bf, []int{0, 0}
+	return fileDescriptor_fabric_2c7388a046c090c3, []int{0, 0}
 }
 
 type EdgeStatsIdentifierType int32
@@ -71,7 +65,6 @@ var EdgeStatsIdentifierType_name = map[int32]string{
 	1: "Switch_Fabric",
 	2: "Linecard",
 }
-
 var EdgeStatsIdentifierType_value = map[string]int32{
 	"Switch_Fabric": 1,
 	"Linecard":      2,
@@ -82,11 +75,9 @@ func (x EdgeStatsIdentifierType) Enum() *EdgeStatsIdentifierType {
 	*p = x
 	return p
 }
-
 func (x EdgeStatsIdentifierType) String() string {
 	return proto.EnumName(EdgeStatsIdentifierType_name, int32(x))
 }
-
 func (x *EdgeStatsIdentifierType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EdgeStatsIdentifierType_value, data, "EdgeStatsIdentifierType")
 	if err != nil {
@@ -95,9 +86,8 @@ func (x *EdgeStatsIdentifierType) UnmarshalJSON(data []byte) error {
 	*x = EdgeStatsIdentifierType(value)
 	return nil
 }
-
 func (EdgeStatsIdentifierType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_284efff686d8e9bf, []int{1, 0}
+	return fileDescriptor_fabric_2c7388a046c090c3, []int{1, 0}
 }
 
 type FabricMessage struct {
@@ -112,17 +102,16 @@ func (m *FabricMessage) Reset()         { *m = FabricMessage{} }
 func (m *FabricMessage) String() string { return proto.CompactTextString(m) }
 func (*FabricMessage) ProtoMessage()    {}
 func (*FabricMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_284efff686d8e9bf, []int{0}
+	return fileDescriptor_fabric_2c7388a046c090c3, []int{0}
 }
-
 func (m *FabricMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FabricMessage.Unmarshal(m, b)
 }
 func (m *FabricMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FabricMessage.Marshal(b, m, deterministic)
 }
-func (m *FabricMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FabricMessage.Merge(m, src)
+func (dst *FabricMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FabricMessage.Merge(dst, src)
 }
 func (m *FabricMessage) XXX_Size() int {
 	return xxx_messageInfo_FabricMessage.Size(m)
@@ -165,17 +154,16 @@ func (m *EdgeStats) Reset()         { *m = EdgeStats{} }
 func (m *EdgeStats) String() string { return proto.CompactTextString(m) }
 func (*EdgeStats) ProtoMessage()    {}
 func (*EdgeStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_284efff686d8e9bf, []int{1}
+	return fileDescriptor_fabric_2c7388a046c090c3, []int{1}
 }
-
 func (m *EdgeStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_EdgeStats.Unmarshal(m, b)
 }
 func (m *EdgeStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_EdgeStats.Marshal(b, m, deterministic)
 }
-func (m *EdgeStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EdgeStats.Merge(m, src)
+func (dst *EdgeStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EdgeStats.Merge(dst, src)
 }
 func (m *EdgeStats) XXX_Size() int {
 	return xxx_messageInfo_EdgeStats.Size(m)
@@ -249,17 +237,16 @@ func (m *ClassStats) Reset()         { *m = ClassStats{} }
 func (m *ClassStats) String() string { return proto.CompactTextString(m) }
 func (*ClassStats) ProtoMessage()    {}
 func (*ClassStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_284efff686d8e9bf, []int{2}
+	return fileDescriptor_fabric_2c7388a046c090c3, []int{2}
 }
-
 func (m *ClassStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClassStats.Unmarshal(m, b)
 }
 func (m *ClassStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ClassStats.Marshal(b, m, deterministic)
 }
-func (m *ClassStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ClassStats.Merge(m, src)
+func (dst *ClassStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ClassStats.Merge(dst, src)
 }
 func (m *ClassStats) XXX_Size() int {
 	return xxx_messageInfo_ClassStats.Size(m)
@@ -324,17 +311,16 @@ func (m *Counters) Reset()         { *m = Counters{} }
 func (m *Counters) String() string { return proto.CompactTextString(m) }
 func (*Counters) ProtoMessage()    {}
 func (*Counters) Descriptor() ([]byte, []int) {
-	return fileDescriptor_284efff686d8e9bf, []int{3}
+	return fileDescriptor_fabric_2c7388a046c090c3, []int{3}
 }
-
 func (m *Counters) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Counters.Unmarshal(m, b)
 }
 func (m *Counters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Counters.Marshal(b, m, deterministic)
 }
-func (m *Counters) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Counters.Merge(m, src)
+func (dst *Counters) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Counters.Merge(dst, src)
 }
 func (m *Counters) XXX_Size() int {
 	return xxx_messageInfo_Counters.Size(m)
@@ -453,18 +439,18 @@ var E_FabricMessageExt = &proto.ExtensionDesc{
 }
 
 func init() {
-	proto.RegisterEnum("FabricMessageSensorLocation", FabricMessageSensorLocation_name, FabricMessageSensorLocation_value)
-	proto.RegisterEnum("EdgeStatsIdentifierType", EdgeStatsIdentifierType_name, EdgeStatsIdentifierType_value)
 	proto.RegisterType((*FabricMessage)(nil), "fabric_message")
 	proto.RegisterType((*EdgeStats)(nil), "edge_stats")
 	proto.RegisterType((*ClassStats)(nil), "class_stats")
 	proto.RegisterType((*Counters)(nil), "counters")
+	proto.RegisterEnum("FabricMessageSensorLocation", FabricMessageSensorLocation_name, FabricMessageSensorLocation_value)
+	proto.RegisterEnum("EdgeStatsIdentifierType", EdgeStatsIdentifierType_name, EdgeStatsIdentifierType_value)
 	proto.RegisterExtension(E_FabricMessageExt)
 }
 
-func init() { proto.RegisterFile("fabric.proto", fileDescriptor_284efff686d8e9bf) }
+func init() { proto.RegisterFile("fabric.proto", fileDescriptor_fabric_2c7388a046c090c3) }
 
-var fileDescriptor_284efff686d8e9bf = []byte{
+var fileDescriptor_fabric_2c7388a046c090c3 = []byte{
 	// 659 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0x4f, 0x6f, 0xd3, 0x4c,
 	0x10, 0xc6, 0xe5, 0xb4, 0x69, 0x93, 0x71, 0xfe, 0x75, 0xfb, 0x56, 0xb5, 0xde, 0x1e, 0xda, 0x46,
