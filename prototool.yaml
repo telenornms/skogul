@@ -1,3 +1,11 @@
+excludes:
+  # Extension number 44 has already been used in "JuniperNetworksSensors" by extension "jnpr_junos_l2tp_ext" defined in jl2tpd_oc.proto.
+  - ./gen/junos-telemetry-interface/jl2tpd_oc.proto
+  - ./gen/junos-telemetry-interface/sr_te_transit_tunnel_stats.proto
+  # Extension number 45 has already been used in "JuniperNetworksSensors" by extension "jnpr_junos_ppp_ext" defined in jpppd_oc.proto
+  - ./gen/junos-telemetry-interface/jpppd_oc.proto
+  - ./gen/junos-telemetry-interface/sr_te_ingress_tunnel_stats.proto
+
 protoc:
   version: 3.8.0
   includes:
