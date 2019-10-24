@@ -24,3 +24,4 @@ generate:
     - name: go
       type: go
       output: ./gen
+      flags: import_path=gen
