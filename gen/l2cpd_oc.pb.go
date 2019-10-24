@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type LldpL2Cp struct {
 	State                *LldpL2CpStateType      `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
@@ -30,16 +32,17 @@ func (m *LldpL2Cp) Reset()         { *m = LldpL2Cp{} }
 func (m *LldpL2Cp) String() string { return proto.CompactTextString(m) }
 func (*LldpL2Cp) ProtoMessage()    {}
 func (*LldpL2Cp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0}
 }
+
 func (m *LldpL2Cp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2Cp.Unmarshal(m, b)
 }
 func (m *LldpL2Cp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2Cp.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2Cp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2Cp.Merge(dst, src)
+func (m *LldpL2Cp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2Cp.Merge(m, src)
 }
 func (m *LldpL2Cp) XXX_Size() int {
 	return xxx_messageInfo_LldpL2Cp.Size(m)
@@ -82,16 +85,17 @@ func (m *LldpL2CpStateType) Reset()         { *m = LldpL2CpStateType{} }
 func (m *LldpL2CpStateType) String() string { return proto.CompactTextString(m) }
 func (*LldpL2CpStateType) ProtoMessage()    {}
 func (*LldpL2CpStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 0}
 }
+
 func (m *LldpL2CpStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpStateType.Unmarshal(m, b)
 }
 func (m *LldpL2CpStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpStateType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpStateType.Merge(dst, src)
+func (m *LldpL2CpStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpStateType.Merge(m, src)
 }
 func (m *LldpL2CpStateType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpStateType.Size(m)
@@ -177,16 +181,17 @@ func (m *LldpL2CpStateTypeCountersType) Reset()         { *m = LldpL2CpStateType
 func (m *LldpL2CpStateTypeCountersType) String() string { return proto.CompactTextString(m) }
 func (*LldpL2CpStateTypeCountersType) ProtoMessage()    {}
 func (*LldpL2CpStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 0, 0}
 }
+
 func (m *LldpL2CpStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *LldpL2CpStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpStateTypeCountersType.Merge(dst, src)
+func (m *LldpL2CpStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpStateTypeCountersType.Merge(m, src)
 }
 func (m *LldpL2CpStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpStateTypeCountersType.Size(m)
@@ -271,16 +276,17 @@ func (m *LldpL2CpInterfacesType) Reset()         { *m = LldpL2CpInterfacesType{}
 func (m *LldpL2CpInterfacesType) String() string { return proto.CompactTextString(m) }
 func (*LldpL2CpInterfacesType) ProtoMessage()    {}
 func (*LldpL2CpInterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1}
 }
+
 func (m *LldpL2CpInterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesType.Merge(dst, src)
+func (m *LldpL2CpInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesType.Size(m)
@@ -311,16 +317,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceList) Reset()         { *m = LldpL2CpInt
 func (m *LldpL2CpInterfacesTypeInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*LldpL2CpInterfacesTypeInterfaceList) ProtoMessage()    {}
 func (*LldpL2CpInterfacesTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceList.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceList.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceList.Size(m)
@@ -371,16 +378,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListStateType) String() string {
 }
 func (*LldpL2CpInterfacesTypeInterfaceListStateType) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateType.Size(m)
@@ -448,16 +456,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) String() stri
 }
 func (*LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 0, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListStateTypeCountersType.Size(m)
@@ -539,16 +548,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsType) String() string {
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsType) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsType.Size(m)
@@ -584,16 +594,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) String() 
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborList.Size(m)
@@ -658,16 +669,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) 
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListStateType.Size(m)
@@ -777,16 +789,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsT
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 1}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 1}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsType.Size(m)
@@ -823,16 +836,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsT
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) ProtoMessage() {
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 1, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 1, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvList.Size(m)
@@ -890,16 +904,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsT
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) ProtoMessage() {
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 1, 0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 1, 0, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCustomTlvsTypeTlvListStateType.Size(m)
@@ -953,16 +968,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitie
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) ProtoMessage() {}
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 2}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 2}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesType.Size(m)
@@ -997,16 +1013,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitie
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) ProtoMessage() {
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 2, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 2, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityList.Size(m)
@@ -1048,16 +1065,17 @@ func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitie
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) ProtoMessage() {
 }
 func (*LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2cpd_oc_f4c30f0199c612d4, []int{0, 1, 0, 1, 0, 2, 0, 0}
+	return fileDescriptor_c03dcda3397cbbab, []int{0, 1, 0, 1, 0, 2, 0, 0}
 }
+
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType.Unmarshal(m, b)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType.Merge(dst, src)
+func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType.Merge(m, src)
 }
 func (m *LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType) XXX_Size() int {
 	return xxx_messageInfo_LldpL2CpInterfacesTypeInterfaceListNeighborsTypeNeighborListCapabilitiesTypeCapabilityListStateType.Size(m)
@@ -1087,7 +1105,7 @@ var E_JnprLldpL2CpExt = &proto.ExtensionDesc{
 	ExtensionType: (*LldpL2Cp)(nil),
 	Field:         51,
 	Name:          "jnpr_lldp_l2cp_ext",
-	Tag:           "bytes,51,opt,name=jnpr_lldp_l2cp_ext,json=jnprLldpL2cpExt",
+	Tag:           "bytes,51,opt,name=jnpr_lldp_l2cp_ext",
 	Filename:      "l2cpd_oc.proto",
 }
 
@@ -1111,9 +1129,9 @@ func init() {
 	proto.RegisterExtension(E_JnprLldpL2CpExt)
 }
 
-func init() { proto.RegisterFile("l2cpd_oc.proto", fileDescriptor_l2cpd_oc_f4c30f0199c612d4) }
+func init() { proto.RegisterFile("l2cpd_oc.proto", fileDescriptor_c03dcda3397cbbab) }
 
-var fileDescriptor_l2cpd_oc_f4c30f0199c612d4 = []byte{
+var fileDescriptor_c03dcda3397cbbab = []byte{
 	// 1144 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x56, 0xdd, 0x52, 0x1c, 0x45,
 	0x14, 0xae, 0x61, 0x41, 0x76, 0x0f, 0xec, 0x2e, 0x69, 0xa1, 0x98, 0x8c, 0xa5, 0xae, 0xc6, 0x8a,

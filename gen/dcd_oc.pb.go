@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InterfacesInterface struct {
 	Interface            []*InterfacesInterfaceInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *InterfacesInterface) Reset()         { *m = InterfacesInterface{} }
 func (m *InterfacesInterface) String() string { return proto.CompactTextString(m) }
 func (*InterfacesInterface) ProtoMessage()    {}
 func (*InterfacesInterface) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dcd_oc_1a6e99ece2642c81, []int{0}
+	return fileDescriptor_49af152afdbe540c, []int{0}
 }
+
 func (m *InterfacesInterface) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesInterface.Unmarshal(m, b)
 }
 func (m *InterfacesInterface) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesInterface.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesInterface) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesInterface.Merge(dst, src)
+func (m *InterfacesInterface) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesInterface.Merge(m, src)
 }
 func (m *InterfacesInterface) XXX_Size() int {
 	return xxx_messageInfo_InterfacesInterface.Size(m)
@@ -68,16 +71,17 @@ func (m *InterfacesInterfaceInterfaceList) Reset()         { *m = InterfacesInte
 func (m *InterfacesInterfaceInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*InterfacesInterfaceInterfaceList) ProtoMessage()    {}
 func (*InterfacesInterfaceInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dcd_oc_1a6e99ece2642c81, []int{0, 0}
+	return fileDescriptor_49af152afdbe540c, []int{0, 0}
 }
+
 func (m *InterfacesInterfaceInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesInterfaceInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesInterfaceInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesInterfaceInterfaceList.Merge(dst, src)
+func (m *InterfacesInterfaceInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesInterfaceInterfaceList.Merge(m, src)
 }
 func (m *InterfacesInterfaceInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceList.Size(m)
@@ -117,16 +121,17 @@ func (m *InterfacesInterfaceInterfaceListAggregationType) String() string {
 }
 func (*InterfacesInterfaceInterfaceListAggregationType) ProtoMessage() {}
 func (*InterfacesInterfaceInterfaceListAggregationType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dcd_oc_1a6e99ece2642c81, []int{0, 0, 0}
+	return fileDescriptor_49af152afdbe540c, []int{0, 0, 0}
 }
+
 func (m *InterfacesInterfaceInterfaceListAggregationType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationType.Unmarshal(m, b)
 }
 func (m *InterfacesInterfaceInterfaceListAggregationType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesInterfaceInterfaceListAggregationType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationType.Merge(dst, src)
+func (m *InterfacesInterfaceInterfaceListAggregationType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationType.Merge(m, src)
 }
 func (m *InterfacesInterfaceInterfaceListAggregationType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationType.Size(m)
@@ -162,16 +167,17 @@ func (m *InterfacesInterfaceInterfaceListAggregationTypeStateType) String() stri
 }
 func (*InterfacesInterfaceInterfaceListAggregationTypeStateType) ProtoMessage() {}
 func (*InterfacesInterfaceInterfaceListAggregationTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dcd_oc_1a6e99ece2642c81, []int{0, 0, 0, 0}
+	return fileDescriptor_49af152afdbe540c, []int{0, 0, 0, 0}
 }
+
 func (m *InterfacesInterfaceInterfaceListAggregationTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesInterfaceInterfaceListAggregationTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesInterfaceInterfaceListAggregationTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationTypeStateType.Merge(dst, src)
+func (m *InterfacesInterfaceInterfaceListAggregationTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationTypeStateType.Merge(m, src)
 }
 func (m *InterfacesInterfaceInterfaceListAggregationTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesInterfaceInterfaceListAggregationTypeStateType.Size(m)
@@ -215,7 +221,7 @@ var E_JnprInterfacesInterfaceExt = &proto.ExtensionDesc{
 	ExtensionType: (*InterfacesInterface)(nil),
 	Field:         41,
 	Name:          "jnpr_interfaces_interface_ext",
-	Tag:           "bytes,41,opt,name=jnpr_interfaces_interface_ext,json=jnprInterfacesInterfaceExt",
+	Tag:           "bytes,41,opt,name=jnpr_interfaces_interface_ext",
 	Filename:      "dcd_oc.proto",
 }
 
@@ -227,9 +233,9 @@ func init() {
 	proto.RegisterExtension(E_JnprInterfacesInterfaceExt)
 }
 
-func init() { proto.RegisterFile("dcd_oc.proto", fileDescriptor_dcd_oc_1a6e99ece2642c81) }
+func init() { proto.RegisterFile("dcd_oc.proto", fileDescriptor_49af152afdbe540c) }
 
-var fileDescriptor_dcd_oc_1a6e99ece2642c81 = []byte{
+var fileDescriptor_49af152afdbe540c = []byte{
 	// 336 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x50, 0xbd, 0x4e, 0xf3, 0x40,
 	0x10, 0x94, 0x93, 0x2f, 0x1f, 0xf1, 0x06, 0x10, 0x32, 0x7f, 0x8e, 0x11, 0x92, 0x85, 0x28, 0x4c,

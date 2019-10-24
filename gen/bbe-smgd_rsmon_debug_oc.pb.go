@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type DebugRsmonDebug struct {
 	System               *DebugRsmonDebugSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *DebugRsmonDebug) Reset()         { *m = DebugRsmonDebug{} }
 func (m *DebugRsmonDebug) String() string { return proto.CompactTextString(m) }
 func (*DebugRsmonDebug) ProtoMessage()    {}
 func (*DebugRsmonDebug) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0}
+	return fileDescriptor_ef015e367e22db8a, []int{0}
 }
+
 func (m *DebugRsmonDebug) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebug.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebug) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebug.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebug) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebug.Merge(dst, src)
+func (m *DebugRsmonDebug) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebug.Merge(m, src)
 }
 func (m *DebugRsmonDebug) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebug.Size(m)
@@ -67,16 +70,17 @@ func (m *DebugRsmonDebugSystemType) Reset()         { *m = DebugRsmonDebugSystem
 func (m *DebugRsmonDebugSystemType) String() string { return proto.CompactTextString(m) }
 func (*DebugRsmonDebugSystemType) ProtoMessage()    {}
 func (*DebugRsmonDebugSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0}
 }
+
 func (m *DebugRsmonDebugSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemType.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemType.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemType.Merge(dst, src)
+func (m *DebugRsmonDebugSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemType.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemType) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *DebugRsmonDebugSystemTypeSubscriberManagementType) String() string {
 }
 func (*DebugRsmonDebugSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*DebugRsmonDebugSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0, 0}
 }
+
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *DebugRsmonDebugSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) String() st
 }
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) ProtoMessage() {}
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0, 0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0, 0, 0}
 }
+
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType.Merge(dst, src)
+func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraType.Size(m)
@@ -193,16 +199,17 @@ func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 }
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) ProtoMessage() {}
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0, 0, 0, 0}
 }
+
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Merge(dst, src)
+func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Size(m)
@@ -236,16 +243,17 @@ func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) ProtoMessage() {
 }
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Merge(dst, src)
+func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Size(m)
@@ -280,16 +288,17 @@ func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) ProtoMessage() {
 }
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Merge(dst, src)
+func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Size(m)
@@ -331,16 +340,17 @@ func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) ProtoMessage() {
 }
 func (*DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b, []int{0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_ef015e367e22db8a, []int{0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Unmarshal(m, b)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Merge(dst, src)
+func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Merge(m, src)
 }
 func (m *DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_DebugRsmonDebugSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Size(m)
@@ -370,7 +380,7 @@ var E_JnprDebugRsmonDebugExt = &proto.ExtensionDesc{
 	ExtensionType: (*DebugRsmonDebug)(nil),
 	Field:         36,
 	Name:          "jnpr_debug_rsmon_debug_ext",
-	Tag:           "bytes,36,opt,name=jnpr_debug_rsmon_debug_ext,json=jnprDebugRsmonDebugExt",
+	Tag:           "bytes,36,opt,name=jnpr_debug_rsmon_debug_ext",
 	Filename:      "bbe-smgd_rsmon_debug_oc.proto",
 }
 
@@ -386,11 +396,9 @@ func init() {
 	proto.RegisterExtension(E_JnprDebugRsmonDebugExt)
 }
 
-func init() {
-	proto.RegisterFile("bbe-smgd_rsmon_debug_oc.proto", fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b)
-}
+func init() { proto.RegisterFile("bbe-smgd_rsmon_debug_oc.proto", fileDescriptor_ef015e367e22db8a) }
 
-var fileDescriptor_bbe_smgd_rsmon_debug_oc_4267c9ddb1e0897b = []byte{
+var fileDescriptor_ef015e367e22db8a = []byte{
 	// 446 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x90, 0xb1, 0x8a, 0x14, 0x41,
 	0x10, 0x86, 0x99, 0xdb, 0xdd, 0x73, 0xad, 0x45, 0x4e, 0x5b, 0x4f, 0xd7, 0x06, 0xf5, 0x10, 0x83,

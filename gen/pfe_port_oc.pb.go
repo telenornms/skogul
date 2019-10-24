@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InterfacesPfePort struct {
 	Interface            []*InterfacesPfePortInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *InterfacesPfePort) Reset()         { *m = InterfacesPfePort{} }
 func (m *InterfacesPfePort) String() string { return proto.CompactTextString(m) }
 func (*InterfacesPfePort) ProtoMessage()    {}
 func (*InterfacesPfePort) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_port_oc_eaddf1ab324b34d8, []int{0}
+	return fileDescriptor_87ca96f985bf0515, []int{0}
 }
+
 func (m *InterfacesPfePort) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesPfePort.Unmarshal(m, b)
 }
 func (m *InterfacesPfePort) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesPfePort.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesPfePort) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesPfePort.Merge(dst, src)
+func (m *InterfacesPfePort) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesPfePort.Merge(m, src)
 }
 func (m *InterfacesPfePort) XXX_Size() int {
 	return xxx_messageInfo_InterfacesPfePort.Size(m)
@@ -67,16 +70,17 @@ func (m *InterfacesPfePortInterfaceList) Reset()         { *m = InterfacesPfePor
 func (m *InterfacesPfePortInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*InterfacesPfePortInterfaceList) ProtoMessage()    {}
 func (*InterfacesPfePortInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_port_oc_eaddf1ab324b34d8, []int{0, 0}
+	return fileDescriptor_87ca96f985bf0515, []int{0, 0}
 }
+
 func (m *InterfacesPfePortInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesPfePortInterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesPfePortInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesPfePortInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesPfePortInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesPfePortInterfaceList.Merge(dst, src)
+func (m *InterfacesPfePortInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesPfePortInterfaceList.Merge(m, src)
 }
 func (m *InterfacesPfePortInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesPfePortInterfaceList.Size(m)
@@ -107,16 +111,17 @@ func (m *InterfacesPfePortInterfaceListStateType) Reset() {
 func (m *InterfacesPfePortInterfaceListStateType) String() string { return proto.CompactTextString(m) }
 func (*InterfacesPfePortInterfaceListStateType) ProtoMessage()    {}
 func (*InterfacesPfePortInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_port_oc_eaddf1ab324b34d8, []int{0, 0, 0}
+	return fileDescriptor_87ca96f985bf0515, []int{0, 0, 0}
 }
+
 func (m *InterfacesPfePortInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesPfePortInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesPfePortInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesPfePortInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesPfePortInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesPfePortInterfaceListStateType.Merge(dst, src)
+func (m *InterfacesPfePortInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesPfePortInterfaceListStateType.Merge(m, src)
 }
 func (m *InterfacesPfePortInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesPfePortInterfaceListStateType.Size(m)
@@ -162,16 +167,17 @@ func (m *InterfacesPfePortInterfaceListStateTypeCountersType) String() string {
 }
 func (*InterfacesPfePortInterfaceListStateTypeCountersType) ProtoMessage() {}
 func (*InterfacesPfePortInterfaceListStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_port_oc_eaddf1ab324b34d8, []int{0, 0, 0, 0}
+	return fileDescriptor_87ca96f985bf0515, []int{0, 0, 0, 0}
 }
+
 func (m *InterfacesPfePortInterfaceListStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesPfePortInterfaceListStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *InterfacesPfePortInterfaceListStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesPfePortInterfaceListStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesPfePortInterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesPfePortInterfaceListStateTypeCountersType.Merge(dst, src)
+func (m *InterfacesPfePortInterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesPfePortInterfaceListStateTypeCountersType.Merge(m, src)
 }
 func (m *InterfacesPfePortInterfaceListStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesPfePortInterfaceListStateTypeCountersType.Size(m)
@@ -285,7 +291,7 @@ var E_JnprInterfacesPfePortExt = &proto.ExtensionDesc{
 	ExtensionType: (*InterfacesPfePort)(nil),
 	Field:         60,
 	Name:          "jnpr_interfaces_pfe_port_ext",
-	Tag:           "bytes,60,opt,name=jnpr_interfaces_pfe_port_ext,json=jnprInterfacesPfePortExt",
+	Tag:           "bytes,60,opt,name=jnpr_interfaces_pfe_port_ext",
 	Filename:      "pfe_port_oc.proto",
 }
 
@@ -297,9 +303,9 @@ func init() {
 	proto.RegisterExtension(E_JnprInterfacesPfePortExt)
 }
 
-func init() { proto.RegisterFile("pfe_port_oc.proto", fileDescriptor_pfe_port_oc_eaddf1ab324b34d8) }
+func init() { proto.RegisterFile("pfe_port_oc.proto", fileDescriptor_87ca96f985bf0515) }
 
-var fileDescriptor_pfe_port_oc_eaddf1ab324b34d8 = []byte{
+var fileDescriptor_87ca96f985bf0515 = []byte{
 	// 479 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0xcd, 0x6e, 0xd3, 0x40,
 	0x14, 0x85, 0x65, 0xd1, 0xa0, 0xe6, 0x86, 0xb4, 0x74, 0x8a, 0x84, 0x15, 0xa8, 0x08, 0x20, 0x21,

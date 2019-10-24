@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosEvents struct {
 	Events               *JunosEventsEventsType `protobuf:"bytes,151,opt,name=events" json:"events,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosEvents) Reset()         { *m = JunosEvents{} }
 func (m *JunosEvents) String() string { return proto.CompactTextString(m) }
 func (*JunosEvents) ProtoMessage()    {}
 func (*JunosEvents) Descriptor() ([]byte, []int) {
-	return fileDescriptor_eventd_666231d4ec81b2ad, []int{0}
+	return fileDescriptor_d5807bd979efd0cf, []int{0}
 }
+
 func (m *JunosEvents) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosEvents.Unmarshal(m, b)
 }
 func (m *JunosEvents) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosEvents.Marshal(b, m, deterministic)
 }
-func (dst *JunosEvents) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosEvents.Merge(dst, src)
+func (m *JunosEvents) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosEvents.Merge(m, src)
 }
 func (m *JunosEvents) XXX_Size() int {
 	return xxx_messageInfo_JunosEvents.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosEventsEventsType) Reset()         { *m = JunosEventsEventsType{} }
 func (m *JunosEventsEventsType) String() string { return proto.CompactTextString(m) }
 func (*JunosEventsEventsType) ProtoMessage()    {}
 func (*JunosEventsEventsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_eventd_666231d4ec81b2ad, []int{0, 0}
+	return fileDescriptor_d5807bd979efd0cf, []int{0, 0}
 }
+
 func (m *JunosEventsEventsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosEventsEventsType.Unmarshal(m, b)
 }
 func (m *JunosEventsEventsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosEventsEventsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosEventsEventsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosEventsEventsType.Merge(dst, src)
+func (m *JunosEventsEventsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosEventsEventsType.Merge(m, src)
 }
 func (m *JunosEventsEventsType) XXX_Size() int {
 	return xxx_messageInfo_JunosEventsEventsType.Size(m)
@@ -116,16 +120,17 @@ func (m *JunosEventsEventsTypeEventList) Reset()         { *m = JunosEventsEvent
 func (m *JunosEventsEventsTypeEventList) String() string { return proto.CompactTextString(m) }
 func (*JunosEventsEventsTypeEventList) ProtoMessage()    {}
 func (*JunosEventsEventsTypeEventList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_eventd_666231d4ec81b2ad, []int{0, 0, 0}
+	return fileDescriptor_d5807bd979efd0cf, []int{0, 0, 0}
 }
+
 func (m *JunosEventsEventsTypeEventList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosEventsEventsTypeEventList.Unmarshal(m, b)
 }
 func (m *JunosEventsEventsTypeEventList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosEventsEventsTypeEventList.Marshal(b, m, deterministic)
 }
-func (dst *JunosEventsEventsTypeEventList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosEventsEventsTypeEventList.Merge(dst, src)
+func (m *JunosEventsEventsTypeEventList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosEventsEventsTypeEventList.Merge(m, src)
 }
 func (m *JunosEventsEventsTypeEventList) XXX_Size() int {
 	return xxx_messageInfo_JunosEventsEventsTypeEventList.Size(m)
@@ -236,16 +241,17 @@ func (m *JunosEventsEventsTypeEventListTimestampType) String() string {
 }
 func (*JunosEventsEventsTypeEventListTimestampType) ProtoMessage() {}
 func (*JunosEventsEventsTypeEventListTimestampType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_eventd_666231d4ec81b2ad, []int{0, 0, 0, 0}
+	return fileDescriptor_d5807bd979efd0cf, []int{0, 0, 0, 0}
 }
+
 func (m *JunosEventsEventsTypeEventListTimestampType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosEventsEventsTypeEventListTimestampType.Unmarshal(m, b)
 }
 func (m *JunosEventsEventsTypeEventListTimestampType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosEventsEventsTypeEventListTimestampType.Marshal(b, m, deterministic)
 }
-func (dst *JunosEventsEventsTypeEventListTimestampType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosEventsEventsTypeEventListTimestampType.Merge(dst, src)
+func (m *JunosEventsEventsTypeEventListTimestampType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosEventsEventsTypeEventListTimestampType.Merge(m, src)
 }
 func (m *JunosEventsEventsTypeEventListTimestampType) XXX_Size() int {
 	return xxx_messageInfo_JunosEventsEventsTypeEventListTimestampType.Size(m)
@@ -286,16 +292,17 @@ func (m *JunosEventsEventsTypeEventListAttributesList) String() string {
 }
 func (*JunosEventsEventsTypeEventListAttributesList) ProtoMessage() {}
 func (*JunosEventsEventsTypeEventListAttributesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_eventd_666231d4ec81b2ad, []int{0, 0, 0, 1}
+	return fileDescriptor_d5807bd979efd0cf, []int{0, 0, 0, 1}
 }
+
 func (m *JunosEventsEventsTypeEventListAttributesList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosEventsEventsTypeEventListAttributesList.Unmarshal(m, b)
 }
 func (m *JunosEventsEventsTypeEventListAttributesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosEventsEventsTypeEventListAttributesList.Marshal(b, m, deterministic)
 }
-func (dst *JunosEventsEventsTypeEventListAttributesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosEventsEventsTypeEventListAttributesList.Merge(dst, src)
+func (m *JunosEventsEventsTypeEventListAttributesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosEventsEventsTypeEventListAttributesList.Merge(m, src)
 }
 func (m *JunosEventsEventsTypeEventListAttributesList) XXX_Size() int {
 	return xxx_messageInfo_JunosEventsEventsTypeEventListAttributesList.Size(m)
@@ -325,7 +332,7 @@ var E_JnprJunosEventsExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosEvents)(nil),
 	Field:         42,
 	Name:          "jnpr_junos_events_ext",
-	Tag:           "bytes,42,opt,name=jnpr_junos_events_ext,json=jnprJunosEventsExt",
+	Tag:           "bytes,42,opt,name=jnpr_junos_events_ext",
 	Filename:      "eventd.proto",
 }
 
@@ -338,9 +345,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosEventsExt)
 }
 
-func init() { proto.RegisterFile("eventd.proto", fileDescriptor_eventd_666231d4ec81b2ad) }
+func init() { proto.RegisterFile("eventd.proto", fileDescriptor_d5807bd979efd0cf) }
 
-var fileDescriptor_eventd_666231d4ec81b2ad = []byte{
+var fileDescriptor_d5807bd979efd0cf = []byte{
 	// 451 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0x4d, 0x6f, 0xd4, 0x30,
 	0x10, 0x55, 0xba, 0x4d, 0x69, 0x67, 0x77, 0x0b, 0x32, 0x1f, 0x35, 0x39, 0xa0, 0x55, 0xc5, 0x21,

@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Components struct {
 	Component            []*ComponentsComponentList `protobuf:"bytes,151,rep,name=component" json:"component,omitempty"`
@@ -29,16 +31,17 @@ func (m *Components) Reset()         { *m = Components{} }
 func (m *Components) String() string { return proto.CompactTextString(m) }
 func (*Components) ProtoMessage()    {}
 func (*Components) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0}
+	return fileDescriptor_0e8a9475610846cf, []int{0}
 }
+
 func (m *Components) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Components.Unmarshal(m, b)
 }
 func (m *Components) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Components.Marshal(b, m, deterministic)
 }
-func (dst *Components) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Components.Merge(dst, src)
+func (m *Components) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Components.Merge(m, src)
 }
 func (m *Components) XXX_Size() int {
 	return xxx_messageInfo_Components.Size(m)
@@ -70,16 +73,17 @@ func (m *ComponentsComponentList) Reset()         { *m = ComponentsComponentList
 func (m *ComponentsComponentList) String() string { return proto.CompactTextString(m) }
 func (*ComponentsComponentList) ProtoMessage()    {}
 func (*ComponentsComponentList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0}
 }
+
 func (m *ComponentsComponentList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentList.Unmarshal(m, b)
 }
 func (m *ComponentsComponentList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentList.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentList.Merge(dst, src)
+func (m *ComponentsComponentList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentList.Merge(m, src)
 }
 func (m *ComponentsComponentList) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentList.Size(m)
@@ -136,16 +140,17 @@ func (m *ComponentsComponentListStateType) Reset()         { *m = ComponentsComp
 func (m *ComponentsComponentListStateType) String() string { return proto.CompactTextString(m) }
 func (*ComponentsComponentListStateType) ProtoMessage()    {}
 func (*ComponentsComponentListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 0}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 0}
 }
+
 func (m *ComponentsComponentListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListStateType.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListStateType.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListStateType.Merge(dst, src)
+func (m *ComponentsComponentListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListStateType.Merge(m, src)
 }
 func (m *ComponentsComponentListStateType) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListStateType.Size(m)
@@ -223,16 +228,17 @@ func (m *ComponentsComponentListPropertiesType) Reset()         { *m = Component
 func (m *ComponentsComponentListPropertiesType) String() string { return proto.CompactTextString(m) }
 func (*ComponentsComponentListPropertiesType) ProtoMessage()    {}
 func (*ComponentsComponentListPropertiesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 1}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 1}
 }
+
 func (m *ComponentsComponentListPropertiesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListPropertiesType.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListPropertiesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListPropertiesType.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListPropertiesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListPropertiesType.Merge(dst, src)
+func (m *ComponentsComponentListPropertiesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListPropertiesType.Merge(m, src)
 }
 func (m *ComponentsComponentListPropertiesType) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListPropertiesType.Size(m)
@@ -266,16 +272,17 @@ func (m *ComponentsComponentListPropertiesTypePropertyList) String() string {
 }
 func (*ComponentsComponentListPropertiesTypePropertyList) ProtoMessage() {}
 func (*ComponentsComponentListPropertiesTypePropertyList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 1, 0}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 1, 0}
 }
+
 func (m *ComponentsComponentListPropertiesTypePropertyList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyList.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListPropertiesTypePropertyList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyList.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListPropertiesTypePropertyList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyList.Merge(dst, src)
+func (m *ComponentsComponentListPropertiesTypePropertyList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyList.Merge(m, src)
 }
 func (m *ComponentsComponentListPropertiesTypePropertyList) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyList.Size(m)
@@ -315,16 +322,17 @@ func (m *ComponentsComponentListPropertiesTypePropertyListStateType) String() st
 }
 func (*ComponentsComponentListPropertiesTypePropertyListStateType) ProtoMessage() {}
 func (*ComponentsComponentListPropertiesTypePropertyListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 1, 0, 0}
 }
+
 func (m *ComponentsComponentListPropertiesTypePropertyListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyListStateType.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListPropertiesTypePropertyListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyListStateType.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListPropertiesTypePropertyListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyListStateType.Merge(dst, src)
+func (m *ComponentsComponentListPropertiesTypePropertyListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyListStateType.Merge(m, src)
 }
 func (m *ComponentsComponentListPropertiesTypePropertyListStateType) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListPropertiesTypePropertyListStateType.Size(m)
@@ -355,16 +363,17 @@ func (m *ComponentsComponentListSubcomponentsType) Reset() {
 func (m *ComponentsComponentListSubcomponentsType) String() string { return proto.CompactTextString(m) }
 func (*ComponentsComponentListSubcomponentsType) ProtoMessage()    {}
 func (*ComponentsComponentListSubcomponentsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 2}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 2}
 }
+
 func (m *ComponentsComponentListSubcomponentsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsType.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListSubcomponentsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsType.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListSubcomponentsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListSubcomponentsType.Merge(dst, src)
+func (m *ComponentsComponentListSubcomponentsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListSubcomponentsType.Merge(m, src)
 }
 func (m *ComponentsComponentListSubcomponentsType) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsType.Size(m)
@@ -398,16 +407,17 @@ func (m *ComponentsComponentListSubcomponentsTypeSubcomponentList) String() stri
 }
 func (*ComponentsComponentListSubcomponentsTypeSubcomponentList) ProtoMessage() {}
 func (*ComponentsComponentListSubcomponentsTypeSubcomponentList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 2, 0}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 2, 0}
 }
+
 func (m *ComponentsComponentListSubcomponentsTypeSubcomponentList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentList.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListSubcomponentsTypeSubcomponentList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentList.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListSubcomponentsTypeSubcomponentList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentList.Merge(dst, src)
+func (m *ComponentsComponentListSubcomponentsTypeSubcomponentList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentList.Merge(m, src)
 }
 func (m *ComponentsComponentListSubcomponentsTypeSubcomponentList) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentList.Size(m)
@@ -447,16 +457,17 @@ func (m *ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) Stri
 }
 func (*ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) ProtoMessage() {}
 func (*ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_chassisd_oc_67bc9c0171b21165, []int{0, 0, 2, 0, 0}
+	return fileDescriptor_0e8a9475610846cf, []int{0, 0, 2, 0, 0}
 }
+
 func (m *ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentListStateType.Unmarshal(m, b)
 }
 func (m *ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentListStateType.Marshal(b, m, deterministic)
 }
-func (dst *ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentListStateType.Merge(dst, src)
+func (m *ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentListStateType.Merge(m, src)
 }
 func (m *ComponentsComponentListSubcomponentsTypeSubcomponentListStateType) XXX_Size() int {
 	return xxx_messageInfo_ComponentsComponentListSubcomponentsTypeSubcomponentListStateType.Size(m)
@@ -479,7 +490,7 @@ var E_JnprComponentsExt = &proto.ExtensionDesc{
 	ExtensionType: (*Components)(nil),
 	Field:         40,
 	Name:          "jnpr_components_ext",
-	Tag:           "bytes,40,opt,name=jnpr_components_ext,json=jnprComponentsExt",
+	Tag:           "bytes,40,opt,name=jnpr_components_ext",
 	Filename:      "chassisd_oc.proto",
 }
 
@@ -496,9 +507,9 @@ func init() {
 	proto.RegisterExtension(E_JnprComponentsExt)
 }
 
-func init() { proto.RegisterFile("chassisd_oc.proto", fileDescriptor_chassisd_oc_67bc9c0171b21165) }
+func init() { proto.RegisterFile("chassisd_oc.proto", fileDescriptor_0e8a9475610846cf) }
 
-var fileDescriptor_chassisd_oc_67bc9c0171b21165 = []byte{
+var fileDescriptor_0e8a9475610846cf = []byte{
 	// 491 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x52, 0x4d, 0x6f, 0x13, 0x31,
 	0x10, 0xd5, 0x2e, 0x0d, 0xd9, 0x4c, 0x68, 0x51, 0x5c, 0xa4, 0xba, 0xe6, 0x12, 0x55, 0x42, 0x8a,

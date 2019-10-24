@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosRsmonStats struct {
 	System               *JunosRsmonStatsSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosRsmonStats) Reset()         { *m = JunosRsmonStats{} }
 func (m *JunosRsmonStats) String() string { return proto.CompactTextString(m) }
 func (*JunosRsmonStats) ProtoMessage()    {}
 func (*JunosRsmonStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0}
 }
+
 func (m *JunosRsmonStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStats.Unmarshal(m, b)
 }
 func (m *JunosRsmonStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStats.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStats.Merge(dst, src)
+func (m *JunosRsmonStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStats.Merge(m, src)
 }
 func (m *JunosRsmonStats) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStats.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosRsmonStatsSystemType) Reset()         { *m = JunosRsmonStatsSystem
 func (m *JunosRsmonStatsSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosRsmonStatsSystemType) ProtoMessage()    {}
 func (*JunosRsmonStatsSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0}
 }
+
 func (m *JunosRsmonStatsSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemType.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemType.Merge(dst, src)
+func (m *JunosRsmonStatsSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemType.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosRsmonStatsSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosRsmonStatsSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosRsmonStatsSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0, 0}
 }
+
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosRsmonStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) String() st
 }
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) ProtoMessage() {}
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0, 0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0, 0, 0}
 }
+
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType.Merge(dst, src)
+func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraType.Size(m)
@@ -193,16 +199,17 @@ func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 }
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) ProtoMessage() {}
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Merge(dst, src)
+func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Size(m)
@@ -236,16 +243,17 @@ func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) ProtoMessage() {
 }
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType.Merge(dst, src)
+func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraType.Size(m)
@@ -279,16 +287,17 @@ func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) ProtoMessage() {
 }
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType.Merge(dst, src)
+func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsType.Size(m)
@@ -324,16 +333,17 @@ func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonit
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) ProtoMessage() {
 }
 func (*JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95, []int{0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_ae6cf8ea325e0e06, []int{0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList.Unmarshal(m, b)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList.Merge(dst, src)
+func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList.Merge(m, src)
 }
 func (m *JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList) XXX_Size() int {
 	return xxx_messageInfo_JunosRsmonStatsSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeRsmonInfraTypeFpcsTypeFpcList.Size(m)
@@ -370,7 +380,7 @@ var E_JnprJunosRsmonStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosRsmonStats)(nil),
 	Field:         37,
 	Name:          "jnpr_junos_rsmon_stats_ext",
-	Tag:           "bytes,37,opt,name=jnpr_junos_rsmon_stats_ext,json=jnprJunosRsmonStatsExt",
+	Tag:           "bytes,37,opt,name=jnpr_junos_rsmon_stats_ext",
 	Filename:      "bbe-smgd_rsmon_stats_oc.proto",
 }
 
@@ -386,11 +396,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosRsmonStatsExt)
 }
 
-func init() {
-	proto.RegisterFile("bbe-smgd_rsmon_stats_oc.proto", fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95)
-}
+func init() { proto.RegisterFile("bbe-smgd_rsmon_stats_oc.proto", fileDescriptor_ae6cf8ea325e0e06) }
 
-var fileDescriptor_bbe_smgd_rsmon_stats_oc_3528e641e84e8c95 = []byte{
+var fileDescriptor_ae6cf8ea325e0e06 = []byte{
 	// 478 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x91, 0x3f, 0x6b, 0x14, 0x41,
 	0x18, 0xc6, 0x99, 0x5c, 0x2e, 0x9e, 0xef, 0x21, 0xc6, 0xd1, 0x8b, 0x9b, 0x01, 0x25, 0x08, 0xc2,

@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosTaskMemory struct {
 	TaskMemoryInformation *JunosTaskMemoryTaskMemoryInformationType `protobuf:"bytes,151,opt,name=task_memory_information,json=taskMemoryInformation" json:"task_memory_information,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosTaskMemory) Reset()         { *m = JunosTaskMemory{} }
 func (m *JunosTaskMemory) String() string { return proto.CompactTextString(m) }
 func (*JunosTaskMemory) ProtoMessage()    {}
 func (*JunosTaskMemory) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0}
+	return fileDescriptor_556964e7067b5362, []int{0}
 }
+
 func (m *JunosTaskMemory) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemory.Unmarshal(m, b)
 }
 func (m *JunosTaskMemory) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemory.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemory) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemory.Merge(dst, src)
+func (m *JunosTaskMemory) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemory.Merge(m, src)
 }
 func (m *JunosTaskMemory) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemory.Size(m)
@@ -81,16 +84,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationType) Reset() {
 func (m *JunosTaskMemoryTaskMemoryInformationType) String() string { return proto.CompactTextString(m) }
 func (*JunosTaskMemoryTaskMemoryInformationType) ProtoMessage()    {}
 func (*JunosTaskMemoryTaskMemoryInformationType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationType.Size(m)
@@ -211,16 +215,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) St
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) ProtoMessage() {}
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportType.Size(m)
@@ -282,16 +287,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTask
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 0, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 0, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListType.Size(m)
@@ -330,16 +336,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTask
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskSizeBlockListTypeTaskSizeBlockList.Size(m)
@@ -408,16 +415,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTask
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 0, 1}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 0, 1}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListType.Size(m)
@@ -455,16 +463,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTask
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 0, 1, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 0, 1, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryOverallReportTypeTaskMemoryStatsListTypeTaskMemoryStatsList.Size(m)
@@ -528,16 +537,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) 
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) ProtoMessage() {}
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 1}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 1}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportType.Size(m)
@@ -592,16 +602,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTa
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 1, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 1, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListType.Size(m)
@@ -641,16 +652,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTa
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 1, 0, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskBlockListTypeTaskBlockList.Size(m)
@@ -726,16 +738,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTa
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 1, 1}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 1, 1}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListType.Size(m)
@@ -771,16 +784,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTa
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 1, 1, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 1, 1, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryAllocatorReportTypeTaskLitePageListTypeTaskLitePageList.Size(m)
@@ -829,16 +843,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) ProtoMessage() {}
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 2}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 2}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType.Size(m)
@@ -886,16 +901,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 2, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 2, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListType.Size(m)
@@ -934,16 +950,17 @@ func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportType
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) ProtoMessage() {
 }
 func (*JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031, []int{0, 0, 2, 0, 0}
+	return fileDescriptor_556964e7067b5362, []int{0, 0, 2, 0, 0}
 }
+
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList.Unmarshal(m, b)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList.Merge(dst, src)
+func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList.Merge(m, src)
 }
 func (m *JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList) XXX_Size() int {
 	return xxx_messageInfo_JunosTaskMemoryTaskMemoryInformationTypeTaskMemoryMallocUsageReportTypeTaskMallocListTypeTaskMallocList.Size(m)
@@ -1001,7 +1018,7 @@ var E_JnprJunosTaskMemoryExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosTaskMemory)(nil),
 	Field:         47,
 	Name:          "jnpr_junos_task_memory_ext",
-	Tag:           "bytes,47,opt,name=jnpr_junos_task_memory_ext,json=jnprJunosTaskMemoryExt",
+	Tag:           "bytes,47,opt,name=jnpr_junos_task_memory_ext",
 	Filename:      "junos-xmlproxyd_junos-rtg-task-memory.proto",
 }
 
@@ -1025,10 +1042,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("junos-xmlproxyd_junos-rtg-task-memory.proto", fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031)
+	proto.RegisterFile("junos-xmlproxyd_junos-rtg-task-memory.proto", fileDescriptor_556964e7067b5362)
 }
 
-var fileDescriptor_junos_xmlproxyd_junos_rtg_task_memory_51fcc982d1f24031 = []byte{
+var fileDescriptor_556964e7067b5362 = []byte{
 	// 1267 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x57, 0xcf, 0x6f, 0xdc, 0x44,
 	0x14, 0x96, 0x1b, 0xfa, 0x23, 0xb3, 0xdd, 0x26, 0x99, 0x34, 0xcd, 0xd6, 0x81, 0x12, 0x4a, 0x84,

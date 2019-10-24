@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InterfacesVrrp struct {
 	Interface            []*InterfacesVrrpInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *InterfacesVrrp) Reset()         { *m = InterfacesVrrp{} }
 func (m *InterfacesVrrp) String() string { return proto.CompactTextString(m) }
 func (*InterfacesVrrp) ProtoMessage()    {}
 func (*InterfacesVrrp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0}
 }
+
 func (m *InterfacesVrrp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrp.Unmarshal(m, b)
 }
 func (m *InterfacesVrrp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrp.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrp.Merge(dst, src)
+func (m *InterfacesVrrp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrp.Merge(m, src)
 }
 func (m *InterfacesVrrp) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrp.Size(m)
@@ -69,16 +72,17 @@ func (m *InterfacesVrrpInterfaceList) Reset()         { *m = InterfacesVrrpInter
 func (m *InterfacesVrrpInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*InterfacesVrrpInterfaceList) ProtoMessage()    {}
 func (*InterfacesVrrpInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceList.Size(m)
@@ -125,16 +129,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesType) String() string {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesType) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListSubinterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesType.Size(m)
@@ -169,16 +174,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) String() 
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceList.Size(m)
@@ -225,16 +231,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) S
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Size(m)
@@ -268,16 +275,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Size(m)
@@ -312,16 +320,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Size(m)
@@ -362,16 +371,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpType.Size(m)
@@ -406,16 +416,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Size(m)
@@ -463,16 +474,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Size(m)
@@ -555,16 +567,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Size(m)
@@ -599,16 +612,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Size(m)
@@ -648,16 +662,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) S
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Size(m)
@@ -691,16 +706,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Size(m)
@@ -735,16 +751,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Size(m)
@@ -785,16 +802,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpType.Size(m)
@@ -829,16 +847,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Size(m)
@@ -887,16 +906,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Size(m)
@@ -986,16 +1006,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Size(m)
@@ -1030,16 +1051,17 @@ func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAdd
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Size(m)
@@ -1078,16 +1100,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanType) Reset() {
 func (m *InterfacesVrrpInterfaceListRoutedVlanType) String() string { return proto.CompactTextString(m) }
 func (*InterfacesVrrpInterfaceListRoutedVlanType) ProtoMessage()    {}
 func (*InterfacesVrrpInterfaceListRoutedVlanType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanType.Size(m)
@@ -1127,16 +1150,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) String() string {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4Type.Size(m)
@@ -1169,16 +1193,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) String(
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesType.Size(m)
@@ -1212,16 +1237,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressLi
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressList.Size(m)
@@ -1262,16 +1288,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpType.Size(m)
@@ -1306,16 +1333,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Size(m)
@@ -1363,16 +1391,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Size(m)
@@ -1455,16 +1484,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Size(m)
@@ -1499,16 +1529,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv4TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Size(m)
@@ -1548,16 +1579,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) String() string {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6Type.Size(m)
@@ -1590,16 +1622,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) String(
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesType.Size(m)
@@ -1633,16 +1666,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressLi
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) ProtoMessage() {}
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressList.Size(m)
@@ -1683,16 +1717,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpType.Size(m)
@@ -1727,16 +1762,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupList.Size(m)
@@ -1785,16 +1821,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListStateType.Size(m)
@@ -1884,16 +1921,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0, 0, 0, 0, 1}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0, 0, 0, 0, 1}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingType.Size(m)
@@ -1928,16 +1966,17 @@ func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressLi
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) ProtoMessage() {
 }
 func (*InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_vrrpd_oc_56ff4a50b183a55e, []int{0, 0, 1, 1, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_bf3b3d6b7c480afe, []int{0, 0, 1, 1, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(dst, src)
+func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Merge(m, src)
 }
 func (m *InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesVrrpInterfaceListRoutedVlanTypeIpv6TypeAddressesTypeAddressListVrrpTypeVrrpGroupListInterfaceTrackingTypeStateType.Size(m)
@@ -1967,7 +2006,7 @@ var E_JnprInterfacesVrrpExt = &proto.ExtensionDesc{
 	ExtensionType: (*InterfacesVrrp)(nil),
 	Field:         71,
 	Name:          "jnpr_interfaces_vrrp_ext",
-	Tag:           "bytes,71,opt,name=jnpr_interfaces_vrrp_ext,json=jnprInterfacesVrrpExt",
+	Tag:           "bytes,71,opt,name=jnpr_interfaces_vrrp_ext",
 	Filename:      "vrrpd_oc.proto",
 }
 
@@ -2012,9 +2051,9 @@ func init() {
 	proto.RegisterExtension(E_JnprInterfacesVrrpExt)
 }
 
-func init() { proto.RegisterFile("vrrpd_oc.proto", fileDescriptor_vrrpd_oc_56ff4a50b183a55e) }
+func init() { proto.RegisterFile("vrrpd_oc.proto", fileDescriptor_bf3b3d6b7c480afe) }
 
-var fileDescriptor_vrrpd_oc_56ff4a50b183a55e = []byte{
+var fileDescriptor_bf3b3d6b7c480afe = []byte{
 	// 1081 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x97, 0x41, 0x6f, 0xdc, 0x44,
 	0x14, 0xc7, 0xe5, 0x6d, 0xa2, 0xec, 0xbe, 0xdd, 0x6c, 0x92, 0x41, 0xa1, 0xc6, 0x80, 0x1a, 0xc1,

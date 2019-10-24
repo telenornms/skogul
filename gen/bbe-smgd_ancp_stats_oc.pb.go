@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosAncpStats struct {
 	System               *JunosAncpStatsSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosAncpStats) Reset()         { *m = JunosAncpStats{} }
 func (m *JunosAncpStats) String() string { return proto.CompactTextString(m) }
 func (*JunosAncpStats) ProtoMessage()    {}
 func (*JunosAncpStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596, []int{0}
+	return fileDescriptor_04b5e3e7408ddbf4, []int{0}
 }
+
 func (m *JunosAncpStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAncpStats.Unmarshal(m, b)
 }
 func (m *JunosAncpStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAncpStats.Marshal(b, m, deterministic)
 }
-func (dst *JunosAncpStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAncpStats.Merge(dst, src)
+func (m *JunosAncpStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAncpStats.Merge(m, src)
 }
 func (m *JunosAncpStats) XXX_Size() int {
 	return xxx_messageInfo_JunosAncpStats.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosAncpStatsSystemType) Reset()         { *m = JunosAncpStatsSystemTy
 func (m *JunosAncpStatsSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosAncpStatsSystemType) ProtoMessage()    {}
 func (*JunosAncpStatsSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596, []int{0, 0}
+	return fileDescriptor_04b5e3e7408ddbf4, []int{0, 0}
 }
+
 func (m *JunosAncpStatsSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAncpStatsSystemType.Unmarshal(m, b)
 }
 func (m *JunosAncpStatsSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAncpStatsSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAncpStatsSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAncpStatsSystemType.Merge(dst, src)
+func (m *JunosAncpStatsSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAncpStatsSystemType.Merge(m, src)
 }
 func (m *JunosAncpStatsSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosAncpStatsSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosAncpStatsSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosAncpStatsSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosAncpStatsSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596, []int{0, 0, 0}
+	return fileDescriptor_04b5e3e7408ddbf4, []int{0, 0, 0}
 }
+
 func (m *JunosAncpStatsSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAncpStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosAncpStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) Stri
 }
 func (*JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) ProtoMessage() {}
 func (*JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596, []int{0, 0, 0, 0}
+	return fileDescriptor_04b5e3e7408ddbf4, []int{0, 0, 0, 0}
 }
+
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType.Unmarshal(m, b)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType.Merge(dst, src)
+func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType.Merge(m, src)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType) XXX_Size() int {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkType.Size(m)
@@ -193,16 +199,17 @@ func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTy
 }
 func (*JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) ProtoMessage() {}
 func (*JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_04b5e3e7408ddbf4, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType.Unmarshal(m, b)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType.Merge(dst, src)
+func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType.Merge(m, src)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType) XXX_Size() int {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpType.Size(m)
@@ -236,16 +243,17 @@ func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTy
 func (*JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) ProtoMessage() {
 }
 func (*JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_04b5e3e7408ddbf4, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType.Unmarshal(m, b)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType.Merge(dst, src)
+func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType.Merge(m, src)
 }
 func (m *JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType) XXX_Size() int {
 	return xxx_messageInfo_JunosAncpStatsSystemTypeSubscriberManagementTypeAccessNetworkTypeAncpTypeAdapterType.Size(m)
@@ -268,7 +276,7 @@ var E_JnprJunosAncpStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosAncpStats)(nil),
 	Field:         34,
 	Name:          "jnpr_junos_ancp_stats_ext",
-	Tag:           "bytes,34,opt,name=jnpr_junos_ancp_stats_ext,json=jnprJunosAncpStatsExt",
+	Tag:           "bytes,34,opt,name=jnpr_junos_ancp_stats_ext",
 	Filename:      "bbe-smgd_ancp_stats_oc.proto",
 }
 
@@ -282,11 +290,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosAncpStatsExt)
 }
 
-func init() {
-	proto.RegisterFile("bbe-smgd_ancp_stats_oc.proto", fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596)
-}
+func init() { proto.RegisterFile("bbe-smgd_ancp_stats_oc.proto", fileDescriptor_04b5e3e7408ddbf4) }
 
-var fileDescriptor_bbe_smgd_ancp_stats_oc_520af9f93d8b2596 = []byte{
+var fileDescriptor_04b5e3e7408ddbf4 = []byte{
 	// 364 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x91, 0xb1, 0x4e, 0x23, 0x31,
 	0x10, 0x86, 0xb5, 0x77, 0xb9, 0x3b, 0x9d, 0x73, 0x39, 0xdd, 0x6d, 0x88, 0x08, 0xab, 0x20, 0xa2,

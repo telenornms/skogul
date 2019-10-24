@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type NetworkInstancesNiBgp struct {
 	NetworkInstance      []*NetworkInstancesNiBgpNetworkInstanceList `protobuf:"bytes,151,rep,name=network_instance,json=networkInstance" json:"network_instance,omitempty"`
@@ -29,16 +31,17 @@ func (m *NetworkInstancesNiBgp) Reset()         { *m = NetworkInstancesNiBgp{} }
 func (m *NetworkInstancesNiBgp) String() string { return proto.CompactTextString(m) }
 func (*NetworkInstancesNiBgp) ProtoMessage()    {}
 func (*NetworkInstancesNiBgp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0}
 }
+
 func (m *NetworkInstancesNiBgp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgp.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgp.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgp.Merge(dst, src)
+func (m *NetworkInstancesNiBgp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgp.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgp) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgp.Size(m)
@@ -70,16 +73,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceList) Reset() {
 func (m *NetworkInstancesNiBgpNetworkInstanceList) String() string { return proto.CompactTextString(m) }
 func (*NetworkInstancesNiBgpNetworkInstanceList) ProtoMessage()    {}
 func (*NetworkInstancesNiBgpNetworkInstanceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceList.Size(m)
@@ -119,16 +123,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsType) String() string 
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsType) ProtoMessage() {}
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsType.Size(m)
@@ -161,16 +166,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) Stri
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) ProtoMessage() {}
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolType.Size(m)
@@ -205,16 +211,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) ProtoMessage() {}
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpType.Size(m)
@@ -267,16 +274,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalType.Size(m)
@@ -348,16 +356,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeStateType.Size(m)
@@ -412,16 +421,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsType.Size(m)
@@ -458,16 +468,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeRouteSelectionOptionsTypeStateType.Size(m)
@@ -522,16 +533,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationType.Size(m)
@@ -566,16 +578,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeConfederationTypeStateType.Size(m)
@@ -616,16 +629,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 3}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 3}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartType.Size(m)
@@ -662,16 +676,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 3, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 3, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeGracefulRestartTypeStateType.Size(m)
@@ -726,16 +741,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 4}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 4}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyType.Size(m)
@@ -770,16 +786,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 4, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 4, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeApplyPolicyTypeStateType.Size(m)
@@ -820,16 +837,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisType.Size(m)
@@ -876,16 +894,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiList.Size(m)
@@ -1010,16 +1029,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartType.Size(m)
@@ -1053,16 +1073,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Size(m)
@@ -1099,16 +1120,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListStateType.Size(m)
@@ -1163,16 +1185,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsType.Size(m)
@@ -1209,16 +1232,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListAddPathsTypeStateType.Size(m)
@@ -1273,16 +1297,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 3}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 3}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastType.Size(m)
@@ -1316,16 +1341,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 3, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 3, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Size(m)
@@ -1362,16 +1388,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 3, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 3, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -1426,16 +1453,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 4}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 4}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastType.Size(m)
@@ -1469,16 +1497,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 4, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 4, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Size(m)
@@ -1515,16 +1544,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 4, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 4, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -1579,16 +1609,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 5}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 5}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Size(m)
@@ -1622,16 +1653,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 5, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 5, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Size(m)
@@ -1668,16 +1700,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Size(m)
@@ -1732,16 +1765,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 6}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 6}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Size(m)
@@ -1775,16 +1809,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 6, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 6, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Size(m)
@@ -1821,16 +1856,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 6, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 6, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Size(m)
@@ -1885,16 +1921,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 7}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 7}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Size(m)
@@ -1928,16 +1965,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 7, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 7, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Size(m)
@@ -1974,16 +2012,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 7, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 7, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -2038,16 +2077,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 8}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 8}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Size(m)
@@ -2081,16 +2121,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 8, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 8, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Size(m)
@@ -2127,16 +2168,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 8, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 8, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -2191,16 +2233,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 9}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 9}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Size(m)
@@ -2234,16 +2277,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 9, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 9, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Size(m)
@@ -2280,16 +2324,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 9, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 9, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Size(m)
@@ -2344,16 +2389,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 10}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 10}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Size(m)
@@ -2387,16 +2433,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 10, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 10, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Size(m)
@@ -2433,16 +2480,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 10, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 10, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Size(m)
@@ -2497,16 +2545,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 11}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 11}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsType.Size(m)
@@ -2540,16 +2589,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 11, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 11, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Size(m)
@@ -2586,16 +2636,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 11, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 11, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Size(m)
@@ -2650,16 +2701,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 12}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 12}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnType.Size(m)
@@ -2693,16 +2745,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 12, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 12, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Size(m)
@@ -2739,16 +2792,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 0, 5, 0, 12, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 0, 5, 0, 12, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeGlobalTypeAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Size(m)
@@ -2803,16 +2857,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsType.Size(m)
@@ -2860,16 +2915,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborList.Size(m)
@@ -3022,16 +3078,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateType.Size(m)
@@ -3213,16 +3270,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesType.Size(m)
@@ -3267,16 +3325,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeSentType.Size(m)
@@ -3342,16 +3401,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeMessagesTypeReceivedType.Size(m)
@@ -3414,16 +3474,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListStateTypeQueuesType.Size(m)
@@ -3464,16 +3525,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersType.Size(m)
@@ -3511,16 +3573,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTimersTypeStateType.Size(m)
@@ -3582,16 +3645,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportType.Size(m)
@@ -3631,16 +3695,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListTransportTypeStateType.Size(m)
@@ -3716,16 +3781,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 3}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 3}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingType.Size(m)
@@ -3760,16 +3826,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 3, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 3, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListErrorHandlingTypeStateType.Size(m)
@@ -3810,16 +3877,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 4}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 4}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsType.Size(m)
@@ -3853,16 +3921,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 4, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 4, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListLoggingOptionsTypeStateType.Size(m)
@@ -3896,16 +3965,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 5}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 5}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopType.Size(m)
@@ -3940,16 +4010,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 5, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 5, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListEbgpMultihopTypeStateType.Size(m)
@@ -3990,16 +4061,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 6}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 6}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorType.Size(m)
@@ -4034,16 +4106,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 6, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 6, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListRouteReflectorTypeStateType.Size(m)
@@ -4084,16 +4157,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 7}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 7}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsType.Size(m)
@@ -4129,16 +4203,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 7, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 7, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAsPathOptionsTypeStateType.Size(m)
@@ -4187,16 +4262,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 8}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 8}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsType.Size(m)
@@ -4237,16 +4313,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 8, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 8, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeStateType.Size(m)
@@ -4280,16 +4357,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 8, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 8, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpType.Size(m)
@@ -4323,16 +4401,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 8, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 8, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListUseMultiplePathsTypeEbgpTypeStateType.Size(m)
@@ -4366,16 +4445,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisType.Size(m)
@@ -4422,16 +4502,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiList.Size(m)
@@ -4556,16 +4637,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartType.Size(m)
@@ -4601,16 +4683,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Size(m)
@@ -4663,16 +4746,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateType.Size(m)
@@ -4744,16 +4828,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypePrefixesType.Size(m)
@@ -4809,16 +4894,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListStateTypeQueuesType.Size(m)
@@ -4859,16 +4945,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsType.Size(m)
@@ -4905,16 +4992,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Size(m)
@@ -4969,16 +5057,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 3}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 3}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastType.Size(m)
@@ -5012,16 +5101,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 3, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 3, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Size(m)
@@ -5058,16 +5148,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 3, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 3, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -5122,16 +5213,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 4}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 4}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastType.Size(m)
@@ -5165,16 +5257,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 4, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 4, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Size(m)
@@ -5211,16 +5304,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 4, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 4, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -5275,16 +5369,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 5}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 5}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Size(m)
@@ -5318,16 +5413,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 5, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 5, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Size(m)
@@ -5364,16 +5460,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 5, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 5, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Size(m)
@@ -5428,16 +5525,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 6}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 6}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Size(m)
@@ -5471,16 +5569,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 6, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 6, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Size(m)
@@ -5517,16 +5616,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 6, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 6, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Size(m)
@@ -5581,16 +5681,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 7}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 7}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Size(m)
@@ -5624,16 +5725,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 7, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 7, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Size(m)
@@ -5670,16 +5772,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 7, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 7, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -5734,16 +5837,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 8}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 8}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Size(m)
@@ -5777,16 +5881,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 8, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 8, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Size(m)
@@ -5823,16 +5928,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 8, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 8, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -5887,16 +5993,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 9}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 9}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Size(m)
@@ -5930,16 +6037,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 9, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 9, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Size(m)
@@ -5976,16 +6084,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 9, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 9, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Size(m)
@@ -6040,16 +6149,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 10}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 10}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Size(m)
@@ -6083,16 +6193,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 10, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 10, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Size(m)
@@ -6129,16 +6240,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 10, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 10, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Size(m)
@@ -6193,16 +6305,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 11}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 11}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsType.Size(m)
@@ -6236,16 +6349,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 11, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 11, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Size(m)
@@ -6282,16 +6396,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 11, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 11, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Size(m)
@@ -6346,16 +6461,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 12}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 12}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnType.Size(m)
@@ -6389,16 +6505,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 12, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 12, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Size(m)
@@ -6435,16 +6552,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 12, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 9, 0, 12, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Size(m)
@@ -6499,16 +6617,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 10}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 10}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartType.Size(m)
@@ -6549,16 +6668,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 10, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 10, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListGracefulRestartTypeStateType.Size(m)
@@ -6641,16 +6761,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 11}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 11}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyType.Size(m)
@@ -6685,16 +6806,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 1, 0, 11, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 1, 0, 11, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypeNeighborsTypeNeighborListApplyPolicyTypeStateType.Size(m)
@@ -6735,16 +6857,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsType.Size(m)
@@ -6791,16 +6914,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupList.Size(m)
@@ -6934,16 +7058,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListStateType.Size(m)
@@ -7040,16 +7165,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersType.Size(m)
@@ -7086,16 +7212,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTimersTypeStateType.Size(m)
@@ -7150,16 +7277,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportType.Size(m)
@@ -7196,16 +7324,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListTransportTypeStateType.Size(m)
@@ -7260,16 +7389,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 3}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 3}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingType.Size(m)
@@ -7303,16 +7433,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 3, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 3, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListErrorHandlingTypeStateType.Size(m)
@@ -7346,16 +7477,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 4}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 4}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsType.Size(m)
@@ -7389,16 +7521,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 4, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 4, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListLoggingOptionsTypeStateType.Size(m)
@@ -7432,16 +7565,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 5}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 5}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopType.Size(m)
@@ -7476,16 +7610,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 5, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 5, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListEbgpMultihopTypeStateType.Size(m)
@@ -7526,16 +7661,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 6}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 6}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorType.Size(m)
@@ -7570,16 +7706,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 6, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 6, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListRouteReflectorTypeStateType.Size(m)
@@ -7620,16 +7757,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 7}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 7}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsType.Size(m)
@@ -7665,16 +7803,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 7, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 7, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAsPathOptionsTypeStateType.Size(m)
@@ -7724,16 +7863,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 8}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 8}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsType.Size(m)
@@ -7781,16 +7921,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 8, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 8, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeStateType.Size(m)
@@ -7824,16 +7965,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 8, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 8, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpType.Size(m)
@@ -7868,16 +8010,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 8, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 8, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeEbgpTypeStateType.Size(m)
@@ -7918,16 +8061,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 8, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 8, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpType.Size(m)
@@ -7961,16 +8105,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 8, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 8, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListUseMultiplePathsTypeIbgpTypeStateType.Size(m)
@@ -8004,16 +8149,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisType.Size(m)
@@ -8060,16 +8206,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiList.Size(m)
@@ -8194,16 +8341,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartType.Size(m)
@@ -8237,16 +8385,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListGracefulRestartTypeStateType.Size(m)
@@ -8285,16 +8434,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 1}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 1}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateType.Size(m)
@@ -8366,16 +8516,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 1, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 1, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListStateTypePrefixesType.Size(m)
@@ -8430,16 +8581,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 2}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 2}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsType.Size(m)
@@ -8476,16 +8628,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 2, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 2, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListAddPathsTypeStateType.Size(m)
@@ -8540,16 +8693,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 3}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 3}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastType.Size(m)
@@ -8583,16 +8737,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 3, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 3, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitType.Size(m)
@@ -8629,16 +8784,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 3, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 3, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -8693,16 +8849,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 4}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 4}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastType.Size(m)
@@ -8736,16 +8893,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 4, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 4, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitType.Size(m)
@@ -8782,16 +8940,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 4, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 4, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -8846,16 +9005,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 5}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 5}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastType.Size(m)
@@ -8889,16 +9049,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 5, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 5, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitType.Size(m)
@@ -8935,16 +9096,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 5, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 5, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv4LabeledUnicastTypePrefixLimitTypeStateType.Size(m)
@@ -8999,16 +9161,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 6}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 6}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastType.Size(m)
@@ -9042,16 +9205,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 6, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 6, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitType.Size(m)
@@ -9088,16 +9252,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 6, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 6, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListIpv6LabeledUnicastTypePrefixLimitTypeStateType.Size(m)
@@ -9152,16 +9317,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 7}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 7}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastType.Size(m)
@@ -9195,16 +9361,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 7, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 7, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitType.Size(m)
@@ -9241,16 +9408,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 7, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 7, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -9305,16 +9473,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 8}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 8}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastType.Size(m)
@@ -9348,16 +9517,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 8, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 8, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitType.Size(m)
@@ -9394,16 +9564,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 8, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 8, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6UnicastTypePrefixLimitTypeStateType.Size(m)
@@ -9458,16 +9629,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 9}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 9}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastType.Size(m)
@@ -9501,16 +9673,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 9, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 9, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitType.Size(m)
@@ -9547,16 +9720,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 9, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 9, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv4MulticastTypePrefixLimitTypeStateType.Size(m)
@@ -9611,16 +9785,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 10}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 10}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastType.Size(m)
@@ -9654,16 +9829,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 10, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 10, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitType.Size(m)
@@ -9700,16 +9876,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 10, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 10, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL3VpnIpv6MulticastTypePrefixLimitTypeStateType.Size(m)
@@ -9764,16 +9941,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 11}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 11}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsType.Size(m)
@@ -9807,16 +9985,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 11, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 11, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitType.Size(m)
@@ -9853,16 +10032,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 11, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 11, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnVplsTypePrefixLimitTypeStateType.Size(m)
@@ -9917,16 +10097,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 12}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 12}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnType.Size(m)
@@ -9960,16 +10141,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 12, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 12, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitType.Size(m)
@@ -10006,16 +10188,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 12, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 9, 0, 12, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListAfiSafisTypeAfiSafiListL2VpnEvpnTypePrefixLimitTypeStateType.Size(m)
@@ -10070,16 +10253,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 10}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 10}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartType.Size(m)
@@ -10116,16 +10300,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 10, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 10, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListGracefulRestartTypeStateType.Size(m)
@@ -10180,16 +10365,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 11}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 11}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyType.Size(m)
@@ -10224,16 +10410,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 11, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 11, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListApplyPolicyTypeStateType.Size(m)
@@ -10274,16 +10461,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 12}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 12}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesType.Size(m)
@@ -10318,16 +10506,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 12, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 12, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixList.Size(m)
@@ -10368,16 +10557,17 @@ func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTyp
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7, []int{0, 0, 0, 0, 0, 2, 0, 12, 0, 0}
+	return fileDescriptor_0666d8ed4f670c7b, []int{0, 0, 0, 0, 0, 2, 0, 12, 0, 0}
 }
+
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType.Merge(dst, src)
+func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesNiBgpNetworkInstanceListProtocolsTypeProtocolTypeBgpTypePeerGroupsTypePeerGroupListDynamicNeighborPrefixesTypeDynamicNeighborPrefixListStateType.Size(m)
@@ -10400,7 +10590,7 @@ var E_JnprNetworkInstancesNiBgpExt = &proto.ExtensionDesc{
 	ExtensionType: (*NetworkInstancesNiBgp)(nil),
 	Field:         67,
 	Name:          "jnpr_network_instances_ni_bgp_ext",
-	Tag:           "bytes,67,opt,name=jnpr_network_instances_ni_bgp_ext,json=jnprNetworkInstancesNiBgpExt",
+	Tag:           "bytes,67,opt,name=jnpr_network_instances_ni_bgp_ext",
 	Filename:      "rpd_ni_bgp_oc.proto",
 }
 
@@ -10596,9 +10786,9 @@ func init() {
 	proto.RegisterExtension(E_JnprNetworkInstancesNiBgpExt)
 }
 
-func init() { proto.RegisterFile("rpd_ni_bgp_oc.proto", fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7) }
+func init() { proto.RegisterFile("rpd_ni_bgp_oc.proto", fileDescriptor_0666d8ed4f670c7b) }
 
-var fileDescriptor_rpd_ni_bgp_oc_4726b112d31a79a7 = []byte{
+var fileDescriptor_0666d8ed4f670c7b = []byte{
 	// 5063 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x5d, 0x6b, 0x90, 0x1c, 0xd5,
 	0x75, 0xae, 0x9e, 0xd5, 0x63, 0xf6, 0xee, 0xce, 0xae, 0x74, 0xb5, 0xd2, 0x8e, 0x3a, 0x02, 0x09,

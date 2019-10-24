@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type MplsPfeMplsLdpP2MpIfIngress struct {
 	SignalingProtocols   *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType `protobuf:"bytes,151,opt,name=signaling_protocols,json=signalingProtocols" json:"signaling_protocols,omitempty"`
@@ -29,16 +31,17 @@ func (m *MplsPfeMplsLdpP2MpIfIngress) Reset()         { *m = MplsPfeMplsLdpP2MpI
 func (m *MplsPfeMplsLdpP2MpIfIngress) String() string { return proto.CompactTextString(m) }
 func (*MplsPfeMplsLdpP2MpIfIngress) ProtoMessage()    {}
 func (*MplsPfeMplsLdpP2MpIfIngress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b, []int{0}
+	return fileDescriptor_6b934bd27d65daed, []int{0}
 }
+
 func (m *MplsPfeMplsLdpP2MpIfIngress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngress.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngress.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpIfIngress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngress.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpIfIngress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngress.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngress) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngress.Size(m)
@@ -71,16 +74,17 @@ func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) String() string {
 }
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b, []int{0, 0}
+	return fileDescriptor_6b934bd27d65daed, []int{0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsType.Size(m)
@@ -113,16 +117,17 @@ func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) String() stri
 }
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b, []int{0, 0, 0}
+	return fileDescriptor_6b934bd27d65daed, []int{0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpType.Size(m)
@@ -155,16 +160,17 @@ func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesT
 }
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b, []int{0, 0, 0, 0}
+	return fileDescriptor_6b934bd27d65daed, []int{0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesType.Size(m)
@@ -197,16 +203,17 @@ func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesT
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) ProtoMessage() {
 }
 func (*MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_6b934bd27d65daed, []int{0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpIfIngressSignalingProtocolsTypeLdpTypeP2MpInterfacesTypeP2MpInterfaceList.Size(m)
@@ -222,7 +229,7 @@ var E_JnprMplsPfeMplsLdpP2MpIfIngressExt = &proto.ExtensionDesc{
 	ExtensionType: (*MplsPfeMplsLdpP2MpIfIngress)(nil),
 	Field:         92,
 	Name:          "jnpr_mpls_pfe_mpls_ldp_p2mp_if_ingress_ext",
-	Tag:           "bytes,92,opt,name=jnpr_mpls_pfe_mpls_ldp_p2mp_if_ingress_ext,json=jnprMplsPfeMplsLdpP2mpIfIngressExt",
+	Tag:           "bytes,92,opt,name=jnpr_mpls_pfe_mpls_ldp_p2mp_if_ingress_ext",
 	Filename:      "pfe_mpls_ldp_p2mp_if_ingress_oc.proto",
 }
 
@@ -236,10 +243,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("pfe_mpls_ldp_p2mp_if_ingress_oc.proto", fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b)
+	proto.RegisterFile("pfe_mpls_ldp_p2mp_if_ingress_oc.proto", fileDescriptor_6b934bd27d65daed)
 }
 
-var fileDescriptor_pfe_mpls_ldp_p2mp_if_ingress_oc_8d1230cf164cc46b = []byte{
+var fileDescriptor_6b934bd27d65daed = []byte{
 	// 315 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x91, 0x3f, 0x4b, 0x03, 0x31,
 	0x18, 0xc6, 0x89, 0x75, 0x90, 0x14, 0x2b, 0xa4, 0x8a, 0xe5, 0x26, 0x2d, 0x08, 0xc5, 0x21, 0x43,

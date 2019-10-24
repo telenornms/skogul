@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosDhcp struct {
 	System               *JunosDhcpSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosDhcp) Reset()         { *m = JunosDhcp{} }
 func (m *JunosDhcp) String() string { return proto.CompactTextString(m) }
 func (*JunosDhcp) ProtoMessage()    {}
 func (*JunosDhcp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0}
 }
+
 func (m *JunosDhcp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcp.Unmarshal(m, b)
 }
 func (m *JunosDhcp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcp.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcp.Merge(dst, src)
+func (m *JunosDhcp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcp.Merge(m, src)
 }
 func (m *JunosDhcp) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcp.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosDhcpSystemType) Reset()         { *m = JunosDhcpSystemType{} }
 func (m *JunosDhcpSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosDhcpSystemType) ProtoMessage()    {}
 func (*JunosDhcpSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0}
 }
+
 func (m *JunosDhcpSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemType.Merge(dst, src)
+func (m *JunosDhcpSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemType.Merge(m, src)
 }
 func (m *JunosDhcpSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosDhcpSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) String(
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) ProtoMessage() {}
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsType.Size(m)
@@ -194,16 +200,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType)
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) ProtoMessage() {}
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpType.Size(m)
@@ -244,16 +251,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) ProtoMessage() {}
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4Type.Size(m)
@@ -304,16 +312,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeGlobalStatisticsType.Size(m)
@@ -417,16 +426,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesType.Size(m)
@@ -462,16 +472,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceList.Size(m)
@@ -520,16 +531,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerType.Size(m)
@@ -616,16 +628,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Size(m)
@@ -988,16 +1001,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 0, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 0, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Size(m)
@@ -1082,16 +1096,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayType.Size(m)
@@ -1203,16 +1218,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Size(m)
@@ -1702,16 +1718,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Size(m)
@@ -1801,16 +1818,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 2}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 2}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Size(m)
@@ -1845,16 +1863,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Size(m)
@@ -1900,16 +1919,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV4TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Size(m)
@@ -1978,16 +1998,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) ProtoMessage() {}
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6Type.Size(m)
@@ -2039,16 +2060,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeGlobalStatisticsType.Size(m)
@@ -2159,16 +2181,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesType.Size(m)
@@ -2204,16 +2227,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceList.Size(m)
@@ -2262,16 +2286,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerType.Size(m)
@@ -2352,16 +2377,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeStatisticsType.Size(m)
@@ -2682,16 +2708,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 0, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 0, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListServerTypeBindingsType.Size(m)
@@ -2776,16 +2803,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayType.Size(m)
@@ -2901,16 +2929,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeStatisticsType.Size(m)
@@ -3428,16 +3457,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 1}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 1}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeBindingsType.Size(m)
@@ -3527,16 +3557,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 2}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 2}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersType.Size(m)
@@ -3571,16 +3602,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 2, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 2, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerList.Size(m)
@@ -3626,16 +3658,17 @@ func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) ProtoMessage() {
 }
 func (*JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdhcpd_oc_eba41e5259aed572, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 2, 0, 0}
+	return fileDescriptor_659f84dfcfa1403f, []int{0, 0, 0, 0, 0, 1, 1, 0, 1, 2, 0, 0}
 }
+
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Unmarshal(m, b)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Merge(dst, src)
+func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Merge(m, src)
 }
 func (m *JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType) XXX_Size() int {
 	return xxx_messageInfo_JunosDhcpSystemTypeSubscriberManagementTypeClientProtocolsTypeDhcpTypeV6TypeRoutingInstancesTypeRoutingInstanceListRelayTypeServersTypeServerListResponseTimeType.Size(m)
@@ -3693,7 +3726,7 @@ var E_JnprJunosDhcpExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosDhcp)(nil),
 	Field:         43,
 	Name:          "jnpr_junos_dhcp_ext",
-	Tag:           "bytes,43,opt,name=jnpr_junos_dhcp_ext,json=jnprJunosDhcpExt",
+	Tag:           "bytes,43,opt,name=jnpr_junos_dhcp_ext",
 	Filename:      "jdhcpd_oc.proto",
 }
 
@@ -3732,9 +3765,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosDhcpExt)
 }
 
-func init() { proto.RegisterFile("jdhcpd_oc.proto", fileDescriptor_jdhcpd_oc_eba41e5259aed572) }
+func init() { proto.RegisterFile("jdhcpd_oc.proto", fileDescriptor_659f84dfcfa1403f) }
 
-var fileDescriptor_jdhcpd_oc_eba41e5259aed572 = []byte{
+var fileDescriptor_659f84dfcfa1403f = []byte{
 	// 4980 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5c, 0xd9, 0x8f, 0xdc, 0x46,
 	0x7a, 0x47, 0xfb, 0x76, 0xc9, 0x5e, 0x49, 0x94, 0x46, 0x43, 0xb5, 0x46, 0x87, 0x8f, 0xc8, 0xf2,

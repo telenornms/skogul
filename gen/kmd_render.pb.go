@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosKeyManagement struct {
 	IkeSecurityAssociations *JunosKeyManagementIkeSecurityAssociationsType `protobuf:"bytes,151,opt,name=ike_security_associations,json=ikeSecurityAssociations" json:"ike_security_associations,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosKeyManagement) Reset()         { *m = JunosKeyManagement{} }
 func (m *JunosKeyManagement) String() string { return proto.CompactTextString(m) }
 func (*JunosKeyManagement) ProtoMessage()    {}
 func (*JunosKeyManagement) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kmd_render_7e22659a5f482809, []int{0}
+	return fileDescriptor_17c775346df31e4a, []int{0}
 }
+
 func (m *JunosKeyManagement) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKeyManagement.Unmarshal(m, b)
 }
 func (m *JunosKeyManagement) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKeyManagement.Marshal(b, m, deterministic)
 }
-func (dst *JunosKeyManagement) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKeyManagement.Merge(dst, src)
+func (m *JunosKeyManagement) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKeyManagement.Merge(m, src)
 }
 func (m *JunosKeyManagement) XXX_Size() int {
 	return xxx_messageInfo_JunosKeyManagement.Size(m)
@@ -71,16 +74,17 @@ func (m *JunosKeyManagementIkeSecurityAssociationsType) String() string {
 }
 func (*JunosKeyManagementIkeSecurityAssociationsType) ProtoMessage() {}
 func (*JunosKeyManagementIkeSecurityAssociationsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kmd_render_7e22659a5f482809, []int{0, 0}
+	return fileDescriptor_17c775346df31e4a, []int{0, 0}
 }
+
 func (m *JunosKeyManagementIkeSecurityAssociationsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsType.Unmarshal(m, b)
 }
 func (m *JunosKeyManagementIkeSecurityAssociationsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKeyManagementIkeSecurityAssociationsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsType.Merge(dst, src)
+func (m *JunosKeyManagementIkeSecurityAssociationsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsType.Merge(m, src)
 }
 func (m *JunosKeyManagementIkeSecurityAssociationsType) XXX_Size() int {
 	return xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsType.Size(m)
@@ -134,16 +138,17 @@ func (m *JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList
 }
 func (*JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) ProtoMessage() {}
 func (*JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kmd_render_7e22659a5f482809, []int{0, 0, 0}
+	return fileDescriptor_17c775346df31e4a, []int{0, 0, 0}
 }
+
 func (m *JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList.Unmarshal(m, b)
 }
 func (m *JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList.Marshal(b, m, deterministic)
 }
-func (dst *JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList.Merge(dst, src)
+func (m *JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList.Merge(m, src)
 }
 func (m *JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList) XXX_Size() int {
 	return xxx_messageInfo_JunosKeyManagementIkeSecurityAssociationsTypeIkeSecurityAssociationList.Size(m)
@@ -313,7 +318,7 @@ var E_JnprJunosKeyManagementExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosKeyManagement)(nil),
 	Field:         48,
 	Name:          "jnpr_junos_key_management_ext",
-	Tag:           "bytes,48,opt,name=jnpr_junos_key_management_ext,json=jnprJunosKeyManagementExt",
+	Tag:           "bytes,48,opt,name=jnpr_junos_key_management_ext",
 	Filename:      "kmd_render.proto",
 }
 
@@ -324,9 +329,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosKeyManagementExt)
 }
 
-func init() { proto.RegisterFile("kmd_render.proto", fileDescriptor_kmd_render_7e22659a5f482809) }
+func init() { proto.RegisterFile("kmd_render.proto", fileDescriptor_17c775346df31e4a) }
 
-var fileDescriptor_kmd_render_7e22659a5f482809 = []byte{
+var fileDescriptor_17c775346df31e4a = []byte{
 	// 688 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x94, 0xc1, 0x52, 0xdb, 0x38,
 	0x1c, 0xc6, 0x27, 0xb3, 0x07, 0x12, 0x65, 0x99, 0x65, 0xbc, 0xb0, 0x71, 0x12, 0x02, 0x19, 0xf6,

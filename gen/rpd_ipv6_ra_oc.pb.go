@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Ipv6RaIpv6Ra struct {
 	Ipv6RaInterface      []*Ipv6RaIpv6RaIpv6RaInterfaceList `protobuf:"bytes,151,rep,name=ipv6_ra_interface,json=ipv6RaInterface" json:"ipv6_ra_interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *Ipv6RaIpv6Ra) Reset()         { *m = Ipv6RaIpv6Ra{} }
 func (m *Ipv6RaIpv6Ra) String() string { return proto.CompactTextString(m) }
 func (*Ipv6RaIpv6Ra) ProtoMessage()    {}
 func (*Ipv6RaIpv6Ra) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ipv6_ra_oc_70b23aeafb038a16, []int{0}
+	return fileDescriptor_610995566f3f74cb, []int{0}
 }
+
 func (m *Ipv6RaIpv6Ra) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Ipv6RaIpv6Ra.Unmarshal(m, b)
 }
 func (m *Ipv6RaIpv6Ra) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Ipv6RaIpv6Ra.Marshal(b, m, deterministic)
 }
-func (dst *Ipv6RaIpv6Ra) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Ipv6RaIpv6Ra.Merge(dst, src)
+func (m *Ipv6RaIpv6Ra) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Ipv6RaIpv6Ra.Merge(m, src)
 }
 func (m *Ipv6RaIpv6Ra) XXX_Size() int {
 	return xxx_messageInfo_Ipv6RaIpv6Ra.Size(m)
@@ -73,16 +76,17 @@ func (m *Ipv6RaIpv6RaIpv6RaInterfaceList) Reset()         { *m = Ipv6RaIpv6RaIpv
 func (m *Ipv6RaIpv6RaIpv6RaInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*Ipv6RaIpv6RaIpv6RaInterfaceList) ProtoMessage()    {}
 func (*Ipv6RaIpv6RaIpv6RaInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_ipv6_ra_oc_70b23aeafb038a16, []int{0, 0}
+	return fileDescriptor_610995566f3f74cb, []int{0, 0}
 }
+
 func (m *Ipv6RaIpv6RaIpv6RaInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Ipv6RaIpv6RaIpv6RaInterfaceList.Unmarshal(m, b)
 }
 func (m *Ipv6RaIpv6RaIpv6RaInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Ipv6RaIpv6RaIpv6RaInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *Ipv6RaIpv6RaIpv6RaInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Ipv6RaIpv6RaIpv6RaInterfaceList.Merge(dst, src)
+func (m *Ipv6RaIpv6RaIpv6RaInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Ipv6RaIpv6RaIpv6RaInterfaceList.Merge(m, src)
 }
 func (m *Ipv6RaIpv6RaIpv6RaInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_Ipv6RaIpv6RaIpv6RaInterfaceList.Size(m)
@@ -147,7 +151,7 @@ var E_JnprIpv6RaIpv6RaExt = &proto.ExtensionDesc{
 	ExtensionType: (*Ipv6RaIpv6Ra)(nil),
 	Field:         64,
 	Name:          "jnpr_ipv6_ra_ipv6_ra_ext",
-	Tag:           "bytes,64,opt,name=jnpr_ipv6_ra_ipv6_ra_ext,json=jnprIpv6RaIpv6RaExt",
+	Tag:           "bytes,64,opt,name=jnpr_ipv6_ra_ipv6_ra_ext",
 	Filename:      "rpd_ipv6_ra_oc.proto",
 }
 
@@ -157,11 +161,9 @@ func init() {
 	proto.RegisterExtension(E_JnprIpv6RaIpv6RaExt)
 }
 
-func init() {
-	proto.RegisterFile("rpd_ipv6_ra_oc.proto", fileDescriptor_rpd_ipv6_ra_oc_70b23aeafb038a16)
-}
+func init() { proto.RegisterFile("rpd_ipv6_ra_oc.proto", fileDescriptor_610995566f3f74cb) }
 
-var fileDescriptor_rpd_ipv6_ra_oc_70b23aeafb038a16 = []byte{
+var fileDescriptor_610995566f3f74cb = []byte{
 	// 327 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x91, 0x3f, 0x4f, 0xf3, 0x30,
 	0x10, 0x87, 0x95, 0xbe, 0x95, 0x5e, 0x70, 0x28, 0x6d, 0x5d, 0x04, 0xa1, 0x53, 0xe8, 0x42, 0x04,

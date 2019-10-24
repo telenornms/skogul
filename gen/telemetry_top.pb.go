@@ -3,10 +3,12 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -17,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type TelemetryFieldOptions struct {
 	IsKey                *bool    `protobuf:"varint,1,opt,name=is_key,json=isKey" json:"is_key,omitempty"`
@@ -33,16 +35,17 @@ func (m *TelemetryFieldOptions) Reset()         { *m = TelemetryFieldOptions{} }
 func (m *TelemetryFieldOptions) String() string { return proto.CompactTextString(m) }
 func (*TelemetryFieldOptions) ProtoMessage()    {}
 func (*TelemetryFieldOptions) Descriptor() ([]byte, []int) {
-	return fileDescriptor_telemetry_top_3f8148ea0c6fa289, []int{0}
+	return fileDescriptor_610679feed69e1a4, []int{0}
 }
+
 func (m *TelemetryFieldOptions) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetryFieldOptions.Unmarshal(m, b)
 }
 func (m *TelemetryFieldOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetryFieldOptions.Marshal(b, m, deterministic)
 }
-func (dst *TelemetryFieldOptions) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetryFieldOptions.Merge(dst, src)
+func (m *TelemetryFieldOptions) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetryFieldOptions.Merge(m, src)
 }
 func (m *TelemetryFieldOptions) XXX_Size() int {
 	return xxx_messageInfo_TelemetryFieldOptions.Size(m)
@@ -112,16 +115,17 @@ func (m *TelemetryStream) Reset()         { *m = TelemetryStream{} }
 func (m *TelemetryStream) String() string { return proto.CompactTextString(m) }
 func (*TelemetryStream) ProtoMessage()    {}
 func (*TelemetryStream) Descriptor() ([]byte, []int) {
-	return fileDescriptor_telemetry_top_3f8148ea0c6fa289, []int{1}
+	return fileDescriptor_610679feed69e1a4, []int{1}
 }
+
 func (m *TelemetryStream) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetryStream.Unmarshal(m, b)
 }
 func (m *TelemetryStream) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetryStream.Marshal(b, m, deterministic)
 }
-func (dst *TelemetryStream) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetryStream.Merge(dst, src)
+func (m *TelemetryStream) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetryStream.Merge(m, src)
 }
 func (m *TelemetryStream) XXX_Size() int {
 	return xxx_messageInfo_TelemetryStream.Size(m)
@@ -213,7 +217,7 @@ func (m *IETFSensors) Reset()         { *m = IETFSensors{} }
 func (m *IETFSensors) String() string { return proto.CompactTextString(m) }
 func (*IETFSensors) ProtoMessage()    {}
 func (*IETFSensors) Descriptor() ([]byte, []int) {
-	return fileDescriptor_telemetry_top_3f8148ea0c6fa289, []int{2}
+	return fileDescriptor_610679feed69e1a4, []int{2}
 }
 
 var extRange_IETFSensors = []proto.ExtensionRange{
@@ -223,14 +227,15 @@ var extRange_IETFSensors = []proto.ExtensionRange{
 func (*IETFSensors) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_IETFSensors
 }
+
 func (m *IETFSensors) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IETFSensors.Unmarshal(m, b)
 }
 func (m *IETFSensors) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IETFSensors.Marshal(b, m, deterministic)
 }
-func (dst *IETFSensors) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IETFSensors.Merge(dst, src)
+func (m *IETFSensors) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IETFSensors.Merge(m, src)
 }
 func (m *IETFSensors) XXX_Size() int {
 	return xxx_messageInfo_IETFSensors.Size(m)
@@ -252,7 +257,7 @@ func (m *EnterpriseSensors) Reset()         { *m = EnterpriseSensors{} }
 func (m *EnterpriseSensors) String() string { return proto.CompactTextString(m) }
 func (*EnterpriseSensors) ProtoMessage()    {}
 func (*EnterpriseSensors) Descriptor() ([]byte, []int) {
-	return fileDescriptor_telemetry_top_3f8148ea0c6fa289, []int{3}
+	return fileDescriptor_610679feed69e1a4, []int{3}
 }
 
 var extRange_EnterpriseSensors = []proto.ExtensionRange{
@@ -262,14 +267,15 @@ var extRange_EnterpriseSensors = []proto.ExtensionRange{
 func (*EnterpriseSensors) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_EnterpriseSensors
 }
+
 func (m *EnterpriseSensors) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_EnterpriseSensors.Unmarshal(m, b)
 }
 func (m *EnterpriseSensors) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_EnterpriseSensors.Marshal(b, m, deterministic)
 }
-func (dst *EnterpriseSensors) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EnterpriseSensors.Merge(dst, src)
+func (m *EnterpriseSensors) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EnterpriseSensors.Merge(m, src)
 }
 func (m *EnterpriseSensors) XXX_Size() int {
 	return xxx_messageInfo_EnterpriseSensors.Size(m)
@@ -291,7 +297,7 @@ func (m *JuniperNetworksSensors) Reset()         { *m = JuniperNetworksSensors{}
 func (m *JuniperNetworksSensors) String() string { return proto.CompactTextString(m) }
 func (*JuniperNetworksSensors) ProtoMessage()    {}
 func (*JuniperNetworksSensors) Descriptor() ([]byte, []int) {
-	return fileDescriptor_telemetry_top_3f8148ea0c6fa289, []int{4}
+	return fileDescriptor_610679feed69e1a4, []int{4}
 }
 
 var extRange_JuniperNetworksSensors = []proto.ExtensionRange{
@@ -301,14 +307,15 @@ var extRange_JuniperNetworksSensors = []proto.ExtensionRange{
 func (*JuniperNetworksSensors) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_JuniperNetworksSensors
 }
+
 func (m *JuniperNetworksSensors) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JuniperNetworksSensors.Unmarshal(m, b)
 }
 func (m *JuniperNetworksSensors) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JuniperNetworksSensors.Marshal(b, m, deterministic)
 }
-func (dst *JuniperNetworksSensors) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JuniperNetworksSensors.Merge(dst, src)
+func (m *JuniperNetworksSensors) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JuniperNetworksSensors.Merge(m, src)
 }
 func (m *JuniperNetworksSensors) XXX_Size() int {
 	return xxx_messageInfo_JuniperNetworksSensors.Size(m)
@@ -324,7 +331,7 @@ var E_TelemetryOptions = &proto.ExtensionDesc{
 	ExtensionType: (*TelemetryFieldOptions)(nil),
 	Field:         1024,
 	Name:          "telemetry_options",
-	Tag:           "bytes,1024,opt,name=telemetry_options,json=telemetryOptions",
+	Tag:           "bytes,1024,opt,name=telemetry_options",
 	Filename:      "telemetry_top.proto",
 }
 
@@ -347,9 +354,9 @@ func init() {
 	proto.RegisterExtension(E_JuniperNetworks)
 }
 
-func init() { proto.RegisterFile("telemetry_top.proto", fileDescriptor_telemetry_top_3f8148ea0c6fa289) }
+func init() { proto.RegisterFile("telemetry_top.proto", fileDescriptor_610679feed69e1a4) }
 
-var fileDescriptor_telemetry_top_3f8148ea0c6fa289 = []byte{
+var fileDescriptor_610679feed69e1a4 = []byte{
 	// 494 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0x4f, 0x6f, 0xda, 0x40,
 	0x14, 0xc4, 0x65, 0xfe, 0x24, 0xe6, 0x41, 0x02, 0xd9, 0x36, 0xc9, 0xb6, 0x12, 0x92, 0xeb, 0x48,

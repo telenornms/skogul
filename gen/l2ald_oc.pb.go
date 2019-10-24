@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type VlansL2Al struct {
 	Vlan                 []*VlansL2AlVlanList `protobuf:"bytes,151,rep,name=vlan" json:"vlan,omitempty"`
@@ -29,16 +31,17 @@ func (m *VlansL2Al) Reset()         { *m = VlansL2Al{} }
 func (m *VlansL2Al) String() string { return proto.CompactTextString(m) }
 func (*VlansL2Al) ProtoMessage()    {}
 func (*VlansL2Al) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0}
 }
+
 func (m *VlansL2Al) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2Al.Unmarshal(m, b)
 }
 func (m *VlansL2Al) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2Al.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2Al) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2Al.Merge(dst, src)
+func (m *VlansL2Al) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2Al.Merge(m, src)
 }
 func (m *VlansL2Al) XXX_Size() int {
 	return xxx_messageInfo_VlansL2Al.Size(m)
@@ -69,16 +72,17 @@ func (m *VlansL2AlVlanList) Reset()         { *m = VlansL2AlVlanList{} }
 func (m *VlansL2AlVlanList) String() string { return proto.CompactTextString(m) }
 func (*VlansL2AlVlanList) ProtoMessage()    {}
 func (*VlansL2AlVlanList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0, 0}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0}
 }
+
 func (m *VlansL2AlVlanList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2AlVlanList.Unmarshal(m, b)
 }
 func (m *VlansL2AlVlanList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2AlVlanList.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2AlVlanList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanList.Merge(dst, src)
+func (m *VlansL2AlVlanList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2AlVlanList.Merge(m, src)
 }
 func (m *VlansL2AlVlanList) XXX_Size() int {
 	return xxx_messageInfo_VlansL2AlVlanList.Size(m)
@@ -123,16 +127,17 @@ func (m *VlansL2AlVlanListStateType) Reset()         { *m = VlansL2AlVlanListSta
 func (m *VlansL2AlVlanListStateType) String() string { return proto.CompactTextString(m) }
 func (*VlansL2AlVlanListStateType) ProtoMessage()    {}
 func (*VlansL2AlVlanListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0, 0, 0}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0}
 }
+
 func (m *VlansL2AlVlanListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2AlVlanListStateType.Unmarshal(m, b)
 }
 func (m *VlansL2AlVlanListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2AlVlanListStateType.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2AlVlanListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListStateType.Merge(dst, src)
+func (m *VlansL2AlVlanListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2AlVlanListStateType.Merge(m, src)
 }
 func (m *VlansL2AlVlanListStateType) XXX_Size() int {
 	return xxx_messageInfo_VlansL2AlVlanListStateType.Size(m)
@@ -175,16 +180,17 @@ func (m *VlansL2AlVlanListMembersType) Reset()         { *m = VlansL2AlVlanListM
 func (m *VlansL2AlVlanListMembersType) String() string { return proto.CompactTextString(m) }
 func (*VlansL2AlVlanListMembersType) ProtoMessage()    {}
 func (*VlansL2AlVlanListMembersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0, 0, 1}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1}
 }
+
 func (m *VlansL2AlVlanListMembersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2AlVlanListMembersType.Unmarshal(m, b)
 }
 func (m *VlansL2AlVlanListMembersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2AlVlanListMembersType.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2AlVlanListMembersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersType.Merge(dst, src)
+func (m *VlansL2AlVlanListMembersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2AlVlanListMembersType.Merge(m, src)
 }
 func (m *VlansL2AlVlanListMembersType) XXX_Size() int {
 	return xxx_messageInfo_VlansL2AlVlanListMembersType.Size(m)
@@ -215,16 +221,17 @@ func (m *VlansL2AlVlanListMembersTypeMemberList) Reset() {
 func (m *VlansL2AlVlanListMembersTypeMemberList) String() string { return proto.CompactTextString(m) }
 func (*VlansL2AlVlanListMembersTypeMemberList) ProtoMessage()    {}
 func (*VlansL2AlVlanListMembersTypeMemberList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0, 0, 1, 0}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0}
 }
+
 func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Unmarshal(m, b)
 }
 func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2AlVlanListMembersTypeMemberList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Merge(dst, src)
+func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Merge(m, src)
 }
 func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Size() int {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Size(m)
@@ -257,16 +264,17 @@ func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) String() string
 }
 func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) ProtoMessage() {}
 func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0, 0}
 }
+
 func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Unmarshal(m, b)
 }
 func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Merge(dst, src)
+func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Merge(m, src)
 }
 func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Size() int {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Size(m)
@@ -299,16 +307,17 @@ func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) String
 }
 func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) ProtoMessage() {}
 func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_e57dd47309457895, []int{0, 0, 1, 0, 0, 0}
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0, 0, 0}
 }
+
 func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Unmarshal(m, b)
 }
 func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Merge(dst, src)
+func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Merge(m, src)
 }
 func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Size(m)
@@ -331,7 +340,7 @@ var E_JnprVlansL2AlExt = &proto.ExtensionDesc{
 	ExtensionType: (*VlansL2Al)(nil),
 	Field:         50,
 	Name:          "jnpr_vlans_l2al_ext",
-	Tag:           "bytes,50,opt,name=jnpr_vlans_l2al_ext,json=jnprVlansL2alExt",
+	Tag:           "bytes,50,opt,name=jnpr_vlans_l2al_ext",
 	Filename:      "l2ald_oc.proto",
 }
 
@@ -346,9 +355,9 @@ func init() {
 	proto.RegisterExtension(E_JnprVlansL2AlExt)
 }
 
-func init() { proto.RegisterFile("l2ald_oc.proto", fileDescriptor_l2ald_oc_e57dd47309457895) }
+func init() { proto.RegisterFile("l2ald_oc.proto", fileDescriptor_3d20593bdd4ba4e6) }
 
-var fileDescriptor_l2ald_oc_e57dd47309457895 = []byte{
+var fileDescriptor_3d20593bdd4ba4e6 = []byte{
 	// 376 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x51, 0x4f, 0x4b, 0xfb, 0x40,
 	0x14, 0x24, 0xfd, 0xf5, 0xcf, 0xaf, 0x2f, 0xad, 0xc8, 0x16, 0x6d, 0x08, 0x22, 0xa5, 0xa7, 0xd2,

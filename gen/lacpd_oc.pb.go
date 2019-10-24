@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type LacpLacp struct {
 	State                *LacpLacpStateType      `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
@@ -30,16 +32,17 @@ func (m *LacpLacp) Reset()         { *m = LacpLacp{} }
 func (m *LacpLacp) String() string { return proto.CompactTextString(m) }
 func (*LacpLacp) ProtoMessage()    {}
 func (*LacpLacp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0}
 }
+
 func (m *LacpLacp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacp.Unmarshal(m, b)
 }
 func (m *LacpLacp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacp.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacp.Merge(dst, src)
+func (m *LacpLacp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacp.Merge(m, src)
 }
 func (m *LacpLacp) XXX_Size() int {
 	return xxx_messageInfo_LacpLacp.Size(m)
@@ -75,16 +78,17 @@ func (m *LacpLacpStateType) Reset()         { *m = LacpLacpStateType{} }
 func (m *LacpLacpStateType) String() string { return proto.CompactTextString(m) }
 func (*LacpLacpStateType) ProtoMessage()    {}
 func (*LacpLacpStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 0}
 }
+
 func (m *LacpLacpStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpStateType.Unmarshal(m, b)
 }
 func (m *LacpLacpStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpStateType.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpStateType.Merge(dst, src)
+func (m *LacpLacpStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpStateType.Merge(m, src)
 }
 func (m *LacpLacpStateType) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpStateType.Size(m)
@@ -113,16 +117,17 @@ func (m *LacpLacpInterfacesType) Reset()         { *m = LacpLacpInterfacesType{}
 func (m *LacpLacpInterfacesType) String() string { return proto.CompactTextString(m) }
 func (*LacpLacpInterfacesType) ProtoMessage()    {}
 func (*LacpLacpInterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1}
 }
+
 func (m *LacpLacpInterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesType.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesType.Merge(dst, src)
+func (m *LacpLacpInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesType.Merge(m, src)
 }
 func (m *LacpLacpInterfacesType) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesType.Size(m)
@@ -153,16 +158,17 @@ func (m *LacpLacpInterfacesTypeInterfaceList) Reset()         { *m = LacpLacpInt
 func (m *LacpLacpInterfacesTypeInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*LacpLacpInterfacesTypeInterfaceList) ProtoMessage()    {}
 func (*LacpLacpInterfacesTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1, 0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1, 0}
 }
+
 func (m *LacpLacpInterfacesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceList.Merge(dst, src)
+func (m *LacpLacpInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceList.Merge(m, src)
 }
 func (m *LacpLacpInterfacesTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceList.Size(m)
@@ -213,16 +219,17 @@ func (m *LacpLacpInterfacesTypeInterfaceListStateType) String() string {
 }
 func (*LacpLacpInterfacesTypeInterfaceListStateType) ProtoMessage() {}
 func (*LacpLacpInterfacesTypeInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1, 0, 0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1, 0, 0}
 }
+
 func (m *LacpLacpInterfacesTypeInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListStateType.Merge(dst, src)
+func (m *LacpLacpInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListStateType.Merge(m, src)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListStateType.Size(m)
@@ -283,16 +290,17 @@ func (m *LacpLacpInterfacesTypeInterfaceListMembersType) String() string {
 }
 func (*LacpLacpInterfacesTypeInterfaceListMembersType) ProtoMessage() {}
 func (*LacpLacpInterfacesTypeInterfaceListMembersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1, 0, 1}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1, 0, 1}
 }
+
 func (m *LacpLacpInterfacesTypeInterfaceListMembersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersType.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersType.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesTypeInterfaceListMembersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersType.Merge(dst, src)
+func (m *LacpLacpInterfacesTypeInterfaceListMembersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersType.Merge(m, src)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersType) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersType.Size(m)
@@ -326,16 +334,17 @@ func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) String() stri
 }
 func (*LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) ProtoMessage() {}
 func (*LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1, 0, 1, 0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1, 0, 1, 0}
 }
+
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList.Merge(dst, src)
+func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList.Merge(m, src)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberList.Size(m)
@@ -389,16 +398,17 @@ func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) Stri
 }
 func (*LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) ProtoMessage() {}
 func (*LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1, 0, 1, 0, 0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1, 0, 1, 0, 0}
 }
+
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType.Merge(dst, src)
+func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType.Merge(m, src)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateType.Size(m)
@@ -535,16 +545,17 @@ func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCounte
 }
 func (*LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) ProtoMessage() {}
 func (*LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lacpd_oc_f638001627e7906d, []int{0, 1, 0, 1, 0, 0, 0}
+	return fileDescriptor_8bfdbbc56d07876e, []int{0, 1, 0, 1, 0, 0, 0}
 }
+
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType.Merge(dst, src)
+func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType.Merge(m, src)
 }
 func (m *LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_LacpLacpInterfacesTypeInterfaceListMembersTypeMemberListStateTypeCountersType.Size(m)
@@ -609,7 +620,7 @@ var E_JnprLacpLacpExt = &proto.ExtensionDesc{
 	ExtensionType: (*LacpLacp)(nil),
 	Field:         52,
 	Name:          "jnpr_lacp_lacp_ext",
-	Tag:           "bytes,52,opt,name=jnpr_lacp_lacp_ext,json=jnprLacpLacpExt",
+	Tag:           "bytes,52,opt,name=jnpr_lacp_lacp_ext",
 	Filename:      "lacpd_oc.proto",
 }
 
@@ -626,9 +637,9 @@ func init() {
 	proto.RegisterExtension(E_JnprLacpLacpExt)
 }
 
-func init() { proto.RegisterFile("lacpd_oc.proto", fileDescriptor_lacpd_oc_f638001627e7906d) }
+func init() { proto.RegisterFile("lacpd_oc.proto", fileDescriptor_8bfdbbc56d07876e) }
 
-var fileDescriptor_lacpd_oc_f638001627e7906d = []byte{
+var fileDescriptor_8bfdbbc56d07876e = []byte{
 	// 777 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x55, 0x4d, 0x4f, 0x14, 0x4b,
 	0x14, 0xcd, 0xf0, 0x80, 0xe9, 0xb9, 0xf3, 0xf5, 0x5e, 0x91, 0x97, 0xd7, 0xf4, 0x53, 0x21, 0x68,

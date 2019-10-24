@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosRsvpInterface struct {
 	RsvpInterfaceInformation *JunosRsvpInterfaceRsvpInterfaceInformationType `protobuf:"bytes,151,opt,name=rsvp_interface_information,json=rsvpInterfaceInformation" json:"rsvp_interface_information,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosRsvpInterface) Reset()         { *m = JunosRsvpInterface{} }
 func (m *JunosRsvpInterface) String() string { return proto.CompactTextString(m) }
 func (*JunosRsvpInterface) ProtoMessage()    {}
 func (*JunosRsvpInterface) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773, []int{0}
+	return fileDescriptor_df4225f46c0f8328, []int{0}
 }
+
 func (m *JunosRsvpInterface) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsvpInterface.Unmarshal(m, b)
 }
 func (m *JunosRsvpInterface) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsvpInterface.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsvpInterface) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsvpInterface.Merge(dst, src)
+func (m *JunosRsvpInterface) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsvpInterface.Merge(m, src)
 }
 func (m *JunosRsvpInterface) XXX_Size() int {
 	return xxx_messageInfo_JunosRsvpInterface.Size(m)
@@ -72,16 +75,17 @@ func (m *JunosRsvpInterfaceRsvpInterfaceInformationType) String() string {
 }
 func (*JunosRsvpInterfaceRsvpInterfaceInformationType) ProtoMessage() {}
 func (*JunosRsvpInterfaceRsvpInterfaceInformationType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773, []int{0, 0}
+	return fileDescriptor_df4225f46c0f8328, []int{0, 0}
 }
+
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationType.Unmarshal(m, b)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsvpInterfaceRsvpInterfaceInformationType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationType.Merge(dst, src)
+func (m *JunosRsvpInterfaceRsvpInterfaceInformationType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationType.Merge(m, src)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationType.Size(m)
@@ -131,16 +135,17 @@ func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) String
 }
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) ProtoMessage() {}
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773, []int{0, 0, 0}
+	return fileDescriptor_df4225f46c0f8328, []int{0, 0, 0}
 }
+
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList.Unmarshal(m, b)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList.Merge(dst, src)
+func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList.Merge(m, src)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceList.Size(m)
@@ -248,16 +253,17 @@ func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageS
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) ProtoMessage() {
 }
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773, []int{0, 0, 0, 0}
+	return fileDescriptor_df4225f46c0f8328, []int{0, 0, 0, 0}
 }
+
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList.Unmarshal(m, b)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList.Merge(dst, src)
+func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList.Merge(m, src)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList) XXX_Size() int {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListMessageStatisticsList.Size(m)
@@ -324,16 +330,17 @@ func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTeli
 }
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) ProtoMessage() {}
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773, []int{0, 0, 0, 1}
+	return fileDescriptor_df4225f46c0f8328, []int{0, 0, 0, 1}
 }
+
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType.Unmarshal(m, b)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType.Merge(dst, src)
+func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType.Merge(m, src)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType) XXX_Size() int {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkType.Size(m)
@@ -410,16 +417,17 @@ func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTeli
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) ProtoMessage() {
 }
 func (*JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773, []int{0, 0, 0, 1, 0}
+	return fileDescriptor_df4225f46c0f8328, []int{0, 0, 0, 1, 0}
 }
+
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList.Unmarshal(m, b)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList.Merge(dst, src)
+func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList.Merge(m, src)
 }
 func (m *JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList) XXX_Size() int {
 	return xxx_messageInfo_JunosRsvpInterfaceRsvpInterfaceInformationTypeRsvpInterfaceListRsvpTelinkTypeReservedBandwidthList.Size(m)
@@ -449,7 +457,7 @@ var E_JnprJunosRsvpInterfaceExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosRsvpInterface)(nil),
 	Field:         46,
 	Name:          "jnpr_junos_rsvp_interface_ext",
-	Tag:           "bytes,46,opt,name=jnpr_junos_rsvp_interface_ext,json=jnprJunosRsvpInterfaceExt",
+	Tag:           "bytes,46,opt,name=jnpr_junos_rsvp_interface_ext",
 	Filename:      "junos-xmlproxyd_junos-rsvp-interface.proto",
 }
 
@@ -464,10 +472,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("junos-xmlproxyd_junos-rsvp-interface.proto", fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773)
+	proto.RegisterFile("junos-xmlproxyd_junos-rsvp-interface.proto", fileDescriptor_df4225f46c0f8328)
 }
 
-var fileDescriptor_junos_xmlproxyd_junos_rsvp_interface_d0bbf2b718927773 = []byte{
+var fileDescriptor_df4225f46c0f8328 = []byte{
 	// 779 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x55, 0x4b, 0x6f, 0xd3, 0x4a,
 	0x14, 0x56, 0x7a, 0x6f, 0x75, 0x7b, 0x4f, 0xe2, 0x34, 0x99, 0x96, 0xd6, 0xb5, 0x84, 0xfa, 0x40,

@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type BgpRibBgpRib struct {
 	AfiSafis             *BgpRibBgpRibAfiSafisType `protobuf:"bytes,151,opt,name=afi_safis,json=afiSafis" json:"afi_safis,omitempty"`
@@ -29,16 +31,17 @@ func (m *BgpRibBgpRib) Reset()         { *m = BgpRibBgpRib{} }
 func (m *BgpRibBgpRib) String() string { return proto.CompactTextString(m) }
 func (*BgpRibBgpRib) ProtoMessage()    {}
 func (*BgpRibBgpRib) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0}
 }
+
 func (m *BgpRibBgpRib) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRib.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRib) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRib.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRib) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRib.Merge(dst, src)
+func (m *BgpRibBgpRib) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRib.Merge(m, src)
 }
 func (m *BgpRibBgpRib) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRib.Size(m)
@@ -67,16 +70,17 @@ func (m *BgpRibBgpRibAfiSafisType) Reset()         { *m = BgpRibBgpRibAfiSafisTy
 func (m *BgpRibBgpRibAfiSafisType) String() string { return proto.CompactTextString(m) }
 func (*BgpRibBgpRibAfiSafisType) ProtoMessage()    {}
 func (*BgpRibBgpRibAfiSafisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisType.Size(m)
@@ -107,16 +111,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiList) Reset()         { *m = BgpRibBgpRi
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiList) String() string { return proto.CompactTextString(m) }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiList) ProtoMessage()    {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiList.Size(m)
@@ -164,16 +169,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) String() string {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastType.Size(m)
@@ -214,16 +220,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) String() 
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibType.Size(m)
@@ -263,16 +270,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType)
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesType.Size(m)
@@ -313,16 +321,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteList.Size(m)
@@ -413,16 +422,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -514,16 +524,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -576,16 +587,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -656,16 +668,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -712,16 +725,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) String
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsType.Size(m)
@@ -758,16 +772,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborList.Size(m)
@@ -830,16 +845,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Size(m)
@@ -880,16 +896,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Size(m)
@@ -930,16 +947,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Size(m)
@@ -1030,16 +1048,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -1131,16 +1150,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -1193,16 +1213,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -1273,16 +1294,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -1331,16 +1353,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Size(m)
@@ -1381,16 +1404,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Size(m)
@@ -1431,16 +1455,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Size(m)
@@ -1531,16 +1556,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -1632,16 +1658,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -1694,16 +1721,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -1774,16 +1802,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -1832,16 +1861,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Size(m)
@@ -1882,16 +1912,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Size(m)
@@ -1932,16 +1963,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Size(m)
@@ -2032,16 +2064,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -2133,16 +2166,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -2195,16 +2229,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -2275,16 +2310,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -2333,16 +2369,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Size(m)
@@ -2383,16 +2420,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Size(m)
@@ -2433,16 +2471,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Size(m)
@@ -2533,16 +2572,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -2634,16 +2674,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -2696,16 +2737,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -2776,16 +2818,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 0, 1, 0, 3, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv4UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -2833,16 +2876,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) String() string {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastType.Size(m)
@@ -2883,16 +2927,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) String() 
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibType.Size(m)
@@ -2932,16 +2977,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType)
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesType.Size(m)
@@ -2982,16 +3028,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteList.Size(m)
@@ -3082,16 +3129,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -3183,16 +3231,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -3245,16 +3294,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -3325,16 +3375,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeR
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 0, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 0, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeLocRibTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -3381,16 +3432,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) String
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsType.Size(m)
@@ -3427,16 +3479,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) ProtoMessage() {}
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborList.Size(m)
@@ -3499,16 +3552,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreType.Size(m)
@@ -3549,16 +3603,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesType.Size(m)
@@ -3599,16 +3654,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteList.Size(m)
@@ -3699,16 +3755,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -3800,16 +3857,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -3862,16 +3920,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -3942,16 +4001,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -4000,16 +4060,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostType.Size(m)
@@ -4050,16 +4111,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesType.Size(m)
@@ -4100,16 +4162,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteList.Size(m)
@@ -4200,16 +4263,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -4301,16 +4365,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -4363,16 +4428,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -4443,16 +4509,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibInPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -4501,16 +4568,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreType.Size(m)
@@ -4551,16 +4619,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesType.Size(m)
@@ -4601,16 +4670,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteList.Size(m)
@@ -4701,16 +4771,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -4802,16 +4873,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -4864,16 +4936,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -4944,16 +5017,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 2, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPreTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -5002,16 +5076,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostType.Size(m)
@@ -5052,16 +5127,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesType.Size(m)
@@ -5102,16 +5178,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteList.Size(m)
@@ -5202,16 +5279,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesType.Size(m)
@@ -5303,16 +5381,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 0, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 0, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListAttributesTypeAggregatorType.Size(m)
@@ -5365,16 +5444,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 1}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 1}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesType.Size(m)
@@ -5445,16 +5525,17 @@ func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighbor
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) ProtoMessage() {
 }
 func (*BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 1, 0}
+	return fileDescriptor_9b7bb7c33de41983, []int{0, 0, 0, 1, 1, 0, 3, 0, 0, 1, 0}
 }
+
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Unmarshal(m, b)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Marshal(b, m, deterministic)
 }
-func (dst *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(dst, src)
+func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Merge(m, src)
 }
 func (m *BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList) XXX_Size() int {
 	return xxx_messageInfo_BgpRibBgpRibAfiSafisTypeAfiSafiListIpv6UnicastTypeNeighborsTypeNeighborListAdjRibOutPostTypeRoutesTypeRouteListExtAttributesTypeUnknownAttributeList.Size(m)
@@ -5491,7 +5572,7 @@ var E_JnprBgpRibBgpRibExt = &proto.ExtensionDesc{
 	ExtensionType: (*BgpRibBgpRib)(nil),
 	Field:         63,
 	Name:          "jnpr_bgp_rib_bgp_rib_ext",
-	Tag:           "bytes,63,opt,name=jnpr_bgp_rib_bgp_rib_ext,json=jnprBgpRibBgpRibExt",
+	Tag:           "bytes,63,opt,name=jnpr_bgp_rib_bgp_rib_ext",
 	Filename:      "rpd_bgp_rib_oc.proto",
 }
 
@@ -5578,11 +5659,9 @@ func init() {
 	proto.RegisterExtension(E_JnprBgpRibBgpRibExt)
 }
 
-func init() {
-	proto.RegisterFile("rpd_bgp_rib_oc.proto", fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0)
-}
+func init() { proto.RegisterFile("rpd_bgp_rib_oc.proto", fileDescriptor_9b7bb7c33de41983) }
 
-var fileDescriptor_rpd_bgp_rib_oc_bdeeed1889bfabe0 = []byte{
+var fileDescriptor_9b7bb7c33de41983 = []byte{
 	// 1699 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x9a, 0x5d, 0x8f, 0x14, 0x45,
 	0x17, 0xc7, 0xd3, 0xec, 0xb2, 0xbb, 0x53, 0xb3, 0xb3, 0x3b, 0xd4, 0xf2, 0x40, 0x3f, 0xfd, 0x84,

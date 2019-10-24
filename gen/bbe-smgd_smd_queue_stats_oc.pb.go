@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type DebugQueueStats struct {
 	System               *DebugQueueStatsSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *DebugQueueStats) Reset()         { *m = DebugQueueStats{} }
 func (m *DebugQueueStats) String() string { return proto.CompactTextString(m) }
 func (*DebugQueueStats) ProtoMessage()    {}
 func (*DebugQueueStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a, []int{0}
+	return fileDescriptor_25315a2411c1892a, []int{0}
 }
+
 func (m *DebugQueueStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugQueueStats.Unmarshal(m, b)
 }
 func (m *DebugQueueStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugQueueStats.Marshal(b, m, deterministic)
 }
-func (dst *DebugQueueStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugQueueStats.Merge(dst, src)
+func (m *DebugQueueStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugQueueStats.Merge(m, src)
 }
 func (m *DebugQueueStats) XXX_Size() int {
 	return xxx_messageInfo_DebugQueueStats.Size(m)
@@ -67,16 +70,17 @@ func (m *DebugQueueStatsSystemType) Reset()         { *m = DebugQueueStatsSystem
 func (m *DebugQueueStatsSystemType) String() string { return proto.CompactTextString(m) }
 func (*DebugQueueStatsSystemType) ProtoMessage()    {}
 func (*DebugQueueStatsSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a, []int{0, 0}
+	return fileDescriptor_25315a2411c1892a, []int{0, 0}
 }
+
 func (m *DebugQueueStatsSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugQueueStatsSystemType.Unmarshal(m, b)
 }
 func (m *DebugQueueStatsSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugQueueStatsSystemType.Marshal(b, m, deterministic)
 }
-func (dst *DebugQueueStatsSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugQueueStatsSystemType.Merge(dst, src)
+func (m *DebugQueueStatsSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugQueueStatsSystemType.Merge(m, src)
 }
 func (m *DebugQueueStatsSystemType) XXX_Size() int {
 	return xxx_messageInfo_DebugQueueStatsSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *DebugQueueStatsSystemTypeSubscriberManagementType) String() string {
 }
 func (*DebugQueueStatsSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*DebugQueueStatsSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a, []int{0, 0, 0}
+	return fileDescriptor_25315a2411c1892a, []int{0, 0, 0}
 }
+
 func (m *DebugQueueStatsSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *DebugQueueStatsSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *DebugQueueStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *DebugQueueStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *DebugQueueStatsSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) String() st
 }
 func (*DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) ProtoMessage() {}
 func (*DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a, []int{0, 0, 0, 0}
+	return fileDescriptor_25315a2411c1892a, []int{0, 0, 0, 0}
 }
+
 func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType.Unmarshal(m, b)
 }
 func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType.Marshal(b, m, deterministic)
 }
-func (dst *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType.Merge(dst, src)
+func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType.Merge(m, src)
 }
 func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Size() int {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraType.Size(m)
@@ -273,16 +279,17 @@ func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) Stri
 }
 func (*DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) ProtoMessage() {}
 func (*DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_25315a2411c1892a, []int{0, 0, 0, 0, 0}
 }
+
 func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType.Unmarshal(m, b)
 }
 func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType.Marshal(b, m, deterministic)
 }
-func (dst *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType.Merge(dst, src)
+func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType.Merge(m, src)
 }
 func (m *DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType) XXX_Size() int {
 	return xxx_messageInfo_DebugQueueStatsSystemTypeSubscriberManagementTypeInfraTypeEraType.Size(m)
@@ -865,7 +872,7 @@ var E_JnprDebugQueueStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*DebugQueueStats)(nil),
 	Field:         38,
 	Name:          "jnpr_debug_queue_stats_ext",
-	Tag:           "bytes,38,opt,name=jnpr_debug_queue_stats_ext,json=jnprDebugQueueStatsExt",
+	Tag:           "bytes,38,opt,name=jnpr_debug_queue_stats_ext",
 	Filename:      "bbe-smgd_smd_queue_stats_oc.proto",
 }
 
@@ -878,11 +885,9 @@ func init() {
 	proto.RegisterExtension(E_JnprDebugQueueStatsExt)
 }
 
-func init() {
-	proto.RegisterFile("bbe-smgd_smd_queue_stats_oc.proto", fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a)
-}
+func init() { proto.RegisterFile("bbe-smgd_smd_queue_stats_oc.proto", fileDescriptor_25315a2411c1892a) }
 
-var fileDescriptor_bbe_smgd_smd_queue_stats_oc_034edb00ee38492a = []byte{
+var fileDescriptor_25315a2411c1892a = []byte{
 	// 1560 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x58, 0xe9, 0x76, 0xdb, 0x44,
 	0x14, 0x3e, 0x39, 0x2c, 0x07, 0x26, 0x4d, 0xda, 0x2a, 0x9b, 0xe2, 0x6e, 0x49, 0xba, 0x05, 0xda,

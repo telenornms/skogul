@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type NetworkInstancesIsis struct {
 	NetworkInstance      []*NetworkInstancesIsisNetworkInstanceList `protobuf:"bytes,151,rep,name=network_instance,json=networkInstance" json:"network_instance,omitempty"`
@@ -29,16 +31,17 @@ func (m *NetworkInstancesIsis) Reset()         { *m = NetworkInstancesIsis{} }
 func (m *NetworkInstancesIsis) String() string { return proto.CompactTextString(m) }
 func (*NetworkInstancesIsis) ProtoMessage()    {}
 func (*NetworkInstancesIsis) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0}
+	return fileDescriptor_69a37f0f83887bca, []int{0}
 }
+
 func (m *NetworkInstancesIsis) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsis.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsis) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsis.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsis) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsis.Merge(dst, src)
+func (m *NetworkInstancesIsis) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsis.Merge(m, src)
 }
 func (m *NetworkInstancesIsis) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsis.Size(m)
@@ -70,16 +73,17 @@ func (m *NetworkInstancesIsisNetworkInstanceList) Reset() {
 func (m *NetworkInstancesIsisNetworkInstanceList) String() string { return proto.CompactTextString(m) }
 func (*NetworkInstancesIsisNetworkInstanceList) ProtoMessage()    {}
 func (*NetworkInstancesIsisNetworkInstanceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceList.Size(m)
@@ -119,16 +123,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsType) String() string {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsType) ProtoMessage() {}
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsType.Size(m)
@@ -161,16 +166,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) Strin
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) ProtoMessage() {}
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolType.Size(m)
@@ -204,16 +210,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) ProtoMessage() {}
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisType.Size(m)
@@ -254,16 +261,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsType.Size(m)
@@ -300,16 +308,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelList.Size(m)
@@ -364,16 +373,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseType.Size(m)
@@ -410,16 +420,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspList.Size(m)
@@ -486,16 +497,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListStateType.Size(m)
@@ -613,16 +625,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsType.Size(m)
@@ -669,16 +682,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvList.Size(m)
@@ -803,16 +817,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListStateType.Size(m)
@@ -846,16 +861,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressType.Size(m)
@@ -889,16 +905,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListAreaAddressTypeStateType.Size(m)
@@ -932,16 +949,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeType.Size(m)
@@ -975,16 +993,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListLspBufferSizeTypeStateType.Size(m)
@@ -1018,16 +1037,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidType.Size(m)
@@ -1061,16 +1081,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListNlpidTypeStateType.Size(m)
@@ -1104,16 +1125,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameType.Size(m)
@@ -1147,16 +1169,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListHostnameTypeStateType.Size(m)
@@ -1190,16 +1213,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesType.Size(m)
@@ -1233,16 +1257,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4InterfaceAddressesTypeStateType.Size(m)
@@ -1276,16 +1301,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesType.Size(m)
@@ -1319,16 +1345,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6InterfaceAddressesTypeStateType.Size(m)
@@ -1362,16 +1389,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdType.Size(m)
@@ -1405,16 +1433,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4TeRouterIdTypeStateType.Size(m)
@@ -1448,16 +1477,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsType.Size(m)
@@ -1492,16 +1522,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgList.Size(m)
@@ -1548,16 +1579,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv4SrlgsTypeIpv4SrlgListStateType.Size(m)
@@ -1633,16 +1665,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesType.Size(m)
@@ -1679,16 +1712,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityList.Size(m)
@@ -1745,16 +1779,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListStateType.Size(m)
@@ -1802,16 +1837,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsType.Size(m)
@@ -1848,16 +1884,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvList.Size(m)
@@ -1912,16 +1949,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListStateType.Size(m)
@@ -1955,16 +1993,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsType.Size(m)
@@ -1998,16 +2037,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingAlgorithmsTypeStateType.Size(m)
@@ -2042,16 +2082,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityType.Size(m)
@@ -2092,16 +2133,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeStateType.Size(m)
@@ -2135,16 +2177,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsType.Size(m)
@@ -2179,16 +2222,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorList.Size(m)
@@ -2230,16 +2274,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 1, 0, 2, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListSubtlvsTypeSubtlvListSegmentRoutingCapabilityTypeSrgbDescriptorsTypeSrgbDescriptorListStateType.Size(m)
@@ -2280,16 +2325,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsType.Size(m)
@@ -2324,16 +2370,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvList.Size(m)
@@ -2376,16 +2423,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListRouterCapabilitiesTypeCapabilityListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Size(m)
@@ -2433,16 +2481,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityType.Size(m)
@@ -2476,16 +2525,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsType.Size(m)
@@ -2522,16 +2572,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborList.Size(m)
@@ -2587,16 +2638,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListStateType.Size(m)
@@ -2637,16 +2689,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsType.Size(m)
@@ -2694,16 +2747,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvList.Size(m)
@@ -2835,16 +2889,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListStateType.Size(m)
@@ -2878,16 +2933,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupType.Size(m)
@@ -2921,16 +2977,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdminGroupTypeStateType.Size(m)
@@ -2964,16 +3021,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdType.Size(m)
@@ -3008,16 +3066,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLinkIdTypeStateType.Size(m)
@@ -3058,16 +3117,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 3}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 3}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressType.Size(m)
@@ -3101,16 +3161,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 3, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 3, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4InterfaceAddressTypeStateType.Size(m)
@@ -3144,16 +3205,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 4}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 4}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressType.Size(m)
@@ -3187,16 +3249,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 4, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 4, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv4NeighborAddressTypeStateType.Size(m)
@@ -3230,16 +3293,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 5}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 5}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthType.Size(m)
@@ -3273,16 +3337,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 5, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 5, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxLinkBandwidthTypeStateType.Size(m)
@@ -3316,16 +3381,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 6}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 6}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthType.Size(m)
@@ -3359,16 +3425,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 6, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 6, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListMaxReservableLinkBandwidthTypeStateType.Size(m)
@@ -3402,16 +3469,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 7}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 7}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthType.Size(m)
@@ -3446,16 +3514,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 7, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 7, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityList.Size(m)
@@ -3497,16 +3566,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 7, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 7, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListUnreservedBandwidthTypeSetupPriorityListStateType.Size(m)
@@ -3547,16 +3617,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 8}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 8}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressType.Size(m)
@@ -3590,16 +3661,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 8, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 8, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6InterfaceAddressTypeStateType.Size(m)
@@ -3633,16 +3705,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 9}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 9}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressType.Size(m)
@@ -3676,16 +3749,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 9, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 9, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListIpv6NeighborAddressTypeStateType.Size(m)
@@ -3719,16 +3793,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 10}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 10}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricType.Size(m)
@@ -3762,16 +3837,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 10, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 10, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListTeDefaultMetricTypeStateType.Size(m)
@@ -3805,16 +3881,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsType.Size(m)
@@ -3850,16 +3927,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintList.Size(m)
@@ -3907,16 +3985,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListStateType.Size(m)
@@ -3950,16 +4029,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsType.Size(m)
@@ -3994,16 +4074,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintList.Size(m)
@@ -4045,16 +4126,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 11, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListBandwidthConstraintsTypeBandwidthConstraintListConstraintsTypeConstraintListStateType.Size(m)
@@ -4095,16 +4177,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 12}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 12}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsType.Size(m)
@@ -4138,16 +4221,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 12, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 12, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidType.Size(m)
@@ -4183,16 +4267,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 12, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 12, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListAdjacencySidsTypeAdjSidTypeStateType.Size(m)
@@ -4240,16 +4325,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 13}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 13}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsType.Size(m)
@@ -4283,16 +4369,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 13, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 13, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidType.Size(m)
@@ -4329,16 +4416,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 13, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 1, 0, 13, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListSubtlvsTypeSubtlvListLanAdjacencySidsTypeLanAdjSidTypeStateType.Size(m)
@@ -4393,16 +4481,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsType.Size(m)
@@ -4437,16 +4526,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvList.Size(m)
@@ -4489,16 +4579,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIsReachabilityTypeNeighborsTypeNeighborListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Size(m)
@@ -4546,16 +4637,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityType.Size(m)
@@ -4589,16 +4681,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesType.Size(m)
@@ -4635,16 +4728,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixList.Size(m)
@@ -4702,16 +4796,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListStateType.Size(m)
@@ -4766,16 +4861,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsType.Size(m)
@@ -4812,16 +4908,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Size(m)
@@ -4876,16 +4973,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Size(m)
@@ -4919,16 +5017,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Size(m)
@@ -4962,16 +5061,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Size(m)
@@ -5005,16 +5105,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Size(m)
@@ -5049,16 +5150,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Size(m)
@@ -5101,16 +5203,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 1, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Size(m)
@@ -5158,16 +5261,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Size(m)
@@ -5202,16 +5306,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Size(m)
@@ -5254,16 +5359,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListExtendedIpv4ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Size(m)
@@ -5311,16 +5417,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityType.Size(m)
@@ -5354,16 +5461,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesType.Size(m)
@@ -5400,16 +5508,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixList.Size(m)
@@ -5468,16 +5577,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListStateType.Size(m)
@@ -5539,16 +5649,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsType.Size(m)
@@ -5585,16 +5696,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvList.Size(m)
@@ -5649,16 +5761,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListStateType.Size(m)
@@ -5692,16 +5805,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagType.Size(m)
@@ -5735,16 +5849,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListTagTypeStateType.Size(m)
@@ -5778,16 +5893,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsType.Size(m)
@@ -5822,16 +5938,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidList.Size(m)
@@ -5874,16 +5991,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListSubtlvsTypeSubtlvListPrefixSidsTypePrefixSidListStateType.Size(m)
@@ -5931,16 +6049,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsType.Size(m)
@@ -5975,16 +6094,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvList.Size(m)
@@ -6027,16 +6147,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 12, 0, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListTlvsTypeTlvListIpv6ReachabilityTypePrefixesTypePrefixListUndefinedSubtlvsTypeUndefinedSubtlvListStateType.Size(m)
@@ -6084,16 +6205,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsType.Size(m)
@@ -6128,16 +6250,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvList.Size(m)
@@ -6180,16 +6303,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListLinkStateDatabaseTypeLspListUndefinedTlvsTypeUndefinedTlvListStateType.Size(m)
@@ -6237,16 +6361,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListStateType.Size(m)
@@ -6280,16 +6405,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersType.Size(m)
@@ -6335,16 +6461,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 0, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeLevelsTypeLevelListSystemLevelCountersTypeStateType.Size(m)
@@ -6462,16 +6589,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesType.Size(m)
@@ -6509,16 +6637,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceList.Size(m)
@@ -6580,16 +6709,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListStateType.Size(m)
@@ -6623,16 +6753,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersType.Size(m)
@@ -6674,16 +6805,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListCircuitCountersTypeStateType.Size(m)
@@ -6779,16 +6911,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersType.Size(m)
@@ -6864,16 +6997,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspType.Size(m)
@@ -6911,16 +7045,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeLspTypeStateType.Size(m)
@@ -6982,16 +7117,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihType.Size(m)
@@ -7029,16 +7165,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIihTypeStateType.Size(m)
@@ -7100,16 +7237,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 2}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 2}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshType.Size(m)
@@ -7147,16 +7285,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 2, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 2, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeIshTypeStateType.Size(m)
@@ -7218,16 +7357,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 3}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 3}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshType.Size(m)
@@ -7265,16 +7405,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 3, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 3, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeEshTypeStateType.Size(m)
@@ -7336,16 +7477,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 4}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 4}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpType.Size(m)
@@ -7383,16 +7525,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 4, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 4, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypePsnpTypeStateType.Size(m)
@@ -7454,16 +7597,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 5}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 5}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpType.Size(m)
@@ -7501,16 +7645,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 5, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 5, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeCsnpTypeStateType.Size(m)
@@ -7572,16 +7717,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 6}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 6}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownType.Size(m)
@@ -7619,16 +7765,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 2, 6, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 2, 6, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListPacketCountersTypeUnknownTypeStateType.Size(m)
@@ -7690,16 +7837,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 3}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 3}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsType.Size(m)
@@ -7735,16 +7883,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 3, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 3, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelList.Size(m)
@@ -7792,16 +7941,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListStateType.Size(m)
@@ -7835,16 +7985,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 1}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 1}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesType.Size(m)
@@ -7879,16 +8030,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyList.Size(m)
@@ -7949,16 +8101,17 @@ func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTyp
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0}
+	return fileDescriptor_69a37f0f83887bca, []int{0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType.Merge(dst, src)
+func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesIsisNetworkInstanceListProtocolsTypeProtocolTypeIsisTypeInterfacesTypeInterfaceListLevelsTypeLevelListAdjacenciesTypeAdjacencyListStateType.Size(m)
@@ -8121,7 +8274,7 @@ var E_JnprNetworkInstancesIsisExt = &proto.ExtensionDesc{
 	ExtensionType: (*NetworkInstancesIsis)(nil),
 	Field:         65,
 	Name:          "jnpr_network_instances_isis_ext",
-	Tag:           "bytes,65,opt,name=jnpr_network_instances_isis_ext,json=jnprNetworkInstancesIsisExt",
+	Tag:           "bytes,65,opt,name=jnpr_network_instances_isis_ext",
 	Filename:      "rpd_isis_oc.proto",
 }
 
@@ -8280,9 +8433,9 @@ func init() {
 	proto.RegisterExtension(E_JnprNetworkInstancesIsisExt)
 }
 
-func init() { proto.RegisterFile("rpd_isis_oc.proto", fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a) }
+func init() { proto.RegisterFile("rpd_isis_oc.proto", fileDescriptor_69a37f0f83887bca) }
 
-var fileDescriptor_rpd_isis_oc_7053f16bef4fcf7a = []byte{
+var fileDescriptor_69a37f0f83887bca = []byte{
 	// 5275 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5d, 0x7b, 0x90, 0x1c, 0xc5,
 	0x79, 0xaf, 0x99, 0xd3, 0x9d, 0xee, 0xbe, 0x7b, 0xaa, 0xef, 0x74, 0x5a, 0x8d, 0x90, 0x25, 0x64,

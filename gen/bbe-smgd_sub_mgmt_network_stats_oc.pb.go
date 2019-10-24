@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosNetworkStats struct {
 	System               *JunosNetworkStatsSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosNetworkStats) Reset()         { *m = JunosNetworkStats{} }
 func (m *JunosNetworkStats) String() string { return proto.CompactTextString(m) }
 func (*JunosNetworkStats) ProtoMessage()    {}
 func (*JunosNetworkStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0}
 }
+
 func (m *JunosNetworkStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStats.Unmarshal(m, b)
 }
 func (m *JunosNetworkStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStats.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStats.Merge(dst, src)
+func (m *JunosNetworkStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStats.Merge(m, src)
 }
 func (m *JunosNetworkStats) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStats.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosNetworkStatsSystemType) Reset()         { *m = JunosNetworkStatsSy
 func (m *JunosNetworkStatsSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosNetworkStatsSystemType) ProtoMessage()    {}
 func (*JunosNetworkStatsSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0}
 }
+
 func (m *JunosNetworkStatsSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosNetworkStatsSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) String() 
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) ProtoMessage() {}
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraType.Size(m)
@@ -199,16 +205,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) ProtoMessage() {}
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType.Size(m)
@@ -314,16 +321,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) ProtoMessage() {}
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeIoType.Size(m)
@@ -591,16 +599,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) ProtoMessage() {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 1}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 1}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDhcpType.Size(m)
@@ -807,16 +816,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) ProtoMessage() {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 2}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 2}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppType.Size(m)
@@ -1237,16 +1247,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) ProtoMessage() {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 3}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 3}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypePppoeType.Size(m)
@@ -1392,16 +1403,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) ProtoMessage() {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 4}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 4}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeL2TpType.Size(m)
@@ -1778,16 +1790,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) ProtoMessage() {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 5}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 5}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeDvlanType.Size(m)
@@ -1844,16 +1857,17 @@ func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkType
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) ProtoMessage() {
 }
 func (*JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062, []int{0, 0, 0, 0, 0, 6}
+	return fileDescriptor_dcec3dee7e0b9012, []int{0, 0, 0, 0, 0, 6}
 }
+
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType.Unmarshal(m, b)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType.Marshal(b, m, deterministic)
 }
-func (dst *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType.Merge(dst, src)
+func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType.Merge(m, src)
 }
 func (m *JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType) XXX_Size() int {
 	return xxx_messageInfo_JunosNetworkStatsSystemTypeSubscriberManagementTypeInfraTypeNetworkTypeHagType.Size(m)
@@ -2037,7 +2051,7 @@ var E_JnprJunosNetworkStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosNetworkStats)(nil),
 	Field:         39,
 	Name:          "jnpr_junos_network_stats_ext",
-	Tag:           "bytes,39,opt,name=jnpr_junos_network_stats_ext,json=jnprJunosNetworkStatsExt",
+	Tag:           "bytes,39,opt,name=jnpr_junos_network_stats_ext",
 	Filename:      "bbe-smgd_sub_mgmt_network_stats_oc.proto",
 }
 
@@ -2058,10 +2072,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("bbe-smgd_sub_mgmt_network_stats_oc.proto", fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062)
+	proto.RegisterFile("bbe-smgd_sub_mgmt_network_stats_oc.proto", fileDescriptor_dcec3dee7e0b9012)
 }
 
-var fileDescriptor_bbe_smgd_sub_mgmt_network_stats_oc_ab3ded0fedc05062 = []byte{
+var fileDescriptor_dcec3dee7e0b9012 = []byte{
 	// 3000 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x5a, 0xdd, 0x76, 0x14, 0xc7,
 	0x11, 0x3e, 0x76, 0x8c, 0x0d, 0x8d, 0x00, 0x69, 0x24, 0xa1, 0x65, 0xc1, 0x36, 0xb1, 0x63, 0x43,

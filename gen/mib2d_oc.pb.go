@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InterfacesMib struct {
 	Interface            []*InterfacesMibInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *InterfacesMib) Reset()         { *m = InterfacesMib{} }
 func (m *InterfacesMib) String() string { return proto.CompactTextString(m) }
 func (*InterfacesMib) ProtoMessage()    {}
 func (*InterfacesMib) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0}
 }
+
 func (m *InterfacesMib) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMib.Unmarshal(m, b)
 }
 func (m *InterfacesMib) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMib.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMib) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMib.Merge(dst, src)
+func (m *InterfacesMib) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMib.Merge(m, src)
 }
 func (m *InterfacesMib) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMib.Size(m)
@@ -69,16 +72,17 @@ func (m *InterfacesMibInterfaceList) Reset()         { *m = InterfacesMibInterfa
 func (m *InterfacesMibInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*InterfacesMibInterfaceList) ProtoMessage()    {}
 func (*InterfacesMibInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0}
 }
+
 func (m *InterfacesMibInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceList.Merge(dst, src)
+func (m *InterfacesMibInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceList.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceList.Size(m)
@@ -129,16 +133,17 @@ func (m *InterfacesMibInterfaceListStateType) Reset()         { *m = InterfacesM
 func (m *InterfacesMibInterfaceListStateType) String() string { return proto.CompactTextString(m) }
 func (*InterfacesMibInterfaceListStateType) ProtoMessage()    {}
 func (*InterfacesMibInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListStateType.Size(m)
@@ -227,16 +232,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesType) String() string {
 }
 func (*InterfacesMibInterfaceListSubinterfacesType) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesType.Size(m)
@@ -272,16 +278,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) String() s
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceList.Size(m)
@@ -342,16 +349,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) S
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListStateType.Size(m)
@@ -436,16 +444,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) St
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4Type.Size(m)
@@ -500,16 +509,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddr
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesType.Size(m)
@@ -544,16 +554,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddr
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressList.Size(m)
@@ -596,16 +607,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddr
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 0, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 0, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeAddressesTypeAddressListStateType.Size(m)
@@ -653,16 +665,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeig
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 1}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 1}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsType.Size(m)
@@ -697,16 +710,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeig
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 1, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 1, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborList.Size(m)
@@ -756,16 +770,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeig
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 1, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 1, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeNeighborsTypeNeighborListStateType.Size(m)
@@ -863,16 +878,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 2}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 2}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedType.Size(m)
@@ -913,16 +929,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 2, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 2, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeStateType.Size(m)
@@ -956,16 +973,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 2, 1}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 2, 1}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefType.Size(m)
@@ -1000,16 +1018,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 2, 1, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 2, 1, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeUnnumberedTypeInterfaceRefTypeStateType.Size(m)
@@ -1050,16 +1069,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStat
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 1, 3}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 1, 3}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv4TypeStateType.Size(m)
@@ -1102,16 +1122,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) St
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6Type.Size(m)
@@ -1166,16 +1187,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddr
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesType.Size(m)
@@ -1210,16 +1232,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddr
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressList.Size(m)
@@ -1263,16 +1286,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddr
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 0, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 0, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeAddressesTypeAddressListStateType.Size(m)
@@ -1327,16 +1351,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeig
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 1}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 1}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsType.Size(m)
@@ -1371,16 +1396,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeig
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 1, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 1, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborList.Size(m)
@@ -1431,16 +1457,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeig
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 1, 0, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 1, 0, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeNeighborsTypeNeighborListStateType.Size(m)
@@ -1545,16 +1572,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 2}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 2}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedType.Size(m)
@@ -1595,16 +1623,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 2, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 2, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeStateType.Size(m)
@@ -1638,16 +1667,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 2, 1}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 2, 1}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefType.Size(m)
@@ -1682,16 +1712,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnu
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) ProtoMessage() {
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 2, 1, 0}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 2, 1, 0}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeUnnumberedTypeInterfaceRefTypeStateType.Size(m)
@@ -1732,16 +1763,17 @@ func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStat
 }
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) ProtoMessage() {}
 func (*InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_oc_c56c2ac4251d4f16, []int{0, 0, 1, 0, 2, 3}
+	return fileDescriptor_152d1f4638f28fa5, []int{0, 0, 1, 0, 2, 3}
 }
+
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType.Merge(dst, src)
+func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType.Merge(m, src)
 }
 func (m *InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesMibInterfaceListSubinterfacesTypeSubinterfaceListIpv6TypeStateType.Size(m)
@@ -1771,7 +1803,7 @@ var E_JnprInterfacesMibExt = &proto.ExtensionDesc{
 	ExtensionType: (*InterfacesMib)(nil),
 	Field:         55,
 	Name:          "jnpr_interfaces_mib_ext",
-	Tag:           "bytes,55,opt,name=jnpr_interfaces_mib_ext,json=jnprInterfacesMibExt",
+	Tag:           "bytes,55,opt,name=jnpr_interfaces_mib_ext",
 	Filename:      "mib2d_oc.proto",
 }
 
@@ -1809,9 +1841,9 @@ func init() {
 	proto.RegisterExtension(E_JnprInterfacesMibExt)
 }
 
-func init() { proto.RegisterFile("mib2d_oc.proto", fileDescriptor_mib2d_oc_c56c2ac4251d4f16) }
+func init() { proto.RegisterFile("mib2d_oc.proto", fileDescriptor_152d1f4638f28fa5) }
 
-var fileDescriptor_mib2d_oc_c56c2ac4251d4f16 = []byte{
+var fileDescriptor_152d1f4638f28fa5 = []byte{
 	// 1144 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xdc, 0x57, 0xcd, 0x6f, 0xdc, 0x44,
 	0x14, 0x97, 0x37, 0x49, 0xbb, 0xfb, 0x92, 0x4d, 0x9a, 0xa1, 0xb4, 0xae, 0xcb, 0xc7, 0x52, 0x04,

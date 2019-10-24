@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Nd6InformationMibNd6 struct {
 	Ipv6                 *Nd6InformationMibNd6Ipv6Type `protobuf:"bytes,151,opt,name=ipv6" json:"ipv6,omitempty"`
@@ -29,16 +31,17 @@ func (m *Nd6InformationMibNd6) Reset()         { *m = Nd6InformationMibNd6{} }
 func (m *Nd6InformationMibNd6) String() string { return proto.CompactTextString(m) }
 func (*Nd6InformationMibNd6) ProtoMessage()    {}
 func (*Nd6InformationMibNd6) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_nd6_oc_acd264812d10f62c, []int{0}
+	return fileDescriptor_b6dca21213f5e620, []int{0}
 }
+
 func (m *Nd6InformationMibNd6) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nd6InformationMibNd6.Unmarshal(m, b)
 }
 func (m *Nd6InformationMibNd6) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nd6InformationMibNd6.Marshal(b, m, deterministic)
 }
-func (dst *Nd6InformationMibNd6) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nd6InformationMibNd6.Merge(dst, src)
+func (m *Nd6InformationMibNd6) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nd6InformationMibNd6.Merge(m, src)
 }
 func (m *Nd6InformationMibNd6) XXX_Size() int {
 	return xxx_messageInfo_Nd6InformationMibNd6.Size(m)
@@ -67,16 +70,17 @@ func (m *Nd6InformationMibNd6Ipv6Type) Reset()         { *m = Nd6InformationMibN
 func (m *Nd6InformationMibNd6Ipv6Type) String() string { return proto.CompactTextString(m) }
 func (*Nd6InformationMibNd6Ipv6Type) ProtoMessage()    {}
 func (*Nd6InformationMibNd6Ipv6Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_nd6_oc_acd264812d10f62c, []int{0, 0}
+	return fileDescriptor_b6dca21213f5e620, []int{0, 0}
 }
+
 func (m *Nd6InformationMibNd6Ipv6Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6Type.Unmarshal(m, b)
 }
 func (m *Nd6InformationMibNd6Ipv6Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6Type.Marshal(b, m, deterministic)
 }
-func (dst *Nd6InformationMibNd6Ipv6Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nd6InformationMibNd6Ipv6Type.Merge(dst, src)
+func (m *Nd6InformationMibNd6Ipv6Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nd6InformationMibNd6Ipv6Type.Merge(m, src)
 }
 func (m *Nd6InformationMibNd6Ipv6Type) XXX_Size() int {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6Type.Size(m)
@@ -107,16 +111,17 @@ func (m *Nd6InformationMibNd6Ipv6TypeNeighborsType) Reset() {
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsType) String() string { return proto.CompactTextString(m) }
 func (*Nd6InformationMibNd6Ipv6TypeNeighborsType) ProtoMessage()    {}
 func (*Nd6InformationMibNd6Ipv6TypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_nd6_oc_acd264812d10f62c, []int{0, 0, 0}
+	return fileDescriptor_b6dca21213f5e620, []int{0, 0, 0}
 }
+
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsType.Unmarshal(m, b)
 }
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *Nd6InformationMibNd6Ipv6TypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsType.Merge(dst, src)
+func (m *Nd6InformationMibNd6Ipv6TypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsType.Merge(m, src)
 }
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsType.Size(m)
@@ -150,16 +155,17 @@ func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) String() string 
 }
 func (*Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) ProtoMessage() {}
 func (*Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_nd6_oc_acd264812d10f62c, []int{0, 0, 0, 0}
+	return fileDescriptor_b6dca21213f5e620, []int{0, 0, 0, 0}
 }
+
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborList.Size(m)
@@ -209,16 +215,17 @@ func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) String(
 }
 func (*Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) ProtoMessage() {}
 func (*Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_nd6_oc_acd264812d10f62c, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_b6dca21213f5e620, []int{0, 0, 0, 0, 0}
 }
+
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_Nd6InformationMibNd6Ipv6TypeNeighborsTypeNeighborListStateType.Size(m)
@@ -311,7 +318,7 @@ var E_JnprNd6InformationMibNd6Ext = &proto.ExtensionDesc{
 	ExtensionType: (*Nd6InformationMibNd6)(nil),
 	Field:         54,
 	Name:          "jnpr_nd6_information_mib_nd6_ext",
-	Tag:           "bytes,54,opt,name=jnpr_nd6_information_mib_nd6_ext,json=jnprNd6InformationMibNd6Ext",
+	Tag:           "bytes,54,opt,name=jnpr_nd6_information_mib_nd6_ext",
 	Filename:      "mib2d_nd6_oc.proto",
 }
 
@@ -324,9 +331,9 @@ func init() {
 	proto.RegisterExtension(E_JnprNd6InformationMibNd6Ext)
 }
 
-func init() { proto.RegisterFile("mib2d_nd6_oc.proto", fileDescriptor_mib2d_nd6_oc_acd264812d10f62c) }
+func init() { proto.RegisterFile("mib2d_nd6_oc.proto", fileDescriptor_b6dca21213f5e620) }
 
-var fileDescriptor_mib2d_nd6_oc_acd264812d10f62c = []byte{
+var fileDescriptor_b6dca21213f5e620 = []byte{
 	// 495 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x52, 0xdf, 0x6a, 0x13, 0x4f,
 	0x14, 0x66, 0xd3, 0xa6, 0xbf, 0xe4, 0x94, 0xf6, 0xa7, 0x23, 0xda, 0x31, 0x45, 0x08, 0x05, 0x21,

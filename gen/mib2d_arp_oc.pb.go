@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ArpInformationMibArp struct {
 	Ipv4                 *ArpInformationMibArpIpv4Type `protobuf:"bytes,151,opt,name=ipv4" json:"ipv4,omitempty"`
@@ -29,16 +31,17 @@ func (m *ArpInformationMibArp) Reset()         { *m = ArpInformationMibArp{} }
 func (m *ArpInformationMibArp) String() string { return proto.CompactTextString(m) }
 func (*ArpInformationMibArp) ProtoMessage()    {}
 func (*ArpInformationMibArp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb, []int{0}
+	return fileDescriptor_6609990a88c6913e, []int{0}
 }
+
 func (m *ArpInformationMibArp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ArpInformationMibArp.Unmarshal(m, b)
 }
 func (m *ArpInformationMibArp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ArpInformationMibArp.Marshal(b, m, deterministic)
 }
-func (dst *ArpInformationMibArp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArpInformationMibArp.Merge(dst, src)
+func (m *ArpInformationMibArp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArpInformationMibArp.Merge(m, src)
 }
 func (m *ArpInformationMibArp) XXX_Size() int {
 	return xxx_messageInfo_ArpInformationMibArp.Size(m)
@@ -67,16 +70,17 @@ func (m *ArpInformationMibArpIpv4Type) Reset()         { *m = ArpInformationMibA
 func (m *ArpInformationMibArpIpv4Type) String() string { return proto.CompactTextString(m) }
 func (*ArpInformationMibArpIpv4Type) ProtoMessage()    {}
 func (*ArpInformationMibArpIpv4Type) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb, []int{0, 0}
+	return fileDescriptor_6609990a88c6913e, []int{0, 0}
 }
+
 func (m *ArpInformationMibArpIpv4Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ArpInformationMibArpIpv4Type.Unmarshal(m, b)
 }
 func (m *ArpInformationMibArpIpv4Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ArpInformationMibArpIpv4Type.Marshal(b, m, deterministic)
 }
-func (dst *ArpInformationMibArpIpv4Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArpInformationMibArpIpv4Type.Merge(dst, src)
+func (m *ArpInformationMibArpIpv4Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArpInformationMibArpIpv4Type.Merge(m, src)
 }
 func (m *ArpInformationMibArpIpv4Type) XXX_Size() int {
 	return xxx_messageInfo_ArpInformationMibArpIpv4Type.Size(m)
@@ -107,16 +111,17 @@ func (m *ArpInformationMibArpIpv4TypeNeighborsType) Reset() {
 func (m *ArpInformationMibArpIpv4TypeNeighborsType) String() string { return proto.CompactTextString(m) }
 func (*ArpInformationMibArpIpv4TypeNeighborsType) ProtoMessage()    {}
 func (*ArpInformationMibArpIpv4TypeNeighborsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb, []int{0, 0, 0}
+	return fileDescriptor_6609990a88c6913e, []int{0, 0, 0}
 }
+
 func (m *ArpInformationMibArpIpv4TypeNeighborsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsType.Unmarshal(m, b)
 }
 func (m *ArpInformationMibArpIpv4TypeNeighborsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsType.Marshal(b, m, deterministic)
 }
-func (dst *ArpInformationMibArpIpv4TypeNeighborsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsType.Merge(dst, src)
+func (m *ArpInformationMibArpIpv4TypeNeighborsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsType.Merge(m, src)
 }
 func (m *ArpInformationMibArpIpv4TypeNeighborsType) XXX_Size() int {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsType.Size(m)
@@ -150,16 +155,17 @@ func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) String() string 
 }
 func (*ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) ProtoMessage() {}
 func (*ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb, []int{0, 0, 0, 0}
+	return fileDescriptor_6609990a88c6913e, []int{0, 0, 0, 0}
 }
+
 func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList.Unmarshal(m, b)
 }
 func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList.Marshal(b, m, deterministic)
 }
-func (dst *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList.Merge(dst, src)
+func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList.Merge(m, src)
 }
 func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList) XXX_Size() int {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborList.Size(m)
@@ -208,16 +214,17 @@ func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) String(
 }
 func (*ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) ProtoMessage() {}
 func (*ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_6609990a88c6913e, []int{0, 0, 0, 0, 0}
 }
+
 func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType.Unmarshal(m, b)
 }
 func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType.Marshal(b, m, deterministic)
 }
-func (dst *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType.Merge(dst, src)
+func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType.Merge(m, src)
 }
 func (m *ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType) XXX_Size() int {
 	return xxx_messageInfo_ArpInformationMibArpIpv4TypeNeighborsTypeNeighborListStateType.Size(m)
@@ -303,7 +310,7 @@ var E_JnprArpInformationMibArpExt = &proto.ExtensionDesc{
 	ExtensionType: (*ArpInformationMibArp)(nil),
 	Field:         53,
 	Name:          "jnpr_arp_information_mib_arp_ext",
-	Tag:           "bytes,53,opt,name=jnpr_arp_information_mib_arp_ext,json=jnprArpInformationMibArpExt",
+	Tag:           "bytes,53,opt,name=jnpr_arp_information_mib_arp_ext",
 	Filename:      "mib2d_arp_oc.proto",
 }
 
@@ -316,9 +323,9 @@ func init() {
 	proto.RegisterExtension(E_JnprArpInformationMibArpExt)
 }
 
-func init() { proto.RegisterFile("mib2d_arp_oc.proto", fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb) }
+func init() { proto.RegisterFile("mib2d_arp_oc.proto", fileDescriptor_6609990a88c6913e) }
 
-var fileDescriptor_mib2d_arp_oc_6aa21d9ebf65acfb = []byte{
+var fileDescriptor_6609990a88c6913e = []byte{
 	// 480 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x92, 0xd1, 0x6a, 0xd4, 0x40,
 	0x14, 0x86, 0xc9, 0xb6, 0xab, 0x9b, 0x53, 0x5a, 0x75, 0x44, 0x1b, 0x53, 0x84, 0x50, 0x10, 0x82,

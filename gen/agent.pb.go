@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Result of the operation
 type ReturnCode int32
@@ -32,6 +34,7 @@ var ReturnCode_name = map[int32]string{
 	1: "NO_SUBSCRIPTION_ENTRY",
 	2: "UNKNOWN_ERROR",
 }
+
 var ReturnCode_value = map[string]int32{
 	"SUCCESS":               0,
 	"NO_SUBSCRIPTION_ENTRY": 1,
@@ -41,8 +44,9 @@ var ReturnCode_value = map[string]int32{
 func (x ReturnCode) String() string {
 	return proto.EnumName(ReturnCode_name, int32(x))
 }
+
 func (ReturnCode) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{0}
+	return fileDescriptor_56ede974c0020f77, []int{0}
 }
 
 // Verbosity Level
@@ -59,6 +63,7 @@ var VerbosityLevel_name = map[int32]string{
 	1: "TERSE",
 	2: "BRIEF",
 }
+
 var VerbosityLevel_value = map[string]int32{
 	"DETAIL": 0,
 	"TERSE":  1,
@@ -68,8 +73,9 @@ var VerbosityLevel_value = map[string]int32{
 func (x VerbosityLevel) String() string {
 	return proto.EnumName(VerbosityLevel_name, int32(x))
 }
+
 func (VerbosityLevel) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{1}
+	return fileDescriptor_56ede974c0020f77, []int{1}
 }
 
 // Encoding Type Supported
@@ -88,6 +94,7 @@ var EncodingType_name = map[int32]string{
 	2: "JSON_IETF",
 	3: "PROTO3",
 }
+
 var EncodingType_value = map[string]int32{
 	"UNDEFINED": 0,
 	"XML":       1,
@@ -98,8 +105,9 @@ var EncodingType_value = map[string]int32{
 func (x EncodingType) String() string {
 	return proto.EnumName(EncodingType_name, int32(x))
 }
+
 func (EncodingType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{2}
+	return fileDescriptor_56ede974c0020f77, []int{2}
 }
 
 // Subscription modes
@@ -118,6 +126,7 @@ var SubscriptionMode_name = map[int32]string{
 	1: "ONE_OFF",
 	2: "POLL",
 }
+
 var SubscriptionMode_value = map[string]int32{
 	"LONG_LIVED": 0,
 	"ONE_OFF":    1,
@@ -127,8 +136,9 @@ var SubscriptionMode_value = map[string]int32{
 func (x SubscriptionMode) String() string {
 	return proto.EnumName(SubscriptionMode_name, int32(x))
 }
+
 func (SubscriptionMode) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{3}
+	return fileDescriptor_56ede974c0020f77, []int{3}
 }
 
 // Collector endpoints to send data specified as an ip+port combination.
@@ -146,16 +156,17 @@ func (m *Collector) Reset()         { *m = Collector{} }
 func (m *Collector) String() string { return proto.CompactTextString(m) }
 func (*Collector) ProtoMessage()    {}
 func (*Collector) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{0}
+	return fileDescriptor_56ede974c0020f77, []int{0}
 }
+
 func (m *Collector) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Collector.Unmarshal(m, b)
 }
 func (m *Collector) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Collector.Marshal(b, m, deterministic)
 }
-func (dst *Collector) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Collector.Merge(dst, src)
+func (m *Collector) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Collector.Merge(m, src)
 }
 func (m *Collector) XXX_Size() int {
 	return xxx_messageInfo_Collector.Size(m)
@@ -196,16 +207,17 @@ func (m *SubscriptionInput) Reset()         { *m = SubscriptionInput{} }
 func (m *SubscriptionInput) String() string { return proto.CompactTextString(m) }
 func (*SubscriptionInput) ProtoMessage()    {}
 func (*SubscriptionInput) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{1}
+	return fileDescriptor_56ede974c0020f77, []int{1}
 }
+
 func (m *SubscriptionInput) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubscriptionInput.Unmarshal(m, b)
 }
 func (m *SubscriptionInput) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubscriptionInput.Marshal(b, m, deterministic)
 }
-func (dst *SubscriptionInput) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubscriptionInput.Merge(dst, src)
+func (m *SubscriptionInput) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubscriptionInput.Merge(m, src)
 }
 func (m *SubscriptionInput) XXX_Size() int {
 	return xxx_messageInfo_SubscriptionInput.Size(m)
@@ -275,16 +287,17 @@ func (m *Path) Reset()         { *m = Path{} }
 func (m *Path) String() string { return proto.CompactTextString(m) }
 func (*Path) ProtoMessage()    {}
 func (*Path) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{2}
+	return fileDescriptor_56ede974c0020f77, []int{2}
 }
+
 func (m *Path) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Path.Unmarshal(m, b)
 }
 func (m *Path) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Path.Marshal(b, m, deterministic)
 }
-func (dst *Path) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Path.Merge(dst, src)
+func (m *Path) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Path.Merge(m, src)
 }
 func (m *Path) XXX_Size() int {
 	return xxx_messageInfo_Path.Size(m)
@@ -370,16 +383,17 @@ func (m *SubscriptionAdditionalConfig) Reset()         { *m = SubscriptionAdditi
 func (m *SubscriptionAdditionalConfig) String() string { return proto.CompactTextString(m) }
 func (*SubscriptionAdditionalConfig) ProtoMessage()    {}
 func (*SubscriptionAdditionalConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{3}
+	return fileDescriptor_56ede974c0020f77, []int{3}
 }
+
 func (m *SubscriptionAdditionalConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubscriptionAdditionalConfig.Unmarshal(m, b)
 }
 func (m *SubscriptionAdditionalConfig) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubscriptionAdditionalConfig.Marshal(b, m, deterministic)
 }
-func (dst *SubscriptionAdditionalConfig) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubscriptionAdditionalConfig.Merge(dst, src)
+func (m *SubscriptionAdditionalConfig) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubscriptionAdditionalConfig.Merge(m, src)
 }
 func (m *SubscriptionAdditionalConfig) XXX_Size() int {
 	return xxx_messageInfo_SubscriptionAdditionalConfig.Size(m)
@@ -438,16 +452,17 @@ func (m *SubscriptionRequest) Reset()         { *m = SubscriptionRequest{} }
 func (m *SubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*SubscriptionRequest) ProtoMessage()    {}
 func (*SubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{4}
+	return fileDescriptor_56ede974c0020f77, []int{4}
 }
+
 func (m *SubscriptionRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubscriptionRequest.Unmarshal(m, b)
 }
 func (m *SubscriptionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubscriptionRequest.Marshal(b, m, deterministic)
 }
-func (dst *SubscriptionRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubscriptionRequest.Merge(dst, src)
+func (m *SubscriptionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubscriptionRequest.Merge(m, src)
 }
 func (m *SubscriptionRequest) XXX_Size() int {
 	return xxx_messageInfo_SubscriptionRequest.Size(m)
@@ -494,16 +509,17 @@ func (m *SubscriptionResponse) Reset()         { *m = SubscriptionResponse{} }
 func (m *SubscriptionResponse) String() string { return proto.CompactTextString(m) }
 func (*SubscriptionResponse) ProtoMessage()    {}
 func (*SubscriptionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{5}
+	return fileDescriptor_56ede974c0020f77, []int{5}
 }
+
 func (m *SubscriptionResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubscriptionResponse.Unmarshal(m, b)
 }
 func (m *SubscriptionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubscriptionResponse.Marshal(b, m, deterministic)
 }
-func (dst *SubscriptionResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubscriptionResponse.Merge(dst, src)
+func (m *SubscriptionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubscriptionResponse.Merge(m, src)
 }
 func (m *SubscriptionResponse) XXX_Size() int {
 	return xxx_messageInfo_SubscriptionResponse.Size(m)
@@ -537,16 +553,17 @@ func (m *SubscriptionReply) Reset()         { *m = SubscriptionReply{} }
 func (m *SubscriptionReply) String() string { return proto.CompactTextString(m) }
 func (*SubscriptionReply) ProtoMessage()    {}
 func (*SubscriptionReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{6}
+	return fileDescriptor_56ede974c0020f77, []int{6}
 }
+
 func (m *SubscriptionReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubscriptionReply.Unmarshal(m, b)
 }
 func (m *SubscriptionReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubscriptionReply.Marshal(b, m, deterministic)
 }
-func (dst *SubscriptionReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubscriptionReply.Merge(dst, src)
+func (m *SubscriptionReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubscriptionReply.Merge(m, src)
 }
 func (m *SubscriptionReply) XXX_Size() int {
 	return xxx_messageInfo_SubscriptionReply.Size(m)
@@ -595,16 +612,17 @@ func (m *KeyValue) Reset()         { *m = KeyValue{} }
 func (m *KeyValue) String() string { return proto.CompactTextString(m) }
 func (*KeyValue) ProtoMessage()    {}
 func (*KeyValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{7}
+	return fileDescriptor_56ede974c0020f77, []int{7}
 }
+
 func (m *KeyValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_KeyValue.Unmarshal(m, b)
 }
 func (m *KeyValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_KeyValue.Marshal(b, m, deterministic)
 }
-func (dst *KeyValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_KeyValue.Merge(dst, src)
+func (m *KeyValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KeyValue.Merge(m, src)
 }
 func (m *KeyValue) XXX_Size() int {
 	return xxx_messageInfo_KeyValue.Size(m)
@@ -724,9 +742,9 @@ func (m *KeyValue) GetBytesValue() []byte {
 	return nil
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*KeyValue) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _KeyValue_OneofMarshaler, _KeyValue_OneofUnmarshaler, _KeyValue_OneofSizer, []interface{}{
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*KeyValue) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
 		(*KeyValue_DoubleValue)(nil),
 		(*KeyValue_IntValue)(nil),
 		(*KeyValue_UintValue)(nil),
@@ -735,133 +753,6 @@ func (*KeyValue) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) erro
 		(*KeyValue_StrValue)(nil),
 		(*KeyValue_BytesValue)(nil),
 	}
-}
-
-func _KeyValue_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*KeyValue)
-	// value
-	switch x := m.Value.(type) {
-	case *KeyValue_DoubleValue:
-		b.EncodeVarint(5<<3 | proto.WireFixed64)
-		b.EncodeFixed64(math.Float64bits(x.DoubleValue))
-	case *KeyValue_IntValue:
-		b.EncodeVarint(6<<3 | proto.WireVarint)
-		b.EncodeVarint(uint64(x.IntValue))
-	case *KeyValue_UintValue:
-		b.EncodeVarint(7<<3 | proto.WireVarint)
-		b.EncodeVarint(uint64(x.UintValue))
-	case *KeyValue_SintValue:
-		b.EncodeVarint(8<<3 | proto.WireVarint)
-		b.EncodeZigzag64(uint64(x.SintValue))
-	case *KeyValue_BoolValue:
-		t := uint64(0)
-		if x.BoolValue {
-			t = 1
-		}
-		b.EncodeVarint(9<<3 | proto.WireVarint)
-		b.EncodeVarint(t)
-	case *KeyValue_StrValue:
-		b.EncodeVarint(10<<3 | proto.WireBytes)
-		b.EncodeStringBytes(x.StrValue)
-	case *KeyValue_BytesValue:
-		b.EncodeVarint(11<<3 | proto.WireBytes)
-		b.EncodeRawBytes(x.BytesValue)
-	case nil:
-	default:
-		return fmt.Errorf("KeyValue.Value has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _KeyValue_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*KeyValue)
-	switch tag {
-	case 5: // value.double_value
-		if wire != proto.WireFixed64 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed64()
-		m.Value = &KeyValue_DoubleValue{math.Float64frombits(x)}
-		return true, err
-	case 6: // value.int_value
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Value = &KeyValue_IntValue{int64(x)}
-		return true, err
-	case 7: // value.uint_value
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Value = &KeyValue_UintValue{x}
-		return true, err
-	case 8: // value.sint_value
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeZigzag64()
-		m.Value = &KeyValue_SintValue{int64(x)}
-		return true, err
-	case 9: // value.bool_value
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Value = &KeyValue_BoolValue{x != 0}
-		return true, err
-	case 10: // value.str_value
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.Value = &KeyValue_StrValue{x}
-		return true, err
-	case 11: // value.bytes_value
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeRawBytes(true)
-		m.Value = &KeyValue_BytesValue{x}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _KeyValue_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*KeyValue)
-	// value
-	switch x := m.Value.(type) {
-	case *KeyValue_DoubleValue:
-		n += 1 // tag and wire
-		n += 8
-	case *KeyValue_IntValue:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.IntValue))
-	case *KeyValue_UintValue:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.UintValue))
-	case *KeyValue_SintValue:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(uint64(x.SintValue<<1) ^ uint64((int64(x.SintValue) >> 63))))
-	case *KeyValue_BoolValue:
-		n += 1 // tag and wire
-		n += 1
-	case *KeyValue_StrValue:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.StrValue)))
-		n += len(x.StrValue)
-	case *KeyValue_BytesValue:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.BytesValue)))
-		n += len(x.BytesValue)
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
 }
 
 type OpenConfigData struct {
@@ -896,16 +787,17 @@ func (m *OpenConfigData) Reset()         { *m = OpenConfigData{} }
 func (m *OpenConfigData) String() string { return proto.CompactTextString(m) }
 func (*OpenConfigData) ProtoMessage()    {}
 func (*OpenConfigData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{8}
+	return fileDescriptor_56ede974c0020f77, []int{8}
 }
+
 func (m *OpenConfigData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OpenConfigData.Unmarshal(m, b)
 }
 func (m *OpenConfigData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OpenConfigData.Marshal(b, m, deterministic)
 }
-func (dst *OpenConfigData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OpenConfigData.Merge(dst, src)
+func (m *OpenConfigData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OpenConfigData.Merge(m, src)
 }
 func (m *OpenConfigData) XXX_Size() int {
 	return xxx_messageInfo_OpenConfigData.Size(m)
@@ -998,16 +890,17 @@ func (m *Delete) Reset()         { *m = Delete{} }
 func (m *Delete) String() string { return proto.CompactTextString(m) }
 func (*Delete) ProtoMessage()    {}
 func (*Delete) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{9}
+	return fileDescriptor_56ede974c0020f77, []int{9}
 }
+
 func (m *Delete) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Delete.Unmarshal(m, b)
 }
 func (m *Delete) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Delete.Marshal(b, m, deterministic)
 }
-func (dst *Delete) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Delete.Merge(dst, src)
+func (m *Delete) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Delete.Merge(m, src)
 }
 func (m *Delete) XXX_Size() int {
 	return xxx_messageInfo_Delete.Size(m)
@@ -1037,16 +930,17 @@ func (m *Eom) Reset()         { *m = Eom{} }
 func (m *Eom) String() string { return proto.CompactTextString(m) }
 func (*Eom) ProtoMessage()    {}
 func (*Eom) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{10}
+	return fileDescriptor_56ede974c0020f77, []int{10}
 }
+
 func (m *Eom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Eom.Unmarshal(m, b)
 }
 func (m *Eom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Eom.Marshal(b, m, deterministic)
 }
-func (dst *Eom) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Eom.Merge(dst, src)
+func (m *Eom) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Eom.Merge(m, src)
 }
 func (m *Eom) XXX_Size() int {
 	return xxx_messageInfo_Eom.Size(m)
@@ -1078,16 +972,17 @@ func (m *CancelSubscriptionRequest) Reset()         { *m = CancelSubscriptionReq
 func (m *CancelSubscriptionRequest) String() string { return proto.CompactTextString(m) }
 func (*CancelSubscriptionRequest) ProtoMessage()    {}
 func (*CancelSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{11}
+	return fileDescriptor_56ede974c0020f77, []int{11}
 }
+
 func (m *CancelSubscriptionRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CancelSubscriptionRequest.Unmarshal(m, b)
 }
 func (m *CancelSubscriptionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CancelSubscriptionRequest.Marshal(b, m, deterministic)
 }
-func (dst *CancelSubscriptionRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CancelSubscriptionRequest.Merge(dst, src)
+func (m *CancelSubscriptionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CancelSubscriptionRequest.Merge(m, src)
 }
 func (m *CancelSubscriptionRequest) XXX_Size() int {
 	return xxx_messageInfo_CancelSubscriptionRequest.Size(m)
@@ -1120,16 +1015,17 @@ func (m *CancelSubscriptionReply) Reset()         { *m = CancelSubscriptionReply
 func (m *CancelSubscriptionReply) String() string { return proto.CompactTextString(m) }
 func (*CancelSubscriptionReply) ProtoMessage()    {}
 func (*CancelSubscriptionReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{12}
+	return fileDescriptor_56ede974c0020f77, []int{12}
 }
+
 func (m *CancelSubscriptionReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CancelSubscriptionReply.Unmarshal(m, b)
 }
 func (m *CancelSubscriptionReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CancelSubscriptionReply.Marshal(b, m, deterministic)
 }
-func (dst *CancelSubscriptionReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CancelSubscriptionReply.Merge(dst, src)
+func (m *CancelSubscriptionReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CancelSubscriptionReply.Merge(m, src)
 }
 func (m *CancelSubscriptionReply) XXX_Size() int {
 	return xxx_messageInfo_CancelSubscriptionReply.Size(m)
@@ -1170,16 +1066,17 @@ func (m *GetSubscriptionsRequest) Reset()         { *m = GetSubscriptionsRequest
 func (m *GetSubscriptionsRequest) String() string { return proto.CompactTextString(m) }
 func (*GetSubscriptionsRequest) ProtoMessage()    {}
 func (*GetSubscriptionsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{13}
+	return fileDescriptor_56ede974c0020f77, []int{13}
 }
+
 func (m *GetSubscriptionsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetSubscriptionsRequest.Unmarshal(m, b)
 }
 func (m *GetSubscriptionsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GetSubscriptionsRequest.Marshal(b, m, deterministic)
 }
-func (dst *GetSubscriptionsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetSubscriptionsRequest.Merge(dst, src)
+func (m *GetSubscriptionsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetSubscriptionsRequest.Merge(m, src)
 }
 func (m *GetSubscriptionsRequest) XXX_Size() int {
 	return xxx_messageInfo_GetSubscriptionsRequest.Size(m)
@@ -1210,16 +1107,17 @@ func (m *GetSubscriptionsReply) Reset()         { *m = GetSubscriptionsReply{} }
 func (m *GetSubscriptionsReply) String() string { return proto.CompactTextString(m) }
 func (*GetSubscriptionsReply) ProtoMessage()    {}
 func (*GetSubscriptionsReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{14}
+	return fileDescriptor_56ede974c0020f77, []int{14}
 }
+
 func (m *GetSubscriptionsReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetSubscriptionsReply.Unmarshal(m, b)
 }
 func (m *GetSubscriptionsReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GetSubscriptionsReply.Marshal(b, m, deterministic)
 }
-func (dst *GetSubscriptionsReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetSubscriptionsReply.Merge(dst, src)
+func (m *GetSubscriptionsReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetSubscriptionsReply.Merge(m, src)
 }
 func (m *GetSubscriptionsReply) XXX_Size() int {
 	return xxx_messageInfo_GetSubscriptionsReply.Size(m)
@@ -1261,16 +1159,17 @@ func (m *GetOperationalStateRequest) Reset()         { *m = GetOperationalStateR
 func (m *GetOperationalStateRequest) String() string { return proto.CompactTextString(m) }
 func (*GetOperationalStateRequest) ProtoMessage()    {}
 func (*GetOperationalStateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{15}
+	return fileDescriptor_56ede974c0020f77, []int{15}
 }
+
 func (m *GetOperationalStateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetOperationalStateRequest.Unmarshal(m, b)
 }
 func (m *GetOperationalStateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GetOperationalStateRequest.Marshal(b, m, deterministic)
 }
-func (dst *GetOperationalStateRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetOperationalStateRequest.Merge(dst, src)
+func (m *GetOperationalStateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetOperationalStateRequest.Merge(m, src)
 }
 func (m *GetOperationalStateRequest) XXX_Size() int {
 	return xxx_messageInfo_GetOperationalStateRequest.Size(m)
@@ -1310,16 +1209,17 @@ func (m *GetOperationalStateReply) Reset()         { *m = GetOperationalStateRep
 func (m *GetOperationalStateReply) String() string { return proto.CompactTextString(m) }
 func (*GetOperationalStateReply) ProtoMessage()    {}
 func (*GetOperationalStateReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{16}
+	return fileDescriptor_56ede974c0020f77, []int{16}
 }
+
 func (m *GetOperationalStateReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetOperationalStateReply.Unmarshal(m, b)
 }
 func (m *GetOperationalStateReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GetOperationalStateReply.Marshal(b, m, deterministic)
 }
-func (dst *GetOperationalStateReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetOperationalStateReply.Merge(dst, src)
+func (m *GetOperationalStateReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetOperationalStateReply.Merge(m, src)
 }
 func (m *GetOperationalStateReply) XXX_Size() int {
 	return xxx_messageInfo_GetOperationalStateReply.Size(m)
@@ -1348,16 +1248,17 @@ func (m *DataEncodingRequest) Reset()         { *m = DataEncodingRequest{} }
 func (m *DataEncodingRequest) String() string { return proto.CompactTextString(m) }
 func (*DataEncodingRequest) ProtoMessage()    {}
 func (*DataEncodingRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{17}
+	return fileDescriptor_56ede974c0020f77, []int{17}
 }
+
 func (m *DataEncodingRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DataEncodingRequest.Unmarshal(m, b)
 }
 func (m *DataEncodingRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DataEncodingRequest.Marshal(b, m, deterministic)
 }
-func (dst *DataEncodingRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DataEncodingRequest.Merge(dst, src)
+func (m *DataEncodingRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DataEncodingRequest.Merge(m, src)
 }
 func (m *DataEncodingRequest) XXX_Size() int {
 	return xxx_messageInfo_DataEncodingRequest.Size(m)
@@ -1380,16 +1281,17 @@ func (m *DataEncodingReply) Reset()         { *m = DataEncodingReply{} }
 func (m *DataEncodingReply) String() string { return proto.CompactTextString(m) }
 func (*DataEncodingReply) ProtoMessage()    {}
 func (*DataEncodingReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agent_c59d4482e93b15a3, []int{18}
+	return fileDescriptor_56ede974c0020f77, []int{18}
 }
+
 func (m *DataEncodingReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DataEncodingReply.Unmarshal(m, b)
 }
 func (m *DataEncodingReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DataEncodingReply.Marshal(b, m, deterministic)
 }
-func (dst *DataEncodingReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DataEncodingReply.Merge(dst, src)
+func (m *DataEncodingReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DataEncodingReply.Merge(m, src)
 }
 func (m *DataEncodingReply) XXX_Size() int {
 	return xxx_messageInfo_DataEncodingReply.Size(m)
@@ -1408,6 +1310,10 @@ func (m *DataEncodingReply) GetEncodingList() []EncodingType {
 }
 
 func init() {
+	proto.RegisterEnum("telemetry.ReturnCode", ReturnCode_name, ReturnCode_value)
+	proto.RegisterEnum("telemetry.VerbosityLevel", VerbosityLevel_name, VerbosityLevel_value)
+	proto.RegisterEnum("telemetry.EncodingType", EncodingType_name, EncodingType_value)
+	proto.RegisterEnum("telemetry.SubscriptionMode", SubscriptionMode_name, SubscriptionMode_value)
 	proto.RegisterType((*Collector)(nil), "telemetry.Collector")
 	proto.RegisterType((*SubscriptionInput)(nil), "telemetry.SubscriptionInput")
 	proto.RegisterType((*Path)(nil), "telemetry.Path")
@@ -1427,15 +1333,11 @@ func init() {
 	proto.RegisterType((*GetOperationalStateReply)(nil), "telemetry.GetOperationalStateReply")
 	proto.RegisterType((*DataEncodingRequest)(nil), "telemetry.DataEncodingRequest")
 	proto.RegisterType((*DataEncodingReply)(nil), "telemetry.DataEncodingReply")
-	proto.RegisterEnum("telemetry.ReturnCode", ReturnCode_name, ReturnCode_value)
-	proto.RegisterEnum("telemetry.VerbosityLevel", VerbosityLevel_name, VerbosityLevel_value)
-	proto.RegisterEnum("telemetry.EncodingType", EncodingType_name, EncodingType_value)
-	proto.RegisterEnum("telemetry.SubscriptionMode", SubscriptionMode_name, SubscriptionMode_value)
 }
 
-func init() { proto.RegisterFile("agent.proto", fileDescriptor_agent_c59d4482e93b15a3) }
+func init() { proto.RegisterFile("agent.proto", fileDescriptor_56ede974c0020f77) }
 
-var fileDescriptor_agent_c59d4482e93b15a3 = []byte{
+var fileDescriptor_56ede974c0020f77 = []byte{
 	// 1360 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x57, 0xdf, 0x72, 0xda, 0x46,
 	0x17, 0x47, 0x80, 0x0d, 0x3a, 0x18, 0x22, 0xd6, 0xf1, 0x17, 0xec, 0xf8, 0xfb, 0x42, 0xe4, 0x2f,

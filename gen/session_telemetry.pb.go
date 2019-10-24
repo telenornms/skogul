@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ServicesSession struct {
 	SvcsSessionInfo      []*SessionInfo `protobuf:"bytes,1,rep,name=svcs_session_info,json=svcsSessionInfo" json:"svcs_session_info,omitempty"`
@@ -29,16 +31,17 @@ func (m *ServicesSession) Reset()         { *m = ServicesSession{} }
 func (m *ServicesSession) String() string { return proto.CompactTextString(m) }
 func (*ServicesSession) ProtoMessage()    {}
 func (*ServicesSession) Descriptor() ([]byte, []int) {
-	return fileDescriptor_session_telemetry_95a24690a13878d0, []int{0}
+	return fileDescriptor_6b5b6170d3878570, []int{0}
 }
+
 func (m *ServicesSession) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ServicesSession.Unmarshal(m, b)
 }
 func (m *ServicesSession) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ServicesSession.Marshal(b, m, deterministic)
 }
-func (dst *ServicesSession) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ServicesSession.Merge(dst, src)
+func (m *ServicesSession) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ServicesSession.Merge(m, src)
 }
 func (m *ServicesSession) XXX_Size() int {
 	return xxx_messageInfo_ServicesSession.Size(m)
@@ -78,16 +81,17 @@ func (m *SessionInfo) Reset()         { *m = SessionInfo{} }
 func (m *SessionInfo) String() string { return proto.CompactTextString(m) }
 func (*SessionInfo) ProtoMessage()    {}
 func (*SessionInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_session_telemetry_95a24690a13878d0, []int{1}
+	return fileDescriptor_6b5b6170d3878570, []int{1}
 }
+
 func (m *SessionInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SessionInfo.Unmarshal(m, b)
 }
 func (m *SessionInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SessionInfo.Marshal(b, m, deterministic)
 }
-func (dst *SessionInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SessionInfo.Merge(dst, src)
+func (m *SessionInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SessionInfo.Merge(m, src)
 }
 func (m *SessionInfo) XXX_Size() int {
 	return xxx_messageInfo_SessionInfo.Size(m)
@@ -182,7 +186,7 @@ func (m *SessionInfo) GetSnOffload() bool {
 	return false
 }
 
-// --------------------------
+//--------------------------
 type FlowInfo struct {
 	SrcAddr              *string  `protobuf:"bytes,1,opt,name=src_addr,json=srcAddr" json:"src_addr,omitempty"`
 	DstAddr              *string  `protobuf:"bytes,2,opt,name=dst_addr,json=dstAddr" json:"dst_addr,omitempty"`
@@ -208,16 +212,17 @@ func (m *FlowInfo) Reset()         { *m = FlowInfo{} }
 func (m *FlowInfo) String() string { return proto.CompactTextString(m) }
 func (*FlowInfo) ProtoMessage()    {}
 func (*FlowInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_session_telemetry_95a24690a13878d0, []int{2}
+	return fileDescriptor_6b5b6170d3878570, []int{2}
 }
+
 func (m *FlowInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FlowInfo.Unmarshal(m, b)
 }
 func (m *FlowInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FlowInfo.Marshal(b, m, deterministic)
 }
-func (dst *FlowInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FlowInfo.Merge(dst, src)
+func (m *FlowInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FlowInfo.Merge(m, src)
 }
 func (m *FlowInfo) XXX_Size() int {
 	return xxx_messageInfo_FlowInfo.Size(m)
@@ -349,11 +354,9 @@ func init() {
 	proto.RegisterExtension(E_JnprScvsSessionExt)
 }
 
-func init() {
-	proto.RegisterFile("session_telemetry.proto", fileDescriptor_session_telemetry_95a24690a13878d0)
-}
+func init() { proto.RegisterFile("session_telemetry.proto", fileDescriptor_6b5b6170d3878570) }
 
-var fileDescriptor_session_telemetry_95a24690a13878d0 = []byte{
+var fileDescriptor_6b5b6170d3878570 = []byte{
 	// 654 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x54, 0x5d, 0x6f, 0x1a, 0x39,
 	0x14, 0x15, 0x01, 0x96, 0xe1, 0x02, 0x81, 0x38, 0x2b, 0x65, 0x92, 0x55, 0x24, 0x82, 0xf6, 0x03,

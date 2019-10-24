@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ServicesInfra struct {
 	SvcsPluginsInfo      []*PluginsInfo  `protobuf:"bytes,1,rep,name=svcs_plugins_info,json=svcsPluginsInfo" json:"svcs_plugins_info,omitempty"`
@@ -33,16 +35,17 @@ func (m *ServicesInfra) Reset()         { *m = ServicesInfra{} }
 func (m *ServicesInfra) String() string { return proto.CompactTextString(m) }
 func (*ServicesInfra) ProtoMessage()    {}
 func (*ServicesInfra) Descriptor() ([]byte, []int) {
-	return fileDescriptor_svcset_telemetry_e36f491b0cb367c8, []int{0}
+	return fileDescriptor_d1f011be0986ccfc, []int{0}
 }
+
 func (m *ServicesInfra) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ServicesInfra.Unmarshal(m, b)
 }
 func (m *ServicesInfra) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ServicesInfra.Marshal(b, m, deterministic)
 }
-func (dst *ServicesInfra) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ServicesInfra.Merge(dst, src)
+func (m *ServicesInfra) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ServicesInfra.Merge(m, src)
 }
 func (m *ServicesInfra) XXX_Size() int {
 	return xxx_messageInfo_ServicesInfra.Size(m)
@@ -88,7 +91,7 @@ func (m *ServicesInfra) GetSvcsetPktdropInfo() []*PktDropInfo {
 	return nil
 }
 
-// /=========================
+///=========================
 type PluginsInfo struct {
 	SpNumPlugins         *uint64  `protobuf:"varint,1,opt,name=sp_num_plugins,json=spNumPlugins" json:"sp_num_plugins,omitempty"`
 	SpName               *string  `protobuf:"bytes,2,opt,name=sp_name,json=spName" json:"sp_name,omitempty"`
@@ -112,16 +115,17 @@ func (m *PluginsInfo) Reset()         { *m = PluginsInfo{} }
 func (m *PluginsInfo) String() string { return proto.CompactTextString(m) }
 func (*PluginsInfo) ProtoMessage()    {}
 func (*PluginsInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_svcset_telemetry_e36f491b0cb367c8, []int{1}
+	return fileDescriptor_d1f011be0986ccfc, []int{1}
 }
+
 func (m *PluginsInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PluginsInfo.Unmarshal(m, b)
 }
 func (m *PluginsInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PluginsInfo.Marshal(b, m, deterministic)
 }
-func (dst *PluginsInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PluginsInfo.Merge(dst, src)
+func (m *PluginsInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PluginsInfo.Merge(m, src)
 }
 func (m *PluginsInfo) XXX_Size() int {
 	return xxx_messageInfo_PluginsInfo.Size(m)
@@ -223,7 +227,7 @@ func (m *PluginsInfo) GetSpEvClassName() []string {
 	return nil
 }
 
-// --------------------------
+//--------------------------
 type CpuUsageInfo struct {
 	SvcsetId             *uint64  `protobuf:"varint,1,opt,name=svcset_id,json=svcsetId" json:"svcset_id,omitempty"`
 	SvcsetIdPresent      *uint64  `protobuf:"varint,2,opt,name=svcset_id_present,json=svcsetIdPresent" json:"svcset_id_present,omitempty"`
@@ -244,16 +248,17 @@ func (m *CpuUsageInfo) Reset()         { *m = CpuUsageInfo{} }
 func (m *CpuUsageInfo) String() string { return proto.CompactTextString(m) }
 func (*CpuUsageInfo) ProtoMessage()    {}
 func (*CpuUsageInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_svcset_telemetry_e36f491b0cb367c8, []int{2}
+	return fileDescriptor_d1f011be0986ccfc, []int{2}
 }
+
 func (m *CpuUsageInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CpuUsageInfo.Unmarshal(m, b)
 }
 func (m *CpuUsageInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CpuUsageInfo.Marshal(b, m, deterministic)
 }
-func (dst *CpuUsageInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CpuUsageInfo.Merge(dst, src)
+func (m *CpuUsageInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CpuUsageInfo.Merge(m, src)
 }
 func (m *CpuUsageInfo) XXX_Size() int {
 	return xxx_messageInfo_CpuUsageInfo.Size(m)
@@ -334,7 +339,7 @@ func (m *CpuUsageInfo) GetCpuUser() string {
 	return ""
 }
 
-// --------------------------
+//--------------------------
 type MemUsageInfo struct {
 	SvcsetId               *uint64  `protobuf:"varint,1,opt,name=svcset_id,json=svcsetId" json:"svcset_id,omitempty"`
 	SvcsetIdPresent        *uint64  `protobuf:"varint,2,opt,name=svcset_id_present,json=svcsetIdPresent" json:"svcset_id_present,omitempty"`
@@ -356,16 +361,17 @@ func (m *MemUsageInfo) Reset()         { *m = MemUsageInfo{} }
 func (m *MemUsageInfo) String() string { return proto.CompactTextString(m) }
 func (*MemUsageInfo) ProtoMessage()    {}
 func (*MemUsageInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_svcset_telemetry_e36f491b0cb367c8, []int{3}
+	return fileDescriptor_d1f011be0986ccfc, []int{3}
 }
+
 func (m *MemUsageInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MemUsageInfo.Unmarshal(m, b)
 }
 func (m *MemUsageInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MemUsageInfo.Marshal(b, m, deterministic)
 }
-func (dst *MemUsageInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MemUsageInfo.Merge(dst, src)
+func (m *MemUsageInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MemUsageInfo.Merge(m, src)
 }
 func (m *MemUsageInfo) XXX_Size() int {
 	return xxx_messageInfo_MemUsageInfo.Size(m)
@@ -453,7 +459,7 @@ func (m *MemUsageInfo) GetPolicyBytesUsedPercent() uint64 {
 	return 0
 }
 
-// --------------------------
+//--------------------------
 type ServicesInfo struct {
 	SvcsetId             *uint64  `protobuf:"varint,1,opt,name=svcset_id,json=svcsetId" json:"svcset_id,omitempty"`
 	SvcsetIdPresent      *uint64  `protobuf:"varint,2,opt,name=svcset_id_present,json=svcsetIdPresent" json:"svcset_id_present,omitempty"`
@@ -475,16 +481,17 @@ func (m *ServicesInfo) Reset()         { *m = ServicesInfo{} }
 func (m *ServicesInfo) String() string { return proto.CompactTextString(m) }
 func (*ServicesInfo) ProtoMessage()    {}
 func (*ServicesInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_svcset_telemetry_e36f491b0cb367c8, []int{4}
+	return fileDescriptor_d1f011be0986ccfc, []int{4}
 }
+
 func (m *ServicesInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ServicesInfo.Unmarshal(m, b)
 }
 func (m *ServicesInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ServicesInfo.Marshal(b, m, deterministic)
 }
-func (dst *ServicesInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ServicesInfo.Merge(dst, src)
+func (m *ServicesInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ServicesInfo.Merge(m, src)
 }
 func (m *ServicesInfo) XXX_Size() int {
 	return xxx_messageInfo_ServicesInfo.Size(m)
@@ -572,7 +579,7 @@ func (m *ServicesInfo) GetMemBytesUsedPercent() uint64 {
 	return 0
 }
 
-// --------------------------
+//--------------------------
 type PktDropInfo struct {
 	SvcsetId               *uint64  `protobuf:"varint,1,opt,name=svcset_id,json=svcsetId" json:"svcset_id,omitempty"`
 	SvcsetIdPresent        *uint64  `protobuf:"varint,2,opt,name=svcset_id_present,json=svcsetIdPresent" json:"svcset_id_present,omitempty"`
@@ -597,16 +604,17 @@ func (m *PktDropInfo) Reset()         { *m = PktDropInfo{} }
 func (m *PktDropInfo) String() string { return proto.CompactTextString(m) }
 func (*PktDropInfo) ProtoMessage()    {}
 func (*PktDropInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_svcset_telemetry_e36f491b0cb367c8, []int{5}
+	return fileDescriptor_d1f011be0986ccfc, []int{5}
 }
+
 func (m *PktDropInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PktDropInfo.Unmarshal(m, b)
 }
 func (m *PktDropInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PktDropInfo.Marshal(b, m, deterministic)
 }
-func (dst *PktDropInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PktDropInfo.Merge(dst, src)
+func (m *PktDropInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PktDropInfo.Merge(m, src)
 }
 func (m *PktDropInfo) XXX_Size() int {
 	return xxx_messageInfo_PktDropInfo.Size(m)
@@ -734,11 +742,9 @@ func init() {
 	proto.RegisterExtension(E_JnprScvsInfraExt)
 }
 
-func init() {
-	proto.RegisterFile("svcset_telemetry.proto", fileDescriptor_svcset_telemetry_e36f491b0cb367c8)
-}
+func init() { proto.RegisterFile("svcset_telemetry.proto", fileDescriptor_d1f011be0986ccfc) }
 
-var fileDescriptor_svcset_telemetry_e36f491b0cb367c8 = []byte{
+var fileDescriptor_d1f011be0986ccfc = []byte{
 	// 990 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xdc, 0x96, 0xcf, 0x6e, 0xdb, 0x46,
 	0x10, 0xc6, 0x61, 0xc9, 0xb1, 0xad, 0xd5, 0x7f, 0x3a, 0x71, 0xe8, 0x14, 0x28, 0x04, 0xa3, 0xad,

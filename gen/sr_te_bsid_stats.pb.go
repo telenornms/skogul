@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -33,16 +35,17 @@ func (m *SrTeBsidStats) Reset()         { *m = SrTeBsidStats{} }
 func (m *SrTeBsidStats) String() string { return proto.CompactTextString(m) }
 func (*SrTeBsidStats) ProtoMessage()    {}
 func (*SrTeBsidStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_te_bsid_stats_1930fa3a454394a7, []int{0}
+	return fileDescriptor_c99674bf69207578, []int{0}
 }
+
 func (m *SrTeBsidStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SrTeBsidStats.Unmarshal(m, b)
 }
 func (m *SrTeBsidStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SrTeBsidStats.Marshal(b, m, deterministic)
 }
-func (dst *SrTeBsidStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SrTeBsidStats.Merge(dst, src)
+func (m *SrTeBsidStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SrTeBsidStats.Merge(m, src)
 }
 func (m *SrTeBsidStats) XXX_Size() int {
 	return xxx_messageInfo_SrTeBsidStats.Size(m)
@@ -87,16 +90,17 @@ func (m *SegmentRoutingTeBsidRecord) Reset()         { *m = SegmentRoutingTeBsid
 func (m *SegmentRoutingTeBsidRecord) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingTeBsidRecord) ProtoMessage()    {}
 func (*SegmentRoutingTeBsidRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_te_bsid_stats_1930fa3a454394a7, []int{1}
+	return fileDescriptor_c99674bf69207578, []int{1}
 }
+
 func (m *SegmentRoutingTeBsidRecord) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingTeBsidRecord.Unmarshal(m, b)
 }
 func (m *SegmentRoutingTeBsidRecord) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingTeBsidRecord.Marshal(b, m, deterministic)
 }
-func (dst *SegmentRoutingTeBsidRecord) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingTeBsidRecord.Merge(dst, src)
+func (m *SegmentRoutingTeBsidRecord) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingTeBsidRecord.Merge(m, src)
 }
 func (m *SegmentRoutingTeBsidRecord) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingTeBsidRecord.Size(m)
@@ -165,16 +169,17 @@ func (m *SegmentRoutingTeBsidStats) Reset()         { *m = SegmentRoutingTeBsidS
 func (m *SegmentRoutingTeBsidStats) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingTeBsidStats) ProtoMessage()    {}
 func (*SegmentRoutingTeBsidStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_te_bsid_stats_1930fa3a454394a7, []int{2}
+	return fileDescriptor_c99674bf69207578, []int{2}
 }
+
 func (m *SegmentRoutingTeBsidStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingTeBsidStats.Unmarshal(m, b)
 }
 func (m *SegmentRoutingTeBsidStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingTeBsidStats.Marshal(b, m, deterministic)
 }
-func (dst *SegmentRoutingTeBsidStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingTeBsidStats.Merge(dst, src)
+func (m *SegmentRoutingTeBsidStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingTeBsidStats.Merge(m, src)
 }
 func (m *SegmentRoutingTeBsidStats) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingTeBsidStats.Size(m)
@@ -218,7 +223,7 @@ var E_JnprSrTeBsidStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*SrTeBsidStats)(nil),
 	Field:         24,
 	Name:          "jnpr_sr_te_bsid_stats_ext",
-	Tag:           "bytes,24,opt,name=jnpr_sr_te_bsid_stats_ext,json=jnprSrTeBsidStatsExt",
+	Tag:           "bytes,24,opt,name=jnpr_sr_te_bsid_stats_ext",
 	Filename:      "sr_te_bsid_stats.proto",
 }
 
@@ -229,11 +234,9 @@ func init() {
 	proto.RegisterExtension(E_JnprSrTeBsidStatsExt)
 }
 
-func init() {
-	proto.RegisterFile("sr_te_bsid_stats.proto", fileDescriptor_sr_te_bsid_stats_1930fa3a454394a7)
-}
+func init() { proto.RegisterFile("sr_te_bsid_stats.proto", fileDescriptor_c99674bf69207578) }
 
-var fileDescriptor_sr_te_bsid_stats_1930fa3a454394a7 = []byte{
+var fileDescriptor_c99674bf69207578 = []byte{
 	// 395 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0x41, 0x6f, 0xd4, 0x30,
 	0x14, 0x84, 0xe5, 0x74, 0x17, 0xda, 0x97, 0x6e, 0x8b, 0x5c, 0x04, 0xee, 0xf6, 0x40, 0x94, 0x03,

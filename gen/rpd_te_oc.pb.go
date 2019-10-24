@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type NetworkInstancesTe struct {
 	NetworkInstance      []*NetworkInstancesTeNetworkInstanceList `protobuf:"bytes,151,rep,name=network_instance,json=networkInstance" json:"network_instance,omitempty"`
@@ -29,16 +31,17 @@ func (m *NetworkInstancesTe) Reset()         { *m = NetworkInstancesTe{} }
 func (m *NetworkInstancesTe) String() string { return proto.CompactTextString(m) }
 func (*NetworkInstancesTe) ProtoMessage()    {}
 func (*NetworkInstancesTe) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0}
 }
+
 func (m *NetworkInstancesTe) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTe.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTe.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTe) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTe.Merge(dst, src)
+func (m *NetworkInstancesTe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTe.Merge(m, src)
 }
 func (m *NetworkInstancesTe) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTe.Size(m)
@@ -68,16 +71,17 @@ func (m *NetworkInstancesTeNetworkInstanceList) Reset()         { *m = NetworkIn
 func (m *NetworkInstancesTeNetworkInstanceList) String() string { return proto.CompactTextString(m) }
 func (*NetworkInstancesTeNetworkInstanceList) ProtoMessage()    {}
 func (*NetworkInstancesTeNetworkInstanceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceList.Size(m)
@@ -119,16 +123,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsType) String() string {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsType) ProtoMessage() {}
 func (*NetworkInstancesTeNetworkInstanceListMplsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsType.Size(m)
@@ -177,16 +182,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) St
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) ProtoMessage() {}
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesType.Size(m)
@@ -233,16 +239,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlg
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) ProtoMessage() {}
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsType.Size(m)
@@ -277,16 +284,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlg
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgList.Size(m)
@@ -330,16 +338,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlg
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeSrlgsTypeSrlgListStateType.Size(m)
@@ -394,16 +403,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMpls
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsType.Size(m)
@@ -438,16 +448,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMpls
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupList.Size(m)
@@ -489,16 +500,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMpls
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeMplsAdminGroupsTypeAdminGroupListStateType.Size(m)
@@ -539,16 +551,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLs
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersType.Size(m)
@@ -584,16 +597,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLs
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 0, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeGlobalAttributesTypeTeLspTimersTypeStateType.Size(m)
@@ -640,16 +654,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType)
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) ProtoMessage() {}
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesType.Size(m)
@@ -687,16 +702,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceList.Size(m)
@@ -760,16 +776,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListStateType.Size(m)
@@ -817,16 +834,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefType.Size(m)
@@ -861,16 +879,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListInterfaceRefTypeStateType.Size(m)
@@ -911,16 +930,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthType.Size(m)
@@ -955,16 +975,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListIgpFloodingBandwidthTypeStateType.Size(m)
@@ -1005,16 +1026,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 3}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 3}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementType.Size(m)
@@ -1049,16 +1071,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeI
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 1, 0, 3, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 1, 0, 3, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeTeInterfaceAttributesTypeInterfaceListBandwidthMeasurementTypeStateType.Size(m)
@@ -1098,16 +1121,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) String() string 
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) ProtoMessage() {}
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsType.Size(m)
@@ -1142,16 +1166,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) ProtoMessage() {}
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathType.Size(m)
@@ -1199,16 +1224,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsType.Size(m)
@@ -1244,16 +1270,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathList.Size(m)
@@ -1301,16 +1328,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListStateType.Size(m)
@@ -1344,16 +1372,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 0, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 0, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsType.Size(m)
@@ -1388,16 +1417,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 0, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 0, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectList.Size(m)
@@ -1440,16 +1470,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeNamedExplicitPathsTypeNamedExplicitPathListExplicitRouteObjectsTypeExplicitRouteObjectListStateType.Size(m)
@@ -1497,16 +1528,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsType.Size(m)
@@ -1544,16 +1576,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelList.Size(m)
@@ -1631,16 +1664,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateType.Size(m)
@@ -1791,16 +1825,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListStateTypeCountersType.Size(m)
@@ -1870,16 +1905,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthType.Size(m)
@@ -1922,16 +1958,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeStateType.Size(m)
@@ -1981,16 +2018,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthType.Size(m)
@@ -2043,16 +2081,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeStateType.Size(m)
@@ -2121,16 +2160,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowType.Size(m)
@@ -2165,16 +2205,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeOverflowTypeStateType.Size(m)
@@ -2215,16 +2256,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowType.Size(m)
@@ -2259,16 +2301,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 1, 1, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListBandwidthTypeAutoBandwidthTypeUnderflowTypeStateType.Size(m)
@@ -2311,16 +2354,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesType.Size(m)
@@ -2368,16 +2412,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeStateType.Size(m)
@@ -2411,16 +2456,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathType.Size(m)
@@ -2457,16 +2503,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathList.Size(m)
@@ -2532,16 +2579,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListStateType.Size(m)
@@ -2652,16 +2700,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsType.Size(m)
@@ -2697,16 +2746,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListAdminGroupsTypeStateType.Size(m)
@@ -2757,16 +2807,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesList.Size(m)
@@ -2826,16 +2877,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 1, 0, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PPrimaryPathTypeP2PPrimaryPathListLspInstancesListStateType.Size(m)
@@ -2904,16 +2956,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsType.Size(m)
@@ -2949,16 +3002,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathList.Size(m)
@@ -3014,16 +3068,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListStateType.Size(m)
@@ -3113,16 +3168,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 1}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 1}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsType.Size(m)
@@ -3158,16 +3214,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 1, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 1, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeTunnelsTypeTunnelListP2PTunnelAttributesTypeP2PSecondaryPathsTypeP2PSecondaryPathListAdminGroupsTypeStateType.Size(m)
@@ -3215,16 +3272,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 2}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 2}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsType.Size(m)
@@ -3259,16 +3317,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 2, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 2, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelList.Size(m)
@@ -3327,16 +3386,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 2, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 2, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateType.Size(m)
@@ -3498,16 +3558,17 @@ func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTyp
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) ProtoMessage() {
 }
 func (*NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_te_oc_bd56876c679a4317, []int{0, 0, 0, 2, 0, 2, 0, 0, 0}
+	return fileDescriptor_5d10f38d59cb24ab, []int{0, 0, 0, 2, 0, 2, 0, 0, 0}
 }
+
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType.Unmarshal(m, b)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType.Marshal(b, m, deterministic)
 }
-func (dst *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType.Merge(dst, src)
+func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType.Merge(m, src)
 }
 func (m *NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType) XXX_Size() int {
 	return xxx_messageInfo_NetworkInstancesTeNetworkInstanceListMplsTypeLspsTypeConstrainedPathTypeContainerTunnelsTypeContainerTunnelListStateTypeSamplingType.Size(m)
@@ -3544,7 +3605,7 @@ var E_JnprNetworkInstancesTeExt = &proto.ExtensionDesc{
 	ExtensionType: (*NetworkInstancesTe)(nil),
 	Field:         69,
 	Name:          "jnpr_network_instances_te_ext",
-	Tag:           "bytes,69,opt,name=jnpr_network_instances_te_ext,json=jnprNetworkInstancesTeExt",
+	Tag:           "bytes,69,opt,name=jnpr_network_instances_te_ext",
 	Filename:      "rpd_te_oc.proto",
 }
 
@@ -3611,9 +3672,9 @@ func init() {
 	proto.RegisterExtension(E_JnprNetworkInstancesTeExt)
 }
 
-func init() { proto.RegisterFile("rpd_te_oc.proto", fileDescriptor_rpd_te_oc_bd56876c679a4317) }
+func init() { proto.RegisterFile("rpd_te_oc.proto", fileDescriptor_5d10f38d59cb24ab) }
 
-var fileDescriptor_rpd_te_oc_bd56876c679a4317 = []byte{
+var fileDescriptor_5d10f38d59cb24ab = []byte{
 	// 3334 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xdc, 0x5b, 0x6b, 0x8c, 0x24, 0x55,
 	0xf5, 0x4f, 0xcd, 0xce, 0xec, 0xce, 0x9c, 0xee, 0x9e, 0xc7, 0x9d, 0xc7, 0xf6, 0xd4, 0x2e, 0x30,

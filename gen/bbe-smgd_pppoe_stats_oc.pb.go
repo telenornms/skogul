@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosPppoeStats struct {
 	System               *JunosPppoeStatsSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosPppoeStats) Reset()         { *m = JunosPppoeStats{} }
 func (m *JunosPppoeStats) String() string { return proto.CompactTextString(m) }
 func (*JunosPppoeStats) ProtoMessage()    {}
 func (*JunosPppoeStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1, []int{0}
+	return fileDescriptor_f41d360f8015fe44, []int{0}
 }
+
 func (m *JunosPppoeStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPppoeStats.Unmarshal(m, b)
 }
 func (m *JunosPppoeStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPppoeStats.Marshal(b, m, deterministic)
 }
-func (dst *JunosPppoeStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPppoeStats.Merge(dst, src)
+func (m *JunosPppoeStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPppoeStats.Merge(m, src)
 }
 func (m *JunosPppoeStats) XXX_Size() int {
 	return xxx_messageInfo_JunosPppoeStats.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosPppoeStatsSystemType) Reset()         { *m = JunosPppoeStatsSystem
 func (m *JunosPppoeStatsSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosPppoeStatsSystemType) ProtoMessage()    {}
 func (*JunosPppoeStatsSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1, []int{0, 0}
+	return fileDescriptor_f41d360f8015fe44, []int{0, 0}
 }
+
 func (m *JunosPppoeStatsSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPppoeStatsSystemType.Unmarshal(m, b)
 }
 func (m *JunosPppoeStatsSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPppoeStatsSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosPppoeStatsSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPppoeStatsSystemType.Merge(dst, src)
+func (m *JunosPppoeStatsSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPppoeStatsSystemType.Merge(m, src)
 }
 func (m *JunosPppoeStatsSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosPppoeStatsSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosPppoeStatsSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosPppoeStatsSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosPppoeStatsSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1, []int{0, 0, 0}
+	return fileDescriptor_f41d360f8015fe44, []int{0, 0, 0}
 }
+
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosPppoeStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosPppoeStatsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) S
 }
 func (*JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) ProtoMessage() {}
 func (*JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1, []int{0, 0, 0, 0}
+	return fileDescriptor_f41d360f8015fe44, []int{0, 0, 0, 0}
 }
+
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType.Unmarshal(m, b)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType.Merge(dst, src)
+func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType.Merge(m, src)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsType.Size(m)
@@ -193,16 +199,17 @@ func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePpp
 }
 func (*JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) ProtoMessage() {}
 func (*JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_f41d360f8015fe44, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType.Unmarshal(m, b)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType.Merge(dst, src)
+func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType.Merge(m, src)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType) XXX_Size() int {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeType.Size(m)
@@ -256,16 +263,17 @@ func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePpp
 func (*JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) ProtoMessage() {
 }
 func (*JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_f41d360f8015fe44, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType.Merge(dst, src)
+func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType.Merge(m, src)
 }
 func (m *JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosPppoeStatsSystemTypeSubscriberManagementTypeClientProtocolsTypePppoeTypeStatisticsType.Size(m)
@@ -428,7 +436,7 @@ var E_JnprJunosPppoeStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosPppoeStats)(nil),
 	Field:         35,
 	Name:          "jnpr_junos_pppoe_stats_ext",
-	Tag:           "bytes,35,opt,name=jnpr_junos_pppoe_stats_ext,json=jnprJunosPppoeStatsExt",
+	Tag:           "bytes,35,opt,name=jnpr_junos_pppoe_stats_ext",
 	Filename:      "bbe-smgd_pppoe_stats_oc.proto",
 }
 
@@ -442,11 +450,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosPppoeStatsExt)
 }
 
-func init() {
-	proto.RegisterFile("bbe-smgd_pppoe_stats_oc.proto", fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1)
-}
+func init() { proto.RegisterFile("bbe-smgd_pppoe_stats_oc.proto", fileDescriptor_f41d360f8015fe44) }
 
-var fileDescriptor_bbe_smgd_pppoe_stats_oc_fe74225e9008e1d1 = []byte{
+var fileDescriptor_f41d360f8015fe44 = []byte{
 	// 642 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x94, 0xcb, 0x6e, 0xd3, 0x4e,
 	0x14, 0xc6, 0x95, 0xc5, 0xff, 0x2f, 0x98, 0x50, 0xb5, 0x75, 0x2f, 0x58, 0x96, 0x40, 0x55, 0xd9,

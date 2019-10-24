@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type MplsPfeMplsLdpP2MpLsp struct {
 	SignalingProtocols   *MplsPfeMplsLdpP2MpLspSignalingProtocolsType `protobuf:"bytes,151,opt,name=signaling_protocols,json=signalingProtocols" json:"signaling_protocols,omitempty"`
@@ -29,16 +31,17 @@ func (m *MplsPfeMplsLdpP2MpLsp) Reset()         { *m = MplsPfeMplsLdpP2MpLsp{} }
 func (m *MplsPfeMplsLdpP2MpLsp) String() string { return proto.CompactTextString(m) }
 func (*MplsPfeMplsLdpP2MpLsp) ProtoMessage()    {}
 func (*MplsPfeMplsLdpP2MpLsp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0}
+	return fileDescriptor_b32edb8aac355207, []int{0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLsp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLsp.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLsp.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLsp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLsp.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLsp.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLsp) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLsp.Size(m)
@@ -71,16 +74,17 @@ func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsType) String() string {
 }
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsType) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0, 0}
+	return fileDescriptor_b32edb8aac355207, []int{0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLspSignalingProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsType.Size(m)
@@ -113,16 +117,17 @@ func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) String() string {
 }
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0, 0, 0}
+	return fileDescriptor_b32edb8aac355207, []int{0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpType.Size(m)
@@ -155,16 +160,17 @@ func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) String(
 }
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0, 0, 0, 0}
+	return fileDescriptor_b32edb8aac355207, []int{0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsType.Size(m)
@@ -197,16 +203,17 @@ func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspLi
 }
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) ProtoMessage() {}
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_b32edb8aac355207, []int{0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspList.Size(m)
@@ -240,16 +247,17 @@ func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspLi
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) ProtoMessage() {
 }
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_b32edb8aac355207, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateType.Size(m)
@@ -282,16 +290,17 @@ func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspLi
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) ProtoMessage() {
 }
 func (*MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_b32edb8aac355207, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList.Merge(dst, src)
+func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList.Merge(m, src)
 }
 func (m *MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsLdpP2MpLspSignalingProtocolsTypeLdpTypeP2MpLspsTypeP2MpLspListStateTypeCountersList.Size(m)
@@ -307,7 +316,7 @@ var E_JnprMplsPfeMplsLdpP2MpLspExt = &proto.ExtensionDesc{
 	ExtensionType: (*MplsPfeMplsLdpP2MpLsp)(nil),
 	Field:         89,
 	Name:          "jnpr_mpls_pfe_mpls_ldp_p2mp_lsp_ext",
-	Tag:           "bytes,89,opt,name=jnpr_mpls_pfe_mpls_ldp_p2mp_lsp_ext,json=jnprMplsPfeMplsLdpP2mpLspExt",
+	Tag:           "bytes,89,opt,name=jnpr_mpls_pfe_mpls_ldp_p2mp_lsp_ext",
 	Filename:      "pfe_mpls_ldp_p2mp_lsp_oc.proto",
 }
 
@@ -322,11 +331,9 @@ func init() {
 	proto.RegisterExtension(E_JnprMplsPfeMplsLdpP2MpLspExt)
 }
 
-func init() {
-	proto.RegisterFile("pfe_mpls_ldp_p2mp_lsp_oc.proto", fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51)
-}
+func init() { proto.RegisterFile("pfe_mpls_ldp_p2mp_lsp_oc.proto", fileDescriptor_b32edb8aac355207) }
 
-var fileDescriptor_pfe_mpls_ldp_p2mp_lsp_oc_f6b8b94b083a8a51 = []byte{
+var fileDescriptor_b32edb8aac355207 = []byte{
 	// 351 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x91, 0x3f, 0x4b, 0x03, 0x41,
 	0x10, 0xc5, 0x39, 0x63, 0xf4, 0x9c, 0x10, 0x85, 0x4d, 0x61, 0x58, 0x45, 0x44, 0x9b, 0x54, 0x5b,

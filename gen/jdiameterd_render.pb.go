@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosDiameter struct {
 	System               *JunosDiameterSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosDiameter) Reset()         { *m = JunosDiameter{} }
 func (m *JunosDiameter) String() string { return proto.CompactTextString(m) }
 func (*JunosDiameter) ProtoMessage()    {}
 func (*JunosDiameter) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0}
 }
+
 func (m *JunosDiameter) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameter.Unmarshal(m, b)
 }
 func (m *JunosDiameter) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameter.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameter) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameter.Merge(dst, src)
+func (m *JunosDiameter) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameter.Merge(m, src)
 }
 func (m *JunosDiameter) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameter.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosDiameterSystemType) Reset()         { *m = JunosDiameterSystemType
 func (m *JunosDiameterSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosDiameterSystemType) ProtoMessage()    {}
 func (*JunosDiameterSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0}
 }
+
 func (m *JunosDiameterSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemType.Merge(dst, src)
+func (m *JunosDiameterSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemType.Merge(m, src)
 }
 func (m *JunosDiameterSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosDiameterSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementType.Size(m)
@@ -151,16 +156,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaType) String() string
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaType) ProtoMessage() {}
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaType.Size(m)
@@ -193,16 +199,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) Str
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) ProtoMessage() {}
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Size(m)
@@ -235,16 +242,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) ProtoMessage() {}
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersType.Size(m)
@@ -281,16 +289,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerList.Size(m)
@@ -345,16 +354,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqType.Size(m)
@@ -393,16 +403,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListNasreqTypeResponseTimeType.Size(m)
@@ -471,16 +482,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxType.Size(m)
@@ -519,16 +531,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGxTypeResponseTimeType.Size(m)
@@ -597,16 +610,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0, 2}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0, 2}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyType.Size(m)
@@ -645,16 +659,17 @@ func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeers
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) ProtoMessage() {
 }
 func (*JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c, []int{0, 0, 0, 0, 0, 0, 0, 2, 0}
+	return fileDescriptor_c2442cc5af5ff1ef, []int{0, 0, 0, 0, 0, 0, 0, 2, 0}
 }
+
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType.Unmarshal(m, b)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType.Merge(dst, src)
+func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType.Merge(m, src)
 }
 func (m *JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType) XXX_Size() int {
 	return xxx_messageInfo_JunosDiameterSystemTypeSubscriberManagementTypeAaaTypeDiameterTypePeersTypePeerListGyTypeResponseTimeType.Size(m)
@@ -712,7 +727,7 @@ var E_JnprJunosDiameterExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosDiameter)(nil),
 	Field:         103,
 	Name:          "jnpr_junos_diameter_ext",
-	Tag:           "bytes,103,opt,name=jnpr_junos_diameter_ext,json=jnprJunosDiameterExt",
+	Tag:           "bytes,103,opt,name=jnpr_junos_diameter_ext",
 	Filename:      "jdiameterd_render.proto",
 }
 
@@ -733,11 +748,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosDiameterExt)
 }
 
-func init() {
-	proto.RegisterFile("jdiameterd_render.proto", fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c)
-}
+func init() { proto.RegisterFile("jdiameterd_render.proto", fileDescriptor_c2442cc5af5ff1ef) }
 
-var fileDescriptor_jdiameterd_render_7a4cbc5ec2fa995c = []byte{
+var fileDescriptor_c2442cc5af5ff1ef = []byte{
 	// 625 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x54, 0x3f, 0x6f, 0xd3, 0x4e,
 	0x18, 0x96, 0xdb, 0xb4, 0xbf, 0xf4, 0xcd, 0xaf, 0x20, 0xae, 0x2d, 0x31, 0x6e, 0x25, 0xa2, 0x4e,

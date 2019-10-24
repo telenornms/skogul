@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type MplsPfeMplsSrTeBsid struct {
 	SignalingProtocols   *MplsPfeMplsSrTeBsidSignalingProtocolsType `protobuf:"bytes,151,opt,name=signaling_protocols,json=signalingProtocols" json:"signaling_protocols,omitempty"`
@@ -29,16 +31,17 @@ func (m *MplsPfeMplsSrTeBsid) Reset()         { *m = MplsPfeMplsSrTeBsid{} }
 func (m *MplsPfeMplsSrTeBsid) String() string { return proto.CompactTextString(m) }
 func (*MplsPfeMplsSrTeBsid) ProtoMessage()    {}
 func (*MplsPfeMplsSrTeBsid) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0}
+	return fileDescriptor_46476d996b49ff5e, []int{0}
 }
+
 func (m *MplsPfeMplsSrTeBsid) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsid.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsid) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsid.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsid) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsid.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsid) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsid.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsid) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsid.Size(m)
@@ -69,16 +72,17 @@ func (m *MplsPfeMplsSrTeBsidSignalingProtocolsType) Reset() {
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsType) String() string { return proto.CompactTextString(m) }
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsType) ProtoMessage()    {}
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0, 0}
+	return fileDescriptor_46476d996b49ff5e, []int{0, 0}
 }
+
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsidSignalingProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsType.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsidSignalingProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsType.Size(m)
@@ -111,16 +115,17 @@ func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) String() s
 }
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) ProtoMessage() {}
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0, 0, 0}
+	return fileDescriptor_46476d996b49ff5e, []int{0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingType.Size(m)
@@ -154,16 +159,17 @@ func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoli
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) ProtoMessage() {
 }
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0, 0, 0, 0}
+	return fileDescriptor_46476d996b49ff5e, []int{0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesType.Size(m)
@@ -197,16 +203,17 @@ func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoli
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) ProtoMessage() {
 }
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_46476d996b49ff5e, []int{0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyList.Size(m)
@@ -240,16 +247,17 @@ func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoli
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) ProtoMessage() {
 }
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_46476d996b49ff5e, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateType.Size(m)
@@ -282,16 +290,17 @@ func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoli
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) ProtoMessage() {
 }
 func (*MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_46476d996b49ff5e, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList.Merge(dst, src)
+func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList.Merge(m, src)
 }
 func (m *MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrTeBsidSignalingProtocolsTypeSegmentRoutingTypeSrTeBsidPoliciesTypeSrTeBsidPolicyListStateTypeCountersList.Size(m)
@@ -307,7 +316,7 @@ var E_JnprMplsPfeMplsSrTeBsidExt = &proto.ExtensionDesc{
 	ExtensionType: (*MplsPfeMplsSrTeBsid)(nil),
 	Field:         101,
 	Name:          "jnpr_mpls_pfe_mpls_sr_te_bsid_ext",
-	Tag:           "bytes,101,opt,name=jnpr_mpls_pfe_mpls_sr_te_bsid_ext,json=jnprMplsPfeMplsSrTeBsidExt",
+	Tag:           "bytes,101,opt,name=jnpr_mpls_pfe_mpls_sr_te_bsid_ext",
 	Filename:      "pfe_mpls_sr_te_bsid_oc.proto",
 }
 
@@ -322,11 +331,9 @@ func init() {
 	proto.RegisterExtension(E_JnprMplsPfeMplsSrTeBsidExt)
 }
 
-func init() {
-	proto.RegisterFile("pfe_mpls_sr_te_bsid_oc.proto", fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15)
-}
+func init() { proto.RegisterFile("pfe_mpls_sr_te_bsid_oc.proto", fileDescriptor_46476d996b49ff5e) }
 
-var fileDescriptor_pfe_mpls_sr_te_bsid_oc_58652eff90591d15 = []byte{
+var fileDescriptor_46476d996b49ff5e = []byte{
 	// 385 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x92, 0xb1, 0x6b, 0x1b, 0x31,
 	0x14, 0xc6, 0x11, 0xae, 0xa9, 0x79, 0xa6, 0x76, 0x2b, 0x97, 0xf6, 0x2a, 0x3a, 0xb4, 0x9d, 0x3c,

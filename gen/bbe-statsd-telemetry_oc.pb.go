@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosStatistics struct {
 	System               *JunosStatisticsSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosStatistics) Reset()         { *m = JunosStatistics{} }
 func (m *JunosStatistics) String() string { return proto.CompactTextString(m) }
 func (*JunosStatistics) ProtoMessage()    {}
 func (*JunosStatistics) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0}
 }
+
 func (m *JunosStatistics) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatistics.Unmarshal(m, b)
 }
 func (m *JunosStatistics) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatistics.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatistics) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatistics.Merge(dst, src)
+func (m *JunosStatistics) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatistics.Merge(m, src)
 }
 func (m *JunosStatistics) XXX_Size() int {
 	return xxx_messageInfo_JunosStatistics.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosStatisticsSystemType) Reset()         { *m = JunosStatisticsSystem
 func (m *JunosStatisticsSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosStatisticsSystemType) ProtoMessage()    {}
 func (*JunosStatisticsSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0}
 }
+
 func (m *JunosStatisticsSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemType.Merge(dst, src)
+func (m *JunosStatisticsSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosStatisticsSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementType.Size(m)
@@ -152,16 +157,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType)
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) ProtoMessage() {}
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesType.Size(m)
@@ -205,16 +211,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesType.Size(m)
@@ -269,16 +276,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataType.Size(m)
@@ -320,16 +328,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeMetaDataTypeInterfaceList.Size(m)
@@ -419,16 +428,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 1}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 1}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsType.Size(m)
@@ -463,16 +473,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 1, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 1, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceList.Size(m)
@@ -513,16 +524,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsType.Size(m)
@@ -557,16 +569,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 1, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 1, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcList.Size(m)
@@ -607,16 +620,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesType.Size(m)
@@ -654,16 +668,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeQueueStatisticsTypeInterfaceListFpcsTypeFpcListQueuesTypeQueueList.Size(m)
@@ -725,16 +740,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 2}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 2}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsType.Size(m)
@@ -776,16 +792,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 2, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 2, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeSubscriberStatisticsTypeInterfaceList.Size(m)
@@ -875,16 +892,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesType.Size(m)
@@ -919,16 +937,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceList.Size(m)
@@ -969,16 +988,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsType.Size(m)
@@ -1014,16 +1034,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceList.Size(m)
@@ -1071,16 +1092,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesType.Size(m)
@@ -1115,16 +1137,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyList.Size(m)
@@ -1165,16 +1188,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsType.Size(m)
@@ -1210,16 +1234,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfacesTypeServicesTypeInterfaceListServiceStatisticsTypeServiceListFamiliesTypeFamilyListFilterDirectionsTypeFilterDirectionList.Size(m)
@@ -1268,16 +1293,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsType.Size(m)
@@ -1318,16 +1344,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataType.Size(m)
@@ -1368,16 +1395,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeMetaDataTypeInterfaceSetList.Size(m)
@@ -1460,16 +1488,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 1}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 1}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsType.Size(m)
@@ -1504,16 +1533,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 1, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 1, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetList.Size(m)
@@ -1554,16 +1584,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 1, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 1, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsType.Size(m)
@@ -1598,16 +1629,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 1, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 1, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcList.Size(m)
@@ -1648,16 +1680,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesType.Size(m)
@@ -1695,16 +1728,17 @@ func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeI
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) ProtoMessage() {
 }
 func (*JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_5b36c59d64d7b7d6, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList.Unmarshal(m, b)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList.Marshal(b, m, deterministic)
 }
-func (dst *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList.Merge(dst, src)
+func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList.Merge(m, src)
 }
 func (m *JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList) XXX_Size() int {
 	return xxx_messageInfo_JunosStatisticsSystemTypeSubscriberManagementTypeDynamicInterfacesTypeInterfaceSetsTypeQueueStatisticsTypeInterfaceSetListFpcsTypeFpcListQueuesTypeQueueList.Size(m)
@@ -1755,7 +1789,7 @@ var E_JnprJunosStatisticsExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosStatistics)(nil),
 	Field:         81,
 	Name:          "jnpr_junos_statistics_ext",
-	Tag:           "bytes,81,opt,name=jnpr_junos_statistics_ext,json=jnprJunosStatisticsExt",
+	Tag:           "bytes,81,opt,name=jnpr_junos_statistics_ext",
 	Filename:      "bbe-statsd-telemetry_oc.proto",
 }
 
@@ -1795,11 +1829,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosStatisticsExt)
 }
 
-func init() {
-	proto.RegisterFile("bbe-statsd-telemetry_oc.proto", fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248)
-}
+func init() { proto.RegisterFile("bbe-statsd-telemetry_oc.proto", fileDescriptor_5b36c59d64d7b7d6) }
 
-var fileDescriptor_bbe_statsd_telemetry_oc_05431afaa489c248 = []byte{
+var fileDescriptor_5b36c59d64d7b7d6 = []byte{
 	// 1595 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x58, 0x4b, 0x6f, 0x1c, 0xc5,
 	0x16, 0x56, 0xf9, 0x39, 0x73, 0xc6, 0x63, 0x8f, 0xcb, 0x71, 0xdc, 0xee, 0x28, 0xf7, 0xfa, 0xe6,

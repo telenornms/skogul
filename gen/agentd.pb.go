@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type TelemetrySystem struct {
 	Subscriptions        *TelemetrySystemSubscriptionsType `protobuf:"bytes,151,opt,name=subscriptions" json:"subscriptions,omitempty"`
@@ -29,16 +31,17 @@ func (m *TelemetrySystem) Reset()         { *m = TelemetrySystem{} }
 func (m *TelemetrySystem) String() string { return proto.CompactTextString(m) }
 func (*TelemetrySystem) ProtoMessage()    {}
 func (*TelemetrySystem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0}
+	return fileDescriptor_f929025cc6d20165, []int{0}
 }
+
 func (m *TelemetrySystem) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystem.Unmarshal(m, b)
 }
 func (m *TelemetrySystem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystem.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystem) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystem.Merge(dst, src)
+func (m *TelemetrySystem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystem.Merge(m, src)
 }
 func (m *TelemetrySystem) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystem.Size(m)
@@ -67,16 +70,17 @@ func (m *TelemetrySystemSubscriptionsType) Reset()         { *m = TelemetrySyste
 func (m *TelemetrySystemSubscriptionsType) String() string { return proto.CompactTextString(m) }
 func (*TelemetrySystemSubscriptionsType) ProtoMessage()    {}
 func (*TelemetrySystemSubscriptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0}
 }
+
 func (m *TelemetrySystemSubscriptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsType.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsType.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsType.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsType.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsType) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsType.Size(m)
@@ -109,16 +113,17 @@ func (m *TelemetrySystemSubscriptionsTypeDynamicType) String() string {
 }
 func (*TelemetrySystemSubscriptionsTypeDynamicType) ProtoMessage() {}
 func (*TelemetrySystemSubscriptionsTypeDynamicType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0, 0}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0, 0}
 }
+
 func (m *TelemetrySystemSubscriptionsTypeDynamicType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicType.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicType.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsTypeDynamicType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicType.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsTypeDynamicType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicType.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicType) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicType.Size(m)
@@ -153,16 +158,17 @@ func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) String() s
 }
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) ProtoMessage() {}
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0, 0, 0}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0, 0, 0}
 }
+
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionList.Size(m)
@@ -212,16 +218,17 @@ func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) S
 }
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) ProtoMessage() {}
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0, 0, 0, 0}
 }
+
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListStateType.Size(m)
@@ -275,16 +282,17 @@ func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsT
 }
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) ProtoMessage() {}
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0, 0, 0, 1}
 }
+
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsType.Size(m)
@@ -319,16 +327,17 @@ func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsT
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) ProtoMessage() {
 }
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0, 0, 0, 1, 0}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0, 0, 0, 1, 0}
 }
+
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathList.Size(m)
@@ -370,16 +379,17 @@ func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsT
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) ProtoMessage() {
 }
 func (*TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_agentd_f31bab673a80cf7f, []int{0, 0, 0, 0, 1, 0, 0}
+	return fileDescriptor_f929025cc6d20165, []int{0, 0, 0, 0, 1, 0, 0}
 }
+
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType.Unmarshal(m, b)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType.Marshal(b, m, deterministic)
 }
-func (dst *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType.Merge(dst, src)
+func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType.Merge(m, src)
 }
 func (m *TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType) XXX_Size() int {
 	return xxx_messageInfo_TelemetrySystemSubscriptionsTypeDynamicTypeSubscriptionListSensorPathsTypeSensorPathListStateType.Size(m)
@@ -409,7 +419,7 @@ var E_JnprTelemetrySystemExt = &proto.ExtensionDesc{
 	ExtensionType: (*TelemetrySystem)(nil),
 	Field:         31,
 	Name:          "jnpr_telemetry_system_ext",
-	Tag:           "bytes,31,opt,name=jnpr_telemetry_system_ext,json=jnprTelemetrySystemExt",
+	Tag:           "bytes,31,opt,name=jnpr_telemetry_system_ext",
 	Filename:      "agentd.proto",
 }
 
@@ -425,9 +435,9 @@ func init() {
 	proto.RegisterExtension(E_JnprTelemetrySystemExt)
 }
 
-func init() { proto.RegisterFile("agentd.proto", fileDescriptor_agentd_f31bab673a80cf7f) }
+func init() { proto.RegisterFile("agentd.proto", fileDescriptor_f929025cc6d20165) }
 
-var fileDescriptor_agentd_f31bab673a80cf7f = []byte{
+var fileDescriptor_f929025cc6d20165 = []byte{
 	// 486 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x92, 0xcd, 0x8a, 0xd4, 0x40,
 	0x14, 0x85, 0xc9, 0xfc, 0x30, 0xdd, 0xb7, 0x7b, 0xc6, 0x49, 0x09, 0x9a, 0xc9, 0xc6, 0x46, 0x14,

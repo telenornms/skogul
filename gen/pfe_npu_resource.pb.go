@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosPfeNpu struct {
 	NpuMemory            []*JunosPfeNpuNpuMemoryList `protobuf:"bytes,151,rep,name=npu_memory,json=npuMemory" json:"npu_memory,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosPfeNpu) Reset()         { *m = JunosPfeNpu{} }
 func (m *JunosPfeNpu) String() string { return proto.CompactTextString(m) }
 func (*JunosPfeNpu) ProtoMessage()    {}
 func (*JunosPfeNpu) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_npu_resource_28d6952a84f36551, []int{0}
+	return fileDescriptor_cdd8cb97f7b6deb1, []int{0}
 }
+
 func (m *JunosPfeNpu) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPfeNpu.Unmarshal(m, b)
 }
 func (m *JunosPfeNpu) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPfeNpu.Marshal(b, m, deterministic)
 }
-func (dst *JunosPfeNpu) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPfeNpu.Merge(dst, src)
+func (m *JunosPfeNpu) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPfeNpu.Merge(m, src)
 }
 func (m *JunosPfeNpu) XXX_Size() int {
 	return xxx_messageInfo_JunosPfeNpu.Size(m)
@@ -66,16 +69,17 @@ func (m *JunosPfeNpuNpuMemoryList) Reset()         { *m = JunosPfeNpuNpuMemoryLi
 func (m *JunosPfeNpuNpuMemoryList) String() string { return proto.CompactTextString(m) }
 func (*JunosPfeNpuNpuMemoryList) ProtoMessage()    {}
 func (*JunosPfeNpuNpuMemoryList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_npu_resource_28d6952a84f36551, []int{0, 0}
+	return fileDescriptor_cdd8cb97f7b6deb1, []int{0, 0}
 }
+
 func (m *JunosPfeNpuNpuMemoryList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosPfeNpuNpuMemoryList.Unmarshal(m, b)
 }
 func (m *JunosPfeNpuNpuMemoryList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosPfeNpuNpuMemoryList.Marshal(b, m, deterministic)
 }
-func (dst *JunosPfeNpuNpuMemoryList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosPfeNpuNpuMemoryList.Merge(dst, src)
+func (m *JunosPfeNpuNpuMemoryList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosPfeNpuNpuMemoryList.Merge(m, src)
 }
 func (m *JunosPfeNpuNpuMemoryList) XXX_Size() int {
 	return xxx_messageInfo_JunosPfeNpuNpuMemoryList.Size(m)
@@ -91,7 +95,7 @@ var E_JnprJunosPfeNpuExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosPfeNpu)(nil),
 	Field:         59,
 	Name:          "jnpr_junos_pfe_npu_ext",
-	Tag:           "bytes,59,opt,name=jnpr_junos_pfe_npu_ext,json=jnprJunosPfeNpuExt",
+	Tag:           "bytes,59,opt,name=jnpr_junos_pfe_npu_ext",
 	Filename:      "pfe_npu_resource.proto",
 }
 
@@ -101,11 +105,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosPfeNpuExt)
 }
 
-func init() {
-	proto.RegisterFile("pfe_npu_resource.proto", fileDescriptor_pfe_npu_resource_28d6952a84f36551)
-}
+func init() { proto.RegisterFile("pfe_npu_resource.proto", fileDescriptor_cdd8cb97f7b6deb1) }
 
-var fileDescriptor_pfe_npu_resource_28d6952a84f36551 = []byte{
+var fileDescriptor_cdd8cb97f7b6deb1 = []byte{
 	// 189 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2b, 0x48, 0x4b, 0x8d,
 	0xcf, 0x2b, 0x28, 0x8d, 0x2f, 0x4a, 0x2d, 0xce, 0x2f, 0x2d, 0x4a, 0x4e, 0xd5, 0x2b, 0x28, 0xca,

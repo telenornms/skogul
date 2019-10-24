@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InterfacesL2AlInterface struct {
 	Interface            []*InterfacesL2AlInterfaceInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *InterfacesL2AlInterface) Reset()         { *m = InterfacesL2AlInterface
 func (m *InterfacesL2AlInterface) String() string { return proto.CompactTextString(m) }
 func (*InterfacesL2AlInterface) ProtoMessage()    {}
 func (*InterfacesL2AlInterface) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0}
+	return fileDescriptor_6671014b8a781111, []int{0}
 }
+
 func (m *InterfacesL2AlInterface) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterface.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterface) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterface.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterface) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterface.Merge(dst, src)
+func (m *InterfacesL2AlInterface) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterface.Merge(m, src)
 }
 func (m *InterfacesL2AlInterface) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterface.Size(m)
@@ -69,16 +72,17 @@ func (m *InterfacesL2AlInterfaceInterfaceList) Reset()         { *m = Interfaces
 func (m *InterfacesL2AlInterfaceInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*InterfacesL2AlInterfaceInterfaceList) ProtoMessage()    {}
 func (*InterfacesL2AlInterfaceInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceList.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceList.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceList.Size(m)
@@ -125,16 +129,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesType) String() string 
 }
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesType) ProtoMessage() {}
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesType.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesType.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesType.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesType.Size(m)
@@ -168,16 +173,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) 
 }
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) ProtoMessage() {}
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 0, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 0, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Size(m)
@@ -217,16 +223,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVl
 }
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) ProtoMessage() {}
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanType.Size(m)
@@ -260,16 +267,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVl
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) ProtoMessage() {
 }
 func (*InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListSubinterfacesTypeSubinterfaceListVlanTypeStateType.Size(m)
@@ -302,16 +310,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListEthernetType) String() string {
 }
 func (*InterfacesL2AlInterfaceInterfaceListEthernetType) ProtoMessage() {}
 func (*InterfacesL2AlInterfaceInterfaceListEthernetType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 1}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 1}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetType.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListEthernetType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetType.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListEthernetType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetType.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetType.Size(m)
@@ -344,16 +353,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) Strin
 }
 func (*InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) ProtoMessage() {}
 func (*InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 1, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 1, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanType.Size(m)
@@ -389,16 +399,17 @@ func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateTy
 }
 func (*InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) ProtoMessage() {}
 func (*InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_l2ald_oc_intf_d39471c2da058846, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_6671014b8a781111, []int{0, 0, 1, 0, 0}
 }
+
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType.Unmarshal(m, b)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType.Merge(dst, src)
+func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType.Merge(m, src)
 }
 func (m *InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesL2AlInterfaceInterfaceListEthernetTypeSwitchedVlanTypeStateType.Size(m)
@@ -442,7 +453,7 @@ var E_JnprInterfacesL2AlInterfaceExt = &proto.ExtensionDesc{
 	ExtensionType: (*InterfacesL2AlInterface)(nil),
 	Field:         49,
 	Name:          "jnpr_interfaces_l2al_interface_ext",
-	Tag:           "bytes,49,opt,name=jnpr_interfaces_l2al_interface_ext,json=jnprInterfacesL2alInterfaceExt",
+	Tag:           "bytes,49,opt,name=jnpr_interfaces_l2al_interface_ext",
 	Filename:      "l2ald_oc_intf.proto",
 }
 
@@ -459,9 +470,9 @@ func init() {
 	proto.RegisterExtension(E_JnprInterfacesL2AlInterfaceExt)
 }
 
-func init() { proto.RegisterFile("l2ald_oc_intf.proto", fileDescriptor_l2ald_oc_intf_d39471c2da058846) }
+func init() { proto.RegisterFile("l2ald_oc_intf.proto", fileDescriptor_6671014b8a781111) }
 
-var fileDescriptor_l2ald_oc_intf_d39471c2da058846 = []byte{
+var fileDescriptor_6671014b8a781111 = []byte{
 	// 501 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x93, 0xdf, 0x6a, 0xd4, 0x40,
 	0x14, 0xc6, 0xc9, 0x6e, 0x57, 0x37, 0x67, 0x1b, 0xc1, 0xe9, 0x45, 0xd3, 0x08, 0xba, 0x14, 0x0a,

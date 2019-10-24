@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type LocalRoutesLocRib struct {
 	StaticRoutes         *LocalRoutesLocRibStaticRoutesType    `protobuf:"bytes,151,opt,name=static_routes,json=staticRoutes" json:"static_routes,omitempty"`
@@ -30,16 +32,17 @@ func (m *LocalRoutesLocRib) Reset()         { *m = LocalRoutesLocRib{} }
 func (m *LocalRoutesLocRib) String() string { return proto.CompactTextString(m) }
 func (*LocalRoutesLocRib) ProtoMessage()    {}
 func (*LocalRoutesLocRib) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0}
+	return fileDescriptor_b9ea89688009886c, []int{0}
 }
+
 func (m *LocalRoutesLocRib) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRib.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRib) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRib.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRib) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRib.Merge(dst, src)
+func (m *LocalRoutesLocRib) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRib.Merge(m, src)
 }
 func (m *LocalRoutesLocRib) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRib.Size(m)
@@ -75,16 +78,17 @@ func (m *LocalRoutesLocRibStaticRoutesType) Reset()         { *m = LocalRoutesLo
 func (m *LocalRoutesLocRibStaticRoutesType) String() string { return proto.CompactTextString(m) }
 func (*LocalRoutesLocRibStaticRoutesType) ProtoMessage()    {}
 func (*LocalRoutesLocRibStaticRoutesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesType.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesType.Size(m)
@@ -119,16 +123,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticList) String() string {
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticList) ProtoMessage() {}
 func (*LocalRoutesLocRibStaticRoutesTypeStaticList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticList.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticList.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticList.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticList.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticList) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticList.Size(m)
@@ -176,16 +181,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticListStateType) String() string {
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListStateType) ProtoMessage() {}
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0, 0}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListStateType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListStateType.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListStateType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListStateType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListStateType.Size(m)
@@ -225,16 +231,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) String() strin
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) ProtoMessage() {}
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0, 1}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0, 1}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsType.Size(m)
@@ -269,16 +276,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) Str
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) ProtoMessage() {}
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0, 1, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0, 1, 0}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopList.Size(m)
@@ -329,16 +337,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListState
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) ProtoMessage() {}
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0, 1, 0, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0, 1, 0, 0}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListStateType.Size(m)
@@ -400,16 +409,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInter
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) ProtoMessage() {
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0, 1, 0, 1}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0, 1, 0, 1}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefType.Size(m)
@@ -444,16 +454,17 @@ func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInter
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) ProtoMessage() {
 }
 func (*LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 0, 0, 1, 0, 1, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 0, 0, 1, 0, 1, 0}
 }
+
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType.Merge(dst, src)
+func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibStaticRoutesTypeStaticListNextHopsTypeNextHopListInterfaceRefTypeStateType.Size(m)
@@ -489,16 +500,17 @@ func (m *LocalRoutesLocRibLocalAggregatesType) Reset()         { *m = LocalRoute
 func (m *LocalRoutesLocRibLocalAggregatesType) String() string { return proto.CompactTextString(m) }
 func (*LocalRoutesLocRibLocalAggregatesType) ProtoMessage()    {}
 func (*LocalRoutesLocRibLocalAggregatesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 1}
+	return fileDescriptor_b9ea89688009886c, []int{0, 1}
 }
+
 func (m *LocalRoutesLocRibLocalAggregatesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibLocalAggregatesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibLocalAggregatesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibLocalAggregatesType.Merge(dst, src)
+func (m *LocalRoutesLocRibLocalAggregatesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibLocalAggregatesType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibLocalAggregatesType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesType.Size(m)
@@ -532,16 +544,17 @@ func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateList) String() string {
 }
 func (*LocalRoutesLocRibLocalAggregatesTypeAggregateList) ProtoMessage() {}
 func (*LocalRoutesLocRibLocalAggregatesTypeAggregateList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 1, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 1, 0}
 }
+
 func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateList.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateList.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibLocalAggregatesTypeAggregateList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateList.Merge(dst, src)
+func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateList.Merge(m, src)
 }
 func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateList) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateList.Size(m)
@@ -583,16 +596,17 @@ func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) String() st
 }
 func (*LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) ProtoMessage() {}
 func (*LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e, []int{0, 1, 0, 0}
+	return fileDescriptor_b9ea89688009886c, []int{0, 1, 0, 0}
 }
+
 func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType.Unmarshal(m, b)
 }
 func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType.Marshal(b, m, deterministic)
 }
-func (dst *LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType.Merge(dst, src)
+func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType.Merge(m, src)
 }
 func (m *LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType) XXX_Size() int {
 	return xxx_messageInfo_LocalRoutesLocRibLocalAggregatesTypeAggregateListStateType.Size(m)
@@ -629,7 +643,7 @@ var E_JnprLocalRoutesLocRibExt = &proto.ExtensionDesc{
 	ExtensionType: (*LocalRoutesLocRib)(nil),
 	Field:         66,
 	Name:          "jnpr_local_routes_loc_rib_ext",
-	Tag:           "bytes,66,opt,name=jnpr_local_routes_loc_rib_ext,json=jnprLocalRoutesLocRibExt",
+	Tag:           "bytes,66,opt,name=jnpr_local_routes_loc_rib_ext",
 	Filename:      "rpd_loc_rib_oc.proto",
 }
 
@@ -649,11 +663,9 @@ func init() {
 	proto.RegisterExtension(E_JnprLocalRoutesLocRibExt)
 }
 
-func init() {
-	proto.RegisterFile("rpd_loc_rib_oc.proto", fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e)
-}
+func init() { proto.RegisterFile("rpd_loc_rib_oc.proto", fileDescriptor_b9ea89688009886c) }
 
-var fileDescriptor_rpd_loc_rib_oc_70b75a27abb5cb8e = []byte{
+var fileDescriptor_b9ea89688009886c = []byte{
 	// 592 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x55, 0xdd, 0x8a, 0xd3, 0x40,
 	0x14, 0x26, 0x4a, 0xff, 0x4e, 0xb7, 0xab, 0x8c, 0x5d, 0x37, 0x06, 0x85, 0xb2, 0x57, 0x01, 0xa1,

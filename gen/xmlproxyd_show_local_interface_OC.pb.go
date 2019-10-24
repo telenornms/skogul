@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InterfacesLocalInterface struct {
 	Interface            []*InterfacesLocalInterfaceInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
@@ -29,16 +31,17 @@ func (m *InterfacesLocalInterface) Reset()         { *m = InterfacesLocalInterfa
 func (m *InterfacesLocalInterface) String() string { return proto.CompactTextString(m) }
 func (*InterfacesLocalInterface) ProtoMessage()    {}
 func (*InterfacesLocalInterface) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0}
 }
+
 func (m *InterfacesLocalInterface) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterface.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterface) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterface.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterface) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterface.Merge(dst, src)
+func (m *InterfacesLocalInterface) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterface.Merge(m, src)
 }
 func (m *InterfacesLocalInterface) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterface.Size(m)
@@ -69,16 +72,17 @@ func (m *InterfacesLocalInterfaceInterfaceList) Reset()         { *m = Interface
 func (m *InterfacesLocalInterfaceInterfaceList) String() string { return proto.CompactTextString(m) }
 func (*InterfacesLocalInterfaceInterfaceList) ProtoMessage()    {}
 func (*InterfacesLocalInterfaceInterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceList.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceList.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceList.Size(m)
@@ -125,16 +129,17 @@ func (m *InterfacesLocalInterfaceInterfaceListStateType) String() string {
 }
 func (*InterfacesLocalInterfaceInterfaceListStateType) ProtoMessage() {}
 func (*InterfacesLocalInterfaceInterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0, 0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0, 0}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateType.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateType.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateType.Size(m)
@@ -184,16 +189,17 @@ func (m *InterfacesLocalInterfaceInterfaceListStateTypeCountersType) String() st
 }
 func (*InterfacesLocalInterfaceInterfaceListStateTypeCountersType) ProtoMessage() {}
 func (*InterfacesLocalInterfaceInterfaceListStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0, 0, 0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0, 0, 0}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceListStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceListStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateTypeCountersType.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateTypeCountersType.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceListStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListStateTypeCountersType.Size(m)
@@ -345,16 +351,17 @@ func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesType) String() string
 }
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesType) ProtoMessage() {}
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0, 1}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0, 1}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesType.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesType.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesType.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesType.Size(m)
@@ -388,16 +395,17 @@ func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList)
 }
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) ProtoMessage() {}
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0, 1, 0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0, 1, 0}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceList.Size(m)
@@ -438,16 +446,17 @@ func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListS
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) ProtoMessage() {
 }
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0, 1, 0, 0}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateType.Size(m)
@@ -498,16 +507,17 @@ func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListS
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) ProtoMessage() {
 }
 func (*InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4, []int{0, 0, 1, 0, 0, 0}
+	return fileDescriptor_22f6044bdb5fdcbd, []int{0, 0, 1, 0, 0, 0}
 }
+
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType.Unmarshal(m, b)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType.Marshal(b, m, deterministic)
 }
-func (dst *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType.Merge(dst, src)
+func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType.Merge(m, src)
 }
 func (m *InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType) XXX_Size() int {
 	return xxx_messageInfo_InterfacesLocalInterfaceInterfaceListSubinterfacesTypeSubinterfaceListStateTypeCountersType.Size(m)
@@ -649,7 +659,7 @@ var E_JnprInterfacesLocalInterfaceExt = &proto.ExtensionDesc{
 	ExtensionType: (*InterfacesLocalInterface)(nil),
 	Field:         61,
 	Name:          "jnpr_interfaces_local_interface_ext",
-	Tag:           "bytes,61,opt,name=jnpr_interfaces_local_interface_ext,json=jnprInterfacesLocalInterfaceExt",
+	Tag:           "bytes,61,opt,name=jnpr_interfaces_local_interface_ext",
 	Filename:      "xmlproxyd_show_local_interface_OC.proto",
 }
 
@@ -666,10 +676,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("xmlproxyd_show_local_interface_OC.proto", fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4)
+	proto.RegisterFile("xmlproxyd_show_local_interface_OC.proto", fileDescriptor_22f6044bdb5fdcbd)
 }
 
-var fileDescriptor_xmlproxyd_show_local_interface_OC_45f5494b0256c0e4 = []byte{
+var fileDescriptor_22f6044bdb5fdcbd = []byte{
 	// 670 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x54, 0xcd, 0x4e, 0x14, 0x4d,
 	0x14, 0xcd, 0x7c, 0x1f, 0x23, 0x33, 0x77, 0x18, 0x81, 0x62, 0x41, 0xd3, 0x13, 0x03, 0x6a, 0xa2,

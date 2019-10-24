@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Present as first gNMI update in all packets
 type GnmiJuniperTelemetryHeader struct {
@@ -52,16 +54,17 @@ func (m *GnmiJuniperTelemetryHeader) Reset()         { *m = GnmiJuniperTelemetry
 func (m *GnmiJuniperTelemetryHeader) String() string { return proto.CompactTextString(m) }
 func (*GnmiJuniperTelemetryHeader) ProtoMessage()    {}
 func (*GnmiJuniperTelemetryHeader) Descriptor() ([]byte, []int) {
-	return fileDescriptor_GnmiJuniperTelemetryHeader_eb8a17f4f9e8b3e4, []int{0}
+	return fileDescriptor_5064a3bfb3ff8c20, []int{0}
 }
+
 func (m *GnmiJuniperTelemetryHeader) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GnmiJuniperTelemetryHeader.Unmarshal(m, b)
 }
 func (m *GnmiJuniperTelemetryHeader) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GnmiJuniperTelemetryHeader.Marshal(b, m, deterministic)
 }
-func (dst *GnmiJuniperTelemetryHeader) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GnmiJuniperTelemetryHeader.Merge(dst, src)
+func (m *GnmiJuniperTelemetryHeader) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GnmiJuniperTelemetryHeader.Merge(m, src)
 }
 func (m *GnmiJuniperTelemetryHeader) XXX_Size() int {
 	return xxx_messageInfo_GnmiJuniperTelemetryHeader.Size(m)
@@ -160,11 +163,9 @@ func init() {
 	proto.RegisterType((*GnmiJuniperTelemetryHeader)(nil), "GnmiJuniperTelemetryHeader")
 }
 
-func init() {
-	proto.RegisterFile("GnmiJuniperTelemetryHeader.proto", fileDescriptor_GnmiJuniperTelemetryHeader_eb8a17f4f9e8b3e4)
-}
+func init() { proto.RegisterFile("GnmiJuniperTelemetryHeader.proto", fileDescriptor_5064a3bfb3ff8c20) }
 
-var fileDescriptor_GnmiJuniperTelemetryHeader_eb8a17f4f9e8b3e4 = []byte{
+var fileDescriptor_5064a3bfb3ff8c20 = []byte{
 	// 326 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0xbd, 0x4f, 0xc2, 0x40,
 	0x18, 0xc6, 0x53, 0x41, 0xa4, 0x2f, 0x50, 0xc8, 0x19, 0x63, 0xfd, 0x48, 0xac, 0x3a, 0x50, 0x17,

@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Juniper Error Item information
@@ -64,16 +66,17 @@ func (m *Error) Reset()         { *m = Error{} }
 func (m *Error) String() string { return proto.CompactTextString(m) }
 func (*Error) ProtoMessage()    {}
 func (*Error) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cmerror_e4b6480381faf3ab, []int{0}
+	return fileDescriptor_747f0735808ade43, []int{0}
 }
+
 func (m *Error) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Error.Unmarshal(m, b)
 }
 func (m *Error) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Error.Marshal(b, m, deterministic)
 }
-func (dst *Error) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Error.Merge(dst, src)
+func (m *Error) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Error.Merge(m, src)
 }
 func (m *Error) XXX_Size() int {
 	return xxx_messageInfo_Error.Size(m)
@@ -227,16 +230,17 @@ func (m *GlobalErrorConfiguration) Reset()         { *m = GlobalErrorConfigurati
 func (m *GlobalErrorConfiguration) String() string { return proto.CompactTextString(m) }
 func (*GlobalErrorConfiguration) ProtoMessage()    {}
 func (*GlobalErrorConfiguration) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cmerror_e4b6480381faf3ab, []int{1}
+	return fileDescriptor_747f0735808ade43, []int{1}
 }
+
 func (m *GlobalErrorConfiguration) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GlobalErrorConfiguration.Unmarshal(m, b)
 }
 func (m *GlobalErrorConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GlobalErrorConfiguration.Marshal(b, m, deterministic)
 }
-func (dst *GlobalErrorConfiguration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GlobalErrorConfiguration.Merge(dst, src)
+func (m *GlobalErrorConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GlobalErrorConfiguration.Merge(m, src)
 }
 func (m *GlobalErrorConfiguration) XXX_Size() int {
 	return xxx_messageInfo_GlobalErrorConfiguration.Size(m)
@@ -306,16 +310,17 @@ func (m *Cmerror) Reset()         { *m = Cmerror{} }
 func (m *Cmerror) String() string { return proto.CompactTextString(m) }
 func (*Cmerror) ProtoMessage()    {}
 func (*Cmerror) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cmerror_e4b6480381faf3ab, []int{2}
+	return fileDescriptor_747f0735808ade43, []int{2}
 }
+
 func (m *Cmerror) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Cmerror.Unmarshal(m, b)
 }
 func (m *Cmerror) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Cmerror.Marshal(b, m, deterministic)
 }
-func (dst *Cmerror) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Cmerror.Merge(dst, src)
+func (m *Cmerror) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Cmerror.Merge(m, src)
 }
 func (m *Cmerror) XXX_Size() int {
 	return xxx_messageInfo_Cmerror.Size(m)
@@ -373,7 +378,7 @@ var E_JnprCmerrorExt = &proto.ExtensionDesc{
 	ExtensionType: (*Cmerror)(nil),
 	Field:         20,
 	Name:          "jnpr_cmerror_ext",
-	Tag:           "bytes,20,opt,name=jnpr_cmerror_ext,json=jnprCmerrorExt",
+	Tag:           "bytes,20,opt,name=jnpr_cmerror_ext",
 	Filename:      "cmerror.proto",
 }
 
@@ -384,9 +389,9 @@ func init() {
 	proto.RegisterExtension(E_JnprCmerrorExt)
 }
 
-func init() { proto.RegisterFile("cmerror.proto", fileDescriptor_cmerror_e4b6480381faf3ab) }
+func init() { proto.RegisterFile("cmerror.proto", fileDescriptor_747f0735808ade43) }
 
-var fileDescriptor_cmerror_e4b6480381faf3ab = []byte{
+var fileDescriptor_747f0735808ade43 = []byte{
 	// 593 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x94, 0x4d, 0x6f, 0xd3, 0x4c,
 	0x10, 0xc7, 0xe5, 0x34, 0x4e, 0x93, 0x49, 0x5f, 0x92, 0x6d, 0x9e, 0x27, 0x9b, 0x8a, 0x43, 0xa8,

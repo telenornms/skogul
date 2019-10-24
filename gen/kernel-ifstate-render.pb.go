@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosKernelIfstate struct {
 	KernelIfstate        *JunosKernelIfstateKernelIfstateType `protobuf:"bytes,181,opt,name=kernel_ifstate,json=kernelIfstate" json:"kernel_ifstate,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosKernelIfstate) Reset()         { *m = JunosKernelIfstate{} }
 func (m *JunosKernelIfstate) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelIfstate) ProtoMessage()    {}
 func (*JunosKernelIfstate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kernel_ifstate_render_4e912054c60044ab, []int{0}
+	return fileDescriptor_7e8a66594c8c18c4, []int{0}
 }
+
 func (m *JunosKernelIfstate) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelIfstate.Unmarshal(m, b)
 }
 func (m *JunosKernelIfstate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelIfstate.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelIfstate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelIfstate.Merge(dst, src)
+func (m *JunosKernelIfstate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelIfstate.Merge(m, src)
 }
 func (m *JunosKernelIfstate) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelIfstate.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosKernelIfstateKernelIfstateType) Reset()         { *m = JunosKernel
 func (m *JunosKernelIfstateKernelIfstateType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelIfstateKernelIfstateType) ProtoMessage()    {}
 func (*JunosKernelIfstateKernelIfstateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kernel_ifstate_render_4e912054c60044ab, []int{0, 0}
+	return fileDescriptor_7e8a66594c8c18c4, []int{0, 0}
 }
+
 func (m *JunosKernelIfstateKernelIfstateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateType.Unmarshal(m, b)
 }
 func (m *JunosKernelIfstateKernelIfstateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelIfstateKernelIfstateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelIfstateKernelIfstateType.Merge(dst, src)
+func (m *JunosKernelIfstateKernelIfstateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelIfstateKernelIfstateType.Merge(m, src)
 }
 func (m *JunosKernelIfstateKernelIfstateType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateType.Size(m)
@@ -113,16 +117,17 @@ func (m *JunosKernelIfstateKernelIfstateTypeStatsList) String() string {
 }
 func (*JunosKernelIfstateKernelIfstateTypeStatsList) ProtoMessage() {}
 func (*JunosKernelIfstateKernelIfstateTypeStatsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kernel_ifstate_render_4e912054c60044ab, []int{0, 0, 0}
+	return fileDescriptor_7e8a66594c8c18c4, []int{0, 0, 0}
 }
+
 func (m *JunosKernelIfstateKernelIfstateTypeStatsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsList.Unmarshal(m, b)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelIfstateKernelIfstateTypeStatsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsList.Merge(dst, src)
+func (m *JunosKernelIfstateKernelIfstateTypeStatsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsList.Merge(m, src)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsList) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsList.Size(m)
@@ -189,16 +194,17 @@ func (m *JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) String() str
 }
 func (*JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) ProtoMessage() {}
 func (*JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kernel_ifstate_render_4e912054c60044ab, []int{0, 0, 0, 0}
+	return fileDescriptor_7e8a66594c8c18c4, []int{0, 0, 0, 0}
 }
+
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType.Unmarshal(m, b)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType.Merge(dst, src)
+func (m *JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType.Merge(m, src)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListChurnRateType.Size(m)
@@ -280,16 +286,17 @@ func (m *JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) St
 }
 func (*JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) ProtoMessage() {}
 func (*JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kernel_ifstate_render_4e912054c60044ab, []int{0, 0, 0, 1}
+	return fileDescriptor_7e8a66594c8c18c4, []int{0, 0, 0, 1}
 }
+
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList.Unmarshal(m, b)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList.Merge(dst, src)
+func (m *JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList.Merge(m, src)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListPeerConsumptionRateList.Size(m)
@@ -379,16 +386,17 @@ func (m *JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) String
 }
 func (*JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) ProtoMessage() {}
 func (*JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_kernel_ifstate_render_4e912054c60044ab, []int{0, 0, 0, 2}
+	return fileDescriptor_7e8a66594c8c18c4, []int{0, 0, 0, 2}
 }
+
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType.Merge(dst, src)
+func (m *JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType.Merge(m, src)
 }
 func (m *JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelIfstateKernelIfstateTypeStatsListVetosStatisticsType.Size(m)
@@ -467,7 +475,7 @@ var E_JnprJunosKernelIfstateExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosKernelIfstate)(nil),
 	Field:         72,
 	Name:          "jnpr_junos_kernel_ifstate_ext",
-	Tag:           "bytes,72,opt,name=jnpr_junos_kernel_ifstate_ext,json=jnprJunosKernelIfstateExt",
+	Tag:           "bytes,72,opt,name=jnpr_junos_kernel_ifstate_ext",
 	Filename:      "kernel-ifstate-render.proto",
 }
 
@@ -481,11 +489,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosKernelIfstateExt)
 }
 
-func init() {
-	proto.RegisterFile("kernel-ifstate-render.proto", fileDescriptor_kernel_ifstate_render_4e912054c60044ab)
-}
+func init() { proto.RegisterFile("kernel-ifstate-render.proto", fileDescriptor_7e8a66594c8c18c4) }
 
-var fileDescriptor_kernel_ifstate_render_4e912054c60044ab = []byte{
+var fileDescriptor_7e8a66594c8c18c4 = []byte{
 	// 860 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0x5d, 0x6f, 0x1b, 0x45,
 	0x14, 0x95, 0x4b, 0x2b, 0xd1, 0x1b, 0x9a, 0x8f, 0x4d, 0xd3, 0x6e, 0x96, 0x54, 0x44, 0xa8, 0x42,

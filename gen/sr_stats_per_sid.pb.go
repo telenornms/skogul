@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -33,16 +35,17 @@ func (m *SrStatsPerSid) Reset()         { *m = SrStatsPerSid{} }
 func (m *SrStatsPerSid) String() string { return proto.CompactTextString(m) }
 func (*SrStatsPerSid) ProtoMessage()    {}
 func (*SrStatsPerSid) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_stats_per_sid_066afcfb6e873be1, []int{0}
+	return fileDescriptor_1859f114623bccc6, []int{0}
 }
+
 func (m *SrStatsPerSid) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SrStatsPerSid.Unmarshal(m, b)
 }
 func (m *SrStatsPerSid) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SrStatsPerSid.Marshal(b, m, deterministic)
 }
-func (dst *SrStatsPerSid) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SrStatsPerSid.Merge(dst, src)
+func (m *SrStatsPerSid) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SrStatsPerSid.Merge(m, src)
 }
 func (m *SrStatsPerSid) XXX_Size() int {
 	return xxx_messageInfo_SrStatsPerSid.Size(m)
@@ -85,16 +88,17 @@ func (m *SegmentRoutingRecord) Reset()         { *m = SegmentRoutingRecord{} }
 func (m *SegmentRoutingRecord) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingRecord) ProtoMessage()    {}
 func (*SegmentRoutingRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_stats_per_sid_066afcfb6e873be1, []int{1}
+	return fileDescriptor_1859f114623bccc6, []int{1}
 }
+
 func (m *SegmentRoutingRecord) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingRecord.Unmarshal(m, b)
 }
 func (m *SegmentRoutingRecord) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingRecord.Marshal(b, m, deterministic)
 }
-func (dst *SegmentRoutingRecord) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingRecord.Merge(dst, src)
+func (m *SegmentRoutingRecord) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingRecord.Merge(m, src)
 }
 func (m *SegmentRoutingRecord) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingRecord.Size(m)
@@ -156,16 +160,17 @@ func (m *SegmentRoutingStats) Reset()         { *m = SegmentRoutingStats{} }
 func (m *SegmentRoutingStats) String() string { return proto.CompactTextString(m) }
 func (*SegmentRoutingStats) ProtoMessage()    {}
 func (*SegmentRoutingStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sr_stats_per_sid_066afcfb6e873be1, []int{2}
+	return fileDescriptor_1859f114623bccc6, []int{2}
 }
+
 func (m *SegmentRoutingStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SegmentRoutingStats.Unmarshal(m, b)
 }
 func (m *SegmentRoutingStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SegmentRoutingStats.Marshal(b, m, deterministic)
 }
-func (dst *SegmentRoutingStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SegmentRoutingStats.Merge(dst, src)
+func (m *SegmentRoutingStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SegmentRoutingStats.Merge(m, src)
 }
 func (m *SegmentRoutingStats) XXX_Size() int {
 	return xxx_messageInfo_SegmentRoutingStats.Size(m)
@@ -209,7 +214,7 @@ var E_JnprSrStatsPerSidExt = &proto.ExtensionDesc{
 	ExtensionType: (*SrStatsPerSid)(nil),
 	Field:         16,
 	Name:          "jnpr_sr_stats_per_sid_ext",
-	Tag:           "bytes,16,opt,name=jnpr_sr_stats_per_sid_ext,json=jnprSrStatsPerSidExt",
+	Tag:           "bytes,16,opt,name=jnpr_sr_stats_per_sid_ext",
 	Filename:      "sr_stats_per_sid.proto",
 }
 
@@ -220,11 +225,9 @@ func init() {
 	proto.RegisterExtension(E_JnprSrStatsPerSidExt)
 }
 
-func init() {
-	proto.RegisterFile("sr_stats_per_sid.proto", fileDescriptor_sr_stats_per_sid_066afcfb6e873be1)
-}
+func init() { proto.RegisterFile("sr_stats_per_sid.proto", fileDescriptor_1859f114623bccc6) }
 
-var fileDescriptor_sr_stats_per_sid_066afcfb6e873be1 = []byte{
+var fileDescriptor_1859f114623bccc6 = []byte{
 	// 378 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x92, 0x3f, 0xcf, 0xd3, 0x30,
 	0x10, 0x87, 0xe5, 0xbc, 0xad, 0x68, 0x2f, 0xcd, 0x2b, 0xe4, 0x16, 0x08, 0x30, 0x10, 0x65, 0x40,

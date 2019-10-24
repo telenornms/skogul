@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type MplsPfeMplsSrSidEgress struct {
 	SignalingProtocols   *MplsPfeMplsSrSidEgressSignalingProtocolsType `protobuf:"bytes,151,opt,name=signaling_protocols,json=signalingProtocols" json:"signaling_protocols,omitempty"`
@@ -29,16 +31,17 @@ func (m *MplsPfeMplsSrSidEgress) Reset()         { *m = MplsPfeMplsSrSidEgress{}
 func (m *MplsPfeMplsSrSidEgress) String() string { return proto.CompactTextString(m) }
 func (*MplsPfeMplsSrSidEgress) ProtoMessage()    {}
 func (*MplsPfeMplsSrSidEgress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c, []int{0}
+	return fileDescriptor_190dc8a6fb9244d6, []int{0}
 }
+
 func (m *MplsPfeMplsSrSidEgress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgress.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrSidEgress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgress.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrSidEgress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrSidEgress.Merge(dst, src)
+func (m *MplsPfeMplsSrSidEgress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrSidEgress.Merge(m, src)
 }
 func (m *MplsPfeMplsSrSidEgress) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgress.Size(m)
@@ -71,16 +74,17 @@ func (m *MplsPfeMplsSrSidEgressSignalingProtocolsType) String() string {
 }
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsType) ProtoMessage() {}
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c, []int{0, 0}
+	return fileDescriptor_190dc8a6fb9244d6, []int{0, 0}
 }
+
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrSidEgressSignalingProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsType.Merge(dst, src)
+func (m *MplsPfeMplsSrSidEgressSignalingProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsType.Size(m)
@@ -113,16 +117,17 @@ func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) String(
 }
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) ProtoMessage() {}
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c, []int{0, 0, 0}
+	return fileDescriptor_190dc8a6fb9244d6, []int{0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType.Merge(dst, src)
+func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingType.Size(m)
@@ -156,16 +161,17 @@ func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregate
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) ProtoMessage() {
 }
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c, []int{0, 0, 0, 0}
+	return fileDescriptor_190dc8a6fb9244d6, []int{0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType.Merge(dst, src)
+func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersType.Size(m)
@@ -199,16 +205,17 @@ func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregate
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) ProtoMessage() {
 }
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_190dc8a6fb9244d6, []int{0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList.Merge(dst, src)
+func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList.Merge(m, src)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterList.Size(m)
@@ -241,16 +248,17 @@ func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregate
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) ProtoMessage() {
 }
 func (*MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_190dc8a6fb9244d6, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType.Unmarshal(m, b)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType.Marshal(b, m, deterministic)
 }
-func (dst *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType.Merge(dst, src)
+func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType.Merge(m, src)
 }
 func (m *MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType) XXX_Size() int {
 	return xxx_messageInfo_MplsPfeMplsSrSidEgressSignalingProtocolsTypeSegmentRoutingTypeAggregateSidCountersTypeAggregateSidCounterListStateType.Size(m)
@@ -266,7 +274,7 @@ var E_JnprMplsPfeMplsSrSidEgressExt = &proto.ExtensionDesc{
 	ExtensionType: (*MplsPfeMplsSrSidEgress)(nil),
 	Field:         80,
 	Name:          "jnpr_mpls_pfe_mpls_sr_sid_egress_ext",
-	Tag:           "bytes,80,opt,name=jnpr_mpls_pfe_mpls_sr_sid_egress_ext,json=jnprMplsPfeMplsSrSidEgressExt",
+	Tag:           "bytes,80,opt,name=jnpr_mpls_pfe_mpls_sr_sid_egress_ext",
 	Filename:      "pfe_mpls_sr_sid_egress_oc.proto",
 }
 
@@ -280,11 +288,9 @@ func init() {
 	proto.RegisterExtension(E_JnprMplsPfeMplsSrSidEgressExt)
 }
 
-func init() {
-	proto.RegisterFile("pfe_mpls_sr_sid_egress_oc.proto", fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c)
-}
+func init() { proto.RegisterFile("pfe_mpls_sr_sid_egress_oc.proto", fileDescriptor_190dc8a6fb9244d6) }
 
-var fileDescriptor_pfe_mpls_sr_sid_egress_oc_28309ff1fb05955c = []byte{
+var fileDescriptor_190dc8a6fb9244d6 = []byte{
 	// 360 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x91, 0xb1, 0x4a, 0x33, 0x41,
 	0x10, 0xc7, 0x59, 0xf2, 0x85, 0x0f, 0x36, 0xa2, 0x70, 0x89, 0x1a, 0x2e, 0x8a, 0x22, 0x16, 0xa9,

@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosAuthentication struct {
 	System               *JunosAuthenticationSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosAuthentication) Reset()         { *m = JunosAuthentication{} }
 func (m *JunosAuthentication) String() string { return proto.CompactTextString(m) }
 func (*JunosAuthentication) ProtoMessage()    {}
 func (*JunosAuthentication) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0}
 }
+
 func (m *JunosAuthentication) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthentication.Unmarshal(m, b)
 }
 func (m *JunosAuthentication) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthentication.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthentication) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthentication.Merge(dst, src)
+func (m *JunosAuthentication) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthentication.Merge(m, src)
 }
 func (m *JunosAuthentication) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthentication.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosAuthenticationSystemType) Reset()         { *m = JunosAuthenticati
 func (m *JunosAuthenticationSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosAuthenticationSystemType) ProtoMessage()    {}
 func (*JunosAuthenticationSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0}
 }
+
 func (m *JunosAuthenticationSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemType.Merge(dst, src)
+func (m *JunosAuthenticationSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementType) String() string 
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosAuthenticationSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementType.Size(m)
@@ -156,16 +161,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) String() 
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) ProtoMessage() {}
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaType.Size(m)
@@ -249,16 +255,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticat
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAuthenticationStatisticsType.Size(m)
@@ -407,16 +414,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingS
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 1}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAccountingStatisticsType.Size(m)
@@ -523,16 +531,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequ
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 2}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 2}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDynamicRequestStatisticsType.Size(m)
@@ -586,16 +595,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServe
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) ProtoMessage() {}
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 3}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 3}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersType.Size(m)
@@ -631,16 +641,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServe
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 3, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 3, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerList.Size(m)
@@ -726,16 +737,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServe
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 3, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 3, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListStatisticsType.Size(m)
@@ -1040,16 +1052,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServe
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 3, 0, 1}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 3, 0, 1}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeRadiusServersTypeRadiusServerListResponseTimeType.Size(m)
@@ -1118,16 +1131,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssi
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 4}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 4}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsType.Size(m)
@@ -1161,16 +1175,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssi
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 4, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 4, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesType.Size(m)
@@ -1205,16 +1220,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssi
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 4, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 4, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceList.Size(m)
@@ -1255,16 +1271,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssi
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 4, 0, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 4, 0, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsType.Size(m)
@@ -1305,16 +1322,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssi
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 4, 0, 0, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 4, 0, 0, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeAddressAssignmentStatisticsTypeLogicalSystemRoutingInstancesTypeLogicalSystemRoutingInstanceListPoolsTypePoolList.Size(m)
@@ -1396,16 +1414,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTyp
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) ProtoMessage() {}
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 5}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 5}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterType.Size(m)
@@ -1441,16 +1460,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTyp
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 5, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 5, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsType.Size(m)
@@ -1520,16 +1540,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTyp
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 5, 0, 0}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 5, 0, 0}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeNasreqType.Size(m)
@@ -1749,16 +1770,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTyp
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 5, 0, 1}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 5, 0, 1}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGxType.Size(m)
@@ -2041,16 +2063,17 @@ func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTyp
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) ProtoMessage() {
 }
 func (*JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_authd_oc_bc1391ceee91fd37, []int{0, 0, 0, 0, 5, 0, 2}
+	return fileDescriptor_42f2508cdbfcd884, []int{0, 0, 0, 0, 5, 0, 2}
 }
+
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType.Unmarshal(m, b)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType.Marshal(b, m, deterministic)
 }
-func (dst *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType.Merge(dst, src)
+func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType.Merge(m, src)
 }
 func (m *JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType) XXX_Size() int {
 	return xxx_messageInfo_JunosAuthenticationSystemTypeSubscriberManagementTypeAaaTypeDiameterTypeClientsTypeGyType.Size(m)
@@ -2248,7 +2271,7 @@ var E_JnprJunosAuthenticationExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosAuthentication)(nil),
 	Field:         33,
 	Name:          "jnpr_junos_authentication_ext",
-	Tag:           "bytes,33,opt,name=jnpr_junos_authentication_ext,json=jnprJunosAuthenticationExt",
+	Tag:           "bytes,33,opt,name=jnpr_junos_authentication_ext",
 	Filename:      "authd_oc.proto",
 }
 
@@ -2277,9 +2300,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosAuthenticationExt)
 }
 
-func init() { proto.RegisterFile("authd_oc.proto", fileDescriptor_authd_oc_bc1391ceee91fd37) }
+func init() { proto.RegisterFile("authd_oc.proto", fileDescriptor_42f2508cdbfcd884) }
 
-var fileDescriptor_authd_oc_bc1391ceee91fd37 = []byte{
+var fileDescriptor_42f2508cdbfcd884 = []byte{
 	// 3242 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x5a, 0x4b, 0x8c, 0x54, 0xc7,
 	0xd5, 0x56, 0x03, 0xe6, 0x71, 0xe6, 0x01, 0x73, 0x87, 0x81, 0xa6, 0x81, 0x9f, 0xd7, 0xf0, 0xf8,

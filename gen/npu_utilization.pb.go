@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Top level message
 type NetworkProcessorUtilization struct {
@@ -30,16 +32,17 @@ func (m *NetworkProcessorUtilization) Reset()         { *m = NetworkProcessorUti
 func (m *NetworkProcessorUtilization) String() string { return proto.CompactTextString(m) }
 func (*NetworkProcessorUtilization) ProtoMessage()    {}
 func (*NetworkProcessorUtilization) Descriptor() ([]byte, []int) {
-	return fileDescriptor_npu_utilization_7e3c2919b406a9d9, []int{0}
+	return fileDescriptor_28cd2a2be506ec89, []int{0}
 }
+
 func (m *NetworkProcessorUtilization) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkProcessorUtilization.Unmarshal(m, b)
 }
 func (m *NetworkProcessorUtilization) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NetworkProcessorUtilization.Marshal(b, m, deterministic)
 }
-func (dst *NetworkProcessorUtilization) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkProcessorUtilization.Merge(dst, src)
+func (m *NetworkProcessorUtilization) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkProcessorUtilization.Merge(m, src)
 }
 func (m *NetworkProcessorUtilization) XXX_Size() int {
 	return xxx_messageInfo_NetworkProcessorUtilization.Size(m)
@@ -80,16 +83,17 @@ func (m *Utilization) Reset()         { *m = Utilization{} }
 func (m *Utilization) String() string { return proto.CompactTextString(m) }
 func (*Utilization) ProtoMessage()    {}
 func (*Utilization) Descriptor() ([]byte, []int) {
-	return fileDescriptor_npu_utilization_7e3c2919b406a9d9, []int{1}
+	return fileDescriptor_28cd2a2be506ec89, []int{1}
 }
+
 func (m *Utilization) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Utilization.Unmarshal(m, b)
 }
 func (m *Utilization) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Utilization.Marshal(b, m, deterministic)
 }
-func (dst *Utilization) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Utilization.Merge(dst, src)
+func (m *Utilization) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Utilization.Merge(m, src)
 }
 func (m *Utilization) XXX_Size() int {
 	return xxx_messageInfo_Utilization.Size(m)
@@ -150,16 +154,17 @@ func (m *MemoryLoad) Reset()         { *m = MemoryLoad{} }
 func (m *MemoryLoad) String() string { return proto.CompactTextString(m) }
 func (*MemoryLoad) ProtoMessage()    {}
 func (*MemoryLoad) Descriptor() ([]byte, []int) {
-	return fileDescriptor_npu_utilization_7e3c2919b406a9d9, []int{2}
+	return fileDescriptor_28cd2a2be506ec89, []int{2}
 }
+
 func (m *MemoryLoad) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MemoryLoad.Unmarshal(m, b)
 }
 func (m *MemoryLoad) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MemoryLoad.Marshal(b, m, deterministic)
 }
-func (dst *MemoryLoad) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MemoryLoad.Merge(dst, src)
+func (m *MemoryLoad) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MemoryLoad.Merge(m, src)
 }
 func (m *MemoryLoad) XXX_Size() int {
 	return xxx_messageInfo_MemoryLoad.Size(m)
@@ -238,16 +243,17 @@ func (m *PacketLoad) Reset()         { *m = PacketLoad{} }
 func (m *PacketLoad) String() string { return proto.CompactTextString(m) }
 func (*PacketLoad) ProtoMessage()    {}
 func (*PacketLoad) Descriptor() ([]byte, []int) {
-	return fileDescriptor_npu_utilization_7e3c2919b406a9d9, []int{3}
+	return fileDescriptor_28cd2a2be506ec89, []int{3}
 }
+
 func (m *PacketLoad) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PacketLoad.Unmarshal(m, b)
 }
 func (m *PacketLoad) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PacketLoad.Marshal(b, m, deterministic)
 }
-func (dst *PacketLoad) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PacketLoad.Merge(dst, src)
+func (m *PacketLoad) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PacketLoad.Merge(m, src)
 }
 func (m *PacketLoad) XXX_Size() int {
 	return xxx_messageInfo_PacketLoad.Size(m)
@@ -298,7 +304,7 @@ var E_JnprNpuUtilizationExt = &proto.ExtensionDesc{
 	ExtensionType: (*NetworkProcessorUtilization)(nil),
 	Field:         12,
 	Name:          "jnpr_npu_utilization_ext",
-	Tag:           "bytes,12,opt,name=jnpr_npu_utilization_ext,json=jnprNpuUtilizationExt",
+	Tag:           "bytes,12,opt,name=jnpr_npu_utilization_ext",
 	Filename:      "npu_utilization.proto",
 }
 
@@ -310,11 +316,9 @@ func init() {
 	proto.RegisterExtension(E_JnprNpuUtilizationExt)
 }
 
-func init() {
-	proto.RegisterFile("npu_utilization.proto", fileDescriptor_npu_utilization_7e3c2919b406a9d9)
-}
+func init() { proto.RegisterFile("npu_utilization.proto", fileDescriptor_28cd2a2be506ec89) }
 
-var fileDescriptor_npu_utilization_7e3c2919b406a9d9 = []byte{
+var fileDescriptor_28cd2a2be506ec89 = []byte{
 	// 473 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x93, 0x51, 0x6f, 0xd3, 0x30,
 	0x10, 0xc7, 0x95, 0x36, 0x6c, 0xda, 0xa5, 0xf0, 0xe0, 0xa9, 0x10, 0xc6, 0xb4, 0x85, 0x22, 0xa4,

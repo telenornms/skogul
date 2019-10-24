@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -32,16 +34,17 @@ func (m *Optics) Reset()         { *m = Optics{} }
 func (m *Optics) String() string { return proto.CompactTextString(m) }
 func (*Optics) ProtoMessage()    {}
 func (*Optics) Descriptor() ([]byte, []int) {
-	return fileDescriptor_optics_e8030df0909d7966, []int{0}
+	return fileDescriptor_1b02cb96ddad460a, []int{0}
 }
+
 func (m *Optics) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Optics.Unmarshal(m, b)
 }
 func (m *Optics) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Optics.Marshal(b, m, deterministic)
 }
-func (dst *Optics) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Optics.Merge(dst, src)
+func (m *Optics) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Optics.Merge(m, src)
 }
 func (m *Optics) XXX_Size() int {
 	return xxx_messageInfo_Optics.Size(m)
@@ -78,16 +81,17 @@ func (m *OpticsInfos) Reset()         { *m = OpticsInfos{} }
 func (m *OpticsInfos) String() string { return proto.CompactTextString(m) }
 func (*OpticsInfos) ProtoMessage()    {}
 func (*OpticsInfos) Descriptor() ([]byte, []int) {
-	return fileDescriptor_optics_e8030df0909d7966, []int{1}
+	return fileDescriptor_1b02cb96ddad460a, []int{1}
 }
+
 func (m *OpticsInfos) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OpticsInfos.Unmarshal(m, b)
 }
 func (m *OpticsInfos) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OpticsInfos.Marshal(b, m, deterministic)
 }
-func (dst *OpticsInfos) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OpticsInfos.Merge(dst, src)
+func (m *OpticsInfos) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OpticsInfos.Merge(m, src)
 }
 func (m *OpticsInfos) XXX_Size() int {
 	return xxx_messageInfo_OpticsInfos.Size(m)
@@ -162,16 +166,17 @@ func (m *OpticsDiagStats) Reset()         { *m = OpticsDiagStats{} }
 func (m *OpticsDiagStats) String() string { return proto.CompactTextString(m) }
 func (*OpticsDiagStats) ProtoMessage()    {}
 func (*OpticsDiagStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_optics_e8030df0909d7966, []int{2}
+	return fileDescriptor_1b02cb96ddad460a, []int{2}
 }
+
 func (m *OpticsDiagStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OpticsDiagStats.Unmarshal(m, b)
 }
 func (m *OpticsDiagStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OpticsDiagStats.Marshal(b, m, deterministic)
 }
-func (dst *OpticsDiagStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OpticsDiagStats.Merge(dst, src)
+func (m *OpticsDiagStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OpticsDiagStats.Merge(m, src)
 }
 func (m *OpticsDiagStats) XXX_Size() int {
 	return xxx_messageInfo_OpticsDiagStats.Size(m)
@@ -356,17 +361,17 @@ type OpticsDiagLaneStats struct {
 	LaneLaserReceiverPowerDbm *float64 `protobuf:"fixed64,4,opt,name=lane_laser_receiver_power_dbm,json=laneLaserReceiverPowerDbm" json:"lane_laser_receiver_power_dbm,omitempty"`
 	// Laser receive power
 	LaneLaserBiasCurrent *float64 `protobuf:"fixed64,5,opt,name=lane_laser_bias_current,json=laneLaserBiasCurrent" json:"lane_laser_bias_current,omitempty"`
-	// lane laser output power alarm
+	//lane laser output power alarm
 	LaneLaserOutputPowerHighAlarm   *bool `protobuf:"varint,6,opt,name=lane_laser_output_power_high_alarm,json=laneLaserOutputPowerHighAlarm" json:"lane_laser_output_power_high_alarm,omitempty"`
 	LaneLaserOutputPowerLowAlarm    *bool `protobuf:"varint,7,opt,name=lane_laser_output_power_low_alarm,json=laneLaserOutputPowerLowAlarm" json:"lane_laser_output_power_low_alarm,omitempty"`
 	LaneLaserOutputPowerHighWarning *bool `protobuf:"varint,8,opt,name=lane_laser_output_power_high_warning,json=laneLaserOutputPowerHighWarning" json:"lane_laser_output_power_high_warning,omitempty"`
 	LaneLaserOutputPowerLowWarning  *bool `protobuf:"varint,9,opt,name=lane_laser_output_power_low_warning,json=laneLaserOutputPowerLowWarning" json:"lane_laser_output_power_low_warning,omitempty"`
-	// lane laser receiver power alarm
+	//lane laser receiver power alarm
 	LaneLaserReceiverPowerHighAlarm   *bool `protobuf:"varint,10,opt,name=lane_laser_receiver_power_high_alarm,json=laneLaserReceiverPowerHighAlarm" json:"lane_laser_receiver_power_high_alarm,omitempty"`
 	LaneLaserReceiverPowerLowAlarm    *bool `protobuf:"varint,11,opt,name=lane_laser_receiver_power_low_alarm,json=laneLaserReceiverPowerLowAlarm" json:"lane_laser_receiver_power_low_alarm,omitempty"`
 	LaneLaserReceiverPowerHighWarning *bool `protobuf:"varint,12,opt,name=lane_laser_receiver_power_high_warning,json=laneLaserReceiverPowerHighWarning" json:"lane_laser_receiver_power_high_warning,omitempty"`
 	LaneLaserReceiverPowerLowWarning  *bool `protobuf:"varint,13,opt,name=lane_laser_receiver_power_low_warning,json=laneLaserReceiverPowerLowWarning" json:"lane_laser_receiver_power_low_warning,omitempty"`
-	// lane laser output power alarm
+	//lane laser output power alarm
 	LaneLaserBiasCurrentHighAlarm   *bool    `protobuf:"varint,14,opt,name=lane_laser_bias_current_high_alarm,json=laneLaserBiasCurrentHighAlarm" json:"lane_laser_bias_current_high_alarm,omitempty"`
 	LaneLaserBiasCurrentLowAlarm    *bool    `protobuf:"varint,15,opt,name=lane_laser_bias_current_low_alarm,json=laneLaserBiasCurrentLowAlarm" json:"lane_laser_bias_current_low_alarm,omitempty"`
 	LaneLaserBiasCurrentHighWarning *bool    `protobuf:"varint,16,opt,name=lane_laser_bias_current_high_warning,json=laneLaserBiasCurrentHighWarning" json:"lane_laser_bias_current_high_warning,omitempty"`
@@ -383,16 +388,17 @@ func (m *OpticsDiagLaneStats) Reset()         { *m = OpticsDiagLaneStats{} }
 func (m *OpticsDiagLaneStats) String() string { return proto.CompactTextString(m) }
 func (*OpticsDiagLaneStats) ProtoMessage()    {}
 func (*OpticsDiagLaneStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_optics_e8030df0909d7966, []int{3}
+	return fileDescriptor_1b02cb96ddad460a, []int{3}
 }
+
 func (m *OpticsDiagLaneStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OpticsDiagLaneStats.Unmarshal(m, b)
 }
 func (m *OpticsDiagLaneStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OpticsDiagLaneStats.Marshal(b, m, deterministic)
 }
-func (dst *OpticsDiagLaneStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OpticsDiagLaneStats.Merge(dst, src)
+func (m *OpticsDiagLaneStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OpticsDiagLaneStats.Merge(m, src)
 }
 func (m *OpticsDiagLaneStats) XXX_Size() int {
 	return xxx_messageInfo_OpticsDiagLaneStats.Size(m)
@@ -548,7 +554,7 @@ var E_JnprOpticsExt = &proto.ExtensionDesc{
 	ExtensionType: (*Optics)(nil),
 	Field:         10,
 	Name:          "jnpr_optics_ext",
-	Tag:           "bytes,10,opt,name=jnpr_optics_ext,json=jnprOpticsExt",
+	Tag:           "bytes,10,opt,name=jnpr_optics_ext",
 	Filename:      "optics.proto",
 }
 
@@ -560,9 +566,9 @@ func init() {
 	proto.RegisterExtension(E_JnprOpticsExt)
 }
 
-func init() { proto.RegisterFile("optics.proto", fileDescriptor_optics_e8030df0909d7966) }
+func init() { proto.RegisterFile("optics.proto", fileDescriptor_1b02cb96ddad460a) }
 
-var fileDescriptor_optics_e8030df0909d7966 = []byte{
+var fileDescriptor_1b02cb96ddad460a = []byte{
 	// 1059 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x95, 0x6d, 0x6f, 0xdb, 0x36,
 	0x10, 0xc7, 0xe1, 0x74, 0xcd, 0xc3, 0x29, 0x0f, 0x2d, 0x9d, 0xc4, 0xda, 0xda, 0x24, 0x8e, 0xdb,

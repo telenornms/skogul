@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosKernelHealth struct {
 	Chassis              *JunosKernelHealthChassisType        `protobuf:"bytes,191,opt,name=chassis" json:"chassis,omitempty"`
@@ -33,16 +35,17 @@ func (m *JunosKernelHealth) Reset()         { *m = JunosKernelHealth{} }
 func (m *JunosKernelHealth) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealth) ProtoMessage()    {}
 func (*JunosKernelHealth) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0}
+	return fileDescriptor_0ef45f12b88bd767, []int{0}
 }
+
 func (m *JunosKernelHealth) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealth.Unmarshal(m, b)
 }
 func (m *JunosKernelHealth) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealth.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealth) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealth.Merge(dst, src)
+func (m *JunosKernelHealth) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealth.Merge(m, src)
 }
 func (m *JunosKernelHealth) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealth.Size(m)
@@ -101,16 +104,17 @@ func (m *JunosKernelHealthChassisType) Reset()         { *m = JunosKernelHealthC
 func (m *JunosKernelHealthChassisType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthChassisType) ProtoMessage()    {}
 func (*JunosKernelHealthChassisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 0}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 0}
 }
+
 func (m *JunosKernelHealthChassisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthChassisType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthChassisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthChassisType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthChassisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthChassisType.Merge(dst, src)
+func (m *JunosKernelHealthChassisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthChassisType.Merge(m, src)
 }
 func (m *JunosKernelHealthChassisType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthChassisType.Size(m)
@@ -161,16 +165,17 @@ func (m *JunosKernelHealthChassisTypeGresType) Reset()         { *m = JunosKerne
 func (m *JunosKernelHealthChassisTypeGresType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthChassisTypeGresType) ProtoMessage()    {}
 func (*JunosKernelHealthChassisTypeGresType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 0, 0}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 0, 0}
 }
+
 func (m *JunosKernelHealthChassisTypeGresType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeGresType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthChassisTypeGresType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeGresType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthChassisTypeGresType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthChassisTypeGresType.Merge(dst, src)
+func (m *JunosKernelHealthChassisTypeGresType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthChassisTypeGresType.Merge(m, src)
 }
 func (m *JunosKernelHealthChassisTypeGresType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeGresType.Size(m)
@@ -256,16 +261,17 @@ func (m *JunosKernelHealthChassisTypeIssuType) Reset()         { *m = JunosKerne
 func (m *JunosKernelHealthChassisTypeIssuType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthChassisTypeIssuType) ProtoMessage()    {}
 func (*JunosKernelHealthChassisTypeIssuType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 0, 1}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 0, 1}
 }
+
 func (m *JunosKernelHealthChassisTypeIssuType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeIssuType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthChassisTypeIssuType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeIssuType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthChassisTypeIssuType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthChassisTypeIssuType.Merge(dst, src)
+func (m *JunosKernelHealthChassisTypeIssuType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthChassisTypeIssuType.Merge(m, src)
 }
 func (m *JunosKernelHealthChassisTypeIssuType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeIssuType.Size(m)
@@ -309,16 +315,17 @@ func (m *JunosKernelHealthChassisTypeAggregatedDevicesType) String() string {
 }
 func (*JunosKernelHealthChassisTypeAggregatedDevicesType) ProtoMessage() {}
 func (*JunosKernelHealthChassisTypeAggregatedDevicesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 0, 2}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 0, 2}
 }
+
 func (m *JunosKernelHealthChassisTypeAggregatedDevicesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeAggregatedDevicesType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthChassisTypeAggregatedDevicesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeAggregatedDevicesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthChassisTypeAggregatedDevicesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthChassisTypeAggregatedDevicesType.Merge(dst, src)
+func (m *JunosKernelHealthChassisTypeAggregatedDevicesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthChassisTypeAggregatedDevicesType.Merge(m, src)
 }
 func (m *JunosKernelHealthChassisTypeAggregatedDevicesType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthChassisTypeAggregatedDevicesType.Size(m)
@@ -375,16 +382,17 @@ func (m *JunosKernelHealthRoutingOptionsType) Reset()         { *m = JunosKernel
 func (m *JunosKernelHealthRoutingOptionsType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthRoutingOptionsType) ProtoMessage()    {}
 func (*JunosKernelHealthRoutingOptionsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 1}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 1}
 }
+
 func (m *JunosKernelHealthRoutingOptionsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthRoutingOptionsType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthRoutingOptionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthRoutingOptionsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthRoutingOptionsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthRoutingOptionsType.Merge(dst, src)
+func (m *JunosKernelHealthRoutingOptionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthRoutingOptionsType.Merge(m, src)
 }
 func (m *JunosKernelHealthRoutingOptionsType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthRoutingOptionsType.Size(m)
@@ -419,16 +427,17 @@ func (m *JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) String() string 
 }
 func (*JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) ProtoMessage() {}
 func (*JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 1, 0}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 1, 0}
 }
+
 func (m *JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthRoutingOptionsTypeNonstopRoutingType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthRoutingOptionsTypeNonstopRoutingType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthRoutingOptionsTypeNonstopRoutingType.Merge(dst, src)
+func (m *JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthRoutingOptionsTypeNonstopRoutingType.Merge(m, src)
 }
 func (m *JunosKernelHealthRoutingOptionsTypeNonstopRoutingType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthRoutingOptionsTypeNonstopRoutingType.Size(m)
@@ -471,16 +480,17 @@ func (m *JunosKernelHealthSecurityType) Reset()         { *m = JunosKernelHealth
 func (m *JunosKernelHealthSecurityType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthSecurityType) ProtoMessage()    {}
 func (*JunosKernelHealthSecurityType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 2}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 2}
 }
+
 func (m *JunosKernelHealthSecurityType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthSecurityType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthSecurityType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthSecurityType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthSecurityType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthSecurityType.Merge(dst, src)
+func (m *JunosKernelHealthSecurityType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthSecurityType.Merge(m, src)
 }
 func (m *JunosKernelHealthSecurityType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthSecurityType.Size(m)
@@ -516,16 +526,17 @@ func (m *JunosKernelHealthKernelType) Reset()         { *m = JunosKernelHealthKe
 func (m *JunosKernelHealthKernelType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3}
 }
+
 func (m *JunosKernelHealthKernelType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelType.Merge(dst, src)
+func (m *JunosKernelHealthKernelType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelType.Size(m)
@@ -606,16 +617,17 @@ func (m *JunosKernelHealthKernelTypePeerInfraType) Reset() {
 func (m *JunosKernelHealthKernelTypePeerInfraType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypePeerInfraType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypePeerInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 0}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 0}
 }
+
 func (m *JunosKernelHealthKernelTypePeerInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypePeerInfraType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypePeerInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypePeerInfraType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypePeerInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypePeerInfraType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypePeerInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypePeerInfraType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypePeerInfraType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypePeerInfraType.Size(m)
@@ -654,16 +666,17 @@ func (m *JunosKernelHealthKernelTypeVplsType) Reset()         { *m = JunosKernel
 func (m *JunosKernelHealthKernelTypeVplsType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypeVplsType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypeVplsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 1}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 1}
 }
+
 func (m *JunosKernelHealthKernelTypeVplsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeVplsType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeVplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeVplsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeVplsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeVplsType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeVplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeVplsType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeVplsType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeVplsType.Size(m)
@@ -717,16 +730,17 @@ func (m *JunosKernelHealthKernelTypeTunnelType) Reset()         { *m = JunosKern
 func (m *JunosKernelHealthKernelTypeTunnelType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypeTunnelType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypeTunnelType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 2}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 2}
 }
+
 func (m *JunosKernelHealthKernelTypeTunnelType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTunnelType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTunnelType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTunnelType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTunnelType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTunnelType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTunnelType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTunnelType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTunnelType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTunnelType.Size(m)
@@ -786,16 +800,17 @@ func (m *JunosKernelHealthKernelTypeMulticastType) Reset() {
 func (m *JunosKernelHealthKernelTypeMulticastType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypeMulticastType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypeMulticastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 3}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 3}
 }
+
 func (m *JunosKernelHealthKernelTypeMulticastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeMulticastType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeMulticastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeMulticastType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeMulticastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeMulticastType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeMulticastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeMulticastType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeMulticastType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeMulticastType.Size(m)
@@ -832,16 +847,17 @@ func (m *JunosKernelHealthKernelTypeTnpType) Reset()         { *m = JunosKernelH
 func (m *JunosKernelHealthKernelTypeTnpType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypeTnpType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypeTnpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 4}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 4}
 }
+
 func (m *JunosKernelHealthKernelTypeTnpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTnpType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTnpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTnpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTnpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTnpType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTnpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTnpType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTnpType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTnpType.Size(m)
@@ -881,16 +897,17 @@ func (m *JunosKernelHealthKernelTypeRecordMetaDataType) String() string {
 }
 func (*JunosKernelHealthKernelTypeRecordMetaDataType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeRecordMetaDataType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 5}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 5}
 }
+
 func (m *JunosKernelHealthKernelTypeRecordMetaDataType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeRecordMetaDataType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeRecordMetaDataType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeRecordMetaDataType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeRecordMetaDataType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeRecordMetaDataType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeRecordMetaDataType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeRecordMetaDataType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeRecordMetaDataType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeRecordMetaDataType.Size(m)
@@ -920,16 +937,17 @@ func (m *JunosKernelHealthKernelTypeRtsockType) Reset()         { *m = JunosKern
 func (m *JunosKernelHealthKernelTypeRtsockType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypeRtsockType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypeRtsockType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 6}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 6}
 }
+
 func (m *JunosKernelHealthKernelTypeRtsockType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeRtsockType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeRtsockType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeRtsockType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeRtsockType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeRtsockType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeRtsockType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeRtsockType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeRtsockType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeRtsockType.Size(m)
@@ -970,16 +988,17 @@ func (m *JunosKernelHealthKernelTypeTcpipType) Reset()         { *m = JunosKerne
 func (m *JunosKernelHealthKernelTypeTcpipType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelTypeTcpipType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelTypeTcpipType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipType.Size(m)
@@ -1049,16 +1068,17 @@ func (m *JunosKernelHealthKernelTypeTcpipTypeTcpType) String() string {
 }
 func (*JunosKernelHealthKernelTypeTcpipTypeTcpType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeTcpipTypeTcpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7, 0}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7, 0}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipTypeTcpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeTcpType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeTcpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeTcpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipTypeTcpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeTcpType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipTypeTcpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeTcpType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeTcpType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeTcpType.Size(m)
@@ -1108,16 +1128,17 @@ func (m *JunosKernelHealthKernelTypeTcpipTypeNhidxType) String() string {
 }
 func (*JunosKernelHealthKernelTypeTcpipTypeNhidxType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeTcpipTypeNhidxType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7, 1}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7, 1}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipTypeNhidxType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNhidxType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeNhidxType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNhidxType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipTypeNhidxType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNhidxType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipTypeNhidxType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNhidxType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeNhidxType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNhidxType.Size(m)
@@ -1172,16 +1193,17 @@ func (m *JunosKernelHealthKernelTypeTcpipTypeRtbType) String() string {
 }
 func (*JunosKernelHealthKernelTypeTcpipTypeRtbType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeTcpipTypeRtbType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7, 2}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7, 2}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipTypeRtbType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeRtbType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeRtbType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeRtbType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipTypeRtbType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeRtbType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipTypeRtbType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeRtbType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeRtbType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeRtbType.Size(m)
@@ -1229,16 +1251,17 @@ func (m *JunosKernelHealthKernelTypeTcpipTypeArpType) String() string {
 }
 func (*JunosKernelHealthKernelTypeTcpipTypeArpType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeTcpipTypeArpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7, 3}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7, 3}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipTypeArpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeArpType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeArpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeArpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipTypeArpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeArpType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipTypeArpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeArpType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeArpType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeArpType.Size(m)
@@ -1335,16 +1358,17 @@ func (m *JunosKernelHealthKernelTypeTcpipTypeNdpType) String() string {
 }
 func (*JunosKernelHealthKernelTypeTcpipTypeNdpType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeTcpipTypeNdpType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7, 4}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7, 4}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipTypeNdpType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNdpType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeNdpType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNdpType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipTypeNdpType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNdpType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipTypeNdpType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNdpType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeNdpType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNdpType.Size(m)
@@ -1448,16 +1472,17 @@ func (m *JunosKernelHealthKernelTypeTcpipTypeNetisrType) String() string {
 }
 func (*JunosKernelHealthKernelTypeTcpipTypeNetisrType) ProtoMessage() {}
 func (*JunosKernelHealthKernelTypeTcpipTypeNetisrType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 3, 7, 5}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 3, 7, 5}
 }
+
 func (m *JunosKernelHealthKernelTypeTcpipTypeNetisrType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNetisrType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeNetisrType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNetisrType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelTypeTcpipTypeNetisrType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNetisrType.Merge(dst, src)
+func (m *JunosKernelHealthKernelTypeTcpipTypeNetisrType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNetisrType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelTypeTcpipTypeNetisrType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelTypeTcpipTypeNetisrType.Size(m)
@@ -1598,16 +1623,17 @@ func (m *JunosKernelHealthKernelIfstateType) Reset()         { *m = JunosKernelH
 func (m *JunosKernelHealthKernelIfstateType) String() string { return proto.CompactTextString(m) }
 func (*JunosKernelHealthKernelIfstateType) ProtoMessage()    {}
 func (*JunosKernelHealthKernelIfstateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_jkhmd_oc_1c36afb31ab435dd, []int{0, 4}
+	return fileDescriptor_0ef45f12b88bd767, []int{0, 4}
 }
+
 func (m *JunosKernelHealthKernelIfstateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosKernelHealthKernelIfstateType.Unmarshal(m, b)
 }
 func (m *JunosKernelHealthKernelIfstateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosKernelHealthKernelIfstateType.Marshal(b, m, deterministic)
 }
-func (dst *JunosKernelHealthKernelIfstateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosKernelHealthKernelIfstateType.Merge(dst, src)
+func (m *JunosKernelHealthKernelIfstateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosKernelHealthKernelIfstateType.Merge(m, src)
 }
 func (m *JunosKernelHealthKernelIfstateType) XXX_Size() int {
 	return xxx_messageInfo_JunosKernelHealthKernelIfstateType.Size(m)
@@ -1679,7 +1705,7 @@ var E_JnprJunosKernelHealthExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosKernelHealth)(nil),
 	Field:         85,
 	Name:          "jnpr_junos_kernel_health_ext",
-	Tag:           "bytes,85,opt,name=jnpr_junos_kernel_health_ext,json=jnprJunosKernelHealthExt",
+	Tag:           "bytes,85,opt,name=jnpr_junos_kernel_health_ext",
 	Filename:      "jkhmd_oc.proto",
 }
 
@@ -1711,9 +1737,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosKernelHealthExt)
 }
 
-func init() { proto.RegisterFile("jkhmd_oc.proto", fileDescriptor_jkhmd_oc_1c36afb31ab435dd) }
+func init() { proto.RegisterFile("jkhmd_oc.proto", fileDescriptor_0ef45f12b88bd767) }
 
-var fileDescriptor_jkhmd_oc_1c36afb31ab435dd = []byte{
+var fileDescriptor_0ef45f12b88bd767 = []byte{
 	// 2254 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x98, 0x5b, 0x93, 0x1b, 0x47,
 	0x15, 0xc7, 0x4b, 0xde, 0x8d, 0xbd, 0x7b, 0x76, 0xa5, 0x5d, 0xcd, 0xda, 0xc9, 0x94, 0x02, 0x89,

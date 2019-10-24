@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type JunosSmi struct {
 	System               *JunosSmiSystemType `protobuf:"bytes,151,opt,name=system" json:"system,omitempty"`
@@ -29,16 +31,17 @@ func (m *JunosSmi) Reset()         { *m = JunosSmi{} }
 func (m *JunosSmi) String() string { return proto.CompactTextString(m) }
 func (*JunosSmi) ProtoMessage()    {}
 func (*JunosSmi) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0}
+	return fileDescriptor_352359fcef49673a, []int{0}
 }
+
 func (m *JunosSmi) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmi.Unmarshal(m, b)
 }
 func (m *JunosSmi) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmi.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmi) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmi.Merge(dst, src)
+func (m *JunosSmi) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmi.Merge(m, src)
 }
 func (m *JunosSmi) XXX_Size() int {
 	return xxx_messageInfo_JunosSmi.Size(m)
@@ -67,16 +70,17 @@ func (m *JunosSmiSystemType) Reset()         { *m = JunosSmiSystemType{} }
 func (m *JunosSmiSystemType) String() string { return proto.CompactTextString(m) }
 func (*JunosSmiSystemType) ProtoMessage()    {}
 func (*JunosSmiSystemType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0}
 }
+
 func (m *JunosSmiSystemType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemType.Merge(dst, src)
+func (m *JunosSmiSystemType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemType.Merge(m, src)
 }
 func (m *JunosSmiSystemType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemType.Size(m)
@@ -109,16 +113,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementType) String() string {
 }
 func (*JunosSmiSystemTypeSubscriberManagementType) ProtoMessage() {}
 func (*JunosSmiSystemTypeSubscriberManagementType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementType.Size(m)
@@ -152,16 +157,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraType) String() string {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraType) ProtoMessage() {}
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraType.Size(m)
@@ -201,16 +207,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) String() st
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) ProtoMessage() {}
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbType.Size(m)
@@ -244,16 +251,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTyp
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) ProtoMessage() {}
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsType.Size(m)
@@ -299,16 +307,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTyp
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeStateType.Size(m)
@@ -386,16 +395,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTyp
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 0, 0, 1}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 0, 0, 1}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeSdbTypeStatisticsTypeClientTypeType.Size(m)
@@ -492,16 +502,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType)
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) ProtoMessage() {}
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorType.Size(m)
@@ -545,16 +556,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeC
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeChassisType.Size(m)
@@ -609,16 +621,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsType.Size(m)
@@ -654,16 +667,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcList.Size(m)
@@ -722,16 +736,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsType.Size(m)
@@ -842,16 +857,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesType.Size(m)
@@ -895,16 +911,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeList.Size(m)
@@ -1008,16 +1025,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksType.Size(m)
@@ -1055,16 +1073,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListStatisticsTypePfesTypePfeListSchedBlocksTypeSchedBlockList.Size(m)
@@ -1126,16 +1145,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 1}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 1}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsType.Size(m)
@@ -1174,16 +1194,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 1, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 1, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicList.Size(m)
@@ -1252,16 +1273,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 1, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 1, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsType.Size(m)
@@ -1299,16 +1321,17 @@ func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeF
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) ProtoMessage() {
 }
 func (*JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_smid_oc_0b6c875dd18bb0be, []int{0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0}
+	return fileDescriptor_352359fcef49673a, []int{0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0}
 }
+
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList.Unmarshal(m, b)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList.Marshal(b, m, deterministic)
 }
-func (dst *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList.Merge(dst, src)
+func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList.Merge(m, src)
 }
 func (m *JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList) XXX_Size() int {
 	return xxx_messageInfo_JunosSmiSystemTypeSubscriberManagementTypeInfraTypeResourceMonitorTypeFpcsTypeFpcListPicsTypePicListPortsTypePortList.Size(m)
@@ -1359,7 +1382,7 @@ var E_JnprJunosSmiExt = &proto.ExtensionDesc{
 	ExtensionType: (*JunosSmi)(nil),
 	Field:         70,
 	Name:          "jnpr_junos_smi_ext",
-	Tag:           "bytes,70,opt,name=jnpr_junos_smi_ext,json=jnprJunosSmiExt",
+	Tag:           "bytes,70,opt,name=jnpr_junos_smi_ext",
 	Filename:      "smid_oc.proto",
 }
 
@@ -1388,9 +1411,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosSmiExt)
 }
 
-func init() { proto.RegisterFile("smid_oc.proto", fileDescriptor_smid_oc_0b6c875dd18bb0be) }
+func init() { proto.RegisterFile("smid_oc.proto", fileDescriptor_352359fcef49673a) }
 
-var fileDescriptor_smid_oc_0b6c875dd18bb0be = []byte{
+var fileDescriptor_352359fcef49673a = []byte{
 	// 1514 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x58, 0xdf, 0x6f, 0x14, 0xd5,
 	0x17, 0xcf, 0xb4, 0x14, 0x76, 0x4f, 0x81, 0x6e, 0x2f, 0xb4, 0x5d, 0xa6, 0x7c, 0xf9, 0x12, 0xf2,

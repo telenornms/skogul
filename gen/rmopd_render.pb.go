@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Junos struct {
 	Rpm                  *JunosRpmType   `protobuf:"bytes,151,opt,name=rpm" json:"rpm,omitempty"`
@@ -30,16 +32,17 @@ func (m *Junos) Reset()         { *m = Junos{} }
 func (m *Junos) String() string { return proto.CompactTextString(m) }
 func (*Junos) ProtoMessage()    {}
 func (*Junos) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0}
 }
+
 func (m *Junos) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Junos.Unmarshal(m, b)
 }
 func (m *Junos) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Junos.Marshal(b, m, deterministic)
 }
-func (dst *Junos) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Junos.Merge(dst, src)
+func (m *Junos) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Junos.Merge(m, src)
 }
 func (m *Junos) XXX_Size() int {
 	return xxx_messageInfo_Junos.Size(m)
@@ -77,16 +80,17 @@ func (m *JunosRpmType) Reset()         { *m = JunosRpmType{} }
 func (m *JunosRpmType) String() string { return proto.CompactTextString(m) }
 func (*JunosRpmType) ProtoMessage()    {}
 func (*JunosRpmType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0}
 }
+
 func (m *JunosRpmType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmType.Unmarshal(m, b)
 }
 func (m *JunosRpmType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmType.Merge(dst, src)
+func (m *JunosRpmType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmType.Merge(m, src)
 }
 func (m *JunosRpmType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmType.Size(m)
@@ -129,16 +133,17 @@ func (m *JunosRpmTypeProbeResultsType) Reset()         { *m = JunosRpmTypeProbeR
 func (m *JunosRpmTypeProbeResultsType) String() string { return proto.CompactTextString(m) }
 func (*JunosRpmTypeProbeResultsType) ProtoMessage()    {}
 func (*JunosRpmTypeProbeResultsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 0}
 }
+
 func (m *JunosRpmTypeProbeResultsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsType.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeProbeResultsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeProbeResultsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeProbeResultsType.Merge(dst, src)
+func (m *JunosRpmTypeProbeResultsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeProbeResultsType.Merge(m, src)
 }
 func (m *JunosRpmTypeProbeResultsType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsType.Size(m)
@@ -193,16 +198,17 @@ func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsList) String() string {
 }
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsList) ProtoMessage() {}
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 0, 0}
 }
+
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsList.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeProbeResultsTypeProbeTestResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsList.Merge(dst, src)
+func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsList.Merge(m, src)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsList.Size(m)
@@ -392,16 +398,17 @@ func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) 
 }
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) ProtoMessage() {}
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 0, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 0, 0, 0}
 }
+
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType.Merge(dst, src)
+func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType.Merge(m, src)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestsHwTsErrType.Size(m)
@@ -468,16 +475,17 @@ func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType)
 }
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) ProtoMessage() {}
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 0, 0, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 0, 0, 1}
 }
+
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType.Merge(dst, src)
+func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType.Merge(m, src)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeSingleResultsType.Size(m)
@@ -606,16 +614,17 @@ func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResults
 }
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) ProtoMessage() {}
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 0, 0, 2}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 0, 0, 2}
 }
+
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList.Merge(dst, src)
+func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList.Merge(m, src)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsList.Size(m)
@@ -691,16 +700,17 @@ func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResults
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) ProtoMessage() {
 }
 func (*JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 0, 0, 2, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 0, 0, 2, 0}
 }
+
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Merge(dst, src)
+func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Merge(m, src)
 }
 func (m *JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeProbeResultsTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Size(m)
@@ -778,16 +788,17 @@ func (m *JunosRpmTypeHistoryResultsType) Reset()         { *m = JunosRpmTypeHist
 func (m *JunosRpmTypeHistoryResultsType) String() string { return proto.CompactTextString(m) }
 func (*JunosRpmTypeHistoryResultsType) ProtoMessage()    {}
 func (*JunosRpmTypeHistoryResultsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 1}
 }
+
 func (m *JunosRpmTypeHistoryResultsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsType.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeHistoryResultsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeHistoryResultsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeHistoryResultsType.Merge(dst, src)
+func (m *JunosRpmTypeHistoryResultsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeHistoryResultsType.Merge(m, src)
 }
 func (m *JunosRpmTypeHistoryResultsType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsType.Size(m)
@@ -820,16 +831,17 @@ func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) String() string {
 }
 func (*JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) ProtoMessage() {}
 func (*JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 1, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 1, 0}
 }
+
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsList.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsList.Merge(dst, src)
+func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsList.Merge(m, src)
 }
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsList.Size(m)
@@ -883,16 +895,17 @@ func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestRe
 func (*JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) ProtoMessage() {
 }
 func (*JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 1, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 1, 0, 0}
 }
+
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList.Merge(dst, src)
+func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList.Merge(m, src)
 }
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsList.Size(m)
@@ -1079,16 +1092,17 @@ func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestRe
 func (*JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) ProtoMessage() {
 }
 func (*JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 1, 0, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 1, 0, 0, 0}
 }
+
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Merge(dst, src)
+func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Merge(m, src)
 }
 func (m *JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeHistoryResultsTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Size(m)
@@ -1208,16 +1222,17 @@ func (m *JunosRpmTypeServerType) Reset()         { *m = JunosRpmTypeServerType{}
 func (m *JunosRpmTypeServerType) String() string { return proto.CompactTextString(m) }
 func (*JunosRpmTypeServerType) ProtoMessage()    {}
 func (*JunosRpmTypeServerType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 2}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 2}
 }
+
 func (m *JunosRpmTypeServerType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeServerType.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeServerType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeServerType.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeServerType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeServerType.Merge(dst, src)
+func (m *JunosRpmTypeServerType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeServerType.Merge(m, src)
 }
 func (m *JunosRpmTypeServerType) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeServerType.Size(m)
@@ -1250,16 +1265,17 @@ func (m *JunosRpmTypeServerTypeActiveServersList) Reset() {
 func (m *JunosRpmTypeServerTypeActiveServersList) String() string { return proto.CompactTextString(m) }
 func (*JunosRpmTypeServerTypeActiveServersList) ProtoMessage()    {}
 func (*JunosRpmTypeServerTypeActiveServersList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 0, 2, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 0, 2, 0}
 }
+
 func (m *JunosRpmTypeServerTypeActiveServersList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosRpmTypeServerTypeActiveServersList.Unmarshal(m, b)
 }
 func (m *JunosRpmTypeServerTypeActiveServersList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosRpmTypeServerTypeActiveServersList.Marshal(b, m, deterministic)
 }
-func (dst *JunosRpmTypeServerTypeActiveServersList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosRpmTypeServerTypeActiveServersList.Merge(dst, src)
+func (m *JunosRpmTypeServerTypeActiveServersList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosRpmTypeServerTypeActiveServersList.Merge(m, src)
 }
 func (m *JunosRpmTypeServerTypeActiveServersList) XXX_Size() int {
 	return xxx_messageInfo_JunosRpmTypeServerTypeActiveServersList.Size(m)
@@ -1303,16 +1319,17 @@ func (m *JunosTwampType) Reset()         { *m = JunosTwampType{} }
 func (m *JunosTwampType) String() string { return proto.CompactTextString(m) }
 func (*JunosTwampType) ProtoMessage()    {}
 func (*JunosTwampType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1}
 }
+
 func (m *JunosTwampType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampType.Unmarshal(m, b)
 }
 func (m *JunosTwampType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampType.Merge(dst, src)
+func (m *JunosTwampType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampType.Merge(m, src)
 }
 func (m *JunosTwampType) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampType.Size(m)
@@ -1349,16 +1366,17 @@ func (m *JunosTwampTypeServerType) Reset()         { *m = JunosTwampTypeServerTy
 func (m *JunosTwampTypeServerType) String() string { return proto.CompactTextString(m) }
 func (*JunosTwampTypeServerType) ProtoMessage()    {}
 func (*JunosTwampTypeServerType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 0}
 }
+
 func (m *JunosTwampTypeServerType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeServerType.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeServerType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeServerType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeServerType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeServerType.Merge(dst, src)
+func (m *JunosTwampTypeServerType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeServerType.Merge(m, src)
 }
 func (m *JunosTwampTypeServerType) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeServerType.Size(m)
@@ -1405,16 +1423,17 @@ func (m *JunosTwampTypeServerTypeControlConnectionList) String() string {
 }
 func (*JunosTwampTypeServerTypeControlConnectionList) ProtoMessage() {}
 func (*JunosTwampTypeServerTypeControlConnectionList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 0, 0}
 }
+
 func (m *JunosTwampTypeServerTypeControlConnectionList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeServerTypeControlConnectionList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeServerTypeControlConnectionList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeServerTypeControlConnectionList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeServerTypeControlConnectionList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeServerTypeControlConnectionList.Merge(dst, src)
+func (m *JunosTwampTypeServerTypeControlConnectionList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeServerTypeControlConnectionList.Merge(m, src)
 }
 func (m *JunosTwampTypeServerTypeControlConnectionList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeServerTypeControlConnectionList.Size(m)
@@ -1495,16 +1514,17 @@ func (m *JunosTwampTypeServerTypeTestSessionList) Reset() {
 func (m *JunosTwampTypeServerTypeTestSessionList) String() string { return proto.CompactTextString(m) }
 func (*JunosTwampTypeServerTypeTestSessionList) ProtoMessage()    {}
 func (*JunosTwampTypeServerTypeTestSessionList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 0, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 0, 1}
 }
+
 func (m *JunosTwampTypeServerTypeTestSessionList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeServerTypeTestSessionList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeServerTypeTestSessionList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeServerTypeTestSessionList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeServerTypeTestSessionList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeServerTypeTestSessionList.Merge(dst, src)
+func (m *JunosTwampTypeServerTypeTestSessionList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeServerTypeTestSessionList.Merge(m, src)
 }
 func (m *JunosTwampTypeServerTypeTestSessionList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeServerTypeTestSessionList.Size(m)
@@ -1548,16 +1568,17 @@ func (m *JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) String() st
 }
 func (*JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) ProtoMessage() {}
 func (*JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 0, 1, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 0, 1, 0}
 }
+
 func (m *JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeServerTypeTestSessionListTestSessionInfoList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeServerTypeTestSessionListTestSessionInfoList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeServerTypeTestSessionListTestSessionInfoList.Merge(dst, src)
+func (m *JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeServerTypeTestSessionListTestSessionInfoList.Merge(m, src)
 }
 func (m *JunosTwampTypeServerTypeTestSessionListTestSessionInfoList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeServerTypeTestSessionListTestSessionInfoList.Size(m)
@@ -1617,16 +1638,17 @@ func (m *JunosTwampTypeClientType) Reset()         { *m = JunosTwampTypeClientTy
 func (m *JunosTwampTypeClientType) String() string { return proto.CompactTextString(m) }
 func (*JunosTwampTypeClientType) ProtoMessage()    {}
 func (*JunosTwampTypeClientType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1}
 }
+
 func (m *JunosTwampTypeClientType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientType.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientType.Merge(dst, src)
+func (m *JunosTwampTypeClientType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientType.Merge(m, src)
 }
 func (m *JunosTwampTypeClientType) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientType.Size(m)
@@ -1686,16 +1708,17 @@ func (m *JunosTwampTypeClientTypeControlConnectionList) String() string {
 }
 func (*JunosTwampTypeClientTypeControlConnectionList) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeControlConnectionList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 0}
 }
+
 func (m *JunosTwampTypeClientTypeControlConnectionList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeControlConnectionList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeControlConnectionList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeControlConnectionList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeControlConnectionList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeControlConnectionList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeControlConnectionList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeControlConnectionList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeControlConnectionList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeControlConnectionList.Size(m)
@@ -1775,16 +1798,17 @@ func (m *JunosTwampTypeClientTypeTestSessionList) Reset() {
 func (m *JunosTwampTypeClientTypeTestSessionList) String() string { return proto.CompactTextString(m) }
 func (*JunosTwampTypeClientTypeTestSessionList) ProtoMessage()    {}
 func (*JunosTwampTypeClientTypeTestSessionList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 1}
 }
+
 func (m *JunosTwampTypeClientTypeTestSessionList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeTestSessionList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeTestSessionList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeTestSessionList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeTestSessionList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeTestSessionList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeTestSessionList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeTestSessionList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeTestSessionList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeTestSessionList.Size(m)
@@ -1870,16 +1894,17 @@ func (m *JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) String() st
 }
 func (*JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 1, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 1, 0}
 }
+
 func (m *JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeTestSessionListTestSessionInfoList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeTestSessionListTestSessionInfoList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeTestSessionListTestSessionInfoList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeTestSessionListTestSessionInfoList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeTestSessionListTestSessionInfoList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeTestSessionListTestSessionInfoList.Size(m)
@@ -1966,16 +1991,17 @@ func (m *JunosTwampTypeClientTypeProbeTestResultsList) String() string {
 }
 func (*JunosTwampTypeClientTypeProbeTestResultsList) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeProbeTestResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 2}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 2}
 }
+
 func (m *JunosTwampTypeClientTypeProbeTestResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeProbeTestResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeProbeTestResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsList.Size(m)
@@ -2193,16 +2219,17 @@ func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) Stri
 }
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 2, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 2, 0}
 }
+
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestsHwTsErrType.Size(m)
@@ -2269,16 +2296,17 @@ func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) Str
 }
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 2, 1}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 2, 1}
 }
+
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeSingleResultsType.Size(m)
@@ -2407,16 +2435,17 @@ func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList
 }
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 2, 2}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 2, 2}
 }
+
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList.Size(m)
@@ -2492,16 +2521,17 @@ func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsList
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) ProtoMessage() {
 }
 func (*JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 2, 2, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 2, 2, 0}
 }
+
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeProbeTestResultsListProbeTestGenericResultsListProbeTestGenericMeasurementsList.Size(m)
@@ -2583,16 +2613,17 @@ func (m *JunosTwampTypeClientTypeHistoryTestResultsList) String() string {
 }
 func (*JunosTwampTypeClientTypeHistoryTestResultsList) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeHistoryTestResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 3}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 3}
 }
+
 func (m *JunosTwampTypeClientTypeHistoryTestResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeHistoryTestResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeHistoryTestResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeHistoryTestResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeHistoryTestResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsList.Size(m)
@@ -2649,16 +2680,17 @@ func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsL
 }
 func (*JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) ProtoMessage() {}
 func (*JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 3, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 3, 0}
 }
+
 func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsList.Size(m)
@@ -2873,16 +2905,17 @@ func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsL
 func (*JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) ProtoMessage() {
 }
 func (*JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_rmopd_render_095c7d45da4949c9, []int{0, 1, 1, 3, 0, 0}
+	return fileDescriptor_0ea3d1731efd5e28, []int{0, 1, 1, 3, 0, 0}
 }
+
 func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Unmarshal(m, b)
 }
 func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Marshal(b, m, deterministic)
 }
-func (dst *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Merge(dst, src)
+func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Merge(m, src)
 }
 func (m *JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType) XXX_Size() int {
 	return xxx_messageInfo_JunosTwampTypeClientTypeHistoryTestResultsListHistorySingleTestResultsListProbeSingleResultsType.Size(m)
@@ -2996,7 +3029,7 @@ var E_JnprJunosExt = &proto.ExtensionDesc{
 	ExtensionType: (*Junos)(nil),
 	Field:         74,
 	Name:          "jnpr_junos_ext",
-	Tag:           "bytes,74,opt,name=jnpr_junos_ext,json=jnprJunosExt",
+	Tag:           "bytes,74,opt,name=jnpr_junos_ext",
 	Filename:      "rmopd_render.proto",
 }
 
@@ -3035,9 +3068,9 @@ func init() {
 	proto.RegisterExtension(E_JnprJunosExt)
 }
 
-func init() { proto.RegisterFile("rmopd_render.proto", fileDescriptor_rmopd_render_095c7d45da4949c9) }
+func init() { proto.RegisterFile("rmopd_render.proto", fileDescriptor_0ea3d1731efd5e28) }
 
-var fileDescriptor_rmopd_render_095c7d45da4949c9 = []byte{
+var fileDescriptor_0ea3d1731efd5e28 = []byte{
 	// 2181 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x59, 0xcd, 0x6f, 0x1c, 0x49,
 	0x15, 0xd7, 0x24, 0xf1, 0xd7, 0x9b, 0x0f, 0xc7, 0x95, 0x0f, 0x4f, 0xda, 0x64, 0x93, 0x0d, 0x59,
