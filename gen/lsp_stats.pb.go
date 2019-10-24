@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -33,16 +35,17 @@ func (m *LspStats) Reset()         { *m = LspStats{} }
 func (m *LspStats) String() string { return proto.CompactTextString(m) }
 func (*LspStats) ProtoMessage()    {}
 func (*LspStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lsp_stats_7eab2f5f53b1a360, []int{0}
+	return fileDescriptor_edc5e73ce6e34840, []int{0}
 }
+
 func (m *LspStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LspStats.Unmarshal(m, b)
 }
 func (m *LspStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LspStats.Marshal(b, m, deterministic)
 }
-func (dst *LspStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LspStats.Merge(dst, src)
+func (m *LspStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LspStats.Merge(m, src)
 }
 func (m *LspStats) XXX_Size() int {
 	return xxx_messageInfo_LspStats.Size(m)
@@ -89,16 +92,17 @@ func (m *LspStatsRecord) Reset()         { *m = LspStatsRecord{} }
 func (m *LspStatsRecord) String() string { return proto.CompactTextString(m) }
 func (*LspStatsRecord) ProtoMessage()    {}
 func (*LspStatsRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor_lsp_stats_7eab2f5f53b1a360, []int{1}
+	return fileDescriptor_edc5e73ce6e34840, []int{1}
 }
+
 func (m *LspStatsRecord) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LspStatsRecord.Unmarshal(m, b)
 }
 func (m *LspStatsRecord) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_LspStatsRecord.Marshal(b, m, deterministic)
 }
-func (dst *LspStatsRecord) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_LspStatsRecord.Merge(dst, src)
+func (m *LspStatsRecord) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LspStatsRecord.Merge(m, src)
 }
 func (m *LspStatsRecord) XXX_Size() int {
 	return xxx_messageInfo_LspStatsRecord.Size(m)
@@ -163,7 +167,7 @@ var E_JnprLspStatisticsExt = &proto.ExtensionDesc{
 	ExtensionType: (*LspStats)(nil),
 	Field:         5,
 	Name:          "jnpr_lsp_statistics_ext",
-	Tag:           "bytes,5,opt,name=jnpr_lsp_statistics_ext,json=jnprLspStatisticsExt",
+	Tag:           "bytes,5,opt,name=jnpr_lsp_statistics_ext",
 	Filename:      "lsp_stats.proto",
 }
 
@@ -173,9 +177,9 @@ func init() {
 	proto.RegisterExtension(E_JnprLspStatisticsExt)
 }
 
-func init() { proto.RegisterFile("lsp_stats.proto", fileDescriptor_lsp_stats_7eab2f5f53b1a360) }
+func init() { proto.RegisterFile("lsp_stats.proto", fileDescriptor_edc5e73ce6e34840) }
 
-var fileDescriptor_lsp_stats_7eab2f5f53b1a360 = []byte{
+var fileDescriptor_edc5e73ce6e34840 = []byte{
 	// 306 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x90, 0xb1, 0x4f, 0x02, 0x31,
 	0x14, 0xc6, 0x73, 0x07, 0x08, 0xf4, 0x54, 0x62, 0x31, 0xa1, 0xca, 0xc0, 0x85, 0xe9, 0x26, 0x06,

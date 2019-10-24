@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type InlineJflow struct {
 	// Version of exported flow records (v10 or v9)
@@ -61,16 +63,17 @@ func (m *InlineJflow) Reset()         { *m = InlineJflow{} }
 func (m *InlineJflow) String() string { return proto.CompactTextString(m) }
 func (*InlineJflow) ProtoMessage()    {}
 func (*InlineJflow) Descriptor() ([]byte, []int) {
-	return fileDescriptor_inline_jflow_3a1c4d48acfc4089, []int{0}
+	return fileDescriptor_2f414b06d7d500f7, []int{0}
 }
+
 func (m *InlineJflow) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InlineJflow.Unmarshal(m, b)
 }
 func (m *InlineJflow) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InlineJflow.Marshal(b, m, deterministic)
 }
-func (dst *InlineJflow) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InlineJflow.Merge(dst, src)
+func (m *InlineJflow) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InlineJflow.Merge(m, src)
 }
 func (m *InlineJflow) XXX_Size() int {
 	return xxx_messageInfo_InlineJflow.Size(m)
@@ -321,16 +324,17 @@ func (m *InlineJflowNpuStats) Reset()         { *m = InlineJflowNpuStats{} }
 func (m *InlineJflowNpuStats) String() string { return proto.CompactTextString(m) }
 func (*InlineJflowNpuStats) ProtoMessage()    {}
 func (*InlineJflowNpuStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_inline_jflow_3a1c4d48acfc4089, []int{1}
+	return fileDescriptor_2f414b06d7d500f7, []int{1}
 }
+
 func (m *InlineJflowNpuStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InlineJflowNpuStats.Unmarshal(m, b)
 }
 func (m *InlineJflowNpuStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InlineJflowNpuStats.Marshal(b, m, deterministic)
 }
-func (dst *InlineJflowNpuStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InlineJflowNpuStats.Merge(dst, src)
+func (m *InlineJflowNpuStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InlineJflowNpuStats.Merge(m, src)
 }
 func (m *InlineJflowNpuStats) XXX_Size() int {
 	return xxx_messageInfo_InlineJflowNpuStats.Size(m)
@@ -745,7 +749,7 @@ var E_InlineJflowStatsExt = &proto.ExtensionDesc{
 	ExtensionType: (*InlineJflow)(nil),
 	Field:         9,
 	Name:          "inline_jflow_stats_ext",
-	Tag:           "bytes,9,opt,name=inline_jflow_stats_ext,json=inlineJflowStatsExt",
+	Tag:           "bytes,9,opt,name=inline_jflow_stats_ext",
 	Filename:      "inline_jflow.proto",
 }
 
@@ -755,9 +759,9 @@ func init() {
 	proto.RegisterExtension(E_InlineJflowStatsExt)
 }
 
-func init() { proto.RegisterFile("inline_jflow.proto", fileDescriptor_inline_jflow_3a1c4d48acfc4089) }
+func init() { proto.RegisterFile("inline_jflow.proto", fileDescriptor_2f414b06d7d500f7) }
 
-var fileDescriptor_inline_jflow_3a1c4d48acfc4089 = []byte{
+var fileDescriptor_2f414b06d7d500f7 = []byte{
 	// 1401 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x98, 0x5b, 0x73, 0xd3, 0x46,
 	0x1f, 0xc6, 0xc7, 0x01, 0xde, 0x17, 0x36, 0x38, 0xc1, 0x72, 0x70, 0x94, 0x06, 0x06, 0x97, 0x19,

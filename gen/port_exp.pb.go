@@ -3,9 +3,11 @@
 
 package gen
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //
 // Top-level message
@@ -32,16 +34,17 @@ func (m *PortExp) Reset()         { *m = PortExp{} }
 func (m *PortExp) String() string { return proto.CompactTextString(m) }
 func (*PortExp) ProtoMessage()    {}
 func (*PortExp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_port_exp_28fc41d31c1ab609, []int{0}
+	return fileDescriptor_dbd3f2d611fd16ff, []int{0}
 }
+
 func (m *PortExp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PortExp.Unmarshal(m, b)
 }
 func (m *PortExp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PortExp.Marshal(b, m, deterministic)
 }
-func (dst *PortExp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PortExp.Merge(dst, src)
+func (m *PortExp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PortExp.Merge(m, src)
 }
 func (m *PortExp) XXX_Size() int {
 	return xxx_messageInfo_PortExp.Size(m)
@@ -76,16 +79,17 @@ func (m *InterfaceExpInfos) Reset()         { *m = InterfaceExpInfos{} }
 func (m *InterfaceExpInfos) String() string { return proto.CompactTextString(m) }
 func (*InterfaceExpInfos) ProtoMessage()    {}
 func (*InterfaceExpInfos) Descriptor() ([]byte, []int) {
-	return fileDescriptor_port_exp_28fc41d31c1ab609, []int{1}
+	return fileDescriptor_dbd3f2d611fd16ff, []int{1}
 }
+
 func (m *InterfaceExpInfos) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfaceExpInfos.Unmarshal(m, b)
 }
 func (m *InterfaceExpInfos) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_InterfaceExpInfos.Marshal(b, m, deterministic)
 }
-func (dst *InterfaceExpInfos) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterfaceExpInfos.Merge(dst, src)
+func (m *InterfaceExpInfos) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterfaceExpInfos.Merge(m, src)
 }
 func (m *InterfaceExpInfos) XXX_Size() int {
 	return xxx_messageInfo_InterfaceExpInfos.Size(m)
@@ -115,7 +119,7 @@ var E_JnprInterfaceExpExt = &proto.ExtensionDesc{
 	ExtensionType: (*PortExp)(nil),
 	Field:         18,
 	Name:          "jnpr_interface_exp_ext",
-	Tag:           "bytes,18,opt,name=jnpr_interface_exp_ext,json=jnprInterfaceExpExt",
+	Tag:           "bytes,18,opt,name=jnpr_interface_exp_ext",
 	Filename:      "port_exp.proto",
 }
 
@@ -125,9 +129,9 @@ func init() {
 	proto.RegisterExtension(E_JnprInterfaceExpExt)
 }
 
-func init() { proto.RegisterFile("port_exp.proto", fileDescriptor_port_exp_28fc41d31c1ab609) }
+func init() { proto.RegisterFile("port_exp.proto", fileDescriptor_dbd3f2d611fd16ff) }
 
-var fileDescriptor_port_exp_28fc41d31c1ab609 = []byte{
+var fileDescriptor_dbd3f2d611fd16ff = []byte{
 	// 239 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x8f, 0x31, 0x4b, 0xc4, 0x40,
 	0x10, 0x85, 0xd9, 0x88, 0x7a, 0xd9, 0x03, 0xe1, 0x36, 0xa8, 0xc1, 0x42, 0xc2, 0x55, 0xa9, 0x52,
