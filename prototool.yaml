@@ -24,4 +24,5 @@ generate:
     - name: go
       type: go
       output: ./gen
+      # Available parameters/flags are listed here: https://github.com/golang/protobuf#parameters
       flags: import_path=gen
