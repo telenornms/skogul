@@ -1,11 +1,13 @@
 protoc:
   version: 3.8.0
   includes:
-    - ./protobuf-definitions/junos-telemetry-interface-17.3R3.10
+    - ./gen/junos-telemetry-interface/
+
 create:
   packages:
     - directory: gen
       name: gen
+
 generate:
   go_options:
     import_path: .
