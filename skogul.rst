@@ -698,7 +698,7 @@ Splits a metric into multiple metrics based on a field.
 Settings:
 
 ``fail - bool``
-	Error the whole container if the split fails
+	Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working.
 
 ``field - []string``
 	Split into multiple metrics based on this field (each field denotes the path to a nested object element).

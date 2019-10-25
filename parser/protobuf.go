@@ -33,7 +33,7 @@ import (
 	"github.com/golang/protobuf/proto"
 
 	"github.com/telenornms/skogul"
-	pb "github.com/telenornms/skogul/gen"
+	pb "github.com/telenornms/skogul/gen/junos/telemetry"
 )
 
 // ProtoBuf parses a byte string-representation of a Container

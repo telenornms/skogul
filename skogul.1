@@ -716,7 +716,7 @@ Settings:
 .INDENT 0.0
 .TP
 .B \fBfail \- bool\fP
-Error the whole container if the split fails
+Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working.
 .TP
 .B \fBfield \- []string\fP
 Split into multiple metrics based on this field (each field denotes the path to a nested object element).
