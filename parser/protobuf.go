@@ -98,6 +98,15 @@ by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
 */
 func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
+	var err error
+	defer func() {
+		if err != nil {
+			systemId := telemetry.GetSystemId()
+			sensorName := telemetry.GetSensorName()
+			log.Printf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemId, sensorName)
+		}
+	}()
+
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
 		log.Printf("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
@@ -147,7 +156,7 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	}
 
 	var metrics map[string]interface{}
-	if err := json.Unmarshal(jsonMessage, &metrics); err != nil {
+	if err = json.Unmarshal(jsonMessage, &metrics); err != nil {
 		log.Printf("Unmarshalling JSON data to string/interface map failed: %s", err)
 		return nil
 	}
