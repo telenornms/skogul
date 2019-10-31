@@ -57,4 +57,10 @@ func init() {
 		Alloc:   func() skogul.Transformer { return &Split{} },
 		Help:    "Splits a metric into multiple metrics based on a field.",
 	})
+	Add(Transformer{
+		Name:    "replace",
+		Aliases: []string{},
+		Alloc:   func() skogul.Transformer { return &Replace{} },
+		Help:    "Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.",
+	})
 }
