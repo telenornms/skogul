@@ -347,6 +347,15 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		configStruct := reflect.TypeOf(h.Handler)
 		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
+	for idx, t := range c.Transformers {
+		log.WithField("transformer", idx).Debug("Verifying transformer configuration")
+		if err := verifyItem("transformer", idx, t.Transformer); err != nil {
+			return nil, err
+		}
+
+		configStruct := reflect.ValueOf(t.Transformer).Elem().Type()
+		verifyOnlyRequiredConfigProps(jsonData, "transformers", idx, configStruct)
+	}
 	for idx, s := range c.Senders {
 		log.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
