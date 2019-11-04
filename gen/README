@@ -1,3 +1,6 @@
-This is machine-generated from Juniper protobuf files, licensed under
-Apache 2 license. A better integration into the repo is coming when we get
-a round to it.
+This directory is used to manage machine-generated code, presently only the
+stuff shipped for Juniper's Streaming Telmetry interface, which is based on
+Google Protocol buffers.
+
+The protocol interfaces are released under an Apache 2 license, and we
+include a tar-ball of it here for pure convenience.
