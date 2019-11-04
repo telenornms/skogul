@@ -32,7 +32,7 @@ import (
 	"github.com/telenornms/skogul"
 )
 
-// Replace executes a set of regular expressions, in order
+// Replace executes a regular expression replacement of metric metadata.
 type Replace struct {
 	Source      string `doc:"Metadata key to read from."`
 	Destination string `doc:"Metadata key to write to. Defaults to overwriting the source-key if left blank. Destination key will always be overwritten, e.g., even if the source key is missing, the key located at the destination will be removed."`
@@ -54,7 +54,8 @@ func (replace *Replace) Transform(c *skogul.Container) error {
 	// Verify() should catch this, so there's no reasonable way this
 	// should happen. But in the off chance that a regex compiles on
 	// the first attempt but not the second.... (e.g.: some serious
-	// bugs)
+	// bugs). It will also catch our own bugs, if, for some reason, we
+	// manage to botch up Verify() under some corner case.
 	skogul.Assert(replace.err == nil)
 
 	for mi := range c.Metrics {
