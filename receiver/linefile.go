@@ -25,10 +25,12 @@ package receiver
 
 import (
 	"bufio"
-	"github.com/telenornms/skogul"
-	"log"
 	"os"
 	"time"
+
+	log "github.com/sirupsen/logrus"
+
+	"github.com/telenornms/skogul"
 )
 
 // LineFile will keep reading File over and over again, assuming one
@@ -44,18 +46,18 @@ type LineFile struct {
 func (lf *LineFile) read() error {
 	f, err := os.Open(lf.File)
 	if err != nil {
-		log.Printf("Unable to open file: %s", err)
+		log.WithError(err).WithField("file", lf.File).Error("Unable to open file")
 		return err
 	}
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		if err := lf.Handler.H.Handle(bytes); err != nil {
-			log.Printf("Failed to send metric: %v", err)
+			log.WithError(err).Error("Failed to send metric")
 		}
 	}
 	if err := scanner.Err(); err != nil {
-		log.Printf("Error reading file: %s", err)
+		log.WithError(err).Error("Error reading file")
 		return skogul.Error{Reason: "Error reading file"}
 	}
 	return nil

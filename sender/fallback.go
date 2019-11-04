@@ -24,7 +24,7 @@
 package sender
 
 import (
-	"log"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -90,6 +90,6 @@ type Log struct {
 
 // Send logs a message and does no further processing
 func (lg Log) Send(c *skogul.Container) error {
-	log.Print(lg.Message)
+	log.Debug(lg.Message)
 	return nil
 }

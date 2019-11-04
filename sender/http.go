@@ -30,12 +30,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"runtime"
 	"sync"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -137,28 +138,52 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	b, err := json.Marshal(*c)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
-		log.Print(e)
+		log.WithError(e).Error("Configuring HTTP sender failed")
 		return e
 	}
 	var buffer bytes.Buffer
 	buffer.Write(b)
+	ht.once.Do(func() {
+		if ht.Timeout.Duration == 0 {
+			ht.Timeout.Duration = 20 * time.Second
+		}
+		if ht.Insecure {
+			log.Warn("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+		}
+		iconsph := ht.IdleConnsPerHost
+
+		if iconsph == 0 {
+			iconsph = 2 + runtime.NumCPU()
+		}
+		tran := http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: ht.Insecure,
+			},
+			MaxConnsPerHost:     ht.ConnsPerHost,
+			MaxIdleConnsPerHost: iconsph,
+		}
+		ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
+	})
 	resp, err := ht.client.Post(ht.URL, "application/json", &buffer)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to POST request", Next: err}
-		log.Print(e)
+		log.WithError(e).Error("Failed to do POST request")
 		return e
 	}
 	if resp.ContentLength > 0 {
 		tmp := make([]byte, resp.ContentLength)
 		if n, err := io.ReadFull(resp.Body, tmp); err != nil {
-			log.Printf("Read %d of %d bytes, returned: %v", n, resp.ContentLength, err)
+			log.WithError(err).WithFields(log.Fields{
+				"expected": resp.ContentLength,
+				"actual":   n,
+			}).Error("Failed to read http response body")
 			resp.Body.Close()
 			return err
 		}
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
-		log.Print(e)
+		log.WithError(e).Error("HTTP response status code was not in OK range")
 		return e
 	}
 	return nil

@@ -25,10 +25,11 @@ package receiver
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"runtime"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -64,15 +65,15 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 func (tst *Tester) Start() error {
 	if tst.Threads == 0 {
 		tst.Threads = runtime.NumCPU()
-		log.Printf("No threads set, defaulting to runtime.NumCPU() (%d)", tst.Threads)
+		log.WithField("threads", tst.Threads).Debug("No threads set, defaulting to runtime.NumCPU()")
 	}
 	if tst.Metrics < 1 {
 		tst.Metrics = 10
-		log.Printf("No Metrics specified for testing, defaulting to %d", tst.Metrics)
+		log.WithField("metrics", tst.Metrics).Debug("No Metrics specified for testing, defaulting to default value")
 	}
 	if tst.Values < 1 {
 		tst.Values = 50
-		log.Printf("No Values specified for testing, defaulting to %d", tst.Values)
+		log.WithField("values", tst.Values).Debug("No Values specified for testing, defaulting to default value")
 	}
 	for i := 1; i < tst.Threads; i++ {
 		go tst.run()
@@ -86,7 +87,7 @@ func (tst *Tester) run() {
 	for {
 		c := tst.generate(time.Now())
 		if err := tst.Handler.H.TransformAndSend(&c); err != nil {
-			log.Printf("Failed to transform and send metrics: %v", err)
+			log.WithError(err).Error("Failed to transform and send metrics: %v", err)
 		}
 		time.Sleep(tst.Delay.Duration)
 	}

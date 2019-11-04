@@ -24,13 +24,13 @@
 package receiver
 
 import (
-	"log"
 	"time"
 
 	"github.com/telenornms/skogul"
 	skmqtt "github.com/telenornms/skogul/internal/mqtt"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
+	log "github.com/sirupsen/logrus"
 )
 
 /*
@@ -49,7 +49,7 @@ type MQTT struct {
 func (handler *MQTT) receiver(msg mqtt.Message) {
 	err := handler.Handler.H.Handle(msg.Payload())
 	if err != nil {
-		log.Printf("Unable to handle payload: %s", err)
+		log.WithError(err).Error("Unable to handle payload")
 	}
 }
 
@@ -60,7 +60,7 @@ func (handler *MQTT) Start() error {
 	handler.mc.Password = handler.Password
 	handler.mc.Init()
 	handler.mc.Subscribe(handler.mc.Topic, handler.receiver)
-	log.Printf("Starting MQTT receiver at %s", handler.Address)
+	log.WithField("address", handler.Address).Debug("Starting MQTT receiver")
 	handler.mc.Connect()
 	// Note that handler.listen() DOES return, because it only sets up
 	// subscriptions. This sillyness is to satisfy the requirement that

@@ -27,9 +27,10 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"sync"
+
+	log "github.com/sirupsen/logrus"
 
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
@@ -118,7 +119,7 @@ func (sq *SQL) prep() {
 func (sq *SQL) init() {
 	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
 	if sq.initErr != nil {
-		log.Print(sq.initErr)
+		log.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection")
 		return
 	}
 	sq.prep()
@@ -161,17 +162,17 @@ func (sq *SQL) Send(c *skogul.Container) error {
 		sq.init()
 	})
 	if sq.initErr != nil {
-		log.Print(sq.initErr)
+		log.WithError(sq.initErr).Error("Database initialization failed")
 		return sq.initErr
 	}
 	txn, err := sq.db.Begin()
 	if err != nil {
-		log.Print(err)
+		log.WithError(err).Error("Acquiring database transaction failed")
 		return err
 	}
 	defer func() {
 		if err != nil {
-			log.Print(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err})
+			log.WithError(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err}).Error("Failed to send")
 			txn.Rollback()
 		}
 	}()

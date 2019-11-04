@@ -387,7 +387,6 @@ func verifyItem(family string, name string, item interface{}) error {
 }
 
 func findFieldsOfStruct(T reflect.Type) []string {
-	log.WithField("type", T.Name()).Debug("Finding defined fields for type")
 	requiredProps := make([]string, 0)
 	switch T.Kind() {
 	case reflect.Struct:
@@ -407,13 +406,11 @@ func findFieldsOfStruct(T reflect.Type) []string {
 }
 
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
-	// log.Debugf("Fetching config section '%s' for '%s' from %v", section, family, rawConfig)
 	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
 }
 
 func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
 	requiredProps := findFieldsOfStruct(T)
-	log.Debugf("Required fields: %v", requiredProps)
 
 	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
 

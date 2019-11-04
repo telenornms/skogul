@@ -24,8 +24,9 @@
 package receiver
 
 import (
-	"log"
 	"net"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -40,24 +41,24 @@ type UDP struct {
 func (ud *UDP) Start() error {
 	udpip, err := net.ResolveUDPAddr("udp", ud.Address)
 	if err != nil {
-		log.Printf("Can't resolve %s: %v", ud.Address, err)
+		log.WithError(err).WithField("address", ud.Address).Error("Can't resolve address")
 		return err
 	}
 	ln, err := net.ListenUDP("udp", udpip)
 	if err != nil {
-		log.Printf("Can't listen on %s: %v", ud.Address, err)
+		log.WithError(err).WithField("address", ud.Address).Error("Can't listen on address")
 		return err
 	}
 	for {
 		bytes := make([]byte, 9000)
 		n, err := ln.Read(bytes)
 		if err != nil || n == 0 {
-			log.Printf("Unable to read UDP message. Got %d bytes. Error: %v", n, err)
+			log.WithError(err).WithField("bytes", n).Error("Unable to read UDP message")
 			continue
 		}
 		go func() {
 			if err := ud.Handler.H.Handle(bytes[0:n]); err != nil {
-				log.Printf("Unable to handle UDP message: %s", err)
+				log.WithError(err).Error("Unable to handle UDP message")
 			}
 		}()
 	}
