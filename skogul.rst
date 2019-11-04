@@ -690,6 +690,25 @@ Settings:
 ``set - map[string]interface {}``
 	Set metadata fields to specific values.
 
+replace
+-------
+
+Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.
+
+Settings:
+
+``destination - string``
+	Metadata key to write to. Defaults to overwriting the source-key if left blank. Destination key will always be overwritten, e.g., even if the source key is missing, the key located at the destination will be removed.
+
+``regex - string``
+	Regular expression to match.
+
+``replacement - string``
+	Replacement text. Can also use $1, $2, etc to reference sub-matches. Defaults to empty string - remove matching items.
+
+``source - string``
+	Metadata key to read from.
+
 split
 -----
 

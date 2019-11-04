@@ -708,6 +708,25 @@ Require the pressence of these fields.
 .B \fBset \- map[string]interface {}\fP
 Set metadata fields to specific values.
 .UNINDENT
+.SS replace
+.sp
+Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBdestination \- string\fP
+Metadata key to write to. Defaults to overwriting the source\-key if left blank. Destination key will always be overwritten, e.g., even if the source key is missing, the key located at the destination will be removed.
+.TP
+.B \fBregex \- string\fP
+Regular expression to match.
+.TP
+.B \fBreplacement \- string\fP
+Replacement text. Can also use $1, $2, etc to reference sub\-matches. Defaults to empty string \- remove matching items.
+.TP
+.B \fBsource \- string\fP
+Metadata key to read from.
+.UNINDENT
 .SS split
 .sp
 Splits a metric into multiple metrics based on a field.

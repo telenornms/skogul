@@ -112,7 +112,7 @@ func TestMetadata_config(t *testing.T) {
 	}`)
 }
 
-func testConfOk(t *testing.T, rawconf string) {
+func testConfOk(t *testing.T, rawconf string) *config.Config {
 	t.Helper()
 	conf, err := config.Bytes([]byte(rawconf))
 	if err != nil {
@@ -121,6 +121,7 @@ func testConfOk(t *testing.T, rawconf string) {
 	if conf == nil {
 		t.Errorf("failed to get valid config for transformer")
 	}
+	return conf
 }
 
 func testConfBad(t *testing.T, rawconf string) {
