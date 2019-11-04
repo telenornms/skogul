@@ -406,7 +406,24 @@ func findFieldsOfStruct(T reflect.Type) []string {
 }
 
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
-	return (*rawConfig)[family].(map[string]interface{})[section].(map[string]interface{})
+	configFamily, ok := (*rawConfig)[family].(map[string]interface{})
+	if !ok {
+		log.WithFields(log.Fields{
+			"family":  family,
+			"section": section,
+		}).Warnf("Failed to cast config family to map[string]interface{}")
+		return nil
+	}
+
+	configSection, ok := configFamily[section].(map[string]interface{})
+	if !ok {
+		log.WithFields(log.Fields{
+			"family":  family,
+			"section": section,
+		}).Warnf("Failed to cast config section to map[string]interface{}")
+		return nil
+	}
+	return configSection
 }
 
 func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
