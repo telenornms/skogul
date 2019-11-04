@@ -406,7 +406,7 @@ func findFieldsOfStruct(T reflect.Type) []string {
 }
 
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
-	return (*rawConfig)[family].(map[string]interface{})[strings.ToLower(section)].(map[string]interface{})
+	return (*rawConfig)[family].(map[string]interface{})[section].(map[string]interface{})
 }
 
 func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
