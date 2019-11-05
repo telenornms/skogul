@@ -215,7 +215,11 @@ func printSyntaxError(b []byte, offset int, text string) {
 	fmt.Printf("Unable to parse JSON configuration at byte offset %d.\nError: %s\nContext:\n", offset, text)
 	fmt.Println(string(b[start:end2]))
 	for i := start2; i < (offset - 2); i++ {
-		fmt.Print("-")
+		if b[i] == '	' {
+			fmt.Print("--------")
+		} else {
+			fmt.Print("-")
+		}
 	}
 	// We found the crappy part!
 	fmt.Println("💩")
