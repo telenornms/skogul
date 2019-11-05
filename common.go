@@ -25,6 +25,7 @@ package skogul
 
 import (
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"runtime"
 	"time"
 )
@@ -221,6 +222,14 @@ func (h Handler) Verify() error {
 		return Error{Reason: "Missing parser for Handler"}
 	}
 	return nil
+}
+
+// Logger returns a logrus.Entry pre-populated with standard Skogul fields.
+// sourceType is the typical family of the code/module:
+// sender/receiver/parser/transformer/core, while sourceName is the local
+// implementation.
+func Logger(sourceType, sourceName string) *logrus.Entry {
+	return logrus.WithField("source", sourceType).WithField(sourceType, sourceName)
 }
 
 // AssertErrors counts the number of assert errors

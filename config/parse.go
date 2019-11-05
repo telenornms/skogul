@@ -42,6 +42,8 @@ import (
 	"github.com/telenornms/skogul/transformer"
 )
 
+var confLog = skogul.Logger("core", "config")
+
 // Sender wraps the skogul.Sender for configuration parsing.
 type Sender struct {
 	Type   string
@@ -256,7 +258,7 @@ func Bytes(b []byte) (*Config, error) {
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
-		log.WithError(err).Fatal("Failed to read config file")
+		confLog.WithError(err).Fatal("Failed to read config file")
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
 	return Bytes(dat)
@@ -267,10 +269,10 @@ func File(f string) (*Config, error) {
 // completion.
 func resolveSenders(c *Config) error {
 	for _, s := range skogul.SenderMap {
-		log.WithField("sender", s.Name).Debug("Resolving sender")
+		confLog.WithField("sender", s.Name).Debug("Resolving sender")
 
 		if c.Senders[s.Name] == nil {
-			log.WithField("sender", s.Name).Error("Unresolved sender reference")
+			confLog.WithField("sender", s.Name).Error("Unresolved sender reference")
 			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
 		}
 		s.S = c.Senders[s.Name].Sender
@@ -287,7 +289,7 @@ func resolveSenders(c *Config) error {
 // It then zeroes the skogul.HandlerMap
 func resolveHandlers(c *Config) error {
 	for _, h := range c.Handlers {
-		logger := log.WithField("parser", h.Parser)
+		logger := confLog.WithField("parser", h.Parser)
 
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
@@ -339,7 +341,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 	}
 
 	for idx, h := range c.Handlers {
-		log.WithField("handler", idx).Debug("Verifying handler configuration")
+		confLog.WithField("handler", idx).Debug("Verifying handler configuration")
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
 			return nil, err
 		}
@@ -348,7 +350,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, t := range c.Transformers {
-		log.WithField("transformer", idx).Debug("Verifying transformer configuration")
+		confLog.WithField("transformer", idx).Debug("Verifying transformer configuration")
 		if err := verifyItem("transformer", idx, t.Transformer); err != nil {
 			return nil, err
 		}
@@ -357,7 +359,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		verifyOnlyRequiredConfigProps(jsonData, "transformers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
-		log.WithField("sender", idx).Debug("Verifying sender configuration")
+		confLog.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
 			return nil, err
 		}
@@ -366,7 +368,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		verifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
-		log.WithField("receiver", idx).Debug("Verifying receiver configuration")
+		confLog.WithField("receiver", idx).Debug("Verifying receiver configuration")
 		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
 			return nil, err
 		}
@@ -383,15 +385,15 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 func verifyItem(family string, name string, item interface{}) error {
 	i, ok := item.(skogul.Verifier)
 	if !ok {
-		log.WithFields(log.Fields{"family": family, "name": name}).Trace("No verifier found")
+		confLog.WithFields(log.Fields{"family": family, "name": name}).Trace("No verifier found")
 		return nil
 	}
 	err := i.Verify()
 	if err != nil {
-		log.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
+		confLog.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
 	}
-	log.WithFields(log.Fields{"family": family, "name": name}).Trace("Verified OK")
+	confLog.WithFields(log.Fields{"family": family, "name": name}).Trace("Verified OK")
 	return nil
 }
 
@@ -417,7 +419,7 @@ func findFieldsOfStruct(T reflect.Type) []string {
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
 	configFamily, ok := (*rawConfig)[family].(map[string]interface{})
 	if !ok {
-		log.WithFields(log.Fields{
+		confLog.WithFields(log.Fields{
 			"family":  family,
 			"section": section,
 		}).Warnf("Failed to cast config family to map[string]interface{}")
@@ -426,7 +428,7 @@ func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 
 	configSection, ok := configFamily[section].(map[string]interface{})
 	if !ok {
-		log.WithFields(log.Fields{
+		confLog.WithFields(log.Fields{
 			"family":  family,
 			"section": section,
 		}).Warnf("Failed to cast config section to map[string]interface{}")
@@ -458,7 +460,7 @@ func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, ha
 		}
 		if !propertyDefined {
 			superfluousProperties = append(superfluousProperties, prop)
-			log.WithField("property", prop).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
+			confLog.WithField("property", prop).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
 		}
 	}
 

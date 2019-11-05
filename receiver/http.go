@@ -30,9 +30,10 @@ import (
 	"net/http"
 
 	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
+
+var httpLog = skogul.Logger("receiver", "http")
 
 /*
 HTTP accepts HTTP connections on the Address specified, and requires at
@@ -86,7 +87,7 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 	b := make([]byte, r.ContentLength)
 
 	if n, err := io.ReadFull(r.Body, b); err != nil {
-		log.WithFields(log.Fields{
+		httpLog.WithFields(log.Fields{
 			"address":  r.RemoteAddr,
 			"error":    err,
 			"numbytes": n,
@@ -121,19 +122,19 @@ func (htt *HTTP) Start() error {
 	serveMux := http.NewServeMux()
 	server.Handler = serveMux
 	if htt.Username != "" {
-		log.WithField("username", htt.Username).Debug("Enforcing basic authentication")
+		httpLog.WithField("username", htt.Username).Debug("Enforcing basic authentication")
 		if htt.Password == "" {
-			log.Fatal("HTTP receiver has a Username provided, but not a password? Probably a mistake.")
+			httpLog.Fatal("HTTP receiver has a Username provided, but not a password? Probably a mistake.")
 		}
 		htt.auth = true
 	} else {
 		if htt.Password != "" {
-			log.Fatal("Password provided for HTTP receiver, but not a username? Probably a mistake.")
+			httpLog.Fatal("Password provided for HTTP receiver, but not a username? Probably a mistake.")
 		}
 		htt.auth = false
 	}
 	for idx, h := range htt.Handlers {
-		log.WithFields(log.Fields{
+		httpLog.WithFields(log.Fields{
 			"configuredHandler": idx,
 			"selectedHandler":   h.Name,
 		}).Debug("Adding handler")
@@ -142,11 +143,11 @@ func (htt *HTTP) Start() error {
 
 	server.Addr = htt.Address
 	if htt.Certfile != "" {
-		log.WithField("address", htt.Address).Info("Starting http receiver with TLS")
-		log.Fatal(server.ListenAndServeTLS(htt.Certfile, htt.Keyfile))
+		httpLog.WithField("address", htt.Address).Info("Starting http receiver with TLS")
+		httpLog.Fatal(server.ListenAndServeTLS(htt.Certfile, htt.Keyfile))
 	} else {
-		log.WithField("address", htt.Address).Info("Starting INSECURE http receiver (no TLS)")
-		log.Fatal(server.ListenAndServe())
+		httpLog.WithField("address", htt.Address).Info("Starting INSECURE http receiver (no TLS)")
+		httpLog.Fatal(server.ListenAndServe())
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
 }
@@ -154,12 +155,12 @@ func (htt *HTTP) Start() error {
 // Verify verifies the configuration for the HTTP receiver
 func (htt *HTTP) Verify() error {
 	if htt.Handlers == nil || len(htt.Handlers) == 0 {
-		log.Error("No handlers specified. Need at least one.")
+		httpLog.Error("No handlers specified. Need at least one.")
 		return skogul.Error{Source: "http receiver", Reason: "No handlers specified. Need at least one."}
 	}
 
 	if htt.Address == "" {
-		log.Warn("Missing listen address for http receiver, using Go default")
+		httpLog.Warn("Missing listen address for http receiver, using Go default")
 	}
 
 	return nil

@@ -30,10 +30,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
+
+var debugLog = skogul.Logger("sender", "debug")
 
 /*
 Debug sender simply prints the metrics in json-marshalled format to
@@ -47,7 +47,7 @@ type Debug struct {
 func (db *Debug) Send(c *skogul.Container) error {
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {
-		log.WithError(err).Panic("Unable to marshal json for debug output")
+		debugLog.WithError(err).Panic("Unable to marshal json for debug output")
 		return err
 	}
 	fmt.Printf("%s%s\n", db.Prefix, b)
@@ -72,7 +72,7 @@ type Sleeper struct {
 func (sl *Sleeper) Send(c *skogul.Container) error {
 	d := sl.Base.Duration + time.Duration(rand.Float64()*float64(sl.MaxDelay.Duration))
 	if sl.Verbose {
-		log.WithField("duration", d).Debug("Sleeping")
+		debugLog.WithField("duration", d).Debug("Sleeping")
 	}
 	time.Sleep(d)
 	return sl.Next.S.Send(c)

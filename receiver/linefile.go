@@ -28,10 +28,10 @@ import (
 	"os"
 	"time"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
+
+var lfLog = skogul.Logger("receiver", "linefile")
 
 // LineFile will keep reading File over and over again, assuming one
 // collection per line. Best suited for pointing at a FIFO, which will
@@ -46,18 +46,18 @@ type LineFile struct {
 func (lf *LineFile) read() error {
 	f, err := os.Open(lf.File)
 	if err != nil {
-		log.WithError(err).WithField("file", lf.File).Error("Unable to open file")
+		lfLog.WithError(err).WithField("file", lf.File).Error("Unable to open file")
 		return err
 	}
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		bytes := scanner.Bytes()
 		if err := lf.Handler.H.Handle(bytes); err != nil {
-			log.WithError(err).Error("Failed to send metric")
+			lfLog.WithError(err).Error("Failed to send metric")
 		}
 	}
 	if err := scanner.Err(); err != nil {
-		log.WithError(err).Error("Error reading file")
+		lfLog.WithError(err).Error("Error reading file")
 		return skogul.Error{Reason: "Error reading file"}
 	}
 	return nil

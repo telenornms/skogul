@@ -25,12 +25,13 @@ package transformer
 
 import (
 	"fmt"
-	"log"
 	"regexp"
 	"sync"
 
 	"github.com/telenornms/skogul"
 )
+
+var repLog = skogul.Logger("transformer", "edit")
 
 // Replace executes a regular expression replacement of metric metadata.
 type Replace struct {
@@ -73,7 +74,7 @@ func (replace *Replace) Transform(c *skogul.Container) error {
 			// the same memory, which can create unexpected
 			// behavior if other transformers want to modify
 			// just one of the headers.
-			log.Printf("Unable to transform non-string field %s with content %v", replace.Source, c.Metrics[mi].Metadata[replace.Source])
+			repLog.WithField("source", replace.Source).Printf("Unable to transform non-string field %s with content %v", replace.Source, c.Metrics[mi].Metadata[replace.Source])
 			// This is to confirm with the documentation and
 			// ensure that this isn't exploited by providing a
 			// bogus Source-field only to be able to provide a

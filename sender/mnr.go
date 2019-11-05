@@ -28,10 +28,10 @@ import (
 	"fmt"
 	"net"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
+
+var mnrLog = skogul.Logger("sender", "mnr")
 
 /*
 MnR sender writes to M&R port collector.
@@ -106,7 +106,7 @@ be negligible. But this should, of course, be fixed in the future.
 func (mnr *MnR) Send(c *skogul.Container) error {
 	d, err := net.Dial("tcp", mnr.Address)
 	if err != nil {
-		log.WithError(err).WithField("address", mnr.Address).Error("Failed to connect to MnR")
+		mnrLog.WithError(err).WithField("address", mnr.Address).Error("Failed to connect to MnR")
 		return skogul.Error{Source: "mnr sender", Reason: "unable to connect to MnR"}
 	}
 	for _, m := range c.Metrics {

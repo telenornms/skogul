@@ -27,9 +27,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
-
-	log "github.com/sirupsen/logrus"
 )
+
+var dataLog = Logger("core", "data")
 
 /*
 Container is the top-level object for one or more metric.
@@ -187,7 +187,7 @@ func (c *Container) Validate() error {
 func (c Container) String() string {
 	b, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {
-		log.WithError(err).Error("Unable to marshal JSON")
+		dataLog.WithError(err).Error("Unable to marshal JSON")
 		return ""
 	}
 	return fmt.Sprintf("%s", b)

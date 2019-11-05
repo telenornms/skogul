@@ -41,6 +41,8 @@ import (
 	"github.com/telenornms/skogul"
 )
 
+var httpLog = skogul.Logger("sender", "http")
+
 /*
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
@@ -73,7 +75,7 @@ func getCertPool(path string) (*x509.CertPool, error) {
 	cp := x509.NewCertPool()
 	fd, err := os.Open(path)
 	if err != nil {
-		log.Printf("unable to open alternate root CA: %v", err)
+		httpLog.Printf("unable to open alternate root CA: %v", err)
 		return nil, skogul.Error{Source: "http sender", Reason: "unable to open custom root CA", Next: err}
 	}
 	defer func() {
@@ -82,12 +84,12 @@ func getCertPool(path string) (*x509.CertPool, error) {
 	bytes := make([]byte, 1024000)
 	n, err := fd.Read(bytes)
 	if err != nil {
-		log.Printf("unable to read root ca: %v", err)
+		httpLog.Printf("unable to read root ca: %v", err)
 		return nil, skogul.Error{Source: "http sender", Reason: "unable to read custom root CA", Next: err}
 	}
 	ok := cp.AppendCertsFromPEM(bytes[:n])
 	if !ok {
-		log.Printf("unable to append certificate to cert pool")
+		httpLog.Printf("unable to append certificate to cert pool")
 		return nil, skogul.Error{Source: "http sender", Reason: "unable to append certificate to root CA pool"}
 	}
 	return cp, nil
@@ -99,7 +101,7 @@ func (ht *HTTP) init() {
 		ht.Timeout.Duration = 20 * time.Second
 	}
 	if ht.Insecure {
-		log.Print("Warning: Disabeling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+		httpLog.Print("Warning: Disabeling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
 	}
 	iconsph := ht.IdleConnsPerHost
 
@@ -109,7 +111,7 @@ func (ht *HTTP) init() {
 
 	cp, err := getCertPool(ht.RootCA)
 	if err != nil {
-		log.Print("Failed to initialize root CA pool")
+		httpLog.Print("Failed to initialize root CA pool")
 		return
 	}
 
@@ -132,13 +134,13 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	})
 	if !ht.ok {
 		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
-		log.Print(e)
+		httpLog.Print(e)
 		return e
 	}
 	b, err := json.Marshal(*c)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
-		log.WithError(e).Error("Configuring HTTP sender failed")
+		httpLog.WithError(e).Error("Configuring HTTP sender failed")
 		return e
 	}
 	var buffer bytes.Buffer
@@ -148,7 +150,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 			ht.Timeout.Duration = 20 * time.Second
 		}
 		if ht.Insecure {
-			log.Warn("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+			httpLog.Warn("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
 		}
 		iconsph := ht.IdleConnsPerHost
 
@@ -167,13 +169,13 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	resp, err := ht.client.Post(ht.URL, "application/json", &buffer)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to POST request", Next: err}
-		log.WithError(e).Error("Failed to do POST request")
+		httpLog.WithError(e).Error("Failed to do POST request")
 		return e
 	}
 	if resp.ContentLength > 0 {
 		tmp := make([]byte, resp.ContentLength)
 		if n, err := io.ReadFull(resp.Body, tmp); err != nil {
-			log.WithError(err).WithFields(log.Fields{
+			httpLog.WithError(err).WithFields(log.Fields{
 				"expected": resp.ContentLength,
 				"actual":   n,
 			}).Error("Failed to read http response body")
@@ -183,7 +185,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
-		log.WithError(e).Error("HTTP response status code was not in OK range")
+		httpLog.WithError(e).Error("HTTP response status code was not in OK range")
 		return e
 	}
 	return nil
