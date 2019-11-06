@@ -26,26 +26,13 @@ package skogul
 import "github.com/sirupsen/logrus"
 
 // ConfigureLogger sets up the logger based on calling parameters
-func ConfigureLogger(requestedLoglevel, logformat string) {
+func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
 	loglevel := getLogLevelFromString(requestedLoglevel)
 	logrus.SetLevel(loglevel)
 
-	textFormatter := getLogTextFormatter(logformat)
-	logrus.SetFormatter(textFormatter)
-}
-
-func getLogTextFormatter(requestedFormatter string) *logrus.TextFormatter {
-	switch requestedFormatter {
-	case "syslog":
-		return &syslogFormat
-	default:
-		return &logrus.TextFormatter{}
-	}
-}
-
-var syslogFormat = logrus.TextFormatter{
-	DisableTimestamp: true,
-	DisableColors:    true,
+	logrus.SetFormatter(&logrus.TextFormatter{
+		DisableTimestamp: !logtimestamp,
+	})
 }
 
 func getLogLevelFromString(requestedLevel string) logrus.Level {
