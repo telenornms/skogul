@@ -37,6 +37,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
+	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
@@ -47,6 +48,7 @@ var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to 
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
+var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
@@ -710,9 +712,10 @@ func help() {
 }
 
 func main() {
-	log.SetLevel(log.WarnLevel)
-
 	flag.Parse()
+
+	skogul.ConfigureLogger(*floglevel)
+
 	if *fhelp {
 		help()
 		os.Exit(0)
