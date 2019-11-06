@@ -50,10 +50,6 @@ var syslogFormat = logrus.TextFormatter{
 
 func getLogLevelFromString(requestedLevel string) logrus.Level {
 	switch requestedLevel {
-	case "p", "panic":
-		return logrus.PanicLevel
-	case "f", "fatal":
-		return logrus.FatalLevel
 	case "e", "error":
 		return logrus.ErrorLevel
 	case "w", "warn":
@@ -65,7 +61,6 @@ func getLogLevelFromString(requestedLevel string) logrus.Level {
 	case "v", "verbose", "t", "trace":
 		return logrus.TraceLevel
 	default:
-		logrus.Error("Default")
 		return logrus.WarnLevel
 	}
 }
