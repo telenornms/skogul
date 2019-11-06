@@ -33,7 +33,7 @@ import (
 func TestLogLevelForConfiguredAsInfo(t *testing.T) {
 	levelString := "info"
 	levelType := logrus.InfoLevel
-	skogul.ConfigureLogger(levelString)
+	skogul.ConfigureLogger(levelString, "")
 
 	if logrus.GetLevel() != levelType {
 		t.Errorf("Failed to set log level to info, got %v", logrus.GetLevel())
@@ -42,7 +42,7 @@ func TestLogLevelForConfiguredAsInfo(t *testing.T) {
 func TestLogLevelForConfiguredAsInfoShorthand(t *testing.T) {
 	levelString := "i"
 	levelType := logrus.InfoLevel
-	skogul.ConfigureLogger(levelString)
+	skogul.ConfigureLogger(levelString, "")
 
 	if logrus.GetLevel() != levelType {
 		t.Errorf("Failed to set log level to info, got %v", logrus.GetLevel())
@@ -51,7 +51,7 @@ func TestLogLevelForConfiguredAsInfoShorthand(t *testing.T) {
 func TestLogLevelForInvalid(t *testing.T) {
 	levelString := "abcdefgh"
 	levelType := logrus.WarnLevel
-	skogul.ConfigureLogger(levelString)
+	skogul.ConfigureLogger(levelString, "")
 
 	if logrus.GetLevel() != levelType {
 		t.Errorf("Expected loglevel to default to warn, got %v", logrus.GetLevel())

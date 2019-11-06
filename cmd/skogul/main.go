@@ -49,6 +49,7 @@ var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display")
+var flogformat = flag.String("logformat", "default", "Log format (text) to use. Either default (logrus default) or syslog.")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
@@ -714,7 +715,7 @@ func help() {
 func main() {
 	flag.Parse()
 
-	skogul.ConfigureLogger(*floglevel)
+	skogul.ConfigureLogger(*floglevel, *flogformat)
 
 	if *fhelp {
 		help()
