@@ -23,7 +23,11 @@
 
 package skogul
 
-import "github.com/sirupsen/logrus"
+import (
+	"strings"
+
+	"github.com/sirupsen/logrus"
+)
 
 // ConfigureLogger sets up the logger based on calling parameters
 func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
@@ -36,7 +40,7 @@ func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
 }
 
 func getLogLevelFromString(requestedLevel string) logrus.Level {
-	switch requestedLevel {
+	switch strings.ToLower(requestedLevel) {
 	case "e", "error":
 		return logrus.ErrorLevel
 	case "w", "warn":
