@@ -246,6 +246,17 @@ func Test_syntaxError(t *testing.T) {
       }
     }
   }`)
+	testBadConf(t,
+		`{
+	"senders": {
+		"tnet_alarms":: {
+			"type": "sql",
+			"Driver": "mysql",
+			"ConnStr":: "root:lol@/mydb",
+			"Query": "INERT INTO tnet_Alarms values(${foo})"
+		}
+	}
+}`)
 }
 func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	rawConfig := []byte(`{"receivers": {
