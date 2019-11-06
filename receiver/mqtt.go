@@ -30,8 +30,9 @@ import (
 	skmqtt "github.com/telenornms/skogul/internal/mqtt"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	log "github.com/sirupsen/logrus"
 )
+
+var mqttLog = skogul.Logger("receiver", "mqtt")
 
 /*
 MQTT connects to a MQTT broker and listens for messages on a topic.
@@ -49,7 +50,7 @@ type MQTT struct {
 func (handler *MQTT) receiver(msg mqtt.Message) {
 	err := handler.Handler.H.Handle(msg.Payload())
 	if err != nil {
-		log.WithError(err).Error("Unable to handle payload")
+		mqttLog.WithError(err).Error("Unable to handle payload")
 	}
 }
 
@@ -60,7 +61,7 @@ func (handler *MQTT) Start() error {
 	handler.mc.Password = handler.Password
 	handler.mc.Init()
 	handler.mc.Subscribe(handler.mc.Topic, handler.receiver)
-	log.WithField("address", handler.Address).Debug("Starting MQTT receiver")
+	mqttLog.WithField("address", handler.Address).Debug("Starting MQTT receiver")
 	handler.mc.Connect()
 	// Note that handler.listen() DOES return, because it only sets up
 	// subscriptions. This sillyness is to satisfy the requirement that

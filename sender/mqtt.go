@@ -27,11 +27,11 @@ import (
 	"encoding/json"
 	"sync"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 	skmqtt "github.com/telenornms/skogul/internal/mqtt"
 )
+
+var mqttLog = skogul.Logger("sender", "mqtt")
 
 /*
 MQTT Sender publishes messages on a MQTT message bus.
@@ -56,7 +56,7 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 	})
 	b, err := json.MarshalIndent(*c, "", "  ")
 	if err != nil {
-		log.WithError(err).Panic("Unable to marshal json for debug output")
+		mqttLog.WithError(err).Panic("Unable to marshal json for debug output")
 		return err
 	}
 	handler.mc.Client.Publish(handler.mc.Topic, 0, false, b)

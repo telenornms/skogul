@@ -30,8 +30,6 @@ import (
 	"os"
 	"sync"
 
-	log "github.com/sirupsen/logrus"
-
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
 	"github.com/telenornms/skogul"
@@ -44,6 +42,8 @@ const (
 	marshalData = iota
 	marshalMeta = iota
 )
+
+var sqlLog = skogul.Logger("sender", "sql")
 
 type dbElement struct {
 	family int
@@ -119,7 +119,7 @@ func (sq *SQL) prep() {
 func (sq *SQL) init() {
 	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
 	if sq.initErr != nil {
-		log.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection")
+		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection")
 		return
 	}
 	sq.prep()
@@ -162,17 +162,17 @@ func (sq *SQL) Send(c *skogul.Container) error {
 		sq.init()
 	})
 	if sq.initErr != nil {
-		log.WithError(sq.initErr).Error("Database initialization failed")
+		sqlLog.WithError(sq.initErr).Error("Database initialization failed")
 		return sq.initErr
 	}
 	txn, err := sq.db.Begin()
 	if err != nil {
-		log.WithError(err).Error("Acquiring database transaction failed")
+		sqlLog.WithError(err).Error("Acquiring database transaction failed")
 		return err
 	}
 	defer func() {
 		if err != nil {
-			log.WithError(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err}).Error("Failed to send")
+			sqlLog.WithError(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err}).Error("Failed to send")
 			txn.Rollback()
 		}
 	}()

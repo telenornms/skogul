@@ -27,10 +27,10 @@ import (
 	"runtime"
 	"sync"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
+
+var detachLog = skogul.Logger("sender", "detacher")
 
 /*
 These senders are somewhat controversial, as they affect the fanout/fan-in
@@ -69,7 +69,7 @@ func (de *Detacher) consume() {
 func (de *Detacher) doInit() {
 	if de.Depth == 0 {
 		de.Depth = 1000
-		log.WithField("depth", de.Depth).Debug("No detach depth/queue depth set. Using default value.")
+		detachLog.WithField("depth", de.Depth).Debug("No detach depth/queue depth set. Using default value.")
 	}
 	de.ch = make(chan *skogul.Container, de.Depth)
 	go de.consume()
@@ -111,7 +111,7 @@ func (fo *Fanout) doInit() {
 	if fo.Workers == 0 {
 		n := runtime.NumCPU()
 		fo.Workers = n
-		log.WithField("fanout", fo.Workers).Debug("No fanout size set. Using default value")
+		detachLog.WithField("fanout", fo.Workers).Debug("No fanout size set. Using default value")
 	}
 	fo.workers = make(chan chan *skogul.Container)
 	for i := 0; i < fo.Workers; i++ {

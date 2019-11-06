@@ -27,10 +27,10 @@ import (
 	"sync"
 	"time"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
+
+var countLog = skogul.Logger("sender", "count")
 
 /*
 Counter sender emits, periodically, the flow-rate of metrics through
@@ -62,7 +62,7 @@ func (co *Counter) init() {
 	co.ch = make(chan count, 100)
 	co.up = true
 	if co.Period.Duration == 0 {
-		log.Debug("No Period set for Counter-sender. Using 1 second intervals.")
+		countLog.Debug("No Period set for Counter-sender. Using 1 second intervals.")
 		co.Period.Duration = 1 * time.Second
 	}
 	go co.getIt()
@@ -128,7 +128,7 @@ func (co *Counter) getIt() {
 			container.Metrics[0].Data["rate_metrics"] = rate.metrics
 			container.Metrics[0].Data["rate_values"] = rate.values
 			if err := co.Stats.H.TransformAndSend(&container); err != nil {
-				log.WithError(err).Error("Unable to transform and send counter stats")
+				countLog.WithError(err).Error("Unable to transform and send counter stats")
 			}
 			current = count{nil, 0, 0, 0}
 			last = *m.ts

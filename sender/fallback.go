@@ -24,8 +24,6 @@
 package sender
 
 import (
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 )
 
@@ -78,6 +76,9 @@ func (dp *Dupe) Send(c *skogul.Container) error {
 	return e
 }
 
+// logLog logs to a log. Loggingly.
+var logLog = skogul.Logger("sender", "log")
+
 /*
 Log sender simply executes log.Print() on a predefined message.
 
@@ -90,6 +91,6 @@ type Log struct {
 
 // Send logs a message and does no further processing
 func (lg Log) Send(c *skogul.Container) error {
-	log.Debug(lg.Message)
+	logLog.Debug(lg.Message)
 	return nil
 }

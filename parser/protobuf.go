@@ -30,11 +30,12 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"
 )
+
+var pbLog = skogul.Logger("parser", "protobuf")
 
 // ProtoBuf parses a byte string-representation of a Container
 type ProtoBuf struct{}
@@ -103,19 +104,19 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 		if err != nil {
 			systemId := telemetry.GetSystemId()
 			sensorName := telemetry.GetSensorName()
-			log.Printf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemId, sensorName)
+			pbLog.Printf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemId, sensorName)
 		}
 	}()
 
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
-		log.Debug("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
+		pbLog.Debug("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
 		return nil
 	}
 
 	enterpriseExtension, ok := extension.(proto.Message)
 	if !ok {
-		log.Debug("Failed to cast to juniper message")
+		pbLog.Debug("Failed to cast to juniper message")
 		return nil
 	}
 
@@ -136,19 +137,19 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 		}
 
 		if found {
-			log.Debug("Multiple extensions found, don't know what to do!")
+			pbLog.Debug("Multiple extensions found, don't know what to do!")
 			return nil
 		}
 
 		messageOnly, ok := ext.(proto.Message)
 		if !ok {
-			log.Debugf("Failed to cast to message: %v", ext)
+			pbLog.Debugf("Failed to cast to message: %v", ext)
 			return nil
 		}
 
 		jsonMessage, err = json.Marshal(messageOnly)
 		if err != nil {
-			log.WithError(err).Fatal("Failed to marshal to JSON")
+			pbLog.WithError(err).Fatal("Failed to marshal to JSON")
 			return nil
 		}
 
@@ -157,7 +158,7 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 
 	var metrics map[string]interface{}
 	if err = json.Unmarshal(jsonMessage, &metrics); err != nil {
-		log.WithError(err).Debug("Unmarshalling JSON data to string/interface map failed")
+		pbLog.WithError(err).Debug("Unmarshalling JSON data to string/interface map failed")
 		return nil
 	}
 
