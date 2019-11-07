@@ -225,11 +225,11 @@ func (h Handler) Verify() error {
 }
 
 // Logger returns a logrus.Entry pre-populated with standard Skogul fields.
-// sourceType is the typical family of the code/module:
-// sender/receiver/parser/transformer/core, while sourceName is the local
-// implementation.
-func Logger(sourceType, sourceName string) *logrus.Entry {
-	return logrus.WithField("source", sourceType).WithField(sourceType, sourceName)
+// category is the typical family of the code/module:
+// sender/receiver/parser/transformer/core, while implementation is the
+// local implementation (http, json, protobuf, udp, etc).
+func Logger(category, implementation string) *logrus.Entry {
+	return logrus.WithField("category", category).WithField(category, implementation)
 }
 
 // AssertErrors counts the number of assert errors
