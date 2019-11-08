@@ -1,0 +1,36 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: build
+  image: golang
+  commands:
+  - go build ./cmd/skogul
+
+- name: test
+  image: golang
+  commands:
+  - go test
+
+- name: prepare-release
+  image: golang
+  commands:
+  - ./skogul -make-man > skogul.rst
+  when:
+    event: tag
+
+- name: publish
+  image: plugins/github-release
+  settings:
+    title: ${DRONE_TAG}
+    api_key:
+      from_secret: github_release_api_key
+    files:
+      - skogul
+      - skogul.rst
+    checksum:
+      - sha256
+  when:
+    event: tag
