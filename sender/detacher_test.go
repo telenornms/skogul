@@ -90,7 +90,7 @@ func TestFanout(t *testing.T) {
 	tst.TestQuick(t, fanout, &c, 0)
 
 	diff = time.Since(start)
-	if diff > (120 * time.Millisecond) {
+	if diff > (150 * time.Millisecond) {
 		t.Errorf("Took too long sending to the fanout-sender. Took more than 120ms (%v). Should be ~100ms.", diff)
 	}
 	// Should block, have 1 received as one worker clears up.
