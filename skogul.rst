@@ -57,11 +57,17 @@ OPTIONS
 ``-help``
 	Print more help (default false)
 
+``-loglevel`` string
+	Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose) (default warn)
+
 ``-make-man``
 	Output RST documentation suited for rst2man (default false)
 
 ``-show``
 	Print the parsed JSON config instead of starting (default false)
+
+``-timestamp``
+	Include timestamp in log entries (default true)
 
 
 CONFIGURATION
