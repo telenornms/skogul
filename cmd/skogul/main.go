@@ -48,7 +48,7 @@ var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to 
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
-var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display")
+var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 
 // man generates an RST document suited for converting to a manual page
