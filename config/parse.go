@@ -335,24 +335,17 @@ func resolveHandlers(c *Config) error {
 
 func resolveTransformers(c *Config) error {
 	logger := confLog.WithField("method", "resolveTransformers")
-	for transformerName, t := range c.Transformers {
+	for transformerName, t := range skogul.TransformerMap {
 		logger = logger.WithField("transformer", transformerName)
 
-		if c.Transformers[transformerName] != nil {
+		if c.Transformers[t.Name] != nil {
 			logger.Debug("Using predefined transformer")
-		} else if transformerName == "templater" {
-			logger.Debug("Using templating transformer")
 		} else {
 			logger.Error("Unknown transformer")
-			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", transformerName)}
+			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
 		}
 
-		tRef := skogul.TransformerRef{
-			Name: transformerName,
-			T:    &t.Transformer,
-		}
-
-		skogul.TransformerMap = append(skogul.TransformerMap, &tRef)
+		t.T = &c.Transformers[t.Name].Transformer
 	}
 	return nil
 }
