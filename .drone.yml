@@ -21,7 +21,7 @@ steps:
   commands:
   - apt update
   - apt -y install python-docutils
-  - go generate
+  - ./make-release.sh
   when:
     event: tag
 
@@ -34,9 +34,7 @@ steps:
     api_key:
       from_secret: github_release_api_key
     files:
-      - skogul
-      - skogul.rst
-      - skgoul.1
+      - skogul-*.tar.bz2
     checksum:
       - sha256
   when:
