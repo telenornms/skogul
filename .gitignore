@@ -1,6 +1,10 @@
 cmd/skogul/skogul
 /skogul
 
+# for release-mechanics
+/*.tar.bz2
+/dist
+
 # Don't check vendored files in
 vendor
 
