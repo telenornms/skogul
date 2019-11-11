@@ -34,8 +34,6 @@ import (
 	"strings"
 
 	"github.com/sirupsen/logrus"
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
@@ -417,15 +415,15 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 func verifyItem(family string, name string, item interface{}) error {
 	i, ok := item.(skogul.Verifier)
 	if !ok {
-		confLog.WithFields(log.Fields{"family": family, "name": name}).Trace("No verifier found")
+		confLog.WithFields(logrus.Fields{"family": family, "name": name}).Trace("No verifier found")
 		return nil
 	}
 	err := i.Verify()
 	if err != nil {
-		confLog.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
+		confLog.WithFields(logrus.Fields{"family": family, "name": name}).Error("Invalid item configuration")
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
 	}
-	confLog.WithFields(log.Fields{"family": family, "name": name}).Trace("Verified OK")
+	confLog.WithFields(logrus.Fields{"family": family, "name": name}).Trace("Verified OK")
 	return nil
 }
 
@@ -451,7 +449,7 @@ func findFieldsOfStruct(T reflect.Type) []string {
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
 	configFamily, ok := (*rawConfig)[family].(map[string]interface{})
 	if !ok {
-		confLog.WithFields(log.Fields{
+		confLog.WithFields(logrus.Fields{
 			"family":  family,
 			"section": section,
 		}).Warnf("Failed to cast config family to map[string]interface{}")
@@ -460,7 +458,7 @@ func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 
 	configSection, ok := configFamily[section].(map[string]interface{})
 	if !ok {
-		confLog.WithFields(log.Fields{
+		confLog.WithFields(logrus.Fields{
 			"family":  family,
 			"section": section,
 		}).Warnf("Failed to cast config section to map[string]interface{}")
