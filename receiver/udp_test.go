@@ -75,12 +75,12 @@ func init() {
 	"receivers": {
 		"udp1": {
 			"type": "udp",
-			"address": "[::1]:1939",
+			"address": "localhost:1939",
 			"handler": "protobuf"
 		},
 		"udp2": {
 			"type": "udp",
-			"address": "[::1]:1959",
+			"address": "localhost:1959",
 			"handler": "json"
 		}
 	},
@@ -105,19 +105,27 @@ func init() {
 	pFile = readProtobufFile("../parser/testdata/protobuf-packet.bin")
 	var udpAddr1 *net.UDPAddr
 	var udpAddr2 *net.UDPAddr
-	udpAddr1, err = net.ResolveUDPAddr("udp", "[::1]:1939")
+	udpAddr1, err = net.ResolveUDPAddr("udp", "localhost:1939")
 	if err != nil {
 		fmt.Printf("Failed to resolve: %v\n", err)
 		os.Exit(1)
 	}
-	udpAddr2, err = net.ResolveUDPAddr("udp", "[::1]:1959")
+	udpAddr2, err = net.ResolveUDPAddr("udp", "localhost:1959")
 	if err != nil {
 		fmt.Printf("Failed to resolve: %v\n", err)
 		os.Exit(1)
 	}
-	u1, _ = net.DialUDP("udp", nil, udpAddr1)
+	u1, err = net.DialUDP("udp", nil, udpAddr1)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
 	u1.SetWriteBuffer(9000)
-	u2, _ = net.DialUDP("udp", nil, udpAddr2)
+	u2, err = net.DialUDP("udp", nil, udpAddr2)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
 	u2.SetWriteBuffer(9000)
 
 	rUDP1 := uConfig.Receivers["udp1"].Receiver.(*receiver.UDP)

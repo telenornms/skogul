@@ -56,7 +56,7 @@ func TestHttp_stack(t *testing.T) {
 	one := &(sender.Test{})
 
 	port := 1337 + rand.Intn(100)
-	adr := fmt.Sprintf("[::1]:%d", port)
+	adr := fmt.Sprintf("localhost:%d", port)
 	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
 	rcv := receiver.HTTP{Address: adr, Handlers: map[string]*skogul.HandlerRef{"/": {H: &h}}}
 	//	rcv.Handle("/", &h)
@@ -67,7 +67,7 @@ func TestHttp_stack(t *testing.T) {
 	blank := skogul.Container{}
 	one.TestNegative(t, &hs, &blank)
 
-	hs2 := sender.HTTP{URL: "http://[::1]:1/foobar"}
+	hs2 := sender.HTTP{URL: "http://localhost:1/foobar"}
 
 	err := hs2.Send(&validContainer)
 	if err == nil {
@@ -81,7 +81,7 @@ func TestHttp_rootCa(t *testing.T) {
    "senders": {
      "ok1": {
        "type": "http",
-       "url": "https://[::1]/write?db=foo",
+       "url": "https://localhost/write?db=foo",
        "rootca": "testdata/cacert-snakeoil.pem"
      }
    }
@@ -98,7 +98,7 @@ func TestHttp_rootCa_bad1(t *testing.T) {
    "senders": {
      "bad1": {
        "type": "http",
-       "url": "https://[::1]/write?db=foo",
+       "url": "https://localhost/write?db=foo",
        "rootca": "/dev/null"
      }
    }
@@ -114,7 +114,7 @@ func TestHttp_rootCa_bad2(t *testing.T) {
    "senders": {
      "bad2": {
        "type": "http",
-       "url": "https://[::1]/write?db=foo",
+       "url": "https://localhost/write?db=foo",
        "rootca": "/dev/no/proc/such/sys/file/run/lol/kek/why/are/you/still/reading/this"
      }
    }

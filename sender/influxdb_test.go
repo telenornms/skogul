@@ -35,17 +35,17 @@ func TestInfluxDB(t *testing.T) {
    "senders": {
      "ok1": {
        "type": "influxdb",
-       "url": "http://[::1]/write?db=foo",
+       "url": "http://localhost/write?db=foo",
        "measurement": "bar"
      },
      "ok2": {
        "type": "influxdb",
-       "url": "http://[::1]/write?db=foo",
+       "url": "http://localhost/write?db=foo",
        "measurementfrommetadata": "bar"
      },
      "ok1": {
        "type": "influxdb",
-       "url": "http://[::1]/write?db=foo",
+       "url": "http://localhost/write?db=foo",
        "measurement": "bar",
        "measurementfrommetadata": "baz"
      }
@@ -64,7 +64,7 @@ func TestInfluxDB_fail(t *testing.T) {
    "senders": {
      "bad": {
        "type": "influxdb",
-       "url": "http://[::1]/write?db=foo"
+       "url": "http://localhost/write?db=foo"
      }
    }
 }`)); err == nil {
@@ -87,7 +87,7 @@ func TestInfluxDB_fail(t *testing.T) {
    "senders": {
      "bad": {
        "type": "influxdb",
-       "url": "http://[::1]/write?db=foo",
+       "url": "http://localhost/write?db=foo",
        "measurement": { "foo": "bar" }
      }
    }
