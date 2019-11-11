@@ -33,7 +33,7 @@ import (
 
 const testMetadataA = `{ "sensor": "a" }`
 const testMetadataB = `{ "sensor": "b" }`
-const testData = `{ "bannable_field": "someValue", "removable_field": "someOtherValue", "data": 42 }`
+const testData = `{ "bannable_field": "someValue", "removable_field": "someOtherValue", "data": "42" }`
 
 func generateContainer() skogul.Container {
 	metric := skogul.Metric{}
