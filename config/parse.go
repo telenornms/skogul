@@ -307,20 +307,10 @@ func resolveHandlers(c *Config) error {
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
 		}
 		for _, t := range h.Transformers {
-			logger = logger.WithField("transformer", t)
+			logger = logger.WithField("transformer", t.Name)
+			logger.Debug("Using predefined transformer")
 
-			var nextT skogul.Transformer
-			if c.Transformers[t.Name] != nil {
-				logger.Debug("Using predefined transformer")
-				nextT = c.Transformers[t.Name].Transformer
-			} else if t.Name == "templater" {
-				logger.Debug("Using templating transformer")
-				nextT = transformer.Templater{}
-			} else {
-				logger.Error("Unknown transformer")
-				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
-			}
-			h.Handler.Transformers = append(h.Handler.Transformers, nextT)
+			h.Handler.Transformers = append(h.Handler.Transformers, *t.T)
 		}
 	}
 	for _, h := range skogul.HandlerMap {
@@ -356,10 +346,10 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 	if err := resolveSenders(c); err != nil {
 		return nil, err
 	}
-	if err := resolveHandlers(c); err != nil {
+	if err := resolveTransformers(c); err != nil {
 		return nil, err
 	}
-	if err := resolveTransformers(c); err != nil {
+	if err := resolveHandlers(c); err != nil {
 		return nil, err
 	}
 
