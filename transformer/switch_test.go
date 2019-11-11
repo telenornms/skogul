@@ -65,7 +65,7 @@ func TestSwitchTransformerRunsWithoutError(t *testing.T) {
 	}
 }
 
-func TestSwitchTransformer1(t *testing.T) {
+func TestSwitchTransformerRunsSpecifiedTransformer(t *testing.T) {
 	conf := testConfOk(t, `
 	{
 		"transformers": {
@@ -96,5 +96,43 @@ func TestSwitchTransformer1(t *testing.T) {
 
 	if container.Metrics[0].Data["removable_field"] != nil {
 		t.Errorf("Failed to remove field using switch transformer, 'removable_field' should be removed but is '%v'", container.Metrics[0].Data["removable_field"])
+	}
+}
+
+func TestSwitchTransformerDoesNotRunNonSpecifiedTransformer(t *testing.T) {
+	conf := testConfOk(t, `
+	{
+		"transformers": {
+			"switch": {
+				"type": "switch",
+				"cases": [
+					{
+						"when": "sensor",
+						"is": "a",
+						"transformers": ["require"]
+					}
+				]
+			},
+			"require": {
+				"type": "data",
+				"require": ["data"]
+			}
+		}
+	}`)
+
+	container := generateContainer()
+
+	err := conf.Transformers["switch"].Transformer.Transform(&container)
+
+	if err != nil {
+		t.Errorf("Switch transformer returned error %v", err)
+	}
+
+	if container.Metrics[0].Data["data"] != "42" {
+		t.Errorf("Expected transformer to not modify metrics, 'data' should be '42' but is '%v'", container.Metrics[0].Data["data"])
+	}
+
+	if container.Metrics[0].Data["removable_field"] != "someOtherValue" {
+		t.Errorf("Exptected transformer to not modify metrics, 'removable_field' should be 'someOtherValue' but is is '%v'", container.Metrics[0].Data["removable_field"])
 	}
 }
