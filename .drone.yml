@@ -36,7 +36,7 @@ steps:
     files:
       - skogul
       - skogul.rst
-      - skgoul.1
+      - skogul.1
     checksum:
       - sha256
   when:
