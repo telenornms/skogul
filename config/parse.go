@@ -323,6 +323,9 @@ func resolveHandlers(c *Config) error {
 	return nil
 }
 
+// resolveTransformers looks in the parsed config for transformers and initializes the
+// actual transformers. Zeroizes the TransformerMap after if case a new
+// config is applied without restarting.
 func resolveTransformers(c *Config) error {
 	logger := confLog.WithField("method", "resolveTransformers")
 	for transformerName, t := range skogul.TransformerMap {
@@ -337,6 +340,7 @@ func resolveTransformers(c *Config) error {
 
 		t.T = c.Transformers[t.Name].Transformer
 	}
+	skogul.TransformerMap = skogul.TransformerMap[0:0]
 	return nil
 }
 
