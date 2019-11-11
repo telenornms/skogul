@@ -47,27 +47,21 @@ func generateContainer() skogul.Container {
 	return container
 }
 
-// func generateTransformer() skogul.Transformer {
-// 	ban := transformer.Metadata{
-// 		Ban: []string{"a"},
-// 	}
-
-// 	return ban
-// }
-
-func TestSwitch1(t *testing.T) {
-	removeTransformer := transformer.Data{
-		Remove: []string{"removable_field"},
-	}
-
+func TestSwitchTransformerRunsWithoutError(t *testing.T) {
 	case1 := transformer.Case{
 		When:         "sensor",
 		Is:           "a",
-		Transformers: []string{""},
+		Transformers: []string{"remove"},
 	}
 
-	config := transformer.Switch{
+	sw := transformer.Switch{
 		Cases: []transformer.Case{case1},
 	}
 
+	container := generateContainer()
+	err := sw.Transform(&container)
+
+	if err != nil {
+		t.Errorf("Switch transformer returned err: %v", err)
+	}
 }
