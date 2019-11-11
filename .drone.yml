@@ -13,6 +13,8 @@ steps:
   image: golang
   commands:
   - go test -short ./...
+  - if [ "x$(gofmt -s -d .)" != "x" ]; then gofmt -s -d .; exit 1; fi
+  - go vet ./...
 
 - name: prepare-release
   image: golang
