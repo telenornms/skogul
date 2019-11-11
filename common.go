@@ -137,7 +137,7 @@ type HandlerRef struct {
 // TransformerRef is a string mapping to a Transformer.
 // It is used during configuration/transformer setup.
 type TransformerRef struct {
-	T    *Transformer
+	T    Transformer
 	Name string
 }
 

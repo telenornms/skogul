@@ -61,7 +61,7 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 
 			for _, wantedTransformerName := range cas.Transformers {
 				switchLogger.WithField("wantedTransformer", wantedTransformerName).Tracef("Transformer: %v", wantedTransformerName)
-				(*wantedTransformerName.T).Transform(c)
+				wantedTransformerName.T.Transform(c)
 			}
 		}
 	}
