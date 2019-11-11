@@ -30,9 +30,9 @@ import (
 // Case requires a field ("when") and a value ("is") to match
 // for the set of transformers to run
 type Case struct {
-	When         string   `doc:"Used as a conditional statement on a field"`
-	Is           string   `doc:"Used for the specific value (string) of the stated metadata field"`
-	Transformers []string `doc:"The transformers to run when the defined conditional is true"`
+	When         string                  `doc:"Used as a conditional statement on a field"`
+	Is           string                  `doc:"Used for the specific value (string) of the stated metadata field"`
+	Transformers []skogul.TransformerRef `doc:"The transformers to run when the defined conditional is true"`
 }
 
 // Switch is a wrapper for a list of cases
@@ -55,23 +55,13 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 				continue
 			}
 
-			if metadataField == condition {
-				for _, wantedTransformerName := range cas.Transformers {
-					logger = logger.WithField("wantedTransformer", wantedTransformerName)
-					for _, availableTransformer := range skogul.TransformerMap {
-						logger = logger.WithField("actualTransformer", availableTransformer.Name)
-						// HOW LOW CAN WE GO
-						// OH MY GOD
-						if wantedTransformerName == availableTransformer.Name {
-							logger.Tracef("Transforming with '%s'", availableTransformer.Name)
-							(*availableTransformer.T).Transform(c)
-							// The name check will never match multiple names, so as soon
-							// as we find a match we can break out of this loop
-							// and continue processing wanted transformers
-							break
-						}
-					}
-				}
+			if metadataField != condition {
+				continue
+			}
+
+			for _, wantedTransformerName := range cas.Transformers {
+				logger.WithField("wantedTransformer", wantedTransformerName).Tracef("Transformer: %v", wantedTransformerName)
+				(*wantedTransformerName.T).Transform(c)
 			}
 		}
 	}
