@@ -29,7 +29,7 @@ steps:
   image: plugins/github-release
   settings:
     title: Skogul ${DRONE_TAG}
-    note: ${DRONE_COMMIT_MESSAGE}
+    note: "${DRONE_COMMIT_MESSAGE}"
     draft: true
     api_key:
       from_secret: github_release_api_key
