@@ -49,9 +49,8 @@ func generateContainer() skogul.Container {
 
 func TestSwitchTransformerRunsWithoutError(t *testing.T) {
 	case1 := transformer.Case{
-		When:         "sensor",
-		Is:           "a",
-		Transformers: []string{"remove"},
+		When: "sensor",
+		Is:   "a",
 	}
 
 	sw := transformer.Switch{
