@@ -40,7 +40,7 @@ type Switch struct {
 	Cases []Case `doc:"A list of switch cases "`
 }
 
-var logger = skogul.Logger("transformer", "switch")
+var switchLogger = skogul.Logger("transformer", "switch")
 
 // Transform checks the cases and applies the matching transformers
 func (sw *Switch) Transform(c *skogul.Container) error {
@@ -51,7 +51,7 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 		for _, metric := range c.Metrics {
 			metadataField, ok := metric.Metadata[field].(string)
 			if !ok {
-				logger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
+				switchLogger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
 				continue
 			}
 
@@ -60,7 +60,7 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 			}
 
 			for _, wantedTransformerName := range cas.Transformers {
-				logger.WithField("wantedTransformer", wantedTransformerName).Tracef("Transformer: %v", wantedTransformerName)
+				switchLogger.WithField("wantedTransformer", wantedTransformerName).Tracef("Transformer: %v", wantedTransformerName)
 				(*wantedTransformerName.T).Transform(c)
 			}
 		}
