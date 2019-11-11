@@ -70,8 +70,8 @@ func (sr *SenderRef) MarshalJSON() ([]byte, error) {
 }
 
 // MarshalJSON just returns the Name of the handler reference.
-func (sr *HandlerRef) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
+func (hr *HandlerRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", hr.Name)), nil
 }
 
 // MarshalJSON just returns the Name of the transformer reference.
@@ -81,14 +81,14 @@ func (tr *TransformerRef) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON will create an entry on the HandlerMap for the parsed
 // handler reference, so the real handler can be substituted later.
-func (sr *HandlerRef) UnmarshalJSON(b []byte) error {
+func (hr *HandlerRef) UnmarshalJSON(b []byte) error {
 	var s string
 	if err := json.Unmarshal(b, &s); err != nil {
 		return err
 	}
-	sr.Name = s
-	sr.H = nil
-	HandlerMap = append(HandlerMap, sr)
+	hr.Name = s
+	hr.H = nil
+	HandlerMap = append(HandlerMap, hr)
 	return nil
 }
 
