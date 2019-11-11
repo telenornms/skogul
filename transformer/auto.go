@@ -63,4 +63,10 @@ func init() {
 		Alloc:   func() skogul.Transformer { return &Replace{} },
 		Help:    "Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.",
 	})
+	Add(Transformer{
+		Name:    "switch",
+		Aliases: []string{},
+		Alloc:   func() skogul.Transformer { return &Switch{} },
+		Help:    "Conditionally apply transformers",
+	})
 }
