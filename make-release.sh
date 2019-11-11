@@ -21,4 +21,4 @@ rst2man < dist/share/doc/skogul/skogul.rst > dist/share/man/man1/skogul.1
 cp skogul dist/bin
 cp LICENSE dist/share/doc/skogul
 cd dist
-tar cvf ../skogul-${V}.${OS}-${ARCH}.tar.bz2 .
+tar cvjf ../skogul-${V}.${OS}-${ARCH}.tar.bz2 .
