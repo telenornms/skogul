@@ -38,7 +38,7 @@ func TestTCPLine(t *testing.T) {
   "receivers": {
     "tcpline": {
       "type": "tcp",
-      "address": "[::1]:1337",
+      "address": "localhost:1337",
       "handler": "h"
     }
   },
@@ -55,7 +55,7 @@ func TestTCPLine(t *testing.T) {
     },
     "net": {
       "type": "net",
-      "address": "[::1]:1337",
+      "address": "localhost:1337",
       "network": "tcp"
     }
   }

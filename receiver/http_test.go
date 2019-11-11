@@ -46,74 +46,74 @@ func TestHttp_stack(t *testing.T) {
 	"senders": {
 		"plain_origin": {
 			"type": "http",
-			"url": "http://[::1]:1339"
+			"url": "http://localhost:1339"
 		},
 		"auth_plain_origin": {
 			"type": "http",
-			"url": "http://god:hunter2@[::1]:3000"
+			"url": "http://god:hunter2@localhost:3000"
 		},
 		"auth_plain_fail1": {
 			"type": "http",
-			"url": "http://gad:hunter2@[::1]:3000"
+			"url": "http://gad:hunter2@localhost:3000"
 		},
 		"auth_plain_fail2": {
 			"type": "http",
-			"url": "http://gad:@[::1]:3000"
+			"url": "http://gad:@localhost:3000"
 		},
 		"auth_plain_fail3": {
 			"type": "http",
-			"url": "http://:hunter2@[::1]:3000"
+			"url": "http://:hunter2@localhost:3000"
 		},
 		"auth_plain_fail4": {
 			"type": "http",
-			"url": "http://[::1]:3000"
+			"url": "http://localhost:3000"
 		},
 		"ssl_ok": {
 			"type": "http",
-			"url": "https://[::1]:3443",
+			"url": "https://localhost:3443",
 			"insecure": true
 		},
 		"ssl_bad1": {
 			"type": "http",
-			"url": "https://[::1]:3443",
+			"url": "https://localhost:3443",
 			"insecure": false
 		},
 		"ssl_bad2": {
 			"type": "http",
-			"url": "http://[::1]:3443"
+			"url": "http://localhost:3443"
 		},
 		"ssl_auth_ok": {
 			"type": "http",
-			"url": "https://god:hunter2@[::1]:5443",
+			"url": "https://god:hunter2@localhost:5443",
 			"insecure": true
 		},
 		"ssl_auth_bad1": {
 			"type": "http",
-			"url": "https://gad:hunter2@[::1]:5443",
+			"url": "https://gad:hunter2@localhost:5443",
 			"insecure": true
 		},
 		"ssl_auth_bad2": {
 			"type": "http",
-			"url": "https://god:hunter3@[::1]:5443",
+			"url": "https://god:hunter3@localhost:5443",
 			"insecure": true
 		},
 		"ssl_auth_bad3": {
 			"type": "http",
-			"url": "https://god:@[::1]:5443",
+			"url": "https://god:@localhost:5443",
 			"insecure": true
 		},
 		"ssl_auth_bad4": {
 			"type": "http",
-			"url": "https://:hunter2@[::1]:5443",
+			"url": "https://:hunter2@localhost:5443",
 			"insecure": true
 		},
 		"ssl_auth_bad5": {
 			"type": "http",
-			"url": "http://god:hunter2@[::1]:5443"
+			"url": "http://god:hunter2@localhost:5443"
 		},
 		"ssl_auth_bad6": {
 			"type": "http",
-			"url": "https://god:hunter2@[::1]:5443",
+			"url": "https://god:hunter2@localhost:5443",
 			"insecure": false
 		},
 		"common": {
@@ -123,26 +123,26 @@ func TestHttp_stack(t *testing.T) {
 	"receivers": {
 		"plain": {
 			"type": "http",
-			"address": "[::1]:1339",
+			"address": "localhost:1339",
 			"handlers": { "/": "common"}
 		},
 		"auth": {
 			"type": "http",
-			"address": "[::1]:3000",
+			"address": "localhost:3000",
 			"handlers": { "/": "common"},
 			"username": "god",
 			"password": "hunter2"
 		},
 		"ssl_noauth": {
 			"type": "http",
-			"address": "[::1]:3443",
+			"address": "localhost:3443",
 			"handlers": { "/": "common"},
 			"certfile": "../examples/cacert-snakeoil.pem",
 			"keyfile": "../examples/privkey-snakeoil.pem"
 		},
 		"ssl_auth": {
 			"type": "http",
-			"address": "[::1]:5443",
+			"address": "localhost:5443",
 			"handlers": { "/": "common"},
 			"certfile": "../examples/cacert-snakeoil.pem",
 			"keyfile": "../examples/privkey-snakeoil.pem",
@@ -236,7 +236,7 @@ func TestMain(m *testing.M) {
 	"senders": {
 		"plain_origin": {
 			"type": "http",
-			"url": "http://[::1]:1349",
+			"url": "http://localhost:1349",
 			"connsperhost": 300
 		},
 		"plain_batch": {
@@ -247,7 +247,7 @@ func TestMain(m *testing.M) {
 		},
 		"ssl_auth": {
 			"type": "http",
-			"url": "https://god:hunter2@[::1]:5449",
+			"url": "https://god:hunter2@localhost:5449",
 			"insecure": true
 		},
 		"ssl_auth_batch": {
@@ -263,12 +263,12 @@ func TestMain(m *testing.M) {
 	"receivers": {
 		"plain": {
 			"type": "http",
-			"address": "[::1]:1349",
+			"address": "localhost:1349",
 			"handlers": { "/": "common"}
 		},
 		"ssl_auth": {
 			"type": "http",
-			"address": "[::1]:5449",
+			"address": "localhost:5449",
 			"handlers": { "/": "common"},
 			"certfile": "../examples/cacert-snakeoil.pem",
 			"keyfile": "../examples/privkey-snakeoil.pem",
