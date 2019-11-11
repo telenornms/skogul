@@ -98,7 +98,7 @@ func (r *Receiver) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
-// that receiver, than unmarshals the remaining configuration onto that.
+// that receiver, then unmarshals the remaining configuration onto that.
 func (t *Transformer) UnmarshalJSON(b []byte) error {
 	type tType struct {
 		Type string
@@ -122,7 +122,7 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 }
 
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
-// that receiver, than unmarshals the remaining configuration onto that.
+// that receiver, then unmarshals the remaining configuration onto that.
 func (r *Receiver) UnmarshalJSON(b []byte) error {
 	type tType struct {
 		Type string
