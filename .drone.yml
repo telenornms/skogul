@@ -19,19 +19,24 @@ steps:
 - name: prepare-release
   image: golang
   commands:
-  - ./skogul -make-man > skogul.rst
+  - apt update
+  - apt -y install python-docutils
+  - go generate
   when:
     event: tag
 
 - name: publish
   image: plugins/github-release
   settings:
-    title: ${DRONE_TAG}
+    title: Skogul ${DRONE_TAG}
+    note: ${DRONE_COMMIT_MESSAGE}
+    draft: true
     api_key:
       from_secret: github_release_api_key
     files:
       - skogul
       - skogul.rst
+      - skgoul.1
     checksum:
       - sha256
   when:
