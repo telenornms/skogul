@@ -5,6 +5,9 @@
 .. image:: https://godoc.org/github.com/telenornms/skogul?status.svg
    :target: https://godoc.org/github.com/telenornms/skogul
 
+.. image:: https://cloud.drone.io/api/badges/telenornms/skogul/status.svg
+   :target: https://cloud.drone.io/telenornms/skogul
+
 ======================================
 Skogul - generic metric/data collector
 ======================================

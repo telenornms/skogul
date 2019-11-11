@@ -21,7 +21,7 @@ steps:
   commands:
   - apt update
   - apt -y install python-docutils
-  - ./make-release.sh
+  - ./make-release.sh ${DRONE_TAG}
   when:
     event: tag
 
