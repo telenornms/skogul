@@ -28,9 +28,8 @@ import (
 )
 
 type Case struct {
-	When   string `doc:"Used as a conditional statement on a field"`
-	Is     string `doc:"Used for the specific value of the stated field"`
-	Invert bool   `doc:"Invert the result of the conditional"`
+	When string `doc:"Used as a conditional statement on a field"`
+	Is   string `doc:"Used for the specific value (string) of the stated metadata field"`
 	// Transformers []skogul.Transformer `doc:"The transformers to run when the defined conditional is true"`
 	Transformers []string `doc:"The transformers to run when the defined conditional is true"`
 }
