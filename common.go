@@ -134,6 +134,13 @@ type HandlerRef struct {
 	Name string
 }
 
+// TransformerRef is a string mapping to a Transformer.
+// It is used during configuration/transformer setup.
+type TransformerRef struct {
+	T    *Transformer
+	Name string
+}
+
 // Error for use in regular error messages. Also outputs to log.Print().
 // Will also include e.Next, if present.
 func (e Error) Error() string {

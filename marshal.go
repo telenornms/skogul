@@ -28,6 +28,8 @@ import (
 	"errors"
 	"fmt"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 /*
@@ -41,6 +43,9 @@ var SenderMap []*SenderRef
 // HandlerMap keeps track of which named handlers exists. A configuration
 // engine needs to iterate over this and back-fill the real handlers.
 var HandlerMap []*HandlerRef
+
+// TransformerMap keeps track of the named transformers.
+var TransformerMap []*TransformerRef
 
 /*
 UnmarshalJSON will unmarshal a sender reference by creating a
@@ -69,6 +74,11 @@ func (sr *HandlerRef) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
 }
 
+// MarshalJSON just returns the Name of the transformer reference.
+func (tr *TransformerRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", tr.Name)), nil
+}
+
 // UnmarshalJSON will create an entry on the HandlerMap for the parsed
 // handler reference, so the real handler can be substituted later.
 func (sr *HandlerRef) UnmarshalJSON(b []byte) error {
@@ -79,6 +89,19 @@ func (sr *HandlerRef) UnmarshalJSON(b []byte) error {
 	sr.Name = s
 	sr.H = nil
 	HandlerMap = append(HandlerMap, sr)
+	return nil
+}
+
+// UnmarshalJSON will create an entry on the TransformerMap for the parsed
+// transformer reference, so the real transformer can be substituted later.
+func (tr *TransformerRef) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	tr.Name = s
+	tr.T = nil
+	TransformerMap = append(TransformerMap, tr)
 	return nil
 }
 

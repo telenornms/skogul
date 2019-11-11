@@ -33,6 +33,7 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
@@ -59,7 +60,7 @@ type Receiver struct {
 // Handler wraps skogul.Handler for configuration parsing.
 type Handler struct {
 	Parser       string
-	Transformers []string
+	Transformers []skogul.TransformerRef
 	Sender       skogul.SenderRef
 	Handler      skogul.Handler `json:"-"`
 }
@@ -311,15 +312,15 @@ func resolveHandlers(c *Config) error {
 			logger = logger.WithField("transformer", t)
 
 			var nextT skogul.Transformer
-			if c.Transformers[t] != nil {
+			if c.Transformers[t.Name] != nil {
 				logger.Debug("Using predefined transformer")
-				nextT = c.Transformers[t].Transformer
-			} else if t == "templater" {
+				nextT = c.Transformers[t.Name].Transformer
+			} else if t.Name == "templater" {
 				logger.Debug("Using templating transformer")
 				nextT = transformer.Templater{}
 			} else {
 				logger.Error("Unknown transformer")
-				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
+				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
 			}
 			h.Handler.Transformers = append(h.Handler.Transformers, nextT)
 		}
@@ -334,6 +335,30 @@ func resolveHandlers(c *Config) error {
 	return nil
 }
 
+func resolveTransformers(c *Config) error {
+	logger := confLog.WithField("method", "resolveTransformers")
+	for transformerName, t := range c.Transformers {
+		logger = logger.WithField("transformer", transformerName)
+
+		if c.Transformers[transformerName] != nil {
+			logger.Debug("Using predefined transformer")
+		} else if transformerName == "templater" {
+			logger.Debug("Using templating transformer")
+		} else {
+			logger.Error("Unknown transformer")
+			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", transformerName)}
+		}
+
+		tRef := skogul.TransformerRef{
+			Name: transformerName,
+			T:    &t.Transformer,
+		}
+
+		skogul.TransformerMap = append(skogul.TransformerMap, &tRef)
+	}
+	return nil
+}
+
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
 func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
@@ -341,6 +366,9 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		return nil, err
 	}
 	if err := resolveHandlers(c); err != nil {
+		return nil, err
+	}
+	if err := resolveTransformers(c); err != nil {
 		return nil, err
 	}
 

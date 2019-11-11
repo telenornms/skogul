@@ -24,7 +24,6 @@
 package transformer
 
 import (
-	log "github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
 )
 
@@ -40,11 +39,39 @@ type Switch struct {
 	Cases []Case `doc:"A list of switch cases "`
 }
 
+var logger = skogul.Logger("transformer", "switch")
+
 func (sw *Switch) Transform(c *skogul.Container) error {
 	for _, cas := range sw.Cases {
-		log.Warningf("cases: %+v", cas)
+		field := cas.When
+		condition := cas.Is
 
-		// c.
+		for _, metric := range c.Metrics {
+			metadataField, ok := metric.Metadata[field].(string)
+			if !ok {
+				logger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
+				continue
+			}
+
+			if metadataField == condition {
+				for _, wantedTransformerName := range cas.Transformers {
+					logger = logger.WithField("wantedTransformer", wantedTransformerName)
+					for _, availableTransformer := range skogul.TransformerMap {
+						logger = logger.WithField("actualTransformer", availableTransformer.Name)
+						// HOW LOW CAN WE GO
+						// OH MY GOD
+						if wantedTransformerName == availableTransformer.Name {
+							logger.Tracef("Transforming with '%s'", availableTransformer.Name)
+							(*availableTransformer.T).Transform(c)
+							// The name check will never match multiple names, so as soon
+							// as we find a match we can break out of this loop
+							// and continue processing wanted transformers
+							break
+						}
+					}
+				}
+			}
+		}
 	}
 
 	return nil
