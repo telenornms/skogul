@@ -64,3 +64,37 @@ func TestSwitchTransformerRunsWithoutError(t *testing.T) {
 		t.Errorf("Switch transformer returned err: %v", err)
 	}
 }
+
+func TestSwitchTransformer1(t *testing.T) {
+	conf := testConfOk(t, `
+	{
+		"transformers": {
+			"switch": {
+				"type": "switch",
+				"cases": [
+					{
+						"when": "sensor",
+						"is": "a",
+						"transformers": ["remove"]
+					}
+				]
+			},
+			"remove": {
+				"type": "data",
+				"remove": ["removable_field"]
+			}
+		}
+	}`)
+
+	container := generateContainer()
+
+	err := conf.Transformers["switch"].Transformer.Transform(&container)
+
+	if err != nil {
+		t.Errorf("Switch transformer returned error %v", err)
+	}
+
+	if container.Metrics[0].Data["removable_field"] != nil {
+		t.Errorf("Failed to remove field using switch transformer, 'removable_field' should be removed but is '%v'", container.Metrics[0].Data["removable_field"])
+	}
+}
