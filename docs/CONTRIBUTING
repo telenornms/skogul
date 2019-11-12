@@ -1,0 +1,53 @@
+Contributing to Skogul
+======================
+
+Skogul is, thus far, a small project. We do not want too rigid routines,
+but to make life easier for everyone, here are some guidelines for
+contributing - they are not complete or absolute:
+
+- Read and follow our code of conduct.
+- Perfection is a goal, not a requirement.
+- We accept pull requests from anyone, and we do reviews. Pull requests
+  should be limited in scope, roughly equivalent to a github issue. If the
+  pull request changes a lot of files (e.g.: change in an API that
+  requires minor adjustments to all callers), a comment in the pull
+  request explaining this and where to look to do a review is helpful.
+  E.g.: "This changes api Foo(), as seen in config/parse.go. Most files
+  changes are just reflecting this, see senders/http.go for a typical
+  example of the effect."
+- We like test cases. Write and run tests as much as possible. If you are
+  trying to fix a bug, a test case demonstrating the bug is useful. Even
+  simple test cases have value, so if you can't test all aspects of your
+  code, at least test that initialization works and that configuration
+  passes basic parsing.
+- End-user documentation is important. Write descriptive doc-strings for
+  your data structures, as they will become part of the auto-generated
+  manual page. Similarly, follow Go best-practices with regards to
+  code-documentation.
+- "gofmt -d ." is your friend.
+- Individual senders, receivers and parsers should be self-contained. You
+  have a great degree of freedom in how these are implemented, and we don't
+  worry too much about details here - but we still want test cases.
+  External interfaces are the most crucial.
+- Senders should never ever modify a metric container. If you want to, then
+  grab a copy. This ALSO means that if you want to create a new container
+  which contain a subset of other containers, you can do so without copying
+  the content of the metrics, because you are guaranteed that the content
+  will not change.
+
+The best way to seek help is to open an issue. We currently have no
+official communication channels outside of github since the community is
+small, but the closest thing you can get is probably The Gathering's
+discord: https://discordapp.com/invite/PmSTYdT - check out the
+tech-channel.
+
+The overall focus for Skogul is:
+
+1. Be simple, fast and flexible
+2. Configuration should be as self-explanatory as possible
+3. Do not make assumptions on how the data is received, transformed or
+   stored
+4. Modules should be self-contained and simple to implement
+
+Simplicity means that Skogul should seem like a no-brainer type of work
+that anyone could've written. 
