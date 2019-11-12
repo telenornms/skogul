@@ -3,6 +3,10 @@ kind: pipeline
 type: docker
 name: default
 
+platform:
+  os: linux
+  arch: amd64
+
 steps:
 - name: build
   image: golang
@@ -23,19 +27,23 @@ steps:
   - apt -y install python-docutils
   - ./make-release.sh ${DRONE_TAG}
   when:
-    event: tag
+    event:
+    - tag
 
 - name: publish
   image: plugins/github-release
   settings:
-    title: Skogul ${DRONE_TAG}
-    note: "${DRONE_COMMIT_MESSAGE}"
-    draft: true
     api_key:
       from_secret: github_release_api_key
-    files:
-      - skogul-*.tar.bz2
     checksum:
-      - sha256
+    - sha256
+    draft: true
+    files:
+    - skogul-*.tar.bz2
+    note: ${DRONE_COMMIT_MESSAGE}
+    title: Skogul ${DRONE_TAG}
   when:
-    event: tag
+    event:
+    - tag
+
+...
