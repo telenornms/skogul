@@ -68,20 +68,18 @@ type httpReturn struct {
 	Message string
 }
 
-func (auth *HTTPAuth) auth(r *http.Request) (bool, error) {
-	var authErrMsg skogul.Error
-
+func (auth *HTTPAuth) auth(r *http.Request) error {
 	if auth.Username != "" && auth.Password != "" {
 		username, pw, ok := r.BasicAuth()
 		success := ok && auth.Username == username && auth.Password == pw
 		if !success {
-			authErrMsg = skogul.Error{Source: "http receiver", Reason: "Invalid credentials"}
+			return skogul.Error{Source: "http receiver", Reason: "Invalid credentials"}
 		}
 
-		return success, authErrMsg
+		return nil
 	}
 
-	return false, nil
+	return skogul.Error{Source: "http receiver", Reason: "No matching authentication method"}
 }
 
 func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
@@ -102,13 +100,7 @@ func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, in
 
 func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error) {
 	if rcvr.auth != nil {
-		ok, err := rcvr.auth.auth(r)
-		if !ok && err == nil {
-			return 401, skogul.Error{Source: "http receiver", Reason: "Auth error"}
-		}
-
-		if !ok {
-			// !ok could be either "yeah no this didn't authenticate" or "yeah no this doesn't have access"...
+		if err := rcvr.auth.auth(r); err != nil {
 			return 401, err
 		}
 	}
