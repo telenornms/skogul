@@ -33,8 +33,7 @@ import (
 	"reflect"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
-
+	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
@@ -59,7 +58,7 @@ type Receiver struct {
 // Handler wraps skogul.Handler for configuration parsing.
 type Handler struct {
 	Parser       string
-	Transformers []string
+	Transformers []skogul.TransformerRef
 	Sender       skogul.SenderRef
 	Handler      skogul.Handler `json:"-"`
 }
@@ -97,7 +96,7 @@ func (r *Receiver) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
-// that receiver, than unmarshals the remaining configuration onto that.
+// that receiver, then unmarshals the remaining configuration onto that.
 func (t *Transformer) UnmarshalJSON(b []byte) error {
 	type tType struct {
 		Type string
@@ -121,7 +120,7 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 }
 
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
-// that receiver, than unmarshals the remaining configuration onto that.
+// that receiver, then unmarshals the remaining configuration onto that.
 func (r *Receiver) UnmarshalJSON(b []byte) error {
 	type tType struct {
 		Type string
@@ -308,20 +307,10 @@ func resolveHandlers(c *Config) error {
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
 		}
 		for _, t := range h.Transformers {
-			logger = logger.WithField("transformer", t)
+			logger = logger.WithField("transformer", t.Name)
+			logger.Debug("Using predefined transformer")
 
-			var nextT skogul.Transformer
-			if c.Transformers[t] != nil {
-				logger.Debug("Using predefined transformer")
-				nextT = c.Transformers[t].Transformer
-			} else if t == "templater" {
-				logger.Debug("Using templating transformer")
-				nextT = transformer.Templater{}
-			} else {
-				logger.Error("Unknown transformer")
-				return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t)}
-			}
-			h.Handler.Transformers = append(h.Handler.Transformers, nextT)
+			h.Handler.Transformers = append(h.Handler.Transformers, t.T)
 		}
 	}
 	for _, h := range skogul.HandlerMap {
@@ -334,10 +323,34 @@ func resolveHandlers(c *Config) error {
 	return nil
 }
 
+// resolveTransformers looks in the parsed config for transformers and initializes the
+// actual transformers. Zeroizes the TransformerMap after if case a new
+// config is applied without restarting.
+func resolveTransformers(c *Config) error {
+	logger := confLog.WithField("method", "resolveTransformers")
+	for transformerName, t := range skogul.TransformerMap {
+		logger = logger.WithField("transformer", transformerName)
+
+		if c.Transformers[t.Name] != nil {
+			logger.Debug("Using predefined transformer")
+		} else {
+			logger.Error("Unknown transformer")
+			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
+		}
+
+		t.T = c.Transformers[t.Name].Transformer
+	}
+	skogul.TransformerMap = skogul.TransformerMap[0:0]
+	return nil
+}
+
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
 func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 	if err := resolveSenders(c); err != nil {
+		return nil, err
+	}
+	if err := resolveTransformers(c); err != nil {
 		return nil, err
 	}
 	if err := resolveHandlers(c); err != nil {
@@ -389,15 +402,15 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 func verifyItem(family string, name string, item interface{}) error {
 	i, ok := item.(skogul.Verifier)
 	if !ok {
-		confLog.WithFields(log.Fields{"family": family, "name": name}).Trace("No verifier found")
+		confLog.WithFields(logrus.Fields{"family": family, "name": name}).Trace("No verifier found")
 		return nil
 	}
 	err := i.Verify()
 	if err != nil {
-		confLog.WithFields(log.Fields{"family": family, "name": name}).Error("Invalid item configuration")
+		confLog.WithFields(logrus.Fields{"family": family, "name": name}).Error("Invalid item configuration")
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
 	}
-	confLog.WithFields(log.Fields{"family": family, "name": name}).Trace("Verified OK")
+	confLog.WithFields(logrus.Fields{"family": family, "name": name}).Trace("Verified OK")
 	return nil
 }
 
@@ -423,7 +436,7 @@ func findFieldsOfStruct(T reflect.Type) []string {
 func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
 	configFamily, ok := (*rawConfig)[family].(map[string]interface{})
 	if !ok {
-		confLog.WithFields(log.Fields{
+		confLog.WithFields(logrus.Fields{
 			"family":  family,
 			"section": section,
 		}).Warnf("Failed to cast config family to map[string]interface{}")
@@ -432,7 +445,7 @@ func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 
 	configSection, ok := configFamily[section].(map[string]interface{})
 	if !ok {
-		confLog.WithFields(log.Fields{
+		confLog.WithFields(logrus.Fields{
 			"family":  family,
 			"section": section,
 		}).Warnf("Failed to cast config section to map[string]interface{}")
