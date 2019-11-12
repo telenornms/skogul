@@ -35,6 +35,12 @@ import (
 
 var httpLog = skogul.Logger("receiver", "http")
 
+// HTTPAuth contains ways to authenticate a HTTP request, e.g. Username/Password for Basic Auth.
+type HTTPAuth struct {
+	Username string `doc:"Username for basic authentication. No authentication is required if left blank."`
+	Password string `doc:"Password for basic authentication."`
+}
+
 /*
 HTTP accepts HTTP connections on the Address specified, and requires at
 least one handler to be set up, using Handle. This is done implicitly
@@ -43,11 +49,9 @@ if the HTTP receiver is created using New()
 type HTTP struct {
 	Address  string                        `doc:"Address to listen to." example:"[::1]:80 [2001:db8::1]:443"`
 	Handlers map[string]*skogul.HandlerRef `doc:"Paths to handlers. Need at least one." example:"{\"/\": \"someHandler\" }"`
-	Username string                        `doc:"Username for basic authentication. No authentication is required if left blank."`
-	Password string                        `doc:"Password for basic authentication."`
+	Auth     map[string]*HTTPAuth          `doc:"A map corresponding to Handlers; specifying authentication for the given path, if required."`
 	Certfile string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
 	Keyfile  string                        `doc:"Path to key file for TLS."`
-	auth     bool
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -57,10 +61,28 @@ type HTTP struct {
 type receiver struct {
 	Handler  *skogul.Handler
 	settings *HTTP
+	auth     *HTTPAuth
 }
 
 type httpReturn struct {
 	Message string
+}
+
+func (auth *HTTPAuth) auth(r *http.Request) (bool, error) {
+	var authErrMsg skogul.Error
+
+	// If username is present we assume username/pw auth
+	if auth.Username != "" {
+		username, pw, ok := r.BasicAuth()
+		success := ok && auth.Username == username && auth.Password == pw
+		if !success {
+			authErrMsg = skogul.Error{Source: "http receiver", Reason: "Invalid credentials"}
+		}
+
+		return success, authErrMsg
+	}
+
+	return false, nil
 }
 
 func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
@@ -80,6 +102,18 @@ func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, in
 }
 
 func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error) {
+	if rcvr.auth != nil {
+		ok, err := rcvr.auth.auth(r)
+		if !ok && err == nil {
+			return 401, skogul.Error{Source: "http receiver", Reason: "Auth error"}
+		}
+
+		if !ok {
+			// !ok could be either "yeah no this didn't authenticate" or "yeah no this doesn't have access"...
+			return 401, err
+		}
+	}
+
 	if r.ContentLength == 0 {
 		return 400, skogul.Error{Source: "http receiver", Reason: "Missing input data"}
 	}
@@ -104,14 +138,6 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 
 // Core HTTP handler
 func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if rcvr.settings.auth {
-		user, pass, ok := r.BasicAuth()
-		if !ok || user != rcvr.settings.Username || pass != rcvr.settings.Password {
-			rcvr.answer(w, r, 401, skogul.Error{Source: "http receiver", Reason: "Authentication failed"})
-			return
-		}
-
-	}
 	code, err := rcvr.handle(w, r)
 	rcvr.answer(w, r, code, err)
 }
@@ -121,24 +147,14 @@ func (htt *HTTP) Start() error {
 	server := http.Server{}
 	serveMux := http.NewServeMux()
 	server.Handler = serveMux
-	if htt.Username != "" {
-		httpLog.WithField("username", htt.Username).Debug("Enforcing basic authentication")
-		if htt.Password == "" {
-			httpLog.Fatal("HTTP receiver has a Username provided, but not a password? Probably a mistake.")
-		}
-		htt.auth = true
-	} else {
-		if htt.Password != "" {
-			httpLog.Fatal("Password provided for HTTP receiver, but not a username? Probably a mistake.")
-		}
-		htt.auth = false
-	}
 	for idx, h := range htt.Handlers {
 		httpLog.WithFields(log.Fields{
 			"configuredHandler": idx,
 			"selectedHandler":   h.Name,
+			"hasAuth":           htt.Auth[idx] != nil,
 		}).Debug("Adding handler")
-		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt})
+
+		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt, auth: htt.Auth[idx]})
 	}
 
 	server.Addr = htt.Address
@@ -161,6 +177,10 @@ func (htt *HTTP) Verify() error {
 
 	if htt.Address == "" {
 		httpLog.Warn("Missing listen address for http receiver, using Go default")
+	}
+
+	if htt.Certfile == "" && htt.Auth != nil {
+		httpLog.Warn("HTTP receiver configured with authentication but not with TLS! Auth will happen in the open!")
 	}
 
 	return nil

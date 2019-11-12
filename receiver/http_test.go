@@ -130,8 +130,12 @@ func TestHttp_stack(t *testing.T) {
 			"type": "http",
 			"address": "localhost:3000",
 			"handlers": { "/": "common"},
-			"username": "god",
-			"password": "hunter2"
+			"auth": {
+				"/": {
+					"username": "god",
+					"password": "hunter2"
+				}
+			}
 		},
 		"ssl_noauth": {
 			"type": "http",
@@ -146,8 +150,12 @@ func TestHttp_stack(t *testing.T) {
 			"handlers": { "/": "common"},
 			"certfile": "../examples/cacert-snakeoil.pem",
 			"keyfile": "../examples/privkey-snakeoil.pem",
-			"username": "god",
-			"password": "hunter2"
+			"auth": {
+				"/": {
+					"username": "god",
+					"password": "hunter2"
+				}
+			}
 		}
 	},
 	"handlers": {
