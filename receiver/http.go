@@ -71,8 +71,7 @@ type httpReturn struct {
 func (auth *HTTPAuth) auth(r *http.Request) (bool, error) {
 	var authErrMsg skogul.Error
 
-	// If username is present we assume username/pw auth
-	if auth.Username != "" {
+	if auth.Username != "" && auth.Password != "" {
 		username, pw, ok := r.BasicAuth()
 		success := ok && auth.Username == username && auth.Password == pw
 		if !success {
