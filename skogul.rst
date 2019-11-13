@@ -531,6 +531,9 @@ Settings:
 
 	Example(s): [::1]:80 [2001:db8::1]:443
 
+``auth - map[string]*receiver.HTTPAuth``
+	A map corresponding to Handlers; specifying authentication for the given path, if required.
+
 ``certfile - string``
 	Path to certificate file for TLS. If left blank, un-encrypted HTTP is used.
 
@@ -541,6 +544,10 @@ Settings:
 
 ``keyfile - string``
 	Path to key file for TLS.
+
+Custom type ``HTTPAuth``
+
+Settings:
 
 ``password - string``
 	Password for basic authentication.
@@ -643,7 +650,6 @@ Settings:
 	Handler used to parse, transform and send data.
 
 
-
 TRANSFORMERS
 ============
 
@@ -727,6 +733,16 @@ Settings:
 
 ``field - []string``
 	Split into multiple metrics based on this field (each field denotes the path to a nested object element).
+
+switch
+------
+
+Conditionally apply transformers
+
+Settings:
+
+``cases - []transformer.Case``
+	A list of switch cases 
 
 templater
 ---------

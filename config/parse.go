@@ -112,7 +112,9 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 	if transformer.Auto[t.Type].Alloc == nil {
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad transformer %v", t.Type)}
 	}
-	t.Transformer = transformer.Auto[t.Type].Alloc()
+	var ok bool
+	t.Transformer, ok = (transformer.Auto[t.Type].Alloc()).(skogul.Transformer)
+	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &t.Transformer); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
@@ -136,7 +138,9 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	if receiver.Auto[r.Type].Alloc == nil {
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad receiver %v", r.Type)}
 	}
-	r.Receiver = receiver.Auto[r.Type].Alloc()
+	var ok bool
+	r.Receiver, ok = (receiver.Auto[r.Type].Alloc()).(skogul.Receiver)
+	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &r.Receiver); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
@@ -174,7 +178,9 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	if sender.Auto[s.Type].Alloc == nil {
 		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad sender %v", s.Type)}
 	}
-	s.Sender = sender.Auto[s.Type].Alloc()
+	var ok bool
+	s.Sender, ok = (sender.Auto[s.Type].Alloc()).(skogul.Sender)
+	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &s.Sender); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}

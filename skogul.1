@@ -553,6 +553,9 @@ Address to listen to.
 .sp
 Example(s): [::1]:80 [2001:db8::1]:443
 .TP
+.B \fBauth \- map[string]*receiver.HTTPAuth\fP
+A map corresponding to Handlers; specifying authentication for the given path, if required.
+.TP
 .B \fBcertfile \- string\fP
 Path to certificate file for TLS. If left blank, un\-encrypted HTTP is used.
 .TP
@@ -563,6 +566,12 @@ Example(s): {"/": "someHandler" }
 .TP
 .B \fBkeyfile \- string\fP
 Path to key file for TLS.
+.UNINDENT
+.sp
+Custom type \fBHTTPAuth\fP
+.sp
+Settings:
+.INDENT 0.0
 .TP
 .B \fBpassword \- string\fP
 Password for basic authentication.
@@ -745,6 +754,16 @@ Fail the transformer entirely if split is unsuccsessful on a metric container. T
 .TP
 .B \fBfield \- []string\fP
 Split into multiple metrics based on this field (each field denotes the path to a nested object element).
+.UNINDENT
+.SS switch
+.sp
+Conditionally apply transformers
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBcases \- []transformer.Case\fP
+A list of switch cases
 .UNINDENT
 .SS templater
 .sp
