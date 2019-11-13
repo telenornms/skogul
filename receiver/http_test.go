@@ -130,8 +130,12 @@ func TestHttp_stack(t *testing.T) {
 			"type": "http",
 			"address": "localhost:3000",
 			"handlers": { "/": "common"},
-			"username": "god",
-			"password": "hunter2"
+			"auth": {
+				"/": {
+					"username": "god",
+					"password": "hunter2"
+				}
+			}
 		},
 		"ssl_noauth": {
 			"type": "http",
@@ -146,8 +150,12 @@ func TestHttp_stack(t *testing.T) {
 			"handlers": { "/": "common"},
 			"certfile": "../examples/cacert-snakeoil.pem",
 			"keyfile": "../examples/privkey-snakeoil.pem",
-			"username": "god",
-			"password": "hunter2"
+			"auth": {
+				"/": {
+					"username": "god",
+					"password": "hunter2"
+				}
+			}
 		}
 	},
 	"handlers": {
@@ -225,6 +233,80 @@ func TestHttp_stack(t *testing.T) {
 	sCommon.TestQuick(t, sSSLAuthOk1, &validContainer, 1)
 	sCommon.TestNegative(t, sSSLAuthBad6, &validContainer)
 	sCommon.TestQuick(t, sSSLAuthOk1, &validContainer, 1)
+}
+
+func TestHttpHandlersWithAuth(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("TestHttpHandlersWithAuth encountered an assert errror")
+		}
+	}()
+	config, err := config.Bytes([]byte(`
+{
+	"senders": {
+		"ssl_auth_no_auth_no_auth_ok": {
+			"type": "http",
+			"url": "https://localhost:6443",
+			"insecure": true
+		},
+		"ssl_auth_no_auth_auth_ok": {
+			"type": "http",
+			"url": "https://god:hunter2@localhost:6443/auth",
+			"insecure": true
+		},
+		"ssl_auth_no_auth_no_ok": {
+			"type": "http",
+			"url": "https://god:wrong-pw@localhost:6443/auth",
+			"insecure": true
+		},
+		"common": {
+			"type": "test"
+		}
+	},
+	"receivers": {
+		"ssl_auth_and_no_auth": {
+			"type": "http",
+			"address": "localhost:6443",
+			"handlers": {
+				"/": "common",
+				"/auth": "common"
+			},
+			"certfile": "../examples/cacert-snakeoil.pem",
+			"keyfile": "../examples/privkey-snakeoil.pem",
+			"auth": {
+				"/auth": {
+					"username": "god",
+					"password": "hunter2"
+				}
+			}
+		}
+	},
+	"handlers": {
+		"common": {
+			"parser": "json",
+			"transformers": [],
+			"sender": "common"
+		}
+	}
+}`))
+
+	if err != nil {
+		t.Errorf("Failed to load config: %v", err)
+		return
+	}
+
+	sSSLAuthHandlers1 := config.Senders["ssl_auth_no_auth_no_auth_ok"].Sender.(*sender.HTTP)
+	sSSLAuthHandlers2 := config.Senders["ssl_auth_no_auth_auth_ok"].Sender.(*sender.HTTP)
+	sSSLAuthHandlers3 := config.Senders["ssl_auth_no_auth_no_ok"].Sender.(*sender.HTTP)
+	sCommon := config.Senders["common"].Sender.(*sender.Test)
+
+	rSSLAuthHandlers := config.Receivers["ssl_auth_and_no_auth"].Receiver.(*receiver.HTTP)
+
+	go rSSLAuthHandlers.Start()
+	time.Sleep(time.Duration(100 * time.Millisecond))
+	sCommon.TestQuick(t, sSSLAuthHandlers1, &validContainer, 1)
+	sCommon.TestQuick(t, sSSLAuthHandlers2, &validContainer, 1)
+	sCommon.TestNegative(t, sSSLAuthHandlers3, &validContainer)
 }
 
 var bConfig *config.Config
