@@ -244,17 +244,17 @@ func TestHttpHandlersWithAuth(t *testing.T) {
 	config, err := config.Bytes([]byte(`
 {
 	"senders": {
-		"ssl_auth_no_auth_no_auth_ok": {
+		"open_endpoint_ok": {
 			"type": "http",
 			"url": "https://localhost:6443",
 			"insecure": true
 		},
-		"ssl_auth_no_auth_auth_ok": {
+		"authentication_required_correct_details": {
 			"type": "http",
 			"url": "https://god:hunter2@localhost:6443/auth",
 			"insecure": true
 		},
-		"ssl_auth_no_auth_no_ok": {
+		"authentication_required_invalid_details": {
 			"type": "http",
 			"url": "https://god:wrong-pw@localhost:6443/auth",
 			"insecure": true
@@ -264,7 +264,7 @@ func TestHttpHandlersWithAuth(t *testing.T) {
 		}
 	},
 	"receivers": {
-		"ssl_auth_and_no_auth": {
+		"ssl_with_auth": {
 			"type": "http",
 			"address": "localhost:6443",
 			"handlers": {
@@ -295,18 +295,18 @@ func TestHttpHandlersWithAuth(t *testing.T) {
 		return
 	}
 
-	sSSLAuthHandlers1 := config.Senders["ssl_auth_no_auth_no_auth_ok"].Sender.(*sender.HTTP)
-	sSSLAuthHandlers2 := config.Senders["ssl_auth_no_auth_auth_ok"].Sender.(*sender.HTTP)
-	sSSLAuthHandlers3 := config.Senders["ssl_auth_no_auth_no_ok"].Sender.(*sender.HTTP)
+	openEndpointOk := config.Senders["open_endpoint_ok"].Sender.(*sender.HTTP)
+	authRequiredCorrectDetails := config.Senders["authentication_required_correct_details"].Sender.(*sender.HTTP)
+	authRequiredIncorrectDetails := config.Senders["authentication_required_invalid_details"].Sender.(*sender.HTTP)
 	sCommon := config.Senders["common"].Sender.(*sender.Test)
 
-	rSSLAuthHandlers := config.Receivers["ssl_auth_and_no_auth"].Receiver.(*receiver.HTTP)
+	rSSLAuthHandlers := config.Receivers["ssl_with_auth"].Receiver.(*receiver.HTTP)
 
 	go rSSLAuthHandlers.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
-	sCommon.TestQuick(t, sSSLAuthHandlers1, &validContainer, 1)
-	sCommon.TestQuick(t, sSSLAuthHandlers2, &validContainer, 1)
-	sCommon.TestNegative(t, sSSLAuthHandlers3, &validContainer)
+	sCommon.TestQuick(t, openEndpointOk, &validContainer, 1)
+	sCommon.TestQuick(t, authRequiredCorrectDetails, &validContainer, 1)
+	sCommon.TestNegative(t, authRequiredIncorrectDetails, &validContainer)
 }
 
 var bConfig *config.Config
