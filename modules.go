@@ -32,7 +32,7 @@ package skogul
 // cmd/skogul/main.go for how to extract information/help, and ultimately
 // config/parse.go for how it is applied.
 type Module struct {
-	Name    string             // short name of the module (e.g: "http"
+	Name    string             // short name of the module (e.g: "http")
 	Aliases []string           // optional aliases (e.g. "https")
 	Alloc   func() interface{} // allocation of a blank module structure
 	Extras  []interface{}      // Optional additional custom data structures that should be exposed in documentation.
