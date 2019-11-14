@@ -3,44 +3,51 @@ package config
 import (
 	"fmt"
 	"github.com/telenornms/skogul"
-	"github.com/telenornms/skogul/receiver"
-	"github.com/telenornms/skogul/sender"
-	"github.com/telenornms/skogul/transformer"
 	"reflect"
 	"unicode"
 )
 
-// fieldDoc is a structured representation of the documentation of a single
-// field in a struct, used for both senders and receivers (and more?)
-type fieldDoc struct {
+// FieldDoc is a structured representation of the documentation of a single
+// field in a struct, used for modules
+type FieldDoc struct {
 	Doc     string
 	Example string
 	Type    string
 }
 
-// Help is the relevant help for a single sender/receiver
+// Help is the relevant help for a single module
 type Help struct {
-	Name    string
-	Aliases string
-	Doc     string
-	Fields  map[string]fieldDoc
+	Name        string
+	Aliases     string
+	Doc         string
+	Fields      map[string]FieldDoc
+	CustomTypes map[string]map[string]FieldDoc
 }
 
-// HelpSender looks up documentation for a named sender and provides a
-// help-structure. Should probably be merged with HelpReceiver somewhat.
-func HelpSender(s string) (Help, error) {
-	if sender.Auto[s] == nil {
-		return Help{}, skogul.Error{Source: "config parser", Reason: "No such sender"}
+// HelpModule looks up help for a module in the specified module map. It
+// also fetches documentation for the struct fields, using reflection.
+func HelpModule(mmap skogul.ModuleMap, mod string) (Help, error) {
+	if mmap[mod] == nil {
+		return Help{}, skogul.Error{Source: "config parser", Reason: "No such module"}
 	}
-	sh := Help{}
-	sh.Name = s
-	sh.Doc = sender.Auto[s].Help
-	for _, alias := range sender.Auto[s].Aliases {
-		sh.Aliases = fmt.Sprintf("%s %s", alias, sh.Aliases)
+	mh := Help{}
+	mh.Name = mod
+	mh.Doc = mmap[mod].Help
+	for _, alias := range mmap[mod].Aliases {
+		mh.Aliases = fmt.Sprintf("%s %s", alias, mh.Aliases)
 	}
-	sh.Fields = make(map[string]fieldDoc)
-	news := sender.Auto[s].Alloc()
-	st := reflect.TypeOf(news)
+	mh.Fields, _ = getFieldDoc(mmap[mod].Alloc())
+	mh.CustomTypes = make(map[string]map[string]FieldDoc)
+	for _, extra := range mmap[mod].Extras {
+		d, name := getFieldDoc(extra)
+		mh.CustomTypes[name] = d
+	}
+	return mh, nil
+}
+
+func getFieldDoc(d interface{}) (map[string]FieldDoc, string) {
+	fields := make(map[string]FieldDoc)
+	st := reflect.TypeOf(d)
 	if st.Kind() == reflect.Ptr {
 		st = st.Elem()
 	}
@@ -50,7 +57,7 @@ func HelpSender(s string) (Help, error) {
 		if !unicode.IsUpper(rune(field.Name[0])) {
 			continue
 		}
-		fielddoc := fieldDoc{}
+		fielddoc := FieldDoc{}
 		t := fmt.Sprintf("%v", field.Type.Kind())
 		typeName := field.Type.Name()
 		typeString := field.Type.String()
@@ -66,95 +73,7 @@ func HelpSender(s string) (Help, error) {
 				fielddoc.Example = ex
 			}
 		}
-		sh.Fields[field.Name] = fielddoc
+		fields[field.Name] = fielddoc
 	}
-	return sh, nil
-}
-
-// HelpReceiver looks up documentation for a named receiver.
-func HelpReceiver(r string) (Help, error) {
-	if receiver.Auto[r] == nil {
-		return Help{}, skogul.Error{Source: "config parser", Reason: "No such receiver"}
-	}
-	sh := Help{}
-	sh.Name = r
-	sh.Doc = receiver.Auto[r].Help
-	for _, alias := range receiver.Auto[r].Aliases {
-		sh.Aliases = fmt.Sprintf("%s %s", alias, sh.Aliases)
-	}
-	sh.Fields = make(map[string]fieldDoc)
-	news := receiver.Auto[r].Alloc()
-	st := reflect.TypeOf(news)
-	if st.Kind() == reflect.Ptr {
-		st = st.Elem()
-	}
-
-	for i := 0; i < st.NumField(); i++ {
-		field := st.Field(i)
-		if !unicode.IsUpper(rune(field.Name[0])) {
-			continue
-		}
-		fielddoc := fieldDoc{}
-		t := fmt.Sprintf("%v", field.Type.Kind())
-		typeName := field.Type.Name()
-		typeString := field.Type.String()
-		if typeName != "" {
-			t = typeName
-		} else if typeString != "" {
-			t = typeString
-		}
-		fielddoc.Type = fmt.Sprintf("%s", t)
-		if doc, ok := field.Tag.Lookup("doc"); ok {
-			fielddoc.Doc = doc
-			if ex, ok := field.Tag.Lookup("example"); ok {
-				fielddoc.Example = ex
-			}
-		}
-		sh.Fields[field.Name] = fielddoc
-	}
-	return sh, nil
-}
-
-// HelpTransformer looks up documentation for a named transformer.
-func HelpTransformer(t string) (Help, error) {
-	if transformer.Auto[t] == nil {
-		return Help{}, skogul.Error{Source: "config parser", Reason: "No such transformer"}
-	}
-	sh := Help{}
-	sh.Name = t
-	sh.Doc = transformer.Auto[t].Help
-	for _, alias := range transformer.Auto[t].Aliases {
-		sh.Aliases = fmt.Sprintf("%s %s", alias, sh.Aliases)
-	}
-	sh.Fields = make(map[string]fieldDoc)
-	news := transformer.Auto[t].Alloc()
-	st := reflect.TypeOf(news)
-	if st.Kind() == reflect.Ptr {
-		st = st.Elem()
-	}
-
-	for i := 0; i < st.NumField(); i++ {
-		field := st.Field(i)
-		if !unicode.IsUpper(rune(field.Name[0])) {
-			continue
-		}
-		fielddoc := fieldDoc{}
-		ty := fmt.Sprintf("%v", field.Type.Kind())
-		typeName := field.Type.Name()
-		typeString := field.Type.String()
-		if typeName != "" {
-			ty = typeName
-		} else if typeString != "" {
-			ty = typeString
-		}
-		fielddoc.Type = fmt.Sprintf("%s", ty)
-		if doc, ok := field.Tag.Lookup("doc"); ok {
-			fielddoc.Doc = doc
-			if ex, ok := field.Tag.Lookup("example"); ok {
-				fielddoc.Example = ex
-			}
-		}
-		sh.Fields[field.Name] = fielddoc
-	}
-	return sh, nil
+	return fields, st.Name()
 }

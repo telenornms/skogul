@@ -233,18 +233,7 @@ SENDERS
 The following senders exist.
 
 `)
-	senders := []string{}
-	for idx := range sender.Auto {
-		if sender.Auto[idx].Name != idx {
-			continue // alias
-		}
-		senders = append(senders, idx)
-	}
-	sort.Strings(senders)
-	for _, s := range senders {
-		sh, _ := config.HelpSender(s)
-		thingMan(sh)
-	}
+	helpModules(sender.Auto)
 	fmt.Print(`
 RECEIVERS
 =========
@@ -252,20 +241,8 @@ RECEIVERS
 The following receivers exist.
 
 `)
-	receivers := []string{}
-	for idx := range receiver.Auto {
-		if receiver.Auto[idx].Name != idx {
-			continue // alias
-		}
-		receivers = append(receivers, idx)
-	}
-	sort.Strings(receivers)
-	for _, r := range receivers {
-		sh, _ := config.HelpReceiver(r)
-		thingMan(sh)
-	}
+	helpModules(receiver.Auto)
 	fmt.Print(`
-
 TRANSFORMERS
 ============
 
@@ -275,18 +252,7 @@ does not need to be defined - if a handler lists "templater", one will be
 created behind the scenes. The available transformers are:
 
 `)
-	transformers := []string{}
-	for idx := range transformer.Auto {
-		if transformer.Auto[idx].Name != idx {
-			continue // alias
-		}
-		transformers = append(transformers, idx)
-	}
-	sort.Strings(transformers)
-	for _, r := range transformers {
-		sh, _ := config.HelpTransformer(r)
-		thingMan(sh)
-	}
+	helpModules(transformer.Auto)
 	fmt.Print(`
 HANDLERS
 ========
@@ -645,6 +611,46 @@ happens to be GPLv2 (or later). See LICENSE for details.
 
 }
 
+// helpModules iterates over a ModuleMap, printing rst-formatted help for
+// each module.
+func helpModules(mmap skogul.ModuleMap) {
+	mods := []string{}
+	for idx := range mmap {
+		if mmap[idx].Name != idx {
+			continue // alias
+		}
+		mods = append(mods, idx)
+	}
+	sort.Strings(mods)
+	for _, mod := range mods {
+		mh, _ := config.HelpModule(mmap, mod)
+		thingMan(mh)
+	}
+}
+
+// fieldDoc iterates of FieldDoc to pretty-print it for rst.
+func fieldDoc(inFields map[string]config.FieldDoc) {
+	fields := []string{}
+	doit := false
+	for n := range inFields {
+		fields = append(fields, n)
+		doit = true
+
+	}
+	if doit {
+		fmt.Printf("Settings:\n\n")
+	}
+	sort.Strings(fields)
+	for _, n := range fields {
+		f := inFields[n]
+		fmt.Printf("``%s - %s``\n\t", strings.ToLower(n), f.Type)
+		fmt.Printf("%s\n\n", strings.Replace(f.Doc, "\n", "\n\t", -1))
+		if f.Example != "" {
+			fmt.Printf("\tExample(s): %s\n\n", f.Example)
+		}
+	}
+}
+
 // thingMan is thus named because of reasons. It prints RST-formatted
 // documentation for a sender or receiver, whatever config.Help has.
 func thingMan(thing config.Help) {
@@ -657,23 +663,11 @@ func thingMan(thing config.Help) {
 	if thing.Aliases != "" {
 		fmt.Printf("Aliases: %s\n\n", thing.Aliases)
 	}
-	fields := []string{}
-	doit := false
-	for n := range thing.Fields {
-		fields = append(fields, n)
-		doit = true
-
-	}
-	if doit {
-		fmt.Printf("Settings:\n\n")
-	}
-	sort.Strings(fields)
-	for _, n := range fields {
-		f := thing.Fields[n]
-		fmt.Printf("``%s - %s``\n\t", strings.ToLower(n), f.Type)
-		fmt.Printf("%s\n\n", strings.Replace(f.Doc, "\n", "\n\t", -1))
-		if f.Example != "" {
-			fmt.Printf("\tExample(s): %s\n\n", f.Example)
+	fieldDoc(thing.Fields)
+	if len(thing.CustomTypes) > 0 {
+		for ctype, n := range thing.CustomTypes {
+			fmt.Printf("Custom type ``%s``\n\n", ctype)
+			fieldDoc(n)
 		}
 	}
 }

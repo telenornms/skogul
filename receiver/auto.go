@@ -32,78 +32,54 @@ import (
 )
 
 // Auto maps names to Receivers to allow auto configuration
-var Auto map[string]*Receiver
-
-// Receiver is the generic data for all receivers, used for
-// auto-configuration and more.
-type Receiver struct {
-	Name    string
-	Aliases []string
-	Alloc   func() skogul.Receiver
-	Help    string
-}
-
-// Add is used to announce a receiver-implementation to the world, so to
-// speak. It is exported to allow out-of-package senders to exist.
-func Add(r Receiver) error {
-	if Auto == nil {
-		Auto = make(map[string]*Receiver)
-	}
-	skogul.Assert(Auto[r.Name] == nil)
-	skogul.Assert(r.Alloc != nil)
-	for _, alias := range r.Aliases {
-		skogul.Assert(Auto[alias] == nil)
-		Auto[alias] = &r
-	}
-	Auto[r.Name] = &r
-	return nil
-}
+var Auto skogul.ModuleMap
 
 func init() {
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:    "http",
 		Aliases: []string{"https"},
-		Alloc:   func() skogul.Receiver { return &HTTP{} },
+		Alloc:   func() interface{} { return &HTTP{} },
 		Help:    "Listen for metrics on HTTP or HTTPS. Optionally requiring authentication. Each request received is passed to the handler.",
+		Extras:  []interface{}{HTTPAuth{}},
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "file",
-		Alloc: func() skogul.Receiver { return &File{} },
+		Alloc: func() interface{} { return &File{} },
 		Help:  "Reads from a file, then stops. Assumes one collection per line.",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "fifo",
-		Alloc: func() skogul.Receiver { return &LineFile{} },
+		Alloc: func() interface{} { return &LineFile{} },
 		Help:  "Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "log",
-		Alloc: func() skogul.Receiver { return &Log{} },
+		Alloc: func() interface{} { return &Log{} },
 		Help:  "Log attaches to the internal logging of Skogul and diverts log messages.",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "mqtt",
-		Alloc: func() skogul.Receiver { return &MQTT{} },
+		Alloc: func() interface{} { return &MQTT{} },
 		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "stdin",
-		Alloc: func() skogul.Receiver { return &Stdin{} },
+		Alloc: func() interface{} { return &Stdin{} },
 		Help:  "Reads from standard input, one collection per line, allowing you to pipe collections to Skogul on a command line or similar.",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "test",
-		Alloc: func() skogul.Receiver { return &Tester{} },
+		Alloc: func() interface{} { return &Tester{} },
 		Help:  "Generate dummy-data. Useful for testing, including in combination with the http sender to send dummy-data to an other skogul instance.",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "tcp",
-		Alloc: func() skogul.Receiver { return &TCPLine{} },
+		Alloc: func() interface{} { return &TCPLine{} },
 		Help:  "Listen for Skogul-formatted JSON on a tcp socket, reading one collection per line.",
 	})
-	Add(Receiver{
+	Auto.Add(skogul.Module{
 		Name:  "udp",
-		Alloc: func() skogul.Receiver { return &UDP{} },
+		Alloc: func() interface{} { return &UDP{} },
 		Help:  "Accept UDP messages, parsed by specified handler. E.g.: Protobuf.",
 	})
 }

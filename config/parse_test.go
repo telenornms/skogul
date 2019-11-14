@@ -7,6 +7,7 @@ import (
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/receiver"
+	"github.com/telenornms/skogul/sender"
 )
 
 func TestFile(t *testing.T) {
@@ -107,10 +108,10 @@ func TestByte_ok(t *testing.T) {
 
 }
 
-func TestHelpSender(t *testing.T) {
-	_, err := HelpSender("sql")
+func TestHelpModule(t *testing.T) {
+	_, err := HelpModule(sender.Auto, "sql")
 	if err != nil {
-		t.Errorf("HelpSender(\"sql\") didn't work: %v", err)
+		t.Errorf("HelpModule(sender.Auto,\"sql\") didn't work: %v", err)
 	}
 }
 

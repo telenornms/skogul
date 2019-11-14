@@ -5,68 +5,44 @@ import (
 )
 
 // Auto maps names to Transformers to allow auto configuration
-var Auto map[string]*Transformer
-
-// Transformer is the generic data for all transformers, used for
-// auto-configuration and more.
-type Transformer struct {
-	Name    string
-	Aliases []string
-	Alloc   func() skogul.Transformer
-	Help    string
-}
-
-// Add is used to announce a transformer-implementation to the world, so to
-// speak. It is exported to allow out-of-package senders to exist.
-func Add(r Transformer) error {
-	if Auto == nil {
-		Auto = make(map[string]*Transformer)
-	}
-	skogul.Assert(Auto[r.Name] == nil)
-	skogul.Assert(r.Alloc != nil)
-	for _, alias := range r.Aliases {
-		skogul.Assert(Auto[alias] == nil)
-		Auto[alias] = &r
-	}
-	Auto[r.Name] = &r
-	return nil
-}
+var Auto skogul.ModuleMap
 
 func init() {
-	Add(Transformer{
+	Auto.Add(skogul.Module{
 		Name:    "templater",
 		Aliases: []string{"template", "templating"},
-		Alloc:   func() skogul.Transformer { return Templater{} },
+		Alloc:   func() interface{} { return Templater{} },
 		Help:    "Executes metric templating. See separate documentationf or how skogul templating works.",
 	})
-	Add(Transformer{
+	Auto.Add(skogul.Module{
 		Name:    "metadata",
 		Aliases: []string{},
-		Alloc:   func() skogul.Transformer { return &Metadata{} },
+		Alloc:   func() interface{} { return &Metadata{} },
 		Help:    "Enforces custom-rules on metadata of metrics.",
 	})
-	Add(Transformer{
+	Auto.Add(skogul.Module{
 		Name:    "data",
 		Aliases: []string{},
-		Alloc:   func() skogul.Transformer { return &Data{} },
+		Alloc:   func() interface{} { return &Data{} },
 		Help:    "Enforces custom-rules for data fields of metrics.",
 	})
-	Add(Transformer{
+	Auto.Add(skogul.Module{
 		Name:    "split",
 		Aliases: []string{},
-		Alloc:   func() skogul.Transformer { return &Split{} },
+		Alloc:   func() interface{} { return &Split{} },
 		Help:    "Splits a metric into multiple metrics based on a field.",
 	})
-	Add(Transformer{
+	Auto.Add(skogul.Module{
 		Name:    "replace",
 		Aliases: []string{},
-		Alloc:   func() skogul.Transformer { return &Replace{} },
+		Alloc:   func() interface{} { return &Replace{} },
 		Help:    "Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.",
 	})
-	Add(Transformer{
+	Auto.Add(skogul.Module{
 		Name:    "switch",
 		Aliases: []string{},
-		Alloc:   func() skogul.Transformer { return &Switch{} },
+		Alloc:   func() interface{} { return &Switch{} },
 		Help:    "Conditionally apply transformers",
+		Extras:  []interface{}{Case{}},
 	})
 }
