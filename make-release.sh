@@ -20,5 +20,6 @@ go build ./cmd/skogul
 rst2man < dist/share/doc/skogul/skogul.rst > dist/share/man/man1/skogul.1
 cp skogul dist/bin
 cp LICENSE dist/share/doc/skogul
+cp -r README.rst docs/* dist/share/doc/skogul/
 cd dist
 tar cvjf ../skogul-${V}.${OS}-${ARCH}.tar.bz2 .
