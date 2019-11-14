@@ -220,9 +220,9 @@ func (h Handler) Verify() error {
 	if h.Transformers == nil {
 		return Error{Reason: "Missing parser for Handler"}
 	}
-	for _, t := range h.Transformers {
+	for i, t := range h.Transformers {
 		if t == nil {
-			return Error{Reason: "nil-transformer for Handler"}
+			return Error{Source: "handler verification", Reason: fmt.Sprintf("nil-transformer %d for Handler",i)}
 		}
 	}
 	if h.Sender == nil {

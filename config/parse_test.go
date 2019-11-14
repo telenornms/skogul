@@ -69,8 +69,13 @@ func TestByte_ok(t *testing.T) {
     "plain": {
       "parser": "json",
       "sender": "batch",
-      "transformers": []
+      "transformers": ["foo"]
     }
+  },
+  "transformers": {
+	  "foo": {
+		  "type": "templater"
+	  }
   },
   "receivers": {
     "http": {

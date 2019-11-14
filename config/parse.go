@@ -58,7 +58,7 @@ type Receiver struct {
 // Handler wraps skogul.Handler for configuration parsing.
 type Handler struct {
 	Parser       string
-	Transformers []skogul.TransformerRef
+	Transformers []*skogul.TransformerRef
 	Sender       skogul.SenderRef
 	Handler      skogul.Handler `json:"-"`
 }
@@ -246,6 +246,9 @@ func printSyntaxError(b []byte, offset int, text string) {
 // references and does a final validation.
 func Bytes(b []byte) (*Config, error) {
 	var jsonData map[string]interface{}
+	skogul.HandlerMap = skogul.HandlerMap[0:0]
+	skogul.SenderMap = skogul.SenderMap[0:0]
+	skogul.TransformerMap = skogul.TransformerMap[0:0]
 	if err := json.Unmarshal(b, &jsonData); err != nil {
 		jerr, ok := err.(*json.SyntaxError)
 		if ok {
@@ -315,8 +318,8 @@ func resolveHandlers(c *Config) error {
 		for _, t := range h.Transformers {
 			logger = logger.WithField("transformer", t.Name)
 			logger.Debug("Using predefined transformer")
-
-			h.Handler.Transformers = append(h.Handler.Transformers, c.Transformers[t.Name].Transformer)
+			skogul.Assert(t.T != nil)
+			h.Handler.Transformers = append(h.Handler.Transformers, t.T)
 		}
 	}
 	for _, h := range skogul.HandlerMap {
@@ -343,7 +346,7 @@ func resolveTransformers(c *Config) error {
 			logger.Error("Unknown transformer")
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
 		}
-
+		skogul.Assert(c.Transformers[t.Name].Transformer != nil)
 		t.T = c.Transformers[t.Name].Transformer
 	}
 	skogul.TransformerMap = skogul.TransformerMap[0:0]
