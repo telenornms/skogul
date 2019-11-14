@@ -290,7 +290,7 @@ Aliases: duplicate dup
 Settings:
 .INDENT 0.0
 .TP
-.B \fBnext \- []skogul.SenderRef\fP
+.B \fBnext \- []*skogul.SenderRef\fP
 List of senders that will receive metrics, in order.
 .UNINDENT
 .SS errdiverter
@@ -318,7 +318,7 @@ Tries the senders provided in Next, in order. E.g.: if the first responds OK, th
 Settings:
 .INDENT 0.0
 .TP
-.B \fBnext \- []skogul.SenderRef\fP
+.B \fBnext \- []*skogul.SenderRef\fP
 Ordered list of senders that will potentially receive metrics.
 .UNINDENT
 .SS fanout
@@ -764,6 +764,21 @@ Settings:
 .TP
 .B \fBcases \- []transformer.Case\fP
 A list of switch cases
+.UNINDENT
+.sp
+Custom type \fBCase\fP
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBis \- string\fP
+Used for the specific value (string) of the stated metadata field
+.TP
+.B \fBtransformers \- []*skogul.TransformerRef\fP
+The transformers to run when the defined conditional is true
+.TP
+.B \fBwhen \- string\fP
+Used as a conditional statement on a field
 .UNINDENT
 .SS templater
 .sp

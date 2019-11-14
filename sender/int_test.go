@@ -44,7 +44,7 @@ func TestDupe(t *testing.T) {
 	c := skogul.Container{}
 	one := &(sender.Test{})
 	two := &(sender.Test{})
-	dupe := sender.Dupe{Next: []skogul.SenderRef{{S: one}, {S: two}}}
+	dupe := sender.Dupe{Next: []*skogul.SenderRef{{S: one}, {S: two}}}
 
 	err := dupe.Send(&c)
 	if err != nil {
@@ -108,7 +108,7 @@ func TestFallback_fail(t *testing.T) {
 	two := &(sender.Test{})
 	three := &(sender.Test{})
 	faf := &(sender.ForwardAndFail{Next: skogul.SenderRef{S: one}})
-	fb := sender.Fallback{Next: []skogul.SenderRef{{S: faf}, {S: two}, {S: three}}}
+	fb := sender.Fallback{Next: []*skogul.SenderRef{{S: faf}, {S: two}, {S: three}}}
 
 	err := fb.Send(&c)
 	if err != nil {
