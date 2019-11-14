@@ -316,7 +316,7 @@ func resolveHandlers(c *Config) error {
 			logger = logger.WithField("transformer", t.Name)
 			logger.Debug("Using predefined transformer")
 
-			h.Handler.Transformers = append(h.Handler.Transformers, t.T)
+			h.Handler.Transformers = append(h.Handler.Transformers, c.Transformers[t.Name].Transformer)
 		}
 	}
 	for _, h := range skogul.HandlerMap {
