@@ -222,7 +222,7 @@ func (h Handler) Verify() error {
 	}
 	for i, t := range h.Transformers {
 		if t == nil {
-			return Error{Source: "handler verification", Reason: fmt.Sprintf("nil-transformer %d for Handler",i)}
+			return Error{Source: "handler verification", Reason: fmt.Sprintf("nil-transformer %d for Handler", i)}
 		}
 	}
 	if h.Sender == nil {

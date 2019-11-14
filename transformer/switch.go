@@ -30,8 +30,8 @@ import (
 // Case requires a field ("when") and a value ("is") to match
 // for the set of transformers to run
 type Case struct {
-	When         string                  `doc:"Used as a conditional statement on a field"`
-	Is           string                  `doc:"Used for the specific value (string) of the stated metadata field"`
+	When         string                   `doc:"Used as a conditional statement on a field"`
+	Is           string                   `doc:"Used for the specific value (string) of the stated metadata field"`
 	Transformers []*skogul.TransformerRef `doc:"The transformers to run when the defined conditional is true"`
 }
 
