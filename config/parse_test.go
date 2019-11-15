@@ -69,8 +69,13 @@ func TestByte_ok(t *testing.T) {
     "plain": {
       "parser": "json",
       "sender": "batch",
-      "transformers": []
+      "transformers": ["foo"]
     }
+  },
+  "transformers": {
+	  "foo": {
+		  "type": "templater"
+	  }
   },
   "receivers": {
     "http": {
@@ -258,6 +263,64 @@ func Test_syntaxError(t *testing.T) {
 		}
 	}
 }`)
+
+	_, err := Bytes([]byte(`{
+    "receivers": {
+      "udp": {
+        "type": "udp",
+        "address": "[::1]:5015",
+        "handler": "protobuf"
+      }
+    },
+    "handlers": {
+      "protobuf": {
+        "parser": "protobuf",
+        "transformers": ["remove", "remove2", "remove3", "remove4", "remove5"],
+        "sender": "print"
+      }
+    },
+    "transformers": {
+      "sw": {
+        "type": "switch",
+        "cases": [
+          {
+            "when": "sensorName",
+            "is": "junos_system_linecard_intf-exp:/junos/system/linecard/intf-exp/:/junos/system/linecard/intf-exp/:PFE",
+            "transformers": ["remove"]
+          }
+        ]
+      },
+      "remove": {
+        "type": "data",
+        "remove": ["interfaceExp_stats"]
+      },
+      "remove2": {
+        "type": "data",
+        "remove": ["interfaceExp_stats"]
+      },
+      "remove3": {
+        "type": "data",
+        "remove": ["interfaceExp_stats"]
+      },
+      "remove4": {
+        "type": "data",
+        "remove": ["interfaceExp_stats"]
+      },
+      "remove5": {
+        "type": "data",
+        "remove": ["interfaceExp_stats"]
+      }
+    },
+    "senders": {
+      "print": {
+        "type": "debug",
+        "prefix": "DEBUG"
+      }
+    }
+  }`))
+	if err != nil {
+		t.Errorf("Expected config to pass: %v", err)
+	}
 }
 func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	rawConfig := []byte(`{"receivers": {

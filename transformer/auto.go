@@ -11,7 +11,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:    "templater",
 		Aliases: []string{"template", "templating"},
-		Alloc:   func() interface{} { return Templater{} },
+		Alloc:   func() interface{} { return &Templater{} },
 		Help:    "Executes metric templating. See separate documentationf or how skogul templating works.",
 	})
 	Auto.Add(skogul.Module{

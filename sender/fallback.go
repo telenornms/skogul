@@ -45,7 +45,7 @@ This will send data to Influx normally. If Influx fails, it will send it to
 a queue. If that fails, it will print it to stdout.
 */
 type Fallback struct {
-	Next []skogul.SenderRef `doc:"Ordered list of senders that will potentially receive metrics."`
+	Next []*skogul.SenderRef `doc:"Ordered list of senders that will potentially receive metrics."`
 }
 
 // Send sends data down stream
@@ -61,7 +61,7 @@ func (fb *Fallback) Send(c *skogul.Container) error {
 
 // Dupe sender executes all provided senders in turn.
 type Dupe struct {
-	Next []skogul.SenderRef `doc:"List of senders that will receive metrics, in order."`
+	Next []*skogul.SenderRef `doc:"List of senders that will receive metrics, in order."`
 }
 
 // Send sends data down stream

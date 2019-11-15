@@ -261,7 +261,7 @@ Aliases: duplicate dup
 
 Settings:
 
-``next - []skogul.SenderRef``
+``next - []*skogul.SenderRef``
 	List of senders that will receive metrics, in order.
 
 errdiverter
@@ -289,7 +289,7 @@ Tries the senders provided in Next, in order. E.g.: if the first responds OK, th
 
 Settings:
 
-``next - []skogul.SenderRef``
+``next - []*skogul.SenderRef``
 	Ordered list of senders that will potentially receive metrics.
 
 fanout
@@ -743,6 +743,19 @@ Settings:
 
 ``cases - []transformer.Case``
 	A list of switch cases 
+
+Custom type ``Case``
+
+Settings:
+
+``is - string``
+	Used for the specific value (string) of the stated metadata field
+
+``transformers - []*skogul.TransformerRef``
+	The transformers to run when the defined conditional is true
+
+``when - string``
+	Used as a conditional statement on a field
 
 templater
 ---------
