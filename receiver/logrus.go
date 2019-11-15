@@ -56,6 +56,7 @@ func (lg *LogrusLog) Write(bytes []byte) (int, error) {
 	var data map[string]interface{}
 	if err := json.Unmarshal(bytes, &data); err != nil {
 		logrusLogLogger.Error("Failed to unmarshal logrus log for sending it to log receiver")
+		return 0, err
 	}
 
 	// Extract metadata fields from data
