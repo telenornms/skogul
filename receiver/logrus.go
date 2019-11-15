@@ -34,7 +34,6 @@ func (lg *LogrusLog) configureLogger() error {
 		*logMetadataFields = append(*logMetadataFields, field)
 	}
 	logrus.SetFormatter(&logrus.JSONFormatter{})
-	logrus.SetOutput(lg)
 	return nil
 }
 
@@ -93,8 +92,42 @@ func (lg *LogrusLog) Write(bytes []byte) (int, error) {
 func (lg *LogrusLog) Start() error {
 	logrusLogLogger.Debug("Starting logger")
 	lg.configureLogger()
+
+	h := LogrusSkogulHook{
+		Writer: lg,
+	}
+
+	logrus.AddHook(&h)
 	// for {
 	// 	time.Sleep(time.Hour * 1)
 	// }
 	return nil
+}
+
+// LogrusSkogulHook is a logrus.Hook made for skogul
+type LogrusSkogulHook struct {
+	Writer *LogrusLog
+	A      string
+}
+
+// Fire implements the logrus.Hook interface and handles each log entry
+func (hook *LogrusSkogulHook) Fire(entry *logrus.Entry) error {
+	line, err := entry.String()
+	if err != nil {
+		fmt.Println("Log entry has errors", err)
+		return err
+	}
+
+	_, err = (*hook.Writer).Write([]byte(line))
+	if err != nil {
+		fmt.Println("Write to handler failed", err)
+		return err
+	}
+
+	return nil
+}
+
+// Levels returns the log levels the hook should care about
+func (hook *LogrusSkogulHook) Levels() []logrus.Level {
+	return logrus.AllLevels
 }
