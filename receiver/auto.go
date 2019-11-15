@@ -58,6 +58,11 @@ func init() {
 		Help:  "Log attaches to the internal logging of Skogul and diverts log messages.",
 	})
 	Auto.Add(skogul.Module{
+		Name:  "logrus",
+		Alloc: func() interface{} { return &LogrusLog{} },
+		Help:  "Log attaches to the internal logging of Skogul and diverts log messages, using logrus.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "mqtt",
 		Alloc: func() interface{} { return &MQTT{} },
 		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",
