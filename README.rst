@@ -80,7 +80,7 @@ receive data and pass it on to a sender. A sender can either transmit data
 to an external source (including an other Skogul instance), or add some
 internal routing logic before passing it on to one or more other senders.
 
-.. image:: docs/basic.png
+.. image:: docs/imgs/basic.png
 
 Unlike most APIs or collectors of metrics, Skogul does NOT have a
 preference when it comes to storage engine. It is explicitly designed to
@@ -119,7 +119,7 @@ Performance
 Skogul is meant to scale well. Early tests on a laptop proved to work very
 well:
 
-.. image:: docs/skogul-rates.png
+.. image:: docs/imgs/skogul-rates.png
 
 The above graph is from a very simple test on a laptop (with a quad core
 i7), using the provided tester to write data to influxdb. It demonstrates
@@ -154,42 +154,35 @@ Hacking
 There is little "exotic" about Skogul hacking, so the following sections
 are aimed mostly at people who are unfamiliar with Go.
 
-The first place to start is the top-level ``doc.go`` documentation, aimed
-at developers.
+A few sources for more documentation:
 
-.. note::
-
-   End-user documentation is kept in ``cmd/skogul/main.go``, and source
-   code annotations for senders, receivers and transformers.
-   
-   Developer documentation is kept in-line in the source code, following
-   godoc conventions. It is available either in the code directly, through
-   ``go doc github.com/telenornms/skogul`` or  through the web, at
-   https://godoc.org/github.com/telenornms/skogul .
+- docs/CODE_OF_CONDUCT.md
+- docs/CONTRIBUTING
+- docs/CODING
+- doc.go
 
 Testing
 .......
 
 To run test cases, ``go test`` can be run. This can be used either in
-individual directories, or at the top directory, with ``go test ./...``
-(note the triple dots. This is a go-ism for recursive behavior).
+individual directories, or at the top directory, with ``go test -short ./...``
+(note the triple dots. This is a go-ism for recursive behavior). Tests are
+run automatically if you create a pull request.
+
+The ``-short`` argument disables integration tests that would otherwise
+fail unless you've set up a compatible postgres and mysql database locally.
 
 To produce coverage analysis, use::
 
    $ cd skogul
-   $ go test ./... -covermode=count -coverprofile=coverage.out
+   $ go test -short ./... -covermode=count -coverprofile=coverage.out
    $ go tool cover -html coverage.out
    // Opens a browser with coverage anlysis
-
-Be aware that the MySQL sender does not do integration testing by default,
-as that requires a working MySQL instance.
 
 Tests are extracted from ``*_test.go`` files, and start with the name
 ``Test`` followed by a function or data structure, optionally followed by
 an underscore and an arbitrary name to support multiple tests of the same
 function/type. E.g. ``TestValidate()``, ``TestHTTP_foobar()`` etc.
-
-Runnable examples follow the same style, but are named Example, not Test.
 
 Formatting etc
 ..............
@@ -216,7 +209,7 @@ are provided in the ``examples/`` directory.
 
 For development, documentation is written and maintained using code
 comments and runnable examples, following the ``godoc`` approach. Some
-architecture comments are kept in ``docs//``, but by and large,
+architecture comments are kept in ``docs/``, but by and large,
 documentation should be consumed from godoc.
 
 See https://godoc.org/github.com/telenornms/skogul for the online
@@ -229,21 +222,23 @@ where applicable.
 Roadmap
 -------
 
-The configuration backend was just introduced. It took a few iterations,
-but I don't anticipate noteworthy changes in the architecture going
-forward.
+We are doing frequent releases on github, with an ambition of reaching a
+1.0 version within some reasonable time frame, I'm guessing 2020. It
+doesn't really mean much.
 
-The new configuration backend obsoleted a previous philosophy where complex
-chains would only be available by writing the ``main``-function yourself,
-while simple chains could be access through ``skogul-x2y``, which only
-supported a small subset of senders/receivers.
+Short term work is defined in milestones on github.
 
-This shift has meant that some documentation need to be changed. Things
-that were exposed as godoc in the past was partially aimed at end-users,
-and that is simply no longer the case.
+Overall, the core modules and the scaffolding is getting pretty good. The
+new config engine is still receiving period updates, but the actual
+configuration hasn't changed much.
 
-An other thing that is sorely lacking is feedback to the end user when an
-invalid configuration is provided. It is, at best, cryptic.
+Future work to get us to 1.0 will be rounding out the new logrus-based
+logging by both rewriting the log receiver and overhauling each module to
+make our approach to logging consistent across all modules.
 
-Time-wise, we hope to do a release in 2019 when we feel Skogul is mature
-enough. It is already in use.
+Similarly, test cases need to be refreshed. Tests are written very
+isolated, and a good bit of spaghetti-logic has arisen. We have decent
+coverage, but it's getting trickier to scale test case writing.
+
+Other than that, there are modules to be written and features to be added
+which are mostly a matter of what needs arise.

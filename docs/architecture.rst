@@ -3,18 +3,24 @@ Skogul architecture
 ===================
 
 The Skogul architecture is designed around small primitives that pass
-collections of metrics around. At present, there are three primitives:
+collections of metrics around. At present, there are four primitives:
 
 - Receivers
 - Transformers
 - Senders
+- Handlers
 
 Receivers produce metrics. Typically by listening for input from external
 sources, e.g.: the http receiver listens for metrics on a HTTP interface.
 
-Transformers are executed by receivers and are used to transform input
-data. They can mutate an existing collection of metrics, but can not direct
-where output is sent and can not produce new collections. E.g.: While a
+Handlers define how raw data is parsed, transforms (or mutate) the data,
+then pass it on to a sender. Skogul currently support parsing it's own JSON
+format, or Juniper Telemetry data. A handler is used by any source of data,
+though the typical user is a receiver.
+
+Transformers are executed by handlers and are used to transform input data.
+They can mutate an existing collection of metrics, but can not direct where
+output is sent and can not produce new collections. E.g.: While a
 transformer can take metrics for a router, parse the tree and produce
 per-interface statistics and more, it can NOT determine that
 interfacestatistics will be sent to influxdb while other data will be sent
@@ -42,7 +48,7 @@ Simple example
 
 The following diagram shows the architecture by examples.
 
-.. image:: basic.png
+.. image:: imgs/basic.png
 
 The first diagram illustrates the simplest chain possible, with a single
 receiver and a single sender. 
@@ -64,7 +70,7 @@ follow the UNIX-philosophy of doing one thing and doing it well. The
 following illustrates how Skogul could provide robustness by using an
 external queue combined with a "fallback writer".
 
-.. image:: queue.jpg
+.. image:: imgs/queue.jpg
 
 Example: Multi-DC and queueing
 ==============================
@@ -72,7 +78,7 @@ Example: Multi-DC and queueing
 To support multiple data centers, multiple servers and provide high
 availability, the same mechanics as above can be further chained.
 
-.. image:: fallback-2.jpg
+.. image:: imgs/fallback-2.jpg
 
 Note that to avoid overly complex diagrams, the above does not deal with
 redundancy with regards to influx.
@@ -89,4 +95,4 @@ instances connected to Influx can then be mixed based on need. An early
 implementation might for instance send directly from Skogul to Skogul,
 while a later design might introduce a queue or bus-based architecture.
 
-.. image:: security-zones.jpg
+.. image:: imgs/security-zones.jpg
