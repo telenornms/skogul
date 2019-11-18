@@ -2,6 +2,7 @@ package receiver
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 	"time"
@@ -16,6 +17,9 @@ type LogrusLog struct {
 
 var logrusLogLogger = logrus.New()
 
+// Proxy all log entries onto this logger so we can customize its output without polluting the global logger
+var proxyLogger = logrus.New()
+
 var logMetadataFields *[]string
 
 func (lg *LogrusLog) configureLogger() error {
@@ -25,6 +29,7 @@ func (lg *LogrusLog) configureLogger() error {
 		"category": "receiver",
 		"receiver": "logrus",
 	})
+	logrusLogLogger.SetLevel(logrus.DebugLevel)
 
 	logrusLogLogger.Debug("Configuring logger")
 	metadataFields := []string{"category", "receiver", "level"}
@@ -33,7 +38,6 @@ func (lg *LogrusLog) configureLogger() error {
 	for _, field := range metadataFields {
 		*logMetadataFields = append(*logMetadataFields, field)
 	}
-	logrus.SetFormatter(&logrus.JSONFormatter{})
 	return nil
 }
 
@@ -112,13 +116,20 @@ type LogrusSkogulHook struct {
 
 // Fire implements the logrus.Hook interface and handles each log entry
 func (hook *LogrusSkogulHook) Fire(entry *logrus.Entry) error {
-	line, err := entry.String()
+	entr := entry.Data
+
+	entr["message"] = entry.Message
+	entr["time"] = entry.Time
+	entr["level"] = entry.Level
+
+	data, err := json.Marshal(entr)
+
 	if err != nil {
-		fmt.Println("Log entry has errors", err)
+		fmt.Println("Failed to convert log entry to json")
 		return err
 	}
 
-	_, err = (*hook.Writer).Write([]byte(line))
+	_, err = (*hook.Writer).Write([]byte(data))
 	if err != nil {
 		fmt.Println("Write to handler failed", err)
 		return err
