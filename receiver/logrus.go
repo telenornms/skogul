@@ -96,7 +96,7 @@ func (lg *LogrusLog) Write(bytes []byte) (int, error) {
 	timestamp, err := time.Parse(time.RFC3339, timestampData)
 	if err != nil {
 		// @ToDo: Do we want to error out if this fails?
-		logrusLogLogger.Error("Failed to parse timestamp '%s' '%s'\n", "time", timestampData)
+		logrusLogLogger.Errorf("Failed to parse timestamp '%s' '%s'\n", "time", timestampData)
 	}
 
 	m := skogul.Metric{
