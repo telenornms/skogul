@@ -70,15 +70,18 @@ func getLogLevelFromString(requestedLevel string) logrus.Level {
 	}
 }
 
+// LoggerCopyHook is simply a wrapper around a logrus logger
 type LoggerCopyHook struct {
 	Writer *logrus.Logger
 }
 
+// Fire logs the log entry onto a copied logger to stdout
 func (l *LoggerCopyHook) Fire(entry *logrus.Entry) error {
 	skogulLogger.WithFields(entry.Data).Log(entry.Level, entry.Message)
 	return nil
 }
 
+// Levels returns the levels this hook will support
 func (l *LoggerCopyHook) Levels() []logrus.Level {
 	return logrus.AllLevels
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/telenornms/skogul"
 )
 
+// LogrusLog configures the logrus log receiver
 type LogrusLog struct {
 	Handler skogul.HandlerRef
 }
