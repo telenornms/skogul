@@ -38,7 +38,7 @@ func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
 	logrus.SetLevel(logrus.TraceLevel)
 	logrus.SetOutput(ioutil.Discard)
 
-	loglevel := getLogLevelFromString(requestedLoglevel)
+	loglevel := GetLogLevelFromString(requestedLoglevel)
 	skogulLogger.SetLevel(loglevel)
 
 	skogulLogger.SetFormatter(&logrus.TextFormatter{
@@ -53,7 +53,8 @@ func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
 	logrus.AddHook(&copyHook)
 }
 
-func getLogLevelFromString(requestedLevel string) logrus.Level {
+// GetLogLevelFromString returns the matching logrus.Level from a string
+func GetLogLevelFromString(requestedLevel string) logrus.Level {
 	switch strings.ToLower(requestedLevel) {
 	case "e", "error":
 		return logrus.ErrorLevel

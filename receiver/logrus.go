@@ -13,7 +13,8 @@ import (
 
 // LogrusLog configures the logrus log receiver
 type LogrusLog struct {
-	Handler skogul.HandlerRef
+	Loglevel string
+	Handler  skogul.HandlerRef
 }
 
 var logrusLogLogger = logrus.New()
@@ -30,9 +31,9 @@ func (lg *LogrusLog) configureLogger() error {
 		"category": "receiver",
 		"receiver": "logrus",
 	})
-	logrusLogLogger.SetLevel(logrus.DebugLevel)
+	loglevel := skogul.GetLogLevelFromString(lg.Loglevel)
+	logrusLogLogger.SetLevel(loglevel)
 
-	logrusLogLogger.Debug("Configuring logger")
 	metadataFields := []string{"category", "receiver", "level"}
 	a := make([]string, 0)
 	logMetadataFields = &a
