@@ -103,9 +103,6 @@ func (lg *LogrusLog) Start() error {
 	}
 
 	logrus.AddHook(&h)
-	// for {
-	// 	time.Sleep(time.Hour * 1)
-	// }
 	return nil
 }
 
