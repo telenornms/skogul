@@ -24,7 +24,7 @@ steps:
   image: golang
   commands:
   - apt update
-  - apt -y install python-docutils
+  - apt -y install python-docutils bzip2
   - ./make-release.sh ${DRONE_TAG}
   when:
     event:
