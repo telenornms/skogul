@@ -150,7 +150,7 @@ func TestExtract(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	metadata := transformer.Metadata{
-		ExtractFromData: []string{extracted_value_key},
+		ExtractFromData: []string{extracted_value_key, "empty_key"},
 	}
 
 	err := metadata.Transform(&c)
@@ -161,6 +161,15 @@ func TestExtract(t *testing.T) {
 
 	if c.Metrics[0].Metadata[extracted_value_key] != extracted_value {
 		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Metadata[extracted_value_key])
+	}
+	if _, ok := c.Metrics[0].Data["empty_key"]; ok {
+		t.Errorf(`Data key 'empty_key' is set after extraction`)
+	}
+	if _, ok := c.Metrics[0].Metadata["empty_key"]; ok {
+		t.Errorf(`Metadata key 'empty_key' is set after extraction`)
+	}
+	if _, ok := c.Metrics[0].Data[extracted_value_key]; ok {
+		t.Errorf(`Data key %s is still set after extraction`, extracted_value_key)
 	}
 }
 

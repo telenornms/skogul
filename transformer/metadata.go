@@ -34,7 +34,7 @@ import (
 type Metadata struct {
 	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
 	Require         []string               `doc:"Require the pressence of these fields."`
-	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata."`
+	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. Removes the original."`
 	Remove          []string               `doc:"Remove these metadata fields."`
 	Ban             []string               `doc:"Fail if any of these fields are present"`
 }
@@ -54,8 +54,11 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			}
 		}
 		for _, extract := range meta.ExtractFromData {
-
+			if _, ok := c.Metrics[mi].Data[extract]; !ok {
+				continue
+			}
 			c.Metrics[mi].Metadata[extract] = c.Metrics[mi].Data[extract]
+			delete(c.Metrics[mi].Data, extract)
 		}
 		for _, value := range meta.Remove {
 			if c.Metrics[mi].Metadata == nil {
