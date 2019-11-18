@@ -23,8 +23,8 @@ steps:
 - name: prepare-release
   image: golang
   commands:
-  - apt update
-  - apt -y install python-docutils bzip2
+  - apt-get update
+  - apt-get -y install python-docutils bzip2 gawk
   - ./make-release.sh ${DRONE_TAG}
   when:
     event:
@@ -40,7 +40,7 @@ steps:
     draft: true
     files:
     - skogul-*.tar.bz2
-    note: Drone is dumb. Fill in from NEWS yourself.
+    note: notes
     title: Skogul ${DRONE_TAG}
   when:
     event:
