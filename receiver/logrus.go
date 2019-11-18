@@ -108,12 +108,7 @@ func (lg *LogrusLog) Write(bytes []byte) (int, error) {
 		Metrics: []*skogul.Metric{&m},
 	}
 
-	logEntry, err := json.Marshal(c)
-	if err != nil {
-		logrusLogLogger.Error("Failed to marshal logrus log into container")
-	}
-
-	lg.Handler.H.Handle(logEntry)
+	lg.Handler.H.TransformAndSend(&c)
 	return len(bytes), nil
 }
 
