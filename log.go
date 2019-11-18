@@ -24,19 +24,33 @@
 package skogul
 
 import (
+	"io/ioutil"
 	"strings"
 
 	"github.com/sirupsen/logrus"
 )
 
+var skogulLogger = logrus.New()
+
 // ConfigureLogger sets up the logger based on calling parameters
 func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
-	loglevel := getLogLevelFromString(requestedLoglevel)
-	logrus.SetLevel(loglevel)
+	// Disable output from the root logger; all logging is delegated through hooks
+	logrus.SetLevel(logrus.TraceLevel)
+	logrus.SetOutput(ioutil.Discard)
 
-	logrus.SetFormatter(&logrus.TextFormatter{
+	loglevel := getLogLevelFromString(requestedLoglevel)
+	skogulLogger.SetLevel(loglevel)
+
+	skogulLogger.SetFormatter(&logrus.TextFormatter{
 		DisableTimestamp: !logtimestamp,
 	})
+
+	copyHook := LoggerCopyHook{
+		Writer: skogulLogger,
+	}
+
+	// Add a hook to a new logger which outputs the logs to stdout
+	logrus.AddHook(&copyHook)
 }
 
 func getLogLevelFromString(requestedLevel string) logrus.Level {
@@ -54,4 +68,17 @@ func getLogLevelFromString(requestedLevel string) logrus.Level {
 	default:
 		return logrus.WarnLevel
 	}
+}
+
+type LoggerCopyHook struct {
+	Writer *logrus.Logger
+}
+
+func (l *LoggerCopyHook) Fire(entry *logrus.Entry) error {
+	skogulLogger.WithFields(entry.Data).Log(entry.Level, entry.Message)
+	return nil
+}
+
+func (l *LoggerCopyHook) Levels() []logrus.Level {
+	return logrus.AllLevels
 }
