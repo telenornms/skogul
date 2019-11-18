@@ -1,0 +1,29 @@
+v0.3.0
+======
+
+Release date: 2019-11-18
+
+Skogul 0.3.0 contains several changes aimed at project management, some to
+improve core functionality, and some module improvements. It's not a huge
+change since 0.2.0, and that's how we like it. As per usual, we aim for
+high quality releases.
+
+Specific changes:
+
+- Use of CI and automated building of release tar-balls
+- Cleanup and refresh of documentation
+- There's now a single unified way of handling modules that dramatically
+  reduces code duplication in core.
+- Modules can now provide documentation for nested data structures, which
+  is correctly exposed in manual pages.
+- A conditional transformer (#71) was added that provides a mechanism to
+  only execute a transformer if certain conditions are present.
+- The "extract" feature of the metadata transformer no longer creates empty
+  metadata keys, and will remove the original to avoid duplicating
+  information.
+- The logrus receiver replaces the log-receiver, allowing better control of
+  log data. More work in this area is to be expected.
+- The HTTP receiver can now apply different authorization rules for
+  different paths.
+
+The latter constitutes a bit of a change in configuration.

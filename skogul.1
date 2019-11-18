@@ -579,19 +579,17 @@ Password for basic authentication.
 .B \fBusername \- string\fP
 Username for basic authentication. No authentication is required if left blank.
 .UNINDENT
-.SS log
+.SS logrus
 .sp
-Log attaches to the internal logging of Skogul and diverts log messages.
+Attaches to the internal logging of Skogul and diverts log messages.
+.sp
+Aliases: log
 .sp
 Settings:
-.INDENT 0.0
-.TP
-.B \fBecho \- bool\fP
-Logs are also echoed to stdout.
-.TP
-.B \fBhandler \- HandlerRef\fP
-Reference to a handler where the data is sent. Parser will be overwritten.
-.UNINDENT
+.sp
+\fBhandler \- HandlerRef\fP
+.sp
+\fBloglevel \- string\fP
 .SS mqtt
 .sp
 Listen for Skogul\-formatted JSON on a MQTT endpoint
@@ -712,7 +710,7 @@ Settings:
 Fail if any of these fields are present
 .TP
 .B \fBextractfromdata \- []string\fP
-Extract a set of fields from Data and add it to Metadata.
+Extract a set of fields from Data and add it to Metadata. Removes the original.
 .TP
 .B \fBremove \- []string\fP
 Remove these metadata fields.

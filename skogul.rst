@@ -555,18 +555,20 @@ Settings:
 ``username - string``
 	Username for basic authentication. No authentication is required if left blank.
 
-log
----
+logrus
+------
 
-Log attaches to the internal logging of Skogul and diverts log messages.
+Attaches to the internal logging of Skogul and diverts log messages.
+
+Aliases: log 
 
 Settings:
 
-``echo - bool``
-	Logs are also echoed to stdout.
-
 ``handler - HandlerRef``
-	Reference to a handler where the data is sent. Parser will be overwritten.
+	
+
+``loglevel - string``
+	
 
 mqtt
 ----
@@ -691,7 +693,7 @@ Settings:
 	Fail if any of these fields are present
 
 ``extractfromdata - []string``
-	Extract a set of fields from Data and add it to Metadata.
+	Extract a set of fields from Data and add it to Metadata. Removes the original.
 
 ``remove - []string``
 	Remove these metadata fields.
