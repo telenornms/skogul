@@ -63,17 +63,6 @@ func (lg *LogrusLog) configureLogger() error {
 	return nil
 }
 
-// Parse logrus logs to a skogul.Container
-func (lg *LogrusLog) Parse(bytes []byte) (*skogul.Container, error) {
-	logrusLogLogger.Debug("Parsing log line")
-	var c *skogul.Container
-	err := json.Unmarshal(bytes, &c)
-	if err != nil {
-		logrusLogLogger.Error("Failed to marshal logrus log")
-	}
-	return c, nil
-}
-
 // Write logrus logs as skogul.Containers to a handler
 func (lg *LogrusLog) Write(bytes []byte) (int, error) {
 	metadata := make(map[string]interface{})
