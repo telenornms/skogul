@@ -40,8 +40,7 @@ steps:
     draft: true
     files:
     - skogul-*.tar.bz2
-    note: |
-      ${DRONE_COMMIT_MESSAGE}
+    note: Drone is dumb. Fill in from NEWS yourself.
     title: Skogul ${DRONE_TAG}
   when:
     event:
