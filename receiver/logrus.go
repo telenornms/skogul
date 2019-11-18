@@ -34,7 +34,7 @@ func (lg *LogrusLog) configureLogger() error {
 	loglevel := skogul.GetLogLevelFromString(lg.Loglevel)
 	logrusLogLogger.SetLevel(loglevel)
 
-	metadataFields := []string{"category", "receiver", "level"}
+	metadataFields := []string{"category", "level"}
 	a := make([]string, 0)
 	logMetadataFields = &a
 	for _, field := range metadataFields {
