@@ -42,9 +42,6 @@ type LogrusLog struct {
 
 var logrusLogLogger = logrus.New()
 
-// Proxy all log entries onto this logger so we can customize its output without polluting the global logger
-var proxyLogger = logrus.New()
-
 var logMetadataFields *[]string
 
 func (lg *LogrusLog) configureLogger() error {
