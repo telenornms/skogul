@@ -53,9 +53,10 @@ func init() {
 		Help:  "Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.",
 	})
 	Auto.Add(skogul.Module{
-		Name:  "log",
-		Alloc: func() interface{} { return &Log{} },
-		Help:  "Log attaches to the internal logging of Skogul and diverts log messages.",
+		Name:    "logrus",
+		Aliases: []string{"log"},
+		Alloc:   func() interface{} { return &LogrusLog{} },
+		Help:    "Attaches to the internal logging of Skogul and diverts log messages.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "mqtt",

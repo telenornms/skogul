@@ -35,8 +35,6 @@ import (
 	"strings"
 	"sync"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
@@ -710,6 +708,7 @@ func main() {
 	flag.Parse()
 
 	skogul.ConfigureLogger(*floglevel, *ftimestamp)
+	log := skogul.Logger("cmd", "main")
 
 	if *fhelp {
 		help()

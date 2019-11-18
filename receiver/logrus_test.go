@@ -1,9 +1,9 @@
 /*
- * skogul, log tests
+ * skogul, logrus receiver
  *
  * Copyright (c) 2019 Telenor Norge AS
  * Author(s):
- *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,47 +24,49 @@
 package receiver_test
 
 import (
+	"testing"
+	"time"
+
+	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
-	"log"
-	"testing"
-	"time"
 )
 
-func TestLog(t *testing.T) {
+func TestLogrusLogReceivesData(t *testing.T) {
+
 	config, err := config.Bytes([]byte(`
-{
-	"receivers": {
-		"log": {
-			"type": "log",
-			"handler": "test_h"
+	{
+		"receivers": {
+			"logrus": {
+				"type": "logrus",
+				"handler": "test_h"
+			}
+		},
+		"handlers": {
+			"test_h": {
+				"parser": "json",
+				"transformers": [],
+				"sender": "test"
+			}
+		},
+		"senders": {
+			"test": {
+				"type": "test"
+			}
 		}
-	},
-	"handlers": {
-		"test_h": {
-			"parser": "json",
-			"transformers": [],
-			"sender": "test"
-		}
-	},
-	"senders": {
-		"test": {
-			"type": "test"
-		}
-	}
-}`))
+	}`))
 
 	if err != nil {
-		t.Errorf("Failed to load config: %v", err)
+		t.Errorf("Failed to load config (err: %s)", err)
 		return
 	}
 
 	sTest := config.Senders["test"].Sender.(*sender.Test)
-	rLog := config.Receivers["log"].Receiver.(*receiver.Log)
+	rLog := config.Receivers["logrus"].Receiver.(*receiver.LogrusLog)
 	go rLog.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
-	log.Printf("This works!")
+	logrus.Info("This works!")
 	time.Sleep(time.Duration(10 * time.Millisecond))
 	got := sTest.Received()
 	if got != 1 {
