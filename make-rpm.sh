@@ -38,7 +38,10 @@ Source0:        https://github.com/telenornms/skogul/archive/v%{version}.tar.gz
 
 
 BuildArch:      $ARCH
-BuildRequires:  go >= 1.13, python-docutils
+# The build requirements. However, because we build
+# in a docker container with ubuntu
+# rpm doesn't know that the requirements are available.
+#BuildRequires:  go >= 1.13, python-docutils
 
 
 %description
