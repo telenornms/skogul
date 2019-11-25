@@ -64,20 +64,19 @@ rm -f %{buildroot}/make-docs.sh
 %install
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_mandir}/man1
-mkdir -p %{buildroot}%{_mandir}/../doc/%{name}-%{version}
-mkdir -p %{buildroot}%{_mandir}/../licenses/%{name}-%{version}
+mkdir -p %{buildroot}%{_defaultdocdir}/%{name}-%{version}
+mkdir -p %{buildroot}%{_datadir}/licenses/%{name}-%{version}
 install -m 0755 dist/%{name} %{buildroot}%{_bindir}/%{name}
 cp dist/share/man/man1/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
-cp -r docs/* %{buildroot}%{_mandir}/../doc/%{name}-%{version}
+cp -r docs/* %{buildroot}%{_defaultdocdir}/%{name}-%{version}
 
 
 %files
 %license LICENSE
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
-%docdir %{_mandir}/../doc/%{name}-%{version}
-%{_mandir}/../doc/%{name}-%{version}
-%doc
+%docdir %{_defaultdocdir}/%{name}-%{version}
+%{_defaultdocdir}/%{name}-%{version}
 
 
 
