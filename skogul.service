@@ -6,7 +6,7 @@ Documentation=man:skogul(1) https://github.com/telenornms/skogul
 After=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/skogul -f /etc/skogul/default.json
+ExecStart=/usr/bin/skogul -show -f /etc/skogul/default.json
 Restart=on-failure
 User=skogul
 Group=skogul
