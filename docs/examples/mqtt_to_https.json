@@ -1,0 +1,42 @@
+{
+  "receivers": {
+      "my_mqtt": {
+        "type": "mqtt",
+	"handler": "json",
+	"user": "user",
+	"password": "password",
+	"address": "mqtt://hostname:port/topic"
+      }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [ "templater" ],
+      "sender": "batch"
+    }
+  },
+  "transformers": {
+	  "templater": {
+		  "type": "templater"
+	  }
+  },
+  "senders": {
+    "batch": {
+      "type": "batch",
+      "threshold": 1000,
+      "interval": "5s",
+      "next": "backoff"
+    },
+    "backoff": {
+      "type": "backoff",
+      "next": "http",
+      "base": "1s",
+      "retries": 10
+    },
+    "http": {
+      "type": "http",
+      "insecure": true,
+      "URL": "https://me:hunter2@[::1]:8080/"
+    }
+  }
+}
