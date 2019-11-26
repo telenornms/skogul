@@ -1,0 +1,16 @@
+# Use overrides in /etc/systemd/system/skogul.service.d/foo.conf to
+# override this.
+[Unit]
+Description=Skogul metric machine
+Documentation=man:skogul(1) https://github.com/telenornms/skogul
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/skogul -f /etc/skogul/default.json
+Restart=on-failure
+User=skogul
+Group=skogul
+NoNewPrivileges=true
+LimitNOFILE=31337
+ProtectSystem=full
+PrivateTmp=true

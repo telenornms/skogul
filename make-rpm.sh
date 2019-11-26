@@ -21,6 +21,7 @@ mkdir -p rpm-prep/SRPMS
 # Copy required files to build dir
 cp LICENSE rpm-prep
 cp make-docs.sh rpm-prep/BUILDROOT
+cp skogul.service rpm-prep/SOURCES
 
 
 VERSION_NO=$(echo $V | sed s/v//)
@@ -69,6 +70,21 @@ mkdir -p %{buildroot}%{_datadir}/licenses/%{name}-%{version}
 install -m 0755 dist/%{name} %{buildroot}%{_bindir}/%{name}
 cp dist/share/man/man1/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 cp -r docs/* %{buildroot}%{_defaultdocdir}/%{name}-%{version}
+mkdir -p %{buildroot}%{_unitdir}
+install -m 0644 %{_sourcedir}/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
+
+%pre
+getent group skogul >/dev/null || groupadd -r skogul
+getent passwd skogul >/dev/null || \
+       useradd -r -g skogul -d /var/lib/skogul -s /sbin/nologin \
+               -c "Skogul metric collector" skogul
+exit 0
+
+%post
+%systemd_post %{name}.service
+
+%preun
+%systemd_preun %{name}.service
 
 
 %files
@@ -77,6 +93,7 @@ cp -r docs/* %{buildroot}%{_defaultdocdir}/%{name}-%{version}
 %{_mandir}/man1/%{name}.1*
 %docdir %{_defaultdocdir}/%{name}-%{version}
 %{_defaultdocdir}/%{name}-%{version}
+%{_unitdir}/%{name}.service
 
 
 
