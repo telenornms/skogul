@@ -104,7 +104,7 @@ exit 0
 %changelog
 EOF
 
-wget -O rpm-prep/SOURCES/$V.tar.gz https://github.com/telenornms/skogul/archive/$V.tar.gz
+git archive -o rpm-prep/SOURCES/$V.tar.gz --prefix="skogul-$VERSION_NO/" --format=tar.gz HEAD
 
 echo "Building"
 
