@@ -32,24 +32,20 @@ package mqtt
 import (
 	"fmt"
 	"math/rand"
-	"net/url"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
+	"github.com/telenornms/skogul"
 )
 
-// MQTT shared data structure annd interal state
+var mqttLog = skogul.Logger("sender", "mqtt")
+
+// MQTT contains an MQTT client, its options and its configuration for handling messages
 type MQTT struct {
-	Address  string
-	Client   mqtt.Client
-	Topic    string
-	Username string
-	Password string
-	opts     *mqtt.ClientOptions
-	topics   map[string]*MessageHandler
-	uri      *url.URL
-	clientID string
+	Client mqtt.Client
+	opts   *mqtt.ClientOptions
+	topics map[string]*MessageHandler
 }
 
 // MessageHandler is used to establish a callback when a message is
@@ -59,7 +55,7 @@ type MessageHandler func(Message mqtt.Message)
 // Subscribe to a topic. callback is called whenever a message is received.
 // This also deals with re-subscribing when a reconnect takes place.
 func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
-	log.WithField("topic", topic).Debug("MQTT subscribed")
+	mqttLog.WithField("topic", topic).Debug("MQTT subscribed")
 	if handler.topics == nil {
 		handler.topics = make(map[string]*MessageHandler)
 	}
@@ -70,7 +66,7 @@ func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
 func (handler *MQTT) receiver(client mqtt.Client, msg mqtt.Message) {
 	t := msg.Topic()
 	if handler.topics[t] == nil {
-		log.WithFields(log.Fields{
+		mqttLog.WithFields(logrus.Fields{
 			"topic": t,
 			"msg":   msg,
 		}).Debug("Message received on unknown topic")
@@ -86,7 +82,7 @@ func (handler *MQTT) Connect() error {
 	for !token.WaitTimeout(3 * time.Second) {
 	}
 	if err := token.Error(); err != nil {
-		log.WithError(err).Error("Failed to connect to MQTT broker")
+		mqttLog.WithError(err).Error("Failed to connect to MQTT broker")
 		return err
 	}
 	for i := range handler.topics {
@@ -95,56 +91,42 @@ func (handler *MQTT) Connect() error {
 	return nil
 }
 
-// Init the generic MQTT data structures, mostly parsing MQTT.Address.
-func (handler *MQTT) Init() error {
-	var err error
-	handler.uri, err = url.Parse(handler.Address)
-	if err != nil {
-		log.WithError(err).Fatal("Initialization of MQTT failed")
-	}
-	handler.Topic = handler.uri.Path[1:len(handler.uri.Path)]
-	if handler.Topic == "" {
-		handler.Topic = "#"
-	}
-	handler.createClientOptions()
+// Init sets up the MQTT client
+func (handler *MQTT) Init(address, username, password, clientID string) error {
+	handler.createClientOptions(address, username, password, clientID)
 	handler.Client = mqtt.NewClient(handler.opts)
 	return nil
 }
 
-// Handle reconnects when the connection drops.
+// connLostHandler handles reconnects if the connection drops.
 func (handler *MQTT) connLostHandler(client mqtt.Client, e error) {
-	log.WithError(e).Debug("Connection lost... Auto-reconnecting and re-subscribing.")
+	mqttLog.WithError(e).Debug("Connection lost... Auto-reconnecting and re-subscribing.")
 	for {
 		e := handler.Connect()
 		if e != nil {
-			log.WithError(e).Debug("Failed to re-connect to MQTT broker. Retrying in 5 seconds")
+			mqttLog.WithError(e).Debug("Failed to re-connect to MQTT broker. Retrying in 5 seconds")
 			time.Sleep(time.Duration(5 * time.Second))
 		} else {
-			log.Debug("Reconnected to MQTT broker successfully.")
+			mqttLog.Debug("Reconnected to MQTT broker successfully.")
 			break
 		}
 	}
 }
 
-// createClientOptions() sets up our default options.
-func (handler *MQTT) createClientOptions() error {
+// createClientOptions configures the MQTT client options
+func (handler *MQTT) createClientOptions(address, username, password, clientID string) error {
 	handler.opts = mqtt.NewClientOptions()
-	handler.opts.AddBroker(fmt.Sprintf("tcp://%s", handler.uri.Host))
-	if handler.Username != "" {
-		handler.opts.SetUsername(handler.Username)
-	} else {
-		handler.opts.SetUsername(handler.uri.User.Username())
+	handler.opts.AddBroker(address)
+	if username != "" {
+		handler.opts.SetUsername(username)
 	}
-	if handler.Password != "" {
-		handler.opts.SetPassword(handler.Password)
-	} else {
-		password, _ := handler.uri.User.Password()
+	if password != "" {
 		handler.opts.SetPassword(password)
 	}
-	if handler.clientID == "" {
-		handler.clientID = fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
+	if clientID == "" {
+		clientID = fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
 	}
-	handler.opts.SetClientID(handler.clientID)
+	handler.opts.SetClientID(clientID)
 	handler.opts.SetAutoReconnect(false)
 	handler.opts.SetPingTimeout(time.Duration(40 * time.Second))
 	handler.opts.SetConnectionLostHandler(handler.connLostHandler)

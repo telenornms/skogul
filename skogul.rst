@@ -401,10 +401,22 @@ Publishes received metrics to an MQTT broker/topic.
 
 Settings:
 
-``address - string``
-	URL-encoded address.
+``broker - string``
+	Address of broker to send to
 
-	Example(s): mqtt://user:password@server/topic
+	Example(s): [::1]:8888
+
+``clientid - string``
+	Custom client id to use (default: random)
+
+``password - string``
+	MQTT broker authorization password
+
+``topics - []string``
+	Topic(s) to publish events to
+
+``username - string``
+	MQTT broker authorization username
 
 net
 ---
@@ -577,14 +589,22 @@ Listen for Skogul-formatted JSON on a MQTT endpoint
 
 Settings:
 
-``address - string``
-	Address to connect to.
+``broker - string``
+	Address of broker to connect to.
+
+	Example(s): [::1]:8888
+
+``clientid - string``
+	Custom client id to use (default: random)
 
 ``handler - *skogul.HandlerRef``
 	Handler used to parse, transform and send data.
 
 ``password - string``
 	Username for authenticating to the broker.
+
+``topics - []string``
+	List of topics to subscribe to
 
 ``username - string``
 	Password for authenticating.
