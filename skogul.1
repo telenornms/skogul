@@ -430,10 +430,22 @@ Publishes received metrics to an MQTT broker/topic.
 Settings:
 .INDENT 0.0
 .TP
-.B \fBaddress \- string\fP
-URL\-encoded address.
+.B \fBbroker \- string\fP
+Address of broker to send to
 .sp
-Example(s): mqtt://user:password@server/topic
+Example(s): [::1]:8888
+.TP
+.B \fBclientid \- string\fP
+Custom client id to use (default: random)
+.TP
+.B \fBpassword \- string\fP
+MQTT broker authorization password
+.TP
+.B \fBtopics \- []string\fP
+Topic(s) to publish events to
+.TP
+.B \fBusername \- string\fP
+MQTT broker authorization username
 .UNINDENT
 .SS net
 .sp
@@ -597,14 +609,22 @@ Listen for Skogul\-formatted JSON on a MQTT endpoint
 Settings:
 .INDENT 0.0
 .TP
-.B \fBaddress \- string\fP
-Address to connect to.
+.B \fBbroker \- string\fP
+Address of broker to connect to.
+.sp
+Example(s): [::1]:8888
+.TP
+.B \fBclientid \- string\fP
+Custom client id to use (default: random)
 .TP
 .B \fBhandler \- *skogul.HandlerRef\fP
 Handler used to parse, transform and send data.
 .TP
 .B \fBpassword \- string\fP
 Username for authenticating to the broker.
+.TP
+.B \fBtopics \- []string\fP
+List of topics to subscribe to
 .TP
 .B \fBusername \- string\fP
 Password for authenticating.

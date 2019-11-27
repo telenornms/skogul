@@ -40,8 +40,11 @@ FIXME: The MQTT-sender and receiver should be updated to not use the
 url-encoded scheme.
 */
 type MQTT struct {
-	Address string   `doc:"URL-encoded address." example:"mqtt://user:password@server/topic"`
-	Topics  []string `doc:"Topic(s) to publish events to"`
+	Broker   string   `doc:"Address of broker to send to" example:"[::1]:8888"`
+	Topics   []string `doc:"Topic(s) to publish events to"`
+	Username string   `doc:"MQTT broker authorization username"`
+	Password string   `doc:"MQTT broker authorization password"`
+	ClientID string   `doc:"Custom client id to use (default: random)"`
 
 	once sync.Once
 	mc   skmqtt.MQTT
@@ -51,11 +54,10 @@ type MQTT struct {
 // topic.
 func (handler *MQTT) Send(c *skogul.Container) error {
 	handler.once.Do(func() {
-		handler.mc.Address = handler.Address
 		if handler.Topics == nil {
 			handler.Topics = []string{"#"}
 		}
-		handler.mc.Init()
+		handler.mc.Init(handler.Broker, handler.Username, handler.Password, handler.ClientID)
 		handler.mc.Connect()
 	})
 	b, err := json.MarshalIndent(*c, "", "  ")
@@ -65,5 +67,14 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 	}
 	for _, topic := range handler.Topics {
 		handler.mc.Client.Publish(topic, 0, false, b)
+	}
+	return nil
+}
+
+// Verify makes sure required configuration options are set
+func (handler *MQTT) Verify() error {
+	if handler.Topics == nil {
+		mqttLog.Warn("MQTT topic(s) not set, sending all messages to wildcard ('#')")
+	}
 	return nil
 }
