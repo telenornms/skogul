@@ -46,7 +46,7 @@ var mqttLog = skogul.Logger("sender", "mqtt")
 type MQTT struct {
 	Address  string
 	Client   mqtt.Client
-	Topic    string
+	Topics   []string
 	Username string
 	Password string
 	opts     *mqtt.ClientOptions
@@ -104,10 +104,6 @@ func (handler *MQTT) Init() error {
 	handler.uri, err = url.Parse(handler.Address)
 	if err != nil {
 		mqttLog.WithError(err).Fatal("Initialization of MQTT failed")
-	}
-	handler.Topic = handler.uri.Path[1:len(handler.uri.Path)]
-	if handler.Topic == "" {
-		handler.Topic = "#"
 	}
 	handler.createClientOptions()
 	handler.Client = mqtt.NewClient(handler.opts)

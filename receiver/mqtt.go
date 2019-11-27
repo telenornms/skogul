@@ -39,6 +39,7 @@ MQTT connects to a MQTT broker and listens for messages on a topic.
 */
 type MQTT struct {
 	Address  string             `doc:"Address to connect to."`
+	Topics   []string           `doc:"List of topics to subscribe to"`
 	Handler  *skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
 	Password string             `doc:"Username for authenticating to the broker."`
 	Username string             `doc:"Password for authenticating."`
@@ -59,8 +60,11 @@ func (handler *MQTT) Start() error {
 	handler.mc.Address = handler.Address
 	handler.mc.Username = handler.Username
 	handler.mc.Password = handler.Password
+	handler.mc.Topics = handler.Topics
 	handler.mc.Init()
-	handler.mc.Subscribe(handler.mc.Topic, handler.receiver)
+	for _, topic := range handler.Topics {
+		handler.mc.Subscribe(topic, handler.receiver)
+	}
 	mqttLog.WithField("address", handler.Address).Debug("Starting MQTT receiver")
 	handler.mc.Connect()
 	// Note that handler.listen() DOES return, because it only sets up

@@ -40,7 +40,8 @@ FIXME: The MQTT-sender and receiver should be updated to not use the
 url-encoded scheme.
 */
 type MQTT struct {
-	Address string `doc:"URL-encoded address." example:"mqtt://user:password@server/topic"`
+	Address string   `doc:"URL-encoded address." example:"mqtt://user:password@server/topic"`
+	Topics  []string `doc:"Topic(s) to publish events to"`
 
 	once sync.Once
 	mc   skmqtt.MQTT
@@ -51,6 +52,9 @@ type MQTT struct {
 func (handler *MQTT) Send(c *skogul.Container) error {
 	handler.once.Do(func() {
 		handler.mc.Address = handler.Address
+		if handler.Topics == nil {
+			handler.Topics = []string{"#"}
+		}
 		handler.mc.Init()
 		handler.mc.Connect()
 	})
@@ -59,6 +63,7 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 		mqttLog.WithError(err).Panic("Unable to marshal json for debug output")
 		return err
 	}
-	handler.mc.Client.Publish(handler.mc.Topic, 0, false, b)
+	for _, topic := range handler.Topics {
+		handler.mc.Client.Publish(topic, 0, false, b)
 	return nil
 }
