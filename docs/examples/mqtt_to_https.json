@@ -3,9 +3,10 @@
       "my_mqtt": {
         "type": "mqtt",
 	"handler": "json",
-	"user": "user",
+	"username": "username",
 	"password": "password",
-	"address": "mqtt://hostname:port/topic"
+	"broker": "hostname:port",
+	"topics": ["mytopic"]
       }
   },
   "handlers": {
