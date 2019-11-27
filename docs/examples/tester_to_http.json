@@ -1,12 +1,12 @@
 {
   "receivers": {
-      "test": {
-        "type": "test",
-	"handler": "json",
-	"metrics": 100,
-	"values": 100,
-	"threas": 30
-      }
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 100,
+      "values": 100,
+      "threas": 30
+    }
   },
   "handlers": {
     "json": {
@@ -18,7 +18,7 @@
   "senders": {
     "http": {
       "type": "http",
-      "idleconsperhost": 30,
+      "idleconnsperhost": 30,
       "URL": "http://[::1]:8080/"
     }
   }
