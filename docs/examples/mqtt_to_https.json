@@ -12,7 +12,7 @@
   "handlers": {
     "json": {
       "parser": "json",
-      "transformers": [ "templater" ],
+      "transformers": [],
       "sender": "batch"
     }
   },
