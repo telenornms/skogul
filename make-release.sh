@@ -15,10 +15,8 @@ mkdir -p dist/bin
 mkdir -p dist/share/man/man1
 mkdir -p dist/share/doc/skogul
 
-go build ./cmd/skogul
-./skogul -make-man > dist/share/doc/skogul/skogul.rst
-rst2man < dist/share/doc/skogul/skogul.rst > dist/share/man/man1/skogul.1
-cp skogul dist/bin
+go build -o dist/skogul ./cmd/skogul
+./make-docs.sh
 cp LICENSE dist/share/doc/skogul
 cp -r README.rst docs/* dist/share/doc/skogul/
 
