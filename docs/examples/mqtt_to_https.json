@@ -16,11 +16,6 @@
       "sender": "batch"
     }
   },
-  "transformers": {
-	  "templater": {
-		  "type": "templater"
-	  }
-  },
   "senders": {
     "batch": {
       "type": "batch",

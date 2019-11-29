@@ -19,13 +19,18 @@
   "handlers": {
     "jsontemplating": {
       "parser": "json",
-      "transformers": [],
+      "transformers": ["templater"],
       "sender": "batch"
     },
     "debugger": {
       "parser": "json",
       "transformers": [],
       "sender": "print"
+    }
+  },
+  "transformers": {
+    "templater": {
+      "type": "templater"
     }
   },
   "senders": {
