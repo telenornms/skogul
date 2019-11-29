@@ -1,27 +1,36 @@
 {
   "receivers": {
-      "api": {
-        "type": "http",
-        "address": "[::1]:8080",
-        "handlers": {
-          "/": "jsontemplating"
-        },
-	"username": "me",
-	"password": "hunter2",
-	"certfile": "cacert-snakeoil.pem",
-	"keyfile": "privkey-snakeoil.pem"
-      }
+    "api": {
+      "type": "http",
+      "address": "[::1]:8080",
+      "handlers": {
+        "/": "jsontemplating"
+      },
+      "auth": {
+        "/": {
+          "username": "me",
+          "password": "hunter2"
+        }
+      },
+      "certfile": "cacert-snakeoil.pem",
+      "keyfile": "privkey-snakeoil.pem"
+    }
   },
   "handlers": {
     "jsontemplating": {
       "parser": "json",
-      "transformers": [ "templater" ],
+      "transformers": ["templater"],
       "sender": "batch"
     },
     "debugger": {
       "parser": "json",
       "transformers": [],
       "sender": "print"
+    }
+  },
+  "transformers": {
+    "templater": {
+      "type": "templater"
     }
   },
   "senders": {

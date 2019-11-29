@@ -11,8 +11,13 @@
   "handlers": {
     "jsontemplating": {
       "parser": "json",
-      "transformers": [ "templater" ],
+      "transformers": ["templater"],
       "sender": "batch"
+    }
+  },
+  "transformers": {
+    "templater": {
+      "type": "templater"
     }
   },
   "senders": {

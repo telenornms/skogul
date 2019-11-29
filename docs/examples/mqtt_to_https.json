@@ -1,25 +1,20 @@
 {
   "receivers": {
-      "my_mqtt": {
-        "type": "mqtt",
-	"handler": "json",
-	"username": "username",
-	"password": "password",
-	"broker": "hostname:port",
-	"topics": ["mytopic"]
-      }
+    "my_mqtt": {
+      "type": "mqtt",
+      "handler": "json",
+      "username": "username",
+      "password": "password",
+      "broker": "hostname:port",
+      "topics": ["mytopic"]
+    }
   },
   "handlers": {
     "json": {
       "parser": "json",
-      "transformers": [ "templater" ],
+      "transformers": [],
       "sender": "batch"
     }
-  },
-  "transformers": {
-	  "templater": {
-		  "type": "templater"
-	  }
   },
   "senders": {
     "batch": {
