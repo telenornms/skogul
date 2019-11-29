@@ -35,7 +35,6 @@ import (
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
 )
 
@@ -62,19 +61,6 @@ func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
 	handler.topics[topic] = &callback
 }
 
-// Shim-layer that accepts a message and calls the appropriate callback.
-func (handler *MQTT) receiver(client mqtt.Client, msg mqtt.Message) {
-	t := msg.Topic()
-	if handler.topics[t] == nil {
-		mqttLog.WithFields(logrus.Fields{
-			"topic": t,
-			"msg":   msg,
-		}).Debug("Message received on unknown topic")
-		return
-	}
-	(*handler.topics[t])(msg)
-}
-
 // Connect to the broker and subscribe to the relevant topics, if any.
 func (handler *MQTT) Connect() error {
 	token := handler.Client.Connect()
@@ -85,8 +71,8 @@ func (handler *MQTT) Connect() error {
 		mqttLog.WithError(err).Error("Failed to connect to MQTT broker")
 		return err
 	}
-	for i := range handler.topics {
-		handler.Client.Subscribe(i, 0, handler.receiver)
+	for i, messageHandler := range handler.topics {
+		handler.Client.Subscribe(i, 0, func(_ mqtt.Client, msg mqtt.Message) { (*messageHandler)(msg) })
 	}
 	return nil
 }
