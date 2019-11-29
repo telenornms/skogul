@@ -1,11 +1,11 @@
 {
   "receivers": {
-      "test": {
-        "type": "test",
-	"handler": "json",
-	"metrics": 10,
-	"values": 10
-      }
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 10,
+      "values": 10
+    }
   },
   "handlers": {
     "json": {
