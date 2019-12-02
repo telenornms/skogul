@@ -25,6 +25,8 @@ package parser
 
 import "testing"
 
+import "io/ioutil"
+
 // TestJSONParse tests parsing of a simple JSON document to skogul
 // container
 func TestJSONParse(t *testing.T) {
@@ -41,5 +43,26 @@ func BenchmarkJSONParse(b *testing.B) {
 	x := JSON{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
+	}
+}
+
+func TestRawJSONParse(t *testing.T) {
+	b, err := ioutil.ReadFile("./testdata/raw.json")
+
+	if err != nil {
+		t.Errorf("Failed to read test data file: %v", err)
+		return
+	}
+
+	container, err := RawJSON{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse JSON data: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed JSON to return a container with at least 1 metric")
+		return
 	}
 }
