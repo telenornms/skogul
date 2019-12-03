@@ -803,6 +803,22 @@ Used as a conditional statement on a field
 Executes metric templating. See separate documentationf or how skogul templating works.
 .sp
 Aliases: templating template
+.SS timestamp
+.sp
+Extract a timestamp from the container data
+.sp
+Settings:
+.INDENT 0.0
+.TP
+.B \fBfail \- bool\fP
+Propagate errors back to the caller. Useful if the timestamp is required for the container.
+.TP
+.B \fBformat \- string\fP
+The format to use (default: RFC3339)
+.TP
+.B \fBsource \- []string\fP
+The source field of the timestamp
+.UNINDENT
 .SH HANDLERS
 .sp
 There is only one type of handler. It accepts three arguments: A parser to
