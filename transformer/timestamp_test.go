@@ -66,7 +66,7 @@ func TestTimestampParse(t *testing.T) {
 
 	c := skogul.Container{
 		Metrics: []*skogul.Metric{
-			&skogul.Metric{
+			{
 				Time:     &now,
 				Metadata: make(map[string]interface{}),
 				Data:     jsonData,
