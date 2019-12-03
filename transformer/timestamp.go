@@ -81,3 +81,14 @@ func parseTimestamp(format string) string {
 		return format
 	}
 }
+
+// Verify will make sure the required fields are set, or set some sane defaults
+func (config *Timestamp) Verify() error {
+	if config.Source == nil {
+		return skogul.Error{Reason: "Missing source field for timestamp transformer", Source: "timestamp transformer"}
+	}
+	if config.Format == "" {
+		config.Format = time.RFC3339
+	}
+	return nil
+}
