@@ -45,4 +45,10 @@ func init() {
 		Help:    "Conditionally apply transformers",
 		Extras:  []interface{}{Case{}},
 	})
+	Auto.Add(skogul.Module{
+		Name:    "timestamp",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &Timestamp{} },
+		Help:    "Extract a timestamp from the container data",
+	})
 }
