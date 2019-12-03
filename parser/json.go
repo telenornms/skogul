@@ -25,6 +25,7 @@ package parser
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/telenornms/skogul"
 )
@@ -37,4 +38,33 @@ func (x JSON) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	err := json.Unmarshal(b, &container)
 	return &container, err
+}
+
+// RawJSON can be used when the JSON format does not conform to the final JSON format of skogul,
+// e.g. when it is used as the first step of parsing from a third party source where modifying
+// the source data structure might be hard/impossible
+type RawJSON struct{}
+
+// Parse accepts a byte slice of JSON data and marshals it into an empty skogul.Container
+func (data RawJSON) Parse(b []byte) (*skogul.Container, error) {
+
+	// The Validate() func of a container expects a timestamp to be valid.
+	// Better way to fix?
+	time := time.Now()
+	metric := skogul.Metric{
+		Metadata: make(map[string]interface{}),
+		Time:     &time,
+	}
+
+	err := json.Unmarshal(b, &metric.Data)
+
+	if err != nil {
+		return nil, err
+	}
+
+	container := skogul.Container{
+		Metrics: []*skogul.Metric{&metric},
+	}
+
+	return &container, nil
 }

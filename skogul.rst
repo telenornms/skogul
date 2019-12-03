@@ -794,8 +794,8 @@ There is only one type of handler. It accepts three arguments: A parser to
 parse data, a list of optional transformers, and the first sender that will
 receive the parsed container(s).
 
-The only valid parsers are "json" and "protobuf". Only three transformers
-exist. The "templating" transformer does not need to be explicitly defined
+The valid parsers are "json", "custom-json" and "protobuf".
+The "templating" transformer does not need to be explicitly defined
 to be referenced, since it has no settings.
 
 JSON parsing
@@ -835,6 +835,11 @@ thus::
 
 The "template" is optional, see the "Templater"-documentation above for an
 in-depth description.
+
+If the format of the incoming data does not conform to the Skogul JSON
+structure it is possible to use a custom JSON parser ("custom-json")
+which puts all the incoming data into the data-field in the Container.
+After this it is possible to apply transformers to process the data further.
 
 The primary difference between metadata and data is searchability,
 and it will depend on storage engines. Typically this means the name
