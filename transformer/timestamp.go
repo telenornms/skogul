@@ -34,7 +34,7 @@ var timestampLogger = skogul.Logger("transformer", "timestamp")
 
 // Timestamp is the configuration for extracing a timestamp from inside the data
 type Timestamp struct {
-	Source string   `doc:"The source field of the timestamp"`
+	Source []string `doc:"The source field of the timestamp"`
 	Format string   `doc:"The format to use (default: RFC3339)"`
 	Fail   bool     `doc:"Propagate errors back to the caller. Useful if the timestamp is required for the container."`
 }
@@ -43,7 +43,8 @@ type Timestamp struct {
 func (config *Timestamp) Transform(c *skogul.Container) error {
 	for i, metric := range c.Metrics {
 
-		timestamp, ok := metric.Data[config.Source].(string)
+		obj, err := skogul.ExtractNestedObject(metric.Data, config.Source)
+		timestamp, ok := obj[config.Source[len(config.Source)-1]].(string)
 
 		if !ok {
 			timestampLogger.Error("Failed to cast timestamp field to a string")

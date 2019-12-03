@@ -75,7 +75,7 @@ func TestTimestampParse(t *testing.T) {
 	}
 
 	transformer := transformer.Timestamp{
-		Source: "timestamp",
+		Source: []string{"timestamp"},
 		Format: "rfc3339",
 		Fail:   false,
 	}
