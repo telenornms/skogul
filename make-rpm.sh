@@ -25,7 +25,7 @@ cp skogul.service rpm-prep/SOURCES
 cp docs/examples/http_count.json rpm-prep/SOURCES/config.json
 
 
-VERSION_NO=$(echo $V | sed s/v//)
+VERSION_NO=$(echo $V | sed s/[v-]//g)
 
 cat <<EOF > rpm-prep/SPECS/skogul.spec
 Name:           skogul
@@ -36,7 +36,7 @@ Summary:        Skogul metric engine
 Group:          telenornms
 License:        LGPL-2.1
 URL:            https://github.com/telenornms/skogul
-Source0:        https://github.com/telenornms/skogul/archive/v%{version}.tar.gz
+Source0:        https://github.com/telenornms/skogul/archive/$V.tar.gz
 
 
 BuildArch:      $ARCH
