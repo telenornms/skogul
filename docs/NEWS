@@ -1,7 +1,27 @@
-v0.4.0
+v0.5.0
 ======
 
 Unreleased
+
+v0.4.0
+======
+
+Release date: 2019-12-04
+
+Skogul 0.4.0 brings MQTT configuration up to speed with other receivers and senders.
+A new transformer to set the timestamp is introduced, as well as a custom JSON parser
+for use where the incoming JSON format does not conform to the one of Skogul.
+Furthermore, new versions now ship with prebuilt RPMs as well as prebuilt archives.
+We also run automated tests on all example configuration in ./docs/examples!
+
+Specific changes:
+
+- JSON syntax errors offsets correctly with tabs
+- Support building RPMs and build RPMs for new releases
+- Bring MQTT configuration up to speed (configuration updates required!)
+- MQTT wildcard support (+ and #)
+- A custom JSON parser, for use when the JSON is not already on Skogul format
+- Timestamp transformer, used to set the timestamp of a metric from data
 
 v0.3.0
 ======
