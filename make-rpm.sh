@@ -131,3 +131,6 @@ else
             --buildroot "$(pwd)/BUILDROOT" \
             SPECS/skogul.spec
 fi
+
+# Move built files out to working dir
+cp x86_64/* ../
