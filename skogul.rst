@@ -786,6 +786,22 @@ Executes metric templating. See separate documentationf or how skogul templating
 
 Aliases: templating template 
 
+timestamp
+---------
+
+Extract a timestamp from the container data
+
+Settings:
+
+``fail - bool``
+	Propagate errors back to the caller. Useful if the timestamp is required for the container.
+
+``format - string``
+	The format to use (default: RFC3339)
+
+``source - []string``
+	The source field of the timestamp
+
 
 HANDLERS
 ========
