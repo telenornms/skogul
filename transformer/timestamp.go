@@ -25,6 +25,7 @@ package transformer
 
 import (
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -38,10 +39,17 @@ type Timestamp struct {
 	Source []string `doc:"The source field of the timestamp"`
 	Format string   `doc:"The format to use (default: RFC3339)"`
 	Fail   bool     `doc:"Propagate errors back to the caller. Useful if the timestamp is required for the container."`
+	once   sync.Once
 }
 
 // Transform sets the timestamp of a set of metrics to the specified field
 func (config *Timestamp) Transform(c *skogul.Container) error {
+	config.once.Do(func() {
+		if config.Format == "" {
+			config.Format = time.RFC3339
+		}
+	})
+
 	for i, metric := range c.Metrics {
 
 		obj, err := skogul.ExtractNestedObject(metric.Data, config.Source)
@@ -89,7 +97,7 @@ func (config *Timestamp) Verify() error {
 		return skogul.Error{Reason: "Missing source field for timestamp transformer", Source: "timestamp transformer"}
 	}
 	if config.Format == "" {
-		config.Format = time.RFC3339
+		timestampLogger.Warn("Timestamp format not set, defaulting to RFC3339.")
 	}
 	return nil
 }
