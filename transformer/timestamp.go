@@ -24,6 +24,7 @@
 package transformer
 
 import (
+	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -74,7 +75,7 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 // parseTimestamp parses a timestamp format name into a timestamp format
 // e.g. rfc3339 will be returned as "2006-01-02T15:04:05Z07:00"
 func parseTimestamp(format string) string {
-	switch format {
+	switch strings.ToLower(format) {
 	case "rfc3339", "iso8601": // 🙈
 		return time.RFC3339
 	default:
