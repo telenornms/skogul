@@ -87,6 +87,7 @@ func parseTimestamp(format string) string {
 	case "rfc3339", "iso8601": // 🙈
 		return time.RFC3339
 	default:
+		timestampLogger.WithField("format", format).Info("Could not match format to a named format, using format directly")
 		return format
 	}
 }
