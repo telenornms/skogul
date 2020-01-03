@@ -48,11 +48,29 @@ type MQTT struct {
 	mc skmqtt.MQTT
 }
 
+func appendTopic(container *skogul.Container, topic string) {
+	for _, metric := range container.Metrics {
+		if metric.Metadata == nil {
+			metric.Metadata = make(map[string]interface{})
+		}
+		metric.Metadata["_mqtt_topic"] = topic
+	}
+}
+
 // Handle a received message.
 func (handler *MQTT) receiver(msg mqtt.Message) {
-	err := handler.Handler.H.Handle(msg.Payload())
+	container, err := handler.Handler.H.Parser.Parse(msg.Payload())
+
 	if err != nil {
-		mqttLog.WithError(err).Error("Unable to handle payload")
+		mqttLog.WithError(err).Error("Failed to parse payload from MQTT message")
+		return
+	}
+
+	appendTopic(container, msg.Topic())
+
+	err = handler.Handler.H.TransformAndSend(container)
+	if err != nil {
+		mqttLog.WithError(err).Error("Error during transform or send container")
 	}
 }
 
