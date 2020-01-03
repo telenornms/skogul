@@ -2,8 +2,11 @@ cmd/skogul/skogul
 /skogul
 
 # for release-mechanics
+/build
 /*.tar.bz2
 /dist
+/rpm-prep
+*.rpm
 
 # Don't check vendored files in
 vendor
