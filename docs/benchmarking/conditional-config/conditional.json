@@ -1,0 +1,180 @@
+[{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:45.950394+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 247124,
+        "rate_metrics": 2471244,
+        "rate_values": 2471244,
+        "total_containers": 247126,
+        "total_metrics": 2471260,
+        "total_values": 2471260
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:46.95043+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 246594,
+        "rate_metrics": 2465945,
+        "rate_values": 2465945,
+        "total_containers": 493723,
+        "total_metrics": 4937230,
+        "total_values": 4937230
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:47.950456+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 246844,
+        "rate_metrics": 2468448,
+        "rate_values": 2468448,
+        "total_containers": 740568,
+        "total_metrics": 7405680,
+        "total_values": 7405680
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:48.950488+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 248852,
+        "rate_metrics": 2488527,
+        "rate_values": 2488527,
+        "total_containers": 989422,
+        "total_metrics": 9894220,
+        "total_values": 9894220
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:49.950521+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 247533,
+        "rate_metrics": 2475330,
+        "rate_values": 2475330,
+        "total_containers": 1236957,
+        "total_metrics": 12369570,
+        "total_values": 12369570
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:50.950549+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 245762,
+        "rate_metrics": 2457626,
+        "rate_values": 2457626,
+        "total_containers": 1482720,
+        "total_metrics": 14827200,
+        "total_values": 14827200
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:51.950575+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 249612,
+        "rate_metrics": 2496128,
+        "rate_values": 2496128,
+        "total_containers": 1732333,
+        "total_metrics": 17323330,
+        "total_values": 17323330
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:52.950604+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 252674,
+        "rate_metrics": 2526741,
+        "rate_values": 2526741,
+        "total_containers": 1985008,
+        "total_metrics": 19850080,
+        "total_values": 19850080
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:53.950632+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 253288,
+        "rate_metrics": 2532886,
+        "rate_values": 2532886,
+        "total_containers": 2238297,
+        "total_metrics": 22382970,
+        "total_values": 22382970
+      }
+    }
+  ]
+},
+{
+  "metrics": [
+    {
+      "timestamp": "2020-01-06T13:32:54.950662+01:00",
+      "metadata": {
+        "skogul": "counter"
+      },
+      "data": {
+        "rate_containers": 255935,
+        "rate_metrics": 2559359,
+        "rate_values": 2559359,
+        "total_containers": 2494234,
+        "total_metrics": 24942340,
+        "total_values": 24942340
+      }
+    }
+  ]
+}]
