@@ -49,6 +49,10 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 		condition := cas.Is
 
 		for _, metric := range c.Metrics {
+			if metric.Metadata[field] == nil || metric.Metadata[field] == "" {
+				continue
+			}
+
 			metadataField, ok := metric.Metadata[field].(string)
 			if !ok {
 				switchLogger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
