@@ -302,6 +302,50 @@ func TestFlattenMapCustomSeparator(t *testing.T) {
 	}
 }
 
+func TestFlattenMapDropSeparator(t *testing.T) {
+	path := "nestedData"
+	extracted_value_key := "key"
+	extracted_value := "value"
+	separator := "drop"
+
+	metric := skogul.Metric{}
+
+	metric.Data = make(map[string]interface{})
+	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extracted_value_key, extracted_value)
+	json.Unmarshal([]byte(testData), &metric.Data)
+
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric}
+
+	data := transformer.Data{
+		Flatten:          [][]string{{path}},
+		FlattenSeparator: separator,
+	}
+
+	err := data.Transform(&c)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	new_path := fmt.Sprintf("%s", extracted_value_key)
+
+	// Expect data to be accessible at its new location
+	if c.Metrics[0].Data[new_path] != extracted_value {
+		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	}
+
+	// Expect data to still be accessible at its original location
+	if c.Metrics[0].Data[path] == nil {
+		t.Errorf(`Expected "%s" but got "%s" in %+v`, extracted_value, c.Metrics[0].Data[path], c.Metrics[0].Data)
+	}
+
+	// Expect data unrelated to the flattening to still be accessible
+	if c.Metrics[0].Data["otherData"] != "dataer" {
+		t.Errorf(`Expected "%s" but got "%s"`, "dataer", c.Metrics[0].Data["otherData"])
+	}
+}
+
 func TestFlattenArray(t *testing.T) {
 	path := "nestedData"
 	extracted_value_key := "0"
