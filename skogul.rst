@@ -694,7 +694,7 @@ Settings:
 	Flatten nested structures down to the root level
 
 ``flattenseparator - string``
-	Custom separator to use for flattening.
+	Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name.
 
 ``remove - []string``
 	Remove these data fields.

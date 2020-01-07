@@ -711,7 +711,7 @@ Fail if any of these data fields are present
 Flatten nested structures down to the root level
 .TP
 .B \fBflattenseparator \- string\fP
-Custom separator to use for flattening.
+Custom separator to use for flattening. Use \(aqdrop\(aq to drop intermediate keys. This will overwrite existing keys with the same name.
 .TP
 .B \fBremove \- []string\fP
 Remove these data fields.

@@ -81,12 +81,16 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 // flattenStructure copies a nested object/array to the root level
 func flattenStructure(nestedPath []string, separator string, metric *skogul.Metric) error {
 	nestedObjectPath := nestedPath[0]
-	if separator == "" {
-		separator = "__"
+	var pathFmt string
+	if separator == "drop" {
+		pathFmt = "%s%s"
+		nestedObjectPath = ""
+	} else {
+		pathFmt = "%s" + separator + "%s"
 	}
-	pathFmt := "%s" + separator + "%s"
 
-	if len(nestedPath) > 1 {
+	// Create a nested path unless configuration says not to
+	if separator != "drop" && len(nestedPath) > 1 {
 		for _, p := range nestedPath[1:] {
 			nestedObjectPath = fmt.Sprintf(pathFmt, nestedObjectPath, p)
 		}
@@ -110,7 +114,8 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 				obj, isMap := val.(map[string]interface{})
 
 				// If the cast is successful, the array of items is a list of map[string]interface{},
-				// and we want to extract each key to its own key in the root, prefixed with the path.
+				// and we want to extract each key to its own key in the root (prefixed with the path,
+				// which may be removed by using 'drop' as separator. Array keys will still be included)
 				// Otherwise, the array is a list of a primitive construct and we
 				// simply prefix the key with the array index
 				if isMap {
@@ -139,13 +144,18 @@ type Data struct {
 	Set              map[string]interface{} `doc:"Set data fields to specific values."`
 	Require          []string               `doc:"Require the pressence of these data fields."`
 	Flatten          [][]string             `doc:"Flatten nested structures down to the root level"`
-	FlattenSeparator string                 `doc:"Custom separator to use for flattening."`
+	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
 	Remove           []string               `doc:"Remove these data fields."`
 	Ban              []string               `doc:"Fail if any of these data fields are present"`
 }
 
 // Transform enforces the Metadata rules
 func (data *Data) Transform(c *skogul.Container) error {
+	// Set flatten separator to default value if not configured
+	if data.FlattenSeparator == "" {
+		data.FlattenSeparator = "__"
+	}
+
 	for mi := range c.Metrics {
 		for key, value := range data.Set {
 			if c.Metrics[mi].Data == nil {
