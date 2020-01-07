@@ -79,12 +79,16 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 }
 
 // flattenStructure copies a nested object/array to the root level
-func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
-	newPath := nestedPath[0]
+func flattenStructure(nestedPath []string, separator string, metric *skogul.Metric) error {
+	nestedObjectPath := nestedPath[0]
+	if separator == "" {
+		separator = "__"
+	}
+	pathFmt := "%s" + separator + "%s"
 
 	if len(nestedPath) > 1 {
 		for _, p := range nestedPath[1:] {
-			newPath = fmt.Sprintf("%s__%s", newPath, p)
+			nestedObjectPath = fmt.Sprintf(pathFmt, nestedObjectPath, p)
 		}
 	}
 
@@ -106,12 +110,12 @@ func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 				obj, isMap := val.(map[string]interface{})
 
 				// If the cast is successful, the array of items is a list of map[string]interface{},
-				// and we want to extract each key to its own key in the root, prefixed with the path
+				// and we want to extract each key to its own key in the root, prefixed with the path.
 				// Otherwise, the array is a list of a primitive construct and we
 				// simply prefix the key with the array index
 				if isMap {
 					for key, val := range obj {
-						nestedObj[fmt.Sprintf("%d__%s", i, key)] = val
+						nestedObj[fmt.Sprintf(pathFmt, fmt.Sprintf("%d", i), key)] = val
 					}
 				} else {
 					nestedObj[fmt.Sprintf("%d", i)] = val
@@ -120,7 +124,7 @@ func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 		}
 
 		for key, val := range nestedObj {
-			metric.Data[fmt.Sprintf("%s__%s", newPath, key)] = val
+			metric.Data[fmt.Sprintf(pathFmt, nestedObjectPath, key)] = val
 		}
 	} else {
 		return err
@@ -132,11 +136,12 @@ func flattenStructure(nestedPath []string, metric *skogul.Metric) error {
 // Data enforces a set of rules on data in all metrics, potentially
 // changing the metric data.
 type Data struct {
-	Set     map[string]interface{} `doc:"Set data fields to specific values."`
-	Require []string               `doc:"Require the pressence of these data fields."`
-	Flatten [][]string             `doc:"Flatten nested structures down to the root level"`
-	Remove  []string               `doc:"Remove these data fields."`
-	Ban     []string               `doc:"Fail if any of these data fields are present"`
+	Set              map[string]interface{} `doc:"Set data fields to specific values."`
+	Require          []string               `doc:"Require the pressence of these data fields."`
+	Flatten          [][]string             `doc:"Flatten nested structures down to the root level"`
+	FlattenSeparator string                 `doc:"Custom separator to use for flattening."`
+	Remove           []string               `doc:"Remove these data fields."`
+	Ban              []string               `doc:"Fail if any of these data fields are present"`
 }
 
 // Transform enforces the Metadata rules
@@ -149,7 +154,7 @@ func (data *Data) Transform(c *skogul.Container) error {
 			c.Metrics[mi].Data[key] = value
 		}
 		for _, nestedPath := range data.Flatten {
-			_ = flattenStructure(nestedPath, c.Metrics[mi])
+			_ = flattenStructure(nestedPath, data.FlattenSeparator, c.Metrics[mi])
 		}
 		for _, value := range data.Require {
 			if c.Metrics[mi].Data == nil || c.Metrics[mi].Data[value] == nil {

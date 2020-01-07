@@ -693,6 +693,9 @@ Settings:
 ``flatten - [][]string``
 	Flatten nested structures down to the root level
 
+``flattenseparator - string``
+	Custom separator to use for flattening.
+
 ``remove - []string``
 	Remove these data fields.
 
