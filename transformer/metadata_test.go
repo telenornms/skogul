@@ -329,7 +329,7 @@ func TestFlattenArray(t *testing.T) {
 	new_path := fmt.Sprintf("%s__%s", path, extracted_value_key)
 
 	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Data[new_path])
+		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
 	}
 }
 
@@ -361,6 +361,6 @@ func TestFlattenArrayOfMaps(t *testing.T) {
 	new_path := fmt.Sprintf("%s__%s__%s", path, extracted_value_key, extracted_value_key_2)
 
 	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Data[new_path])
+		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
 	}
 }
