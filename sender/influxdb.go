@@ -103,7 +103,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		return e
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response from InfluxDB: %s", resp.Status)}
+		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response from InfluxDB: %s - %s", resp.Status, resp.Body)}
 		return e
 	}
 	return nil
