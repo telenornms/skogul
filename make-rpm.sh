@@ -22,7 +22,7 @@ mkdir -p rpm-prep/SRPMS
 cp LICENSE rpm-prep
 cp make-docs.sh rpm-prep/BUILDROOT
 cp skogul.service rpm-prep/SOURCES
-cp docs/examples/http_count.json rpm-prep/SOURCES/config.json
+cp docs/examples/default.json rpm-prep/SOURCES/default.json
 
 
 VERSION_NO=$(echo $V | sed s/[v-]//g)
@@ -74,7 +74,7 @@ cp dist/share/man/man1/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 cp -r docs/* %{buildroot}%{_defaultdocdir}/%{name}-%{version}
 mkdir -p %{buildroot}%{_unitdir}
 install -m 0644 %{_sourcedir}/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
-install -m 0644 %{_sourcedir}/config.json %{buildroot}%{_sysconfdir}/%{name}/config.json
+install -m 0644 %{_sourcedir}/default.json %{buildroot}%{_sysconfdir}/%{name}/default.json
 
 %pre
 getent group skogul >/dev/null || groupadd -r skogul
@@ -97,7 +97,7 @@ exit 0
 %docdir %{_defaultdocdir}/%{name}-%{version}
 %{_defaultdocdir}/%{name}-%{version}
 %{_unitdir}/%{name}.service
-%{_sysconfdir}/%{name}/config.json
+%{_sysconfdir}/%{name}/default.json
 
 
 
