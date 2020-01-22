@@ -1,7 +1,20 @@
 v0.5.0
 ======
 
-Unreleased
+Release date: 2020-01-22
+
+Skogul 0.5.0 is a small release, but should make life much easier for
+InfluxDB-users.
+
+Specific changes:
+
+- InfluxDB sender now detects invalid metrics instead of sending "garbage"
+  to InfluxDB that fails - it will send what it can.
+- InfluxDB sender has much better logging
+- Split transformer now correctly transforms remainder of metrics in a
+  container after encountering one it can't handle.
+- RPM packages and systemd unit files now agree upon default config file
+  path.
 
 v0.4.1
 ======
