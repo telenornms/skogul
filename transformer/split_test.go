@@ -33,36 +33,39 @@ import (
 )
 
 func TestSplit(t *testing.T) {
-	split_path := "data"
-	testData := `{
-		"data": [
-			{
-				"splitField": "key1",
-				"data": "yes"
-			},
-			{
-				"splitField": "key2",
-				"data": "yes also"
+	var c skogul.Container
+	testData := `
+	{
+		"metrics": [
+		{
+			"data": {
+				"data": [
+				{
+					"splitField": "key1",
+					"data": "yes"
+				},
+				{
+					"splitField": "key2",
+					"data": "yes also"
+				}
+				]
 			}
+
+		}
 		]
-	}`
+	}
+	`
+	if err := json.Unmarshal([]byte(testData), &c); err != nil {
+		t.Error(err)
+		return
+	}
 
-	metric := skogul.Metric{}
-	metric.Metadata = make(map[string]interface{})
-
-	metric.Data = make(map[string]interface{})
-	json.Unmarshal([]byte(testData), &metric.Data)
-
-	c := skogul.Container{}
-	c.Metrics = []*skogul.Metric{&metric}
-
+	split_path := "data"
 	metadata := transformer.Split{
 		Field: []string{split_path},
 	}
 
-	err := metadata.Transform(&c)
-
-	if err != nil {
+	if err := metadata.Transform(&c); err != nil {
 		t.Error(err)
 		return
 	}
