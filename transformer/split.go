@@ -62,6 +62,7 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 
 		if err != nil {
 			if !split.Fail {
+				newMetrics = append(newMetrics, origMetrics[mi])
 				continue
 			}
 			return nil, fmt.Errorf("Failed to extract nested obj '%v' from '%v' to string/interface map", split.Field, origMetrics[mi].Data)
@@ -70,6 +71,10 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 		metrics, ok := splitObj[split.Field[len(split.Field)-1]].([]interface{})
 
 		if !ok {
+			if !split.Fail {
+				newMetrics = append(newMetrics, origMetrics[mi])
+				continue
+			}
 			return nil, fmt.Errorf("Failed to cast '%v' to string/interface map on '%s'", origMetrics[mi].Data, split.Field[0])
 		}
 
@@ -78,6 +83,10 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 			metricsData, ok := obj.(map[string]interface{})
 
 			if !ok {
+				if !split.Fail {
+					newMetrics = append(newMetrics, origMetrics[mi])
+					continue
+				}
 				return nil, fmt.Errorf("Failed to cast '%v' to string/interface map", obj)
 			}
 
