@@ -81,19 +81,17 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 // flattenStructure copies a nested object/array to the root level
 func flattenStructure(nestedPath []string, separator string, metric *skogul.Metric) error {
 	nestedObjectPath := nestedPath[0]
-	var pathFmt string
-	if separator == "drop" {
-		pathFmt = "%s%s"
-		nestedObjectPath = ""
-	} else {
-		pathFmt = "%s" + separator + "%s"
-	}
 
 	// Create a nested path unless configuration says not to
 	if separator != "drop" && len(nestedPath) > 1 {
 		for _, p := range nestedPath[1:] {
-			nestedObjectPath = fmt.Sprintf(pathFmt, nestedObjectPath, p)
+			nestedObjectPath = fmt.Sprintf("%s%s%s", nestedObjectPath, separator, p)
 		}
+	}
+
+	if separator == "drop" {
+		separator = ""
+		nestedObjectPath = ""
 	}
 
 	obj, err := skogul.ExtractNestedObject(metric.Data, nestedPath)
@@ -120,7 +118,7 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 				// simply prefix the key with the array index
 				if isMap {
 					for key, val := range obj {
-						nestedObj[fmt.Sprintf(pathFmt, fmt.Sprintf("%d", i), key)] = val
+						nestedObj[fmt.Sprintf("%s%s%s", fmt.Sprintf("%d", i), separator, key)] = val
 					}
 				} else {
 					nestedObj[fmt.Sprintf("%d", i)] = val
@@ -129,7 +127,7 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 		}
 
 		for key, val := range nestedObj {
-			metric.Data[fmt.Sprintf(pathFmt, nestedObjectPath, key)] = val
+			metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
 		}
 	} else {
 		return err
