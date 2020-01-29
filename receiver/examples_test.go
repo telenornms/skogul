@@ -36,8 +36,10 @@ HTTP can have different skogul.Handler's for different paths, with potentially d
 */
 func ExampleHTTP() {
 	h := receiver.HTTP{Address: "localhost:8080"}
-	template := skogul.Handler{Parser: parser.JSON{}, Transformers: []skogul.Transformer{transformer.Templater{}}, Sender: &sender.Debug{}}
-	noTemplate := skogul.Handler{Parser: parser.JSON{}, Sender: &sender.Debug{}}
+	template := skogul.Handler{Transformers: []skogul.Transformer{transformer.Templater{}}, Sender: &sender.Debug{}}
+	template.SetParser(parser.JSON{})
+	noTemplate := skogul.Handler{Sender: &sender.Debug{}}
+	noTemplate.SetParser(parser.JSON{})
 	h.Handlers = map[string]*skogul.HandlerRef{
 		"/template":   {H: &template},
 		"/notemplate": {H: &noTemplate},
