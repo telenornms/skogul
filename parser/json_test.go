@@ -66,3 +66,11 @@ func TestRawJSONParse(t *testing.T) {
 		return
 	}
 }
+
+func BenchmarkRawJSONParse(b *testing.B) {
+	by := []byte(`{"string":"text","float":1.11,"integer":5,"timestamp":"2019-03-15T11:08:02+01:00","key":"value"}`)
+	x := RawJSON{}
+	for i := 0; i < b.N; i++ {
+		x.Parse(by)
+	}
+}
