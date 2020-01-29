@@ -21,17 +21,20 @@
  * 02110-1301  USA
  */
 
-package parser
+package parser_test
 
-import "testing"
+import (
+	"io/ioutil"
+	"testing"
 
-import "io/ioutil"
+	"github.com/telenornms/skogul/parser"
+)
 
 // TestJSONParse tests parsing of a simple JSON document to skogul
 // container
 func TestJSONParse(t *testing.T) {
 	b := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
-	x := JSON{}
+	x := parser.JSON{}
 	_, err := x.Parse(b)
 	if err != nil {
 		t.Errorf("JSON.Parse(b) failed: %s", err)
@@ -40,7 +43,7 @@ func TestJSONParse(t *testing.T) {
 
 func BenchmarkJSONParse(b *testing.B) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
-	x := JSON{}
+	x := parser.JSON{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}
@@ -54,7 +57,7 @@ func TestRawJSONParse(t *testing.T) {
 		return
 	}
 
-	container, err := RawJSON{}.Parse(b)
+	container, err := parser.RawJSON{}.Parse(b)
 
 	if err != nil {
 		t.Errorf("Failed to parse JSON data: %v", err)
@@ -69,7 +72,7 @@ func TestRawJSONParse(t *testing.T) {
 
 func BenchmarkRawJSONParse(b *testing.B) {
 	by := []byte(`{"string":"text","float":1.11,"integer":5,"timestamp":"2019-03-15T11:08:02+01:00","key":"value"}`)
-	x := RawJSON{}
+	x := parser.RawJSON{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}

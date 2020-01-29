@@ -21,11 +21,13 @@
  * 02110-1301  USA
  */
 
-package parser
+package parser_test
 
 import (
 	"os"
 	"testing"
+
+	"github.com/telenornms/skogul/parser"
 )
 
 type failer interface {
@@ -53,7 +55,7 @@ func readProtobufFile(t failer, file string) []byte {
 
 func TestProtoBuf(t *testing.T) {
 	b := readProtobufFile(t, "testdata/protobuf-packet.bin")
-	x := ProtoBuf{}
+	x := parser.ProtoBuf{}
 	c, err := x.Parse(b)
 	if err != nil {
 		t.Errorf("ProtoBuf.Parse(b) failed: %s", err)
@@ -65,7 +67,7 @@ func TestProtoBuf(t *testing.T) {
 
 func BenchmarkProtoBufParse(b *testing.B) {
 	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
-	x := ProtoBuf{}
+	x := parser.ProtoBuf{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}
