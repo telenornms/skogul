@@ -44,7 +44,7 @@ used in the future.
 To make it configurable, a HandlerRef should be used.
 */
 type Handler struct {
-	Parser       Parser
+	parser       Parser
 	Transformers []Transformer
 	Sender       Sender
 }
@@ -171,9 +171,21 @@ func (e Error) Container() Container {
 	return c
 }
 
+// SetParser sets the parser to use for a Handler
+func (h *Handler) SetParser(p Parser) error {
+	if h.parser != nil {
+		return Error{Source: "handler", Reason: "Handler already has a parser set"}
+	}
+	if p == nil {
+		return Error{Source: "handler", Reason: "Attempting to set parser to 'nil'"}
+	}
+	h.parser = p
+	return nil
+}
+
 // Parse parses the bytes into a Container
 func (h *Handler) Parse(b []byte) (*Container, error) {
-	c, err := h.Parser.Parse(b)
+	c, err := h.parser.Parse(b)
 	if err != nil {
 		return nil, Error{Source: "handler", Reason: "parsing data failed", Next: err}
 	}
@@ -220,7 +232,7 @@ func (h *Handler) TransformAndSend(c *Container) error {
 
 // Verify the basic integrity of a handler. Quite shallow.
 func (h Handler) Verify() error {
-	if h.Parser == nil {
+	if h.parser == nil {
 		return Error{Reason: "Missing parser for Handler"}
 	}
 	for i, t := range h.Transformers {
