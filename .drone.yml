@@ -24,8 +24,22 @@ steps:
   image: golang
   commands:
   - apt-get update
-  - apt-get -y install python-docutils bzip2 gawk rpm
+  - apt-get -y install python-docutils bzip2 gawk
   - ./make-release.sh ${DRONE_TAG}
+  when:
+    event:
+    - tag
+
+- name: prepare-centos-release
+  image: centos:7
+  environment:
+    SHELL: /bin/bash
+  commands:
+  - yum install -y git python-docutils rpm-build wget
+  - wget https://storage.googleapis.com/golang/getgo/installer_linux
+  - chmod +x installer_linux
+  - ./installer_linux
+  - source /root/.bash_profile
   - ./make-rpm.sh ${DRONE_TAG}
   when:
     event:
@@ -44,6 +58,9 @@ steps:
     - skogul-*.rpm
     note: notes
     title: Skogul ${DRONE_TAG}
+  depends_on:
+    - prepare-release
+    - prepare-centos-release
   when:
     event:
     - tag
