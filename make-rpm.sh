@@ -40,10 +40,10 @@ Source0:        https://github.com/telenornms/skogul/archive/$V.tar.gz
 
 
 BuildArch:      $ARCH
-# The build requirements. However, because we build
-# in a docker container with ubuntu
-# rpm doesn't know that the requirements are available.
-#BuildRequires:  go >= 1.13, python-docutils
+# Since we download go manually and not through yum,
+# the version won't be registered as installed.
+#BuildRequires:  go >= 1.13
+BuildRequires:  python-docutils, systemd-units
 
 
 %description
