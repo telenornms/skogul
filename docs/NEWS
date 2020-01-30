@@ -1,9 +1,11 @@
-next
+v0.5.1
 ====
 
-Release date: -
+Release date: 2020-01-30
 
-...
+Add custom flattening separator, and a magic 'drop' separator to
+remove any intermediate keys. Also adds some benchmarks for custom
+parsers as well as cleaning up some package names for test files.
 
 Specific changes:
 

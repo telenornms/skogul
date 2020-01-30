@@ -376,7 +376,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.TypeOf(h.Handler)
-		verifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
+		VerifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, t := range c.Transformers {
 		confLog.WithField("transformer", idx).Debug("Verifying transformer configuration")
@@ -385,7 +385,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.ValueOf(t.Transformer).Elem().Type()
-		verifyOnlyRequiredConfigProps(jsonData, "transformers", idx, configStruct)
+		VerifyOnlyRequiredConfigProps(jsonData, "transformers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
 		confLog.WithField("sender", idx).Debug("Verifying sender configuration")
@@ -394,7 +394,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.ValueOf(s.Sender).Elem().Type()
-		verifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
+		VerifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
 		confLog.WithField("receiver", idx).Debug("Verifying receiver configuration")
@@ -403,7 +403,7 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		}
 
 		configStruct := reflect.ValueOf(r.Receiver).Elem().Type()
-		verifyOnlyRequiredConfigProps(jsonData, "receivers", idx, configStruct)
+		VerifyOnlyRequiredConfigProps(jsonData, "receivers", idx, configStruct)
 	}
 
 	return c, nil
@@ -466,7 +466,9 @@ func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 	return configSection
 }
 
-func verifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
+// VerifyOnlyRequiredConfigProps checks for undefined configuration properties
+// It can be used to identify typos or invalid configuration
+func VerifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
 	requiredProps := findFieldsOfStruct(T)
 
 	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)

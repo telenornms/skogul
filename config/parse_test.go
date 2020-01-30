@@ -1,4 +1,4 @@
-package config
+package config_test
 
 import (
 	"encoding/json"
@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 )
@@ -16,7 +17,7 @@ func TestFile(t *testing.T) {
 			t.Errorf("File() paniced")
 		}
 	}()
-	c, err := File("testdata/test.json")
+	c, err := config.File("testdata/test.json")
 	if err != nil {
 		t.Errorf("File() failed: %v", err)
 	}
@@ -87,7 +88,7 @@ func TestByte_ok(t *testing.T) {
   }
 }
 `)
-	c, err := Bytes(okData)
+	c, err := config.Bytes(okData)
 	if err != nil {
 		t.Errorf("Bytes() failed: %v", err)
 	}
@@ -95,7 +96,7 @@ func TestByte_ok(t *testing.T) {
 		t.Errorf("Bytes() returned nil config")
 	}
 	badData := []byte(`{ "senders": { "x": { "type": "sql", "ConnStr": 5 } } }`)
-	c, err = Bytes(badData)
+	c, err = config.Bytes(badData)
 	if err == nil {
 		t.Errorf("Bytes() test 2 failed, sent bad data, didn't get error.")
 	}
@@ -103,7 +104,7 @@ func TestByte_ok(t *testing.T) {
 		t.Errorf("Bytes() with bad data returned valid config.")
 	}
 	noURL := []byte(`{ "senders": { "x" : { "type": "http" }}}`)
-	c, err = Bytes(noURL)
+	c, err = config.Bytes(noURL)
 	if err == nil {
 		t.Errorf("Bytes() test 3 failed, http sender with no URL didn't get error.")
 	}
@@ -114,7 +115,7 @@ func TestByte_ok(t *testing.T) {
 }
 
 func TestHelpModule(t *testing.T) {
-	_, err := HelpModule(sender.Auto, "sql")
+	_, err := config.HelpModule(sender.Auto, "sql")
 	if err != nil {
 		t.Errorf("HelpModule(sender.Auto,\"sql\") didn't work: %v", err)
 	}
@@ -122,7 +123,7 @@ func TestHelpModule(t *testing.T) {
 
 func testBadConf(t *testing.T, badData string) {
 	t.Helper()
-	_, err := Bytes([]byte(badData))
+	_, err := config.Bytes([]byte(badData))
 	if err == nil {
 		t.Errorf("Bytes() was ok, despite bad data")
 	}
@@ -264,7 +265,7 @@ func Test_syntaxError(t *testing.T) {
 	}
 }`)
 
-	_, err := Bytes([]byte(`{
+	_, err := config.Bytes([]byte(`{
     "receivers": {
       "udp": {
         "type": "udp",
@@ -332,15 +333,15 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	  }
 	}`)
 
-	var config map[string]interface{}
-	err := json.Unmarshal(rawConfig, &config)
+	var c map[string]interface{}
+	err := json.Unmarshal(rawConfig, &c)
 
 	if err != nil {
 		t.Error("Failed to parse config")
 	}
 
 	configStruct := reflect.TypeOf(receiver.UDP{})
-	superfluousProperties := verifyOnlyRequiredConfigProps(&config, "receivers", "foo", configStruct)
+	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&c, "receivers", "foo", configStruct)
 
 	if len(superfluousProperties) != 1 {
 		t.Errorf("Expected 1 superfluous property but got %d", len(superfluousProperties))
