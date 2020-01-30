@@ -19,6 +19,8 @@ steps:
   - go test -short ./...
   - if [ "x$(gofmt -s -d .)" != "x" ]; then gofmt -s -d .; exit 1; fi
   - go vet ./...
+  depends_on:
+    - build
 
 - name: prepare-release
   image: golang
@@ -26,6 +28,8 @@ steps:
   - apt-get update
   - apt-get -y install python-docutils bzip2 gawk
   - ./make-release.sh ${DRONE_TAG}
+  depends_on:
+    - test
   when:
     event:
     - tag
@@ -41,6 +45,8 @@ steps:
   - ./installer_linux
   - source /root/.bash_profile
   - ./make-rpm.sh ${DRONE_TAG}
+  depends_on:
+    - test
   when:
     event:
     - tag
