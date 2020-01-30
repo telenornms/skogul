@@ -1,3 +1,14 @@
+next
+====
+
+Release date: -
+
+...
+
+Specific changes:
+
+- Support for custom flattening separator as well as dropping intermediate keys.
+
 v0.5.0
 ======
 
