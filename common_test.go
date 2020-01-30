@@ -24,10 +24,14 @@
 package skogul_test
 
 import (
+	"fmt"
+	"testing"
+	"time"
+
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/sender"
-	"testing"
+	"github.com/telenornms/skogul/transformer"
 )
 
 func TestHandler(t *testing.T) {
@@ -105,4 +109,78 @@ func TestAssert_fail_arg(t *testing.T) {
 	}()
 	skogul.Assert(false, "something")
 	t.Errorf("skogul.Error(false,\"test\") called, but execution continued.")
+}
+
+func TestParseInvalidContainerSuccess(t *testing.T) {
+	data := []byte(`{"data": 1, "ts": "2020-01-01T00:00:00.0Z"}`)
+
+	h := skogul.Handler{}
+	h.SetParser(parser.JSON{})
+
+	// Verify that a JSON{} parser successfully parses this
+	// container even though it's not on the proper format
+	_, err := h.Parse(data)
+	if err != nil {
+		t.Error("Failed to parse json data", err)
+		return
+	}
+}
+
+func TestParseAndTransformInvalidContainerFails(t *testing.T) {
+	data := []byte(`{"data": 1, "ts": "2020-01-01T00:00:00.0Z"}`)
+
+	h := skogul.Handler{}
+	h.SetParser(parser.JSON{})
+
+	c, err := h.Parse(data)
+	if err != nil {
+		t.Error("Failed to parse json data", err)
+		return
+	}
+
+	// Verify that running a transformer (with an implicit Validate())
+	// fails this container as it's on an invalid format
+	err = h.Transform(c)
+	if err == nil {
+		t.Error("Transformation successful even though it should fail")
+		return
+	}
+}
+
+func TestParseInvalidContainerAndTransformItValid(t *testing.T) {
+	tformat := "2006-01-02T15:04:05Z07:00"
+	parsedTimestamp, err := time.Parse(tformat, "2020-01-01T00:00:00.0Z")
+	timestring := parsedTimestamp.Format(tformat)
+	data := []byte(fmt.Sprintf(`{"data": 1, "ts": "%s"}`, timestring))
+
+	h := skogul.Handler{}
+	h.SetParser(parser.RawJSON{})
+
+	// Parse the data using the custom JSON handler
+	c, err := h.Parse(data)
+
+	if err != nil {
+		t.Error("Failed to parse json data", err)
+		return
+	}
+
+	// Extract timestamp from data
+	parseTimestamp := transformer.Timestamp{}
+	parseTimestamp.Source = []string{"ts"}
+	parseTimestamp.Format = "RFC3339"
+
+	h.Transformers = []skogul.Transformer{&parseTimestamp}
+
+	err = h.Transform(c)
+
+	// Make sure the transformer validates the container successfully
+	if err != nil {
+		t.Error("Failed to transform container", err)
+		return
+	}
+
+	if c.Metrics[0].Time.UTC().Format(tformat) != timestring {
+		t.Errorf("%v not matching expected time '%v'", c.Metrics[0].Time.UTC().String(), timestring)
+		return
+	}
 }
