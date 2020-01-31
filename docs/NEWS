@@ -6,6 +6,11 @@ Release date:
 Fixes a bug with the install RPMs which would error during install
 and uninstall. The RPMs are now built on a system running yum, which
 will make sure build dependencies are correctly satisfied.
+Refactors the internal Handler API to expose Parse, Transform and Send
+(also TransformAndSend which transforms a container and then sends it,
+and Handle which parses, transforms and sends a container). This should
+make the API easier to understand and makes sure relevant procedures (
+like Validate()) are run before e.g. Send()-ing things off.
 
 Specific changes:
 
