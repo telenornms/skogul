@@ -79,7 +79,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an empty Container")
 	}
 	got := fmt.Sprintf("%s", err)
-	want := "<nil>: Missing metrics[] data"
+	want := "container validation: Missing metrics[] data"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}

@@ -167,7 +167,7 @@ validated by that time.
 */
 func (c *Container) Validate() error {
 	if c.Metrics == nil {
-		return Error{Reason: "Missing metrics[] data"}
+		return Error{Source: "container validation", Reason: "Missing metrics[] data"}
 	}
 	if len(c.Metrics) <= 0 {
 		return Error{Reason: "Empty metrics[] data"}

@@ -233,7 +233,7 @@ func (h *Handler) TransformAndSend(c *Container) error {
 // Verify the basic integrity of a handler. Quite shallow.
 func (h Handler) Verify() error {
 	if h.parser == nil {
-		return Error{Reason: "Missing parser for Handler"}
+		return Error{Source: "handler verification", Reason: "Missing parser for Handler"}
 	}
 	for i, t := range h.Transformers {
 		if t == nil {
@@ -241,7 +241,7 @@ func (h Handler) Verify() error {
 		}
 	}
 	if h.Sender == nil {
-		return Error{Reason: "Missing parser for Handler"}
+		return Error{Source: "handler verification", Reason: "Missing Sender for Handler"}
 	}
 	return nil
 }
