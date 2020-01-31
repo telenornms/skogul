@@ -1,5 +1,23 @@
+next
+======
+
+Release date: 
+
+Fixes a bug with the install RPMs which would error during install
+and uninstall. The RPMs are now built on a system running yum, which
+will make sure build dependencies are correctly satisfied.
+
+Specific changes:
+
+- Fixes a bug with the RPM building which would make it error
+  during install and uninstall (reinstall). The package gets
+  installed correctly, but not uninstalled. This bug has to be
+  manually worked a round if any previous skogul RPM is
+  installed, by manually uninstalling the version using rpm.
+  (rpm -e --noscripts skogul*)
+
 v0.5.1
-====
+======
 
 Release date: 2020-01-30
 
