@@ -147,6 +147,37 @@ func TestParseAndTransformInvalidContainerFails(t *testing.T) {
 	}
 }
 
+func TestParseAndTransformInvalidContainerSuccess(t *testing.T) {
+	data := []byte(`{"metrics": [{ "metadata": {"foo":"bar"}}], "template": {"data": {"a": "b"}, "timestamp": "2020-01-01T00:00:00.0Z"}}`)
+
+	h := skogul.Handler{}
+	h.SetParser(parser.JSON{})
+
+	c, err := h.Parse(data)
+	if err != nil {
+		t.Error("Failed to parse json data", err)
+		return
+	}
+
+	err = h.Transform(c)
+	if err == nil {
+		t.Errorf("Transformation-Validation of container should fail before transforming it")
+		return
+	}
+
+	templater := transformer.Templater{}
+
+	h.Transformers = []skogul.Transformer{&templater}
+
+	// Verify that running a transformer (with an implicit Validate())
+	// validates this container successfully after transforming
+	err = h.Transform(c)
+	if err != nil {
+		t.Error("Transformation of container failed after transforming it valid", err)
+		return
+	}
+}
+
 func TestParseInvalidContainerAndTransformItValid(t *testing.T) {
 	tformat := "2006-01-02T15:04:05Z07:00"
 	parsedTimestamp, err := time.Parse(tformat, "2020-01-01T00:00:00.0Z")

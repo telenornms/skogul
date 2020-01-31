@@ -194,13 +194,13 @@ func (h *Handler) Parse(b []byte) (*Container, error) {
 
 // Transform validates the parsed container and runs all available transformers
 func (h *Handler) Transform(c *Container) error {
-	if err := c.Validate(); err != nil {
-		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
-	}
 	for _, t := range h.Transformers {
 		if err := t.Transform(c); err != nil {
 			return err
 		}
+	}
+	if err := c.Validate(); err != nil {
+		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
 	}
 	return nil
 }
