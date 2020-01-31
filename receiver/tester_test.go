@@ -34,7 +34,8 @@ import (
 
 func TestTester_stack(t *testing.T) {
 	one := &(sender.Test{})
-	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
+	h := skogul.Handler{Sender: one}
+	h.SetParser(parser.JSON{})
 	rcv := receiver.Tester{Metrics: 10, Values: 5, Threads: 2, Handler: skogul.HandlerRef{H: &h}}
 	go rcv.Start()
 
@@ -52,7 +53,8 @@ func TestTester_stack(t *testing.T) {
 
 func TestTester_auto(t *testing.T) {
 	one := &(sender.Test{})
-	h := skogul.Handler{Sender: one, Parser: parser.JSON{}}
+	h := skogul.Handler{Sender: one}
+	h.SetParser(parser.JSON{})
 	parsedD, _ := time.ParseDuration("1s")
 	x := receiver.Tester{
 		Handler: skogul.HandlerRef{H: &h},

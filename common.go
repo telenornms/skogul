@@ -44,7 +44,7 @@ used in the future.
 To make it configurable, a HandlerRef should be used.
 */
 type Handler struct {
-	Parser       Parser
+	parser       Parser
 	Transformers []Transformer
 	Sender       Sender
 }
@@ -171,7 +171,28 @@ func (e Error) Container() Container {
 	return c
 }
 
-// Transform runs all available transformers in order and enforce any rules
+// SetParser sets the parser to use for a Handler
+func (h *Handler) SetParser(p Parser) error {
+	if h.parser != nil {
+		return Error{Source: "handler", Reason: "Handler already has a parser set"}
+	}
+	if p == nil {
+		return Error{Source: "handler", Reason: "Attempting to set parser to 'nil'"}
+	}
+	h.parser = p
+	return nil
+}
+
+// Parse parses the bytes into a Container
+func (h *Handler) Parse(b []byte) (*Container, error) {
+	c, err := h.parser.Parse(b)
+	if err != nil {
+		return nil, Error{Source: "handler", Reason: "parsing data failed", Next: err}
+	}
+	return c, nil
+}
+
+// Transform runs all available transformers
 func (h *Handler) Transform(c *Container) error {
 	for _, t := range h.Transformers {
 		if err := t.Transform(c); err != nil {
@@ -181,21 +202,26 @@ func (h *Handler) Transform(c *Container) error {
 	return nil
 }
 
+// Send validates the container and sends it to the configured sender
+func (h *Handler) Send(c *Container) error {
+	if err := c.Validate(); err != nil {
+		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
+	}
+	if err := h.Sender.Send(c); err != nil {
+		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+	}
+	return nil
+}
+
 // Handle parses the byte array using the configured parser, issues
 // transformers and sends the data off.
 func (h *Handler) Handle(b []byte) error {
-	c, err := h.Parser.Parse(b)
+	c, err := h.Parse(b)
 	if err != nil {
 		return Error{Source: "handler", Reason: "parsing bytestream failed", Next: err}
 	}
-	if err = c.Validate(); err != nil {
-		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
-	}
-	if err = h.Transform(c); err != nil {
-		return Error{Source: "handler", Reason: "transforming metrics failed", Next: err}
-	}
-	if err = h.Sender.Send(c); err != nil {
-		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+	if err = h.TransformAndSend(c); err != nil {
+		return Error{Source: "handler", Reason: "transforming and sending container failed", Next: err}
 	}
 	return nil
 }
@@ -204,21 +230,18 @@ func (h *Handler) Handle(b []byte) error {
 // data off.
 func (h *Handler) TransformAndSend(c *Container) error {
 	if err := h.Transform(c); err != nil {
-		return Error{Source: "handler", Reason: "transforming metrics failed", Next: err}
+		return Error{Source: "handler transform&send", Reason: "transforming metrics failed", Next: err}
 	}
-	if err := h.Sender.Send(c); err != nil {
-		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+	if err := h.Send(c); err != nil {
+		return Error{Source: "handler transform&send", Reason: "sending metrics failed", Next: err}
 	}
 	return nil
 }
 
 // Verify the basic integrity of a handler. Quite shallow.
 func (h Handler) Verify() error {
-	if h.Parser == nil {
-		return Error{Reason: "Missing parser for Handler"}
-	}
-	if h.Transformers == nil {
-		return Error{Reason: "Missing parser for Handler"}
+	if h.parser == nil {
+		return Error{Source: "handler verification", Reason: "Missing parser for Handler"}
 	}
 	for i, t := range h.Transformers {
 		if t == nil {
@@ -226,7 +249,7 @@ func (h Handler) Verify() error {
 		}
 	}
 	if h.Sender == nil {
-		return Error{Reason: "Missing parser for Handler"}
+		return Error{Source: "handler verification", Reason: "Missing Sender for Handler"}
 	}
 	return nil
 }

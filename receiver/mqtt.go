@@ -59,7 +59,7 @@ func appendTopic(container *skogul.Container, topic string) {
 
 // Handle a received message.
 func (handler *MQTT) receiver(msg mqtt.Message) {
-	container, err := handler.Handler.H.Parser.Parse(msg.Payload())
+	container, err := handler.Handler.H.Parse(msg.Payload())
 
 	if err != nil {
 		mqttLog.WithError(err).Error("Failed to parse payload from MQTT message")

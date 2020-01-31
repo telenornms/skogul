@@ -307,13 +307,13 @@ func resolveHandlers(c *Config) error {
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
 		if h.Parser == "protobuf" {
 			logger.Debug("Using protobuf parser")
-			h.Handler.Parser = parser.ProtoBuf{}
+			h.Handler.SetParser(parser.ProtoBuf{})
 		} else if h.Parser == "custom-json" {
 			logger.Debug("Using custom JSON parser")
-			h.Handler.Parser = parser.RawJSON{}
+			h.Handler.SetParser(parser.RawJSON{})
 		} else if h.Parser == "json" || h.Parser == "" {
 			logger.Debug("Using JSON parser")
-			h.Handler.Parser = parser.JSON{}
+			h.Handler.SetParser(parser.JSON{})
 		} else {
 			logger.Error("Unknown parser")
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
