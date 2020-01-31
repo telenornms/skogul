@@ -39,10 +39,12 @@ has to.
 Skogul Templates are shallow:
 
         {
-                "tempate": {
-                        "foo": "bar",
-                        "geo": {
-                                "country": "Norway"
+                "template": {
+                        "metadata": {
+                                "foo": "bar",
+                                "geo": {
+                                        "country": "Norway"
+                                }
                         }
                 },
                 "metrics": [
@@ -96,7 +98,7 @@ Will result in:
                 ]
         }
 
-The template just checked if "geo" was present or not - it did not merge missing keys.
+The template just checked if "geo" was present in metadata or not - it did not merge missing keys.
 
 It is good practice to use a template for any common fields, particularly timestamps.
 */

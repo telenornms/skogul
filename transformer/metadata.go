@@ -57,6 +57,9 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			if _, ok := c.Metrics[mi].Data[extract]; !ok {
 				continue
 			}
+			if c.Metrics[mi].Metadata == nil {
+				c.Metrics[mi].Metadata = make(map[string]interface{})
+			}
 			c.Metrics[mi].Metadata[extract] = c.Metrics[mi].Data[extract]
 			delete(c.Metrics[mi].Data, extract)
 		}
