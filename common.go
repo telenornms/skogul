@@ -192,15 +192,23 @@ func (h *Handler) Parse(b []byte) (*Container, error) {
 	return c, nil
 }
 
-// Transform validates the parsed container and runs all available transformers
+// Transform runs all available transformers
 func (h *Handler) Transform(c *Container) error {
 	for _, t := range h.Transformers {
 		if err := t.Transform(c); err != nil {
 			return err
 		}
 	}
+	return nil
+}
+
+// Send validates the container and sends it to the configured sender
+func (h *Handler) Send(c *Container) error {
 	if err := c.Validate(); err != nil {
 		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
+	}
+	if err := h.Sender.Send(c); err != nil {
+		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
 	}
 	return nil
 }
@@ -222,10 +230,10 @@ func (h *Handler) Handle(b []byte) error {
 // data off.
 func (h *Handler) TransformAndSend(c *Container) error {
 	if err := h.Transform(c); err != nil {
-		return Error{Source: "handler", Reason: "transforming metrics failed", Next: err}
+		return Error{Source: "handler transform&send", Reason: "transforming metrics failed", Next: err}
 	}
-	if err := h.Sender.Send(c); err != nil {
-		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+	if err := h.Send(c); err != nil {
+		return Error{Source: "handler transform&send", Reason: "sending metrics failed", Next: err}
 	}
 	return nil
 }

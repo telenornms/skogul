@@ -138,11 +138,36 @@ func TestParseAndTransformInvalidContainerFails(t *testing.T) {
 		return
 	}
 
-	// Verify that running a transformer (with an implicit Validate())
-	// fails this container as it's on an invalid format
+	// Verify that running a transformer does not fail
+	// this container even though it's on an invalid format
 	err = h.Transform(c)
+	if err != nil {
+		t.Error("Transformation unsuccessful even though it should pass")
+		return
+	}
+}
+
+func TestParseTransformAndSendInvalidContainerFails(t *testing.T) {
+	data := []byte(`{"data": 1, "ts": "2020-01-01T00:00:00.0Z"}`)
+
+	h := skogul.Handler{}
+	h.SetParser(parser.JSON{})
+
+	c, err := h.Parse(data)
+	if err != nil {
+		t.Error("Failed to parse json data", err)
+		return
+	}
+
+	err = h.Transform(c)
+	if err != nil {
+		t.Error("Transformation unsuccessful even though it should pass")
+		return
+	}
+
+	err = h.Send(c)
 	if err == nil {
-		t.Error("Transformation successful even though it should fail")
+		t.Error("Sending container should fail if the container is invalid")
 		return
 	}
 }
@@ -156,12 +181,6 @@ func TestParseAndTransformInvalidContainerSuccess(t *testing.T) {
 	c, err := h.Parse(data)
 	if err != nil {
 		t.Error("Failed to parse json data", err)
-		return
-	}
-
-	err = h.Transform(c)
-	if err == nil {
-		t.Errorf("Transformation-Validation of container should fail before transforming it")
 		return
 	}
 
