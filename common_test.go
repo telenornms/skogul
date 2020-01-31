@@ -188,8 +188,8 @@ func TestParseAndTransformInvalidContainerSuccess(t *testing.T) {
 
 	h.Transformers = []skogul.Transformer{&templater}
 
-	// Verify that running a transformer (with an implicit Validate())
-	// validates this container successfully after transforming
+	// Verify that running a transformer validates this container
+	// successfully after transforming
 	err = h.Transform(c)
 	if err != nil {
 		t.Error("Transformation of container failed after transforming it valid", err)
