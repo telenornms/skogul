@@ -25,7 +25,6 @@ package parser
 
 import (
 	"encoding/json"
-	"time"
 
 	"github.com/telenornms/skogul"
 )
@@ -50,7 +49,7 @@ func (data RawJSON) Parse(b []byte) (*skogul.Container, error) {
 
 	// The Validate() func of a container expects a timestamp to be valid.
 	// Better way to fix?
-	time := time.Now()
+	time := skogul.Now()
 	metric := skogul.Metric{
 		Metadata: make(map[string]interface{}),
 		Time:     &time,
