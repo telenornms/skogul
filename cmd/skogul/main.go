@@ -42,12 +42,17 @@ import (
 	"github.com/telenornms/skogul/transformer"
 )
 
+// versionNo gets set by passing the -X flag to ld like this
+// go build -ldflags "-X main.versionNo=0.1.0" ./cmd/skogul
+var versionNo string
+
 var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to read.")
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
+var fversion = flag.Bool("version", false, "Print skogul version")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
@@ -709,12 +714,26 @@ func help() {
 	fmt.Println("\nYou can also see the skogul manual page. It can be generated with `./skogul -make-man > foo; rst2man < foo > skogul.1; man ./skogul.1'.")
 }
 
+func printVersion() {
+	if len(versionNo) == 0 {
+		// Since versionNo has to be explicitly set compile-time
+		// provide a fallback in case it is not.
+		fmt.Println("unknown")
+	} else {
+		fmt.Println(versionNo)
+	}
+}
+
 func main() {
 	flag.Parse()
 
 	skogul.ConfigureLogger(*floglevel, *ftimestamp)
 	log := skogul.Logger("cmd", "main")
 
+	if *fversion {
+		printVersion()
+		os.Exit(0)
+	}
 	if *fhelp {
 		help()
 		os.Exit(0)

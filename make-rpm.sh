@@ -58,7 +58,7 @@ Skogul metric engine
 
 
 %build
-go build -o dist/%{name} ./cmd/%{name}
+go build -ldflags "-X main.versionNo=$V" -o dist/%{name} ./cmd/%{name}
 bash %{buildroot}/make-docs.sh
 rm -f %{buildroot}/make-docs.sh
 
