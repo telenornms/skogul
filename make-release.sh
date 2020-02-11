@@ -15,7 +15,7 @@ mkdir -p dist/bin
 mkdir -p dist/share/man/man1
 mkdir -p dist/share/doc/skogul
 
-go build -o dist/skogul ./cmd/skogul
+go build -ldflags "-X main.versionNo=$V" -o dist/skogul ./cmd/skogul
 ./make-docs.sh
 cp LICENSE dist/share/doc/skogul
 cp -r README.rst docs/* dist/share/doc/skogul/
