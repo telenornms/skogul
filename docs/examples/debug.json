@@ -1,0 +1,21 @@
+{
+  "receivers": {},
+  "handlers": {
+    "_debugger": {
+      "parser": "json",
+      "transformers": ["remove_string"],
+      "sender": "print"
+    }
+  },
+  "transformers": {
+    "remove_string": {
+      "type": "data",
+      "remove": ["string"]
+    }
+  },
+  "senders": {
+    "print": {
+      "type": "debug"
+    }
+  }
+}

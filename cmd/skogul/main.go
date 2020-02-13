@@ -42,6 +42,8 @@ import (
 	"github.com/telenornms/skogul/transformer"
 )
 
+var mainLogger = skogul.Logger("main", "main")
+
 // versionNo gets set by passing the -X flag to ld like this
 // go build -ldflags "-X main.versionNo=0.1.0" ./cmd/skogul
 var versionNo string
@@ -53,6 +55,7 @@ var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 var fversion = flag.Bool("version", false, "Print skogul version")
+var ftest = flag.Bool("test", false, "Run skogul one-off on some data. By default it reads from stdin, but it can also use a config file.")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
@@ -757,6 +760,18 @@ func main() {
 		fmt.Println(string(out))
 		os.Exit(0)
 	}
+
+	if *ftest {
+		err = config.RunTestWithConfig(c)
+
+		if err != nil {
+			mainLogger.WithError(err).Error("One-off run with configuration failed")
+			os.Exit(1)
+		}
+
+		os.Exit(0)
+	}
+
 	log.Info("Starting skogul")
 
 	var exitInt = 0
