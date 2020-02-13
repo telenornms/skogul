@@ -746,9 +746,17 @@ func main() {
 		os.Exit(0)
 	}
 
-	c, err := config.File(*ffile)
-	if err != nil {
-		log.Fatal(err)
+	var c *config.Config
+
+	// Allow config file to be missing if running in -test mode,
+	// require it otherwise.
+	_, confFileErr := os.Stat(*ffile)
+	if !*ftest && os.IsNotExist(confFileErr) {
+		var err error
+		c, err = config.File(*ffile)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	if *fconf {
@@ -762,7 +770,7 @@ func main() {
 	}
 
 	if *ftest {
-		err = config.RunTestWithConfig(c)
+		err := config.RunTestWithConfig(c)
 
 		if err != nil {
 			mainLogger.WithError(err).Error("One-off run with configuration failed")

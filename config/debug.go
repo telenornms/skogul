@@ -18,6 +18,16 @@ import (
 // * Run no transformers
 // * Print the result to stdout
 func RunTestWithConfig(conf *Config) error {
+
+	if conf == nil {
+		conf = &Config{
+			Handlers:     make(map[string]*Handler),
+			Receivers:    make(map[string]*Receiver),
+			Senders:      make(map[string]*Sender),
+			Transformers: make(map[string]*Transformer),
+		}
+	}
+
 	const debuggerName = "_debugger"
 
 	debugSender := sender.Debug{}
