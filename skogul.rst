@@ -69,6 +69,9 @@ OPTIONS
 ``-timestamp``
 	Include timestamp in log entries (default true)
 
+``-version``
+	Print skogul version (default false)
+
 
 CONFIGURATION
 =============
