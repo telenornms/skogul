@@ -770,10 +770,10 @@ func main() {
 	}
 
 	if *ftest {
-		err := config.RunTestWithConfig(c)
+		err := config.OneOff(c)
 
 		if err != nil {
-			mainLogger.WithError(err).Error("One-off run with configuration failed")
+			mainLogger.WithError(err).Error("One-off run failed")
 			os.Exit(1)
 		}
 

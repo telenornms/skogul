@@ -7,7 +7,7 @@ import (
 	"github.com/telenornms/skogul/sender"
 )
 
-// RunTestWithConfig runs skogul with only a debugger
+// OneOff runs skogul with only a debugger
 // The debugger can be configured all the way through
 // using a configuration file, and by overriding either
 // the receiver, handler or sender. The ones not defined
@@ -17,7 +17,7 @@ import (
 // * Parse the input as "skogul-JSON" (container format)
 // * Run no transformers
 // * Print the result to stdout
-func RunTestWithConfig(conf *Config) error {
+func OneOff(conf *Config) error {
 
 	if conf == nil {
 		conf = &Config{
