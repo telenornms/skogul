@@ -66,6 +66,9 @@ OPTIONS
 ``-show``
 	Print the parsed JSON config instead of starting (default false)
 
+``-test``
+	Run skogul one-off on some data. By default it reads from stdin, but it can also use a config file. (-f) (default false)
+
 ``-timestamp``
 	Include timestamp in log entries (default true)
 
