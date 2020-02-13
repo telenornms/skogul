@@ -55,7 +55,7 @@ var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 var fversion = flag.Bool("version", false, "Print skogul version")
-var ftest = flag.Bool("test", false, "Run skogul one-off on some data. By default it reads from stdin, but it can also use a config file.")
+var ftest = flag.Bool("test", false, "Run skogul one-off on some data. By default it reads from stdin, but it can also use a config file. (-f)")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
