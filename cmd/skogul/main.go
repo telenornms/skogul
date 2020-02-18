@@ -34,6 +34,7 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
@@ -63,7 +64,7 @@ var fversion = flag.Bool("version", false, "Print skogul version")
 // Also includes help for all senders and receivers, and uses flag to print
 // the command line flag options as well.
 func man() {
-	fmt.Print(`
+	fmt.Printf(`
 ======
 skogul
 ======
@@ -73,6 +74,8 @@ Skogul
 ------
 
 :Manual section: 1
+:Date: %s
+:Version: skogul %s
 :Authors: Kristian Lyngstøl <kly@kly.no>
 
 SYNOPSIS
@@ -116,7 +119,7 @@ There are more examples in the the "examples/" directory.
 OPTIONS
 =======
 
-`)
+`, time.Now().Format("2006-01-02"), versionNo)
 
 	f := flag.CommandLine
 	f.VisitAll(func(fl *flag.Flag) {
