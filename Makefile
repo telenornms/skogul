@@ -1,45 +1,44 @@
-
+PREFIX=/usr/local
 TOPDOCS=README.rst LICENSE
-DIST=dist/
-DOCDIR=${DIST}share/doc/skogul
-MANDIR=${DIST}share/man/man1
-MANFILE=${MANDIR}/skogul.1
-DOCFILE=${DOCDIR}/skogul.rst
+
 GIT_DESCRIBE:=$(shell git describe --always --tag --dirty)
+VERSION_NO=$(shell echo ${GIT_DESCRIBE} | sed s/[v-]//g)
 OS:=$(shell uname -s | tr A-Z a-z)
 ARCH:=$(shell uname -m)
-DOCS=${TOPDOCS} ${MANFILE} ${DOCFILE} 
-SKOGUL=${DIST}bin/skogul
 TARBALL=skogul-${GIT_DESCRIBE}.${OS}-${ARCH}.tar.bz2
 
-${SKOGUL}: $(wildcard *.go */*.go */*/*.go) | $(dir ${SKOGUL})
-	go build -ldflags "-X main.versionNo=$V" -o ${SKOGUL} ./cmd/skogul
+skogul: $(wildcard *.go */*.go */*/*.go)
+	go build -ldflags "-X main.versionNo=$V" -o skogul ./cmd/skogul
 
-$(dir ${SKOGUL} ${MANFILE} ${DOCFILE}):
-	mkdir -p $@
+docs/skogul.rst: skogul
+	./skogul -make-man > $@
 
-$(addprefix ${DOCDIR}/,${TOPDOCS}): ${TOPDOCS}
-	cp $$(basename $@ ) $@
-
-${MANFILE}: ${DOCFILE} | $(dir ${MANFILE})
+skogul.1: docs/skogul.rst
 	rst2man < $< > $@
-
-${DOCFILE}: ${SKOGUL} | $(dir ${DOCFILE})
-	${SKOGUL} -make-man > $@
-
-${DOCDIR}/% : docs/%
-	cp -a $< $@
 
 notes:
 	./build/release-notes.sh > notes
 
-${TARBALL}: dist
-	tar -C dist/ -cjf ${TARBALL} .
+all: skogul skogul.1 docs/skogul.rst
 
-tar: ${TARBALL}
+install: skogul skogul.1 docs/skogul.rst
+	install -D -m 0755 skogul ${DESTDIR}${PREFIX}/bin/skogul
+	install -D -m 0644 skogul.1 ${DESTDIR}${PREFIX}/share/man/man1/skogul.1
+	install -D -m 0644 docs/examples/default.json ${DESTDIR}/etc/skogul/default.json
+	cd docs; \
+	find -type f -exec install -D -m 0644 {} ${DESTDIR}${PREFIX}/share/doc/skogul/{} \;
+	install -D -m 0644 ${TOPDOCS} -t ${DESTDIR}${PREFIX}/share/doc/skogul/
 
-dist: ${SKOGUL} ${DOCS} $(addprefix ${DOCDIR}/,$(notdir $(wildcard docs/*)))
-	touch dist
+%/:
+	mkdir -p $@
+
+rpm-prep/SPECS/skogul.spec: build/redhat-skogul.spec.in | rpm-prep/SPECS/
+	cat $< | sed "s/xxVxx/${GIT_DESCRIBE}/g; s/xxARCHxx/${ARCH}/g; s/xxVERSION_NOxx/${VERSION_NO}/g" > $@
+
+rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/ rpm-prep/RPMS/ rpm-prep/SPECS/ rpm-prep/SRPMS/
+	test -h rpm-prep/BUILD || ln -s ./ rpm-prep/BUILD
+	build/trigger-rpm.sh
+	cp rpm-prep/x86_64/* .
 
 test:
 	go test -short ./...
@@ -48,16 +47,20 @@ bench:
 	go test -run ^Bench -benchtime 1s -bench Bench ./... | grep Benchmark
 
 clean:
-	rm -r dist
+	-rm -fr dist
+	-rm -fr rpm-prep
+	-rm -f skogul
+	-rm -f docs/skogul.rst
+	-rm -f skogul.1
 
 help:
 	@echo "Several targets exist:"
 	@echo 
-	@echo " - dist/bin/skogul - build the binary "
-	@echo " - dist - build the entire distribution in dist/ "
-	@echo " - tar - build a tar ball (currently ${TARBALL}) "
+	@echo " - skogul - build the binary "
+	@echo " - install - install binary and docs. Honors PREFIX, default prefix: ${PREFIX}"
+	@echo " - rpm - build RPM"
 	@echo " - test / bench - run go test, with and without benchmarks "
 	@echo "                  note that this uses "-short" to avoid mysql/postgres dependencies. "
 
-.PHONY: clean test bench tar help
+.PHONY: clean test bench help install
 

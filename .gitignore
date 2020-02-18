@@ -1,5 +1,7 @@
 cmd/skogul/skogul
 /skogul
+/skogul.1
+/docs/skogul.rst
 
 # for release-mechanics
 /*.tar.bz2

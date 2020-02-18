@@ -1,0 +1,64 @@
+Name:           skogul
+Version:        xxVERSION_NOxx
+Release:        1%{?dist}
+Summary:        Skogul metric engine
+
+Group:          telenornms
+License:        LGPL-2.1
+URL:            https://github.com/telenornms/skogul
+Source0:        https://github.com/telenornms/skogul/archive/xxVxx.tar.gz
+
+
+BuildArch:      xxARCHxx
+# Since we download go manually and not through yum,
+# the version won't be registered as installed.
+#BuildRequires:  go >= 1.13
+#BuildRequires:  python-docutils, systemd-units
+
+
+%description
+Skogul metric engine
+
+# Executable files require a build id; let's stop that
+# https://github.com/rpm-software-management/rpm/issues/367
+%undefine _missing_build_ids_terminate_build
+
+%prep
+
+cd ../
+rm  BUILD
+ln -s ../ BUILD
+
+%build
+make
+
+%install
+make install DESTDIR=%{buildroot} PREFIX=/usr
+install -D -m 0644 build/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
+
+%pre
+getent group skogul >/dev/null || groupadd -r skogul
+getent passwd skogul >/dev/null || \
+       useradd -r -g skogul -d /var/lib/skogul -s /sbin/nologin \
+               -c "Skogul metric collector" skogul
+exit 0
+
+%post
+%systemd_post %{name}.service
+
+%preun
+%systemd_preun %{name}.service
+
+
+%files
+%license LICENSE
+%{_bindir}/%{name}
+%{_mandir}/man1/%{name}.1*
+%docdir %{_defaultdocdir}/%{name}-%{version}
+%{_defaultdocdir}/%{name}
+%{_unitdir}/%{name}.service
+%{_sysconfdir}/%{name}/default.json
+
+
+
+%changelog
