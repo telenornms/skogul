@@ -13,27 +13,26 @@ BuildArch:      xxARCHxx
 # Since we download go manually and not through yum,
 # the version won't be registered as installed.
 #BuildRequires:  go >= 1.13
-#BuildRequires:  python-docutils, systemd-units
+BuildRequires:  python-docutils, systemd-units
 
 
 %description
-Skogul metric engine
+Skogul is a generic tool for moving metric data around. It can serve as a
+collector of data, but is primarily designed to be a framework for building
+bridges between data collectors and storage engines.
 
 # Executable files require a build id; let's stop that
 # https://github.com/rpm-software-management/rpm/issues/367
 %undefine _missing_build_ids_terminate_build
 
 %prep
-
-cd ../
-rm  BUILD
-ln -s ../ BUILD
+%setup -q
 
 %build
 make
 
 %install
-make install DESTDIR=%{buildroot} PREFIX=/usr
+make install DESTDIR=%{buildroot} PREFIX=/usr DOCDIR=%{_defaultdocdir}/skogul-%{version}
 install -D -m 0644 build/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 %pre
@@ -55,7 +54,7 @@ exit 0
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
 %docdir %{_defaultdocdir}/%{name}-%{version}
-%{_defaultdocdir}/%{name}
+%{_defaultdocdir}/%{name}-%{version}
 %{_unitdir}/%{name}.service
 %{_sysconfdir}/%{name}/default.json
 
