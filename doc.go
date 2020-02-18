@@ -104,6 +104,3 @@ Once more parsers/transformers are added, they will likely also use a similar
 system.
 */
 package skogul
-
-// This file is just used as a convenience to generate documentation :D
-//go:generate /bin/sh -c "go build ./cmd/skogul && ./skogul -make-man > skogul.rst && rst2man < skogul.rst > skogul.1 && echo Updated man-page skogul.1 and skogul.rst"

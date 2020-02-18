@@ -2,7 +2,6 @@ cmd/skogul/skogul
 /skogul
 
 # for release-mechanics
-/build
 /*.tar.bz2
 /dist
 /rpm-prep
