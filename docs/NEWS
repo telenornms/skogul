@@ -1,11 +1,13 @@
-next
+v0.5.2
 ======
 
-Release date: 
+Release date: 2020-02-25 (temp)
 
 Fixes a bug with the install RPMs which would error during install
 and uninstall. The RPMs are now built on a system running yum, which
-will make sure build dependencies are correctly satisfied.
+will make sure build dependencies are correctly satisfied. Also reworks the
+build system using Make, and introduces a -version flag.
+
 Refactors the internal Handler API to expose Parse, Transform and Send
 (also TransformAndSend which transforms a container and then sends it,
 and Handle which parses, transforms and sends a container). This should

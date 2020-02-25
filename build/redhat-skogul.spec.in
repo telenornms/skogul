@@ -1,6 +1,6 @@
 Name:           skogul
 Version:        xxVERSION_NOxx
-Release:        1%{?dist}
+Release:        1
 Summary:        Skogul metric engine
 
 Group:          telenornms
@@ -13,7 +13,7 @@ BuildArch:      xxARCHxx
 # Since we download go manually and not through yum,
 # the version won't be registered as installed.
 #BuildRequires:  go >= 1.13
-BuildRequires:  python-docutils, systemd-units
+BuildRequires:  python3-docutils, systemd-units
 
 
 %description

@@ -1,20 +1,6 @@
-
-# Makefile-lol 101:
-#  PREFIX is typically overridden locally. Should default to /usr/local,
-#  and be set to /usr explicitly. It is used for most items, but not all.
-#  It indicates where the program will be installed on the target system.
-#
-# DESTDIR is used to do installations during packaging etc. We will install
-# all files under DESTDIR$PREFIX, but any internal references will ignore
-# DESTDIR. E.g.: rpmbuild intends for the target systems to install to
-# /usr, so PREFIX should be /usr, but during the RPM build process, DESTDIR
-# is set to rpm-prep/BUILDROOT, so you get
-# rpm-prep/BUILDROOT/usr/bin/skogul, etc.
-#
-# DESTDIR is empty/undefined by default.
-#
-# No, I'm not entirely sure this is 105% correct, but it's in the right
-# neighbourhood.
+# PREFIX is the prefix on the targetsystem
+# DESTDIR can be used to prefix ALL paths, e.g., to do a dummy-install in a
+# fake root dir, e.g., for building packages. Users mainly want PREFIX
 
 PREFIX=/usr/local
 DOCDIR=${PREFIX}/share/doc/skogul
@@ -38,7 +24,7 @@ skogul.1: docs/skogul.rst
 
 notes: docs/NEWS
 	@echo ⛲ Extracting release notes.
-	@./build/release-notes.sh > notes
+	@./build/release-notes.sh ${GIT_DESCRIBE} > notes
 
 # MAGIC (I hate noisy Make-runs)
 %/:
@@ -60,7 +46,7 @@ install: skogul skogul.1 docs/skogul.rst
 rpm-prep/SPECS/skogul.spec: build/redhat-skogul.spec.in | rpm-prep/SPECS/
 	@echo  ❕Building spec-file
 	@cat $< | sed "s/xxVxx/${GIT_DESCRIBE}/g; s/xxARCHxx/${ARCH}/g; s/xxVERSION_NOxx/${VERSION_NO}/g" > $@
-	@which dpkg >/dev/null && { echo 🆒 Adding debian-workaround for rpm build; sed -i 's/^BuildReq/\#Debian hack, auto-commented out: BuildReq/g' $@; }
+	@which dpkg >/dev/null 2>&1 && { echo 🆒 Adding debian-workaround for rpm build; sed -i 's/^BuildReq/\#Debian hack, auto-commented out: BuildReq/g' $@; } || true
 
 # Build RPM. The spec has a blank %prep, so it assumes sources are already
 # available. This isn't perfect, since it creates a tight coupling between
@@ -74,6 +60,7 @@ rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
 	if [ "$${RPM_UNIT_DIR}" = "$%{_unitdir}" ]; then \
 	    echo "😭 _unitdir not set, setting _unitdir to $$DEFAULT_UNIT_DIR"; \
 	    rpmbuild --quiet --bb \
+	        --nodebuginfo \
 	    	--build-in-place \
 		--define "_rpmdir $$(pwd)" \
 		--define "_topdir $$(pwd)" \
@@ -82,6 +69,7 @@ rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
 		rpm-prep/SPECS/skogul.spec; \
 	else \
 	    rpmbuild --quiet --bb \
+	        --nodebuginfo \
 	    	--build-in-place \
 		--define "_rpmdir $$(pwd)" \
 		--define "_topdir $$(pwd)" \
@@ -93,10 +81,18 @@ rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
 
 
 test:
-	go test -short ./...
+	@echo 🧐 Testing, without SQL-tests
+	@go test -short ./...
 
 bench:
-	go test -run ^Bench -benchtime 1s -bench Bench ./... | grep Benchmark
+	@echo 🏋 Benchmarking
+	@go test -run ^Bench -benchtime 1s -bench Bench ./... | grep Benchmark
+
+covergui:
+	@echo 🧠 Testing, with coverage analysis
+	@go test -short -coverpkg ./... -covermode=atomic -coverprofile=coverage.out ./...
+	@echo 💡 Generating HTML coverage report and opening browser
+	@go tool cover -html coverage.out
 
 clean:
 	@echo 💩Cleaning up
@@ -106,16 +102,18 @@ clean:
 	@-rm -f docs/skogul.rst
 	@-rm -f skogul.1
 	@-rm -f *.rpm
+	@-rm -f coverage.out
 
 help:
-	@echo "Several targets exist:"
+	@echo "Several targets(🎯) exist:"
 	@echo 
-	@echo " - skogul - build the binary"
+	@echo " - skogul - build the binary (the default)"
 	@echo " - all - build binary and documentation"
 	@echo " - install - install binary and docs. Honors PREFIX, default prefix: ${PREFIX}"
 	@echo " - rpm - build RPM"
 	@echo " - clean - remove build crap"
 	@echo " - test / bench - run go test, with and without benchmarks "
 	@echo "                  note that this uses "-short" to avoid mysql/postgres dependencies. "
+	@echo " - covergui - Run tests, track test coverage and open coverage analysis in browser"
 
 .PHONY: clean test bench help install rpm
