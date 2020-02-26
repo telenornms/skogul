@@ -16,9 +16,9 @@ steps:
 - name: test
   image: golang
   commands:
-  - go test -short ./...
-  - if [ "x$(gofmt -s -d .)" != "x" ]; then gofmt -s -d .; exit 1; fi
-  - go vet ./...
+  - apt-get update
+  - apt-get -y install make
+  - make check
   depends_on:
     - build
 
@@ -26,7 +26,7 @@ steps:
   image: golang
   commands:
   - apt-get update
-  - apt-get -y install python-docutils bzip2 gawk
+  - apt-get -y install make python3-docutils bzip2 gawk
   - make install DESTDIR=skogul-${DRONE_TAG}
   - tar cvjf skogul-${DRONE_TAG}.tar.bz2 skogul-${DRONE_TAG}
   depends_on:

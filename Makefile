@@ -79,6 +79,19 @@ rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
+check: test fmtcheck vet
+
+vet:
+	@echo 🔬 Vetting code
+	@go vet ./...
+
+fmtcheck:
+	@echo 🦉 Checking format with gofmt -d -s
+	@if [ "x$$(find -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +)" != "x" ]; then find -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +; exit 1; fi
+
+fmtfix:
+	@echo 🎨 Fixing formating
+	@find -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s -w {} +
 
 test:
 	@echo 🧐 Testing, without SQL-tests
@@ -111,9 +124,11 @@ help:
 	@echo " - all - build binary and documentation"
 	@echo " - install - install binary and docs. Honors PREFIX, default prefix: ${PREFIX}"
 	@echo " - rpm - build RPM"
-	@echo " - clean - remove build crap"
+	@echo " - clean - remove known build crap - use git clean -fdx for more thorough cleaning"
 	@echo " - test / bench - run go test, with and without benchmarks "
 	@echo "                  note that this uses "-short" to avoid mysql/postgres dependencies. "
+	@echo " - fmtcheck - Runs gofmt -d -s, excluding generated code"
+	@echo " - fmtfix - Runs gofmt -d -s -w, excluding generated code (e.g.: fix formating)"
 	@echo " - covergui - Run tests, track test coverage and open coverage analysis in browser"
 
 .PHONY: clean test bench help install rpm
