@@ -38,11 +38,13 @@ install: skogul skogul.1 docs/skogul.rst
 	@install -D -m 0644 README.rst LICENSE -t ${DESTDIR}${DOCDIR}/
 
 
+FORCE:
+
 # Any complaints on this macro-substitution without patches and I introduce m4.
-build/redhat-skogul.spec: build/redhat-skogul.spec.in
+build/redhat-skogul.spec: build/redhat-skogul.spec.in FORCE
 	@echo  ❕Building spec-file
 	@cat $< | sed "s/xxVxx/${GIT_DESCRIBE}/g; s/xxARCHxx/${ARCH}/g; s/xxVERSION_NOxx/${VERSION_NO}/g" > $@
-	@which dpkg >/dev/null 2>&1 && { echo 🆒 Adding debian-workaround for rpm build; sed -i 's/^BuildReq/\#Debian hack, auto-commented out: BuildReq/g' $@; } || true
+	@if [ ! -f /etc/redhat-release ]; then echo 🆒 Adding debian-workaround for rpm build; sed -i 's/^BuildReq/\#Debian hack, auto-commented out: BuildReq/g' $@; fi
 
 # Build RPM. The spec has a blank %prep, so it assumes sources are already
 # available. This isn't perfect, since it creates a tight coupling between
@@ -88,7 +90,7 @@ fmtcheck:
 
 fmtfix:
 	@echo 🎨 Fixing formating
-	@find -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s -w {} +
+	@find . -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s -w {} +
 
 test:
 	@echo 🧐 Testing, without SQL-tests
