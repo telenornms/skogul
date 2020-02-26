@@ -26,10 +26,6 @@ notes: docs/NEWS
 	@echo ⛲ Extracting release notes.
 	@./build/release-notes.sh ${GIT_DESCRIBE} > notes
 
-# MAGIC (I hate noisy Make-runs)
-%/:
-	@mkdir -p $@
-
 all: skogul skogul.1 docs/skogul.rst
 
 install: skogul skogul.1 docs/skogul.rst
@@ -43,7 +39,7 @@ install: skogul skogul.1 docs/skogul.rst
 
 
 # Any complaints on this macro-substitution without patches and I introduce m4.
-rpm-prep/SPECS/skogul.spec: build/redhat-skogul.spec.in | rpm-prep/SPECS/
+build/redhat-skogul.spec: build/redhat-skogul.spec.in
 	@echo  ❕Building spec-file
 	@cat $< | sed "s/xxVxx/${GIT_DESCRIBE}/g; s/xxARCHxx/${ARCH}/g; s/xxVERSION_NOxx/${VERSION_NO}/g" > $@
 	@which dpkg >/dev/null 2>&1 && { echo 🆒 Adding debian-workaround for rpm build; sed -i 's/^BuildReq/\#Debian hack, auto-commented out: BuildReq/g' $@; } || true
@@ -53,8 +49,9 @@ rpm-prep/SPECS/skogul.spec: build/redhat-skogul.spec.in | rpm-prep/SPECS/
 # Makefile and specfile, but it isn't all that bad either, since it allows
 # building with minimal redundant effort, and without having to commit to
 # git.
-rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
+rpm: build/redhat-skogul.spec
 	@echo 🎇 Triggering huge-as-heck rpm build
+	@mkdir -p rpm-prep/BUILDROOOT
 	@DEFAULT_UNIT_DIR=/usr/lib/systemd/system ;\
 	RPM_UNIT_DIR=$$(rpm --eval $%{_unitdir}) ;\
 	if [ "$${RPM_UNIT_DIR}" = "$%{_unitdir}" ]; then \
@@ -66,7 +63,7 @@ rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
 		--define "_topdir $$(pwd)" \
 		--define "_unitdir $$DEFAULT_UNIT_DIR" \
 		--buildroot "$$(pwd)/rpm-prep/BUILDROOT" \
-		rpm-prep/SPECS/skogul.spec; \
+		build/redhat-skogul.spec; \
 	else \
 	    rpmbuild --quiet --bb \
 	        --nodebuginfo \
@@ -74,7 +71,7 @@ rpm: rpm-prep/SPECS/skogul.spec | rpm-prep/BUILDROOT/
 		--define "_rpmdir $$(pwd)" \
 		--define "_topdir $$(pwd)" \
 		--buildroot "$$(pwd)/rpm-prep/BUILDROOT" \
-		rpm-prep/SPECS/skogul.spec; \
+		build/redhat-skogul.spec; \
 	fi
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm

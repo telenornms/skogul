@@ -7,6 +7,7 @@ cmd/skogul/skogul
 /*.tar.bz2
 /dist
 /rpm-prep
+/build/redhat-skogul.spec
 *.rpm
 
 # Don't check vendored files in
