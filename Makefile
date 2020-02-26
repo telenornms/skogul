@@ -38,7 +38,7 @@ install: skogul skogul.1 docs/skogul.rst
 	@install -D -m 0644 skogul.1 ${DESTDIR}${PREFIX}/share/man/man1/skogul.1
 	@install -D -m 0644 docs/examples/default.json ${DESTDIR}/etc/skogul/default.json
 	@cd docs; \
-	find -type f -exec install -D -m 0644 {} ${DESTDIR}${DOCDIR}/{} \;
+	find . -type f -exec install -D -m 0644 {} ${DESTDIR}${DOCDIR}/{} \;
 	@install -D -m 0644 README.rst LICENSE -t ${DESTDIR}${DOCDIR}/
 
 
@@ -87,7 +87,7 @@ vet:
 
 fmtcheck:
 	@echo 🦉 Checking format with gofmt -d -s
-	@if [ "x$$(find -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +)" != "x" ]; then find -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +; exit 1; fi
+	@if [ "x$$(find . -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +)" != "x" ]; then find . -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +; exit 1; fi
 
 fmtfix:
 	@echo 🎨 Fixing formating
