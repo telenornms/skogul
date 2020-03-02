@@ -1,7 +1,7 @@
 v0.5.2
 ======
 
-Release date: 2020-02-25 (temp)
+Release date: 2020-03-02 (temp)
 
 Fixes a bug with the install RPMs which would error during install
 and uninstall. The RPMs are now built on a system running yum, which
@@ -22,6 +22,8 @@ Specific changes:
   manually worked a round if any previous skogul RPM is
   installed, by manually uninstalling the version using rpm.
   (rpm -e --noscripts skogul*)
+- Inverts the influxdb-sender field validation to white-list instead of
+  black-list data types, which should fix #119.
 
 v0.5.1
 ======
