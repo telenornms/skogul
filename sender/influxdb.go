@@ -53,10 +53,29 @@ type InfluxDB struct {
 	once                    sync.Once
 }
 
+// checkVariable verifies that the relevant variable is of a type we can
+// handle.
 func checkVariable(category string, field string, idx string, value interface{}) error {
 	t := reflect.TypeOf(value)
 	k := t.Kind()
-	if k == reflect.Struct || k == reflect.Array || k == reflect.Slice {
+
+	switch k {
+	case reflect.Bool:
+	case reflect.Int:
+	case reflect.Int8:
+	case reflect.Int16:
+	case reflect.Int32:
+	case reflect.Int64:
+	case reflect.Uint:
+	case reflect.Uint8:
+	case reflect.Uint16:
+	case reflect.Uint32:
+	case reflect.Uint64:
+	case reflect.Uintptr:
+	case reflect.Float32:
+	case reflect.Float64:
+	case reflect.String:
+	default:
 		influxLog.WithFields(logrus.Fields{
 			"category": category,
 			"field":    field,
