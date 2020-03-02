@@ -1,11 +1,13 @@
 cmd/skogul/skogul
 /skogul
+/skogul.1
+/docs/skogul.rst
 
 # for release-mechanics
-/build
 /*.tar.bz2
 /dist
 /rpm-prep
+/build/redhat-skogul.spec
 *.rpm
 
 # Don't check vendored files in

@@ -26,43 +26,39 @@ aimed at end-users. See ``skogul.rst`` (or ``man ./skogul.1``).
    :depth: 2
    :local:
 
-Quickstart
-----------
+Quickstart - RPM
+----------------
 
-You need to install a recent/decent version of Go. Either from your
-favorite Linux distro, or through https://golang.org/dl/ .
+If you're on CentOS/RHEL 6 or newer, you should use our naively built RPM,
+available at https://github.com/telenornms/skogul/releases/latest.
+
+It will install skogul, set up a systemd service and install a simple
+configuration in ``/etc/skogul/default.json``.
+
+There's also a 64-bit linux build there, which should work for most
+non-RPM-based installations. But we make no attempt to really maintain it.
+
+Quickstart - source
+-------------------
+
+Building from source is not difficult. First you need Golang. Get it at 
+https://golang.org/dl/ (I think you want go 1.13 or newer).
 
 Building ``skogul``, including cloning::
 
    $ git clone https://github.com/telenornms/skogul
    (...)
-   $ cd skogul/cmd/skogul
-   $ go build
-   $ 
-   # (No output from go build is good)
+   $ make
+   $ make install
 
-Alternatively, you can use ``go install`` instead of ``go build`` to
-install to ``$GOPATH/bin``, which is typically ``~/go/bin``.
+You don't have to use make - there's very little magic involved for regular
+building, but it will ensure ``-version`` works, along with building the
+auto-generated documentation.
 
-To use the locally imported/vendored packages instead of downloading them
-directly, e.g. if a system does not have direct internet access or you wish
-to take a local copy of the code in its entirety, including dependencies.
-First make a vendored copy on an internet-attached computer - checksums in
-the repo will be verified::
+Running ``make install`` installs the binary and default configuration, but
+does NOT install any systemd unit or similar.
 
-   $ cd skogul
-   $ go mod vendor
-   $
-   ( skogul/vendor is now populated after a while )
-
-Copy repo/directory to relevant computer, then run::
-
-   $ cd skogul/cmd/skogul
-   $ go build -mod vendor
-   $
-
-(or ``go install -mod vendor``)
-
+Also see ``make help`` for other make targets.
 
 About
 -----

@@ -16,9 +16,9 @@ steps:
 - name: test
   image: golang
   commands:
-  - go test -short ./...
-  - if [ "x$(gofmt -s -d .)" != "x" ]; then gofmt -s -d .; exit 1; fi
-  - go vet ./...
+  - apt-get update
+  - apt-get -y install make
+  - make check
   depends_on:
     - build
 
@@ -26,8 +26,9 @@ steps:
   image: golang
   commands:
   - apt-get update
-  - apt-get -y install python-docutils bzip2 gawk
-  - ./make-release.sh ${DRONE_TAG}
+  - apt-get -y install make python3-docutils bzip2 gawk
+  - make install DESTDIR=skogul-${DRONE_TAG}
+  - tar cvjf skogul-${DRONE_TAG}.tar.bz2 skogul-${DRONE_TAG}
   depends_on:
     - test
   when:
@@ -35,16 +36,16 @@ steps:
     - tag
 
 - name: prepare-centos-release
-  image: centos:7
+  image: centos:8
   environment:
     SHELL: /bin/bash
   commands:
-  - yum install -y git python-docutils rpm-build wget
+  - yum install -y git python3-docutils rpm-build wget make
   - wget https://storage.googleapis.com/golang/getgo/installer_linux
   - chmod +x installer_linux
   - ./installer_linux
   - source /root/.bash_profile
-  - ./make-rpm.sh ${DRONE_TAG}
+  - make rpm
   depends_on:
     - test
   when:
