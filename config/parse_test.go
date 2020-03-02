@@ -425,3 +425,15 @@ func TestMergeConfigFilesConflicts(t *testing.T) {
 		t.Error("Merged two configurations with conflicting keys")
 	}
 }
+
+func TestReadConfigFiles(t *testing.T) {
+	c, err := config.ReadFiles("testdata/configs")
+
+	if err != nil {
+		t.Error("Error from config read files", err)
+	}
+
+	if c.Receivers["foo"] == nil || c.Receivers["bar"] == nil {
+		t.Error("Missing a receiver which should be configured")
+	}
+}

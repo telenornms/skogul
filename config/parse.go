@@ -30,6 +30,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"reflect"
 	"strings"
 
@@ -324,6 +326,60 @@ func MergeRawConfigs(configs []map[string]interface{}) (*Config, error) {
 	}
 
 	return Bytes(conf)
+}
+
+func findConfigFiles(path string) ([]string, error) {
+	confLog.WithField("path", path).Debugf("Reading configuration files from %s", path)
+	configFiles := make([]string, 0)
+	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && len(strings.Split(path, ".")) > 1 &&
+			strings.ToLower(strings.Split(path, ".")[1]) == "json" {
+			configFiles = append(configFiles, path)
+		}
+		return err
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return configFiles, nil
+}
+
+// ReadFiles reads all JSON files (with the .JSON suffix) in a given directory
+// and combines them to a configuration for the program.
+func ReadFiles(p string) (*Config, error) {
+	files, err := findConfigFiles(p)
+
+	if err != nil {
+		return nil, err
+	}
+
+	configs := make([]map[string]interface{}, 0)
+
+	for _, f := range files {
+		b, err := ioutil.ReadFile(f)
+
+		if err != nil {
+			confLog.WithError(err).Error("Failed to read config file")
+			return nil, skogul.Error{Source: "config:parser", Reason: "Failed to read config file", Next: err}
+		}
+
+		var c map[string]interface{}
+		err = json.Unmarshal(b, &c)
+
+		if err != nil {
+			jerr, ok := err.(*json.SyntaxError)
+			if ok {
+				printSyntaxError(b, int(jerr.Offset), jerr.Error())
+			}
+			return nil, err
+		}
+
+		configs = append(configs, c)
+	}
+
+	return MergeRawConfigs(configs)
 }
 
 // resolveSenders iterates over the skogul.SenderMap and resolves senders,
