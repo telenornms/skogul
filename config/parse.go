@@ -276,6 +276,56 @@ func File(f string) (*Config, error) {
 	return Bytes(dat)
 }
 
+// MergeRawConfigs merges a list of configurations on a JSON format. Each configuration
+// must be valid JSON and it must follow the skogul configuration format, but it does
+// not need to include all sections (receivers, handlers, senders, transformers).
+// Items in each section can only be defined once, and the program will error
+// if duplicate keys are found in a section.
+func MergeRawConfigs(configs []map[string]interface{}) (*Config, error) {
+	master := make(map[string]map[string]interface{})
+
+	for i, conf := range configs {
+		for section, items := range conf {
+			if master[section] == nil {
+				master[section] = make(map[string]interface{})
+			}
+
+			itemsMap, ok := items.(map[string]interface{})
+
+			if !ok {
+				confLog.WithFields(logrus.Fields{
+					"config":  i,
+					"section": section,
+				}).Error("Failed to cast section to map[string]interface{}")
+				return nil, skogul.Error{Source: "config:parser",
+					Reason: "Failed to cast section to map[string]interface{}"}
+			}
+
+			for k, v := range itemsMap {
+				if master[section][k] != nil {
+					confLog.WithFields(logrus.Fields{
+						"config":  i,
+						"section": section,
+						"field":   k,
+					}).Error("Field already present in configuration")
+					return nil, skogul.Error{Source: "config:parser",
+						Reason: "Field already present in configuration"}
+				}
+
+				master[section][k] = v
+			}
+		}
+	}
+	conf, err := json.Marshal(master)
+
+	if err != nil {
+		confLog.Error("Failed to marshal configuration to JSON")
+		return nil, skogul.Error{Source: "config:parser", Reason: "Failed to marshal configuration to JSON"}
+	}
+
+	return Bytes(conf)
+}
+
 // resolveSenders iterates over the skogul.SenderMap and resolves senders,
 // using the provided configuration. It zeroes the senderMap upon
 // completion.

@@ -351,3 +351,77 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 		t.Errorf("Expected to find '%s' in the superfluous fields list", "superfluousField")
 	}
 }
+
+func TestMergeConfigFiles(t *testing.T) {
+	conf1 := `{"receivers": {
+    "foo": {
+      "type": "stdin",
+      "handler": "baz"
+    }
+  }}`
+	conf2 := `{"receivers": {
+    "bar": {
+      "type": "stdin",
+      "handler": "baz"
+    }
+  }}`
+	handler := `{"handlers": {
+    "baz": {
+      "parser": "json",
+      "sender": "qux"
+    }
+  }}`
+	sender := `{"senders": {
+    "qux": {
+      "type": "debug"
+    }
+  }}`
+
+	configs := make([]map[string]interface{}, 4)
+
+	_ = json.Unmarshal([]byte(conf1), &configs[0])
+	_ = json.Unmarshal([]byte(conf2), &configs[1])
+	_ = json.Unmarshal([]byte(handler), &configs[2])
+	_ = json.Unmarshal([]byte(sender), &configs[3])
+
+	c, err := config.MergeRawConfigs(configs)
+
+	if err != nil {
+		t.Errorf("Failed to merge two valid configurations: %s", err)
+	}
+
+	if c.Receivers["foo"] == nil || c.Receivers["bar"] == nil {
+		t.Error("Missing a receiver from the merged configuration")
+	}
+	if c.Handlers["baz"] == nil {
+		t.Error("Missing the handler from the merged configuration")
+	}
+	if c.Senders["qux"] == nil {
+		t.Error("Missing the sender from the merged configuration")
+	}
+}
+func TestMergeConfigFilesConflicts(t *testing.T) {
+	conf1 := `{"receivers": {
+    "foo": {
+      "type": "stdin",
+      "handler": "baz"
+    }
+  }}`
+	conf2 := `{"receivers": {
+    "foo": {
+      "type": "stdin",
+      "handler": "baz"
+    }
+  }}`
+
+	configs := make([]map[string]interface{}, 2)
+
+	_ = json.Unmarshal([]byte(conf1), &configs[0])
+	_ = json.Unmarshal([]byte(conf2), &configs[1])
+
+	_, err := config.MergeRawConfigs(configs)
+
+	if err == nil {
+		t.Error("Merged two configurations with conflicting keys")
+	}
+}
