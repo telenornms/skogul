@@ -283,7 +283,9 @@ func File(f string) (*Config, error) {
 // not need to include all sections (receivers, handlers, senders, transformers).
 // Items in each section can only be defined once, and the program will error
 // if duplicate keys are found in a section.
-func MergeRawConfigs(configs []map[string]interface{}) (*Config, error) {
+func MergeRawConfigs(configs []map[string]interface{}, configurationSources []string) (*Config, error) {
+	// configurationSources is optional and can therefore be nil.
+
 	master := make(map[string]map[string]interface{})
 
 	for i, conf := range configs {
@@ -294,10 +296,16 @@ func MergeRawConfigs(configs []map[string]interface{}) (*Config, error) {
 
 			itemsMap, ok := items.(map[string]interface{})
 
+			configurationSource := "unknown"
+			if configurationSources != nil && configurationSources[i] != "" {
+				configurationSource = configurationSources[i]
+			}
+
 			if !ok {
 				confLog.WithFields(logrus.Fields{
 					"config":  i,
 					"section": section,
+					"source":  configurationSource,
 				}).Error("Failed to cast section to map[string]interface{}")
 				return nil, skogul.Error{Source: "config:parser",
 					Reason: "Failed to cast section to map[string]interface{}"}
@@ -308,6 +316,7 @@ func MergeRawConfigs(configs []map[string]interface{}) (*Config, error) {
 					confLog.WithFields(logrus.Fields{
 						"config":  i,
 						"section": section,
+						"source":  configurationSource,
 						"field":   k,
 					}).Error("Field already present in configuration")
 					return nil, skogul.Error{Source: "config:parser",
@@ -379,7 +388,7 @@ func ReadFiles(p string) (*Config, error) {
 		configs = append(configs, c)
 	}
 
-	return MergeRawConfigs(configs)
+	return MergeRawConfigs(configs, files)
 }
 
 // resolveSenders iterates over the skogul.SenderMap and resolves senders,

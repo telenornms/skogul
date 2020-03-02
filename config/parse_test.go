@@ -384,7 +384,7 @@ func TestMergeConfigFiles(t *testing.T) {
 	_ = json.Unmarshal([]byte(handler), &configs[2])
 	_ = json.Unmarshal([]byte(sender), &configs[3])
 
-	c, err := config.MergeRawConfigs(configs)
+	c, err := config.MergeRawConfigs(configs, nil)
 
 	if err != nil {
 		t.Errorf("Failed to merge two valid configurations: %s", err)
@@ -419,7 +419,7 @@ func TestMergeConfigFilesConflicts(t *testing.T) {
 	_ = json.Unmarshal([]byte(conf1), &configs[0])
 	_ = json.Unmarshal([]byte(conf2), &configs[1])
 
-	_, err := config.MergeRawConfigs(configs)
+	_, err := config.MergeRawConfigs(configs, nil)
 
 	if err == nil {
 		t.Error("Merged two configurations with conflicting keys")
