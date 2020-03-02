@@ -24,7 +24,7 @@ skogul.1: docs/skogul.rst
 
 notes: docs/NEWS
 	@echo ⛲ Extracting release notes.
-	@./build/release-notes.sh ${GIT_DESCRIBE} > notes
+	@./build/release-notes.sh $$(echo ${GIT_DESCRIBE} | sed s/-dirty//) > notes
 
 all: skogul skogul.1 docs/skogul.rst
 
