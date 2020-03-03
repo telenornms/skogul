@@ -12,7 +12,7 @@ ARCH:=$(shell uname -m)
 
 skogul: $(wildcard *.go */*.go */*/*.go)
 	@echo 🤸 go build !
-	@go build -ldflags "-X main.versionNo=$V" -o skogul ./cmd/skogul
+	@go build -ldflags "-X main.versionNo=${VERSION_NO}" -o skogul ./cmd/skogul
 
 docs/skogul.rst: skogul
 	@echo 😽 Generating documentation $@
