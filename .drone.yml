@@ -28,7 +28,7 @@ steps:
   - apt-get update
   - apt-get -y install make python3-docutils bzip2 gawk
   - make install DESTDIR=skogul-${DRONE_TAG}
-  - make notes
+  - make GIT_DESCRIBE=${DRONE_TAG} notes
   - tar cvjf skogul-${DRONE_TAG}.tar.bz2 skogul-${DRONE_TAG}
   depends_on:
     - test
@@ -46,7 +46,7 @@ steps:
   - chmod +x installer_linux
   - ./installer_linux
   - source /root/.bash_profile
-  - make rpm
+  - make GIT_DESCRIBE=${DRONE_TAG} rpm
   depends_on:
     - test
   when:
