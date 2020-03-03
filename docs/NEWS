@@ -1,7 +1,13 @@
+v0.5.3
+
+Release date: 2020-03-03
+
+Fixes a bug with -version which wouldn't work for prebuilt binaries/packages.
+
 v0.5.2
 ======
 
-Release date: 2020-03-02 (temp)
+Release date: 2020-03-02
 
 Fixes a bug with the install RPMs which would error during install
 and uninstall. The RPMs are now built on a system running yum, which
