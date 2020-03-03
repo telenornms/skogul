@@ -48,7 +48,7 @@ steps:
   - source /root/.bash_profile
   - make GIT_DESCRIBE=${DRONE_TAG} rpm
   depends_on:
-    - test
+    - prepare-release
   when:
     event:
     - tag
