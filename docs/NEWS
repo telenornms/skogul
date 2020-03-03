@@ -1,7 +1,17 @@
+v0.5.5
+======
+
+Release date: 2020-03-03
+
+Fixes a bug with the build pipeline which would reuse a previously generated
+skogul binary when archiving releases. The binary in question did not contain
+the build flag for setting version number, so now we clean the directory before
+building a release to make sure to rebuild it with the proper flags.
+
 v0.5.4
 ======
 
-Release date: 2020-03-04
+Release date: 2020-03-03
 
 Fixes a bug where a previous bugfix for generating builds with version numbers
 wasn't in master and therefore wasn't present for future builds.
