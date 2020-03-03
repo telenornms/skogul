@@ -1,4 +1,13 @@
+v0.5.4
+======
+
+Release date: 2020-03-04
+
+Fixes a bug where a previous bugfix for generating builds with version numbers
+wasn't in master and therefore wasn't present for future builds.
+
 v0.5.3
+======
 
 Release date: 2020-03-03
 
