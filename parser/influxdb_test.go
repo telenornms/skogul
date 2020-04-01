@@ -170,3 +170,19 @@ func TestInfluxDBLineParseEscapedChars(t *testing.T) {
 		t.Errorf("Expected 'moretext' but got '%s'", container.Metrics[0].Data["other,text"])
 	}
 }
+
+func BenchmarkInfluxDBLineParse(b *testing.B) {
+	by := []byte(`disk,device=sda1,fstype=fat32,host=testhost,mode=rw,path=/private/var/vm free=98896670720i,used=1073762304i,used_percent=1.0740798769394355,inodes_total=4882452880i,total=499963174912i 1585737350000000000`)
+	x := parser.InfluxDB{}
+	for i := 0; i < b.N; i++ {
+		x.Parse(by)
+	}
+}
+
+func BenchmarkInfluxDBLineParseWithoutTimestamp(b *testing.B) {
+	by := []byte(`disk,device=sda1,fstype=fat32,host=testhost,mode=rw,path=/private/var/vm free=98896670720i,used=1073762304i,used_percent=1.0740798769394355,inodes_total=4882452880i,total=499963174912i`)
+	x := parser.InfluxDB{}
+	for i := 0; i < b.N; i++ {
+		x.Parse(by)
+	}
+}
