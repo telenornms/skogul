@@ -94,7 +94,79 @@ func TestInfluxDBParseFile(t *testing.T) {
 	}
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed influx data to return a container with at least 1 metric")
+		return
+	}
+}
+
+func TestInfluxDBLineParseQuotedString(t *testing.T) {
+	b := []byte("system,host=testhost,foo=bar text=\"sometext\"")
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
 		t.Errorf("Expected parsed influx data to return a container with 1 metric")
 		return
+	}
+
+	if container.Metrics[0].Data["text"] != "sometext" {
+		t.Errorf("Expected 'sometext' but got '%s'", container.Metrics[0].Data["text"])
+	}
+}
+
+func TestInfluxDBLineParseQuotedStringWithSpace(t *testing.T) {
+	b := []byte("system,host=testhost text=\"some text\"")
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed influx data to return a container with 1 metric")
+		return
+	}
+
+	if container.Metrics[0].Data["text"] != "some text" {
+		t.Errorf("Expected 'some text' but got '%s'", container.Metrics[0].Data["text"])
+	}
+}
+
+func TestInfluxDBLineParseEscapedChars(t *testing.T) {
+	b := []byte(`system,foo=bar,host=test\,host,host\,name=test\,host text=some\,text,other\,text=moretext,final=0`)
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed influx data to return a container with 1 metric")
+		return
+	}
+
+	if container.Metrics[0].Metadata["host"] != "test,host" {
+		t.Errorf("Expected 'test,host' but got '%s'", container.Metrics[0].Metadata["host"])
+	}
+
+	if container.Metrics[0].Metadata["host,name"] != "test,host" {
+		t.Errorf("Expected 'test,host' but got '%s'", container.Metrics[0].Metadata["host,name"])
+	}
+
+	if container.Metrics[0].Data["text"].(string) != "some,text" {
+		t.Errorf("Expected 'some,text' but got '%s'", container.Metrics[0].Data["text"])
+	}
+
+	if container.Metrics[0].Data["other,text"] != "moretext" {
+		t.Errorf("Expected 'moretext' but got '%s'", container.Metrics[0].Data["other,text"])
 	}
 }

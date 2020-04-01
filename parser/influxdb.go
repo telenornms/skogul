@@ -1,10 +1,12 @@
 package parser
 
 import (
+	"bufio"
 	"fmt"
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/telenornms/skogul"
 )
@@ -37,7 +39,12 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 
 	errors := make([]skogul.Error, 0)
 
-	for i, line := range lines {
+	for i, l := range lines {
+		line := strings.TrimSpace(l)
+		if len(strings.TrimSpace(line)) == 0 {
+			// Skip empty lines
+			continue
+		}
 		influxLine := InfluxDBLineProtocol{}
 		if err := influxLine.ParseLine(line); err != nil {
 			// skogul.Error.Source shows index in list and actual line that failed parsing.
@@ -62,39 +69,111 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 
 // ParseLine parses a single line into an internal InfluxDBLineProtocol
 func (line *InfluxDBLineProtocol) ParseLine(s string) error {
-	sections := strings.Split(s, " ")
-
-	if len(sections) < 2 || len(sections) > 3 {
-		return skogul.Error{
-			Source: "parser-influxdb",
-			Reason: fmt.Sprintf("Invalid number of sections in influxdb line protocol line, expected '2' or '3', but got '%d'", len(sections))}
+	// Let's see if we can find a , which is not escaped
+	// That'll be our measurement name.
+	prev := ""
+	for i, c := range string(s) {
+		if (c == ',' || c == ' ') && prev != "\\" {
+			line.measurement = s[:i]
+			break
+		}
+		prev = fmt.Sprint(c)
 	}
 
-	if len(sections) == 2 {
-		// Create own timestamp if it doesn't exist in the source line
-		line.timestamp = skogul.Now()
-	} else {
-		nsTime, err := strconv.ParseInt(sections[2], 0, 64)
+	if line.measurement == "" {
+		return skogul.Error{Source: "parser-influxdb", Reason: "Could not find a measurement name"}
+	}
+
+	// skip the comma trailing measurement name
+	sections := s[len(line.measurement)+1:]
+
+	scanner := bufio.NewScanner(strings.NewReader(sections))
+	scanner.Split(splitFieldFunc)
+
+	canContinue := scanner.Scan()
+
+	if !canContinue && scanner.Err() != nil {
+		return skogul.Error{Source: "parser-influxdb", Reason: "Scanner cannot continue after first scan, received an error", Next: scanner.Err()}
+	}
+
+	tags := scanner.Text()
+
+	canContinue = scanner.Scan()
+
+	if !canContinue && scanner.Err() != nil {
+		return skogul.Error{Source: "parser-influxdb", Reason: "Scanner cannot continue after second scan, received an error", Next: scanner.Err()}
+	}
+
+	fields := scanner.Text()
+
+	canContinue = scanner.Scan()
+
+	if !canContinue && scanner.Err() != nil {
+		return skogul.Error{Source: "parser-influxdb", Reason: "Scanner cannot continue after third scan, received an error", Next: scanner.Err()}
+	}
+
+	// If we get a valid length here we have a value in the timestamp section
+	hasTimestamp := len(scanner.Text()) > 0
+
+	if hasTimestamp {
+		timestamp := scanner.Text()
+		nsTime, err := strconv.ParseInt(timestamp, 0, 64)
 		if err != nil {
-			return skogul.Error{Source: "parser-influxdb", Reason: "Failed to parse time for influxdb line protocol", Next: err}
+			return skogul.Error{
+				Source: "parserinfluxdb",
+				Reason: "Failed to parse time for influxdb line",
+				Next:   scanner.Err()}
 		}
 		line.timestamp = time.Unix(0, nsTime)
+	} else {
+		// Create own timestamp if it doesn't exist in the source line
+		line.timestamp = skogul.Now()
 	}
 
-	line.measurement = strings.Split(sections[0], ",")[0]
-
-	tags := sections[0][len(line.measurement)+1:]
+	// Parse tags and fields
 
 	line.tags = make(map[string]interface{})
-	for _, tag := range strings.Split(tags, ",") {
+
+	tagScanner := bufio.NewScanner(strings.NewReader(tags))
+	tagScanner.Split(splitFieldFunc2)
+	for {
+		canContinue := tagScanner.Scan()
+
+		tag := strings.Trim(tagScanner.Text(), "\u0000")
 		tagValue := strings.Split(tag, "=")
+
+		if len(tagValue) != 2 {
+			break
+		}
+
 		line.tags[tagValue[0]] = tagValue[1]
+
+		if !canContinue {
+			break
+		}
 	}
 
 	line.fields = make(map[string]interface{})
-	for _, field := range strings.Split(sections[1], ",") {
+
+	fieldScanner := bufio.NewScanner(strings.NewReader(fields))
+	fieldScanner.Split(splitFieldFunc2)
+	for {
+		canContinue := fieldScanner.Scan()
+
+		a := fieldScanner.Text()
+
+		field := strings.Trim(a, "\u0000")
 		fieldValue := strings.Split(field, "=")
+
+		if len(fieldValue) != 2 {
+			break
+		}
+
 		line.fields[fieldValue[0]] = parseFieldValue(fieldValue[1])
+
+		if !canContinue {
+			break
+		}
 	}
 
 	return nil
@@ -102,6 +181,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 
 // Metric converts an internal InfluxDBLineProtocol struct to a skogul.Metric
 func (line *InfluxDBLineProtocol) Metric() *skogul.Metric {
+	// @ToDo: Add metric name to metadata or sth
 	metric := skogul.Metric{
 		Time:     &line.timestamp,
 		Metadata: line.tags,
@@ -132,5 +212,104 @@ func parseFieldValue(value string) interface{} {
 		return false
 	}
 
+	if value[0] == '"' && value[len(value)-1] == '"' {
+		return value[1 : len(value)-1]
+	}
+
 	return value
+}
+
+// splitFieldFunc is a SplitFunc for Scanner which splits a string into influxdb line protocol key=value pairs
+func splitFieldFunc(data []byte, atEOF bool) (advance int, token []byte, err error) {
+
+	fieldWidth, newData := influxLineParser(data, ' ', false)
+
+	returnChars := len(newData)
+
+	if returnChars == len(data) {
+		// EOF, return with what we have left
+		return returnChars, newData[:returnChars], nil
+	}
+
+	// Skip the trailing comma between each key=value pair, but still advance counter
+	return fieldWidth, newData[:returnChars], nil
+}
+
+func splitFieldFunc2(data []byte, atEOF bool) (advance int, token []byte, err error) {
+
+	fieldWidth, newData := influxLineParser(data, ',', true)
+
+	returnChars := len(newData)
+
+	if returnChars == len(data) {
+		// EOF, return with what we have left
+		return returnChars, newData[:returnChars], nil
+	}
+
+	// Skip the trailing comma between each key=value pair, but still advance counter
+	return fieldWidth, newData[:returnChars], nil
+}
+
+func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResult bool) (int, []byte) {
+	openQuote := false
+	escape := false
+	escapeChars := make([]int, 0)
+	escapeCharsWidth := make([]int, 0)
+	start := 0
+	for width := 0; start < len(data); start += width {
+		var c rune
+		c, width = utf8.DecodeRune(data[start:])
+
+		if escape {
+			escape = false
+			continue
+		}
+
+		// If there is an open quote, continue until we find the closing quote
+		if openQuote {
+			if c == '"' {
+				// We found the closing quote, mark it and continue regular operations
+				openQuote = false
+				continue
+			}
+			// Fast forward loop until we find the closing quote
+			continue
+		}
+
+		// We found the opening of a quote, continue until we find the closing one
+		if c == '"' {
+			openQuote = true
+			continue
+		}
+
+		// Skip next char
+		if c == '\\' {
+			escape = true
+			if removeEscapedCharsFromResult {
+				escapeChars = append([]int{start}, escapeChars...)
+				escapeCharsWidth = append([]int{width}, escapeCharsWidth...)
+			}
+			continue
+		}
+
+		if c == sectionBreak {
+			break
+		}
+	}
+
+	skippedWidth := 0
+	for i, escapedChar := range escapeChars {
+		if removeEscapedCharsFromResult {
+			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:start]))
+		}
+		skippedWidth += escapeCharsWidth[i]
+	}
+
+	// If we haven't skipped any chars, we need to tell the scanner to advance one position extra
+	// to skip over the comma separating the next key=value pair
+	if skippedWidth == 0 {
+		skippedWidth = 1
+	}
+
+	return len(data[:start]) + skippedWidth, data[:start]
 }
