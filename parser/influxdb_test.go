@@ -14,12 +14,12 @@ func TestInfluxDBLineParse(t *testing.T) {
 	container, err := parser.InfluxDB{}.Parse(b)
 
 	if err != nil {
-		t.Errorf("Failed to parse data as influx line protocl: %v", err)
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
 	}
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
-		t.Errorf("Expected parsed JSON to return a container with 1 metric")
+		t.Errorf("Expected parsed influx data to return a container with 1 metric")
 		return
 	}
 
@@ -56,12 +56,12 @@ func TestInfluxDBLineParseWithoutTimestamp(t *testing.T) {
 	container, err := parser.InfluxDB{}.Parse(b)
 
 	if err != nil {
-		t.Errorf("Failed to parse data as influx line protocl: %v", err)
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
 	}
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
-		t.Errorf("Expected parsed JSON to return a container with 1 metric")
+		t.Errorf("Expected parsed influx data to return a container with 1 metric")
 		return
 	}
 
@@ -89,12 +89,12 @@ func TestInfluxDBParseFile(t *testing.T) {
 	container, err := parser.InfluxDB{}.Parse(b)
 
 	if err != nil {
-		t.Errorf("Failed to parse data as influx line protocl: %v", err)
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
 	}
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
-		t.Errorf("Expected parsed JSON to return a container with at least 1 metric")
+		t.Errorf("Expected parsed influx data to return a container with 1 metric")
 		return
 	}
 }

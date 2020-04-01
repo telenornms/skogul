@@ -94,7 +94,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	line.fields = make(map[string]interface{})
 	for _, field := range strings.Split(sections[1], ",") {
 		fieldValue := strings.Split(field, "=")
-		line.fields[fieldValue[0]] = fieldValue[1]
+		line.fields[fieldValue[0]] = parseFieldValue(fieldValue[1])
 	}
 
 	return nil
@@ -109,4 +109,28 @@ func (line *InfluxDBLineProtocol) Metric() *skogul.Metric {
 	}
 
 	return &metric
+}
+
+func parseFieldValue(value string) interface{} {
+
+	// If the last char is an 'i' and the rest is numeric, this is an integer
+	if value[len(value)-1:] == "i" {
+		if i, err := strconv.ParseInt(value[0:len(value)-1], 0, 64); err == nil {
+			return i
+		}
+	}
+
+	if f, err := strconv.ParseFloat(value[0:len(value)-1], 64); err == nil {
+		return f
+	}
+
+	if value == "t" || value == "T" || value == "true" || value == "True" || value == "TRUE" {
+		return true
+	}
+
+	if value == "f" || value == "F" || value == "false" || value == "False" || value == "FALSE" {
+		return false
+	}
+
+	return value
 }

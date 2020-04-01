@@ -9,7 +9,6 @@ disk,device=disk1s1,fstype=apfs,host=Siluria-v2.local,mode=rw,path=/System/Volum
 swap,host=Siluria-v2.local in=0i,out=0i 1585737340000000000
 disk,device=disk1s5,fstype=apfs,host=Siluria-v2.local,mode=ro,path=/ total=499963174912i,free=98896670720i,used=11121364992i,used_percent=10.10867438236489,inodes_total=4882452880i,inodes_free=4881965320i,inodes_used=487560i 1585737340000000000
 swap,host=Siluria-v2.local total=0i,used=0i,free=0i,used_percent=0 1585737340000000000
-^C2020-04-01T10:35:50Z I! [agent] Hang on, flushing any cached metrics before shutdown
 processes,host=Siluria-v2.local idle=0i,blocked=0i,zombies=0i,stopped=0i,running=2i,sleeping=507i,total=509i,unknown=0i 1585737350000000000
 diskio,host=Siluria-v2.local,name=disk0 read_bytes=10227187712i,write_time=303944i,io_time=837027i,reads=1063888i,writes=273854i,weighted_io_time=0i,iops_in_progress=0i,write_bytes=7842324480i,read_time=533082i 1585737350000000000
 swap,host=Siluria-v2.local in=0i,out=0i 1585737350000000000
