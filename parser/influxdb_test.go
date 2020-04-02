@@ -23,6 +23,10 @@ func TestInfluxDBLineParse(t *testing.T) {
 		return
 	}
 
+	if container.Metrics[0].Metadata["measurement"] != "system" {
+		t.Error("Expected parsed data to contain measurement 'system'")
+	}
+
 	if container.Metrics[0].Metadata["host"] != "testhost" {
 		t.Error("Expected parsed data to contain metadata field 'host'='testhost'")
 	}

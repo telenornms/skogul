@@ -181,7 +181,8 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 
 // Metric converts an internal InfluxDBLineProtocol struct to a skogul.Metric
 func (line *InfluxDBLineProtocol) Metric() *skogul.Metric {
-	// @ToDo: Add metric name to metadata or sth
+	line.tags["measurement"] = line.measurement
+
 	metric := skogul.Metric{
 		Time:     &line.timestamp,
 		Metadata: line.tags,
