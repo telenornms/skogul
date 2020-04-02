@@ -34,7 +34,7 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 	lines := strings.Split(s, "\n")
 
 	container := skogul.Container{
-		Metrics: make([]*skogul.Metric, len(lines)),
+		Metrics: make([]*skogul.Metric, 0),
 	}
 
 	errors := make([]skogul.Error, 0)
@@ -54,7 +54,7 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 			continue
 		}
 
-		container.Metrics[i] = influxLine.Metric()
+		container.Metrics = append(container.Metrics, influxLine.Metric())
 	}
 
 	if len(errors) > 0 {
