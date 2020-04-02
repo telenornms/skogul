@@ -1,3 +1,11 @@
+v0.6.0
+======
+
+Release date: 2020-04-02
+
+Introduces a parses for the InfluxDB line protocol. The parser is to be considered
+in beta/testing. Activate it by configuring a handler with the "influx" parser.
+
 v0.5.5
 ======
 
