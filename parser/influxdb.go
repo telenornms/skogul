@@ -88,7 +88,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	sections := s[len(line.measurement)+1:]
 
 	scanner := bufio.NewScanner(strings.NewReader(sections))
-	scanner.Split(splitFieldFunc)
+	scanner.Split(splitSections)
 
 	canContinue := scanner.Scan()
 
@@ -135,7 +135,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	line.tags = make(map[string]interface{})
 
 	tagScanner := bufio.NewScanner(strings.NewReader(tags))
-	tagScanner.Split(splitFieldFunc2)
+	tagScanner.Split(splitInfluxKeyValuePairs)
 	for {
 		canContinue := tagScanner.Scan()
 
@@ -156,7 +156,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	line.fields = make(map[string]interface{})
 
 	fieldScanner := bufio.NewScanner(strings.NewReader(fields))
-	fieldScanner.Split(splitFieldFunc2)
+	fieldScanner.Split(splitInfluxKeyValuePairs)
 	for {
 		canContinue := fieldScanner.Scan()
 
@@ -220,8 +220,11 @@ func parseFieldValue(value string) interface{} {
 	return value
 }
 
-// splitFieldFunc is a SplitFunc for Scanner which splits a string into influxdb line protocol key=value pairs
-func splitFieldFunc(data []byte, atEOF bool) (advance int, token []byte, err error) {
+// splitFieldFunc is a SplitFunc for Scanner which splits a string into
+// influxdb line protocol sections for tag key=value pairs and field key=value pairs.
+// Sections are split on a non-escaped space character, and we retain all escaped
+// characters and let the next splitter handle them.
+func splitSections(data []byte, atEOF bool) (advance int, token []byte, err error) {
 
 	fieldWidth, newData := influxLineParser(data, ' ', false)
 
@@ -236,7 +239,10 @@ func splitFieldFunc(data []byte, atEOF bool) (advance int, token []byte, err err
 	return fieldWidth, newData[:returnChars], nil
 }
 
-func splitFieldFunc2(data []byte, atEOF bool) (advance int, token []byte, err error) {
+// splitInfluxKeyValuePairs splits a section (tag key=value pairs or field key=value pairs)
+// into key=value pairs, honoring escape rules as per the influx line protocol.
+// A key=value pair is split on a non-escaped comma.
+func splitInfluxKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err error) {
 
 	fieldWidth, newData := influxLineParser(data, ',', true)
 
@@ -251,6 +257,13 @@ func splitFieldFunc2(data []byte, atEOF bool) (advance int, token []byte, err er
 	return fieldWidth, newData[:returnChars], nil
 }
 
+// influxLineParser parses part of an influxdb line protocol line and tells the
+// calling scanner how far it should advance (pretty similar to the splitFunc API).
+// The character to split on is passed to the function, and would usually be
+// a space or a comma character, as those are what's used to split
+// the influx line protocol section or key=value pair from each other.
+// A boolean flag decides whether or not escape characters should remain in the output
+// or have their prepending escape character removed.
 func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResult bool) (int, []byte) {
 	openQuote := false
 	escape := false
