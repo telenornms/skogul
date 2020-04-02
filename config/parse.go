@@ -308,6 +308,9 @@ func resolveHandlers(c *Config) error {
 		if h.Parser == "protobuf" {
 			logger.Debug("Using protobuf parser")
 			h.Handler.SetParser(parser.ProtoBuf{})
+		} else if h.Parser == "influx" {
+			logger.Debug("Using influx line protocol parser")
+			h.Handler.SetParser(parser.InfluxDB{})
 		} else if h.Parser == "custom-json" {
 			logger.Debug("Using custom JSON parser")
 			h.Handler.SetParser(parser.RawJSON{})
