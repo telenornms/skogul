@@ -5,6 +5,8 @@ Release date: 2020-04-03
 
 Fixes a bug introduced in the influx-sender in v0.6.1 which would send any integers
 as quoted string values, as in `key="123i"` instead of the expected `key=123i`.
+Fixes a bug in the influx-receiver which would skip the final byte in a float
+when parsing it.
 
 v0.6.1
 ======
