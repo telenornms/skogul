@@ -48,6 +48,7 @@ type InfluxDB struct {
 	Measurement             string          `doc:"Measurement name to write to."`
 	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
 	Timeout                 skogul.Duration `doc:"HTTP timeout"`
+	ConvertIntToFloat       bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
 	client                  *http.Client
 	replacer                *strings.Replacer
 	once                    sync.Once
@@ -92,6 +93,9 @@ func checkVariable(category string, field string, idx string, value interface{})
 func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	idb.once.Do(func() {
+		if idb.ConvertIntToFloat {
+			influxLog.Warn("Influx sender is configured with 'ConvertIntToFloat'. This will convert *all* integers to floats.")
+		}
 		idb.replacer = strings.NewReplacer("\\", "\\\\", " ", "\\ ", ",", "\\,", "=", "\\=")
 		if idb.Timeout.Duration == 0 {
 			idb.Timeout.Duration = 20 * time.Second
@@ -146,21 +150,28 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		}
 		fmt.Fprintf(&buffer, "%s", measurement)
 		for key, value := range m.Metadata {
-			var field interface{}
+			// Tag values and field values are handled differently;
+			// A tag value is always a string, but if you wrap it in
+			// quotes the quotes will be part of the tag value.
+			// Therefore you need to escape any invalid character instead.
+			// Run the replacer for tags (keys and values), and field keys,
+			// but not for field values.
+			var tagValue interface{}
 			v, ok := value.(string)
+
 			if ok {
-				field = idb.replacer.Replace(v)
+				tagValue = idb.replacer.Replace(v)
 			} else {
-				field = value
+				tagValue = value
 			}
-			fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), field)
+			fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), tagValue)
 			nmdata++
 		}
 		fmt.Fprintf(&buffer, " ")
 		comma := ""
 		for key, value := range m.Data {
 
-			fmt.Fprintf(&buffer, "%s%s=%#v", comma, idb.replacer.Replace(key), value)
+			fmt.Fprintf(&buffer, "%s%s=%#v", comma, idb.replacer.Replace(key), idb.toInfluxValue(value))
 			comma = ","
 			ndata++
 		}
@@ -201,6 +212,19 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		return e
 	}
 	return nil
+}
+
+// toInfluxValue handles converting values to values known by InfluxDB.
+// E.g. an integer should end with the char 'i', so if the value is an int,
+// we need to add that 'i'.
+func (idb *InfluxDB) toInfluxValue(value interface{}) interface{} {
+	if !idb.ConvertIntToFloat {
+		i, ok := value.(int64)
+		if ok {
+			return fmt.Sprintf("%di", i)
+		}
+	}
+	return value
 }
 
 // Verify does a shallow verification of settings
