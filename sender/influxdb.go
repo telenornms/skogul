@@ -171,7 +171,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		comma := ""
 		for key, value := range m.Data {
 
-			fmt.Fprintf(&buffer, "%s%s=%#v", comma, idb.replacer.Replace(key), idb.toInfluxValue(value))
+			fmt.Fprintf(&buffer, "%s%s=%s", comma, idb.replacer.Replace(key), idb.toInfluxValue(value))
 			comma = ","
 			ndata++
 		}
@@ -217,14 +217,14 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 // toInfluxValue handles converting values to values known by InfluxDB.
 // E.g. an integer should end with the char 'i', so if the value is an int,
 // we need to add that 'i'.
-func (idb *InfluxDB) toInfluxValue(value interface{}) interface{} {
+func (idb *InfluxDB) toInfluxValue(value interface{}) string {
 	if !idb.ConvertIntToFloat {
 		i, ok := value.(int64)
 		if ok {
 			return fmt.Sprintf("%di", i)
 		}
 	}
-	return value
+	return fmt.Sprintf("%#v", value)
 }
 
 // Verify does a shallow verification of settings

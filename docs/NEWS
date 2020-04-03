@@ -1,3 +1,11 @@
+v0.6.2
+======
+
+Release date: 2020-04-03
+
+Fixes a bug introduced in the influx-sender in v0.6.1 which would send any integers
+as quoted string values, as in `key="123i"` instead of the expected `key=123i`.
+
 v0.6.1
 ======
 
