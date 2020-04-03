@@ -48,6 +48,7 @@ type InfluxDB struct {
 	Measurement             string          `doc:"Measurement name to write to."`
 	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
 	Timeout                 skogul.Duration `doc:"HTTP timeout"`
+	ConvertInts             bool            `doc:"Convert integers to influx line protocol integers"`
 	client                  *http.Client
 	replacer                *strings.Replacer
 	once                    sync.Once
@@ -146,21 +147,14 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		}
 		fmt.Fprintf(&buffer, "%s", measurement)
 		for key, value := range m.Metadata {
-			var field interface{}
-			v, ok := value.(string)
-			if ok {
-				field = idb.replacer.Replace(v)
-			} else {
-				field = value
-			}
-			fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), field)
+			fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), idb.writeValue(value))
 			nmdata++
 		}
 		fmt.Fprintf(&buffer, " ")
 		comma := ""
 		for key, value := range m.Data {
 
-			fmt.Fprintf(&buffer, "%s%s=%#v", comma, idb.replacer.Replace(key), value)
+			fmt.Fprintf(&buffer, "%s%s=%#v", comma, idb.replacer.Replace(key), idb.writeValue(value))
 			comma = ","
 			ndata++
 		}
@@ -201,6 +195,22 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		return e
 	}
 	return nil
+}
+
+func (idb *InfluxDB) writeValue(value interface{}) interface{} {
+	if idb.ConvertInts {
+		i, ok := value.(int64)
+		if ok {
+			return fmt.Sprintf("%di", i)
+		}
+	}
+
+	v, ok := value.(string)
+
+	if ok {
+		return idb.replacer.Replace(v)
+	}
+	return value
 }
 
 // Verify does a shallow verification of settings
