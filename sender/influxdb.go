@@ -48,7 +48,7 @@ type InfluxDB struct {
 	Measurement             string          `doc:"Measurement name to write to."`
 	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
 	Timeout                 skogul.Duration `doc:"HTTP timeout"`
-	ConvertInts             bool            `doc:"Convert integers to influx line protocol integers"`
+	ConvertIntToFloat       bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
 	client                  *http.Client
 	replacer                *strings.Replacer
 	once                    sync.Once
@@ -93,6 +93,9 @@ func checkVariable(category string, field string, idx string, value interface{})
 func (idb *InfluxDB) Send(c *skogul.Container) error {
 	var buffer bytes.Buffer
 	idb.once.Do(func() {
+		if idb.ConvertIntToFloat {
+			influxLog.Warn("Influx sender is configured with 'ConvertIntToFloat'. This will convert *all* integers to floats.")
+		}
 		idb.replacer = strings.NewReplacer("\\", "\\\\", " ", "\\ ", ",", "\\,", "=", "\\=")
 		if idb.Timeout.Duration == 0 {
 			idb.Timeout.Duration = 20 * time.Second
@@ -198,7 +201,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 }
 
 func (idb *InfluxDB) writeValue(value interface{}) interface{} {
-	if idb.ConvertInts {
+	if !idb.ConvertIntToFloat {
 		i, ok := value.(int64)
 		if ok {
 			return fmt.Sprintf("%di", i)
