@@ -1,3 +1,15 @@
+v0.6.1
+======
+
+Release date: 2020-04-03
+
+Fixes a bug in the influx-sender which didn't send integers to influx as <int>i,
+which is what InfluxDB expects. Since this is a breaking change and requires the
+measurement fields to be dropped/updated/altered, there's a feature flag added:
+"ConvertIntToFloat". Enabling this will convert ALL numbers sent through that
+sender to FLOATS. Don't do this unless you know you need this. The default value
+is OFF.
+
 v0.6.0
 ======
 
