@@ -201,7 +201,7 @@ func parseFieldValue(value string) interface{} {
 		}
 	}
 
-	if f, err := strconv.ParseFloat(value[0:len(value)-1], 64); err == nil {
+	if f, err := strconv.ParseFloat(value[0:len(value)], 64); err == nil {
 		return f
 	}
 
