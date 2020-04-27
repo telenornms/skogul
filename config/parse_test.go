@@ -323,7 +323,7 @@ func Test_syntaxError(t *testing.T) {
 		t.Errorf("Expected config to pass: %v", err)
 	}
 }
-func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
+func TestFindSuperfluousReceiverConfigPropertiesFromFullConfig(t *testing.T) {
 	rawConfig := []byte(`{"receivers": {
 		"foo": {
 		  "type": "udp",
@@ -331,6 +331,34 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 		  "superfluousField": "this is not needed"
 		}
 	  }
+	}`)
+
+	var parsedConfig map[string]interface{}
+	err := json.Unmarshal(rawConfig, &parsedConfig)
+
+	relevantConfig := config.GetRelevantRawConfigSection(&parsedConfig, "receivers", "foo")
+
+	if err != nil {
+		t.Error("Failed to parse config")
+	}
+
+	configStruct := reflect.TypeOf(receiver.UDP{})
+	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&relevantConfig, "receivers", "foo", configStruct)
+
+	if len(superfluousProperties) != 1 {
+		t.Errorf("Expected 1 superfluous property but got %d", len(superfluousProperties))
+	}
+
+	if superfluousProperties[0] != "superfluousField" {
+		t.Errorf("Expected to find '%s' in the superfluous fields list", "superfluousField")
+	}
+}
+
+func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
+	rawConfig := []byte(`{
+		"type": "udp",
+		"address": "[::1]:5015",
+		"superfluousField": "this is not needed"
 	}`)
 
 	var c map[string]interface{}
@@ -349,5 +377,81 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 
 	if superfluousProperties[0] != "superfluousField" {
 		t.Errorf("Expected to find '%s' in the superfluous fields list", "superfluousField")
+	}
+}
+
+func TestBytesWorksWithSuperfluousReceiverConfigProperties(t *testing.T) {
+	rawConfig := []byte(`{"receivers": {
+		"foo": {
+		  "type": "udp",
+		  "address": "[::1]:5015",
+		  "superfluousField": "this is not needed"
+		}
+	  }
+	}`)
+
+	_, err := config.Bytes(rawConfig)
+
+	if err != nil {
+		t.Errorf("Failed to Bytes() config: %s", err)
+	}
+}
+
+func TestReadConfigWithoutSuperfluousParamsNoSuperfluousParams(t *testing.T) {
+	rawConfig := []byte(`{
+    "receivers": {
+      "foo": {
+        "type": "stdin",
+        "handler": "bar"
+      }
+    },
+    "handlers": {
+      "bar": {
+        "sender": "baz"
+      }
+    },
+    "senders": {
+      "baz": {
+        "type": "null"
+      }
+    }
+  }`)
+
+	var c map[string]interface{}
+	err := json.Unmarshal(rawConfig, &c)
+	if err != nil {
+		t.Errorf("Failed to unmarshal json: %s", err)
+	}
+
+	superfluousProperties := make([]string, 0)
+
+	configStruct := reflect.TypeOf(receiver.Stdin{})
+	c1 := config.GetRelevantRawConfigSection(&c, "receivers", "foo")
+	superfluousProperties = append(superfluousProperties, config.VerifyOnlyRequiredConfigProps(&c1, "receiver", "foo", configStruct)...)
+
+	configStruct = reflect.TypeOf(sender.Debug{})
+	c2 := config.GetRelevantRawConfigSection(&c, "senders", "baz")
+	superfluousProperties = append(superfluousProperties, config.VerifyOnlyRequiredConfigProps(&c2, "sender", "baz", configStruct)...)
+
+	if len(superfluousProperties) > 0 {
+		t.Errorf("Expected 0 superfluous config params, received %d (%s)", len(superfluousProperties), superfluousProperties)
+	}
+
+	_, err = config.Bytes(rawConfig)
+
+	if err != nil {
+		t.Errorf("Failed to Bytes() config: %s", err)
+	}
+}
+
+func TestReadConfigFiles(t *testing.T) {
+	c, err := config.ReadFiles("testdata/configs")
+
+	if err != nil {
+		t.Error("Error from config read files", err)
+	}
+
+	if c.Receivers["foo"] == nil || c.Receivers["bar"] == nil {
+		t.Error("Missing a receiver which should be configured")
 	}
 }

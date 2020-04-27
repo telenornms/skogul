@@ -1,0 +1,8 @@
+{
+    "receivers": {
+        "bar": {
+            "type": "stdin",
+            "handler": "baz"
+        }
+    }
+}
