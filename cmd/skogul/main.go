@@ -750,6 +750,10 @@ func main() {
 	var c *config.Config
 
 	if *fconfigDir != "" {
+		if _, err := os.Stat(*fconfigDir); os.IsNotExist(err) {
+			log.Fatalf("Directory '%s' does not exist", *fconfigDir)
+		}
+
 		var err error
 		c, err = config.ReadFiles(*fconfigDir)
 		if err != nil {
