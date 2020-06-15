@@ -105,7 +105,7 @@ https://godoc.org/github.com/telenornms/skogul
 
 End-user documentation is found in the manual page, which Skogul can
 generate on demand, or you can review a copy on github: 
-https://github.com/telenornms/skogul/blob/master/skogul.rst
+https://github.com/telenornms/skogul/blob/primary/skogul.rst
 
 More discussion on architecture can be found in `docs/`.
 
