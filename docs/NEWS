@@ -1,3 +1,17 @@
+v0.7.0
+======
+
+Release date: 2020-06-18
+
+Configuration can now be read from multiple files by using the new `-d`
+option instead of `-f` to refer to a configuration directory instead of a
+configuration file.
+
+All configuration files need to end with `.json`, and all are read. When
+all configuration files are read, any reference is reviewed. This means
+that you can have a set of standard senders in a configuration file and
+refer to them from an other.
+
 v0.6.2
 ======
 
