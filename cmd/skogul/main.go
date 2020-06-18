@@ -194,10 +194,11 @@ It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
 operator to avoid setting up feedback loops.
 
-Two parsers exist: the JSON parser and a Juniper Telemetry protobuf parser.
-Only three transformers exists, and to simplify configuration, the
-"templater" transformer does not have to be explicitly defined to be
-referenced.
+Three parsers exist: the JSON parser, a Juniper Telemetry protobuf
+parser and an InfluxDB line protocol parser.
+
+Three transformers exists, and to simplify configuration, the "templater"
+transformer does not have to be explicitly defined to be referenced.
 
 The documentation for each sender and receiver also lists all options. In
 general, you do not need to specify all options.
@@ -268,7 +269,7 @@ There is only one type of handler. It accepts three arguments: A parser to
 parse data, a list of optional transformers, and the first sender that will
 receive the parsed container(s).
 
-The valid parsers are "json", "custom-json" and "protobuf".
+The valid parsers are "json", "influx", "custom-json" and "protobuf".
 The "templating" transformer does not need to be explicitly defined
 to be referenced, since it has no settings.
 
@@ -399,7 +400,19 @@ Minimalistic schema::
 	 metadata | jsonb                    |           |          |
 	 data     | jsonb                    |           |          |
 
+Custom JSON
+-----------
 
+If the "custom-json" parser is used, all data is parsed as if it was JSON,
+but put into a single metric with the current time as timestamp. This
+allows sending generic JSON to Skogul and using transfromers to extract
+relevant data (or just store everything as data).
+
+InfluxDB parser
+---------------
+
+A simple influx line protocol parser is provided and can be used by setting
+the parser to "influx".
 
 Templating
 ----------
