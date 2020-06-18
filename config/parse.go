@@ -296,8 +296,7 @@ func findConfigFiles(path string) ([]string, error) {
 	confLog.WithField("path", path).Debugf("Reading configuration files from %s", path)
 	configFiles := make([]string, 0)
 	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() && len(strings.Split(path, ".")) > 1 &&
-			strings.ToLower(strings.Split(path, ".")[1]) == "json" {
+		if !info.IsDir() && filepath.Ext(path) == ".json" {
 			configFiles = append(configFiles, path)
 		}
 		return err
