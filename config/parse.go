@@ -30,6 +30,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"reflect"
 	"strings"
 
@@ -118,6 +120,11 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 	if err := json.Unmarshal(b, &t.Transformer); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
+
+	// Find superfluous config parameters
+	var jsonConf map[string]interface{}
+	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	VerifyOnlyRequiredConfigProps(&jsonConf, "transformer", t.Type, reflect.ValueOf(t.Transformer).Elem().Type())
 	return nil
 }
 
@@ -144,6 +151,11 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	if err := json.Unmarshal(b, &r.Receiver); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
+
+	// Find superfluous config parameters
+	var jsonConf map[string]interface{}
+	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	VerifyOnlyRequiredConfigProps(&jsonConf, "receiver", r.Type, reflect.ValueOf(r.Receiver).Elem().Type())
 	return nil
 }
 
@@ -184,6 +196,10 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	if err := json.Unmarshal(b, &s.Sender); err != nil {
 		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
 	}
+	// Find superfluous config parameters
+	var jsonConf map[string]interface{}
+	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	VerifyOnlyRequiredConfigProps(&jsonConf, "sender", s.Type, reflect.ValueOf(s.Sender).Elem().Type())
 	return nil
 }
 
@@ -262,7 +278,7 @@ func Bytes(b []byte) (*Config, error) {
 		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
 	}
 
-	return secondPass(&c, &jsonData)
+	return secondPass(&c)
 }
 
 // File opens a config file and parses it, then returns the valid
@@ -274,6 +290,56 @@ func File(f string) (*Config, error) {
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
 	return Bytes(dat)
+}
+
+func findConfigFiles(path string) ([]string, error) {
+	confLog.WithField("path", path).Debugf("Reading configuration files from %s", path)
+	configFiles := make([]string, 0)
+	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && filepath.Ext(path) == ".json" {
+			configFiles = append(configFiles, path)
+		}
+		return err
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return configFiles, nil
+}
+
+// ReadFiles reads all JSON files (with the .JSON suffix) in a given directory
+// and combines them to a configuration for the program.
+func ReadFiles(p string) (*Config, error) {
+	files, err := findConfigFiles(p)
+
+	if err != nil {
+		return nil, err
+	}
+
+	config := Config{}
+
+	for _, f := range files {
+		confLog.WithField("file", f).Debug("Reading file")
+		b, err := ioutil.ReadFile(f)
+
+		if err != nil {
+			confLog.WithError(err).Error("Failed to read config file")
+			return nil, skogul.Error{Source: "config:parser", Reason: "Failed to read config file", Next: err}
+		}
+
+		err = json.Unmarshal(b, &config)
+		if err != nil {
+			jerr, ok := err.(*json.SyntaxError)
+			if ok {
+				printSyntaxError(b, int(jerr.Offset), jerr.Error())
+			}
+			return nil, err
+		}
+	}
+
+	return secondPass(&config)
 }
 
 // resolveSenders iterates over the skogul.SenderMap and resolves senders,
@@ -361,7 +427,7 @@ func resolveTransformers(c *Config) error {
 
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
-func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
+func secondPass(c *Config) (*Config, error) {
 	if err := resolveSenders(c); err != nil {
 		return nil, err
 	}
@@ -377,36 +443,24 @@ func secondPass(c *Config, jsonData *map[string]interface{}) (*Config, error) {
 		if err := verifyItem("handler", idx, h.Handler); err != nil {
 			return nil, err
 		}
-
-		configStruct := reflect.TypeOf(h.Handler)
-		VerifyOnlyRequiredConfigProps(jsonData, "handlers", idx, configStruct)
 	}
 	for idx, t := range c.Transformers {
 		confLog.WithField("transformer", idx).Debug("Verifying transformer configuration")
 		if err := verifyItem("transformer", idx, t.Transformer); err != nil {
 			return nil, err
 		}
-
-		configStruct := reflect.ValueOf(t.Transformer).Elem().Type()
-		VerifyOnlyRequiredConfigProps(jsonData, "transformers", idx, configStruct)
 	}
 	for idx, s := range c.Senders {
 		confLog.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
 			return nil, err
 		}
-
-		configStruct := reflect.ValueOf(s.Sender).Elem().Type()
-		VerifyOnlyRequiredConfigProps(jsonData, "senders", idx, configStruct)
 	}
 	for idx, r := range c.Receivers {
 		confLog.WithField("receiver", idx).Debug("Verifying receiver configuration")
 		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
 			return nil, err
 		}
-
-		configStruct := reflect.ValueOf(r.Receiver).Elem().Type()
-		VerifyOnlyRequiredConfigProps(jsonData, "receivers", idx, configStruct)
 	}
 
 	return c, nil
@@ -448,7 +502,9 @@ func findFieldsOfStruct(T reflect.Type) []string {
 	return requiredProps
 }
 
-func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
+// GetRelevantRawConfigSection is a helper function to dig down into a Config JSON
+// and select the wanted family (receivers, transformers, senders) and item (foo).
+func GetRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
 	configFamily, ok := (*rawConfig)[family].(map[string]interface{})
 	if !ok {
 		confLog.WithFields(logrus.Fields{
@@ -471,14 +527,13 @@ func getRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 
 // VerifyOnlyRequiredConfigProps checks for undefined configuration properties
 // It can be used to identify typos or invalid configuration
-func VerifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
+// Use 'config.GetRelevantRawConfigSection' first for handler if you have a full config.
+func VerifyOnlyRequiredConfigProps(componentConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
 	requiredProps := findFieldsOfStruct(T)
-
-	relevantConfig := getRelevantRawConfigSection(rawConfig, family, handler)
 
 	superfluousProperties := make([]string, 0)
 
-	for prop := range relevantConfig {
+	for prop := range *componentConfig {
 		propertyDefined := false
 
 		if prop == "type" {
@@ -494,7 +549,11 @@ func VerifyOnlyRequiredConfigProps(rawConfig *map[string]interface{}, family, ha
 		}
 		if !propertyDefined {
 			superfluousProperties = append(superfluousProperties, prop)
-			confLog.WithField("property", prop).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
+			confLog.WithFields(logrus.Fields{
+				"family":   family,
+				"handler":  handler,
+				"property": prop,
+			}).Warn("Configuration property configured but not defined in code (this property won't change anything, is it wrongly defined?)")
 		}
 	}
 

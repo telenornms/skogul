@@ -48,6 +48,7 @@ import (
 var versionNo string
 
 var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to read.")
+var fconfigDir = flag.String("d", "", "Path to skogul configuration files.")
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
@@ -746,9 +747,24 @@ func main() {
 		os.Exit(0)
 	}
 
-	c, err := config.File(*ffile)
-	if err != nil {
-		log.Fatal(err)
+	var c *config.Config
+
+	if *fconfigDir != "" {
+		if _, err := os.Stat(*fconfigDir); os.IsNotExist(err) {
+			log.Fatalf("Directory '%s' does not exist", *fconfigDir)
+		}
+
+		var err error
+		c, err = config.ReadFiles(*fconfigDir)
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		var err error
+		c, err = config.File(*ffile)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	if *fconf {

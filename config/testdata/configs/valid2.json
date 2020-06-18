@@ -1,0 +1,19 @@
+{
+    "receivers": {
+        "foo": {
+            "type": "stdin",
+            "handler": "baz"
+        }
+    },
+    "handlers": {
+        "baz": {
+            "parser": "json",
+            "sender": "qux"
+        }
+    },
+    "senders": {
+        "qux": {
+            "type": "debug"
+        }
+    }
+}
