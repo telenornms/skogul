@@ -142,11 +142,11 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 		tag := strings.Trim(tagScanner.Text(), "\u0000")
 		tagValue := strings.Split(tag, "=")
 
-		if len(tagValue) != 2 {
+		if len(tagValue) < 2 {
 			break
 		}
 
-		line.tags[tagValue[0]] = tagValue[1]
+		line.tags[tagValue[0]] = strings.Join(tagValue[1:], "=")
 
 		if !canContinue {
 			break
