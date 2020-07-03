@@ -140,13 +140,13 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 		canContinue := tagScanner.Scan()
 
 		tag := strings.Trim(tagScanner.Text(), "\u0000")
-		tagValue := strings.Split(tag, "=")
+		tagValue := strings.SplitN(tag, "=", 2)
 
-		if len(tagValue) < 2 {
+		if len(tagValue) != 2 {
 			break
 		}
 
-		line.tags[tagValue[0]] = strings.Join(tagValue[1:], "=")
+		line.tags[tagValue[0]] = tagValue[1]
 
 		if !canContinue {
 			break
