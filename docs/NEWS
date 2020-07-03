@@ -1,3 +1,12 @@
+v0.7.1
+======
+
+Release date: 2020-07-03
+
+Fixes a bug in the influx receiver so that it now supports '=' (equals sign)
+in tag values. This is useful for command lines where arguments might be
+-foo=bar.
+
 v0.7.0
 ======
 
