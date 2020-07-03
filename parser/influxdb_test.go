@@ -144,7 +144,7 @@ func TestInfluxDBLineParseQuotedStringWithSpace(t *testing.T) {
 }
 
 func TestInfluxDBLineParseEscapedChars(t *testing.T) {
-	b := []byte(`system,foo=bar,host=test\,host,host\,name=test\,host text=some\,text,other\,text=moretext,final=0`)
+	b := []byte(`system,foo=bar,host=test\,host,host\,name=test\ host text=some\,text,other\,text=moretext,final=0`)
 
 	container, err := parser.InfluxDB{}.Parse(b)
 
@@ -162,7 +162,7 @@ func TestInfluxDBLineParseEscapedChars(t *testing.T) {
 		t.Errorf("Expected 'test,host' but got '%s'", container.Metrics[0].Metadata["host"])
 	}
 
-	if container.Metrics[0].Metadata["host,name"] != "test,host" {
+	if container.Metrics[0].Metadata["host,name"] != "test host" {
 		t.Errorf("Expected 'test,host' but got '%s'", container.Metrics[0].Metadata["host,name"])
 	}
 
@@ -172,6 +172,22 @@ func TestInfluxDBLineParseEscapedChars(t *testing.T) {
 
 	if container.Metrics[0].Data["other,text"] != "moretext" {
 		t.Errorf("Expected 'moretext' but got '%s'", container.Metrics[0].Data["other,text"])
+	}
+}
+
+func TestInfluxDBParseTelegrafCmdLine(t *testing.T) {
+	b := []byte(`procstat,cmdline=/usr/bin/Java/bin/version/bin/java\ -Xms64m\ -Xmx2048m\ -javaagent:/some/path/to/a/.runtime/service/1.13u3/agent.jar\ -Djava.util.logging.config.file\=/var/log/service/you/get-the/gist-of-it/conf/logging.properties cpu_time_irq=0 1593610640000000000`)
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if container.Metrics[0].Metadata["cmdline"] == nil {
+		t.Errorf("Expected 'cmdline' tag in series, got '%v'", container.Metrics[0].Metadata)
+		return
 	}
 }
 
