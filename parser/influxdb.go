@@ -325,5 +325,5 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 		skippedWidth = 1
 	}
 
-	return len(data[:start]) + skippedWidth, data[:start]
+	return len(data[:start]) + 1, data[:start]
 }
