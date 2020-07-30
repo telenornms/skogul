@@ -1,7 +1,9 @@
 package parser_test
 
 import (
+	"fmt"
 	"io/ioutil"
+	"strings"
 	"testing"
 	"time"
 
@@ -175,8 +177,42 @@ func TestInfluxDBLineParseEscapedChars(t *testing.T) {
 	}
 }
 
+func TestInfluxDBParseLineEscapedChars(t *testing.T) {
+	tag1 := "host=my-hostname.example.org"
+	tag2 := `cmd=/usr/usr\ bin/java\ -logpath\=/var/log`
+	b := []byte(fmt.Sprintf("procstat,%s,%s,foo=bar cpu=1 1593610640000000000", tag1, tag2))
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if container.Metrics[0].Metadata["cmd"] == nil {
+		t.Errorf("Expected 'cmd' tag in series")
+	} else {
+		orig := strings.ReplaceAll((strings.SplitN(tag2, "=", 2)[1]), "\\", "")
+		gen := container.Metrics[0].Metadata["cmd"].(string)
+		if len(gen) != len(orig) {
+			t.Errorf("Length of value for 'cmd' in container differs from test case (%d vs %d)", len(gen), len(orig))
+		}
+	}
+	if container.Metrics[0].Metadata["host"] == nil {
+		t.Errorf("Expected 'host' tag in series")
+	} else {
+		// Verifies that the length of the tag is the same as the expected, because this tag contains
+		// escaped characters
+		if len(container.Metrics[0].Metadata["host"].(string)) != len(strings.SplitN(tag1, "=", 2)[1]) {
+			t.Errorf("Length of value for 'host' in container differs from test case")
+		}
+	}
+	if container.Metrics[0].Metadata["foo"] == nil {
+		t.Errorf("Expected 'foo' tag in series")
+	}
+}
+
 func TestInfluxDBParseTelegrafCmdLine(t *testing.T) {
-	b := []byte(`procstat,cmdline=/usr/bin/Java/bin/version/bin/java\ -Xms64m\ -Xmx2048m\ -javaagent:/some/path/to/a/.runtime/service/1.13u3/agent.jar\ -Djava.util.logging.config.file\=/var/log/service/you/get-the/gist-of-it/conf/logging.properties cpu_time_irq=0 1593610640000000000`)
+	b := []byte(`procstat,cmdline=/usr/bin/Java/bin/version/bin/java\ -Xms64m\ -Xmx2048m\ -javaagent:/some/path/to/a/.runtime/service/1.13u3/agent.jar\ -Djava.util.logging.config.file\=/var/log/service/you/get-the/gist-of-it/conf/logging.properties,host=host-name-prod.dc1.example.org,nms_server_group=some-server-group cpu_time_irq=0 1593610640000000000`)
 
 	container, err := parser.InfluxDB{}.Parse(b)
 
@@ -186,8 +222,13 @@ func TestInfluxDBParseTelegrafCmdLine(t *testing.T) {
 	}
 
 	if container.Metrics[0].Metadata["cmdline"] == nil {
-		t.Errorf("Expected 'cmdline' tag in series, got '%v'", container.Metrics[0].Metadata)
-		return
+		t.Errorf("Expected 'cmdline' tag in series")
+	}
+	if container.Metrics[0].Metadata["host"] == nil {
+		t.Errorf("Expected 'host' tag in series")
+	}
+	if container.Metrics[0].Metadata["nms_server_group"] == nil {
+		t.Errorf("Expected 'group' tag in series")
 	}
 }
 
