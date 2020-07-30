@@ -212,7 +212,7 @@ func TestInfluxDBParseLineEscapedChars(t *testing.T) {
 }
 
 func TestInfluxDBParseTelegrafCmdLine(t *testing.T) {
-	b := []byte(`procstat,cmdline=/usr/bin/Java/bin/version/bin/java\ -Xms64m\ -Xmx2048m\ -javaagent:/some/path/to/a/.runtime/service/1.13u3/agent.jar\ -Djava.util.logging.config.file\=/var/log/service/you/get-the/gist-of-it/conf/logging.properties,host=host-name-prod.dc1.example.org,nms_server_group=some-server-group cpu_time_irq=0 1593610640000000000`)
+	b := []byte(`procstat,cmdline=/usr/bin/Java/bin/version/bin/java\ -Xms64m\ -Xmx2048m\ -javaagent:/some/path/to/a/.runtime/service/1.13u3/agent.jar\ -Djava.util.logging.config.file\=/var/log/service/you/get-the/gist-of-it/conf/logging.properties,host=host-name-prod.dc1.example.org,server_group=some-server-group cpu_time_irq=0 1593610640000000000`)
 
 	container, err := parser.InfluxDB{}.Parse(b)
 
@@ -227,8 +227,44 @@ func TestInfluxDBParseTelegrafCmdLine(t *testing.T) {
 	if container.Metrics[0].Metadata["host"] == nil {
 		t.Errorf("Expected 'host' tag in series")
 	}
-	if container.Metrics[0].Metadata["nms_server_group"] == nil {
+	if container.Metrics[0].Metadata["server_group"] == nil {
 		t.Errorf("Expected 'group' tag in series")
+	}
+}
+
+func TestInfluxDBParseTelegrafCmdLines(t *testing.T) {
+	b, err := ioutil.ReadFile("./testdata/influxdb_procstat.txt")
+
+	if err != nil {
+		t.Errorf("Failed to read test data file: %v", err)
+		return
+	}
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed influx data to return a container with at least 1 metric")
+		return
+	}
+
+	for i, metric := range container.Metrics {
+		if metric.Metadata["measurement"] == "procstat_lookup" {
+			continue
+		}
+		if metric.Metadata["cmdline"] == nil {
+			t.Errorf("Expected 'cmdline' tag in metric %d", i)
+		}
+		if metric.Metadata["host"] == nil {
+			t.Errorf("Expected 'host' tag in metric %d", i)
+		}
+		if metric.Metadata["group"] == nil {
+			t.Errorf("Expected 'group' tag in metric %d", i)
+		}
 	}
 }
 
