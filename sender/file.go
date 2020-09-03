@@ -78,7 +78,7 @@ func (f *File) init() {
 	f.ok = true
 }
 
-func (f *File) startChan() error {
+func (f *File) startChan() {
 	fileLog.Trace("Starting file writer channel")
 	// Making sure we close the file if this function exits
 	defer f.f.Close()
@@ -87,12 +87,10 @@ func (f *File) startChan() error {
 		if err != nil {
 			f.ok = false
 			fileLog.WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
-			return err
 		}
 		f.f.Sync()
 	}
 	fileLog.Warning("File writer chan closed, not handling any more writes!")
-	return nil
 }
 
 // Send receives a skogul container and writes it to file.
