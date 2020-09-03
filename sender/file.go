@@ -119,6 +119,10 @@ func (f *File) Send(c *skogul.Container) error {
 
 // Verify checks that the configuration options are set appropriately
 func (f *File) Verify() error {
-	fileLog.Debug("Verified file sender")
+	if f.Path == "" {
+		err := skogul.Error{Reason: "Path name for file sender missing", Source: "file sender"}
+		fileLog.WithError(err).Error("Missing path to file for file sender")
+		return err
+	}
 	return nil
 }
