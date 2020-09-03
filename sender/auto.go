@@ -84,6 +84,11 @@ func init() {
 		Help:  "Tries the senders provided in Next, in order. E.g.: if the first responds OK, the second will never get data. Useful for diverting traffic to alternate paths upon failure.",
 	})
 	Auto.Add(skogul.Module{
+		Name:  "file",
+		Alloc: func() interface{} { return &File{} },
+		Help:  "Writes metrics to file.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "forwardfail",
 		Alloc: func() interface{} { return &ForwardAndFail{} },
 		Help:  "Forwards metrics, but always returns failure. Useful in complex failure handling involving e.g. fallback sender, where it might be used to write log or stats on failure while still propogating a failure upward.",
