@@ -72,7 +72,7 @@ func (f *File) init() {
 	// Listening to a channel is blocking so we have
 	// to start the channel listening in a goroutine
 	// so that init() doesn't block.
-	f.c = make(chan []byte)
+	f.c = make(chan []byte, 50)
 	go f.startChan()
 
 	f.ok = true
