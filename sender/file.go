@@ -72,6 +72,7 @@ func (f *File) init() {
 	// Listening to a channel is blocking so we have
 	// to start the channel listening in a goroutine
 	// so that init() doesn't block.
+	f.c = make(chan []byte)
 	go f.startChan()
 
 	f.ok = true
@@ -81,7 +82,6 @@ func (f *File) startChan() error {
 	fileLog.Trace("Starting file writer channel")
 	// Making sure we close the file if this function exits
 	defer f.f.Close()
-	f.c = make(chan []byte)
 	for b := range f.c {
 		written, err := f.f.Write(append(b, newLineChar))
 		if err != nil {
