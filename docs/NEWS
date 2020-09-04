@@ -1,3 +1,12 @@
+v0.8.0
+======
+
+Release date: 2020-09-04
+
+Adds a file sender which supports writing to file.
+Fixes the RPM build spec so that rpm will not overwrite the default config
+file upon upgrading skogul.
+
 v0.7.2
 ======
 
