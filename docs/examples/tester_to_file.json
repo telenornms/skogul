@@ -1,0 +1,25 @@
+{
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 100,
+      "values": 100,
+      "threads": 30
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "file"
+    }
+  },
+  "senders": {
+    "file": {
+      "type": "file",
+      "path": "/tmp/skogul-out",
+      "append": true
+    }
+  }
+}
