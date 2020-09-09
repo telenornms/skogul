@@ -1,0 +1,45 @@
+{
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 10,
+      "values": 10,
+      "threads": 1
+    },
+    "splunk": {
+      "type": "http",
+      "address": "[::1]:8087",
+      "handlers": {
+        "/": "splunk"
+      }
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "splunk"
+    },
+    "splunk": {
+      "parser": "custom-json",
+      "transformers": [],
+      "sender": "file"
+    }
+  },
+  "senders": {
+    "splunk": {
+      "type": "splunk",
+      "URL": "http://[::1]:8087/",
+      "token": "abcd",
+      "batch": true,
+      "http": {
+        "idleconnsperhost": 30
+      }
+    },
+    "file": {
+      "type": "debug",
+      "path": "/tmp/splunk"
+    }
+  }
+}
