@@ -127,22 +127,16 @@ func (ht *HTTP) init() {
 	ht.ok = true
 }
 
-// Send POSTS data
-func (ht *HTTP) Send(c *skogul.Container) error {
-	ht.once.Do(func() {
-		ht.init()
-	})
+// SendBytes uses a configured HTTP client to
+// send a request.
+// This makes it possible for other senders to
+// reuse the HTTP sender options without having
+// to re-implement them.
+func (ht *HTTP) SendBytes(b []byte) error {
 	if !ht.ok {
-		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
-		httpLog.Print(e)
-		return e
+		return skogul.Error{Reason: "HTTP sender not in OK state", Source: "http-sender"}
 	}
-	b, err := json.Marshal(*c)
-	if err != nil {
-		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
-		httpLog.WithError(e).Error("Configuring HTTP sender failed")
-		return e
-	}
+
 	var buffer bytes.Buffer
 	buffer.Write(b)
 	ht.once.Do(func() {
@@ -187,6 +181,29 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
 		httpLog.WithError(e).Error("HTTP response status code was not in OK range")
 		return e
+	}
+	return nil
+}
+
+// Send POSTS data
+func (ht *HTTP) Send(c *skogul.Container) error {
+	ht.once.Do(func() {
+		ht.init()
+	})
+	if !ht.ok {
+		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
+		httpLog.Print(e)
+		return e
+	}
+	b, err := json.Marshal(*c)
+	if err != nil {
+		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
+		httpLog.WithError(e).Error("Configuring HTTP sender failed")
+		return e
+	}
+	err = ht.SendBytes(b)
+	if err != nil {
+		return err
 	}
 	return nil
 }
