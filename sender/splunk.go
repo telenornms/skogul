@@ -37,13 +37,14 @@ import (
 var splunkLog = skogul.Logger("sender", "splunk")
 
 type Splunk struct {
-	URL          string `doc:"URL to Splunk HTTP Event Collector (HEC)"`
-	Token        string `doc:"Token for HTTP Authorization header for HEC endpoint."`
-	Batch        bool   `doc:"Batch multiple metrics together when sending. Default: false"`
-	Index        string `doc:"Custom Splunk index to send event to."`
-	HTTP         *HTTP  `doc:"HTTP sender options. URL is overwritten from this config, the rest will be HTTP sender defaults unless overridden."`
-	ok           bool
-	once         sync.Once
+	URL           string `doc:"URL to Splunk HTTP Event Collector (HEC)"`
+	Token         string `doc:"Token for HTTP Authorization header for HEC endpoint."`
+	Batch         bool   `doc:"Batch multiple metrics together when sending. Default: false"`
+	Index         string `doc:"Custom Splunk index to send event to."`
+	HostnameField string `doc:"Name of the metadata field with the hostname. Note, this might have to be transformed into metadata depending on the input data."`
+	HTTP          *HTTP  `doc:"HTTP sender options. URL is overwritten from this config, the rest will be HTTP sender defaults unless overridden."`
+	ok            bool
+	once          sync.Once
 }
 
 type SplunkEvent struct {
@@ -63,10 +64,16 @@ func (s *Splunk) prepare(c *skogul.Container) ([]SplunkEvent, error) {
 		if metric.Time == nil {
 			t = c.Template.Time
 		}
+
+		host := ""
+		if s.HostnameField != "" && metric.Metadata != nil && metric.Metadata[s.HostnameField] != nil {
+			host = fmt.Sprintf("%v", metric.Metadata[s.HostnameField])
+		}
 		events = append(events, SplunkEvent{
 			Time:  t,
 			Event: metric.Data,
 			Index: s.Index,
+			Host:  host,
 		})
 	}
 	return events, nil
@@ -162,6 +169,9 @@ func (s *Splunk) Verify() error {
 	}
 	if s.Index == "" {
 		splunkLog.Info("No Splunk index configured, Splunk will send events to its default index.")
+	}
+	if s.HostnameField == "" {
+		splunkLog.Warning("No HostnameField specified, Splunk events will not be metadata-tagged with hostnames")
 	}
 	if err := s.HTTP.Verify(); err != nil {
 		// Verify HTTP handler, but if it contains an error about

@@ -32,6 +32,7 @@
       "type": "splunk",
       "URL": "http://[::1]:8087/",
       "token": "abcd",
+      "hostnamefield": "key1",
       "batch": true,
       "http": {
         "idleconnsperhost": 30
