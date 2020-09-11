@@ -36,6 +36,7 @@ import (
 
 var splunkLog = skogul.Logger("sender", "splunk")
 
+// Splunk contains the configuration parameters for this sender.
 type Splunk struct {
 	URL           string `doc:"URL to Splunk HTTP Event Collector (HEC)"`
 	Token         string `doc:"Token for HTTP Authorization header for HEC endpoint."`
@@ -47,6 +48,8 @@ type Splunk struct {
 	once          sync.Once
 }
 
+// SplunkEvent describes the structure of a Splunk
+// HTTP Event Collector event
 type SplunkEvent struct {
 	Time  *time.Time             `json:"time,omitempty"`
 	Host  string                 `json:"host,omitempty"`
@@ -116,6 +119,7 @@ func (s *Splunk) init() {
 	s.ok = s.HTTP.ok
 }
 
+// Send sends a skogul container to Splunk HEC
 func (s *Splunk) Send(c *skogul.Container) error {
 	s.once.Do(func() {
 		s.init()
@@ -160,6 +164,7 @@ func (s *Splunk) Send(c *skogul.Container) error {
 	return nil
 }
 
+// Verify verifies that the sender config is valid
 func (s *Splunk) Verify() error {
 	if s.URL == "" {
 		return skogul.Error{Reason: "Splunk URL cannot be empty", Source: "splunk-sender"}
