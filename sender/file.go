@@ -45,22 +45,22 @@ type File struct {
 }
 
 func (f *File) init() {
-	fileLog.Debug("Initializing File sender")
+	fileLog.WithField("path", f.Path).Debug("Initializing File sender")
 
 	var err error
 	var file *os.File
 
 	// Open file for append-only if it already exists and config says to append
 	if finfo, err := os.Stat(f.Path); !os.IsNotExist(err) && f.Append {
-		fileLog.Trace("File exists, let's open it for writing")
+		fileLog.WithField("path", f.Path).Trace("File exists, let's open it for writing")
 		file, err = os.OpenFile(f.Path, os.O_APPEND|os.O_WRONLY, finfo.Mode())
 	} else {
 		// Otherwise, create the file (which will truncate it if it already exists)
-		fileLog.Trace("Creating file since it doesn't exist or we don't want to append to it")
+		fileLog.WithField("path", f.Path).Trace("Creating file since it doesn't exist or we don't want to append to it")
 		file, err = os.Create(f.Path)
 	}
 	if err != nil {
-		fileLog.WithError(err).Errorf("Failed to open '%s'", f.Path)
+		fileLog.WithField("path", f.Path).WithError(err).Errorf("Failed to open '%s'", f.Path)
 		f.ok = false
 		return
 	}
@@ -86,11 +86,11 @@ func (f *File) startChan() {
 		written, err := f.f.Write(append(b, newLineChar))
 		if err != nil {
 			f.ok = false
-			fileLog.WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+			fileLog.WithField("path", f.Path).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
 		}
 		f.f.Sync()
 	}
-	fileLog.Warning("File writer chan closed, not handling any more writes!")
+	fileLog.WithField("path", f.Path).Warning("File writer chan closed, not handling any more writes!")
 }
 
 // Send receives a skogul container and writes it to file.
