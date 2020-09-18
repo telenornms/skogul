@@ -168,6 +168,24 @@ func TestMNRExtractValues(t *testing.T) {
 	}
 }
 
+func TestMNROnDataset(t *testing.T) {
+	b, err := ioutil.ReadFile("./testdata/mnr.txt")
+	if err != nil {
+		t.Errorf("Failed to read test data file: %v", err)
+		return
+	}
+
+	container, err := parser.MNR{}.Parse(b)
+	if err != nil {
+		t.Errorf("MnR parser errored on parsing data: %s", err)
+		return
+	}
+	if len(container.Metrics) == 0 {
+		t.Error("Expected metrics from parsing MnR test data set, got 0")
+		return
+	}
+}
+
 func BenchmarkMNRParse(b *testing.B) {
 	line := []byte("1599730066	group	127.0.0.1.ifXTable..1.12.RATEP.Pkts/s.820424119	0.0	key=1")
 	x := parser.MNR{}
