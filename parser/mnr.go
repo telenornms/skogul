@@ -37,7 +37,7 @@ var mnrLog = skogul.Logger("parser", "mnr")
 
 type MNR struct{}
 
-const MNRSeparator byte = 9 // tab
+const mnrSeparator byte = 9 // tab
 
 // Parse converts data from MNR into a skogul Container
 func (mnr MNR) Parse(bytes []byte) (*skogul.Container, error) {
@@ -186,7 +186,7 @@ func mnrSplitLineFunc(data []byte, atEOF bool) (advance int, token []byte, err e
 		var r rune
 		r, width := utf8.DecodeRune(data[start:])
 		// const separator as a rune instead ?
-		if byte(r) == MNRSeparator {
+		if byte(r) == mnrSeparator {
 			break
 		}
 		start += width
