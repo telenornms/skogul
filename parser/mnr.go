@@ -35,6 +35,7 @@ import (
 
 var mnrLog = skogul.Logger("parser", "mnr")
 
+// MNR supports parsing MNR data through the Parse() function
 type MNR struct{}
 
 const mnrSeparator byte = 9 // tab
