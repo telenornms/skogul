@@ -1,3 +1,10 @@
+v0.8.1
+======
+
+Release date: 2020-09-22
+
+Adds a parser for MNR data and adds some more logging to the file sender.
+
 v0.8.0
 ======
 
