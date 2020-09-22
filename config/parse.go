@@ -371,22 +371,12 @@ func resolveHandlers(c *Config) error {
 
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
-		if h.Parser == "protobuf" {
-			logger.Debug("Using protobuf parser")
-			h.Handler.SetParser(parser.ProtoBuf{})
-		} else if h.Parser == "influx" {
-			logger.Debug("Using influx line protocol parser")
-			h.Handler.SetParser(parser.InfluxDB{})
-		} else if h.Parser == "custom-json" {
-			logger.Debug("Using custom JSON parser")
-			h.Handler.SetParser(parser.RawJSON{})
-		} else if h.Parser == "json" || h.Parser == "" {
-			logger.Debug("Using JSON parser")
-			h.Handler.SetParser(parser.JSON{})
+		if p, err := resolveParser(h.Parser); err == nil {
+			h.Handler.SetParser(p)
 		} else {
-			logger.Error("Unknown parser")
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
 		}
+
 		for _, t := range h.Transformers {
 			logger = logger.WithField("transformer", t.Name)
 			logger.Debug("Using predefined transformer")
@@ -402,6 +392,22 @@ func resolveHandlers(c *Config) error {
 	}
 	skogul.HandlerMap = skogul.HandlerMap[0:0]
 	return nil
+}
+
+// resolveParser returns a skogul parser for a given
+// parser name, or errors if the parser doesn't exist
+func resolveParser(p string) (skogul.Parser, error) {
+	switch strings.ToLower(p) {
+	case "custom-json":
+		return parser.RawJSON{}, nil
+	case "influx":
+		return parser.InfluxDB{}, nil
+	case "json", "": // Fallback to json parser if not specified
+		return parser.JSON{}, nil
+	case "protobuf":
+		return parser.ProtoBuf{}, nil
+	}
+	return nil, skogul.Error{Reason: "No valid parser found", Source: "config-parser"}
 }
 
 // resolveTransformers looks in the parsed config for transformers and initializes the
