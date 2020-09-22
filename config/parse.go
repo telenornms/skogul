@@ -404,6 +404,8 @@ func resolveParser(p string) (skogul.Parser, error) {
 		return parser.InfluxDB{}, nil
 	case "json", "": // Fallback to json parser if not specified
 		return parser.JSON{}, nil
+	case "mnr":
+		return parser.MNR{}, nil
 	case "protobuf":
 		return parser.ProtoBuf{}, nil
 	}
