@@ -77,7 +77,8 @@ func mnrParseData(data []byte) ([]*skogul.Metric, error) {
 		metrics = append(metrics, metric)
 	}
 	if len(metrics) == 0 {
-		mnrLog.WithField("lines", len(lines)).Warnf("MNR parser failed to parse all of the %d lines", len(lines))
+		mnrLog.WithField("lines", len(lines)).Warnf("MNR parser failed to parse any of the %d lines", len(lines))
+		return nil, skogul.Error{Reason: "Failed to parse MNR lines", Source: "mnr-parser"}
 	}
 	return metrics, nil
 }
