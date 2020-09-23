@@ -27,6 +27,7 @@ import (
 	"bytes"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 	"unicode/utf8"
 
@@ -36,14 +37,34 @@ import (
 var mnrLog = skogul.Logger("parser", "mnr")
 
 // MNR supports parsing MNR data through the Parse() function
-type MNR struct{}
+type MNR struct {
+	ExtractFieldName bool     `doc:"Extract field name from 'name' parameter in MNR properties."`
+	DefaultFieldName string   `doc:"Name of field to store variable value in, in the case that 'name' is not present."`
+	ParseAsString    []string `doc:"Parse these properties as string (do not try to parse their value)."`
+	StoreVariable    bool     `doc:"Store the uniquely generated variable as a data field."`
+	once             sync.Once
+}
 
 const mnrSeparator byte = 9 // tab
 
-// Parse converts data from MNR into a skogul Container
-func (mnr MNR) Parse(bytes []byte) (*skogul.Container, error) {
+// init prints information about parser configuration
+func (mnr *MNR) init() error {
+	if len(mnr.ParseAsString) > 0 {
+		mnrLog.Debugf("MNR parser configured with parsing fields as string: %v", mnr.ParseAsString)
+	}
+	return nil
+}
 
-	metrics, err := mnrParseData(bytes)
+// Parse converts data from MNR into a skogul Container
+func (mnr *MNR) Parse(bytes []byte) (*skogul.Container, error) {
+	mnr.once.Do(func() {
+		err := mnr.init()
+		if err != nil {
+			mnrLog.WithError(err).Error("Failed to initialise MNR parser")
+		}
+	})
+
+	metrics, err := mnr.mnrParseData(bytes)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +76,7 @@ func (mnr MNR) Parse(bytes []byte) (*skogul.Container, error) {
 
 // mnrParseData takes the raw input and parses it
 // this takes care of splitting input on newlines etc
-func mnrParseData(data []byte) ([]*skogul.Metric, error) {
+func (mnr *MNR) mnrParseData(data []byte) ([]*skogul.Metric, error) {
 	lines := bytes.Split(data, []byte("\n"))
 
 	metrics := make([]*skogul.Metric, 0)
@@ -67,7 +88,7 @@ func mnrParseData(data []byte) ([]*skogul.Metric, error) {
 			continue
 		}
 
-		metric, err := mnrParseLine(line)
+		metric, err := mnr.mnrParseLine(line)
 		if err != nil {
 			// If we get an error on this line we will continue
 			// in hopes of having other lines working successfully.
@@ -83,7 +104,7 @@ func mnrParseData(data []byte) ([]*skogul.Metric, error) {
 	return metrics, nil
 }
 
-func mnrParseLine(data []byte) (*skogul.Metric, error) {
+func (mnr *MNR) mnrParseLine(data []byte) (*skogul.Metric, error) {
 	scanner := bufio.NewScanner(bytes.NewReader(data))
 	scanner.Split(mnrSplitLineFunc)
 
@@ -141,22 +162,52 @@ func mnrParseLine(data []byte) (*skogul.Metric, error) {
 	}
 	variable := scanner.Text()
 
+	if mnr.StoreVariable {
+		metric.Data["variable"] = variable
+	}
+
 	ok = scanner.Scan()
 	if !ok {
 		return nil, skogul.Error{Reason: "Failed to extract MNR variable value", Source: "mnr-parser"}
 	}
-	metric.Data[variable] = parseMNRFieldValue(scanner.Text())
+	val := parseMNRFieldValue(scanner.Text())
 
 	// Parsing properties
 	for scanner.Scan() {
-		val := scanner.Text()
-
-		pair := strings.SplitN(val, "=", 2)
+		pair := strings.SplitN(scanner.Text(), "=", 2)
 		if len(pair) != 2 {
 			// Skip because we didn't get a 'key=value' pair as we expected
 			continue
 		}
-		metric.Data[pair[0]] = parseMNRFieldValue(pair[1])
+		key := pair[0]
+		parseType := true
+		for _, field := range mnr.ParseAsString {
+			if key == field {
+				parseType = false
+				break
+			}
+		}
+		if parseType {
+			metric.Data[key] = parseMNRFieldValue(pair[1])
+		} else {
+			metric.Data[key] = string(pair[1])
+		}
+	}
+
+	// If we have extracted a 'name' property, that tells us the actual
+	// name of the variable. We'll store this as the field for the value.
+	if mnr.ExtractFieldName && metric.Data["name"] != nil {
+		metric.Data[metric.Data["name"].(string)] = val
+	} else {
+		// If the 'name' property didn't exist, write the value to this key.
+		if mnr.DefaultFieldName != "" {
+			// The variable name is by default pretty hard to identify
+			// programmatically, so we can write the value here too for convenience.
+			metric.Data[mnr.DefaultFieldName] = val
+		}
+
+		// Notify that we weren't able to extract the name.
+		metric.Data["failed_name_extract"] = true
 	}
 
 	return &metric, nil
