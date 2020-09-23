@@ -1,7 +1,7 @@
 /*
  * skogul, common trivialities
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -138,6 +138,13 @@ type HandlerRef struct {
 // It is used during configuration/transformer setup.
 type TransformerRef struct {
 	T    Transformer
+	Name string
+}
+
+// ParserRef is a string mapping to a Parser.
+// It is used during configuration setup.
+type ParserRef struct {
+	P    Parser
 	Name string
 }
 

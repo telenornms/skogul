@@ -1,7 +1,7 @@
 /*
  * skogul, sender automation
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -51,9 +51,11 @@ func init() {
 		Help:    "Accepts metrics, counts them and passes them on. Then emits statistics to the Stats-handler on an interval.",
 	})
 	Auto.Add(skogul.Module{
-		Name:  "debug",
-		Alloc: func() interface{} { return &Debug{} },
-		Help:  "Prints received metrics to stdout.",
+		Name:     "debug",
+		Aliases:  []string{"print"},
+		Alloc:    func() interface{} { return &Debug{} },
+		Help:     "Prints received metrics to stdout.",
+		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
 		Name:    "detacher",

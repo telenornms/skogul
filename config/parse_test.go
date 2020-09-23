@@ -1,3 +1,26 @@
+/*
+ * skogul  config module help generation
+ *
+ * Copyright (c) 2019-2020 Telenor Norge AS
+ * Author(s):
+ *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301  USA
+ */
 package config_test
 
 import (
@@ -112,6 +135,112 @@ func TestByte_ok(t *testing.T) {
 		t.Errorf("Bytes() with bad data returned valid config.")
 	}
 
+}
+
+func TestDefaultModules(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Byte() paniced")
+		}
+	}()
+	var okData []byte
+	okData = []byte(`
+{
+  "handlers": {
+    "plain": {
+      "parser": "json",
+      "sender": "debug",
+      "transformers": ["templater"]
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+	      "/": "plain"
+      }
+    }
+  }
+}
+`)
+	c, err := config.Bytes(okData)
+	if err != nil {
+		t.Errorf("Bytes() failed: %v", err)
+	}
+	if c == nil {
+		t.Errorf("Bytes() returned nil config")
+	}
+}
+func TestUndefinedParser(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Byte() paniced")
+		}
+	}()
+	var okData []byte
+	okData = []byte(`
+{
+  "handlers": {
+    "plain": {
+      "parser": "bondevik",
+      "sender": "debug",
+      "transformers": ["templater"]
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+	      "/": "plain"
+      }
+    }
+  }
+}
+`)
+	_, err := config.Bytes(okData)
+	if err == nil {
+		t.Errorf("Bytes() didn't fail, despite undefined parser.")
+	}
+}
+
+func TestNamedParser(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Byte() paniced")
+		}
+	}()
+	var okData []byte
+	okData = []byte(`
+{
+  "parsers": {
+    "jens": {
+      "type": "json"
+    }
+  },
+  "handlers": {
+    "plain": {
+      "parser": "jens",
+      "sender": "debug",
+      "transformers": ["templater"]
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+	      "/": "plain"
+      }
+    }
+  }
+}
+`)
+	c, err := config.Bytes(okData)
+	if err != nil {
+		t.Errorf("Bytes() failed: %v", err)
+	}
+	if c == nil {
+		t.Errorf("Bytes() returned nil config")
+	}
 }
 
 func TestHelpModule(t *testing.T) {
@@ -407,6 +536,7 @@ func TestReadConfigWithoutSuperfluousParamsNoSuperfluousParams(t *testing.T) {
     },
     "handlers": {
       "bar": {
+	"parser": "json",
         "sender": "baz"
       }
     },
