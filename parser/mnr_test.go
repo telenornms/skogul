@@ -64,8 +64,9 @@ func TestMNRChangedLineParsed(t *testing.T) {
 
 func TestMNRExtractValue(t *testing.T) {
 	line := []byte("1599730066	group	127.0.0.1.ifXTable..1.12.RATEP.Pkts/s.820424119	0.0	key=val")
-	p := parser.MNR{}
-	variable := "127.0.0.1.ifXTable..1.12.RATEP.Pkts/s.820424119"
+	p := parser.MNR{
+		DefaultFieldName: "value",
+	}
 	value := 0.0
 
 	c, err := p.Parse(line)
@@ -79,8 +80,8 @@ func TestMNRExtractValue(t *testing.T) {
 		return
 	}
 
-	if c.Metrics[0].Data[variable] != value {
-		t.Errorf("Expected data to contain the key '%s' with the value '%f', but got '%v'", variable, value, c.Metrics[0].Data[variable])
+	if c.Metrics[0].Data[p.DefaultFieldName] != value {
+		t.Errorf("Expected data to contain the key '%s' with the value '%f', but got '%v'", p.DefaultFieldName, value, c.Metrics[0].Data[p.DefaultFieldName])
 	}
 }
 
@@ -175,7 +176,8 @@ func TestMNROnDataset(t *testing.T) {
 		return
 	}
 
-	container, err := parser.MNR{}.Parse(b)
+	p := parser.MNR{}
+	container, err := p.Parse(b)
 	if err != nil {
 		t.Errorf("MnR parser errored on parsing data: %s", err)
 		return
