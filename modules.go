@@ -1,7 +1,7 @@
 /*
  * skogul, module automation utilities
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -32,17 +32,34 @@ package skogul
 // cmd/skogul/main.go for how to extract information/help, and ultimately
 // config/parse.go for how it is applied.
 type Module struct {
-	Name    string             // short name of the module (e.g: "http")
-	Aliases []string           // optional aliases (e.g. "https")
-	Alloc   func() interface{} // allocation of a blank module structure
-	Extras  []interface{}      // Optional additional custom data structures that should be exposed in documentation.
-	Help    string             // Human-readable help description.
+	Name     string             // short name of the module (e.g: "http")
+	Aliases  []string           // optional aliases (e.g. "https")
+	Alloc    func() interface{} // allocation of a blank module structure
+	Extras   []interface{}      // Optional additional custom data structures that should be exposed in documentation.
+	Help     string             // Human-readable help description.
+	AutoMake bool               // If set, this module is auto-created with default variables if referenced by implementation name without being defined in config.
 }
 
 // ModuleMap maps a name of a module to the Module data structure. Each
 // type of module has its own module map. E.g.: receiver.Auto, sender.Auto
 // and transformer.Auto.
 type ModuleMap map[string]*Module
+
+// Lookup will return a module if the name exists AND it should be
+// autocreated. It is used during config loading to look up a module which
+// is subsequently allocated.
+//
+// FIXME: This should probably be a replaced by Make() which returns an
+// allocated module using Alloc() in the future.
+func (mm ModuleMap) Lookup(name string) *Module {
+	if mm[name] == nil {
+		return nil
+	}
+	if mm[name].AutoMake {
+		return mm[name]
+	}
+	return nil
+}
 
 // Add adds a module to a module map, ensuring basic sanity and announcing
 // it to the world, so to speak.

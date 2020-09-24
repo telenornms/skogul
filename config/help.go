@@ -1,3 +1,25 @@
+/*
+ * skogul  config module help generation
+ *
+ * Copyright (c) 2019-2020 Telenor Norge AS
+ * Author(s):
+ *  - Kristian Lyngstøl <kly@kly.no>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301  USA
+ */
 package config
 
 import (
@@ -22,6 +44,7 @@ type Help struct {
 	Doc         string
 	Fields      map[string]FieldDoc
 	CustomTypes map[string]map[string]FieldDoc
+	AutoMake    bool
 }
 
 // HelpModule looks up help for a module in the specified module map. It
@@ -33,6 +56,7 @@ func HelpModule(mmap skogul.ModuleMap, mod string) (Help, error) {
 	mh := Help{}
 	mh.Name = mod
 	mh.Doc = mmap[mod].Help
+	mh.AutoMake = mmap[mod].AutoMake
 	for _, alias := range mmap[mod].Aliases {
 		mh.Aliases = fmt.Sprintf("%s %s", alias, mh.Aliases)
 	}

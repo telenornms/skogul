@@ -1,9 +1,10 @@
 /*
  * skogul, configuration parsing
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -51,6 +52,12 @@ type Sender struct {
 	Sender skogul.Sender `json:"-"`
 }
 
+// Parser wraps the skogul.Parser for configuration parsing.
+type Parser struct {
+	Type   string
+	Parser skogul.Parser `json:"-"`
+}
+
 // Receiver wraps the skogul.Receiver for configuration parsing.
 type Receiver struct {
 	Type     string
@@ -59,7 +66,7 @@ type Receiver struct {
 
 // Handler wraps skogul.Handler for configuration parsing.
 type Handler struct {
-	Parser       string
+	Parser       skogul.ParserRef
 	Transformers []*skogul.TransformerRef
 	Sender       skogul.SenderRef
 	Handler      skogul.Handler `json:"-"`
@@ -77,24 +84,8 @@ type Config struct {
 	Handlers     map[string]*Handler
 	Receivers    map[string]*Receiver
 	Senders      map[string]*Sender
+	Parsers      map[string]*Parser
 	Transformers map[string]*Transformer
-}
-
-// MarshalJSON for a receiver marshals the actual instantiated receiver,
-// then merges it to add "type". Probably not the most efficient
-// implementation, since it does marshal-unmarshal-merge-marshal, but since
-// this isn't really performance sensitive, that's ok.
-func (r *Receiver) MarshalJSON() ([]byte, error) {
-	nest, err := json.Marshal(r.Receiver)
-	if err != nil {
-		return nil, err
-	}
-	var merged map[string]interface{}
-	if err := json.Unmarshal(nest, &merged); err != nil {
-		return nil, err
-	}
-	merged["type"] = r.Type
-	return json.Marshal(merged)
 }
 
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
@@ -128,6 +119,23 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+// MarshalJSON for a receiver marshals the actual instantiated receiver,
+// then merges it to add "type". Probably not the most efficient
+// implementation, since it does marshal-unmarshal-merge-marshal, but since
+// this isn't really performance sensitive, that's ok.
+func (r *Receiver) MarshalJSON() ([]byte, error) {
+	nest, err := json.Marshal(r.Receiver)
+	if err != nil {
+		return nil, err
+	}
+	var merged map[string]interface{}
+	if err := json.Unmarshal(nest, &merged); err != nil {
+		return nil, err
+	}
+	merged["type"] = r.Type
+	return json.Marshal(merged)
+}
+
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
 // that receiver, then unmarshals the remaining configuration onto that.
 func (r *Receiver) UnmarshalJSON(b []byte) error {
@@ -156,6 +164,50 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	var jsonConf map[string]interface{}
 	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "receiver", r.Type, reflect.ValueOf(r.Receiver).Elem().Type())
+	return nil
+}
+
+// MarshalJSON marshals Parser config. See MarshalJSON for receiver - same
+// same.
+func (p *Parser) MarshalJSON() ([]byte, error) {
+	nest, err := json.Marshal(p.Parser)
+	if err != nil {
+		return nil, err
+	}
+	var merged map[string]interface{}
+	if err := json.Unmarshal(nest, &merged); err != nil {
+		return nil, err
+	}
+	merged["type"] = p.Type
+	return json.Marshal(merged)
+}
+
+// UnmarshalJSON for Parser. See UnmarshalJSON for Receiver - same same.
+func (p *Parser) UnmarshalJSON(b []byte) error {
+	type tType struct {
+		Type string
+	}
+	var t tType
+	if err := json.Unmarshal(b, &t); err != nil {
+		return err
+	}
+	p.Type = t.Type
+	if parser.Auto[p.Type] == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown parser%v", p.Type)}
+	}
+	if parser.Auto[p.Type].Alloc == nil {
+		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad parser %v", p.Type)}
+	}
+	var ok bool
+	p.Parser, ok = (parser.Auto[p.Type].Alloc()).(skogul.Parser)
+	skogul.Assert(ok)
+	if err := json.Unmarshal(b, &p.Parser); err != nil {
+		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
+	}
+	// Find superfluous config parameters
+	var jsonConf map[string]interface{}
+	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	VerifyOnlyRequiredConfigProps(&jsonConf, "parser", p.Type, reflect.ValueOf(p.Parser).Elem().Type())
 	return nil
 }
 
@@ -264,6 +316,7 @@ func Bytes(b []byte) (*Config, error) {
 	var jsonData map[string]interface{}
 	skogul.HandlerMap = skogul.HandlerMap[0:0]
 	skogul.SenderMap = skogul.SenderMap[0:0]
+	skogul.ParserMap = skogul.ParserMap[0:0]
 	skogul.TransformerMap = skogul.TransformerMap[0:0]
 	if err := json.Unmarshal(b, &jsonData); err != nil {
 		jerr, ok := err.(*json.SyntaxError)
@@ -350,12 +403,56 @@ func resolveSenders(c *Config) error {
 		confLog.WithField("sender", s.Name).Debug("Resolving sender")
 
 		if c.Senders[s.Name] == nil {
+			m := sender.Auto.Lookup(s.Name)
+			if m != nil {
+				tmp := m.Alloc()
+				tmp2 := tmp.(skogul.Sender)
+				snew := Sender{}
+				snew.Type = s.Name
+				snew.Sender = tmp2
+				if c.Senders == nil {
+					c.Senders = make(map[string]*Sender)
+				}
+				c.Senders[s.Name] = &snew
+			}
+		}
+		if c.Senders[s.Name] == nil {
 			confLog.WithField("sender", s.Name).Error("Unresolved sender reference")
 			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
 		}
 		s.S = c.Senders[s.Name].Sender
 	}
 	skogul.SenderMap = skogul.SenderMap[0:0]
+	return nil
+}
+
+// resolveParsers iterates over the skogul.ParserMap and resolve any
+// parsers.
+func resolveParsers(c *Config) error {
+	for _, p := range skogul.ParserMap {
+		confLog.WithField("parser", p.Name).Debug("Resolving parser")
+
+		if c.Parsers[p.Name] == nil {
+			m := parser.Auto.Lookup(p.Name)
+			if m != nil {
+				tmp := m.Alloc()
+				tmp2 := tmp.(skogul.Parser)
+				pnew := Parser{}
+				pnew.Type = p.Name
+				pnew.Parser = tmp2
+				if c.Parsers == nil {
+					c.Parsers = make(map[string]*Parser)
+				}
+				c.Parsers[p.Name] = &pnew
+			}
+		}
+		if c.Parsers[p.Name] == nil {
+			confLog.WithField("parser", p.Name).Error("Unresolved parser reference")
+			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved parser reference %s", p.Name)}
+		}
+		p.P = c.Parsers[p.Name].Parser
+	}
+	skogul.ParserMap = skogul.ParserMap[0:0]
 	return nil
 }
 
@@ -371,11 +468,7 @@ func resolveHandlers(c *Config) error {
 
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
-		if p, err := resolveParser(h.Parser); err == nil {
-			h.Handler.SetParser(p)
-		} else {
-			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown parser %s", h.Parser)}
-		}
+		h.Handler.SetParser(h.Parser.P)
 
 		for _, t := range h.Transformers {
 			logger = logger.WithField("transformer", t.Name)
@@ -394,24 +487,6 @@ func resolveHandlers(c *Config) error {
 	return nil
 }
 
-// resolveParser returns a skogul parser for a given
-// parser name, or errors if the parser doesn't exist
-func resolveParser(p string) (skogul.Parser, error) {
-	switch strings.ToLower(p) {
-	case "custom-json":
-		return parser.RawJSON{}, nil
-	case "influx":
-		return parser.InfluxDB{}, nil
-	case "json", "": // Fallback to json parser if not specified
-		return parser.JSON{}, nil
-	case "mnr":
-		return parser.MNR{}, nil
-	case "protobuf":
-		return parser.ProtoBuf{}, nil
-	}
-	return nil, skogul.Error{Reason: "No valid parser found", Source: "config-parser"}
-}
-
 // resolveTransformers looks in the parsed config for transformers and initializes the
 // actual transformers. Zeroizes the TransformerMap after if case a new
 // config is applied without restarting.
@@ -420,6 +495,20 @@ func resolveTransformers(c *Config) error {
 	for transformerName, t := range skogul.TransformerMap {
 		logger = logger.WithField("transformer", transformerName)
 
+		if c.Transformers[t.Name] == nil {
+			m := transformer.Auto.Lookup(t.Name)
+			if m != nil {
+				tmp := m.Alloc()
+				tmp2 := tmp.(skogul.Transformer)
+				tnew := Transformer{}
+				tnew.Type = t.Name
+				tnew.Transformer = tmp2
+				if c.Transformers == nil {
+					c.Transformers = make(map[string]*Transformer)
+				}
+				c.Transformers[t.Name] = &tnew
+			}
+		}
 		if c.Transformers[t.Name] != nil {
 			logger.Debug("Using predefined transformer")
 		} else {
@@ -440,6 +529,9 @@ func secondPass(c *Config) (*Config, error) {
 		return nil, err
 	}
 	if err := resolveTransformers(c); err != nil {
+		return nil, err
+	}
+	if err := resolveParsers(c); err != nil {
 		return nil, err
 	}
 	if err := resolveHandlers(c); err != nil {

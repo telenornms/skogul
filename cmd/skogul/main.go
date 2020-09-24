@@ -1,9 +1,10 @@
 /*
  * skogul, using config file
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -38,6 +39,7 @@ import (
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 	"github.com/telenornms/skogul/transformer"
@@ -148,6 +150,13 @@ sender to make something sensible.
 The base configuration set is::
 
   {
+    "parsers": {
+      "xxx": {
+	"type": "type-of-parser",
+	tpye-specific-options
+      },
+      "other-parser...": ...
+    },
     "receivers": {
       "xxx": {
         "type": "type-of-receiver",
@@ -194,14 +203,16 @@ It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
 operator to avoid setting up feedback loops.
 
-Three parsers exist: the JSON parser, a Juniper Telemetry protobuf
-parser and an InfluxDB line protocol parser.
+Numerous parsers, transformers, senders and receivers exist and they are
+each documented below. Some of these can be referenced by implementation
+name without defining them in the configuration - this will create a
+"blank" variant of the module with default options. This is noted for each
+module, and is provided to avoid bloating your configuration with modules
+that don't have any required options (e.g.: the debug sender or the
+templater transformer, or most parsers).
 
-Three transformers exists, and to simplify configuration, the "templater"
-transformer does not have to be explicitly defined to be referenced.
-
-The documentation for each sender and receiver also lists all options. In
-general, you do not need to specify all options.
+The documentation for each module also lists all options. In general, you
+do not need to specify all options.
 
 CONFIGURATION DATA TYPES
 ========================
@@ -218,6 +229,9 @@ HandlerRef
 
 SenderRef
 	A text string referencing a named sender, specified in "senders".
+
+ParserRef
+	A text string referencing a named parser, specified in "parsers".
 
 []string
 	An array of text strings. E.g. ["foo","bar"].
@@ -261,6 +275,17 @@ created behind the scenes. The available transformers are:
 
 `)
 	helpModules(transformer.Auto)
+	fmt.Print(`
+
+PARSERS
+=======
+
+Parsers are responsible for parsing the data after it has been received by
+a receiver. The reference-parser for Skogul is the JSON parser, but skogul
+supports a number of other parsers as well.
+
+`)
+	helpModules(parser.Auto)
 	fmt.Print(`
 HANDLERS
 ========
@@ -518,15 +543,94 @@ output::
       "myhandler": {
         "parser": "json", 
         "transformers": ["templater"], 
-        "sender": "mysender"
-      }
-    },
-    "senders": {
-      "mysender": {
-        "type": "debug"
+        "sender": "debug"
       }
     }
   }
+
+Note that parser, transformers and senders used here can be used without
+being explicitly configured. This is only true for very simple modules and is
+noted in each module's documentation section.
+
+The same example can be written more verbosly::
+
+  { 
+    "receivers": { 
+      "api": { 
+        "type": "http", 
+        "address": ":8080", 
+        "handlers": { "/": "myhandler" }
+      }
+    },
+    "handlers": {
+      "myhandler": {
+        "parser": "json", 
+        "transformers": ["templater"], 
+        "sender": "debug"
+      }
+    },
+    "parsers": {
+      "json": {
+        "type": "json"
+      }
+    },
+    "transformers": {
+      "templater": {
+	"type": "templater"
+      }
+    },
+    "senders": {
+      "debug": {
+	"type": "debug",
+	"prefix": "foobar"
+      }
+    }
+  }
+
+This is the exact same as the first example, with one minor exception: We
+give the "debug" sender an optional prefix.
+
+You can have multiple variants of the same modules with different options,
+which obviously requires you to configure each with unique names::
+
+  { 
+    "receivers": { 
+      "api": { 
+        "type": "http", 
+        "address": ":8080", 
+        "handlers": { 
+		"/": "silent",
+		"/noise": "noisy" 
+	}
+      }
+    },
+    "handlers": {
+      "silent": {
+        "parser": "json", 
+        "transformers": ["templater"], 
+        "sender": "debug-clean"
+      },
+      "noisy": {
+        "parser": "json", 
+        "transformers": ["templater"], 
+        "sender": "debug-noisy"
+      }
+    },
+    "senders": {
+      "debug-clean": {
+	"type": "debug",
+      },
+      "debug-noisy": {
+	"type": "debug",
+	"prefix": "noise"
+      }
+    }
+  }
+
+The above sets up a HTTP receiver on port 8080 that will use the "silent"
+handler for data sent to  /, which in turn will use the "debug-clean"
+sender without a prefix, while data sent to /noise will use the "noisy"
+handler and "debug-noisy" sender with a prefixed message of "noise".
 
 The following specifies an insecure HTTP-based receiver that will wait up
 to 5 seconds or 1000 metrics before writing data to InfluxDB::
@@ -619,8 +723,8 @@ https://github.com/telenornms/skogul
 BUGS
 ====
 
-Configuration parsing doesn't provide very helpful errors, and silently
-ignores keys/variables that are not used in a specific context.
+While Skogul tries to provide sensible feedback on cofiguration errors, it
+CAN be complicated.
 
 Workaround: Use the "-show" option to display the parsed configuration.
 
@@ -628,9 +732,9 @@ COPYRIGHT
 =========
 
 This document is licensed under the same license as Skogul itself, which
-happens to be GPLv2 (or later). See LICENSE for details.
+happens to be LGPLv2 (or later). See LICENSE for details.
 
-* Copyright (c) 2019 - Telenor Norge AS
+* Copyright (c) 2019-2020 - Telenor Norge AS
 
 `)
 
@@ -687,6 +791,9 @@ func thingMan(thing config.Help) {
 	fmt.Printf("%s\n\n", thing.Doc)
 	if thing.Aliases != "" {
 		fmt.Printf("Aliases: %s\n\n", thing.Aliases)
+	}
+	if thing.AutoMake {
+		fmt.Printf("This module does not have to be explicitly defined in your configuration file. If you refer to it by one of it's implementation names, a default-variant of it will be used.\n\n")
 	}
 	fieldDoc(thing.Fields)
 	if len(thing.CustomTypes) > 0 {

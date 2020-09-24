@@ -1,7 +1,7 @@
 /*
  * skogul, marshaling functions
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -45,6 +45,9 @@ var HandlerMap []*HandlerRef
 // TransformerMap keeps track of the named transformers.
 var TransformerMap []*TransformerRef
 
+// ParserMap keeps track of the named parsers.
+var ParserMap []*ParserRef
+
 /*
 UnmarshalJSON will unmarshal a sender reference by creating a
 SenderRef object and putting it on the SenderMap list. The
@@ -67,16 +70,6 @@ func (sr *SenderRef) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
 }
 
-// MarshalJSON just returns the Name of the handler reference.
-func (hr *HandlerRef) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf("\"%s\"", hr.Name)), nil
-}
-
-// MarshalJSON just returns the Name of the transformer reference.
-func (tr *TransformerRef) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf("\"%s\"", tr.Name)), nil
-}
-
 // UnmarshalJSON will create an entry on the HandlerMap for the parsed
 // handler reference, so the real handler can be substituted later.
 func (hr *HandlerRef) UnmarshalJSON(b []byte) error {
@@ -90,6 +83,29 @@ func (hr *HandlerRef) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+// MarshalJSON just returns the Name of the handler reference.
+func (hr *HandlerRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", hr.Name)), nil
+}
+
+// UnmarshalJSON will create an entry on the ParserMap for the parsed
+// parser reference, so the real parser can be substituted later.
+func (pr *ParserRef) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	pr.Name = s
+	pr.P = nil
+	ParserMap = append(ParserMap, pr)
+	return nil
+}
+
+// MarshalJSON just returns the Name of the parser reference.
+func (pr *ParserRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", pr.Name)), nil
+}
+
 // UnmarshalJSON will create an entry on the TransformerMap for the parsed
 // transformer reference, so the real transformer can be substituted later.
 func (tr *TransformerRef) UnmarshalJSON(b []byte) error {
@@ -101,6 +117,11 @@ func (tr *TransformerRef) UnmarshalJSON(b []byte) error {
 	tr.T = nil
 	TransformerMap = append(TransformerMap, tr)
 	return nil
+}
+
+// MarshalJSON just returns the Name of the transformer reference.
+func (tr *TransformerRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", tr.Name)), nil
 }
 
 // MarshalJSON provides JSON marshalling for Duration
