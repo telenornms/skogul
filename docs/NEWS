@@ -1,3 +1,20 @@
+v0.9.0
+======
+
+Release date: 2020-09-25
+
+Promotes parsers to modules, making the configurable. To keep simplicity,
+parsers can be "auto-instantiated" without having to create a "parsers"
+key in the configuration file. To configure a parser, a "parsers" section
+has to be added and the appropriate configurations made.
+
+The auto-instantiation feature has been added to the debug sender and the
+template transformer as well, to reduce the amount of boilerplate required.
+
+Breaking change: Previously, not supplying a parser in a handler was allowed,
+and would default to use the json parser for skogul containers. This is no
+longer the case, and a parser always has to be defined.
+
 v0.8.1
 ======
 
