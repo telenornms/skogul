@@ -47,9 +47,9 @@ type Splunk struct {
 	once          sync.Once
 }
 
-// SplunkEvent describes the structure of a Splunk
+// splunkEvent describes the structure of a Splunk
 // HTTP Event Collector event
-type SplunkEvent struct {
+type splunkEvent struct {
 	Time  *time.Time             `json:"time,omitempty"`
 	Host  string                 `json:"host,omitempty"`
 	Index string                 `json:"index,omitempty"`
@@ -59,8 +59,8 @@ type SplunkEvent struct {
 // prepare converts a skogul container into the appropriate
 // format expceted by the Splunk HEC collector as defined here
 // https://docs.splunk.com/Documentation/Splunk/8.0.6/Data/FormateventsforHTTPEventCollector
-func (s *Splunk) prepare(c *skogul.Container) ([]SplunkEvent, error) {
-	events := make([]SplunkEvent, len(c.Metrics))
+func (s *Splunk) prepare(c *skogul.Container) ([]splunkEvent, error) {
+	events := make([]splunkEvent, len(c.Metrics))
 	for i, metric := range c.Metrics {
 		t := metric.Time
 		if metric.Time == nil {
@@ -71,7 +71,7 @@ func (s *Splunk) prepare(c *skogul.Container) ([]SplunkEvent, error) {
 		if s.HostnameField != "" && metric.Metadata != nil && metric.Metadata[s.HostnameField] != nil {
 			host = fmt.Sprintf("%v", metric.Metadata[s.HostnameField])
 		}
-		events[i] = SplunkEvent{
+		events[i] = splunkEvent{
 			Time:  t,
 			Event: metric.Data,
 			Index: s.Index,
@@ -82,9 +82,9 @@ func (s *Splunk) prepare(c *skogul.Container) ([]SplunkEvent, error) {
 }
 
 // MarshalJSON overrides the marshalling of the
-// 'Time' field on a SplunkEvent struct to provide
+// 'Time' field on a splunkEvent struct to provide
 // the 'seconds.milliseconds' value which HEC expects.
-func (e *SplunkEvent) MarshalJSON() ([]byte, error) {
+func (e *splunkEvent) MarshalJSON() ([]byte, error) {
 	t := 0.0
 	if e.Time != nil {
 		// Convert the time to the format HEC expects,
@@ -95,16 +95,16 @@ func (e *SplunkEvent) MarshalJSON() ([]byte, error) {
 		t = float64(e.Time.UnixNano()) / 1e9
 	}
 
-	// Type aliasing SplunkEvent to change the
+	// Type aliasing splunkEvent to change the
 	// marshalling of 'Time' but keeping the
 	// default marshaller for the rest.
-	type SplunkEventOutput SplunkEvent
+	type splunkEventOutput splunkEvent
 	return json.Marshal(&struct {
 		Time float64 `json:"time,omitempty"`
-		*SplunkEventOutput
+		*splunkEventOutput
 	}{
 		Time:              t,
-		SplunkEventOutput: (*SplunkEventOutput)(e),
+		splunkEventOutput: (*splunkEventOutput)(e),
 	})
 }
 
