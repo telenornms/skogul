@@ -92,7 +92,7 @@ func (e *SplunkEvent) MarshalJSON() ([]byte, error) {
 		// using UnixNano() and dividing
 		// back up to seconds, which gives us
 		// the milliseconds as decimals.
-		t = float64(e.Time.UnixNano()) / 1e6
+		t = float64(e.Time.UnixNano()) / 1e9
 	}
 
 	// Type aliasing SplunkEvent to change the
