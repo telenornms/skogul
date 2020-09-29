@@ -40,7 +40,6 @@ var splunkLog = skogul.Logger("sender", "splunk")
 type Splunk struct {
 	URL           string `doc:"URL to Splunk HTTP Event Collector (HEC)"`
 	Token         string `doc:"Token for HTTP Authorization header for HEC endpoint."`
-	Batch         bool   `doc:"Batch multiple metrics together when sending. Default: false"`
 	Index         string `doc:"Custom Splunk index to send event to."`
 	HostnameField string `doc:"Name of the metadata field with the hostname. Note, this might have to be transformed into metadata depending on the input data."`
 	HTTP          *HTTP  `doc:"HTTP sender options. URL is overwritten from this config, the rest will be HTTP sender defaults unless overridden."`
@@ -133,32 +132,17 @@ func (s *Splunk) Send(c *skogul.Container) error {
 		return err
 	}
 
-	if s.Batch {
-		var buffer bytes.Buffer
-		for _, event := range events {
-			b, err := json.Marshal(&event)
-			if err != nil {
-				return skogul.Error{Reason: "Failed to marshal JSON data to Splunk", Source: "splunk-sender", Next: err}
-			}
-			// Following the format as showed in Splunk HEC documentation here,
-			// with JSON objects on each line with an empty line in between.
-			// https://docs.splunk.com/Documentation/Splunk/8.0.6/Data/FormateventsforHTTPEventCollector#Event_data
-			buffer.Write(append(b, newLineChar, newLineChar))
+	var buffer bytes.Buffer
+	for _, event := range events {
+		b, err := json.Marshal(&event)
+		if err != nil {
+			return skogul.Error{Reason: "Failed to marshal JSON data to Splunk", Source: "splunk-sender", Next: err}
 		}
-		if err := s.HTTP.SendBytes(buffer.Bytes()); err != nil {
-			return err
-		}
-	} else {
-		for _, event := range events {
-			b, err := json.Marshal(&event)
-			if err != nil {
-				return skogul.Error{Reason: "Failed to marshal JSON data to Splunk", Source: "splunk-sender", Next: err}
-			}
-
-			if err = s.HTTP.SendBytes(b); err != nil {
-				return err
-			}
-		}
+		buffer.Write(b)
+	}
+	if err := s.HTTP.SendBytes(buffer.Bytes()); err != nil {
+		splunkLog.WithError(err).Error("HTTP SendBytes failed")
+		return err
 	}
 
 	return nil
