@@ -60,8 +60,8 @@ type SplunkEvent struct {
 // format expceted by the Splunk HEC collector as defined here
 // https://docs.splunk.com/Documentation/Splunk/8.0.6/Data/FormateventsforHTTPEventCollector
 func (s *Splunk) prepare(c *skogul.Container) ([]SplunkEvent, error) {
-	events := make([]SplunkEvent, 0)
-	for _, metric := range c.Metrics {
+	events := make([]SplunkEvent, len(c.Metrics))
+	for i, metric := range c.Metrics {
 		t := metric.Time
 		if metric.Time == nil {
 			t = c.Template.Time
@@ -71,12 +71,12 @@ func (s *Splunk) prepare(c *skogul.Container) ([]SplunkEvent, error) {
 		if s.HostnameField != "" && metric.Metadata != nil && metric.Metadata[s.HostnameField] != nil {
 			host = fmt.Sprintf("%v", metric.Metadata[s.HostnameField])
 		}
-		events = append(events, SplunkEvent{
+		events[i] = SplunkEvent{
 			Time:  t,
 			Event: metric.Data,
 			Index: s.Index,
 			Host:  host,
-		})
+		}
 	}
 	return events, nil
 }
