@@ -55,3 +55,21 @@ func TestHttpSenderKeepContentHeader(t *testing.T) {
 		t.Errorf("Content-Type value was '%s' when we expected '%s'", ht.Headers[http.CanonicalHeaderKey("content-type")], textPlain)
 	}
 }
+
+func TestHttpSenderKeepContentTypeHeaderEvenInNonCanonicalizedForm(t *testing.T) {
+	textPlain := "text/plain"
+
+	headers := make(map[string]string)
+	headers["content-type"] = textPlain
+	ht := HTTP{
+		Headers: headers,
+	}
+	ht.init()
+
+	if ht.Headers[http.CanonicalHeaderKey("content-type")] == "" {
+		t.Errorf("Missing value in Content-Type header when setting the header value")
+	}
+	if ht.Headers[http.CanonicalHeaderKey("content-type")] != textPlain {
+		t.Errorf("Content-Type value was '%s' when we expected '%s'", ht.Headers[http.CanonicalHeaderKey("content-type")], textPlain)
+	}
+}

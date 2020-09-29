@@ -121,17 +121,20 @@ func (ht *HTTP) init() {
 	if ht.Headers == nil {
 		ht.Headers = make(map[string]string)
 	}
-	hasContentTypeHeader := false
-	for header, _ := range ht.Headers {
+	contentTypeHeaderKey := ""
+	contentTypeHeaderVal := "application/json"
+	for header, val := range ht.Headers {
 		if http.CanonicalHeaderKey(header) == http.CanonicalHeaderKey("content-type") {
-			hasContentTypeHeader = true
+			contentTypeHeaderKey = header
+			contentTypeHeaderVal = val
 			break
 		}
 	}
-	// Use application/json as content-type by default.
-	if !hasContentTypeHeader {
-		ht.Headers[http.CanonicalHeaderKey("content-type")] = "application/json"
+	if contentTypeHeaderKey != http.CanonicalHeaderKey(contentTypeHeaderKey) {
+		// Enforce setting the header in the canonicalized way
+		delete(ht.Headers, contentTypeHeaderKey)
 	}
+	ht.Headers[http.CanonicalHeaderKey("content-type")] = contentTypeHeaderVal
 
 	tran := http.Transport{
 		TLSClientConfig: &tls.Config{
