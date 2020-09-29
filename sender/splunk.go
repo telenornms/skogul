@@ -140,7 +140,7 @@ func (s *Splunk) Send(c *skogul.Container) error {
 		}
 		buffer.Write(b)
 	}
-	if err := s.HTTP.SendBytes(buffer.Bytes()); err != nil {
+	if err := s.HTTP.sendBytes(buffer.Bytes()); err != nil {
 		splunkLog.WithError(err).Error("HTTP SendBytes failed")
 		return err
 	}

@@ -145,12 +145,12 @@ func (ht *HTTP) init() {
 	ht.ok = true
 }
 
-// SendBytes uses a configured HTTP client to
+// sendBytes uses a configured HTTP client to
 // send a request.
 // This makes it possible for other senders to
 // reuse the HTTP sender options without having
 // to re-implement them.
-func (ht *HTTP) SendBytes(b []byte) error {
+func (ht *HTTP) sendBytes(b []byte) error {
 	if !ht.ok {
 		return skogul.Error{Reason: "HTTP sender not in OK state", Source: "http-sender"}
 	}
@@ -228,7 +228,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		httpLog.WithError(e).Error("Configuring HTTP sender failed")
 		return e
 	}
-	err = ht.SendBytes(b)
+	err = ht.sendBytes(b)
 	if err != nil {
 		return err
 	}
