@@ -101,7 +101,7 @@ func (ht *HTTP) init() {
 		ht.Timeout.Duration = 20 * time.Second
 	}
 	if ht.Insecure {
-		httpLog.Print("Warning: Disabeling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+		httpLog.Warning("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
 	}
 	iconsph := ht.IdleConnsPerHost
 
@@ -111,7 +111,7 @@ func (ht *HTTP) init() {
 
 	cp, err := getCertPool(ht.RootCA)
 	if err != nil {
-		httpLog.Print("Failed to initialize root CA pool")
+		httpLog.WithError(err).Error("Failed to initialize root CA pool")
 		return
 	}
 
