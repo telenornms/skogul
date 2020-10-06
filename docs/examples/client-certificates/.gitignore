@@ -1,0 +1,5 @@
+./certsdb
+./private
+index.txt*
+serial*
+*.pem
