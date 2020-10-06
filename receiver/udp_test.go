@@ -41,6 +41,8 @@ var uConfig *config.Config
 var pFile []byte
 var u1 *net.UDPConn
 var u2 *net.UDPConn
+var u3 *net.UDPConn
+var u4 *net.UDPConn
 var pJSON = []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
 
 func readProtobufFile(file string) []byte {
@@ -70,6 +72,12 @@ func init() {
 	"senders": {
 		"common": {
 			"type": "test"
+		},
+		"sleep": {
+			"type": "sleep",
+			"next": "common",
+			"maxdelay": "3ms",
+			"base": "0.1ms"
 		}
 	},
 	"receivers": {
@@ -81,7 +89,20 @@ func init() {
 		"udp2": {
 			"type": "udp",
 			"address": "localhost:1959",
-			"handler": "json"
+			"handler": "json-sleep",
+			"Threads": 1
+		},
+		"udp3": {
+			"type": "udp",
+			"address": "localhost:1969",
+			"handler": "json-sleep",
+			"Threads": 10
+		},
+		"udp4": {
+			"type": "udp",
+			"address": "localhost:1979",
+			"handler": "json-sleep",
+			"Threads": 100
 		}
 	},
 	"handlers": {
@@ -90,10 +111,10 @@ func init() {
 			"transformers": [],
 			"sender": "common"
 		},
-		"json": {
+		"json-sleep": {
 			"parser": "json",
 			"transformers": [],
-			"sender": "common"
+			"sender": "sleep"
 		}
 	}
 }`))
@@ -105,12 +126,24 @@ func init() {
 	pFile = readProtobufFile("../parser/testdata/protobuf-packet.bin")
 	var udpAddr1 *net.UDPAddr
 	var udpAddr2 *net.UDPAddr
+	var udpAddr3 *net.UDPAddr
+	var udpAddr4 *net.UDPAddr
 	udpAddr1, err = net.ResolveUDPAddr("udp", "localhost:1939")
 	if err != nil {
 		fmt.Printf("Failed to resolve: %v\n", err)
 		os.Exit(1)
 	}
 	udpAddr2, err = net.ResolveUDPAddr("udp", "localhost:1959")
+	if err != nil {
+		fmt.Printf("Failed to resolve: %v\n", err)
+		os.Exit(1)
+	}
+	udpAddr3, err = net.ResolveUDPAddr("udp", "localhost:1969")
+	if err != nil {
+		fmt.Printf("Failed to resolve: %v\n", err)
+		os.Exit(1)
+	}
+	udpAddr4, err = net.ResolveUDPAddr("udp", "localhost:1979")
 	if err != nil {
 		fmt.Printf("Failed to resolve: %v\n", err)
 		os.Exit(1)
@@ -127,11 +160,27 @@ func init() {
 		os.Exit(1)
 	}
 	u2.SetWriteBuffer(9000)
+	u3, err = net.DialUDP("udp", nil, udpAddr3)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
+	u3.SetWriteBuffer(9000)
+	u4, err = net.DialUDP("udp", nil, udpAddr4)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
+	u4.SetWriteBuffer(9000)
 
 	rUDP1 := uConfig.Receivers["udp1"].Receiver.(*receiver.UDP)
 	rUDP2 := uConfig.Receivers["udp2"].Receiver.(*receiver.UDP)
+	rUDP3 := uConfig.Receivers["udp3"].Receiver.(*receiver.UDP)
+	rUDP4 := uConfig.Receivers["udp4"].Receiver.(*receiver.UDP)
 	go rUDP1.Start()
 	go rUDP2.Start()
+	go rUDP3.Start()
+	go rUDP4.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
 }
 
@@ -143,10 +192,15 @@ func sendUDP(u *net.UDPConn, b []byte) {
 }
 
 type dummySender struct{}
-type dummyJSONSender struct{}
+type dummyJSONSender struct {
+	sock       *net.UDPConn
+	iterations int
+}
 
 func (d *dummyJSONSender) Send(c *skogul.Container) error {
-	sendUDP(u2, pJSON)
+	for i := 0; i < d.iterations; i++ {
+		sendUDP(d.sock, pJSON)
+	}
 	return nil
 }
 
@@ -159,7 +213,7 @@ func TestUDP(t *testing.T) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
 
 	ds1 := &dummySender{}
-	ds2 := &dummyJSONSender{}
+	ds2 := &dummyJSONSender{u2, 1}
 	sCommon.SetSync(true)
 	sCommon.TestSync(t, ds1, &validContainer, 1, 1)
 	sCommon.TestSync(t, ds2, &validContainer, 1, 1)
@@ -174,11 +228,29 @@ func BenchmarkUDP_protobuf(b *testing.B) {
 	}
 }
 
-func BenchmarkUDP_json(b *testing.B) {
+func BenchmarkUDP_json_Threads1(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
-	ds := &dummyJSONSender{}
+	ds := &dummyJSONSender{u2, 20}
 	sCommon.SetSync(true)
 	for i := 0; i < b.N; i++ {
-		sCommon.TestSync(b, ds, &validContainer, 10, 10)
+		sCommon.TestSync(b, ds, &validContainer, 5, 100)
+	}
+}
+
+func BenchmarkUDP_json_Threads10(b *testing.B) {
+	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
+	ds := &dummyJSONSender{u3, 20}
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, ds, &validContainer, 5, 100)
+	}
+}
+
+func BenchmarkUDP_json_Threads100(b *testing.B) {
+	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
+	ds := &dummyJSONSender{u4, 20}
+	sCommon.SetSync(true)
+	for i := 0; i < b.N; i++ {
+		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}
 }

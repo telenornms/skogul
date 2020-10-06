@@ -25,6 +25,7 @@ package receiver
 
 import (
 	"net"
+	"runtime"
 
 	"github.com/telenornms/skogul"
 )
@@ -35,10 +36,41 @@ var udpLog = skogul.Logger("receiver", "udp")
 type UDP struct {
 	Address string            `doc:"Address and port to listen to." example:"[::1]:3306"`
 	Handler skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Backlog int               `doc:"Number of queued messages that are not delievered before the receiver starts blocking. Defaults to 100. Even when this is full, the kernel will still buffer data on top of this value. Higher values give smoother performance, but slightly more memory usage. Actual memory usage is a factor of average message size * backlog-fill."`
+	Threads int               `doc:"Number of worker go routines to use, which loosely translates to parallell execution. Defaults to number of CPU threads, with a minimum of 20. There is no correct number, but the value depends on how fast your senders are."`
+	ch      chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
 }
 
-// Start starts listening for incoming UDP messages on the configured address
+// process is the worker-thread responsible for handling individual
+// messages.
+func (ud *UDP) process() {
+	for {
+		bytes := <-ud.ch
+		if err := ud.Handler.H.Handle(bytes); err != nil {
+			udpLog.WithError(err).Error("Unable to handle UDP message")
+		}
+	}
+}
+
+// Start boots up ud.Threads number of worker threads, then starts
+// listening for incoming UDP messages on the configured address. Start
+// never returns.
 func (ud *UDP) Start() error {
+	if ud.Backlog == 0 {
+		ud.Backlog = 100
+	}
+	if ud.Threads == 0 {
+		ud.Threads = runtime.NumCPU()
+		if ud.Threads < 20 {
+			ud.Threads = 20
+		}
+	}
+	udpLog.Tracef("Got backlog size of %d and number of threads %d", ud.Backlog, ud.Threads)
+	ud.ch = make(chan []byte, ud.Backlog)
+	for i := 0; i < ud.Threads; i++ {
+		go ud.process()
+	}
+
 	udpip, err := net.ResolveUDPAddr("udp", ud.Address)
 	if err != nil {
 		udpLog.WithError(err).WithField("address", ud.Address).Error("Can't resolve address")
@@ -56,10 +88,6 @@ func (ud *UDP) Start() error {
 			udpLog.WithError(err).WithField("bytes", n).Error("Unable to read UDP message")
 			continue
 		}
-		go func() {
-			if err := ud.Handler.H.Handle(bytes[0:n]); err != nil {
-				udpLog.WithError(err).Error("Unable to handle UDP message")
-			}
-		}()
+		ud.ch <- bytes[0:n]
 	}
 }
