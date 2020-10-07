@@ -1,0 +1,46 @@
+{
+  "NOTE1": "This configuration is expected to be run from the skogul root directory",
+  "NOTE2": "as when fetched from source. If this is not the case, change the file paths for",
+  "NOTE3": "'AcceptableCAs', 'RootCA', 'certfile's and 'keyfile's",
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 1,
+      "values": 1,
+      "threads": 1,
+      "delay": "1s"
+    },
+    "https": {
+      "type": "http",
+      "address": "localhost:8084",
+      "handlers": {
+        "/": "debug"
+      },
+      "acceptableCAs": ["./docs/examples/client-certificates/ca_cert.pem"],
+      "certfile": "./docs/examples/client-certificates/server_cert.pem",
+      "keyfile": "./docs/examples/client-certificates/private/server_key.pem"
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "http"
+    },
+    "debug": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "debug"
+    }
+  },
+  "senders": {
+    "http": {
+      "type": "http",
+      "URL": "https://localhost:8084/",
+      "certfile": "./docs/examples/client-certificates/alice_cert.pem",
+      "keyfile": "./docs/examples/client-certificates/private/alice_key.pem",
+      "rootca": "./docs/examples/client-certificates/ca_cert.pem"
+    }
+  }
+}

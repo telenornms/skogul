@@ -25,9 +25,12 @@
 package receiver
 
 import (
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 
 	log "github.com/sirupsen/logrus"
@@ -48,11 +51,12 @@ least one handler to be set up, using Handle. This is done implicitly
 if the HTTP receiver is created using New()
 */
 type HTTP struct {
-	Address  string                        `doc:"Address to listen to." example:"[::1]:80 [2001:db8::1]:443"`
-	Handlers map[string]*skogul.HandlerRef `doc:"Paths to handlers. Need at least one." example:"{\"/\": \"someHandler\" }"`
-	Auth     map[string]*HTTPAuth          `doc:"A map corresponding to Handlers; specifying authentication for the given path, if required."`
-	Certfile string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
-	Keyfile  string                        `doc:"Path to key file for TLS."`
+	Address       string                        `doc:"Address to listen to." example:"[::1]:80 [2001:db8::1]:443"`
+	Handlers      map[string]*skogul.HandlerRef `doc:"Paths to handlers. Need at least one." example:"{\"/\": \"someHandler\" }"`
+	Auth          map[string]*HTTPAuth          `doc:"A map corresponding to Handlers; specifying authentication for the given path, if required."`
+	Certfile      string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
+	Keyfile       string                        `doc:"Path to key file for TLS."`
+	AcceptableCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -134,6 +138,22 @@ func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	rcvr.answer(w, r, code, err)
 }
 
+// loadClientCertificateCAs loads a given list of strings as paths of
+// acceptable CAs for use in Client Certificate authentication.
+func loadClientCertificateCAs(paths []string) (*x509.CertPool, error) {
+	httpLog.Debugf("Loading %d Client Certificate(s) from file(s)", len(paths))
+	pool := x509.NewCertPool()
+	for _, path := range paths {
+		if data, err := ioutil.ReadFile(path); err != nil {
+			httpLog.WithError(err).WithField("path", path).Error("Failed to read certificate file")
+			return nil, err
+		} else {
+			pool.AppendCertsFromPEM(data)
+		}
+	}
+	return pool, nil
+}
+
 // Start never returns.
 func (htt *HTTP) Start() error {
 	server := http.Server{}
@@ -147,6 +167,19 @@ func (htt *HTTP) Start() error {
 		}).Debug("Adding handler")
 
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt, auth: htt.Auth[idx]})
+	}
+
+	if len(htt.AcceptableCAs) > 0 {
+		pool, err := loadClientCertificateCAs(htt.AcceptableCAs)
+		if err != nil {
+			httpLog.WithError(err).Error("Failed to load Client Certificates")
+			return err
+		}
+		server.TLSConfig = &tls.Config{
+			ClientCAs:  pool,
+			ClientAuth: tls.RequireAndVerifyClientCert,
+		}
+		httpLog.Info("Configured HTTP receiver with Client Certificate authentication")
 	}
 
 	server.Addr = htt.Address
@@ -173,6 +206,9 @@ func (htt *HTTP) Verify() error {
 
 	if htt.Certfile == "" && htt.Auth != nil {
 		httpLog.Warn("HTTP receiver configured with authentication but not with TLS! Auth will happen in the open!")
+	}
+	if _, err := loadClientCertificateCAs(htt.AcceptableCAs); err != nil {
+		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
 	}
 
 	return nil
