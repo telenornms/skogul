@@ -31,6 +31,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
@@ -56,6 +57,7 @@ type HTTP struct {
 	Certfile             string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
 	Keyfile              string                        `doc:"Path to key file for TLS."`
 	ClientCertificateCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
+	SANDNSName    string                        `doc:"DNS name which has to be present in SAN extension of x509 certificate when using Client Certificate authentication"`
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -179,6 +181,10 @@ func (htt *HTTP) Start() error {
 			ClientAuth: tls.RequireAndVerifyClientCert,
 		}
 		httpLog.Info("Configured HTTP receiver with Client Certificate authentication")
+		if htt.SANDNSName != "" {
+			server.TLSConfig.VerifyPeerCertificate = htt.verifyPeerCertificate
+			httpLog.Info("Configured HTTP receiver with Client Certificate verification")
+		}
 	}
 
 	server.Addr = htt.Address
@@ -190,6 +196,43 @@ func (htt *HTTP) Start() error {
 		httpLog.Fatal(server.ListenAndServe())
 	}
 	return skogul.Error{Reason: "Shouldn't reach this"}
+}
+
+// verifyPeerCertificate verifies a client certificate presented to us
+// during TLS handshake by comparing its extensions (such as SAN) to
+// some expected value(s)
+func (htt *HTTP) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509.Certificate) error {
+	certLogger := httpLog
+	certLogger.Tracef("Verifying %d certificate chains", len(verifiedChains))
+	for _, chain := range verifiedChains {
+		if len(chain) < 1 {
+			// Chain has no certificates (?)
+			continue
+		}
+		cert := chain[0]
+		certLogger := certLogger.WithFields(log.Fields{
+			"issuer":           cert.Issuer,
+			"subject":          cert.Subject,
+			"num_dns_names":    len(cert.DNSNames),
+			"num_emails":       len(cert.EmailAddresses),
+			"num_ip_addresses": len(cert.IPAddresses),
+			"num_uris":         len(cert.URIs),
+			"num_x509_ext":     len(cert.Extensions),
+		})
+		certLogger.Trace("Verifying certificate")
+		for _, dnsName := range cert.DNSNames {
+			if strings.ToLower(dnsName) == strings.ToLower(htt.SANDNSName) {
+				// If we find a matching DNS name in the SANs, we return non-error
+				// which specifies that we're done verifying with access granted.
+				return nil
+			}
+		}
+	}
+	// If no checks until now have returned a non-error,
+	// we return an error to tell the verifying function that this certificate
+	// is not verified, and access is denied.
+	// This will present the user with a 'bad certificate' alert.
+	return skogul.Error{Reason: "Failed to verify x509 SAN DNS Name", Source: "http-receiver"}
 }
 
 // Verify verifies the configuration for the HTTP receiver
@@ -206,11 +249,15 @@ func (htt *HTTP) Verify() error {
 	if htt.Certfile == "" && htt.Auth != nil {
 		httpLog.Warn("HTTP receiver configured with authentication but not with TLS! Auth will happen in the open!")
 	}
-	if _, err := loadClientCertificateCAs(htt.ClientCertificateCAs); err != nil {
-		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
-	}
 	if (htt.Certfile != "" && htt.Keyfile == "") || (htt.Certfile == "" && htt.Keyfile != "") {
 		return skogul.Error{Source: "http-receiver", Reason: "Specify both Certfile and Keyfile if either is specified."}
+	}
+	cas, err := loadClientCertificateCAs(htt.ClientCertificateCAs)
+	if err != nil {
+		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
+	}
+	if cas == nil && htt.SANDNSName != "" {
+		return skogul.Error{Source: "http-receiver", Reason: "No acceptable Client Certificate CAs defined, but DNS Name for SAN specified. Specify AcceptableCAs configuration element."}
 	}
 
 	return nil
