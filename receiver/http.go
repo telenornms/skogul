@@ -51,12 +51,12 @@ least one handler to be set up, using Handle. This is done implicitly
 if the HTTP receiver is created using New()
 */
 type HTTP struct {
-	Address       string                        `doc:"Address to listen to." example:"[::1]:80 [2001:db8::1]:443"`
-	Handlers      map[string]*skogul.HandlerRef `doc:"Paths to handlers. Need at least one." example:"{\"/\": \"someHandler\" }"`
-	Auth          map[string]*HTTPAuth          `doc:"A map corresponding to Handlers; specifying authentication for the given path, if required."`
-	Certfile      string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
-	Keyfile       string                        `doc:"Path to key file for TLS."`
-	AcceptableCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
+	Address              string                        `doc:"Address to listen to." example:"[::1]:80 [2001:db8::1]:443"`
+	Handlers             map[string]*skogul.HandlerRef `doc:"Paths to handlers. Need at least one." example:"{\"/\": \"someHandler\" }"`
+	Auth                 map[string]*HTTPAuth          `doc:"A map corresponding to Handlers; specifying authentication for the given path, if required."`
+	Certfile             string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
+	Keyfile              string                        `doc:"Path to key file for TLS."`
+	ClientCertificateCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -169,8 +169,8 @@ func (htt *HTTP) Start() error {
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt, auth: htt.Auth[idx]})
 	}
 
-	if len(htt.AcceptableCAs) > 0 {
-		pool, err := loadClientCertificateCAs(htt.AcceptableCAs)
+	if len(htt.ClientCertificateCAs) > 0 {
+		pool, err := loadClientCertificateCAs(htt.ClientCertificateCAs)
 		if err != nil {
 			httpLog.WithError(err).Error("Failed to load Client Certificates")
 			return err
@@ -207,7 +207,7 @@ func (htt *HTTP) Verify() error {
 	if htt.Certfile == "" && htt.Auth != nil {
 		httpLog.Warn("HTTP receiver configured with authentication but not with TLS! Auth will happen in the open!")
 	}
-	if _, err := loadClientCertificateCAs(htt.AcceptableCAs); err != nil {
+	if _, err := loadClientCertificateCAs(htt.ClientCertificateCAs); err != nil {
 		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
 	}
 
