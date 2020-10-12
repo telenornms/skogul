@@ -67,4 +67,11 @@ func init() {
 		Help:     "Parse M&R internal data",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "structured_data",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &StructuredData{} },
+		Help:     "Parse structured data as specified in RFC5424",
+		AutoMake: true,
+	})
 }
