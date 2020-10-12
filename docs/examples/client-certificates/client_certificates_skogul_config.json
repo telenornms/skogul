@@ -17,7 +17,7 @@
       "handlers": {
         "/": "debug"
       },
-      "acceptableCAs": ["./docs/examples/client-certificates/ca_cert.pem"],
+      "ClientCertificateCAs": ["./docs/examples/client-certificates/ca_cert.pem"],
       "certfile": "./docs/examples/client-certificates/server_cert.pem",
       "keyfile": "./docs/examples/client-certificates/private/server_key.pem"
     }
