@@ -169,6 +169,9 @@ func (s *Splunk) Verify() error {
 		if !strings.Contains(err.Error(), "no URL specified") {
 			return skogul.Error{Reason: "Failed to verify HTTP sender for Splunk", Source: "splunk-sender", Next: err}
 		}
+		if s.HTTP.URL != "" && s.URL != "" && s.HTTP.URL != s.URL {
+			return skogul.Error{Reason: "Splunk URL defined in both HTTP.URL and URL fields with different values. Only specify it once.", Source: "splunk-sender"}
+		}
 	}
 	return nil
 }
