@@ -225,5 +225,8 @@ func (ht *HTTP) Verify() error {
 	if err != nil {
 		return skogul.Error{Source: "http sender", Reason: fmt.Sprintf("failed to read custom root CA (RootCA: %s)", ht.RootCA), Next: err}
 	}
+	if (ht.Certfile != "" && ht.Keyfile == "") || (ht.Certfile == "" && ht.Keyfile != "") {
+		return skogul.Error{Source: "http sender", Reason: "Specify both Certfile and Keyfile if either is specified."}
+	}
 	return nil
 }

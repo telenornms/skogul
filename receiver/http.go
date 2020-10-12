@@ -209,6 +209,9 @@ func (htt *HTTP) Verify() error {
 	if _, err := loadClientCertificateCAs(htt.ClientCertificateCAs); err != nil {
 		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
 	}
+	if (htt.Certfile != "" && htt.Keyfile == "") || (htt.Certfile == "" && htt.Keyfile != "") {
+		return skogul.Error{Source: "http-receiver", Reason: "Specify both Certfile and Keyfile if either is specified."}
+	}
 
 	return nil
 }
