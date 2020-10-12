@@ -41,8 +41,11 @@ var httpLog = skogul.Logger("receiver", "http")
 
 // HTTPAuth contains ways to authenticate a HTTP request, e.g. Username/Password for Basic Auth.
 type HTTPAuth struct {
-	Username string `doc:"Username for basic authentication. No authentication is required if left blank."`
-	Password string `doc:"Password for basic authentication."`
+	Username              string `doc:"Username for basic authentication. No authentication is required if left blank."`
+	Password              string `doc:"Password for basic authentication."`
+	SANDNSName            string `doc:"DNS name which has to be present in SAN extension of x509 certificate when using Client Certificate authentication"`
+	SkipCertificateVerify bool   `doc:"Skip verifying certificate. (default: false)"`
+	path                  string
 }
 
 /*
@@ -57,7 +60,6 @@ type HTTP struct {
 	Certfile             string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
 	Keyfile              string                        `doc:"Path to key file for TLS."`
 	ClientCertificateCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
-	SANDNSName    string                        `doc:"DNS name which has to be present in SAN extension of x509 certificate when using Client Certificate authentication"`
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -83,6 +85,15 @@ func (auth *HTTPAuth) auth(r *http.Request) error {
 		}
 
 		return nil
+	}
+
+	if auth.SANDNSName != "" {
+		httpLog.Trace("Verifying request using client certificates")
+		if err := auth.verifyPeerCertificate(nil, r.TLS.VerifiedChains); err != nil {
+			return err
+		} else {
+			return nil
+		}
 	}
 
 	return skogul.Error{Source: "http receiver", Reason: "No matching authentication method"}
@@ -178,12 +189,14 @@ func (htt *HTTP) Start() error {
 		}
 		server.TLSConfig = &tls.Config{
 			ClientCAs:  pool,
-			ClientAuth: tls.RequireAndVerifyClientCert,
+			ClientAuth: tls.VerifyClientCertIfGiven,
 		}
 		httpLog.Info("Configured HTTP receiver with Client Certificate authentication")
-		if htt.SANDNSName != "" {
-			server.TLSConfig.VerifyPeerCertificate = htt.verifyPeerCertificate
-			httpLog.Info("Configured HTTP receiver with Client Certificate verification")
+		for _, auth := range htt.Auth {
+			if auth.SANDNSName != "" {
+				httpLog.Info("Configured HTTP receiver with Client Certificate verification")
+				break
+			}
 		}
 	}
 
@@ -201,7 +214,12 @@ func (htt *HTTP) Start() error {
 // verifyPeerCertificate verifies a client certificate presented to us
 // during TLS handshake by comparing its extensions (such as SAN) to
 // some expected value(s)
-func (htt *HTTP) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509.Certificate) error {
+func (auth *HTTPAuth) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509.Certificate) error {
+	if auth.SkipCertificateVerify || auth.SANDNSName == "" {
+		httpLog.WithFields(log.Fields{"skip": auth.SkipCertificateVerify, "dns_name": auth.SANDNSName}).Trace("Skipping verifying certificate")
+		return nil
+	}
+
 	certLogger := httpLog
 	certLogger.Tracef("Verifying %d certificate chains", len(verifiedChains))
 	for _, chain := range verifiedChains {
@@ -210,7 +228,7 @@ func (htt *HTTP) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509.Cert
 			continue
 		}
 		cert := chain[0]
-		certLogger := certLogger.WithFields(log.Fields{
+		certDebugLogger := certLogger.WithFields(log.Fields{
 			"issuer":           cert.Issuer,
 			"subject":          cert.Subject,
 			"num_dns_names":    len(cert.DNSNames),
@@ -219,9 +237,9 @@ func (htt *HTTP) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509.Cert
 			"num_uris":         len(cert.URIs),
 			"num_x509_ext":     len(cert.Extensions),
 		})
-		certLogger.Trace("Verifying certificate")
+		certDebugLogger.Trace("Verifying certificate")
 		for _, dnsName := range cert.DNSNames {
-			if strings.ToLower(dnsName) == strings.ToLower(htt.SANDNSName) {
+			if auth.SANDNSName != "" && strings.ToLower(dnsName) == strings.ToLower(auth.SANDNSName) {
 				// If we find a matching DNS name in the SANs, we return non-error
 				// which specifies that we're done verifying with access granted.
 				return nil
@@ -256,8 +274,10 @@ func (htt *HTTP) Verify() error {
 	if err != nil {
 		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
 	}
-	if cas == nil && htt.SANDNSName != "" {
-		return skogul.Error{Source: "http-receiver", Reason: "No acceptable Client Certificate CAs defined, but DNS Name for SAN specified. Specify AcceptableCAs configuration element."}
+	for _, auth := range htt.Auth {
+		if auth.SANDNSName != "" && cas == nil {
+			return skogul.Error{Source: "http-receiver", Reason: "No Client Certificate CAs defined, but DNS Name for SAN specified. Specify ClientCertificateCAs configuration element."}
+		}
 	}
 
 	return nil
