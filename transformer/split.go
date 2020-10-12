@@ -1,7 +1,7 @@
 /*
  * skogul, split transformer
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *

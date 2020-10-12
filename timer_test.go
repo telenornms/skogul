@@ -1,7 +1,7 @@
 /*
  * skogul, timer benchmarks
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
