@@ -15,7 +15,13 @@
       "type": "http",
       "address": "localhost:8084",
       "handlers": {
-        "/": "debug"
+        "/": "debug",
+        "/open": "debug"
+      },
+      "auth": {
+        "/": {
+          "SANDNSName":  "localhost"
+        }
       },
       "ClientCertificateCAs": ["./docs/examples/client-certificates/ca_cert.pem"],
       "certfile": "./docs/examples/client-certificates/server_cert.pem",
