@@ -140,7 +140,7 @@ func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 // loadClientCertificateCAs loads a given list of strings as paths of
 // acceptable CAs for use in Client Certificate authentication.
 func loadClientCertificateCAs(paths []string) (*x509.CertPool, error) {
-	httpLog.Debugf("Loading %d Client Certificate(s) from file(s)", len(paths))
+	httpLog.Debugf("Loading Client Certificates from %d file(s)", len(paths))
 	pool := x509.NewCertPool()
 	for _, path := range paths {
 		if data, err := ioutil.ReadFile(path); err != nil {
