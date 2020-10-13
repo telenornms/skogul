@@ -1,9 +1,10 @@
 /*
  * skogul, test json parser
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
