@@ -52,7 +52,6 @@ func TestStructuredDataParseExample1(t *testing.T) {
 }
 
 func TestStructuredDataParseExample2(t *testing.T) {
-	t.Skip("skipping unfinished test")
 	b := []byte(`[exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"][examplePriority@32473 class="high"]`)
 
 	p := parser.StructuredData{}
@@ -73,11 +72,13 @@ func TestStructuredDataParseExample2(t *testing.T) {
 	expected["iut"] = "3"
 	expected["eventSource"] = "Application"
 	expected["eventID"] = "1011"
-	expected["class"] = "high"
 	for k, v := range expected {
 		if data[k] != expected[k] {
 			t.Errorf("Expected '%s' to be '%s', got '%s'", k, v, data[k])
 		}
+	}
+	if c.Metrics[1].Data["class"] != "high" {
+		t.Errorf("Expected '%s' to be '%s', got '%s'", "class", "high", c.Metrics[1].Data["class"])
 	}
 }
 

@@ -67,29 +67,27 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 		}
 
 		kvScanner := bufio.NewScanner(bytes.NewReader(line))
-		// ToDo: Support Example 2 from https://tools.ietf.org/html/rfc5424#section-6.3.5
 		kvScanner.Split(splitKeyValuePairs)
 
-		// First entry in the line is a single value, not a key/value pair
-		// Extract it, and store it.
-		ok := kvScanner.Scan()
-		if !ok {
-			sdLog.Warning("Failed to parse structured data line")
-			continue
-		}
-		structuredDataID := kvScanner.Text()
-
-		metadata := make(map[string]interface{})
-		metadata["sd-id"] = structuredDataID
-
-		data := make(map[string]interface{})
+		var metric *skogul.Metric
 		for {
 			canContinue := kvScanner.Scan()
 
 			tag := strings.Trim(kvScanner.Text(), "\u0000")
 			tagValue := strings.SplitN(tag, "=", 2)
 
-			if len(tagValue) != 2 {
+			if len(tagValue) == 1 {
+				if metric != nil {
+					metrics = append(metrics, metric)
+				}
+				metric = &skogul.Metric{
+					Time:     &timestamp,
+					Metadata: make(map[string]interface{}),
+					Data:     make(map[string]interface{}),
+				}
+				metric.Metadata["sd-id"] = tagValue[0]
+				continue
+			} else if len(tagValue) != 2 {
 				break
 			}
 
@@ -99,18 +97,16 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			// @ToDo: Support multiple paramName with different paramValue
 			// if the value already exists, replace it with an array ?
 
-			data[paramName] = paramValue
+			metric.Data[paramName] = paramValue
 			sdLog.WithField("tag", paramName).WithField("val", paramValue).Debug("Got :)")
 
 			if !canContinue {
 				break
 			}
 		}
-		metrics = append(metrics, &skogul.Metric{
-			Time:     &timestamp,
-			Data:     data,
-			Metadata: metadata,
-		})
+		if metric != nil {
+			metrics = append(metrics, metric)
+		}
 	}
 	if len(metrics) == 0 {
 		sdLog.WithField("lines", len(lines)).Warnf("RFC5424/Structured Data parser failed to parse any of the %d lines", len(lines))
@@ -127,9 +123,9 @@ func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err
 
 	returnChars := len(newData)
 
-	if returnChars == len(data) {
+	if atEOF || returnChars == len(data) {
 		// EOF, return with what we have left
-		return returnChars, newData[:returnChars], nil
+		return returnChars + 1, newData[:returnChars], nil
 	}
 
 	// Skip the trailing comma between each key=value pair, but still advance counter
