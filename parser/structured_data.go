@@ -77,6 +77,9 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			tagValue := strings.SplitN(tag, "=", 2)
 
 			if len(tagValue) == 1 {
+				if strings.TrimSpace(tagValue[0]) == "" {
+					return nil, skogul.Error{Reason: "Got invalid data in the middle of a structured data line", Source: "structured_data-parser"}
+				}
 				if metric != nil {
 					metrics = append(metrics, metric)
 				}

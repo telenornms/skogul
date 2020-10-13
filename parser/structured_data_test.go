@@ -83,18 +83,16 @@ func TestStructuredDataParseExample2(t *testing.T) {
 }
 
 func TestStructuredDataParseExample3Fails(t *testing.T) {
-	t.Skip("skipping unfinished test")
 	b := []byte(`[exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"] [examplePriority@32473 class="high"]`)
 	p := parser.StructuredData{}
 
-	if _, err := p.Parse(b); err == nil {
-		t.Error("Expected parser to fail for invalid format")
+	if c, err := p.Parse(b); err == nil {
+		t.Errorf("Expected parser to fail for invalid format, got\n%+v", c)
 		return
 	}
 }
 
 func TestStructuredDataParseExample4Fails(t *testing.T) {
-	t.Skip("skipping unfinished test")
 	b := []byte(`[ exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"][examplePriority@32473 class="high"]`)
 	p := parser.StructuredData{}
 
