@@ -25,7 +25,9 @@ package parser
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/telenornms/skogul"
 )
@@ -59,12 +61,12 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 
 	for _, l := range lines {
 		line := bytes.TrimSpace(l)
-		if len(line) <= 2 {
-			// Skip empty lines and lines without wrapping []
+		if len(line) == 0 {
+			// Skip empty lines
 			continue
 		}
 
-		kvScanner := bufio.NewScanner(bytes.NewReader(line[1 : len(line)-1])) // trim leading [ and trailing ]
+		kvScanner := bufio.NewScanner(bytes.NewReader(line))
 		// ToDo: Support Example 2 from https://tools.ietf.org/html/rfc5424#section-6.3.5
 		kvScanner.Split(splitKeyValuePairs)
 
@@ -121,7 +123,7 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 // into key=value pairs, honoring escape rules as per the influx line protocol.
 // A key=value pair is split on a non-escaped space.
 func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err error) {
-	fieldWidth, newData := influxLineParser(data, ' ', true)
+	fieldWidth, newData := structuredDataParser(data, true)
 
 	returnChars := len(newData)
 
@@ -132,4 +134,86 @@ func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err
 
 	// Skip the trailing comma between each key=value pair, but still advance counter
 	return fieldWidth, newData[:returnChars], nil
+}
+
+// influxLineParser parses part of an influxdb line protocol line and tells the
+// calling scanner how far it should advance (pretty similar to the splitFunc API).
+// The character to split on is passed to the function, and would usually be
+// a space or a comma character, as those are what's used to split
+// the influx line protocol section or key=value pair from each other.
+// A boolean flag decides whether or not escape characters should remain in the output
+// or have their prepending escape character removed.
+func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, []byte) {
+	openQuote := false
+	escape := false
+	escapeChars := make([]int, 0)
+	escapeCharsWidth := make([]int, 0)
+	start := 0
+	for width := 0; start < len(data); start += width {
+		var c rune
+		c, width = utf8.DecodeRune(data[start:])
+
+		if escape {
+			escape = false
+			continue
+		}
+
+		// If we receive an un-escaped ] character, this section is done
+		// and we'll restart parsing of the rest (if any) as a new section.
+		if c == ']' {
+			break
+		}
+
+		// If there is an open quote, continue until we find the closing quote
+		if openQuote {
+			if c == '"' {
+				// We found the closing quote, mark it and continue regular operations
+				openQuote = false
+				continue
+			}
+			// Fast forward loop until we find the closing quote
+			continue
+		}
+
+		// We found the opening of a quote, continue until we find the closing one
+		if c == '"' {
+			openQuote = true
+			continue
+		}
+
+		// Skip next char
+		if c == '\\' {
+			escape = true
+			if removeEscapedCharsFromResult {
+				escapeChars = append([]int{start}, escapeChars...)
+				escapeCharsWidth = append([]int{width}, escapeCharsWidth...)
+			}
+			continue
+		}
+
+		if c == ' ' {
+			break
+		}
+	}
+
+	skippedWidth := 0
+	for i, escapedChar := range escapeChars {
+		if removeEscapedCharsFromResult {
+			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:start]))
+		}
+		skippedWidth += escapeCharsWidth[i]
+	}
+
+	// If we haven't skipped any chars, we need to tell the scanner to advance one position extra
+	// to skip over the comma separating the next key=value pair
+	if skippedWidth == 0 {
+		skippedWidth = 1
+	}
+
+	// If the value starts with a [, we remove it from the output
+	if len(data) >= 1 && data[0] == '[' {
+		return len(data[:start]) + 1, data[1:start]
+	}
+
+	return len(data[:start]) + 1, data[:start]
 }
