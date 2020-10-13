@@ -54,6 +54,8 @@ type HTTP struct {
 	ConnsPerHost     int               `doc:"Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited."`
 	IdleConnsPerHost int               `doc:"Max idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU."`
 	RootCA           string            `doc:"Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults."`
+	Certfile         string            `doc:"Path to certificate file for TLS Client Certificate."`
+	Keyfile          string            `doc:"Path to key file for TLS Client Certificate."`
 	ok               bool              // set to OK if init worked. FIXME: Should Verify() check if this is OK? I'm thinking yes.
 	once             sync.Once
 	client           *http.Client
@@ -96,13 +98,22 @@ func getCertPool(path string) (*x509.CertPool, error) {
 	return cp, nil
 }
 
+func (htt *HTTP) loadClientCert() (*tls.Certificate, error) {
+	cert, err := tls.LoadX509KeyPair(htt.Certfile, htt.Keyfile)
+	if err != nil {
+		httpLog.WithError(err).Error("Failed to load Client Certificate")
+		return nil, err
+	}
+	return &cert, nil
+}
+
 func (ht *HTTP) init() {
 	ht.ok = false
 	if ht.Timeout.Duration == 0 {
 		ht.Timeout.Duration = 20 * time.Second
 	}
 	if ht.Insecure {
-		httpLog.Print("Warning: Disabeling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+		httpLog.Warning("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
 	}
 	iconsph := ht.IdleConnsPerHost
 
@@ -112,8 +123,31 @@ func (ht *HTTP) init() {
 
 	cp, err := getCertPool(ht.RootCA)
 	if err != nil {
-		httpLog.Print("Failed to initialize root CA pool")
+		httpLog.WithError(err).Error("Failed to initialize root CA pool")
 		return
+	}
+
+	tlsConfig := &tls.Config{
+		InsecureSkipVerify: ht.Insecure,
+		RootCAs:            cp,
+	}
+
+	if ht.Certfile != "" && ht.Keyfile != "" {
+		c, err := ht.loadClientCert()
+		if err != nil {
+			httpLog.WithError(err).Error("Failed to load Client Certificate")
+		}
+		if c == nil {
+			httpLog.Error("Certificate was nil after loading")
+			return
+		}
+		tlsConfig.Certificates = []tls.Certificate{*c}
+	}
+
+	tran := http.Transport{
+		TLSClientConfig:     tlsConfig,
+		MaxConnsPerHost:     ht.ConnsPerHost,
+		MaxIdleConnsPerHost: iconsph,
 	}
 
 	// Initialize the map if empty in config so we
@@ -136,14 +170,6 @@ func (ht *HTTP) init() {
 	}
 	ht.Headers[http.CanonicalHeaderKey("content-type")] = contentTypeHeaderVal
 
-	tran := http.Transport{
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: ht.Insecure,
-			RootCAs:            cp,
-		},
-		MaxConnsPerHost:     ht.ConnsPerHost,
-		MaxIdleConnsPerHost: iconsph,
-	}
 	ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
 	ht.ok = true
 }
@@ -246,6 +272,9 @@ func (ht *HTTP) Verify() error {
 	_, err := getCertPool(ht.RootCA)
 	if err != nil {
 		return skogul.Error{Source: "http sender", Reason: fmt.Sprintf("failed to read custom root CA (RootCA: %s)", ht.RootCA), Next: err}
+	}
+	if (ht.Certfile != "" && ht.Keyfile == "") || (ht.Certfile == "" && ht.Keyfile != "") {
+		return skogul.Error{Source: "http sender", Reason: "Specify both Certfile and Keyfile if either is specified."}
 	}
 	return nil
 }
