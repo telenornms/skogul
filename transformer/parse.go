@@ -2,60 +2,44 @@ package transformer
 
 import (
 	"fmt"
-	"strings"
 	"sync"
 
 	"github.com/telenornms/skogul"
-	"github.com/telenornms/skogul/parser"
 )
 
 var parseLog = skogul.Logger("transformer", "parser")
 
+// Parse contains the configuration for a skogul transformer which can be used to
+// transform parts of a metric by applying a parser to it. Examples include
+// JSON data with nested JSON stringified fields or JSON data with nested
+// syslog/RFC5424/key-value data.
 type Parse struct {
-	Parser              string `doc:"Name of skogul parser to use. Note: has to be auto-initialisable."` // Feature request: Re-use parser unmarshal logic here
-	Source              string `doc:"Name of data field to apply parser to"`
-	Destination         string `doc:"Field to create with the parsed data (default: [Source]_data)"`
-	DestinationMetadata string `doc:"Field to create with the parsed metadata (default: [Source]_metadata)"`
-	Keep                bool   `doc:"Keep the unparsed value (default: false)"`
-	Append              bool   `doc:"Insert the values directly in the existing container, instead of creating new fields (destination and destination_metadata). (default: false)"`
+	Parser              skogul.ParserRef `doc:"Name of skogul parser to use. Can be auto-initialisable, or can be defined in 'parsers' of the config."`
+	Source              string           `doc:"Name of data field to apply parser to"`
+	Destination         string           `doc:"Field to create with the parsed data (default: [Source]_data)"`
+	DestinationMetadata string           `doc:"Field to create with the parsed metadata (default: [Source]_metadata)"`
+	Keep                bool             `doc:"Keep the unparsed value (default: false)"`
+	Append              bool             `doc:"Insert the values directly in the existing container, instead of creating new fields (destination and destination_metadata). (default: false)"`
 	once                sync.Once
-	parser              skogul.Parser
-	ok                  bool
 }
 
+// init sets the default values of Destination and DestinationMetadata
+// if they are not set by the user.
 func (p *Parse) init() {
-	p.ok = false
 	if p.Destination == "" {
 		p.Destination = fmt.Sprintf("%s_data", p.Source)
 	}
 	if p.DestinationMetadata == "" {
 		p.DestinationMetadata = fmt.Sprintf("%s_metadata", p.Source)
 	}
-
-	parseLog.Debug("Trying to find parser to initialise")
-	for k, pars := range parser.Auto {
-		if strings.ToLower(k) == strings.ToLower(p.Parser) {
-			parseLog.Debugf("Found parser '%s', using it", k)
-			p.parser = pars.Alloc().(skogul.Parser)
-			p.ok = true
-			break
-		}
-	}
-	if p.parser == nil {
-		parseLog.Errorf("Failed to find parser with name '%s'", p.Parser)
-		p.ok = false
-		return
-	}
 }
 
+// Transform transforms a container by applying the Parse configuration
+// to the container metrics.
 func (p *Parse) Transform(c *skogul.Container) error {
 	p.once.Do(func() {
 		p.init()
 	})
-
-	if !p.ok {
-		return skogul.Error{Reason: "Parser transformer not initialized", Source: "transformer-parser"}
-	}
 
 	for i, metric := range c.Metrics {
 		val, ok := metric.Data[p.Source].(string)
@@ -64,7 +48,7 @@ func (p *Parse) Transform(c *skogul.Container) error {
 			continue
 		}
 		b := []byte(val)
-		parsed, err := p.parse(b)
+		parsed, err := p.Parser.P.Parse(b)
 		if err != nil {
 			return err
 		}
@@ -102,16 +86,9 @@ func (p *Parse) Transform(c *skogul.Container) error {
 	return nil
 }
 
-func (p *Parse) parse(b []byte) (*skogul.Container, error) {
-
-	parsed, err := p.parser.Parse(b)
-	if err != nil {
-		return nil, err
-	}
-
-	return parsed, nil
-}
-
+// Verify verifies that the configuration is valid, e.g. disallowing
+// configurations which does not make sense, and warns about
+// configuration options which override each other (if set).
 func (p *Parse) Verify() error {
 	if p.Source == "" {
 		return skogul.Error{Reason: "Missing source field", Source: "transformer-parser"}
