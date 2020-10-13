@@ -47,13 +47,14 @@ var httpLog = skogul.Logger("sender", "http")
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */
 type HTTP struct {
-	URL              string          `doc:"Fully qualified URL to send data to." example:"http://localhost:6081/ https://user:password@[::1]:6082/"`
-	Timeout          skogul.Duration `doc:"HTTP timeout."`
-	Insecure         bool            `doc:"Disable TLS certificate validation."`
-	ConnsPerHost     int             `doc:"Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited."`
-	IdleConnsPerHost int             `doc:"Max idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU."`
-	RootCA           string          `doc:"Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults."`
-	ok               bool            // set to OK if init worked. FIXME: Should Verify() check if this is OK? I'm thinking yes.
+	URL              string            `doc:"Fully qualified URL to send data to." example:"http://localhost:6081/ https://user:password@[::1]:6082/"`
+	Headers          map[string]string `doc:"HTTP headers to be added to every request"`
+	Timeout          skogul.Duration   `doc:"HTTP timeout."`
+	Insecure         bool              `doc:"Disable TLS certificate validation."`
+	ConnsPerHost     int               `doc:"Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited."`
+	IdleConnsPerHost int               `doc:"Max idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU."`
+	RootCA           string            `doc:"Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults."`
+	ok               bool              // set to OK if init worked. FIXME: Should Verify() check if this is OK? I'm thinking yes.
 	once             sync.Once
 	client           *http.Client
 }
@@ -115,6 +116,26 @@ func (ht *HTTP) init() {
 		return
 	}
 
+	// Initialize the map if empty in config so we
+	// can add headers programmatically.
+	if ht.Headers == nil {
+		ht.Headers = make(map[string]string)
+	}
+	contentTypeHeaderKey := ""
+	contentTypeHeaderVal := "application/json"
+	for header, val := range ht.Headers {
+		if http.CanonicalHeaderKey(header) == http.CanonicalHeaderKey("content-type") {
+			contentTypeHeaderKey = header
+			contentTypeHeaderVal = val
+			break
+		}
+	}
+	if contentTypeHeaderKey != http.CanonicalHeaderKey(contentTypeHeaderKey) {
+		// Enforce setting the header in the canonicalized way
+		delete(ht.Headers, contentTypeHeaderKey)
+	}
+	ht.Headers[http.CanonicalHeaderKey("content-type")] = contentTypeHeaderVal
+
 	tran := http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: ht.Insecure,
@@ -127,22 +148,16 @@ func (ht *HTTP) init() {
 	ht.ok = true
 }
 
-// Send POSTS data
-func (ht *HTTP) Send(c *skogul.Container) error {
-	ht.once.Do(func() {
-		ht.init()
-	})
+// sendBytes uses a configured HTTP client to
+// send a request.
+// This makes it possible for other senders to
+// reuse the HTTP sender options without having
+// to re-implement them.
+func (ht *HTTP) sendBytes(b []byte) error {
 	if !ht.ok {
-		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
-		httpLog.Print(e)
-		return e
+		return skogul.Error{Reason: "HTTP sender not in OK state", Source: "http-sender"}
 	}
-	b, err := json.Marshal(*c)
-	if err != nil {
-		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
-		httpLog.WithError(e).Error("Configuring HTTP sender failed")
-		return e
-	}
+
 	var buffer bytes.Buffer
 	buffer.Write(b)
 	ht.once.Do(func() {
@@ -166,7 +181,16 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		}
 		ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
 	})
-	resp, err := ht.client.Post(ht.URL, "application/json", &buffer)
+	req, err := http.NewRequest("POST", ht.URL, &buffer)
+	if err != nil {
+		e := skogul.Error{Source: "http sender", Reason: "unable to create request", Next: err}
+		httpLog.WithError(e).Error("Failed to create request")
+		return e
+	}
+	for header, value := range ht.Headers {
+		req.Header.Add(http.CanonicalHeaderKey(header), value)
+	}
+	resp, err := ht.client.Do(req)
 	if err != nil {
 		e := skogul.Error{Source: "http sender", Reason: "unable to POST request", Next: err}
 		httpLog.WithError(e).Error("Failed to do POST request")
@@ -187,6 +211,29 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
 		httpLog.WithError(e).Error("HTTP response status code was not in OK range")
 		return e
+	}
+	return nil
+}
+
+// Send POSTS data
+func (ht *HTTP) Send(c *skogul.Container) error {
+	ht.once.Do(func() {
+		ht.init()
+	})
+	if !ht.ok {
+		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
+		httpLog.Print(e)
+		return e
+	}
+	b, err := json.Marshal(*c)
+	if err != nil {
+		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
+		httpLog.WithError(e).Error("Configuring HTTP sender failed")
+		return e
+	}
+	err = ht.sendBytes(b)
+	if err != nil {
+		return err
 	}
 	return nil
 }

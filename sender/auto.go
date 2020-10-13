@@ -139,6 +139,12 @@ func init() {
 		Help:  "Injects a random delay before passing data on. Mainly for testing.",
 	})
 	Auto.Add(skogul.Module{
+		Name:    "splunk",
+		Aliases: []string{"hec"},
+		Alloc:   func() interface{} { return &Splunk{HTTP: &HTTP{}} },
+		Help:    "A sender to Splunk HEC",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "net",
 		Alloc: func() interface{} { return &Net{} },
 		Help:  "Sends json data to a network endpoint.",
