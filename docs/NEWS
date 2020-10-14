@@ -1,3 +1,23 @@
+v0.10.0
+=======
+
+Release date: 2020-10-14
+
+This is a big one! The changes are mainly new and opt-in features, so things
+should work "just as before".
+
+Features:
+- New sender: splunk. Can be used to send to Splunk HEC.
+- New parser: Structured Data (RFC5424). Only the data, not a syslog.
+- New transformer: parse. Can be used to apply a parser to a
+                   specific field in the data.
+- new feature: TLS Client Certificate support in HTTP sender and receivers.
+- new feature: TLS Client Certificate SAN DNSName verification.
+
+Fixes:
+- UDP receiver has been buffed with more robust handling of requests as well
+  as some more tests.
+
 v0.9.0
 ======
 
