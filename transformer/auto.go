@@ -50,6 +50,12 @@ func init() {
 		Help:    "Enforces custom-rules for data fields of metrics.",
 	})
 	Auto.Add(skogul.Module{
+		Name:    "parse",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &Parse{} },
+		Help:    "Parses a metric using a skogul parser",
+	})
+	Auto.Add(skogul.Module{
 		Name:    "split",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Split{} },
