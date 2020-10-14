@@ -101,7 +101,6 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			// if the value already exists, replace it with an array ?
 
 			metric.Data[paramName] = paramValue
-			sdLog.WithField("tag", paramName).WithField("val", paramValue).Debug("Got :)")
 
 			if !canContinue {
 				break
