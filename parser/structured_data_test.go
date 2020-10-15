@@ -101,3 +101,18 @@ func TestStructuredDataParseExample4Fails(t *testing.T) {
 		return
 	}
 }
+
+func TestStructuredDataParseNoContentResultsInOneMetric(t *testing.T) {
+	b := []byte(`[exampleSDID@32473]`)
+	p := parser.StructuredData{}
+
+	c, err := p.Parse(b)
+	if err != nil {
+		t.Error("Failed to parse data")
+		return
+	}
+
+	if len(c.Metrics) != 1 {
+		t.Errorf("Expected SD-ID-only metric to return 1 metric, got %d", len(c.Metrics))
+	}
+}
