@@ -125,8 +125,6 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 }
 
 // splitKeyValuePairs splits a section (tag key=value pairs or field key=value pairs)
-// into key=value pairs, honoring escape rules as per the influx line protocol.
-// A key=value pair is split on a non-escaped space.
 func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err error) {
 	fieldWidth, newData := structuredDataParser(data, true)
 
@@ -141,11 +139,7 @@ func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err
 	return fieldWidth, newData[:returnChars], nil
 }
 
-// influxLineParser parses part of an influxdb line protocol line and tells the
-// calling scanner how far it should advance (pretty similar to the splitFunc API).
-// The character to split on is passed to the function, and would usually be
-// a space or a comma character, as those are what's used to split
-// the influx line protocol section or key=value pair from each other.
+// struturedDataParser parses a structured data-line.
 // A boolean flag decides whether or not escape characters should remain in the output
 // or have their prepending escape character removed.
 func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, []byte) {
