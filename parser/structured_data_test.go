@@ -24,6 +24,7 @@
 package parser_test
 
 import (
+	"io/ioutil"
 	"testing"
 
 	"github.com/telenornms/skogul/parser"
@@ -114,5 +115,24 @@ func TestStructuredDataParseNoContentResultsInOneMetric(t *testing.T) {
 
 	if len(c.Metrics) != 1 {
 		t.Errorf("Expected SD-ID-only metric to return 1 metric, got %d", len(c.Metrics))
+	}
+}
+
+func TestStructuredDataOnDataset(t *testing.T) {
+	b, err := ioutil.ReadFile("./testdata/structured_data.txt")
+	if err != nil {
+		t.Errorf("Failed to read test data file: %v", err)
+		return
+	}
+
+	p := parser.StructuredData{}
+	container, err := p.Parse(b)
+	if err != nil {
+		t.Errorf("Structured data parser errored on parsing data: %s", err)
+		return
+	}
+	if len(container.Metrics) == 0 {
+		t.Error("Expected metrics from parsing structured data test data set, got 0")
+		return
 	}
 }
