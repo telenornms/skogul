@@ -67,7 +67,10 @@ func GetLogLevelFromString(requestedLevel string) logrus.Level {
 	case "v", "verbose", "t", "trace":
 		return logrus.TraceLevel
 	default:
-		return logrus.WarnLevel
+		{
+			skogulLogger.Warnf("Invalid loglevel '%s', defaulting to 'warn'", requestedLevel)
+			return logrus.WarnLevel
+		}
 	}
 }
 
