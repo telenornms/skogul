@@ -106,6 +106,9 @@ covergui:
 	@echo 💡 Generating HTML coverage report and opening browser
 	@go tool cover -html coverage.out
 
+release:
+	@git tag -a $$(head -n 1 docs/NEWS)
+
 clean:
 	@echo 💩Cleaning up
 	@-rm -fr dist
@@ -130,4 +133,4 @@ help:
 	@echo " - fmtfix - Runs gofmt -d -s -w, excluding generated code (e.g.: fix formating)"
 	@echo " - covergui - Run tests, track test coverage and open coverage analysis in browser"
 
-.PHONY: clean test bench help install rpm
+.PHONY: clean test bench help install rpm release
