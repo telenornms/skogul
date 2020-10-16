@@ -107,6 +107,7 @@ covergui:
 	@go tool cover -html coverage.out
 
 release:
+	@if ! git diff-index --quiet HEAD; then echo "git working directory is not clean, it would be unfair to not release everything!" && exit 1; fi
 	@git tag -a $$(head -n 1 docs/NEWS)
 
 clean:
