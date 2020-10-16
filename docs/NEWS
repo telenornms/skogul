@@ -1,3 +1,15 @@
+v0.10.1
+=======
+
+Release date: 2020-10-16
+
+Fixes a memory leak in the Structured Data parser. No other parts of
+skogul were affected by this bug.
+
+Other, small fixes:
+- Remove a silly debug log line
+- Inform the user if they supplied an invalid log level
+
 v0.10.0
 =======
 
