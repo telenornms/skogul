@@ -81,7 +81,12 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 					return nil, skogul.Error{Reason: "Got invalid data in the middle of a structured data line", Source: "structured_data-parser"}
 				}
 				if metric != nil {
-					metrics = append(metrics, metric)
+					if len(metric.Data) > 0 {
+						metrics = append(metrics, metric)
+					} else {
+						sdLog.Tracef("NOT Creating new metric because existing is empty, metric: %v, line:'%s'", metric, string(line))
+						break
+					}
 				}
 				metric = &skogul.Metric{
 					Time:     &timestamp,
@@ -107,6 +112,8 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			}
 		}
 		if metric != nil {
+			// Note: We add metrics even if they have no data fields.
+			// Intended from sender or misconfigured sender?
 			metrics = append(metrics, metric)
 		}
 	}
@@ -118,8 +125,6 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 }
 
 // splitKeyValuePairs splits a section (tag key=value pairs or field key=value pairs)
-// into key=value pairs, honoring escape rules as per the influx line protocol.
-// A key=value pair is split on a non-escaped space.
 func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err error) {
 	fieldWidth, newData := structuredDataParser(data, true)
 
@@ -134,11 +139,7 @@ func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err
 	return fieldWidth, newData[:returnChars], nil
 }
 
-// influxLineParser parses part of an influxdb line protocol line and tells the
-// calling scanner how far it should advance (pretty similar to the splitFunc API).
-// The character to split on is passed to the function, and would usually be
-// a space or a comma character, as those are what's used to split
-// the influx line protocol section or key=value pair from each other.
+// struturedDataParser parses a structured data-line.
 // A boolean flag decides whether or not escape characters should remain in the output
 // or have their prepending escape character removed.
 func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, []byte) {
