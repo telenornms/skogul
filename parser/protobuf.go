@@ -102,9 +102,9 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 	var err error
 	defer func() {
 		if err != nil {
-			systemId := telemetry.GetSystemId()
+			systemID := telemetry.GetSystemId()
 			sensorName := telemetry.GetSensorName()
-			pbLog.Printf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemId, sensorName)
+			pbLog.Printf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemID, sensorName)
 		}
 	}()
 
