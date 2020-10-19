@@ -98,8 +98,8 @@ func getCertPool(path string) (*x509.CertPool, error) {
 	return cp, nil
 }
 
-func (htt *HTTP) loadClientCert() (*tls.Certificate, error) {
-	cert, err := tls.LoadX509KeyPair(htt.Certfile, htt.Keyfile)
+func (ht *HTTP) loadClientCert() (*tls.Certificate, error) {
+	cert, err := tls.LoadX509KeyPair(ht.Certfile, ht.Keyfile)
 	if err != nil {
 		httpLog.WithError(err).Error("Failed to load Client Certificate")
 		return nil, err

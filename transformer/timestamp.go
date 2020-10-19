@@ -53,6 +53,10 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 	for i, metric := range c.Metrics {
 
 		obj, err := skogul.ExtractNestedObject(metric.Data, config.Source)
+		if err != nil {
+			timestampLogger.Warning("Unable to extract timestamp field from a metric")
+			return skogul.Error{Reason: "Failed to extract timestamp field from a metric"}
+		}
 		timestamp, ok := obj[config.Source[len(config.Source)-1]].(string)
 
 		if !ok {

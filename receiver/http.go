@@ -92,9 +92,8 @@ func (auth *HTTPAuth) auth(r *http.Request) error {
 		httpLog.Trace("Verifying request using client certificates")
 		if err := auth.verifyPeerCertificate(nil, r.TLS.VerifiedChains); err != nil {
 			return err
-		} else {
-			return nil
 		}
+		return nil
 	}
 
 	return skogul.Error{Source: "http receiver", Reason: "No matching authentication method"}
@@ -157,12 +156,12 @@ func loadClientCertificateCAs(paths []string) (*x509.CertPool, error) {
 	httpLog.Debugf("Loading Client Certificates from %d file(s)", len(paths))
 	pool := x509.NewCertPool()
 	for _, path := range paths {
-		if data, err := ioutil.ReadFile(path); err != nil {
+		data, err := ioutil.ReadFile(path)
+		if err != nil {
 			httpLog.WithError(err).WithField("path", path).Error("Failed to read certificate file")
 			return nil, err
-		} else {
-			pool.AppendCertsFromPEM(data)
 		}
+		pool.AppendCertsFromPEM(data)
 	}
 	return pool, nil
 }

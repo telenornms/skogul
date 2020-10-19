@@ -35,6 +35,10 @@ var fileLog = skogul.Logger("sender", "file")
 
 const newLineChar byte = 10
 
+/*
+File sender writes data to a file in various different fashions. Typical
+use will be debugging (write to disk) and writing to a FIFO for example.
+*/
 type File struct {
 	Path   string `doc:"Absolute path to file to write"`
 	Append bool   `doc:"Whether to append to the file when starting. If false, will empty file before starting writes. Default: false"`
@@ -101,7 +105,7 @@ func (f *File) Send(c *skogul.Container) error {
 
 	if !f.ok {
 		e := skogul.Error{Reason: "File sender not in OK state", Source: "file sender"}
-		fileLog.WithError(e).Error("Failied to initialize file sender, or an error occured in runtime")
+		fileLog.WithError(e).Error("Failied to initialize file sender, or an error occurred in runtime")
 		return e
 	}
 

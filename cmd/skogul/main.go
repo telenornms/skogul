@@ -430,7 +430,7 @@ Custom JSON
 
 If the "custom-json" parser is used, all data is parsed as if it was JSON,
 but put into a single metric with the current time as timestamp. This
-allows sending generic JSON to Skogul and using transfromers to extract
+allows sending generic JSON to Skogul and using transformers to extract
 relevant data (or just store everything as data).
 
 InfluxDB parser

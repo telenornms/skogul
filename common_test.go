@@ -201,6 +201,10 @@ func TestParseAndTransformInvalidContainerSuccess(t *testing.T) {
 func TestParseInvalidContainerAndTransformItValid(t *testing.T) {
 	tformat := "2006-01-02T15:04:05Z07:00"
 	parsedTimestamp, err := time.Parse(tformat, "2020-01-01T00:00:00.0Z")
+	if err != nil {
+		t.Error("Failed to boot-strap test-cases by parsing hard-coded date string. This should never happen unless golang is bugged or broken.")
+		return
+	}
 	timestring := parsedTimestamp.Format(tformat)
 	data := []byte(fmt.Sprintf(`{"data": 1, "ts": "%s"}`, timestring))
 

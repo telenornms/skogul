@@ -78,7 +78,11 @@ rpm: build/redhat-skogul.spec
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
-check: test fmtcheck vet
+check: test fmtcheck vet lint
+
+lint:
+	@echo 🐉 Linting code
+	@golint -set_exit_status
 
 vet:
 	@echo 🔬 Vetting code

@@ -63,11 +63,11 @@ func (mm ModuleMap) Lookup(name string) *Module {
 
 // Add adds a module to a module map, ensuring basic sanity and announcing
 // it to the world, so to speak.
-func (amap *ModuleMap) Add(item Module) error {
-	if *amap == nil {
-		*amap = make(map[string]*Module)
+func (mm *ModuleMap) Add(item Module) error {
+	if *mm == nil {
+		*mm = make(map[string]*Module)
 	}
-	lm := *amap
+	lm := *mm
 	Assert(lm[item.Name] == nil)
 	Assert(item.Alloc != nil)
 	for _, alias := range item.Aliases {
