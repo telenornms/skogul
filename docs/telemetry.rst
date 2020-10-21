@@ -81,7 +81,8 @@ Basic reception of Telemetry is very straight forward::
          "udp": {
            "type": "udp",
            "address": ":1234",
-           "handler": "protobuf"
+           "handler": "protobuf",
+           "packetsize": 9000
          }
      },
      "handlers": {
@@ -109,7 +110,8 @@ set of transformers to "flatten" the data and send it to influxdb::
       "udp": {
         "type": "udp",
           "address": ":1234",
-          "handler": "protobuf"
+          "handler": "protobuf",
+          "packetsize": 9000
       }
     },
     "handlers": {

@@ -399,7 +399,8 @@ func Test_syntaxError(t *testing.T) {
       "udp": {
         "type": "udp",
         "address": "[::1]:5015",
-        "handler": "protobuf"
+        "handler": "protobuf",
+		"packetsize": 9000
       }
     },
     "handlers": {
@@ -457,6 +458,7 @@ func TestFindSuperfluousReceiverConfigPropertiesFromFullConfig(t *testing.T) {
 		"foo": {
 		  "type": "udp",
 		  "address": "[::1]:5015",
+		  "packetsize": 9000,
 		  "superfluousField": "this is not needed"
 		}
 	  }
@@ -487,6 +489,7 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	rawConfig := []byte(`{
 		"type": "udp",
 		"address": "[::1]:5015",
+		"packetsize": 9000,
 		"superfluousField": "this is not needed"
 	}`)
 
@@ -514,6 +517,7 @@ func TestBytesWorksWithSuperfluousReceiverConfigProperties(t *testing.T) {
 		"foo": {
 		  "type": "udp",
 		  "address": "[::1]:5015",
+			"packetsize": 9000,
 		  "superfluousField": "this is not needed"
 		}
 	  }
