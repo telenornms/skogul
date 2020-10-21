@@ -29,6 +29,7 @@ import (
 
 	"errors"
 	"github.com/telenornms/skogul"
+	"strconv"
 )
 
 const (
@@ -63,7 +64,7 @@ func (ud *UDP) process() {
 // never returns.
 func (ud *UDP) Start() error {
 	if ud.PacketSize < 0 || ud.PacketSize > UDP_MAX_READ_SIZE {
-		return errors.New("invalid udp packet size, maximum udp read size is between 0 and " + string(UDP_MAX_READ_SIZE))
+		return errors.New("invalid udp packet size, maximum udp read size is between 0 and " + strconv.Itoa(UDP_MAX_READ_SIZE))
 	}
 	if ud.Backlog == 0 {
 		ud.Backlog = 100
