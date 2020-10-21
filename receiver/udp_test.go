@@ -84,29 +84,25 @@ func init() {
 		"udp1": {
 			"type": "udp",
 			"address": "localhost:1939",
-			"handler": "protobuf",
-			"packetsize": 9000
+			"handler": "protobuf"
 		},
 		"udp2": {
 			"type": "udp",
 			"address": "localhost:1959",
 			"handler": "json-sleep",
-			"Threads": 1,
-			"packetsize": 9000
+			"Threads": 1
 		},
 		"udp3": {
 			"type": "udp",
 			"address": "localhost:1969",
 			"handler": "json-sleep",
-			"Threads": 10,
-			"packetsize": 9000
+			"Threads": 10
 		},
 		"udp4": {
 			"type": "udp",
 			"address": "localhost:1979",
 			"handler": "json-sleep",
-			"Threads": 100,
-			"packetsize": 9000
+			"Threads": 100
 		}
 	},
 	"handlers": {
