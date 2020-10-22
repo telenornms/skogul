@@ -59,7 +59,16 @@ func (data RawJSON) Parse(b []byte) (*skogul.Container, error) {
 	err := json.Unmarshal(b, &metric.Data)
 
 	if err != nil {
-		return nil, err
+		// Try to marshal data in an array form
+		var array []interface{}
+		err = json.Unmarshal(b, &array)
+
+		if err != nil {
+			return nil, err
+		}
+
+		metric.Data = make(map[string]interface{})
+		metric.Data["blob"] = array
 	}
 
 	container := skogul.Container{

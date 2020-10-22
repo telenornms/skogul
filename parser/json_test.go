@@ -71,6 +71,27 @@ func TestRawJSONParse(t *testing.T) {
 	}
 }
 
+func TestRawJSONArrayParse(t *testing.T) {
+	b, err := ioutil.ReadFile("./testdata/raw_array.json")
+
+	if err != nil {
+		t.Errorf("Failed to read test data file: %v", err)
+		return
+	}
+
+	container, err := parser.RawJSON{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse JSON data: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed JSON to return a container with at least 1 metric")
+		return
+	}
+}
+
 func BenchmarkRawJSONParse(b *testing.B) {
 	by := []byte(`{"string":"text","float":1.11,"integer":5,"timestamp":"2019-03-15T11:08:02+01:00","key":"value"}`)
 	x := parser.RawJSON{}
