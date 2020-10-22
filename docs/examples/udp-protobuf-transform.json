@@ -3,7 +3,8 @@
     "udp": {
       "type": "udp",
       "address": "[::1]:5015",
-      "handler": "protobuf"
+      "handler": "protobuf",
+      "packetsize": 9000
     }
   },
   "handlers": {

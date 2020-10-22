@@ -28,17 +28,23 @@ import (
 	"runtime"
 
 	"github.com/telenornms/skogul"
+	"strconv"
+)
+
+const (
+	UDP_MAX_READ_SIZE = 65535
 )
 
 var udpLog = skogul.Logger("receiver", "udp")
 
 // UDP contains the configuration for the receiver
 type UDP struct {
-	Address string            `doc:"Address and port to listen to." example:"[::1]:3306"`
-	Handler skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
-	Backlog int               `doc:"Number of queued messages that are not delievered before the receiver starts blocking. Defaults to 100. Even when this is full, the kernel will still buffer data on top of this value. Higher values give smoother performance, but slightly more memory usage. Actual memory usage is a factor of average message size * backlog-fill."`
-	Threads int               `doc:"Number of worker go routines to use, which loosely translates to parallell execution. Defaults to number of CPU threads, with a minimum of 20. There is no correct number, but the value depends on how fast your senders are."`
-	ch      chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
+	Address    string            `doc:"Address and port to listen to." example:"[::1]:3306"`
+	Handler    skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Backlog    int               `doc:"Number of queued messages that are not delivered before the receiver starts blocking. Defaults to 100. Even when this is full, the kernel will still buffer data on top of this value. Higher values give smoother performance, but slightly more memory usage. Actual memory usage is a factor of average message size * backlog-fill."`
+	Threads    int               `doc:"Number of worker go routines to use, which loosely translates to parallel execution. Defaults to number of CPU threads, with a minimum of 20. There is no correct number, but the value depends on how fast your senders are."`
+	PacketSize int               `doc:"UDP Packet size note: max. UDP read size is 65535"`
+	ch         chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
 }
 
 // process is the worker-thread responsible for handling individual
@@ -52,10 +58,21 @@ func (ud *UDP) process() {
 	}
 }
 
+// Verify verifies the configuration for the UDP receiver
+func (ud *UDP) Verify() error {
+	if ud.PacketSize < 0 || ud.PacketSize > UDP_MAX_READ_SIZE {
+		return skogul.Error{Source: "udp-receiver", Reason: "invalid udp packet size, maximum udp read size is between 0 and " + strconv.Itoa(UDP_MAX_READ_SIZE)}
+	}
+	return nil
+}
+
 // Start boots up ud.Threads number of worker threads, then starts
 // listening for incoming UDP messages on the configured address. Start
 // never returns.
 func (ud *UDP) Start() error {
+	if ud.PacketSize == 0 {
+		ud.PacketSize = 9000
+	}
 	if ud.Backlog == 0 {
 		ud.Backlog = 100
 	}
@@ -82,7 +99,7 @@ func (ud *UDP) Start() error {
 		return err
 	}
 	for {
-		bytes := make([]byte, 9000)
+		bytes := make([]byte, ud.PacketSize)
 		n, err := ln.Read(bytes)
 		if err != nil || n == 0 {
 			udpLog.WithError(err).WithField("bytes", n).Error("Unable to read UDP message")

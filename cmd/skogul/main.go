@@ -362,7 +362,8 @@ receiver. An example configuration::
 	      "udp": {
 		"type": "udp",
 		"address": ":5015",
-		"handler": "protobuf"
+		"handler": "protobuf",
+		"packetsize": 9000
 	      }
 	  },
 	  "handlers": {
@@ -390,7 +391,8 @@ An example that writes to postgres::
 	      "udp": {
 		"type": "udp",
 		"address": ":5015",
-		"handler": "protobuf"
+		"handler": "protobuf",
+		"packetsize": 9000
 	      }
 	  },
 	  "handlers": {
