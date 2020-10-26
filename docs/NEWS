@@ -1,3 +1,13 @@
+v0.10.2
+=======
+
+Release date: 2020-10-26
+
+Makes UDP receiver packet size configurable, instead of being hard-coded to 9000.
+
+This was the first contribution from someone outside our organisation, thanks a lot
+to @moogacs for this feature!
+
 v0.10.1
 =======
 
