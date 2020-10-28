@@ -1,0 +1,6 @@
+[
+  {"Timestamp":"2019-12-02T13:37:22Z","Events":[{"source":"Devices.Device.wl0p0","type":"network","attributes":{"wl0p0":{"Timestamp":"2019-12-02T13:37:22Z","RxPackets":0,"TxPackets":5234,"RxBytes":0,"TxBytes":443032,"DeltaRxPackets":0,"DeltaTxPackets":3,"DeltaRxBytes":0,"DeltaTxBytes":147}}}]},
+  {"Timestamp":"2019-12-02T13:37:22Z","Events":[{"source":"Devices.Device.wl0p0","type":"network","attributes":{"wl0p0":{"Timestamp":"2019-12-02T13:37:22Z","RxPackets":0,"TxPackets":5234,"RxBytes":0,"TxBytes":443032,"DeltaRxPackets":0,"DeltaTxPackets":3,"DeltaRxBytes":0,"DeltaTxBytes":147}}}]},
+  {"Timestamp":"2019-12-02T13:37:22Z","Events":[{"source":"Devices.Device.wl0p0","type":"network","attributes":{"wl0p0":{"Timestamp":"2019-12-02T13:37:22Z","RxPackets":0,"TxPackets":5234,"RxBytes":0,"TxBytes":443032,"DeltaRxPackets":0,"DeltaTxPackets":3,"DeltaRxBytes":0,"DeltaTxBytes":147}}}]},
+  [{"Timestamp":"2019-12-02T13:37:22Z","Events":[{"source":"Devices.Device.wl0p0","type":"network","attributes":{"wl0p0":{"Timestamp":"2019-12-02T13:37:22Z","RxPackets":0,"TxPackets":5234,"RxBytes":0,"TxBytes":443032,"DeltaRxPackets":0,"DeltaTxPackets":3,"DeltaRxBytes":0,"DeltaTxBytes":147}}}]}]
+]
