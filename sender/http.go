@@ -187,25 +187,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	var buffer bytes.Buffer
 	buffer.Write(b)
 	ht.once.Do(func() {
-		if ht.Timeout.Duration == 0 {
-			ht.Timeout.Duration = 20 * time.Second
-		}
-		if ht.Insecure {
-			httpLog.Warn("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
-		}
-		iconsph := ht.IdleConnsPerHost
-
-		if iconsph == 0 {
-			iconsph = 2 + runtime.NumCPU()
-		}
-		tran := http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: ht.Insecure,
-			},
-			MaxConnsPerHost:     ht.ConnsPerHost,
-			MaxIdleConnsPerHost: iconsph,
-		}
-		ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
+		ht.init()
 	})
 	req, err := http.NewRequest("POST", ht.URL, &buffer)
 	if err != nil {
@@ -243,6 +225,12 @@ func (ht *HTTP) sendBytes(b []byte) error {
 
 // Send POSTS data
 func (ht *HTTP) Send(c *skogul.Container) error {
+	// This is called both here and in sendBytes to make sure
+	// we init the sender before sending. Since the first thing we check
+	// is if the init was OK, we have to do the check in both functions.
+	// (if we only do it in sendBytes(), the following !ht.ok check would fail
+	// on first use, and if we only do it in Send(), internal re-use of
+	// sendBytes() would fail their check.)
 	ht.once.Do(func() {
 		ht.init()
 	})
