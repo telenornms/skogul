@@ -43,9 +43,11 @@ var mqttLog = skogul.Logger("sender", "mqtt")
 
 // MQTT contains an MQTT client, its options and its configuration for handling messages
 type MQTT struct {
-	Client mqtt.Client
-	opts   *mqtt.ClientOptions
-	topics map[string]*MessageHandler
+	Client        mqtt.Client
+	RenewClientID bool
+	MQTTLogs      bool
+	opts          *mqtt.ClientOptions
+	topics        map[string]*MessageHandler
 }
 
 // MessageHandler is used to establish a callback when a message is
@@ -64,6 +66,18 @@ func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
 
 // Connect to the broker and subscribe to the relevant topics, if any.
 func (handler *MQTT) Connect() error {
+	if handler.Client.IsConnected() || handler.Client.IsConnectionOpen() {
+		mqttLog.Trace("Disconnecting client before (re)connecting")
+		handler.Client.Disconnect(100)
+	}
+	if handler.RenewClientID {
+		clientID := fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
+		handler.opts.SetClientID(clientID)
+		// renew client to set new clientID
+		handler.Client = mqtt.NewClient(handler.opts)
+	}
+
+	mqttLog.Debugf("Connecting to MQTT broker as '%s'", handler.opts.ClientID)
 	token := handler.Client.Connect()
 	// Should probably be configurable, or at least not infinite.
 	for !token.WaitTimeout(3 * time.Second) {
@@ -80,6 +94,13 @@ func (handler *MQTT) Connect() error {
 
 // Init sets up the MQTT client
 func (handler *MQTT) Init(address, username, password, clientID string) error {
+	if handler.MQTTLogs {
+		mqtt.ERROR = mqttLog
+		mqtt.CRITICAL = mqttLog
+		mqtt.WARN = mqttLog
+		mqtt.DEBUG = mqttLog
+	}
+
 	handler.createClientOptions(address, username, password, clientID)
 	handler.Client = mqtt.NewClient(handler.opts)
 	return nil
