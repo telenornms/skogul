@@ -39,12 +39,14 @@ var mqttLog = skogul.Logger("receiver", "mqtt")
 MQTT connects to a MQTT broker and listens for messages on a topic.
 */
 type MQTT struct {
-	Broker   string             `doc:"Address of broker to connect to." example:"[::1]:8888"`
-	Topics   []string           `doc:"List of topics to subscribe to"`
-	Handler  *skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
-	Password string             `doc:"Username for authenticating to the broker."`
-	Username string             `doc:"Password for authenticating."`
-	ClientID string             `doc:"Custom client id to use (default: random)"`
+	Broker          string             `doc:"Address of broker to connect to." example:"[::1]:8888"`
+	Topics          []string           `doc:"List of topics to subscribe to"`
+	Handler         *skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Password        string             `doc:"Username for authenticating to the broker."`
+	Username        string             `doc:"Password for authenticating."`
+	ClientID        string             `doc:"Custom client id to use (default: random)"`
+	RenewClientID   bool               `doc:"Renew the client ID on reconnects ([MQTT-3.1.4-2] @ https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc384800405)"`
+	DisplayMQTTLogs bool
 
 	mc skmqtt.MQTT
 }
@@ -77,6 +79,8 @@ func (handler *MQTT) receiver(msg mqtt.Message) {
 
 // Start MQTT receiver.
 func (handler *MQTT) Start() error {
+	handler.mc.MQTTLogs = handler.DisplayMQTTLogs
+	handler.mc.RenewClientID = handler.RenewClientID
 	handler.mc.Init(handler.Broker, handler.Username, handler.Password, handler.ClientID)
 	for _, topic := range handler.Topics {
 		handler.mc.Subscribe(topic, handler.receiver)
@@ -99,6 +103,9 @@ func (handler *MQTT) Verify() error {
 	}
 	if handler.Topics == nil {
 		return skogul.Error{Reason: "MQTT topic(s) not set", Source: "MQTT receiver"}
+	}
+	if handler.RenewClientID && handler.ClientID != "" {
+		mqttLog.Warning("RenewClientID AND ClientID is set - ClientID will change!")
 	}
 	return nil
 }
