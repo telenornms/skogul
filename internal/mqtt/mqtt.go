@@ -66,6 +66,10 @@ func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
 
 // Connect to the broker and subscribe to the relevant topics, if any.
 func (handler *MQTT) Connect() error {
+	if handler.Client.IsConnected() || handler.Client.IsConnectionOpen() {
+		mqttLog.Trace("Disconnecting client before (re)connecting")
+		handler.Client.Disconnect(100)
+	}
 	if handler.RenewClientID {
 		clientID := fmt.Sprintf("skogul-%d-%d", rand.Uint32(), rand.Uint32())
 		handler.opts.SetClientID(clientID)
