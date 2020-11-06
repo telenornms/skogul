@@ -1,3 +1,13 @@
+v0.10.3
+=======
+
+Release date: 2020-11-06
+
+Adds support for renewing the Client ID in the MQTT client upon reconnects,
+as reconnecting (too quickly) with the same client ID might make the broker
+forcibly close the connection after having reconnected. Enable this option with
+RenewClientID: true.
+
 v0.10.2
 =======
 
