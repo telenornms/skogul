@@ -42,6 +42,8 @@ type Splunk struct {
 	Token         string `doc:"Token for HTTP Authorization header for HEC endpoint."`
 	Index         string `doc:"Custom Splunk index to send event to."`
 	HostnameField string `doc:"Name of the metadata field with the hostname. Note, this might have to be transformed into metadata depending on the input data."`
+	SourceField   string `doc:"Name of the metadata field with the source. Will fallback to the value set in Source if not found."`
+	Source        string `doc:"Set the source of the data. If used in conjunction with SourceField, SourceField will take precedence and this will be the fallback."`
 	HTTP          *HTTP  `doc:"HTTP sender options. URL is overwritten from this config, the rest will be HTTP sender defaults unless overridden."`
 	ok            bool
 	once          sync.Once
@@ -50,10 +52,11 @@ type Splunk struct {
 // splunkEvent describes the structure of a Splunk
 // HTTP Event Collector event
 type splunkEvent struct {
-	Time  *time.Time             `json:"time,omitempty"`
-	Host  string                 `json:"host,omitempty"`
-	Index string                 `json:"index,omitempty"`
-	Event map[string]interface{} `json:"event"`
+	Time   *time.Time             `json:"time,omitempty"`
+	Host   string                 `json:"host,omitempty"`
+	Index  string                 `json:"index,omitempty"`
+	Source string                 `json:"source,omitempty"`
+	Event  map[string]interface{} `json:"event"`
 }
 
 // prepare converts a skogul container into the appropriate
@@ -68,14 +71,22 @@ func (s *Splunk) prepare(c *skogul.Container) ([]splunkEvent, error) {
 		}
 
 		host := ""
+		source := ""
 		if s.HostnameField != "" && metric.Metadata != nil && metric.Metadata[s.HostnameField] != nil {
 			host = fmt.Sprintf("%v", metric.Metadata[s.HostnameField])
 		}
+		if s.SourceField != "" && metric.Metadata != nil && metric.Metadata[s.SourceField] != nil {
+			source = fmt.Sprintf("%v", metric.Metadata[s.SourceField])
+			if source == "" {
+				source = s.Source
+			}
+		}
 		events[i] = splunkEvent{
-			Time:  t,
-			Event: metric.Data,
-			Index: s.Index,
-			Host:  host,
+			Time:   t,
+			Event:  metric.Data,
+			Index:  s.Index,
+			Host:   host,
+			Source: source,
 		}
 	}
 	return events, nil
