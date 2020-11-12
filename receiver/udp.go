@@ -26,9 +26,12 @@ package receiver
 import (
 	"net"
 	"runtime"
+	"sync"
 
-	"github.com/telenornms/skogul"
 	"strconv"
+
+	"github.com/sirupsen/logrus"
+	"github.com/telenornms/skogul"
 )
 
 const (
@@ -39,21 +42,31 @@ var udpLog = skogul.Logger("receiver", "udp")
 
 // UDP contains the configuration for the receiver
 type UDP struct {
-	Address    string            `doc:"Address and port to listen to." example:"[::1]:3306"`
-	Handler    skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
-	Backlog    int               `doc:"Number of queued messages that are not delivered before the receiver starts blocking. Defaults to 100. Even when this is full, the kernel will still buffer data on top of this value. Higher values give smoother performance, but slightly more memory usage. Actual memory usage is a factor of average message size * backlog-fill."`
-	Threads    int               `doc:"Number of worker go routines to use, which loosely translates to parallel execution. Defaults to number of CPU threads, with a minimum of 20. There is no correct number, but the value depends on how fast your senders are."`
-	PacketSize int               `doc:"UDP Packet size note: max. UDP read size is 65535"`
-	ch         chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
+	Address      string            `doc:"Address and port to listen to." example:"[::1]:3306"`
+	Handler      skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Backlog      int               `doc:"Number of queued messages that are not delivered before the receiver starts blocking. Defaults to 100. Even when this is full, the kernel will still buffer data on top of this value. Higher values give smoother performance, but slightly more memory usage. Actual memory usage is a factor of average message size * backlog-fill."`
+	Threads      int               `doc:"Number of worker go routines to use, which loosely translates to parallel execution. Defaults to number of CPU threads, with a minimum of 20. There is no correct number, but the value depends on how fast your senders are."`
+	PacketSize   int               `doc:"UDP Packet size note: max. UDP read size is 65535"`
+	FailureLevel string            `doc:"Level to log receiver failures as. Error, Warning, Info, Debug, or Trace. (default: Error)"`
+	ch           chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
+	failureLevel logrus.Level
+	once         sync.Once
 }
 
 // process is the worker-thread responsible for handling individual
 // messages.
 func (ud *UDP) process() {
+	ud.once.Do(func() {
+		if ud.FailureLevel == "" {
+			ud.failureLevel = logrus.ErrorLevel
+		} else {
+			ud.failureLevel = skogul.GetLogLevelFromString(ud.FailureLevel)
+		}
+	})
 	for {
 		bytes := <-ud.ch
 		if err := ud.Handler.H.Handle(bytes); err != nil {
-			udpLog.WithError(err).Error("Unable to handle UDP message")
+			udpLog.WithError(err).Log(ud.failureLevel, "Unable to handle UDP message")
 		}
 	}
 }
