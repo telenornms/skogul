@@ -1,3 +1,13 @@
+v0.10.4
+=======
+
+Release date: 2020-11-12
+
+Adds support for specifying a metadata field for Source in the Splunk sender
+or setting it as a constant.
+Adds experimental support for specifying what loglevel to log a failure as
+in the UDP receiver.
+
 v0.10.3
 =======
 
