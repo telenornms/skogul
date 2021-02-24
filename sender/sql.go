@@ -32,6 +32,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
+	_ "github.com/denisenkom/go-mssqldb"
+
 	"github.com/telenornms/skogul"
 )
 
@@ -52,9 +54,11 @@ type dbElement struct {
 
 /*
 SQL sender connects to a SQL Database, currently either MySQL(or Mariadb I
-suppose) or Postgres. The Connection String for MySQL is specified at
-https://github.com/go-sql-driver/mysql/ and postgres at
+suppose) or Postgres or possibly MS SQL is used. The Connection String for
+MySQL is specified at https://github.com/go-sql-driver/mysql/ and postgres
+at
 http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
+and MS SQL at https://github.com/denisenkom/go-mssqldb
 .
 
 The query is expanded using os.Expand() and will fill in
@@ -65,7 +69,7 @@ to foo("INSERT INTO foo VALUES(?,?,?)", timestamp, foo, someData), so they
 will be sensibly escaped.
 */
 type SQL struct {
-	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
+	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database. For MS SQL: server=foo.bar.example.com;user id=kly;password=hunter2;port=1337" example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full' mssql: server=localhost; user id=foo;password=hunter2;port=1234"`
 	Query   string `doc:"Query run for each metric. The following expansions are made:\n\n${timestamp} is expanded to the actual metric timestamp.\n\n${metadata.KEY} will be expanded to the metadata with key name \"KEY\".\n\n${data.KEY} will be expanded to data[foo].\n\n${json.metadata} will be expanded to a json representation of all metadata.\n\n${json.data} will be expanded to a json representation of all data.\n\nFinally, ${KEY} is a shorthand for ${data.KEY}. Both methods are provided, to allow referencing data fields named \"metadata.\". E.g.: ${data.metadata.x} will match data[\"metadata.x\"], while ${metadata.x} will match metadata[\"x\"]." example:"INSERT INTO test VALUES(${timestamp},${hei},${metadata.key1})"`
 	Driver  string `doc:"Database driver/system. Currently suported: mysql and postgres."`
 	initErr error
@@ -111,6 +115,9 @@ func (sq *SQL) prep() {
 			return "?"
 		}
 		nElement++
+		if sq.Driver == "mssql" {
+			return fmt.Sprintf("@p%d", nElement)
+		}
 		return fmt.Sprintf("$%d", nElement)
 	}
 	sq.q = os.Expand(sq.Query, expander)
@@ -210,8 +217,8 @@ func (sq *SQL) Verify() error {
 	if sq.Driver == "" {
 		return skogul.Error{Source: "sql sender", Reason: "Driver is empty"}
 	}
-	if sq.Driver != "mysql" && sq.Driver != "postgres" {
-		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)}
+	if sq.Driver != "mysql" && sq.Driver != "postgres" && sq.Driver != "mssql" {
+		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres' or `mssql'", sq.Driver)}
 	}
 	return nil
 }
