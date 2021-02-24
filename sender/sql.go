@@ -30,9 +30,9 @@ import (
 	"os"
 	"sync"
 
+	_ "github.com/denisenkom/go-mssqldb"
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
-	_ "github.com/denisenkom/go-mssqldb"
 
 	"github.com/telenornms/skogul"
 )

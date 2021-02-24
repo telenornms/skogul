@@ -1,0 +1,26 @@
+{
+  "receivers": {
+    "influx": {
+      "type": "http",
+      "address": "[::1]:1234",
+      "handlers": {
+	      "/": "mssqlhandler"
+      }
+    }
+  },
+  "handlers": {
+    "mssqlhandler": {
+      "parser": "influx",
+      "transformers": [],
+      "sender": "mssql"
+    }
+  },
+  "senders": {
+    "mssql": {
+      "type": "sql",
+      "driver": "mssql",
+      "connstr": "server=localhost;user id=someuser;password=hunter2;port=1337",
+      "query": "INSERT INTO test VALUES(${timestamp}, ${metadata.key1}, ${somefield}"
+    }
+  }
+}
