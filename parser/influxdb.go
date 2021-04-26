@@ -292,13 +292,26 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 	escape := false
 	escapeChars := make([]int, 0)
 	escapeCharsWidth := make([]int, 0)
+
 	start := 0
+	previousWidth := 0
 	for width := 0; start < len(data); start += width {
 		var c rune
 		c, width = utf8.DecodeRune(data[start:])
 
 		if escape {
 			escape = false
+			if c == 'x' || c == '0' || c == 'u' {
+				// \x is hex, so let's keep the \ and the x so that a consumer can
+				// parse the value themselves.
+			} else {
+				// otherwise, we consider the 'removeEscapedChars' boolean
+				// to decide whether to keep the \ or not.
+				if removeEscapedCharsFromResult {
+					escapeChars = append([]int{start - previousWidth}, escapeChars...)
+					escapeCharsWidth = append([]int{previousWidth}, escapeCharsWidth...)
+				}
+			}
 			continue
 		}
 
@@ -322,10 +335,7 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 		// Skip next char
 		if c == '\\' {
 			escape = true
-			if removeEscapedCharsFromResult {
-				escapeChars = append([]int{start}, escapeChars...)
-				escapeCharsWidth = append([]int{width}, escapeCharsWidth...)
-			}
+			previousWidth = width
 			continue
 		}
 

@@ -169,7 +169,7 @@ func TestInfluxDBLineParseQuotedStringWithSpace(t *testing.T) {
 }
 
 func TestInfluxDBLineParseEscapedChars(t *testing.T) {
-	b := []byte(`system,foo=bar,host=test\,host,host\,name=test\ host text=some\,text,other\,text=moretext,final=0`)
+	b := []byte(`system,foo=bar,host=test\,host,host\,name=test\ host,hexed=my\x2dtag text=some\,text,other\,text=moretext,final=0`)
 
 	container, err := parser.InfluxDB{}.Parse(b)
 
@@ -189,6 +189,9 @@ func TestInfluxDBLineParseEscapedChars(t *testing.T) {
 
 	if container.Metrics[0].Metadata["host,name"] != "test host" {
 		t.Errorf("Expected 'test,host' but got '%s'", container.Metrics[0].Metadata["host,name"])
+	}
+	if container.Metrics[0].Metadata["hexed"] != `my\x2dtag` {
+		t.Errorf("Expected 'my\x2dtag' but got '%s'", container.Metrics[0].Metadata["hexed"])
 	}
 
 	if container.Metrics[0].Data["text"].(string) != "some,text" {
@@ -304,5 +307,33 @@ func BenchmarkInfluxDBLineParseWithoutTimestamp(b *testing.B) {
 	x := parser.InfluxDB{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
+	}
+}
+
+func TestInfluxDBParseTelegrafSystemdUnitLines(t *testing.T) {
+	b, err := ioutil.ReadFile("./testdata/influxdb_systemd_units.txt")
+
+	if err != nil {
+		t.Errorf("Failed to read test data file: %v", err)
+		return
+	}
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed influx data to return a container with at least 1 metric")
+		return
+	}
+
+	for i, metric := range container.Metrics {
+		//fmt.Printf("line:%v\n", metric)
+		if metric.Metadata["host"] == nil {
+			t.Errorf("Expected 'host' tag in metric %d", i)
+		}
 	}
 }

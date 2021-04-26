@@ -1,0 +1,17 @@
+systemd_units,active=active,host=localhost,load=loaded,name=containerd.service,sub=running active_code=0i,load_code=0i,sub_code=0i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=crond.service,sub=running active_code=0i,load_code=0i,sub_code=0i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=docker.service,sub=running active_code=0i,load_code=0i,sub_code=0i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=skogul.service,sub=running active_code=0i,load_code=0i,sub_code=0i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=sshd.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=inactive,host=localhost,load=not-found,name=syslog.service,sub=dead active_code=2i,load_code=2i,sub_code=1i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck-root.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck@dev-disk-by\x2duuid-8274064c\x2daac0\x2d4346\x2da4d2\x2dc7f785ce59e1.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck@dev-mapper-vg00\x2dadm.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=inactive,host=localhost,load=loaded,name=systemd-fsck@dev-mapper-vg00\x2ddocker.service,sub=dead active_code=2i,load_code=0i,sub_code=1i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck@dev-mapper-vg00\x2dhome.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck@dev-mapper-vg00\x2dlocal.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck@dev-mapper-vg00\x2dlog.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-fsck@dev-mapper-vg00\x2dtmp.service,sub=exited active_code=0i,load_code=0i,sub_code=4i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-journald.service,sub=running active_code=0i,load_code=0i,sub_code=0i 1619444733000000000
+systemd_units,active=active,host=localhost,load=loaded,name=systemd-logind.service,sub=running active_code=0i,load_code=0i,sub_code=0i 1619444733000000000
+systemd_units,active=inactive,host=localhost,load=loaded,name=systemd-reboot.service,sub=dead active_code=2i,load_code=0i,sub_code=1i 1619444733000000000
