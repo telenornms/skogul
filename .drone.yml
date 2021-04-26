@@ -18,7 +18,7 @@ steps:
   commands:
   - apt-get update
   - apt-get -y install make
-  - go get -u golang.org/x/lint/golint
+  - go get golang.org/x/lint/golint
   - make check
   depends_on:
     - build
