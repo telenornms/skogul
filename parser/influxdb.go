@@ -301,12 +301,9 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 
 		if escape {
 			escape = false
-			if c == 'x' || c == '0' || c == 'u' {
+			if c != 'x' && c != 'X' && c != '0' && c != 'u' && c != 'U' {
 				// \x is hex, so let's keep the \ and the x so that a consumer can
-				// parse the value themselves.
-			} else {
-				// otherwise, we consider the 'removeEscapedChars' boolean
-				// to decide whether to keep the \ or not.
+				// parse the value themselves. Let's also do the same for decimals (\0) and unicode (\u).
 				if removeEscapedCharsFromResult {
 					escapeChars = append([]int{start - previousWidth}, escapeChars...)
 					escapeCharsWidth = append([]int{previousWidth}, escapeCharsWidth...)
