@@ -349,11 +349,9 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 		skippedWidth += escapeCharsWidth[i]
 	}
 
-	// If we haven't skipped any chars, we need to tell the scanner to advance one position extra
-	// to skip over the comma separating the next key=value pair
-	if skippedWidth == 0 {
-		skippedWidth = 1
-	}
-
-	return len(data[:start]) + 1, data[:start]
+	// Tell the scanner to skip the amount of characters we processed,
+	// + one. This tells the scanner to skip over the next separator.
+	// Also return the data up until the point we scanned, removing
+	// the skipped characters.
+	return start + 1, data[:start - skippedWidth]
 }

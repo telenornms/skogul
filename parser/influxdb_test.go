@@ -310,6 +310,20 @@ func BenchmarkInfluxDBLineParseWithoutTimestamp(b *testing.B) {
 	}
 }
 
+func TestInfluxDBParseDoubleBackslashEscape(t *testing.T) {
+	b := []byte(`systemd_units,host=foo,name=systemd-fsck@dev-mapper-vg00\\x2dlog.service,bar=foo active_code=0i 1619523738000000000`)
+
+	_container, err := parser.InfluxDB{}.Parse(b)
+	if err != nil {
+		t.Errorf("expected to parse influx line protocol containing two backslashes: %v", err)
+	}
+
+
+	name := "systemd-fsck@dev-mapper-vg00\\x2dlog.service"
+	if _container.Metrics[0].Metadata["name"] != name {
+		t.Errorf("expected parsed tag to equal %s, got %s", name, _container.Metrics[0].Metadata["name"])
+	}
+}
 func TestInfluxDBParseTelegrafSystemdUnitLines(t *testing.T) {
 	b, err := ioutil.ReadFile("./testdata/influxdb_systemd_units.txt")
 
