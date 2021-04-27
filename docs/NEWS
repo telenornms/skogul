@@ -1,3 +1,11 @@
+v0.10.6
+=======
+
+Release date: 2021-04-27
+
+Adds even better support for escaped characters in the influx parser,
+specifically if the values had previously been escaped.
+
 v0.10.5
 =======
 
