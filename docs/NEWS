@@ -1,3 +1,12 @@
+v0.10.5
+=======
+
+Release date: 2021-04-27
+
+Supports parsing escaped hex, decimal and unicode character sequences
+in the influxdb parser. Previously this would not have the expected behaviour.
+
+
 v0.10.4
 =======
 
