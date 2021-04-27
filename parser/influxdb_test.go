@@ -318,7 +318,6 @@ func TestInfluxDBParseDoubleBackslashEscape(t *testing.T) {
 		t.Errorf("expected to parse influx line protocol containing two backslashes: %v", err)
 	}
 
-
 	name := "systemd-fsck@dev-mapper-vg00\\x2dlog.service"
 	if _container.Metrics[0].Metadata["name"] != name {
 		t.Errorf("expected parsed tag to equal %s, got %s", name, _container.Metrics[0].Metadata["name"])
