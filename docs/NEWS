@@ -1,3 +1,11 @@
+v0.10.7
+=======
+
+Release date: 2021-05-07
+
+Fixes the systemd(1) unit file so that it supports being enabled
+and automagically started on boot. We all WantedBy this.
+
 v0.10.6
 =======
 
