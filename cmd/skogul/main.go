@@ -825,18 +825,32 @@ func prettyPrint(scheme string, desc string) {
 	fmt.Printf("\n")
 }
 
+func listModules(name string, mmap skogul.ModuleMap) {
+	mods := []string{}
+	fmt.Printf("\n%s\n", name)
+	for idx := range mmap {
+		if mmap[idx].Name != idx {
+			continue // alias
+		}
+		mods = append(mods, idx)
+	}
+	sort.Strings(mods)
+	for _, mod := range mods {
+		aliases := ""
+		if len(mmap[mod].Aliases) > 0 {
+			aliases = fmt.Sprintf(" Alias(es): %s",	strings.Join(mmap[mod].Aliases,","))
+		}
+		prettyPrint(mod, fmt.Sprintf("%s%s",mmap[mod].Help,aliases))
+	}
+}
 // help prints the regular command line usage, and lists all receivers and
 // senders.
 func help() {
 	flag.Usage()
-	fmt.Println("\nSenders:")
-	for idx, sen := range sender.Auto {
-		prettyPrint(idx, sen.Help)
-	}
-	fmt.Println("\nReceivers:")
-	for idx, rcv := range receiver.Auto {
-		prettyPrint(idx, rcv.Help)
-	}
+	listModules("Receivers", receiver.Auto)
+	listModules("Transformers", transformer.Auto)
+	listModules("Parsers", parser.Auto)
+	listModules("Senders", sender.Auto)
 	fmt.Println("\nYou can also see the skogul manual page. It can be generated with `./skogul -make-man > foo; rst2man < foo > skogul.1; man ./skogul.1'.")
 }
 

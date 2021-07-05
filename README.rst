@@ -16,6 +16,11 @@ Skogul is a generic tool for moving metric data around. It can serve as a
 collector of data, but is primarily designed to be a framework for building
 bridges between data collectors and storage engines.
 
+Anything that can be expressed as a timestamp and a set of data and
+metadata-fields can be handled. The traditional use cases are for storing
+statistics (time series data) and logs, but more complex schemes can be
+used.
+
 This repository contains the Skogul library/package, and ``cmd/skogul``,
 which parses a JSON-config to set up Skogul.
 
