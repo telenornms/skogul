@@ -1,0 +1,9 @@
+   {
+     "receivers": {
+         "udp": {
+           "type": "udp",
+           "address": ":3300",
+           "handler": "junos-telemetry"
+         }
+     }
+   }

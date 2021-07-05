@@ -52,9 +52,9 @@ func init() {
 	})
 	Auto.Add(skogul.Module{
 		Name:     "debug",
-		Aliases:  []string{"print"},
+		Aliases:  []string{"print", "default"},
 		Alloc:    func() interface{} { return &Debug{} },
-		Help:     "Prints received metrics to stdout.",
+		Help:     "Prints received metrics to stdout. Used as the default sender in various libraries - redefine as needed.",
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
