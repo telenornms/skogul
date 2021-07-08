@@ -65,6 +65,19 @@ does NOT install any systemd unit or similar.
 
 Also see ``make help`` for other make targets.
 
+Quickstart - telemetry/collections
+----------------------------------
+
+We are introducing pre-made configuration collections to enable certain
+features with close to 0 configuration on your end.
+
+For Juniper Telemetry, take a look in `docs/collections/junos-telemetry`
+which contains ready-to-use Skogul configuration and instructions on how to
+set up your Juniper boxes for sending telemetry.
+
+We will be adding more collections like this in the (near?) future, and
+patches are welcome.
+
 About
 -----
 
