@@ -60,19 +60,29 @@ This means that:
 3. Send() will only block if two channels are full.
 */
 type Batch struct {
-	Next      skogul.SenderRef `doc:"Sender that will receive batched metrics"`
-	Interval  skogul.Duration  `doc:"Flush the bucket after this duration regardless of how full it is"`
-	Threshold int              `doc:"Flush the bucket after reaching this amount of metrics"`
-	allocSize int
-	ch        chan *skogul.Container
-	once      sync.Once
-	metrics   int
-	timer     *time.Timer
-	cont      *skogul.Container
-	out       chan *skogul.Container
+	Next       skogul.SenderRef `doc:"Sender that will receive batched metrics"`
+	Interval   skogul.Duration  `doc:"Flush the bucket after this duration regardless of how full it is"`
+	Threshold  int              `doc:"Flush the bucket after reaching this amount of metrics"`
+	allocSize  int
+	ch         chan *skogul.Container
+	once       sync.Once
+	metrics    int
+	timer      *time.Timer
+	cont       *skogul.Container
+	out        chan *skogul.Container
+	numThreads int
+}
+
+func (bat *Batch) fillUninitialized() {
+	if bat.numThreads == 0 {
+		bat.numThreads = runtime.NumCPU()
+	}
 }
 
 func (bat *Batch) setup() {
+
+	bat.fillUninitialized()
+
 	if bat.Threshold == 0 {
 		bat.Threshold = 10
 	}
@@ -89,8 +99,8 @@ func (bat *Batch) setup() {
 	if bat.allocSize < 100 {
 		bat.allocSize = 100
 	}
-	bat.out = make(chan *skogul.Container, runtime.NumCPU())
-	for i := 0; i < runtime.NumCPU(); i++ {
+	bat.out = make(chan *skogul.Container, bat.numThreads)
+	for i := 0; i < bat.numThreads; i++ {
 		go bat.flusher()
 	}
 	go bat.run()
