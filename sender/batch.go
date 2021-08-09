@@ -63,6 +63,7 @@ type Batch struct {
 	Next      skogul.SenderRef `doc:"Sender that will receive batched metrics"`
 	Interval  skogul.Duration  `doc:"Flush the bucket after this duration regardless of how full it is"`
 	Threshold int              `doc:"Flush the bucket after reaching this amount of metrics"`
+	Threads   int              `doc:"Number of threads for batch sender. Defaults to number of CPU cores."`
 	allocSize int
 	ch        chan *skogul.Container
 	once      sync.Once
@@ -70,7 +71,6 @@ type Batch struct {
 	timer     *time.Timer
 	cont      *skogul.Container
 	out       chan *skogul.Container
-	Threads   int `doc:"Number of threads for batch sender"`
 }
 
 func (bat *Batch) setup() {
