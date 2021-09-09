@@ -27,13 +27,14 @@ package sender
 import (
 	"bytes"
 	"fmt"
-	"github.com/sirupsen/logrus"
 	"io"
 	"net/http"
 	"reflect"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
@@ -50,6 +51,7 @@ type InfluxDB struct {
 	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
 	Timeout                 skogul.Duration `doc:"HTTP timeout"`
 	ConvertIntToFloat       bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
+	Token                   skogul.Secret   `doc:"Authorization token used in InfluxDB 2.0"`
 	client                  *http.Client
 	replacer                *strings.Replacer
 	once                    sync.Once
@@ -184,7 +186,17 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		return nil
 	}
 
-	resp, err := idb.client.Post(idb.URL, "text/plain", &buffer)
+	req, err := http.NewRequest("POST", idb.URL, &buffer)
+	if err != nil {
+		e := skogul.Error{Source: "influxdb sender", Reason: "unable to create request", Next: err}
+		influxLog.Trace(e)
+		return e
+	}
+	if len(idb.Token) > 0 {
+		req.Header.Add("authorization", fmt.Sprintf("Token %s", idb.Token.Expose()))
+	}
+
+	resp, err := idb.client.Do(req)
 	if err != nil {
 		e := skogul.Error{Source: "influxdb sender", Reason: "unable to POST data", Next: err}
 		influxLog.Trace(e)
