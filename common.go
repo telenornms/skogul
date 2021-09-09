@@ -26,9 +26,10 @@ package skogul
 
 import (
 	"fmt"
-	"github.com/sirupsen/logrus"
 	"runtime"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 /*
@@ -303,4 +304,22 @@ func ExtractNestedObject(object map[string]interface{}, keys []string) (map[stri
 	}
 
 	return ExtractNestedObject(next, keys[1:])
+}
+
+// Secret is a common type that wraps a string where the contents of the string
+// can be sensitive, such as a credential. The String() func will output `***` to prevent accidental exposure,
+// but the raw contents can be `Expose()`d.
+type Secret string
+
+func (s Secret) String() string {
+	return "<redacted>"
+}
+
+func (s Secret) Expose() string {
+	r := ""
+	for _, c := range s {
+		r = fmt.Sprintf("%s%c", r, c)
+	}
+
+	return r
 }
