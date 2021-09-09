@@ -115,6 +115,12 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 			// XXX: Should rneport.
 			continue
 		}
+		// Set time from template if we don't have a time and the template does.
+		if m.Time == nil {
+			if c.Template != nil && c.Template.Time != nil {
+				m.Time = c.Template.Time
+			}
+		}
 		if idb.MeasurementFromMetadata != "" {
 			measure, ok := m.Metadata[idb.MeasurementFromMetadata].(string)
 			if ok {
