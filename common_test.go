@@ -239,3 +239,16 @@ func TestParseInvalidContainerAndTransformItValid(t *testing.T) {
 		return
 	}
 }
+
+func TestSecretIsRedacted(t *testing.T) {
+	secret := skogul.Secret("hunter2")
+	if secret.String() != "<redacted>" {
+		t.Errorf("Expected secret to be redacted, but got %s", secret.String())
+	}
+}
+func TestSecretIsExposed(t *testing.T) {
+	secret := skogul.Secret("hunter2")
+	if secret.Expose() != "hunter2" {
+		t.Errorf("Expected secret to be 'hunter2', but got %s", secret.Expose())
+	}
+}
