@@ -111,3 +111,55 @@ func TestSplit(t *testing.T) {
 		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "2yes also", c.Metrics[4].Data["data"])
 	}
 }
+func TestSplit_dict(t *testing.T) {
+	var c skogul.Container
+	testData := `
+	{
+		"metrics": [
+		{
+			"data": {
+				"dict": {
+					"foo": {
+						"name": "foo",
+						"key": "value1"
+					},
+					"bar": {
+						"name": "bar",
+						"key": "value2"
+					}
+				}
+			}
+
+		}
+		]
+	}
+	`
+	if err := json.Unmarshal([]byte(testData), &c); err != nil {
+		t.Error(err)
+		return
+	}
+
+	split_path := "dict"
+	metadata := transformer.Split{
+		Field: []string{split_path},
+	}
+
+	if err := metadata.Transform(&c); err != nil {
+		t.Error(err)
+		return
+	}
+
+	if len(c.Metrics) != 2 {
+		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 5, len(c.Metrics))
+		return
+	}
+
+	// Verify that the data is not the same in the two objects as it might differ
+	if c.Metrics[0].Data["name"] != "foo" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "foo", c.Metrics[0].Data["name"])
+	}
+	if c.Metrics[1].Data["name"] != "bar" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "bar", c.Metrics[0].Data["name"])
+	}
+
+}

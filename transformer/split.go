@@ -68,9 +68,54 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 			return nil, fmt.Errorf("Failed to extract nested obj '%v' from '%v' to string/interface map", split.Field, origMetrics[mi].Data)
 		}
 
-		metrics, ok := splitObj[split.Field[len(split.Field)-1]].([]interface{})
+		switch metrics := splitObj[split.Field[len(split.Field)-1]].(type) {
+		case map[string]interface{}:
+			for _, obj := range metrics {
+				// Create a new metrics object as a copy of the original one, then reassign the data field
+				metricsData, ok := obj.(map[string]interface{})
 
-		if !ok {
+				if !ok {
+					if !split.Fail {
+						newMetrics = append(newMetrics, origMetrics[mi])
+						continue
+					}
+					return nil, fmt.Errorf("Failed to cast '%v' to string/interface map", obj)
+				}
+
+				newMetric := *origMetrics[mi]
+				newMetric.Data = metricsData
+				newMetric.Metadata = make(map[string]interface{})
+
+				for key, val := range origMetrics[mi].Metadata {
+					newMetric.Metadata[key] = val
+				}
+
+				newMetrics = append(newMetrics, &newMetric)
+			}
+		case []interface{}:
+			for _, obj := range metrics {
+				// Create a new metrics object as a copy of the original one, then reassign the data field
+				metricsData, ok := obj.(map[string]interface{})
+
+				if !ok {
+					if !split.Fail {
+						newMetrics = append(newMetrics, origMetrics[mi])
+						continue
+					}
+					return nil, fmt.Errorf("Failed to cast '%v' to string/interface map", obj)
+				}
+
+				newMetric := *origMetrics[mi]
+				newMetric.Data = metricsData
+				newMetric.Metadata = make(map[string]interface{})
+
+				for key, val := range origMetrics[mi].Metadata {
+					newMetric.Metadata[key] = val
+				}
+
+				newMetrics = append(newMetrics, &newMetric)
+			}
+		default:
 			if !split.Fail {
 				newMetrics = append(newMetrics, origMetrics[mi])
 				continue
@@ -78,28 +123,6 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 			return nil, fmt.Errorf("Failed to cast '%v' to string/interface map on '%s'", origMetrics[mi].Data, split.Field[0])
 		}
 
-		for _, obj := range metrics {
-			// Create a new metrics object as a copy of the original one, then reassign the data field
-			metricsData, ok := obj.(map[string]interface{})
-
-			if !ok {
-				if !split.Fail {
-					newMetrics = append(newMetrics, origMetrics[mi])
-					continue
-				}
-				return nil, fmt.Errorf("Failed to cast '%v' to string/interface map", obj)
-			}
-
-			newMetric := *origMetrics[mi]
-			newMetric.Data = metricsData
-			newMetric.Metadata = make(map[string]interface{})
-
-			for key, val := range origMetrics[mi].Metadata {
-				newMetric.Metadata[key] = val
-			}
-
-			newMetrics = append(newMetrics, &newMetric)
-		}
 	}
 
 	return newMetrics, nil
