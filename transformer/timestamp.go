@@ -28,6 +28,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/dolmen-go/jsonptr"
 	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
 )
@@ -36,9 +37,9 @@ var timestampLogger = skogul.Logger("transformer", "timestamp")
 
 // Timestamp is the configuration for extracing a timestamp from inside the data
 type Timestamp struct {
-	Source []string `doc:"The source field of the timestamp"`
-	Format string   `doc:"The format to use (default: RFC3339)"`
-	Fail   bool     `doc:"Propagate errors back to the caller. Useful if the timestamp is required for the container."`
+	Source jsonptr.Pointer `doc:"The source field of the timestamp"`
+	Format string          `doc:"The format to use (default: RFC3339)"`
+	Fail   bool            `doc:"Propagate errors back to the caller. Useful if the timestamp is required for the container."`
 	once   sync.Once
 }
 
@@ -52,12 +53,12 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 
 	for i, metric := range c.Metrics {
 
-		obj, err := skogul.ExtractNestedObject(metric.Data, config.Source)
+		obj, err := jsonptr.Get(metric.Data, config.Source.String())
 		if err != nil {
 			timestampLogger.Warning("Unable to extract timestamp field from a metric")
 			return skogul.Error{Reason: "Failed to extract timestamp field from a metric"}
 		}
-		timestamp, ok := obj[config.Source[len(config.Source)-1]].(string)
+		timestamp, ok := obj.(string)
 
 		if !ok {
 			timestampLogger.Error("Failed to cast timestamp field to a string")
