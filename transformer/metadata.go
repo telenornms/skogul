@@ -100,19 +100,19 @@ func flattenStructure(nestedPath jsonptr.Pointer, separator string, metric *skog
 	}
 
 	ptr := nestedPath.Copy()
-	obj, err := jsonptr.Get(metric.Data, ptr.String())
+	val, err := jsonptr.Get(metric.Data, ptr.String())
 
 	if err == nil {
-		nestedObj, ok := obj.(map[string]interface{})
+		nestedObj, ok := val.(map[string]interface{})
 
 		if !ok {
 
-			nestedObjArray, ok := obj.([]interface{})
+			nestedObjArray, ok := val.([]interface{})
 			if !ok {
 				// it is not an object and not an array,
 				// we'll assume the type is supposed to be what it is now.
 
-				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, ptr.Pop())] = obj
+				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, ptr.Pop())] = val
 
 				return nil
 			}
