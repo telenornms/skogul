@@ -26,13 +26,15 @@ package transformer
 import (
 	"fmt"
 
+	"github.com/dolmen-go/jsonptr"
+
 	"github.com/telenornms/skogul"
 )
 
 // Split is the configuration for the split transformer
 type Split struct {
-	Field []string `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
-	Fail  bool     `doc:"Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working."`
+	Field jsonptr.Pointer `doc:"Split into multiple metrics based on this JSON Pointer (RFC6901)."`
+	Fail  bool            `doc:"Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working."`
 }
 
 // Transform splits the thing
@@ -58,7 +60,7 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 	var newMetrics []*skogul.Metric
 
 	for mi := range origMetrics {
-		splitObj, err := skogul.ExtractNestedObject(origMetrics[mi].Data, split.Field)
+		doc, err := jsonptr.Get(origMetrics[mi].Data, split.Field.String())
 
 		if err != nil {
 			if !split.Fail {
@@ -68,7 +70,7 @@ func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogu
 			return nil, fmt.Errorf("Failed to extract nested obj '%v' from '%v' to string/interface map", split.Field, origMetrics[mi].Data)
 		}
 
-		metrics, ok := splitObj[split.Field[len(split.Field)-1]].([]interface{})
+		metrics, ok := doc.([]interface{})
 
 		if !ok {
 			if !split.Fail {

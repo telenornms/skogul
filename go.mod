@@ -3,6 +3,7 @@ module github.com/telenornms/skogul
 go 1.12
 
 require (
+	github.com/dolmen-go/jsonptr v0.0.0-20200427210345-20e1608f9d85 // indirect
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.2

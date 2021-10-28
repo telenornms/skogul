@@ -17,7 +17,7 @@
   "transformers": {
     "split": {
       "type": "split",
-      "field": ["interfaceExp_stats"]
+      "field": "/interfaceExp_stats"
     },
     "extract": {
       "type": "metadata",

@@ -27,6 +27,7 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/dolmen-go/jsonptr"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/transformer"
 )
@@ -78,9 +79,9 @@ func TestSplit(t *testing.T) {
 		return
 	}
 
-	split_path := "data"
+	split_path := "/data"
 	metadata := transformer.Split{
-		Field: []string{split_path},
+		Field: jsonptr.MustParse(split_path),
 	}
 
 	if err := metadata.Transform(&c); err != nil {
