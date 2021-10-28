@@ -291,21 +291,6 @@ func Assert(x bool, v ...interface{}) {
 	}
 }
 
-// ExtractNestedObject extracts an object from a nested object structure. All intermediate objects has to map[string]interface{}
-func ExtractNestedObject(object map[string]interface{}, keys []string) (map[string]interface{}, error) {
-	if len(keys) == 1 {
-		return object, nil
-	}
-
-	next, ok := object[keys[0]].(map[string]interface{})
-
-	if !ok {
-		return nil, Error{Reason: "Failed to cast nested object to map[string]interface{}"}
-	}
-
-	return ExtractNestedObject(next, keys[1:])
-}
-
 // Secret is a common type that wraps a string where the contents of the string
 // can be sensitive, such as a credential. The String() func will output `***` to prevent accidental exposure,
 // but the raw contents can be `Expose()`d.
