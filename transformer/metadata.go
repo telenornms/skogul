@@ -99,7 +99,8 @@ func flattenStructure(nestedPath jsonptr.Pointer, separator string, metric *skog
 		nestedObjectPath = ""
 	}
 
-	obj, err := jsonptr.Get(metric.Data, nestedPath.String())
+	ptr := nestedPath.Copy()
+	obj, err := jsonptr.Get(metric.Data, ptr.String())
 
 	if err == nil {
 		nestedObj, ok := obj.(map[string]interface{})
@@ -108,7 +109,12 @@ func flattenStructure(nestedPath jsonptr.Pointer, separator string, metric *skog
 
 			nestedObjArray, ok := obj.([]interface{})
 			if !ok {
-				return skogul.Error{Reason: "Failed cast"}
+				// it is not an object and not an array,
+				// we'll assume the type is supposed to be what it is now.
+
+				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, ptr.Pop())] = obj
+
+				return nil
 			}
 
 			nestedObj = make(map[string]interface{})

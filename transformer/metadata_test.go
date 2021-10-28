@@ -219,6 +219,39 @@ func TestFlattenMap(t *testing.T) {
 	}
 }
 
+func TestFlattenMap2(t *testing.T) {
+	jsonData := []byte(`{
+	"system": {
+		"hostname": "foo",
+		"platform": "bar"
+	}
+}`)
+	var data map[string]interface{}
+	json.Unmarshal(jsonData, &data)
+
+	container := skogul.Container{
+		Metrics: []*skogul.Metric{
+			{
+				Data: data,
+			},
+		},
+	}
+
+	conf := transformer.Data{
+		Flatten:          []jsonptr.Pointer{jsonptr.MustParse("/system/hostname")},
+		FlattenSeparator: "drop",
+	}
+
+	if err := conf.Transform(&container); err != nil {
+		t.Errorf("failed to run flatten transformer: %s", err)
+	}
+
+	rootHostname := container.Metrics[0].Data["hostname"]
+	if rootHostname == nil || rootHostname != "foo" {
+		t.Errorf("expected to find 'foo' for 'hostname' on the root level of the transformed metric.Data, but found '%v'", rootHostname)
+	}
+}
+
 func TestFlattenMapDefaultSeparator(t *testing.T) {
 	path := "nestedData"
 	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
