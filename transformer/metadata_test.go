@@ -29,6 +29,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/dolmen-go/jsonptr"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/transformer"
@@ -176,6 +177,7 @@ func TestExtract(t *testing.T) {
 
 func TestFlattenMap(t *testing.T) {
 	path := "nestedData"
+	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
 	extracted_value_key := "key"
 	extracted_value := "value"
 
@@ -189,7 +191,7 @@ func TestFlattenMap(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten: [][]string{{path}},
+		Flatten: []jsonptr.Pointer{pointer},
 	}
 
 	err := data.Transform(&c)
@@ -202,7 +204,8 @@ func TestFlattenMap(t *testing.T) {
 
 	// Expect data to be accessible at its new location
 	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+		t.Errorf(`Expected "%s" but got "%s" for key "%s"`, extracted_value, c.Metrics[0].Data[new_path], new_path)
+		fmt.Println(c.Metrics[0].Data)
 	}
 
 	// Expect data to still be accessible at its original location
@@ -218,6 +221,7 @@ func TestFlattenMap(t *testing.T) {
 
 func TestFlattenMapDefaultSeparator(t *testing.T) {
 	path := "nestedData"
+	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
 	extracted_value_key := "key"
 	extracted_value := "value"
 
@@ -231,7 +235,7 @@ func TestFlattenMapDefaultSeparator(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten:          [][]string{{path}},
+		Flatten:          []jsonptr.Pointer{pointer},
 		FlattenSeparator: "",
 	}
 
@@ -261,6 +265,7 @@ func TestFlattenMapDefaultSeparator(t *testing.T) {
 
 func TestFlattenMapCustomSeparator(t *testing.T) {
 	path := "nestedData"
+	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
 	extracted_value_key := "key"
 	extracted_value := "value"
 	separator := "!SEP!"
@@ -275,7 +280,7 @@ func TestFlattenMapCustomSeparator(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten:          [][]string{{path}},
+		Flatten:          []jsonptr.Pointer{pointer},
 		FlattenSeparator: separator,
 	}
 
@@ -305,6 +310,7 @@ func TestFlattenMapCustomSeparator(t *testing.T) {
 
 func TestFlattenMapDropSeparator(t *testing.T) {
 	path := "nestedData"
+	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
 	extracted_value_key := "key"
 	extracted_value := "value"
 	separator := "drop"
@@ -319,7 +325,7 @@ func TestFlattenMapDropSeparator(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten:          [][]string{{path}},
+		Flatten:          []jsonptr.Pointer{pointer},
 		FlattenSeparator: separator,
 	}
 
@@ -349,6 +355,7 @@ func TestFlattenMapDropSeparator(t *testing.T) {
 
 func TestFlattenArray(t *testing.T) {
 	path := "nestedData"
+	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
 	extracted_value_key := "0"
 	extracted_value := "value"
 
@@ -362,7 +369,7 @@ func TestFlattenArray(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten: [][]string{{path}},
+		Flatten: []jsonptr.Pointer{pointer},
 	}
 
 	err := data.Transform(&c)
@@ -380,6 +387,7 @@ func TestFlattenArray(t *testing.T) {
 
 func TestFlattenArrayOfMaps(t *testing.T) {
 	path := "nestedData"
+	pointer := jsonptr.MustParse(fmt.Sprintf("/%s", path))
 	extracted_value_key := "0"
 	extracted_value_key_2 := "key"
 	extracted_value := "value"
@@ -394,7 +402,7 @@ func TestFlattenArrayOfMaps(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten: [][]string{{path}},
+		Flatten: []jsonptr.Pointer{pointer},
 	}
 
 	err := data.Transform(&c)

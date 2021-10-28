@@ -27,6 +27,7 @@ package transformer
 import (
 	"fmt"
 
+	"github.com/dolmen-go/jsonptr"
 	"github.com/telenornms/skogul"
 )
 
@@ -83,7 +84,7 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 }
 
 // flattenStructure copies a nested object/array to the root level
-func flattenStructure(nestedPath []string, separator string, metric *skogul.Metric) error {
+func flattenStructure(nestedPath jsonptr.Pointer, separator string, metric *skogul.Metric) error {
 	nestedObjectPath := nestedPath[0]
 
 	// Create a nested path unless configuration says not to
@@ -98,14 +99,14 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 		nestedObjectPath = ""
 	}
 
-	obj, err := skogul.ExtractNestedObject(metric.Data, nestedPath)
+	obj, err := jsonptr.Get(metric.Data, nestedPath.String())
 
 	if err == nil {
-		nestedObj, ok := obj[nestedPath[len(nestedPath)-1]].(map[string]interface{})
+		nestedObj, ok := obj.(map[string]interface{})
 
 		if !ok {
 
-			nestedObjArray, ok := obj[nestedPath[len(nestedPath)-1]].([]interface{})
+			nestedObjArray, ok := obj.([]interface{})
 			if !ok {
 				return skogul.Error{Reason: "Failed cast"}
 			}
@@ -145,7 +146,7 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 type Data struct {
 	Set              map[string]interface{} `doc:"Set data fields to specific values."`
 	Require          []string               `doc:"Require the pressence of these data fields."`
-	Flatten          [][]string             `doc:"Flatten nested structures down to the root level"`
+	Flatten          []jsonptr.Pointer      `doc:"Flatten nested structures down to the root level"`
 	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
 	Remove           []string               `doc:"Remove these data fields."`
 	Ban              []string               `doc:"Fail if any of these data fields are present"`
