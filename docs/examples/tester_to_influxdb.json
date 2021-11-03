@@ -1,0 +1,25 @@
+{
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 100,
+      "values": 100,
+      "threads": 30
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "influxdb"
+    }
+  },
+  "senders": {
+    "influxdb": {
+      "type": "influx",
+      "url": "http://localhost:8086/write?db=skogul",
+      "measurement": "skogul"
+    }
+  }
+}
