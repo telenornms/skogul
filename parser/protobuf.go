@@ -149,7 +149,7 @@ func createData(telemetry *pb.TelemetryStream) map[string]interface{} {
 
 		jsonMessage, err = json.Marshal(messageOnly)
 		if err != nil {
-			pbLog.WithError(err).Fatal("Failed to marshal to JSON")
+			pbLog.WithError(err).Error("Failed to marshal data to JSON")
 			return nil
 		}
 
