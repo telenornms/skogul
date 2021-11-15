@@ -1,3 +1,13 @@
+v0.10.8
+=======
+
+Release date: 2021-11-15
+
+Fixes a bug that would crash skogul if it failed to convert
+a protocol buffer packet into the internal data format of
+skogul. The underlying problem was an interesting value
+for a numerical metric, which there are now tests added for.
+
 v0.10.7
 =======
 
