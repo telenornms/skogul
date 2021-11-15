@@ -175,7 +175,7 @@ func TestParseJunosProtobufTelemetryStreamOptics(t *testing.T) {
 
 func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
 	expected := float64(math.Inf(-1))
-	telemetry := generateOpticsDiag(math.Inf(-1))
+	telemetry := generateOpticsDiag(expected)
 
 	bytes, err := proto.Marshal(&telemetry)
 	if err != nil {
@@ -188,17 +188,8 @@ func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
 	}
 
 	protobuf_parser := parser.ProtoBuf{}
-	c, err := protobuf_parser.Parse(bytes)
-	if err != nil {
-		t.Errorf("Failed to parse optics diag lane stats protobuf data, err: %v", err)
+	if _, err := protobuf_parser.Parse(bytes); err == nil {
+		t.Errorf("Expected parsing -Inf values to return an error, ref issue #194.")
 		return
-	}
-	if c == nil {
-		t.Error("Protobuf parse returned nil-container")
-	}
-
-	got := parseDiagStatsResp(c.Metrics[0].Data, "lane_laser_receiver_power_dbm")
-	if got != expected {
-		t.Errorf("Expected lane_laser_receiver_power_dbm to be %T(%v), but got %T(%v)", expected, expected, got, got)
 	}
 }
