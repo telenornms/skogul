@@ -169,17 +169,29 @@ func TestSplit_dict(t *testing.T) {
 	}
 
 	// Verify that the data is not the same in the two objects as it might differ
-	if c.Metrics[0].Data["name"] != "foo" {
-		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "foo", c.Metrics[0].Data["name"])
+	test1 := 0
+	test2 := 1
+	if c.Metrics[0].Data["name"] == "foo" && c.Metrics[1].Data["name"] == "bar" {
+		test1 = 0
+		test2 = 1
+	} else if c.Metrics[1].Data["name"] == "foo" && c.Metrics[0].Data["name"] == "bar" {
+		test1 = 1
+		test2 = 0
+	} else {
+		t.Errorf(`Expected Metrics not present for dict split?`)
 	}
-	if c.Metrics[0].Metadata["keyname"] != "fookey" {
-		t.Errorf(`Expected Metrics Metadata key 'keyname' to have value of 'fookey', but got '%s'`, c.Metrics[0].Metadata["keyname"])
+
+	if c.Metrics[test1].Data["name"] != "foo" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "foo", c.Metrics[test1].Data["name"])
 	}
-	if c.Metrics[1].Data["name"] != "bar" {
-		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "bar", c.Metrics[0].Data["name"])
+	if c.Metrics[test1].Metadata["keyname"] != "fookey" {
+		t.Errorf(`Expected Metrics Metadata key 'keyname' to have value of 'fookey', but got '%s'`, c.Metrics[test1].Metadata["keyname"])
 	}
-	if c.Metrics[1].Metadata["keyname"] != "barkey" {
-		t.Errorf(`Expected Metrics Metadata key 'keyname' to have value of 'barkey', but got '%s'`, c.Metrics[0].Metadata["keyname"])
+	if c.Metrics[test2].Data["name"] != "bar" {
+		t.Errorf(`Expected Metrics Data to contain key of val '%s' but got '%s'`, "bar", c.Metrics[test2].Data["name"])
+	}
+	if c.Metrics[test2].Metadata["keyname"] != "barkey" {
+		t.Errorf(`Expected Metrics Metadata key 'keyname' to have value of 'barkey', but got '%s'`, c.Metrics[test2].Metadata["keyname"])
 	}
 
 }
