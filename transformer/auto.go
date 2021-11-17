@@ -60,7 +60,13 @@ func init() {
 		Name:    "split",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Split{} },
-		Help:    "Splits a metric into multiple metrics based on a field.",
+		Help:    "Split an array inside a metric into multiple metrics, one for each array element.",
+	})
+	Auto.Add(skogul.Module{
+		Name:    "dictsplit",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &DictSplit{} },
+		Help:    "Split a dictionary/hash inside a metric into multiple metrics, one for each dictinoary/hash element.",
 	})
 	Auto.Add(skogul.Module{
 		Name:    "replace",
