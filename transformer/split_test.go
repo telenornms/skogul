@@ -169,6 +169,11 @@ func TestSplit_dict(t *testing.T) {
 	}
 
 	// Verify that the data is not the same in the two objects as it might differ
+	// Since dictionaries/hashes are unsorted, there's no guarantee
+	// that c.Metrics[0] is the first data listed in the data set
+	// above, though it usually has been for now. Thus we try to detect
+	// which test is which. This sort of makes us verify parts of the
+	// test twice, though.
 	test1 := 0
 	test2 := 1
 	if c.Metrics[0].Data["name"] == "foo" && c.Metrics[1].Data["name"] == "bar" {
