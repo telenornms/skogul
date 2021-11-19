@@ -70,6 +70,8 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 		kvScanner := bufio.NewScanner(bytes.NewReader(line))
 		kvScanner.Split(splitKeyValuePairs)
 
+		has_hostname := false
+
 		var metric *skogul.Metric
 		for {
 			canContinue := kvScanner.Scan()
@@ -95,7 +97,15 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 					Data:     make(map[string]interface{}),
 				}
 				metric.Metadata["sd-id"] = tagValue[0]
+				has_hostname = true
 				continue
+			} else if !has_hostname {
+				metric = &skogul.Metric{
+					Time:     &timestamp,
+					Metadata: make(map[string]interface{}),
+					Data:     make(map[string]interface{}),
+				}
+				has_hostname = true
 			} else if len(tagValue) != 2 {
 				break
 			}

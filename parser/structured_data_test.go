@@ -103,6 +103,20 @@ func TestStructuredDataParseExample4Fails(t *testing.T) {
 	}
 }
 
+func TestStructuredDataParseNoHostnameAllowed(t *testing.T) {
+	b := []byte(`[iut="3" eventSource="Application" eventID="1011"]`)
+	p := parser.StructuredData{}
+
+	c, err := p.Parse(b)
+	if err != nil {
+		t.Error("Expected parser to parse even though no hostname in data")
+		return
+	}
+	if c.Metrics[0].Data["iut"] != "3" {
+		t.Errorf("Expected structured data parser to return 3 for iut, but got %v", c.Metrics[0].Data["iut"])
+	}
+}
+
 func TestStructuredDataParseNoContentResultsInOneMetric(t *testing.T) {
 	b := []byte(`[exampleSDID@32473]`)
 	p := parser.StructuredData{}
