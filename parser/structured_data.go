@@ -235,8 +235,8 @@ func structuredDataParser(data []byte, removeEscapedCharsFromResult, stopOnNewMe
 
 	if stopOnNewMetric {
 		r := data[skipLeadingChars:start]
-		return len(data[:start]) + 1, r
+		return len(data[:start]) + skippedWidth, r
 	}
 
-	return len(data[:start]) + 1, data[skipLeadingChars:start]
+	return len(data[:start]) + skippedWidth, data[skipLeadingChars:start]
 }
