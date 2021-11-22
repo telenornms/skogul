@@ -51,63 +51,46 @@ func (sd *StructuredData) Parse(bytes []byte) (*skogul.Container, error) {
 	}, nil
 }
 
-// mnrParseData takes the raw input and parses it
+// parseStructuredData takes the raw input and parses it
 // this takes care of splitting input on newlines etc
 func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, error) {
-	lines := bytes.Split(data, []byte("\n"))
+	lineScanner := bufio.NewScanner(bytes.NewReader(data))
+	lineScanner.Split(splitStructuredDataMetrics)
 
 	metrics := make([]*skogul.Metric, 0)
 
 	timestamp := skogul.Now()
-
-	for _, l := range lines {
-		line := bytes.TrimSpace(l)
+	for lineScanner.Scan() {
+		line := lineScanner.Bytes()
 		if len(line) == 0 {
 			// Skip empty lines
 			continue
 		}
 
+		metric := &skogul.Metric{
+			Time:     &timestamp,
+			Metadata: make(map[string]interface{}),
+			Data:     make(map[string]interface{}),
+		}
+
+		// Set up the Key-Value scanner to extract data
 		kvScanner := bufio.NewScanner(bytes.NewReader(line))
 		kvScanner.Split(splitKeyValuePairs)
 
-		has_hostname := false
-
-		var metric *skogul.Metric
-		for {
-			canContinue := kvScanner.Scan()
-
+		for kvScanner.Scan() {
 			tag := strings.Trim(kvScanner.Text(), "\u0000")
 			tagValue := strings.SplitN(tag, "=", 2)
+
+			if len(tagValue) == 1 && metric.Metadata["sd-id"] == nil {
+				metric.Metadata["sd-id"] = tagValue[0]
+				continue
+			}
 
 			if len(tagValue) == 1 {
 				if strings.TrimSpace(tagValue[0]) == "" {
 					return nil, skogul.Error{Reason: "Got invalid data in the middle of a structured data line", Source: "structured_data-parser"}
 				}
-				if metric != nil {
-					if len(metric.Data) > 0 {
-						metrics = append(metrics, metric)
-					} else {
-						sdLog.Tracef("NOT Creating new metric because existing is empty, metric: %v, line:'%s'", metric, string(line))
-						break
-					}
-				}
-				metric = &skogul.Metric{
-					Time:     &timestamp,
-					Metadata: make(map[string]interface{}),
-					Data:     make(map[string]interface{}),
-				}
-				metric.Metadata["sd-id"] = tagValue[0]
-				has_hostname = true
 				continue
-			} else if !has_hostname {
-				metric = &skogul.Metric{
-					Time:     &timestamp,
-					Metadata: make(map[string]interface{}),
-					Data:     make(map[string]interface{}),
-				}
-				has_hostname = true
-			} else if len(tagValue) != 2 {
-				break
 			}
 
 			paramName := tagValue[0]
@@ -117,19 +100,11 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			// if the value already exists, replace it with an array ?
 
 			metric.Data[paramName] = paramValue
-
-			if !canContinue {
-				break
-			}
 		}
-		if metric != nil {
-			// Note: We add metrics even if they have no data fields.
-			// Intended from sender or misconfigured sender?
-			metrics = append(metrics, metric)
-		}
+		metrics = append(metrics, metric)
 	}
 	if len(metrics) == 0 {
-		sdLog.WithField("lines", len(lines)).Warnf("RFC5424/Structured Data parser failed to parse any of the %d lines", len(lines))
+		sdLog.WithField("bytes", len(data)).Warnf("RFC5424/Structured Data parser failed to parse any lines")
 		return nil, skogul.Error{Reason: "Failed to parse RFC5424 lines", Source: "structured_data-parser"}
 	}
 	return metrics, nil
@@ -137,23 +112,51 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 
 // splitKeyValuePairs splits a section (tag key=value pairs or field key=value pairs)
 func splitKeyValuePairs(data []byte, atEOF bool) (advance int, token []byte, err error) {
-	fieldWidth, newData := structuredDataParser(data, true)
+	fieldWidth, newData := structuredDataParser(data, true, false)
 
 	returnChars := len(newData)
 
-	if atEOF || returnChars == len(data) {
+	if atEOF {
 		// EOF, return with what we have left
 		return returnChars + 1, newData[:returnChars], nil
+	} else if returnChars == len(data) {
+		// 'Soft EOF', we don't actually have more data
+		// but we might have a separator char leftover.
+		return returnChars, newData[:returnChars], nil
 	}
 
 	// Skip the trailing comma between each key=value pair, but still advance counter
 	return fieldWidth, newData[:returnChars], nil
 }
 
+// splitStructuredDataMatrics splits a byte-stream of structured data into a list
+// of metrics. This is most commonly split on newline, but multiple metrics can also
+// appear on the same line, so we also split those.
+func splitStructuredDataMetrics(data []byte, atEOF bool) (advance int, token []byte, err error) {
+	fieldWidth, newData := structuredDataParser(data, false, true)
+
+	returnChars := len(newData)
+
+	if atEOF || returnChars == len(data) {
+		// EOF, return with what we have left
+		advance, token, err = returnChars+1, newData[:returnChars], nil
+		return advance, token, err
+	}
+
+	// Skip the trailing comma between each key=value pair, but still advance counter
+	advance, token, err = fieldWidth, newData[:returnChars], nil
+	return advance, token, err
+}
+
 // struturedDataParser parses a structured data-line.
 // A boolean flag decides whether or not escape characters should remain in the output
 // or have their prepending escape character removed.
-func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, []byte) {
+func structuredDataParser(data []byte, removeEscapedCharsFromResult, stopOnNewMetric bool) (int, []byte) {
+	// Discard lines beginning with spaces, as this is not allowed in the RFC.
+	if len(data) > 0 && data[0] == ' ' {
+		return len(data), nil
+	}
+
 	openQuote := false
 	escape := false
 	escapeChars := make([]int, 0)
@@ -168,9 +171,9 @@ func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, 
 			continue
 		}
 
-		// If we receive an un-escaped ] character, this section is done
+		// If we receive an un-escaped ] or newline character, this section is done
 		// and we'll restart parsing of the rest (if any) as a new section.
-		if c == ']' {
+		if c == ']' || c == '\n' {
 			break
 		}
 
@@ -201,7 +204,11 @@ func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, 
 			continue
 		}
 
-		if c == ' ' {
+		// Stop when we reach a space, unless we're
+		// instructed to only stop on new metrics,
+		// in which case we will keep going until
+		// we find a closing bracket.
+		if !stopOnNewMetric && c == ' ' {
 			break
 		}
 	}
@@ -220,10 +227,16 @@ func structuredDataParser(data []byte, removeEscapedCharsFromResult bool) (int, 
 		skippedWidth = 1
 	}
 
+	skipLeadingChars := 0
 	// If the value starts with a [, we remove it from the output
 	if len(data) >= 1 && data[0] == '[' {
-		return len(data[:start]) + 1, data[1:start]
+		skipLeadingChars = 1
 	}
 
-	return len(data[:start]) + 1, data[:start]
+	if stopOnNewMetric {
+		r := data[skipLeadingChars:start]
+		return len(data[:start]) + 1, r
+	}
+
+	return len(data[:start]) + 1, data[skipLeadingChars:start]
 }
