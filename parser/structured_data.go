@@ -151,10 +151,10 @@ func splitStructuredDataMetrics(data []byte, atEOF bool) (advance int, token []b
 // struturedDataParser parses a structured data-line.
 // A boolean flag decides whether or not escape characters should remain in the output
 // or have their prepending escape character removed.
-func structuredDataParser(data []byte, removeEscapedCharsFromResult, stopOnNewMetric bool) (int, []byte) {
+func structuredDataParser(bytes []byte, removeEscapedCharsFromResult, stopOnNewMetric bool) (tokens int, data []byte) {
 	// Discard lines beginning with spaces, as this is not allowed in the RFC.
-	if len(data) > 0 && data[0] == ' ' {
-		return len(data), nil
+	if len(bytes) > 0 && bytes[0] == ' ' {
+		return len(bytes), nil
 	}
 
 	openQuote := false
@@ -162,9 +162,9 @@ func structuredDataParser(data []byte, removeEscapedCharsFromResult, stopOnNewMe
 	escapeChars := make([]int, 0)
 	escapeCharsWidth := make([]int, 0)
 	start := 0
-	for width := 0; start < len(data); start += width {
+	for width := 0; start < len(bytes); start += width {
 		var c rune
-		c, width = utf8.DecodeRune(data[start:])
+		c, width = utf8.DecodeRune(bytes[start:])
 
 		if escape {
 			escape = false
@@ -213,30 +213,30 @@ func structuredDataParser(data []byte, removeEscapedCharsFromResult, stopOnNewMe
 		}
 	}
 
-	skippedWidth := 0
+	// Prepare the return values
+	data = bytes[:start]
+	tokens = len(data)
+
 	for i, escapedChar := range escapeChars {
 		if removeEscapedCharsFromResult {
 			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:start]))
 		}
-		skippedWidth += escapeCharsWidth[i]
+		tokens += escapeCharsWidth[i]
 	}
 
 	// If we haven't skipped any chars, we need to tell the scanner to advance one position extra
-	// to skip over the comma separating the next key=value pair
-	if skippedWidth == 0 {
-		skippedWidth = 1
+	// to skip over separator of the next key=value pair
+	if len(escapeChars) == 0 {
+		tokens += 1
 	}
 
 	skipLeadingChars := 0
 	// If the value starts with a [, we remove it from the output
-	if len(data) >= 1 && data[0] == '[' {
+	if len(bytes) >= 1 && bytes[0] == '[' {
 		skipLeadingChars = 1
 	}
 
-	if stopOnNewMetric {
-		r := data[skipLeadingChars:start]
-		return len(data[:start]) + skippedWidth, r
-	}
+	data = data[skipLeadingChars:]
 
-	return len(data[:start]) + skippedWidth, data[skipLeadingChars:start]
+	return tokens, data
 }
