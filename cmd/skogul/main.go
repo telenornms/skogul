@@ -32,9 +32,12 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
+	"runtime/pprof"
 	"sort"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	"github.com/telenornms/skogul"
@@ -57,6 +60,7 @@ var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 var fversion = flag.Bool("version", false, "Print skogul version")
+var fprofile = flag.Bool("profile", false, "Run skogul with profiling")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
@@ -898,6 +902,37 @@ func main() {
 		fmt.Println(string(out))
 		os.Exit(0)
 	}
+	proFilePath := "./prof"
+	var proFile *os.File
+	if *fprofile {
+		log.Info("Enabling skogul profiling")
+		var err error
+		proFile, err = os.Create(proFilePath)
+		if err != nil {
+			log.WithError(err).Fatal("couldn't create profiling file")
+		}
+		defer proFile.Close()
+
+		pprof.StartCPUProfile(proFile)
+		defer pprof.StopCPUProfile()
+	}
+
+	sigChan := make(chan os.Signal, 2)
+	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		select {
+		case <-sigChan:
+			{
+				log.Info("Received interrupt signal, quitting...")
+				if proFile != nil {
+					pprof.StopCPUProfile()
+					proFile.Close()
+				}
+				os.Exit(0)
+			}
+		}
+	}()
+
 	log.Info("Starting skogul")
 
 	var exitInt = 0
