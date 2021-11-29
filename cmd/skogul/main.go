@@ -869,24 +869,17 @@ func main() {
 		os.Exit(0)
 	}
 
-	var c *config.Config
+	configPath := ""
 
 	if *fconfigDir != "" {
-		if _, err := os.Stat(*fconfigDir); os.IsNotExist(err) {
-			log.Fatalf("Directory '%s' does not exist", *fconfigDir)
-		}
-
-		var err error
-		c, err = config.ReadFiles(*fconfigDir)
-		if err != nil {
-			log.Fatal(err)
-		}
+		configPath = *fconfigDir
 	} else {
-		var err error
-		c, err = config.File(*ffile)
-		if err != nil {
-			log.Fatal(err)
-		}
+		configPath = *ffile
+	}
+
+	c, err := config.Path(configPath)
+	if err != nil {
+		log.WithError(err).Fatal("Failed to configure Skogul")
 	}
 
 	if *fconf {

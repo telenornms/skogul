@@ -334,6 +334,20 @@ func Bytes(b []byte) (*Config, error) {
 	return secondPass(&c)
 }
 
+// Path opens a path (file or directory) and parses the configuration.
+func Path(path string) (*Config, error) {
+	stat, err := os.Stat(path)
+	if err != nil {
+		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read configuration path", Next: err}
+	}
+
+	if stat.IsDir() {
+		return ReadFiles(path)
+	}
+
+	return File(path)
+}
+
 // File opens a config file and parses it, then returns the valid
 // configuration, using Bytes()
 func File(f string) (*Config, error) {
