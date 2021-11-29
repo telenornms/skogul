@@ -39,13 +39,13 @@ func init() {
 		Name:    "http",
 		Aliases: []string{"https"},
 		Alloc:   func() interface{} { return &HTTP{} },
-		Help:    "Listen for metrics on HTTP or HTTPS. Optionally requiring authentication. Each request received is passed to the handler.",
+		Help:    "Listen for metrics on HTTP or HTTPS. Optionally requiring authentication. Each request received is passed to a handler, and a single HTTP receiver can listen for multiple formats depending on URL used.",
 		Extras:  []interface{}{HTTPAuth{}},
 	})
 	Auto.Add(skogul.Module{
 		Name:  "file",
 		Alloc: func() interface{} { return &File{} },
-		Help:  "Reads from a file, then stops. Assumes one collection per line.",
+		Help:  "Reads from a file, then stops. Assumes one collection per line. E.g.: If the file has json data, the each line has to be a self-contained document/container.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "fifo",
@@ -61,7 +61,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:  "mqtt",
 		Alloc: func() interface{} { return &MQTT{} },
-		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint",
+		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "stdin",
@@ -76,11 +76,11 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:  "tcp",
 		Alloc: func() interface{} { return &TCPLine{} },
-		Help:  "Listen for Skogul-formatted JSON on a tcp socket, reading one collection per line.",
+		Help:  "Listen for data on a tcp socket, reading one collection per line.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "udp",
 		Alloc: func() interface{} { return &UDP{} },
-		Help:  "Accept UDP messages, parsed by specified handler. E.g.: Protobuf.",
+		Help:  "Accept UDP messages, one UDP message is one container. Combine with protobuf parser to receive Juniper telemetry.",
 	})
 }

@@ -35,7 +35,7 @@ func init() {
 		Name:     "templater",
 		Aliases:  []string{"template", "templating"},
 		Alloc:    func() interface{} { return &Templater{} },
-		Help:     "Executes metric templating. See separate documentationf or how skogul templating works.",
+		Help:     "Executes metric templating. See separate documentation for how skogul templating works.",
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
@@ -54,7 +54,7 @@ func init() {
 		Name:    "parse",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Parse{} },
-		Help:    "Parses a metric using a skogul parser",
+		Help:    "Parses a metric using a skogul parser. Useful if data encoding is nested, e.g.: Original data is json, but contains a text field with influx line protocol data.",
 	})
 	Auto.Add(skogul.Module{
 		Name:    "split",
@@ -78,13 +78,13 @@ func init() {
 		Name:    "switch",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Switch{} },
-		Help:    "Conditionally apply transformers",
+		Help:    "Conditionally apply transformers.",
 		Extras:  []interface{}{Case{}},
 	})
 	Auto.Add(skogul.Module{
 		Name:    "timestamp",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Timestamp{} },
-		Help:    "Extract a timestamp from the container data",
+		Help:    "Extract a timestamp from the container data.",
 	})
 }
