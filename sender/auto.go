@@ -48,7 +48,7 @@ func init() {
 		Name:    "counter",
 		Aliases: []string{"count"},
 		Alloc:   func() interface{} { return &Counter{} },
-		Help:    "Accepts metrics, counts them and passes them on. Then emits statistics to the Stats-handler on an interval.",
+		Help:    "Accepts metrics, counts them and passes them on. Then emits statistics to the Stats-handler on an interval. Useful for housekeeping, highly recommended both during testing and production for internal Skogul-metrics.",
 	})
 	Auto.Add(skogul.Module{
 		Name:     "debug",
@@ -61,7 +61,7 @@ func init() {
 		Name:    "detacher",
 		Aliases: []string{"detach"},
 		Alloc:   func() interface{} { return &Detacher{} },
-		Help:    "Returns OK without waiting for the next sender to finish.",
+		Help:    "Returns OK without waiting for the next sender to finish. The detached part is single-threaded.",
 	})
 	Auto.Add(skogul.Module{
 		Name:    "dupe",
@@ -73,12 +73,12 @@ func init() {
 		Name:    "errdiverter",
 		Aliases: []string{"errordiverter", "errdivert", "errordivert"},
 		Alloc:   func() interface{} { return &ErrDiverter{} },
-		Help:    "Forwards data to next sender. If an error is returned, the error is converted into a Skogul container and sent to the err-handler. This provides the means of logging errors through regular skogul-chains.",
+		Help:    "Forwards data to next sender. If an error is returned, the error is converted into a Skogul container and sent to the err-handler. This provides the means of logging errors through regular skogul-chains. See the logrus receiver for a more solid approach to diverting all log messages, instead of individually failed containers.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "fanout",
 		Alloc: func() interface{} { return &Fanout{} },
-		Help:  "Fanout to a fixed number of threads before passing data on. This is rarely needed, as receivers should do this.",
+		Help:  "Fan out (load balance) to a fixed number of threads before passing data on. This is rarely needed, as receivers should do this.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "fallback",
@@ -88,7 +88,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:  "file",
 		Alloc: func() interface{} { return &File{} },
-		Help:  "Writes metrics to file.",
+		Help:  "Writes metrics to a file.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "forwardfail",
@@ -129,9 +129,10 @@ func init() {
 		Help:  "Execute a SQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance. Supported engines are MySQL/MariaDB and Postgres.",
 	})
 	Auto.Add(skogul.Module{
-		Name:  "null",
-		Alloc: func() interface{} { return &Null{} },
-		Help:  "Discards all data. Mainly useful for testing.",
+		Name:     "null",
+		Alloc:    func() interface{} { return &Null{} },
+		Help:     "Discards all data. Mainly useful for testing the receive-pipeline decoupled from storage.",
+		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
 		Name:  "sleep",

@@ -105,7 +105,8 @@ channel, if that fails, write to a local queue and retry periodically.
 To facilitate this, Skogul has three core components:
 
 1. Receivers acquire raw data
-2. Handlers turns raw data into meaningful content
+2. Handlers turns raw data into meaningful content, using a parser and 0 or
+   more transformers.
 3. Senders determine what happens to the data
 
 A single instance of Skogul must have at least one receiver, but can have
@@ -144,8 +145,8 @@ CONFIGURATION
 =============
 
 Configuration of skogul is done with a json config file, referenced with
-the -f option. You need to specify at least one receiver, handler and
-sender to make something sensible.
+the -f option. You need to specify at least one receiver and handler to
+make something sensible, you probably also want a sender.
 
 The base configuration set is::
 
@@ -153,7 +154,7 @@ The base configuration set is::
     "parsers": {
       "xxx": {
 	"type": "type-of-parser",
-	tpye-specific-options
+	type-specific-options
       },
       "other-parser...": ...
     },
@@ -201,7 +202,9 @@ Upon start-up, all receivers are started.
 
 It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
-operator to avoid setting up feedback loops.
+operator to avoid setting up feedback loops. In other words: If you tell
+a dupe-sender to send data back to itself, it will happily do so until
+it runs out of memory and dies.
 
 Numerous parsers, transformers, senders and receivers exist and they are
 each documented below. Some of these can be referenced by implementation
@@ -209,7 +212,8 @@ name without defining them in the configuration - this will create a
 "blank" variant of the module with default options. This is noted for each
 module, and is provided to avoid bloating your configuration with modules
 that don't have any required options (e.g.: the debug sender or the
-templater transformer, or most parsers).
+templater transformer, or most parsers). Any explicitly defined module
+will always take precedence over the implicitly created ones.
 
 The documentation for each module also lists all options. In general, you
 do not need to specify all options.
@@ -236,7 +240,7 @@ ParserRef
 []string
 	An array of text strings. E.g. ["foo","bar"].
 
-[]*skogul.HandlerRef
+[]*skogul.SenderRef
 	An array of SenderRef, so similar to the above ["foo", "bar"], where "foo"
 	and "bar" are senders named in the "senders" section of the configuration.
 
@@ -269,9 +273,7 @@ TRANSFORMERS
 ============
 
 Transformers are the only tools that can actively modify a metric. See the
-"HANDLERS" section for more discussion. Note that the "templater" transformer
-does not need to be defined - if a handler lists "templater", one will be
-created behind the scenes. The available transformers are:
+"HANDLERS" section for more discussion. The available transformers are:
 
 `)
 	helpModules(transformer.Auto)
@@ -293,10 +295,6 @@ HANDLERS
 There is only one type of handler. It accepts three arguments: A parser to
 parse data, a list of optional transformers, and the first sender that will
 receive the parsed container(s).
-
-The valid parsers are "json", "influx", "custom-json" and "protobuf".
-The "templating" transformer does not need to be explicitly defined
-to be referenced, since it has no settings.
 
 JSON parsing
 ------------
