@@ -76,6 +76,11 @@ func drainStats(ctx context.Context) {
 // Starts starts listening for Skogul stats and
 // emits them on the configured interval.
 func (s *Stats) Start() error {
+	return s.StartC(context.Background())
+}
+
+// StartC allows starting Stats with a context.
+func (s *Stats) StartC(ctx context.Context) error {
 	if s.Interval.Duration == 0 {
 		statsLog.Debug("Missing interval for stats reporting, defaulting to every 3 seconds")
 		s.Interval.Duration = 3 * time.Second
@@ -94,7 +99,12 @@ func (s *Stats) Start() error {
 			statsLog.Debug("Dropping stats because the channel is full")
 			continue
 		}
-		s.ch <- metric
+		select {
+		case s.ch <- metric:
+			continue
+		case <-ctx.Done():
+			return ctx.Err()
+		}
 	}
 	return nil
 }

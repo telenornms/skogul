@@ -24,6 +24,7 @@
 package receiver_test
 
 import (
+	"context"
 	"testing"
 	"time"
 
@@ -51,6 +52,15 @@ func TestNoStatsReceived(t *testing.T) {
 		Handler: h,
 	}
 
+	skogul.StatsChan = make(chan *skogul.Metric, 2)
+	defer func() {
+		close(skogul.StatsChan)
+	}()
+
+	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	defer cancel()
+	go stats.StartC(ctx)
+
 	// Allow stats to attempt to send
 	time.Sleep(2 * stats.Interval.Duration)
 
@@ -75,7 +85,9 @@ func TestStatsReceived(t *testing.T) {
 		close(skogul.StatsChan)
 	}()
 
-	go stats.Start()
+	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	defer cancel()
+	go stats.StartC(ctx)
 
 	s := skogul.Stats{
 		Received: 10,
@@ -106,7 +118,9 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 		close(skogul.StatsChan)
 	}()
 
-	go stats.Start()
+	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	defer cancel()
+	go stats.StartC(ctx)
 
 	s := skogul.Stats{
 		Received: 10,
