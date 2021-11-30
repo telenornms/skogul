@@ -37,6 +37,9 @@ var sdLog = skogul.Logger("parser", "structured_data")
 
 // StructuredData supports parsing RFC5424 structured data through the Parse() function
 // Note: This does not parse a full syslog message.
+// In the resulting metrics, there may be a metadata field with the key
+// "SD-ID" which contains the SD-ID from the message if it was present.
+// SD-ID: https://datatracker.ietf.org/doc/html/draft-ietf-syslog-protocol-23#section-6.3.2
 type StructuredData struct{}
 
 // Parse converts RFC5424 Structured Data data into a skogul Container
@@ -82,6 +85,7 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			tagValue := strings.SplitN(tag, "=", 2)
 
 			if len(tagValue) == 1 && metric.Metadata["sd-id"] == nil {
+				// Set the SD-ID if it exists in the message (https://datatracker.ietf.org/doc/html/draft-ietf-syslog-protocol-23#section-6.3.2)
 				metric.Metadata["sd-id"] = tagValue[0]
 				continue
 			}
