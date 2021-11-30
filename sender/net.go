@@ -63,3 +63,13 @@ func (n *Net) Send(c *skogul.Container) error {
 	}
 	return nil
 }
+
+func (n *Net) Verify() error {
+	if n.Address == "" {
+		return skogul.Error{Reason: "Missing address for Net sender", Source: "net-sender"}
+	}
+	if n.Network == "" {
+		return skogul.Error{Reason: "Missing network for Net sender", Source: "net-sender"}
+	}
+	return nil
+}
