@@ -69,26 +69,20 @@ func (s *Stats) Start() error {
 // them when there is time for it.
 func (s *Stats) runner() {
 	for range s.ticker.C {
-		statsLog.Trace("Time to send skogul stats")
-		// Create a new channel,
-		// consume all on the existing, and then close it
-		ch := s.ch
-		s.ch = make(chan *skogul.Metric, 100)
-		close(ch)
+		statsLog.WithField("stats", len(s.ch)).Trace("Time to send skogul stats")
 
-		metrics := make([]*skogul.Metric, 0)
+		metrics := make([]*skogul.Metric, len(s.ch))
 
-		// Drain the old channel
-		for {
-			statsLog.Trace("Consuming entry from channel..")
-			metric, more := <-ch
+		// Drain the current messages on the channel
+		for i := range metrics {
+			metric, more := <-s.ch
 			if !more {
 				break
 			} else if metric == nil {
-				statsLog.Error("Got nil metric on stats channel with more metrics left. Discarding this.")
+				statsLog.Debug("Got nil metric on stats channel with more metrics left. Discarding this.")
 				break
 			}
-			metrics = append(metrics, metric)
+			metrics[i] = metric
 		}
 
 		if len(metrics) == 0 && !s.SendEveryInterval {

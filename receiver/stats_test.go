@@ -128,3 +128,44 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 		t.Errorf("expected stats channel to not block noticeably, but had to wait %v", td)
 	}
 }
+
+func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
+	tester := sender.Test{}
+	h := genStatsHandler(&tester)
+	stats := receiver.Stats{
+		SendEveryInterval: false,
+		Interval: skogul.Duration{
+			Duration: time.Millisecond * 10,
+		},
+		Handler: h,
+	}
+
+	skogul.StatsChan = make(chan *skogul.Metric, 2)
+	defer func() {
+		close(skogul.StatsChan)
+	}()
+
+	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	defer cancel()
+	go stats.StartC(ctx)
+
+	s := skogul.Stats{
+		Received: 10,
+	}
+	t0 := time.Now()
+	for i := 0; i < 1000; i++ {
+		skogul.StatsChan <- s.Metric()
+	}
+	td := time.Since(t0)
+
+	// Allow stats to attempt to send
+	time.Sleep(2 * stats.Interval.Duration)
+
+	if tester.Received() != 1 {
+		t.Errorf("expected to have gotten 1 stats container but got %d", tester.Received())
+	}
+
+	if td > stats.Interval.Duration*2 { // allow for a bit of jitter
+		t.Errorf("expected stats channel to not block noticeably, but had to wait %v", td)
+	}
+}

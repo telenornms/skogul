@@ -196,7 +196,6 @@ func (ud *UDP) sendStats() {
 	for {
 		// FIXME: time.Ticker
 		udpLog.Trace("sending stats")
-		// FIXME: this is blocking if we don't get to send (such as with no receiver configured)
 		skogul.StatsChan <- ud.GetStats()
 		time.Sleep(ud.EmitStats.Duration)
 	}
