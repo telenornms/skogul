@@ -49,7 +49,9 @@ func (s *Stats) Start() error {
 		s.Interval.Duration = 3 * time.Second
 	}
 
-	skogul.StatsChan = make(chan *skogul.Metric, 1000)
+	if skogul.StatsChan == nil {
+		skogul.StatsChan = make(chan *skogul.Metric, 1000)
+	}
 
 	s.ch = make(chan *skogul.Metric, 100)
 

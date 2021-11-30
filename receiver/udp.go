@@ -173,14 +173,13 @@ func (ud *UDP) initStats() {
 		Generic: &skogul.Stats{},
 	}
 	ud.stats.ch = make(chan stat, 100) // XXX: ud.Threads or sth?
+	ud.ticker = time.NewTicker(ud.EmitStats.Duration)
 }
 
 // startStats starts the listening loop for the stats chan
 func (ud *UDP) startStats() {
 	for {
 		switch <-ud.stats.ch {
-		// FIXME: Race ?
-		// FIXME: atomic increment benchmark + race test mby?
 		case receive:
 			ud.stats.Generic.Received++
 		case er:
