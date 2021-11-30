@@ -55,6 +55,7 @@ type UDP struct {
 	failureLevel logrus.Level
 	once         sync.Once
 	stats        *udpStats
+	ticker       *time.Ticker
 }
 
 // udpStats is a type containing internal stats of the UDP receiver
@@ -193,10 +194,8 @@ func (ud *UDP) startStats() {
 // sendStats sets up a forever-running loop which sends stats
 // to the global skogul stats channel at the configured interval.
 func (ud *UDP) sendStats() {
-	for {
-		// FIXME: time.Ticker
+	for range ud.ticker.C {
 		udpLog.Trace("sending stats")
 		skogul.StatsChan <- ud.GetStats()
-		time.Sleep(ud.EmitStats.Duration)
 	}
 }
