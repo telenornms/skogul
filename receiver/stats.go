@@ -34,11 +34,10 @@ var statsLog = skogul.Logger("receiver", "stats")
 
 // Stats sends metrics to a HTTP endpoint
 type Stats struct {
-	Handler           *skogul.HandlerRef
-	Interval          skogul.Duration
-	SendEveryInterval bool `doc:"Send stats for every configured interval, even if no new stats are to be reported."` //FIXME: Skogul crashes on sending empty metrics
-	ch                chan *skogul.Metric
-	ticker            *time.Ticker
+	Handler  *skogul.HandlerRef
+	Interval skogul.Duration
+	ch       chan *skogul.Metric
+	ticker   *time.Ticker
 }
 
 // statsDrainCtx and statsDrainCancel are the context and cancel functions
@@ -129,10 +128,8 @@ func (s *Stats) runner() {
 			metrics[i] = metric
 		}
 
-		if len(metrics) == 0 && !s.SendEveryInterval {
-			// We have no metrics and we're configured
-			// to *not* ship the metrics if we have none,
-			// so we wait until next tick.
+		if len(metrics) == 0 {
+			// We have no metrics so we wait until next tick.
 			statsLog.Trace("Skipping sending metrics since we have none")
 			continue
 		}

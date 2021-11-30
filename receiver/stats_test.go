@@ -45,7 +45,6 @@ func TestNoStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	stats := receiver.Stats{
-		SendEveryInterval: false,
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
@@ -73,7 +72,6 @@ func TestStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	stats := receiver.Stats{
-		SendEveryInterval: false,
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
@@ -106,7 +104,6 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	stats := receiver.Stats{
-		SendEveryInterval: false,
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
@@ -147,7 +144,6 @@ func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	stats := receiver.Stats{
-		SendEveryInterval: false,
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
