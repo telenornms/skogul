@@ -173,7 +173,7 @@ func (ud *UDP) initStats() {
 	ud.stats = &udpStats{
 		Generic: &skogul.Stats{},
 	}
-	ud.stats.ch = make(chan stat, 100) // XXX: ud.Threads or sth?
+	ud.stats.ch = make(chan stat, 10*ud.Threads)
 	ud.ticker = time.NewTicker(ud.EmitStats.Duration)
 }
 
