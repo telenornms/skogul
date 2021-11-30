@@ -36,6 +36,7 @@ var statsLog = skogul.Logger("receiver", "stats")
 type Stats struct {
 	Handler  *skogul.HandlerRef
 	Interval skogul.Duration
+	ChanSize uint64
 	ch       chan *skogul.Metric
 	ticker   *time.Ticker
 }
@@ -53,7 +54,7 @@ var statsDrainCtx, statsDrainCancel = context.WithCancel(context.Background())
 func init() {
 	// Create skogul.StatsChan so we don't have components blocking on it
 	if skogul.StatsChan == nil {
-		skogul.StatsChan = make(chan *skogul.Metric, 1000)
+		skogul.StatsChan = make(chan *skogul.Metric, 100)
 	}
 	go drainStats(statsDrainCtx)
 }
@@ -84,8 +85,11 @@ func (s *Stats) StartC(ctx context.Context) error {
 		statsLog.Debug("Missing interval for stats reporting, defaulting to every 3 seconds")
 		s.Interval.Duration = 3 * time.Second
 	}
+	if s.ChanSize == 0 {
+		s.ChanSize = 100
+	}
 
-	s.ch = make(chan *skogul.Metric, 100)
+	s.ch = make(chan *skogul.Metric, s.ChanSize)
 
 	s.ticker = time.NewTicker(s.Interval.Duration)
 
