@@ -24,6 +24,7 @@
 package receiver
 
 import (
+	"context"
 	"time"
 
 	"github.com/telenornms/skogul"
@@ -38,7 +39,38 @@ type Stats struct {
 	SendEveryInterval bool `doc:"Send stats for every configured interval, even if no new stats are to be reported."` //FIXME: Skogul crashes on sending empty metrics
 	ch                chan *skogul.Metric
 	ticker            *time.Ticker
-	//ch       chan *skogul.Container // FIXME: no *  (?), we should own this // global chan ?
+}
+
+// statsDrainCtx and statsDrainCancel are the context and cancel functions
+// for the automatically created skogul.StatsChan.
+// If a skogul stats receiver is configured, statsDrainCancel MUST be called
+// so that statistics are not discarded.
+var statsDrainCtx, statsDrainCancel = context.WithCancel(context.Background())
+
+// init makes sure that the skogul stats channel exists at all times.
+// Furthermore, it starts a goroutine to empty the channel in the case
+// that the stats receiver is not configured, in which case the chan
+// would end up blocking after it is filled.
+func init() {
+	// Create skogul.StatsChan so we don't have components blocking on it
+	if skogul.StatsChan == nil {
+		skogul.StatsChan = make(chan *skogul.Metric, 1000)
+	}
+	go drainStats(statsDrainCtx)
+}
+
+// drainStats drains all statistics on the stats channel.
+// If the passed context is cancelled it will stop draining the channel
+// so that a configured stats-receiver can listen on the channel.
+func drainStats(ctx context.Context) {
+	for {
+		select {
+		case <-skogul.StatsChan:
+			continue
+		case <-ctx.Done():
+			return
+		}
+	}
 }
 
 // Starts starts listening for Skogul stats and
@@ -49,17 +81,19 @@ func (s *Stats) Start() error {
 		s.Interval.Duration = 3 * time.Second
 	}
 
-	if skogul.StatsChan == nil {
-		skogul.StatsChan = make(chan *skogul.Metric, 1000)
-	}
-
 	s.ch = make(chan *skogul.Metric, 100)
 
 	s.ticker = time.NewTicker(s.Interval.Duration)
 
 	go s.runner()
 
+	statsDrainCancel()
+
 	for metric := range skogul.StatsChan {
+		if len(s.ch) >= cap(s.ch) {
+			statsLog.Debug("Dropping stats because the channel is full")
+			continue
+		}
 		s.ch <- metric
 	}
 	return nil
