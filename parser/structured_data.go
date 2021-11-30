@@ -165,10 +165,10 @@ func structuredDataParser(bytes []byte, removeEscapedCharsFromResult, stopOnNewM
 	escape := false
 	escapeChars := make([]int, 0)
 	escapeCharsWidth := make([]int, 0)
-	start := 0
-	for width := 0; start < len(bytes); start += width {
+	tokens = 0
+	for width := 0; tokens < len(bytes); tokens += width {
 		var c rune
-		c, width = utf8.DecodeRune(bytes[start:])
+		c, width = utf8.DecodeRune(bytes[tokens:])
 
 		if escape {
 			escape = false
@@ -202,7 +202,7 @@ func structuredDataParser(bytes []byte, removeEscapedCharsFromResult, stopOnNewM
 		if c == '\\' {
 			escape = true
 			if removeEscapedCharsFromResult {
-				escapeChars = append([]int{start}, escapeChars...)
+				escapeChars = append([]int{tokens}, escapeChars...)
 				escapeCharsWidth = append([]int{width}, escapeCharsWidth...)
 			}
 			continue
@@ -217,13 +217,12 @@ func structuredDataParser(bytes []byte, removeEscapedCharsFromResult, stopOnNewM
 		}
 	}
 
-	// Prepare the return values
-	data = bytes[:start]
-	tokens = len(data)
+	// Prepare the return value
+	data = bytes[:tokens]
 
 	for i, escapedChar := range escapeChars {
 		if removeEscapedCharsFromResult {
-			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:start]))
+			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:tokens]))
 		}
 		tokens += escapeCharsWidth[i]
 	}
