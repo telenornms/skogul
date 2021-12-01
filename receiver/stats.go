@@ -32,7 +32,7 @@ import (
 
 var statsLog = skogul.Logger("receiver", "stats")
 
-// Stats sends metrics to a HTTP endpoint
+// Stats receives metrics from skogul and forwards it to a handler.
 type Stats struct {
 	Handler  *skogul.HandlerRef
 	Interval skogul.Duration
@@ -75,7 +75,7 @@ func DrainStats(ctx context.Context) {
 	}
 }
 
-// Starts starts listening for Skogul stats and
+// Start starts listening for Skogul stats and
 // emits them on the configured interval.
 func (s *Stats) Start() error {
 	return s.StartC(context.Background())
