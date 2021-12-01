@@ -91,6 +91,10 @@ func (s *Stats) StartC(ctx context.Context) error {
 		s.ChanSize = 100
 	}
 
+	// XXX: we shouldn't allow multiple stats receivers instantiated probably
+	// because they'll just steal the stats from each other.
+	// or we'll have to direct stats to a specific stats instance.
+
 	s.ch = make(chan *skogul.Metric, s.ChanSize)
 
 	s.ticker = time.NewTicker(s.Interval.Duration)
