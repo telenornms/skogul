@@ -124,7 +124,7 @@ func (ud *UDP) Start() error {
 		}
 	}
 	if ud.EmitStats.Duration == 0 {
-		ud.EmitStats.Duration = 10 * time.Second
+		ud.EmitStats.Duration = skogul.StatsDefaultInterval
 	}
 
 	ud.initStats()

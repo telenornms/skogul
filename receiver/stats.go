@@ -84,8 +84,8 @@ func (s *Stats) Start() error {
 // StartC allows starting Stats with a context.
 func (s *Stats) StartC(ctx context.Context) error {
 	if s.Interval.Duration == 0 {
-		statsLog.Debug("Missing interval for stats reporting, defaulting to every 3 seconds")
-		s.Interval.Duration = 3 * time.Second
+		statsLog.Debugf("Missing interval for stats reporting, defaulting to every %d seconds", skogul.StatsDefaultInterval)
+		s.Interval.Duration = skogul.StatsDefaultInterval
 	}
 	if s.ChanSize == 0 {
 		s.ChanSize = 100

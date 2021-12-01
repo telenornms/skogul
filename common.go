@@ -327,3 +327,6 @@ func (s Secret) Expose() string {
 // By configuring the stats receiver, this channel is drained and sent on to
 // the specified handler.
 var StatsChan chan *Metric
+
+// StatsDefaultInterval is the default interval used for sending stats.
+var StatsDefaultInterval = time.Second * 10
