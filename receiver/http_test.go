@@ -173,6 +173,8 @@ func TestHttp_stack(t *testing.T) {
 		return
 	}
 
+	UpdateHttpConfigWithUsablePorts(config)
+
 	sPlainOrigin := config.Senders["plain_origin"].Sender.(*sender.HTTP)
 	sAuthPlainOrigin := config.Senders["auth_plain_origin"].Sender.(*sender.HTTP)
 	sAuthPlainFail1 := config.Senders["auth_plain_fail1"].Sender.(*sender.HTTP)
