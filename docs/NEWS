@@ -1,3 +1,22 @@
+v0.10.9
+=======
+
+Release date: 2021-12-01
+
+Skogul now figures out if the configuration path is a file or a directory,
+and will work with either using the same options (-f or -d). We will
+probably deprecate one of the flags at some point in the future.
+
+Add a new DictSplit transformer.
+
+Improved language in documentation.
+
+Make the null-sender configure itself automatically.
+
+The Net sender now checks for required parameters.
+
+When running tests, try to find a new port if the selected one was already in use.
+
 v0.10.8
 =======
 
