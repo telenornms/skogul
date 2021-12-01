@@ -56,18 +56,20 @@ func init() {
 	if skogul.StatsChan == nil {
 		skogul.StatsChan = make(chan *skogul.Metric, 100)
 	}
-	go drainStats(statsDrainCtx)
+	go DrainStats(statsDrainCtx)
 }
 
 // drainStats drains all statistics on the stats channel.
 // If the passed context is cancelled it will stop draining the channel
 // so that a configured stats-receiver can listen on the channel.
-func drainStats(ctx context.Context) {
+func DrainStats(ctx context.Context) {
+	statsLog.Debug("Starting stats drain. All stats are being dropped.")
 	for {
 		select {
 		case <-skogul.StatsChan:
 			continue
 		case <-ctx.Done():
+			statsLog.Debug("Stopping stats drain. Stats are being consumed.")
 			return
 		}
 	}

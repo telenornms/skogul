@@ -141,41 +141,43 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 }
 
 func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
-	tester := sender.Test{}
-	h := genStatsHandler(&tester)
-	stats := receiver.Stats{
-		Interval: skogul.Duration{
-			Duration: time.Millisecond * 10,
-		},
-		Handler: h,
-	}
-
 	skogul.StatsChan = make(chan *skogul.Metric, 2)
 	defer func() {
 		close(skogul.StatsChan)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
-	defer cancel()
-	go stats.StartC(ctx)
+	// This is called by init, but since it has already been cancelled by earlier tests, we
+	// have to start it again.
+	drainCtx, drainCancel := context.WithCancel(context.Background())
+	go receiver.DrainStats(drainCtx)
+	defer drainCancel()
 
 	s := skogul.Stats{
 		Received: 10,
 	}
-	t0 := time.Now()
-	for i := 0; i < 1000; i++ {
-		skogul.StatsChan <- s.Metric()
-	}
-	td := time.Since(t0)
+	done := make(chan bool)
 
-	// Allow stats to attempt to send
-	time.Sleep(2 * stats.Interval.Duration)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*10)
+	defer cancel()
 
-	if tester.Received() != 1 {
-		t.Errorf("expected to have gotten 1 stats container but got %d", tester.Received())
-	}
+	go func(ctx context.Context) {
+		// looping one more than channel capacity to be blocked
+		// if the channel is not being drained
+		for i := 0; i < cap(skogul.StatsChan)+1; i++ {
+			select {
+			case <-ctx.Done():
+			case skogul.StatsChan <- s.Metric():
+			}
+		}
 
-	if td > stats.Interval.Duration*2 { // allow for a bit of jitter
-		t.Errorf("expected stats channel to not block noticeably, but had to wait %v", td)
+		done <- true
+		return
+	}(ctx)
+
+	select {
+	case <-ctx.Done():
+		t.Errorf("expected clean exit from context but got '%v'", ctx.Err())
+	case <-done:
+		// we got the finished signal, all good
 	}
 }
