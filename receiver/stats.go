@@ -28,6 +28,7 @@ import (
 	"time"
 
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/stats"
 )
 
 var statsLog = skogul.Logger("receiver", "stats")
@@ -41,40 +42,6 @@ type Stats struct {
 	ticker   *time.Ticker
 }
 
-// statsDrainCtx and statsDrainCancel are the context and cancel functions
-// for the automatically created skogul.StatsChan.
-// If a skogul stats receiver is configured, statsDrainCancel MUST be called
-// so that statistics are not discarded.
-var statsDrainCtx, statsDrainCancel = context.WithCancel(context.Background())
-
-// init makes sure that the skogul stats channel exists at all times.
-// Furthermore, it starts a goroutine to empty the channel in the case
-// that the stats receiver is not configured, in which case the chan
-// would end up blocking after it is filled.
-func init() {
-	// Create skogul.StatsChan so we don't have components blocking on it
-	if skogul.StatsChan == nil {
-		skogul.StatsChan = make(chan *skogul.Metric, 100)
-	}
-	go DrainStats(statsDrainCtx)
-}
-
-// drainStats drains all statistics on the stats channel.
-// If the passed context is cancelled it will stop draining the channel
-// so that a configured stats-receiver can listen on the channel.
-func DrainStats(ctx context.Context) {
-	statsLog.Debug("Starting stats drain. All stats are being dropped.")
-	for {
-		select {
-		case <-skogul.StatsChan:
-			continue
-		case <-ctx.Done():
-			statsLog.Debug("Stopping stats drain. Stats are being consumed.")
-			return
-		}
-	}
-}
-
 // Start starts listening for Skogul stats and
 // emits them on the configured interval.
 func (s *Stats) Start() error {
@@ -84,8 +51,8 @@ func (s *Stats) Start() error {
 // StartC allows starting Stats with a context.
 func (s *Stats) StartC(ctx context.Context) error {
 	if s.Interval.Duration == 0 {
-		statsLog.Debugf("Missing interval for stats reporting, defaulting to every %d seconds", skogul.StatsDefaultInterval)
-		s.Interval.Duration = skogul.StatsDefaultInterval
+		statsLog.Debugf("Missing interval for stats reporting, defaulting to every %d seconds", stats.DefaultInterval)
+		s.Interval.Duration = stats.DefaultInterval
 	}
 	if s.ChanSize == 0 {
 		s.ChanSize = 100
@@ -101,9 +68,9 @@ func (s *Stats) StartC(ctx context.Context) error {
 
 	go s.runner()
 
-	statsDrainCancel()
+	stats.StatsDrainCancel()
 
-	for metric := range skogul.StatsChan {
+	for metric := range stats.StatsChan {
 		if len(s.ch) >= cap(s.ch) {
 			statsLog.Debug("Dropping stats because the channel is full")
 			continue

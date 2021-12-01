@@ -33,6 +33,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/stats"
 )
 
 const (
@@ -124,7 +125,7 @@ func (ud *UDP) Start() error {
 		}
 	}
 	if ud.EmitStats.Duration == 0 {
-		ud.EmitStats.Duration = skogul.StatsDefaultInterval
+		ud.EmitStats.Duration = stats.DefaultInterval
 	}
 
 	ud.initStats()
@@ -211,6 +212,6 @@ func (ud *UDP) startStats() {
 func (ud *UDP) sendStats() {
 	for range ud.ticker.C {
 		udpLog.Trace("sending stats")
-		skogul.StatsChan <- ud.GetStats()
+		stats.StatsChan <- ud.GetStats()
 	}
 }

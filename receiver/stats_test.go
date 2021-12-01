@@ -31,6 +31,7 @@ import (
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
+	"github.com/telenornms/skogul/stats"
 )
 
 func genStatsHandler(tester *sender.Test) *skogul.HandlerRef {
@@ -57,24 +58,24 @@ func generateMetric() *skogul.Metric {
 func TestNoStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
-	stats := receiver.Stats{
+	statsReceiver := receiver.Stats{
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
 		Handler: h,
 	}
 
-	skogul.StatsChan = make(chan *skogul.Metric, 2)
+	stats.StatsChan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(skogul.StatsChan)
+		close(stats.StatsChan)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
 	defer cancel()
-	go stats.StartC(ctx)
+	go statsReceiver.StartC(ctx)
 
 	// Allow stats to attempt to send
-	time.Sleep(2 * stats.Interval.Duration)
+	time.Sleep(2 * statsReceiver.Interval.Duration)
 
 	if tester.Received() != 0 {
 		t.Errorf("expected to have gotten 0 stats containers but got %d", tester.Received())
@@ -84,26 +85,26 @@ func TestNoStatsReceived(t *testing.T) {
 func TestStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
-	stats := receiver.Stats{
+	statsReceiver := receiver.Stats{
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
 		Handler: h,
 	}
 
-	skogul.StatsChan = make(chan *skogul.Metric, 2)
+	stats.StatsChan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(skogul.StatsChan)
+		close(stats.StatsChan)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
 	defer cancel()
-	go stats.StartC(ctx)
+	go statsReceiver.StartC(ctx)
 
-	skogul.StatsChan <- generateMetric()
+	stats.StatsChan <- generateMetric()
 
 	// Allow stats to attempt to send
-	time.Sleep(2 * stats.Interval.Duration)
+	time.Sleep(2 * statsReceiver.Interval.Duration)
 
 	if tester.Received() != 1 {
 		t.Errorf("expected to have gotten 1 stats container but got %d", tester.Received())
@@ -113,30 +114,30 @@ func TestStatsReceived(t *testing.T) {
 func TestStatsDoesntBlockChan(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
-	stats := receiver.Stats{
+	statsReceiver := receiver.Stats{
 		Interval: skogul.Duration{
 			Duration: time.Millisecond * 10,
 		},
 		Handler: h,
 	}
 
-	skogul.StatsChan = make(chan *skogul.Metric, 2)
+	stats.StatsChan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(skogul.StatsChan)
+		close(stats.StatsChan)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), stats.Interval.Duration*2)
+	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
 	defer cancel()
-	go stats.StartC(ctx)
+	go statsReceiver.StartC(ctx)
 
 	t0 := time.Now()
 	for i := 0; i < 100; i++ {
-		skogul.StatsChan <- generateMetric()
+		stats.StatsChan <- generateMetric()
 	}
 	td := time.Since(t0)
 
 	// Allow stats to attempt to send
-	time.Sleep(2 * stats.Interval.Duration)
+	time.Sleep(2 * statsReceiver.Interval.Duration)
 
 	if tester.Received() != 1 {
 		t.Errorf("expected to have gotten 1 stats container but got %d", tester.Received())
@@ -148,15 +149,15 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 }
 
 func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
-	skogul.StatsChan = make(chan *skogul.Metric, 2)
+	stats.StatsChan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(skogul.StatsChan)
+		close(stats.StatsChan)
 	}()
 
 	// This is called by init, but since it has already been cancelled by earlier tests, we
 	// have to start it again.
 	drainCtx, drainCancel := context.WithCancel(context.Background())
-	go receiver.DrainStats(drainCtx)
+	go stats.DrainStats(drainCtx)
 	defer drainCancel()
 
 	done := make(chan bool)
@@ -167,10 +168,10 @@ func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
 	go func(ctx context.Context) {
 		// looping one more than channel capacity to be blocked
 		// if the channel is not being drained
-		for i := 0; i < cap(skogul.StatsChan)+1; i++ {
+		for i := 0; i < cap(stats.StatsChan)+1; i++ {
 			select {
 			case <-ctx.Done():
-			case skogul.StatsChan <- generateMetric():
+			case stats.StatsChan <- generateMetric():
 			}
 		}
 

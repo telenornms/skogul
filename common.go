@@ -322,11 +322,3 @@ func (s Secret) String() string {
 func (s Secret) Expose() string {
 	return string(s)
 }
-
-// StatsChan is a channel which accepts skogul statistic as a skogul.Metric
-// By configuring the stats receiver, this channel is drained and sent on to
-// the specified handler.
-var StatsChan chan *Metric
-
-// StatsDefaultInterval is the default interval used for sending stats.
-var StatsDefaultInterval = time.Second * 10
