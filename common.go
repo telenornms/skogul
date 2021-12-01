@@ -323,33 +323,6 @@ func (s Secret) Expose() string {
 	return string(s)
 }
 
-// Stats is a struct of common metrics that Skogul can expose through
-// the Stats receiver. Stats is usually converted into a skogul metric
-// and collected in a Container before it is shipped off at a configured
-// interval.
-// Modules might have more stats than these as well.
-type Stats struct {
-	Received int64 // number of received elements. For a receiver, this is the number of received incoming data.
-	Errors   int64 // number of errors encountered. For a receiver, this could be if it received malformed data.
-	Sent     int64 // number of 'successful' elements encountered and passed on to the next chain.
-}
-
-// Metric converts a Stats object into a valid skogul.Metric.
-func (s *Stats) Metric() *Metric {
-	now := Now()
-
-	data := make(map[string]interface{})
-	data["received"] = s.Received
-	data["errors"] = s.Errors
-	data["sent"] = s.Sent
-
-	return &Metric{
-		Time:     &now,
-		Metadata: make(map[string]interface{}),
-		Data:     data,
-	}
-}
-
 // StatsChan is a channel which accepts skogul statistic as a skogul.Metric
 // By configuring the stats receiver, this channel is drained and sent on to
 // the specified handler.

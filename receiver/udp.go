@@ -60,8 +60,11 @@ type UDP struct {
 
 // udpStats is a type containing internal stats of the UDP receiver
 type udpStats struct {
-	Generic *skogul.Stats
-	ch      chan stat // channel to receive stats on
+	Received int64 // number of received elements. For a receiver, this is the number of received incoming data.
+	Errors   int64 // number of errors encountered. For a receiver, this could be if it received malformed data.
+	Sent     int64 // number of successful elements encountered and passed on to the next chain.
+
+	ch chan stat // channel to receive stats on
 }
 
 // stat is an enum type for easily mapping what type of statistic/counter
@@ -161,18 +164,29 @@ func (ud *UDP) Start() error {
 // GetStats prepares a skogul metric with stats
 // for the UDP receiver.
 func (ud *UDP) GetStats() *skogul.Metric {
-	metric := ud.stats.Generic.Metric()
+	now := skogul.Now()
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]interface{}),
+		Data:     make(map[string]interface{}),
+	}
 	metric.Metadata["component"] = "receiver"
 	metric.Metadata["type"] = "UDP"
 	metric.Metadata["name"] = "N/A"         // FIXME: this makes it so multiple receivers of the same type get grouped together
 	metric.Metadata["address"] = ud.Address // XXX: using something which probably is unique as a temporary fix for ^
-	return metric
+
+	metric.Data["received"] = ud.stats.Received
+	metric.Data["errors"] = ud.stats.Errors
+	metric.Data["sent"] = ud.stats.Sent
+	return &metric
 }
 
 // initStats initializes up the necessary components for stats
 func (ud *UDP) initStats() {
 	ud.stats = &udpStats{
-		Generic: &skogul.Stats{},
+		Received: 0,
+		Errors:   0,
+		Sent:     0,
 	}
 	ud.stats.ch = make(chan stat, 10*ud.Threads)
 	ud.ticker = time.NewTicker(ud.EmitStats.Duration)
@@ -183,11 +197,11 @@ func (ud *UDP) startStats() {
 	for {
 		switch <-ud.stats.ch {
 		case receive:
-			ud.stats.Generic.Received++
+			ud.stats.Received++
 		case er:
-			ud.stats.Generic.Errors++
+			ud.stats.Errors++
 		case sent:
-			ud.stats.Generic.Sent++
+			ud.stats.Sent++
 		}
 	}
 }

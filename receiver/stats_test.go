@@ -41,6 +41,19 @@ func genStatsHandler(tester *sender.Test) *skogul.HandlerRef {
 	}
 }
 
+func generateMetric() *skogul.Metric {
+	now := skogul.Now()
+	d := make(map[string]interface{})
+	m := make(map[string]interface{})
+	m["key"] = "example"
+	d["value"] = 1
+	return &skogul.Metric{
+		Time:     &now,
+		Data:     d,
+		Metadata: m,
+	}
+}
+
 func TestNoStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
@@ -87,10 +100,7 @@ func TestStatsReceived(t *testing.T) {
 	defer cancel()
 	go stats.StartC(ctx)
 
-	s := skogul.Stats{
-		Received: 10,
-	}
-	skogul.StatsChan <- s.Metric()
+	skogul.StatsChan <- generateMetric()
 
 	// Allow stats to attempt to send
 	time.Sleep(2 * stats.Interval.Duration)
@@ -119,12 +129,9 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 	defer cancel()
 	go stats.StartC(ctx)
 
-	s := skogul.Stats{
-		Received: 10,
-	}
 	t0 := time.Now()
 	for i := 0; i < 100; i++ {
-		skogul.StatsChan <- s.Metric()
+		skogul.StatsChan <- generateMetric()
 	}
 	td := time.Since(t0)
 
@@ -152,9 +159,6 @@ func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
 	go receiver.DrainStats(drainCtx)
 	defer drainCancel()
 
-	s := skogul.Stats{
-		Received: 10,
-	}
 	done := make(chan bool)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*10)
@@ -166,7 +170,7 @@ func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
 		for i := 0; i < cap(skogul.StatsChan)+1; i++ {
 			select {
 			case <-ctx.Done():
-			case skogul.StatsChan <- s.Metric():
+			case skogul.StatsChan <- generateMetric():
 			}
 		}
 
