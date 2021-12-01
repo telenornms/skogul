@@ -27,6 +27,7 @@ import (
 	"net"
 	"runtime"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"strconv"
@@ -61,22 +62,10 @@ type UDP struct {
 
 // udpStats is a type containing internal stats of the UDP receiver
 type udpStats struct {
-	Received int64 // number of received elements. For a receiver, this is the number of received incoming data.
-	Errors   int64 // number of errors encountered. For a receiver, this could be if it received malformed data.
-	Sent     int64 // number of successful elements encountered and passed on to the next chain.
-
-	ch chan stat // channel to receive stats on
+	Received uint64 // number of received elements. For a receiver, this is the number of received incoming data.
+	Errors   uint64 // number of errors encountered. For a receiver, this could be if it received malformed data.
+	Sent     uint64 // number of successful elements encountered and passed on to the next chain.
 }
-
-// stat is an enum type for easily mapping what type of statistic/counter
-// to send to the counter engine.
-type stat int64
-
-const (
-	receive stat = iota // incremented when receiving data
-	er                  // incremented when there is an error receiving data (note: since we use Handler.H.Handle(bytes) we don't know if 'we' or a handler or a parser or a sender failed)
-	sent                // incremented when data is sent from this module
-)
 
 // process is the worker-thread responsible for handling individual
 // messages.
@@ -90,12 +79,12 @@ func (ud *UDP) process() {
 	})
 	for {
 		bytes := <-ud.ch
-		ud.stats.ch <- receive
+		atomic.AddUint64(&ud.stats.Received, 1)
 		if err := ud.Handler.H.Handle(bytes); err != nil {
-			ud.stats.ch <- er
+			atomic.AddUint64(&ud.stats.Errors, 1)
 			udpLog.WithError(err).Log(ud.failureLevel, "Unable to handle UDP message")
 		} else {
-			ud.stats.ch <- sent
+			atomic.AddUint64(&ud.stats.Sent, 1)
 		}
 	}
 }
@@ -129,7 +118,6 @@ func (ud *UDP) Start() error {
 	}
 
 	ud.initStats()
-	go ud.startStats()
 	go ud.sendStats()
 
 	udpLog.Tracef("Got backlog size of %d and number of threads %d", ud.Backlog, ud.Threads)
@@ -189,22 +177,7 @@ func (ud *UDP) initStats() {
 		Errors:   0,
 		Sent:     0,
 	}
-	ud.stats.ch = make(chan stat, 10*ud.Threads)
 	ud.ticker = time.NewTicker(ud.EmitStats.Duration)
-}
-
-// startStats starts the listening loop for the stats chan
-func (ud *UDP) startStats() {
-	for {
-		switch <-ud.stats.ch {
-		case receive:
-			ud.stats.Received++
-		case er:
-			ud.stats.Errors++
-		case sent:
-			ud.stats.Sent++
-		}
-	}
 }
 
 // sendStats sets up a forever-running loop which sends stats
