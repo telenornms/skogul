@@ -25,11 +25,12 @@ package receiver_test
 
 import (
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
-	"testing"
-	"time"
 )
 
 func TestTCPLine(t *testing.T) {
@@ -67,6 +68,8 @@ func TestTCPLine(t *testing.T) {
 		t.Errorf("Failed to load config: %v", err)
 		return
 	}
+
+	UpdateTcpConfigWithUsablePorts(conf)
 
 	sTest := conf.Senders["test"].Sender.(*sender.Test)
 	sNet := conf.Senders["net"].Sender
