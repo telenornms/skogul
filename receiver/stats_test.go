@@ -65,9 +65,9 @@ func TestNoStatsReceived(t *testing.T) {
 		Handler: h,
 	}
 
-	stats.StatsChan = make(chan *skogul.Metric, 2)
+	stats.Chan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(stats.StatsChan)
+		close(stats.Chan)
 	}()
 
 	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
@@ -92,16 +92,16 @@ func TestStatsReceived(t *testing.T) {
 		Handler: h,
 	}
 
-	stats.StatsChan = make(chan *skogul.Metric, 2)
+	stats.Chan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(stats.StatsChan)
+		close(stats.Chan)
 	}()
 
 	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
 	defer cancel()
 	go statsReceiver.StartC(ctx)
 
-	stats.StatsChan <- generateMetric()
+	stats.Chan <- generateMetric()
 
 	// Allow stats to attempt to send
 	time.Sleep(2 * statsReceiver.Interval.Duration)
@@ -121,9 +121,9 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 		Handler: h,
 	}
 
-	stats.StatsChan = make(chan *skogul.Metric, 2)
+	stats.Chan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(stats.StatsChan)
+		close(stats.Chan)
 	}()
 
 	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
@@ -132,7 +132,7 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 
 	t0 := time.Now()
 	for i := 0; i < 100; i++ {
-		stats.StatsChan <- generateMetric()
+		stats.Chan <- generateMetric()
 	}
 	td := time.Since(t0)
 
@@ -149,9 +149,9 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 }
 
 func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
-	stats.StatsChan = make(chan *skogul.Metric, 2)
+	stats.Chan = make(chan *skogul.Metric, 2)
 	defer func() {
-		close(stats.StatsChan)
+		close(stats.Chan)
 	}()
 
 	// This is called by init, but since it has already been cancelled by earlier tests, we
@@ -168,10 +168,10 @@ func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
 	go func(ctx context.Context) {
 		// looping one more than channel capacity to be blocked
 		// if the channel is not being drained
-		for i := 0; i < cap(stats.StatsChan)+1; i++ {
+		for i := 0; i < cap(stats.Chan)+1; i++ {
 			select {
 			case <-ctx.Done():
-			case stats.StatsChan <- generateMetric():
+			case stats.Chan <- generateMetric():
 			}
 		}
 

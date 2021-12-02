@@ -38,7 +38,7 @@ var statsLog = skogul.Logger("stats", "main")
 // StatsChan is a channel which accepts skogul statistic as a skogul.Metric
 // By configuring the stats receiver, this channel is drained and sent on to
 // the specified handler.
-var StatsChan chan *skogul.Metric
+var Chan chan *skogul.Metric
 
 // StatsDrainCtx and StatsDrainCancel are the context and cancel functions
 // for the automatically created stats.StatsChan.
@@ -52,8 +52,8 @@ var StatsDrainCtx, StatsDrainCancel = context.WithCancel(context.Background())
 // would end up blocking after it is filled.
 func init() {
 	// Create stats.StatsChan so we don't have components blocking on it
-	if StatsChan == nil {
-		StatsChan = make(chan *skogul.Metric, 100)
+	if Chan == nil {
+		Chan = make(chan *skogul.Metric, 100)
 	}
 	go DrainStats(StatsDrainCtx)
 }
@@ -65,7 +65,7 @@ func DrainStats(ctx context.Context) {
 	statsLog.Debug("Starting stats drain. All stats are being dropped.")
 	for {
 		select {
-		case <-StatsChan:
+		case <-Chan:
 			continue
 		case <-ctx.Done():
 			statsLog.Debug("Stopping stats drain. Stats are being consumed.")

@@ -185,6 +185,6 @@ func (ud *UDP) initStats() {
 func (ud *UDP) sendStats() {
 	for range ud.ticker.C {
 		udpLog.Trace("sending stats")
-		stats.StatsChan <- ud.GetStats()
+		stats.Chan <- ud.GetStats()
 	}
 }

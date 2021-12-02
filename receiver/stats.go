@@ -70,7 +70,7 @@ func (s *Stats) StartC(ctx context.Context) error {
 
 	stats.StatsDrainCancel()
 
-	for metric := range stats.StatsChan {
+	for metric := range stats.Chan {
 		if len(s.ch) >= cap(s.ch) {
 			statsLog.Debug("Dropping stats because the channel is full")
 			continue
