@@ -30,6 +30,9 @@ import (
 	"github.com/telenornms/skogul"
 )
 
+// DefaultInterval is the default interval used for sending stats.
+var DefaultInterval = time.Second * 10
+
 var statsLog = skogul.Logger("stats", "main")
 
 // StatsChan is a channel which accepts skogul statistic as a skogul.Metric
@@ -70,6 +73,3 @@ func DrainStats(ctx context.Context) {
 		}
 	}
 }
-
-// DefaultInterval is the default interval used for sending stats.
-var DefaultInterval = time.Second * 10
