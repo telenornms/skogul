@@ -60,17 +60,18 @@ This means that:
 3. Send() will only block if two channels are full.
 */
 type Batch struct {
-	Next      skogul.SenderRef `doc:"Sender that will receive batched metrics"`
-	Interval  skogul.Duration  `doc:"Flush the bucket after this duration regardless of how full it is"`
-	Threshold int              `doc:"Flush the bucket after reaching this amount of metrics"`
-	Threads   int              `doc:"Number of threads for batch sender. Defaults to number of CPU cores."`
-	allocSize int
-	ch        chan *skogul.Container
+	Next      skogul.SenderRef       `doc:"Sender that will receive batched metrics"`
+	Interval  skogul.Duration        `doc:"Flush the bucket after this duration regardless of how full it is"`
+	Threshold int                    `doc:"Flush the bucket after reaching this amount of metrics"`
+	Threads   int                    `doc:"Number of threads for batch sender. Defaults to number of CPU cores."`
+	Burner    skogul.SenderRef       `doc:"If the next sender is too slow and containers pile up beyond the backlog, instead of blocking waiting for the regular sender, redirect the overflown data to this burner. If left blank, the batcher will block, waiting for the regular sender. Note that there is no secondary overflow protection, so if the burner-sender is slow as well, the batcher will still block. To just discard the data, just use the null-sender. To measure how frequently this happens, use the count-sender in combination with the null-sender."`
+	allocSize int                    // Precomputed of container to allocate initially
+	ch        chan *skogul.Container // Initial channel used from Send()
 	once      sync.Once
-	metrics   int
 	timer     *time.Timer
-	cont      *skogul.Container
-	out       chan *skogul.Container
+	cont      *skogul.Container       // Current container - used single threaded
+	out       chan *skogul.Container  // When Thershold/Timer is triggered, dump the container here
+	burner    *chan *skogul.Container // Or burn it. Points to "out" if no burner is configured.
 }
 
 func (bat *Batch) setup() {
@@ -95,7 +96,14 @@ func (bat *Batch) setup() {
 	}
 	bat.out = make(chan *skogul.Container, bat.Threads)
 	for i := 0; i < bat.Threads; i++ {
-		go bat.flusher()
+		go bat.flusher(bat.out, bat.Next.S)
+	}
+	if bat.Burner.Name != "" {
+		burner := make(chan *skogul.Container, bat.Threads)
+		bat.burner = &burner
+		go bat.flusher(burner, bat.Burner.S)
+	} else {
+		bat.burner = &bat.out
 	}
 	go bat.run()
 }
@@ -129,18 +137,26 @@ func (bat *Batch) add(c *skogul.Container) {
 
 // flusher fetches a ready-to-ship container and issues send(). One flusher
 // is run per NumCPU
-func (bat *Batch) flusher() {
+func (bat *Batch) flusher(ch chan *skogul.Container, sender skogul.Sender) {
 	for {
-		c := <-bat.out
-		err := bat.Next.S.Send(c)
+		c := <-ch
+		err := sender.Send(c)
 		if err != nil {
 			batchLog.WithError(err).Error(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
 		}
 	}
 }
 
+// flush is a "non-blocking" flush from the single-threaded part of the
+// batcher. It just dumps the container on to a channel, if the channel is
+// blocked, it will use an alternate channel. bat.burner will just point
+// back to bat.out if no burner is present, thus block.
 func (bat *Batch) flush() {
-	bat.out <- bat.cont
+	select {
+	case bat.out <- bat.cont:
+	default:
+		*bat.burner <- bat.cont
+	}
 	bat.cont = nil
 }
 
