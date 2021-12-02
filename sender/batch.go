@@ -60,17 +60,17 @@ This means that:
 3. Send() will only block if two channels are full.
 */
 type Batch struct {
-	Next      skogul.SenderRef `doc:"Sender that will receive batched metrics"`
-	Interval  skogul.Duration  `doc:"Flush the bucket after this duration regardless of how full it is"`
-	Threshold int              `doc:"Flush the bucket after reaching this amount of metrics"`
-	Threads   int              `doc:"Number of threads for batch sender. Defaults to number of CPU cores."`
-	Burner	  skogul.SenderRef `doc:"If the next sender is too slow and containers pile up beyond the backlog, instead of blocking waiting for the regular sender, redirect the overflown data to this burner. If left blank, the batcher will block, waiting for the regular sender. Note that there is no secondary overflow protection, so if the burner-sender is slow as well, the batcher will still block. To just discard the data, just use the null-sender. To measure how frequently this happens, use the count-sender in combination with the null-sender."`
-	allocSize int // Precomputed of container to allocate initially
+	Next      skogul.SenderRef       `doc:"Sender that will receive batched metrics"`
+	Interval  skogul.Duration        `doc:"Flush the bucket after this duration regardless of how full it is"`
+	Threshold int                    `doc:"Flush the bucket after reaching this amount of metrics"`
+	Threads   int                    `doc:"Number of threads for batch sender. Defaults to number of CPU cores."`
+	Burner    skogul.SenderRef       `doc:"If the next sender is too slow and containers pile up beyond the backlog, instead of blocking waiting for the regular sender, redirect the overflown data to this burner. If left blank, the batcher will block, waiting for the regular sender. Note that there is no secondary overflow protection, so if the burner-sender is slow as well, the batcher will still block. To just discard the data, just use the null-sender. To measure how frequently this happens, use the count-sender in combination with the null-sender."`
+	allocSize int                    // Precomputed of container to allocate initially
 	ch        chan *skogul.Container // Initial channel used from Send()
 	once      sync.Once
 	timer     *time.Timer
-	cont      *skogul.Container // Current container - used single threaded
-	out       chan *skogul.Container // When Thershold/Timer is triggered, dump the container here
+	cont      *skogul.Container       // Current container - used single threaded
+	out       chan *skogul.Container  // When Thershold/Timer is triggered, dump the container here
 	burner    *chan *skogul.Container // Or burn it. Points to "out" if no burner is configured.
 }
 
@@ -153,9 +153,9 @@ func (bat *Batch) flusher(ch chan *skogul.Container, sender skogul.Sender) {
 // back to bat.out if no burner is present, thus block.
 func (bat *Batch) flush() {
 	select {
-		case bat.out <- bat.cont:
-		default:
-			*bat.burner <- bat.cont
+	case bat.out <- bat.cont:
+	default:
+		*bat.burner <- bat.cont
 	}
 	bat.cont = nil
 }
