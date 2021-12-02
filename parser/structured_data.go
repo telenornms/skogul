@@ -28,6 +28,7 @@ import (
 	"bytes"
 	"fmt"
 	"strings"
+	"sync"
 	"unicode/utf8"
 
 	"github.com/telenornms/skogul"
@@ -37,13 +38,22 @@ var sdLog = skogul.Logger("parser", "structured_data")
 
 // StructuredData supports parsing RFC5424 structured data through the Parse() function
 // Note: This does not parse a full syslog message.
-// In the resulting metrics, there may be a metadata field with the key
-// "SD-ID" which contains the SD-ID from the message if it was present.
+// In the resulting metrics, there may be a metadata field
+// which contains the SD-ID from the message if it was present.
+// By default the metadata field is named SD-ID, but it may be overridden in configuration.
 // SD-ID: https://datatracker.ietf.org/doc/html/draft-ietf-syslog-protocol-23#section-6.3.2
-type StructuredData struct{}
+type StructuredData struct {
+	SDIDField string `doc:"The field to store the SDID in if it was present." default:"SD-ID"`
+	once      sync.Once
+}
 
 // Parse converts RFC5424 Structured Data data into a skogul Container
 func (sd *StructuredData) Parse(bytes []byte) (*skogul.Container, error) {
+	sd.once.Do(func() {
+		if sd.SDIDField == "" {
+			sd.SDIDField = "sd-id"
+		}
+	})
 	metrics, err := sd.parseStructuredData(bytes)
 	if err != nil {
 		return nil, err
@@ -84,9 +94,9 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 			tag := strings.Trim(kvScanner.Text(), "\u0000")
 			tagValue := strings.SplitN(tag, "=", 2)
 
-			if len(tagValue) == 1 && metric.Metadata["sd-id"] == nil {
+			if len(tagValue) == 1 && metric.Metadata[sd.SDIDField] == nil {
 				// Set the SD-ID if it exists in the message (https://datatracker.ietf.org/doc/html/draft-ietf-syslog-protocol-23#section-6.3.2)
-				metric.Metadata["sd-id"] = tagValue[0]
+				metric.Metadata[sd.SDIDField] = tagValue[0]
 				continue
 			}
 
