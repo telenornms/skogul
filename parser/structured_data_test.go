@@ -24,6 +24,7 @@
 package parser_test
 
 import (
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -48,7 +49,7 @@ func TestStructuredDataParseExample1(t *testing.T) {
 
 	data := c.Metrics[0].Data
 	if data["iut"] != "3" || data["eventSource"] != "Application" || data["eventID"] != "1011" {
-		t.Error("Failed to parse one or more params from the structured data")
+		t.Errorf("Failed to parse one or more params from the structured data, got: %v", c.Metrics[0].Data)
 	}
 }
 
@@ -87,19 +88,65 @@ func TestStructuredDataParseExample3Fails(t *testing.T) {
 	b := []byte(`[exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"] [examplePriority@32473 class="high"]`)
 	p := parser.StructuredData{}
 
-	if c, err := p.Parse(b); err == nil {
-		t.Errorf("Expected parser to fail for invalid format, got\n%+v", c)
+	c, err := p.Parse(b)
+	if err != nil {
+		t.Errorf("Expected parser to parse up until the invalid format, got err: %v", err)
 		return
+	}
+
+	if len(c.Metrics) != 1 {
+		t.Errorf("Expected to parse 1 metric, got %d", len(c.Metrics))
 	}
 }
 
-func TestStructuredDataParseExample4Fails(t *testing.T) {
+func TestStructuredDataParseExample4(t *testing.T) {
+	allowBracketSpace := true // https://datatracker.ietf.org/doc/html/draft-ietf-syslog-protocol-23#section-6.3.5 Example 4 *may* be allowed.
 	b := []byte(`[ exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"][examplePriority@32473 class="high"]`)
 	p := parser.StructuredData{}
 
-	if _, err := p.Parse(b); err == nil {
-		t.Error("Expected parser to fail for invalid format")
+	if allowBracketSpace {
+		c, err := p.Parse(b)
+		if err != nil {
+			t.Errorf("Expected parser to handle invalid format, err:%v", err)
+			return
+		}
+		if len(c.Metrics) != 2 {
+			t.Errorf("Expected parser to handle invalid format and parse 2 metrics, got %d", len(c.Metrics))
+		}
+	} else {
+		if _, err := p.Parse(b); err == nil {
+			t.Error("Expected parser to error on invalid format")
+			return
+		}
+	}
+
+}
+
+func TestStructuredDataParseNoHostnameAllowed(t *testing.T) {
+	b := []byte(`[iut="3" eventSource="Application" eventID="1011"]`)
+	p := parser.StructuredData{}
+
+	c, err := p.Parse(b)
+	if err != nil {
+		t.Error("Expected parser to parse even though no hostname in data")
 		return
+	}
+	if c.Metrics[0].Data["iut"] != "3" {
+		t.Errorf("Expected structured data parser to return 3 for iut, but got %v", c.Metrics[0].Data["iut"])
+	}
+}
+
+func TestStructuredDataParseNoHostnameAllowedMultipleMetrics(t *testing.T) {
+	b := []byte(`[iut="3" eventSource="Application" eventID="1011"]`)
+	p := parser.StructuredData{}
+
+	c, err := p.Parse([]byte(fmt.Sprintf("%s%s", b, b)))
+	if err != nil {
+		t.Error("Expected parser to parse even though no hostname in data")
+		return
+	}
+	if c.Metrics[0].Data["iut"] != "3" {
+		t.Errorf("Expected structured data parser to return 3 for iut, but got %v", c.Metrics[0].Data["iut"])
 	}
 }
 
@@ -109,7 +156,7 @@ func TestStructuredDataParseNoContentResultsInOneMetric(t *testing.T) {
 
 	c, err := p.Parse(b)
 	if err != nil {
-		t.Error("Failed to parse data")
+		t.Errorf("Failed to parse data: %v", err)
 		return
 	}
 
