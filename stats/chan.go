@@ -33,7 +33,7 @@ import (
 // DefaultInterval is the default interval used for sending stats.
 var DefaultInterval = time.Second * 10
 
-var statsLog = skogul.Logger("stats", "main")
+var statsLog = skogul.Logger("stats", "chan")
 
 // StatsChan is a channel which accepts skogul statistic as a skogul.Metric
 // By configuring the stats receiver, this channel is drained and sent on to
