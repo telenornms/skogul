@@ -96,13 +96,15 @@ func init() {
 			"type": "udp",
 			"address": "localhost:1969",
 			"handler": "json-sleep",
-			"Threads": 10
+			"Threads": 10,
+			"Buffer": 10240
 		},
 		"udp4": {
 			"type": "udp",
 			"address": "localhost:1979",
 			"handler": "json-sleep",
-			"Threads": 100
+			"Threads": 100,
+			"Buffer": 1024
 		}
 	},
 	"handlers": {
