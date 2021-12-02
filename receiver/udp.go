@@ -48,6 +48,7 @@ type UDP struct {
 	Threads      int               `doc:"Number of worker go routines to use, which loosely translates to parallel execution. Defaults to number of CPU threads, with a minimum of 20. There is no correct number, but the value depends on how fast your senders are."`
 	PacketSize   int               `doc:"UDP Packet size note: max. UDP read size is 65535"`
 	FailureLevel string            `doc:"Level to log receiver failures as. Error, Warning, Info, Debug, or Trace. (default: Error)"`
+	Buffer       int               `doc:"Set kernel read buffer. Default is kernel-specific. Bumping this will make it easier to handler bursty UDP traffic."`
 	ch           chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
 	failureLevel logrus.Level
 	once         sync.Once
@@ -110,6 +111,9 @@ func (ud *UDP) Start() error {
 	if err != nil {
 		udpLog.WithError(err).WithField("address", ud.Address).Error("Can't listen on address")
 		return err
+	}
+	if ud.Buffer > 0 {
+		ln.SetReadBuffer(ud.Buffer)
 	}
 	for {
 		bytes := make([]byte, ud.PacketSize)
