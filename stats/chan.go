@@ -21,6 +21,12 @@
  * 02110-1301  USA
  */
 
+/* stats supports Skogul by adding internal statistics
+   about how Skogul is doing. The stats are very generic
+   and are sent as regular `skogul.Metric`s. By configuring
+   the stats receiver all stats will be picked up and sent
+   through skogul as any other metrics.
+*/
 package stats
 
 import (
