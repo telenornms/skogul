@@ -1,3 +1,22 @@
+v0.11.0
+=======
+
+Release date: 2021-12-02
+
+The Batch sender now has a concept of a burning metrics if the sender is
+too slow. If a "Burner" sender is configured, the batch sender will
+redirect metrics to the burner if the regular sender would otherwise block,
+e.g.: If the backlog is too big. This is recommended for setups where data
+is duplicated to multiple backends, such as to a staging and test
+environment, where you don't want the staging and test environment to slow
+down data replication to the production environment.
+
+Additionally, the UDP Read buffer size can now be configured for the UDP
+receiver, which can be very useful for bursty telemetry data.
+
+On a side note, shout out to Lasse Haugen for inspiring the DictSplitter
+included in v0.10.9.
+
 v0.10.9
 =======
 
