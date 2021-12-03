@@ -59,7 +59,7 @@ type protobufStats struct {
 }
 
 // Parse accepts a byte slice of protobuf data and marshals it into a container
-func (x ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
+func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 	x.once.Do(func() {
 		// XXX: This doesn't start until the first message is parsed. But it's probably fine for now.
 		x.stats = &protobufStats{
