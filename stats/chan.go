@@ -39,6 +39,9 @@ import (
 // DefaultInterval is the default interval used for sending stats.
 var DefaultInterval = time.Second * 10
 
+// DefaultChanSize is the default size of stats channels.
+var DefaultChanSize = 100
+
 var statsLog = skogul.Logger("stats", "chan")
 
 // Chan is a channel which accepts skogul statistic as a skogul.Metric
@@ -59,7 +62,7 @@ var DrainCtx, CancelDrain = context.WithCancel(context.Background())
 func init() {
 	// Create stats.Chan so we don't have components blocking on it
 	if Chan == nil {
-		Chan = make(chan *skogul.Metric, 100)
+		Chan = make(chan *skogul.Metric, DefaultChanSize)
 	}
 	go DrainStats(DrainCtx)
 }
