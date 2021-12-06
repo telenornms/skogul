@@ -68,7 +68,7 @@ func (s *Stats) StartC(ctx context.Context) error {
 
 	go s.runner()
 
-	stats.StatsDrainCancel()
+	stats.CancelDrain()
 
 	for metric := range stats.Chan {
 		if len(s.ch) >= cap(s.ch) {

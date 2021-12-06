@@ -41,30 +41,30 @@ var DefaultInterval = time.Second * 10
 
 var statsLog = skogul.Logger("stats", "chan")
 
-// StatsChan is a channel which accepts skogul statistic as a skogul.Metric
+// Chan is a channel which accepts skogul statistic as a skogul.Metric
 // By configuring the stats receiver, this channel is drained and sent on to
 // the specified handler.
 var Chan chan *skogul.Metric
 
-// StatsDrainCtx and StatsDrainCancel are the context and cancel functions
-// for the automatically created stats.StatsChan.
-// If a skogul stats receiver is configured, StatsDrainCancel MUST be called
+// DrainCtx and CancelDrain are the context and cancel functions
+// for the automatically created stats.Chan.
+// If a skogul stats receiver is configured, DrainCancel MUST be called
 // so that statistics are not discarded.
-var StatsDrainCtx, StatsDrainCancel = context.WithCancel(context.Background())
+var DrainCtx, CancelDrain = context.WithCancel(context.Background())
 
 // init makes sure that the skogul stats channel exists at all times.
 // Furthermore, it starts a goroutine to empty the channel in the case
 // that the stats receiver is not configured, in which case the chan
 // would end up blocking after it is filled.
 func init() {
-	// Create stats.StatsChan so we don't have components blocking on it
+	// Create stats.Chan so we don't have components blocking on it
 	if Chan == nil {
 		Chan = make(chan *skogul.Metric, 100)
 	}
-	go DrainStats(StatsDrainCtx)
+	go DrainStats(DrainCtx)
 }
 
-// drainStats drains all statistics on the stats channel.
+// DrainStats drains all statistics on the stats channel.
 // If the passed context is cancelled it will stop draining the channel
 // so that a configured stats-receiver can listen on the channel.
 func DrainStats(ctx context.Context) {
