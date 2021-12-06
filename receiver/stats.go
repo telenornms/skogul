@@ -85,35 +85,15 @@ func (s *Stats) StartC(ctx context.Context) error {
 	return nil
 }
 
-// runner is the function listening for stats and emits
-// them when there is time for it.
+// runner is the function listening for stats and
+// emits them through the configured handler
 func (s *Stats) runner() {
-	for range s.ticker.C {
+	for metric := range s.ch {
 		statsLog.WithField("stats", len(s.ch)).Trace("Time to send skogul stats")
-
-		metrics := make([]*skogul.Metric, len(s.ch))
-
-		// Drain the current messages on the channel
-		for i := range metrics {
-			metric, more := <-s.ch
-			if !more {
-				break
-			} else if metric == nil {
-				statsLog.Debug("Got nil metric on stats channel with more metrics left. Discarding this.")
-				break
-			}
-			metrics[i] = metric
-		}
-
-		if len(metrics) == 0 {
-			// We have no metrics so we wait until next tick.
-			statsLog.Trace("Skipping sending metrics since we have none")
-			continue
-		}
-
 		container := skogul.Container{
-			Metrics: metrics,
+			Metrics: []*skogul.Metric{metric},
 		}
+
 		if err := s.Handler.H.Send(&container); err != nil {
 			statsLog.WithError(err).Error("Failed to send skogul stats")
 		}

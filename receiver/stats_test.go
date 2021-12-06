@@ -139,8 +139,8 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 	// Allow stats to attempt to send
 	time.Sleep(2 * statsReceiver.Interval.Duration)
 
-	if tester.Received() != 1 {
-		t.Errorf("expected to have gotten 1 stats container but got %d", tester.Received())
+	if tester.Received() != 100 {
+		t.Errorf("expected to have gotten 100 stats container but got %d", tester.Received())
 	}
 
 	if td > time.Millisecond*1 {
