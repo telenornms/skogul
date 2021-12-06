@@ -434,6 +434,7 @@ func resolveSenders(c *Config) error {
 			confLog.WithField("sender", s.Name).Error("Unresolved sender reference")
 			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
 		}
+		skogul.Identity[c.Senders[s.Name].Sender] = s.Name
 		s.S = c.Senders[s.Name].Sender
 	}
 	skogul.SenderMap = skogul.SenderMap[0:0]
@@ -464,6 +465,7 @@ func resolveParsers(c *Config) error {
 			confLog.WithField("parser", p.Name).Error("Unresolved parser reference")
 			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved parser reference %s", p.Name)}
 		}
+		skogul.Identity[c.Parsers[p.Name].Parser] = p.Name
 		p.P = c.Parsers[p.Name].Parser
 	}
 	skogul.ParserMap = skogul.ParserMap[0:0]
@@ -530,15 +532,29 @@ func resolveTransformers(c *Config) error {
 			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
 		}
 		skogul.Assert(c.Transformers[t.Name].Transformer != nil)
+		skogul.Identity[c.Transformers[t.Name].Transformer] = t.Name
 		t.T = c.Transformers[t.Name].Transformer
 	}
 	skogul.TransformerMap = skogul.TransformerMap[0:0]
 	return nil
 }
 
+// identifyReceivers iterates over defined receivers and updates the
+// identity map. This is required specially because the other modules each
+// have module resolving logic where we do it for those modules, but there
+// are no external references to receivers (yet?), so no code that iterates
+// over them.
+func identifyReceivers(c *Config) {
+	for idx, name := range c.Receivers {
+		skogul.Identity[name.Receiver] = idx
+	}
+}
+
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
 func secondPass(c *Config) (*Config, error) {
+	skogul.Identity = make(map[interface{}]string)
+	identifyReceivers(c)
 	if err := resolveSenders(c); err != nil {
 		return nil, err
 	}

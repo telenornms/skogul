@@ -50,6 +50,7 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 		m := skogul.Metric{}
 		m.Time = &t
 		m.Metadata = map[string]interface{}{}
+		m.Metadata["id"] = skogul.Identity[tst]
 		m.Metadata["key1"] = i
 		m.Data = map[string]interface{}{}
 		for key := int64(0); key < tst.Values; key++ {
