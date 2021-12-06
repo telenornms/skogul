@@ -52,7 +52,7 @@ type UDP struct {
 	PacketSize   int               `doc:"UDP Packet size note: max. UDP read size is 65535"`
 	FailureLevel string            `doc:"Level to log receiver failures as. Error, Warning, Info, Debug, or Trace. (default: Error)"`
 	Buffer       int               `doc:"Set kernel read buffer. Default is kernel-specific. Bumping this will make it easier to handler bursty UDP traffic."`
-	EmitStats    skogul.Duration   `doc:"How often to emit internal skogul stats for this receiver"`
+	EmitStats    skogul.Duration   `doc:"How often to emit internal skogul stats for this receiver. Default: 10s (from stats.DefaultInterval)"`
 	ch           chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
 	failureLevel logrus.Level
 	once         sync.Once
