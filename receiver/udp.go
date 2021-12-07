@@ -161,8 +161,7 @@ func (ud *UDP) GetStats() *skogul.Metric {
 	}
 	metric.Metadata["component"] = "receiver"
 	metric.Metadata["type"] = "UDP"
-	metric.Metadata["name"] = "N/A"         // FIXME: this makes it so multiple receivers of the same type get grouped together
-	metric.Metadata["address"] = ud.Address // XXX: using something which probably is unique as a temporary fix for ^
+	metric.Metadata["identity"] = skogul.Identity[ud]
 
 	metric.Data["received"] = ud.stats.Received
 	metric.Data["errors"] = ud.stats.Errors
