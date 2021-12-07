@@ -59,9 +59,6 @@ func TestNoStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	statsReceiver := receiver.Stats{
-		Interval: skogul.Duration{
-			Duration: time.Millisecond * 10,
-		},
 		Handler: h,
 	}
 
@@ -70,12 +67,12 @@ func TestNoStatsReceived(t *testing.T) {
 		close(stats.Chan)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
 	defer cancel()
 	go statsReceiver.StartC(ctx)
 
 	// Allow stats to attempt to send
-	time.Sleep(2 * statsReceiver.Interval.Duration)
+	time.Sleep(time.Millisecond * 20)
 
 	if tester.Received() != 0 {
 		t.Errorf("expected to have gotten 0 stats containers but got %d", tester.Received())
@@ -86,9 +83,6 @@ func TestStatsReceived(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	statsReceiver := receiver.Stats{
-		Interval: skogul.Duration{
-			Duration: time.Millisecond * 10,
-		},
 		Handler: h,
 	}
 
@@ -96,15 +90,14 @@ func TestStatsReceived(t *testing.T) {
 	defer func() {
 		close(stats.Chan)
 	}()
-
-	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
 	defer cancel()
 	go statsReceiver.StartC(ctx)
 
 	stats.Chan <- generateMetric()
 
 	// Allow stats to attempt to send
-	time.Sleep(2 * statsReceiver.Interval.Duration)
+	time.Sleep(time.Millisecond * 20)
 
 	if tester.Received() != 1 {
 		t.Errorf("expected to have gotten 1 stats container but got %d", tester.Received())
@@ -115,9 +108,6 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 	tester := sender.Test{}
 	h := genStatsHandler(&tester)
 	statsReceiver := receiver.Stats{
-		Interval: skogul.Duration{
-			Duration: time.Millisecond * 10,
-		},
 		Handler: h,
 	}
 
@@ -126,7 +116,7 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 		close(stats.Chan)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), statsReceiver.Interval.Duration*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
 	defer cancel()
 	go statsReceiver.StartC(ctx)
 
@@ -137,7 +127,7 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 	td := time.Since(t0)
 
 	// Allow stats to attempt to send
-	time.Sleep(2 * statsReceiver.Interval.Duration)
+	time.Sleep(time.Millisecond * 20)
 
 	if tester.Received() != 100 {
 		t.Errorf("expected to have gotten 100 stats container but got %d", tester.Received())

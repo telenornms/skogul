@@ -36,7 +36,6 @@ var statsLog = skogul.Logger("receiver", "stats")
 // Stats receives metrics from skogul and forwards it to a handler.
 type Stats struct {
 	Handler  *skogul.HandlerRef
-	Interval skogul.Duration
 	ChanSize uint64
 	ch       chan *skogul.Metric
 	ticker   *time.Ticker
@@ -50,10 +49,6 @@ func (s *Stats) Start() error {
 
 // StartC allows starting Stats with a context.
 func (s *Stats) StartC(ctx context.Context) error {
-	if s.Interval.Duration == 0 {
-		statsLog.Debugf("Missing interval for stats reporting, defaulting to every %d seconds", stats.DefaultInterval)
-		s.Interval.Duration = stats.DefaultInterval
-	}
 	if s.ChanSize == 0 {
 		s.ChanSize = 100
 	}
@@ -63,8 +58,6 @@ func (s *Stats) StartC(ctx context.Context) error {
 	// or we'll have to direct stats to a specific stats instance.
 
 	s.ch = make(chan *skogul.Metric, s.ChanSize)
-
-	s.ticker = time.NewTicker(s.Interval.Duration)
 
 	go s.runner()
 
