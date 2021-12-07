@@ -42,6 +42,7 @@ import (
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
+	"github.com/telenornms/skogul/stats"
 	"github.com/telenornms/skogul/transformer"
 )
 
@@ -906,6 +907,32 @@ func main() {
 		}(name, r)
 	}
 
+	go startStats(c)
+
 	wg.Wait()
 	os.Exit(exitInt)
+}
+
+// startStats starts a forever-running loop which fetches
+// stats from each module at the configured interval.
+func startStats(c *config.Config) {
+	statsLogger := skogul.Logger("main", "stats")
+
+	ticker := time.NewTicker(stats.DefaultInterval)
+
+	for range ticker.C {
+		statsLogger.Trace("Gathering stats")
+		for _, r := range c.Receivers {
+			stats.Collect(r.Receiver)
+		}
+		for _, p := range c.Parsers {
+			stats.Collect(p.Parser)
+		}
+		for _, t := range c.Transformers {
+			stats.Collect(t.Transformer)
+		}
+		for _, s := range c.Senders {
+			stats.Collect(s.Sender)
+		}
+	}
 }

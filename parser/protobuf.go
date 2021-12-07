@@ -35,16 +35,14 @@ import (
 
 	"github.com/telenornms/skogul"
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"
-	"github.com/telenornms/skogul/stats"
 )
 
 var pbLog = skogul.Logger("parser", "protobuf")
 
 // ProtoBuf parses a byte string-representation of a Container
 type ProtoBuf struct {
-	once   sync.Once
-	stats  *protobufStats
-	ticker *time.Ticker
+	once  sync.Once
+	stats *protobufStats
 }
 
 type protobufStats struct {
@@ -72,8 +70,6 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 			NilData:                      0,
 			Parsed:                       0,
 		}
-		x.ticker = time.NewTicker(stats.DefaultInterval)
-		go x.sendStats()
 	})
 	atomic.AddUint64(&x.stats.Received, 1)
 	parsedProtoBuf, err := parseTelemetryStream(b)
@@ -233,13 +229,4 @@ func (x *ProtoBuf) GetStats() *skogul.Metric {
 	metric.Data["failed_to_json_unmarshal"] = x.stats.FailedToJsonUnmarshal
 	metric.Data["parsed"] = x.stats.Parsed
 	return &metric
-}
-
-// sendStats sets up a forever-running loop which sends stats
-// to the global skogul stats channel at the configured interval.
-func (x *ProtoBuf) sendStats() {
-	for range x.ticker.C {
-		pbLog.Trace("sending stats")
-		stats.Chan <- x.GetStats()
-	}
 }

@@ -40,7 +40,6 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
-	"github.com/telenornms/skogul/stats"
 )
 
 var httpLog = skogul.Logger("sender", "http")
@@ -60,7 +59,6 @@ type HTTP struct {
 	Keyfile          string            `doc:"Path to key file for TLS Client Certificate."`
 	ok               bool              // set to OK if init worked. FIXME: Should Verify() check if this is OK? I'm thinking yes.
 	stats            *httpStats
-	ticker           *time.Ticker
 	once             sync.Once
 	client           *http.Client
 }
@@ -197,8 +195,6 @@ func (ht *HTTP) initStats() {
 		RequestErrors:     0,
 		HttpResponseError: make(map[int]uint64),
 	}
-	ht.ticker = time.NewTicker(stats.DefaultInterval)
-	go ht.sendStats()
 }
 
 // sendBytes uses a configured HTTP client to
@@ -324,13 +320,4 @@ func (ht *HTTP) GetStats() *skogul.Metric {
 		metric.Data[fmt.Sprintf("http_response_%d", key)] = val
 	}
 	return &metric
-}
-
-// sendStats sets up a forever-running loop which sends stats
-// to the global skogul stats channel at the configured interval.
-func (ht *HTTP) sendStats() {
-	for range ht.ticker.C {
-		httpLog.Trace("sending stats")
-		stats.Chan <- ht.GetStats()
-	}
 }

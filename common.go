@@ -105,6 +105,17 @@ type Verifier interface {
 }
 
 /*
+Stats is an optional interface for all skogul modules. It is used
+by modules to export internal stats about them, such as received data,
+specific errors, successes and sent metrics.
+The GetStats() method is called by the stats package for each configured module
+and the stats are sent onto the stats channel.
+*/
+type Stats interface {
+	GetStats() *Metric
+}
+
+/*
 Error is a typical skogul error. All Skogul functions should provide Source
 and Reason. I'm not entirely sure why, except that it allows chaining errors?
 
