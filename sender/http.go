@@ -34,11 +34,13 @@ import (
 	"os"
 	"runtime"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/stats"
 )
 
 var httpLog = skogul.Logger("sender", "http")
@@ -57,8 +59,18 @@ type HTTP struct {
 	Certfile         string            `doc:"Path to certificate file for TLS Client Certificate."`
 	Keyfile          string            `doc:"Path to key file for TLS Client Certificate."`
 	ok               bool              // set to OK if init worked. FIXME: Should Verify() check if this is OK? I'm thinking yes.
+	stats            *httpStats
+	ticker           *time.Ticker
 	once             sync.Once
 	client           *http.Client
+}
+
+type httpStats struct {
+	Received          uint64         // Metrics received.
+	Sent              uint64         // Metrics successfully sent.
+	Errors            uint64         // Generic error cases in the module, such as failing to initialize or marshal/unmarshal data.
+	RequestErrors     uint64         // Errors during requests, such as not being able to connect to a remote host.
+	HttpResponseError map[int]uint64 // Error response codes from HTTP requests. Basically anything != 2XX.
 }
 
 // getCertPool reads the file specified in f and returns a CertPool with
@@ -171,7 +183,22 @@ func (ht *HTTP) init() {
 	ht.Headers[http.CanonicalHeaderKey("content-type")] = contentTypeHeaderVal
 
 	ht.client = &http.Client{Transport: &tran, Timeout: ht.Timeout.Duration}
+
+	ht.initStats()
 	ht.ok = true
+}
+
+// initStats initializes the required components and structs for stats collection.
+func (ht *HTTP) initStats() {
+	ht.stats = &httpStats{
+		Received:          0,
+		Sent:              0,
+		Errors:            0,
+		RequestErrors:     0,
+		HttpResponseError: make(map[int]uint64),
+	}
+	ht.ticker = time.NewTicker(stats.DefaultInterval)
+	go ht.sendStats()
 }
 
 // sendBytes uses a configured HTTP client to
@@ -191,6 +218,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	})
 	req, err := http.NewRequest("POST", ht.URL, &buffer)
 	if err != nil {
+		atomic.AddUint64(&ht.stats.Errors, 1)
 		e := skogul.Error{Source: "http sender", Reason: "unable to create request", Next: err}
 		httpLog.WithError(e).Error("Failed to create request")
 		return e
@@ -200,6 +228,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	}
 	resp, err := ht.client.Do(req)
 	if err != nil {
+		atomic.AddUint64(&ht.stats.RequestErrors, 1)
 		e := skogul.Error{Source: "http sender", Reason: "unable to POST request", Next: err}
 		httpLog.WithError(e).Error("Failed to do POST request")
 		return e
@@ -207,6 +236,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	if resp.ContentLength > 0 {
 		tmp := make([]byte, resp.ContentLength)
 		if n, err := io.ReadFull(resp.Body, tmp); err != nil {
+			atomic.AddUint64(&ht.stats.Errors, 1)
 			httpLog.WithError(err).WithFields(log.Fields{
 				"expected": resp.ContentLength,
 				"actual":   n,
@@ -216,10 +246,13 @@ func (ht *HTTP) sendBytes(b []byte) error {
 		}
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
+		httpResponseCodeStats := ht.stats.HttpResponseError[resp.StatusCode]
+		atomic.AddUint64(&httpResponseCodeStats, 1)
 		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
 		httpLog.WithError(e).Error("HTTP response status code was not in OK range")
 		return e
 	}
+	atomic.AddUint64(&ht.stats.Sent, 1)
 	return nil
 }
 
@@ -234,13 +267,16 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	ht.once.Do(func() {
 		ht.init()
 	})
+	atomic.AddUint64(&ht.stats.Received, 1)
 	if !ht.ok {
+		atomic.AddUint64(&ht.stats.Errors, 1)
 		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
 		httpLog.Print(e)
 		return e
 	}
 	b, err := json.Marshal(*c)
 	if err != nil {
+		atomic.AddUint64(&ht.stats.Errors, 1)
 		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
 		httpLog.WithError(e).Error("Configuring HTTP sender failed")
 		return e
@@ -265,4 +301,36 @@ func (ht *HTTP) Verify() error {
 		return skogul.Error{Source: "http sender", Reason: "Specify both Certfile and Keyfile if either is specified."}
 	}
 	return nil
+}
+
+// GetStats prepares a skogul metric with stats
+// for the HTTP sender.
+func (ht *HTTP) GetStats() *skogul.Metric {
+	now := skogul.Now()
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]interface{}),
+		Data:     make(map[string]interface{}),
+	}
+	metric.Metadata["component"] = "sender"
+	metric.Metadata["type"] = "HTTP"
+	metric.Metadata["identity"] = skogul.Identity[ht]
+
+	metric.Data["received"] = ht.stats.Received
+	metric.Data["sent"] = ht.stats.Sent
+	metric.Data["errors"] = ht.stats.Errors
+	metric.Data["request_errors"] = ht.stats.RequestErrors
+	for key, val := range ht.stats.HttpResponseError {
+		metric.Data[fmt.Sprintf("http_response_%d", key)] = val
+	}
+	return &metric
+}
+
+// sendStats sets up a forever-running loop which sends stats
+// to the global skogul stats channel at the configured interval.
+func (ht *HTTP) sendStats() {
+	for range ht.ticker.C {
+		httpLog.Trace("sending stats")
+		stats.Chan <- ht.GetStats()
+	}
 }
