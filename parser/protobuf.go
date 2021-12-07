@@ -222,8 +222,7 @@ func (x *ProtoBuf) GetStats() *skogul.Metric {
 	}
 	metric.Metadata["component"] = "parser"
 	metric.Metadata["type"] = "protobuf"
-	metric.Metadata["name"] = "N/A" // FIXME: this makes it so multiple parsers of the same type get grouped together
-	// XXX: We don't have a unique name for the auto-instantiated things... so they'll always get grouped together with the same types of modules.
+	metric.Metadata["identity"] = skogul.Identity[x]
 
 	metric.Data["received"] = x.stats.Received
 	metric.Data["parse_errors"] = x.stats.ParseErrors
