@@ -314,8 +314,7 @@ func (ht *HTTP) GetStats() *skogul.Metric {
 	}
 	metric.Metadata["component"] = "sender"
 	metric.Metadata["type"] = "HTTP"
-	metric.Metadata["name"] = "N/A"     // FIXME: this makes it so multiple receivers of the same type get grouped together
-	metric.Metadata["address"] = ht.URL // FIXME: this may contain credentials. using something which probably is unique as a temporary fix for ^
+	metric.Metadata["identity"] = skogul.Identity[ht]
 
 	metric.Data["received"] = ht.stats.Received
 	metric.Data["sent"] = ht.stats.Sent
