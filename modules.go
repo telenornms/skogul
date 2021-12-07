@@ -45,6 +45,15 @@ type Module struct {
 // and transformer.Auto.
 type ModuleMap map[string]*Module
 
+// Identity is used to map instances of modules to their configured name.
+// E.g.: If you have 3 influx senders, the module can access
+// skogul.Identity[] to distinguish between them. This is meant for logging
+// and statistics. Note that this is independent of which type of module
+// we're dealing with, since they all have unique addresses, while they
+// don't have unique names (e.g.: You can have a receiver named "test" and
+// a sender named "test" at the same time - it will still work fine).
+var Identity map[interface{}]string
+
 // Lookup will return a module if the name exists AND it should be
 // autocreated. It is used during config loading to look up a module which
 // is subsequently allocated.
