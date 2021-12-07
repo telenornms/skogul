@@ -30,12 +30,22 @@ import (
 	"github.com/telenornms/skogul"
 )
 
+// SourceDestination provides a source and destination key, and the option
+// to delete the source. At this writing, it is only used to copy from the
+// data-section to metadata, but it's left intentionally generic.
+type SourceDestination struct {
+	Source      string `doc:"Name of the source field"`
+	Destination string `doc:"The destination name/field. If left blank/undefined, the source name will be used as a destination name."`
+	Delete      bool   `doc:"Set to true to delete the original. Default is to leave the original."`
+}
+
 // Metadata enforces a set of rules on metadata in all metrics, potentially
 // changing the metric metadata.
 type Metadata struct {
 	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
 	Require         []string               `doc:"Require the pressence of these fields."`
-	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. Removes the original."`
+	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. Removes the original. Obsolete, will be removed. Use CopyFromData instead."`
+	CopyFromData    []SourceDestination    `doc:"Copy and potentially rename keys from the data section to the metadata section." example:"[{\"source\": \"datakey\", \"destination\": \"destkey\"},{\"source\":\"otherkey\"}]" `
 	Remove          []string               `doc:"Remove these metadata fields."`
 	Ban             []string               `doc:"Fail if any of these fields are present"`
 }
@@ -63,6 +73,23 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			}
 			c.Metrics[mi].Metadata[extract] = c.Metrics[mi].Data[extract]
 			delete(c.Metrics[mi].Data, extract)
+		}
+		for _, cpy := range meta.CopyFromData {
+			if _, ok := c.Metrics[mi].Data[cpy.Source]; !ok {
+				continue
+			}
+			if c.Metrics[mi].Metadata == nil {
+				c.Metrics[mi].Metadata = make(map[string]interface{})
+			}
+			// XXX: So ideally we do this only once, but
+			// yeah...
+			if cpy.Destination == "" {
+				cpy.Destination = cpy.Source
+			}
+			c.Metrics[mi].Metadata[cpy.Destination] = c.Metrics[mi].Data[cpy.Source]
+			if cpy.Delete {
+				delete(c.Metrics[mi].Data, cpy.Source)
+			}
 		}
 		for _, value := range meta.Remove {
 			if c.Metrics[mi].Metadata == nil {
