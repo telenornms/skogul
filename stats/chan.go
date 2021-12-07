@@ -82,3 +82,15 @@ func DrainStats(ctx context.Context) {
 		}
 	}
 }
+
+// Collect stats for a skogul.Module if it has stats.
+// If it doesn't have stats it does nothing.
+func Collect(m interface{}) {
+	module, ok := m.(skogul.Stats)
+	if !ok {
+		// We haven't gotten stats for this module, silently return
+		return
+	}
+
+	Chan <- module.GetStats()
+}
