@@ -64,6 +64,11 @@ func init() {
 		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint.",
 	})
 	Auto.Add(skogul.Module{
+		Name:  "stats",
+		Alloc: func() interface{} { return &Stats{} },
+		Help:  "Gather internal Skogul metrics and send them on to the specified handler. Metrics gathered depends on modules used, and verbosity and completeness also depends on the modules. Examples of metrics gathered are: parse errors, send errors, number of received messages.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "stdin",
 		Alloc: func() interface{} { return &Stdin{} },
 		Help:  "Reads from standard input, one collection per line, allowing you to pipe collections to Skogul on a command line or similar.",

@@ -27,11 +27,14 @@ import (
 	"net"
 	"runtime"
 	"sync"
+	"sync/atomic"
+	"time"
 
 	"strconv"
 
 	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/stats"
 )
 
 const (
@@ -49,9 +52,19 @@ type UDP struct {
 	PacketSize   int               `doc:"UDP Packet size note: max. UDP read size is 65535"`
 	FailureLevel string            `doc:"Level to log receiver failures as. Error, Warning, Info, Debug, or Trace. (default: Error)"`
 	Buffer       int               `doc:"Set kernel read buffer. Default is kernel-specific. Bumping this will make it easier to handler bursty UDP traffic."`
+	EmitStats    skogul.Duration   `doc:"How often to emit internal skogul stats for this receiver. Default: 10s (from stats.DefaultInterval)"`
 	ch           chan []byte       // Used to pass messages from the accept/read-loop to the worker pool/threads.
 	failureLevel logrus.Level
 	once         sync.Once
+	stats        *udpStats
+	ticker       *time.Ticker
+}
+
+// udpStats is a type containing internal stats of the UDP receiver
+type udpStats struct {
+	Received uint64 // number of received elements. For a receiver, this is the number of received incoming data.
+	Errors   uint64 // number of errors encountered. For a receiver, this could be if it received malformed data.
+	Sent     uint64 // number of successful elements encountered and passed on to the next chain.
 }
 
 // process is the worker-thread responsible for handling individual
@@ -66,8 +79,12 @@ func (ud *UDP) process() {
 	})
 	for {
 		bytes := <-ud.ch
+		atomic.AddUint64(&ud.stats.Received, 1)
 		if err := ud.Handler.H.Handle(bytes); err != nil {
+			atomic.AddUint64(&ud.stats.Errors, 1)
 			udpLog.WithError(err).Log(ud.failureLevel, "Unable to handle UDP message")
+		} else {
+			atomic.AddUint64(&ud.stats.Sent, 1)
 		}
 	}
 }
@@ -96,6 +113,13 @@ func (ud *UDP) Start() error {
 			ud.Threads = 20
 		}
 	}
+	if ud.EmitStats.Duration == 0 {
+		ud.EmitStats.Duration = stats.DefaultInterval
+	}
+
+	ud.initStats()
+	go ud.sendStats()
+
 	udpLog.Tracef("Got backlog size of %d and number of threads %d", ud.Backlog, ud.Threads)
 	ud.ch = make(chan []byte, ud.Backlog)
 	for i := 0; i < ud.Threads; i++ {
@@ -123,5 +147,44 @@ func (ud *UDP) Start() error {
 			continue
 		}
 		ud.ch <- bytes[0:n]
+	}
+}
+
+// GetStats prepares a skogul metric with stats
+// for the UDP receiver.
+func (ud *UDP) GetStats() *skogul.Metric {
+	now := skogul.Now()
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]interface{}),
+		Data:     make(map[string]interface{}),
+	}
+	metric.Metadata["component"] = "receiver"
+	metric.Metadata["type"] = "UDP"
+	metric.Metadata["name"] = "N/A"         // FIXME: this makes it so multiple receivers of the same type get grouped together
+	metric.Metadata["address"] = ud.Address // XXX: using something which probably is unique as a temporary fix for ^
+
+	metric.Data["received"] = ud.stats.Received
+	metric.Data["errors"] = ud.stats.Errors
+	metric.Data["sent"] = ud.stats.Sent
+	return &metric
+}
+
+// initStats initializes up the necessary components for stats
+func (ud *UDP) initStats() {
+	ud.stats = &udpStats{
+		Received: 0,
+		Errors:   0,
+		Sent:     0,
+	}
+	ud.ticker = time.NewTicker(ud.EmitStats.Duration)
+}
+
+// sendStats sets up a forever-running loop which sends stats
+// to the global skogul stats channel at the configured interval.
+func (ud *UDP) sendStats() {
+	for range ud.ticker.C {
+		udpLog.Trace("sending stats")
+		stats.Chan <- ud.GetStats()
 	}
 }
