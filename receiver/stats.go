@@ -25,7 +25,6 @@ package receiver
 
 import (
 	"context"
-	"time"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/stats"
@@ -36,9 +35,8 @@ var statsLog = skogul.Logger("receiver", "stats")
 // Stats receives metrics from skogul and forwards it to a handler.
 type Stats struct {
 	Handler  *skogul.HandlerRef
-	ChanSize uint64
+	ChanSize int
 	ch       chan *skogul.Metric
-	ticker   *time.Ticker
 }
 
 // Start starts listening for Skogul stats and
@@ -50,7 +48,7 @@ func (s *Stats) Start() error {
 // StartC allows starting Stats with a context.
 func (s *Stats) StartC(ctx context.Context) error {
 	if s.ChanSize == 0 {
-		s.ChanSize = 100
+		s.ChanSize = stats.DefaultChanSize
 	}
 
 	// XXX: we shouldn't allow multiple stats receivers instantiated probably
@@ -82,7 +80,6 @@ func (s *Stats) StartC(ctx context.Context) error {
 // emits them through the configured handler
 func (s *Stats) runner() {
 	for metric := range s.ch {
-		statsLog.WithField("stats", len(s.ch)).Trace("Time to send skogul stats")
 		container := skogul.Container{
 			Metrics: []*skogul.Metric{metric},
 		}
