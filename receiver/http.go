@@ -33,6 +33,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"sync/atomic"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
@@ -61,6 +62,16 @@ type HTTP struct {
 	Certfile             string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
 	Keyfile              string                        `doc:"Path to key file for TLS."`
 	ClientCertificateCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
+	stats                *httpStats
+}
+
+// httpStats contains the internal stats of the HTTP receiver.
+type httpStats struct {
+	Received      uint64 // Number of valid received HTTP request
+	NoData        uint64 // If Content-Length is zero
+	ReadFailed    uint64 // Number of read failures of http request body
+	HandlerErrors uint64 // Number of errors from upstream handlers
+	Sent          uint64 // Number of sent skogul.Containers
 }
 
 // For each path we handle, we set up a receiver such as this
@@ -122,7 +133,9 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 		}
 	}
 
+	atomic.AddUint64(&rcvr.settings.stats.Received, 1)
 	if r.ContentLength == 0 {
+		atomic.AddUint64(&rcvr.settings.stats.NoData, 1)
 		return 400, skogul.Error{Source: "http receiver", Reason: "Missing input data"}
 	}
 
@@ -134,13 +147,17 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 			"error":    err,
 			"numbytes": n,
 		}).Error("Read error from client")
+
+		atomic.AddUint64(&rcvr.settings.stats.ReadFailed, 1)
 		return 400, skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
 	}
 
 	if err := rcvr.Handler.Handle(b); err != nil {
+		atomic.AddUint64(&rcvr.settings.stats.HandlerErrors, 1)
 		return 400, err
 	}
 
+	atomic.AddUint64(&rcvr.settings.stats.Sent, 1)
 	return 204, nil
 }
 
@@ -198,6 +215,14 @@ func (htt *HTTP) Start() error {
 				break
 			}
 		}
+	}
+
+	htt.stats = &httpStats{
+		Received:      0,
+		NoData:        0,
+		ReadFailed:    0,
+		HandlerErrors: 0,
+		Sent:          0,
 	}
 
 	server.Addr = htt.Address
@@ -281,4 +306,27 @@ func (htt *HTTP) Verify() error {
 	}
 
 	return nil
+}
+
+// GetStats exposes stats about the HTTP receiver.
+func (htt *HTTP) GetStats() *skogul.Metric {
+	now := skogul.Now()
+	httpLog.WithField("time", now).Trace("Getting stats")
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]interface{}),
+		Data:     make(map[string]interface{}),
+	}
+
+	metric.Metadata["component"] = "receiver"
+	metric.Metadata["type"] = "HTTP"
+	metric.Metadata["identity"] = skogul.Identity[htt]
+
+	metric.Data["received"] = htt.stats.Received
+	metric.Data["no_data"] = htt.stats.NoData
+	metric.Data["read_failed"] = htt.stats.ReadFailed
+	metric.Data["handler_errors"] = htt.stats.HandlerErrors
+	metric.Data["sent"] = htt.stats.Sent
+
+	return &metric
 }
