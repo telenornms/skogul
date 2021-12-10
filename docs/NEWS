@@ -1,3 +1,26 @@
+v0.12.0
+=======
+
+Release date: 2021-12-10
+
+Adds a Stats receiver for shipping internal skogul stats. This is a bit more
+detailed than the Stats _sender_, and will be further extended in the future.
+For now there are stats for the UDP receiver, protobuf parser and HTTP sender.
+Furthermore, in the future we will try to get rid of more log messages about
+errors and rather use stats for that.
+
+Fixes the Structured Data parser to support more formats, and tackle all
+formats with the same efficiency and priority.
+
+Adds a concept of skogul.Identity to identify a skogul module by name. The
+name is fetched from the configuration, and is typically the key used to
+define a module.
+
+This release also adds CopyFromData, a transformer to copy a field from data
+to metadata without removing it. The ExtractFromData transformer is marked as
+obsolete and will be removed in the future. To achieve the same effect, use
+CopyFromData togheter with a Remove transformer.
+
 v0.11.0
 =======
 
