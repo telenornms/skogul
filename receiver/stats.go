@@ -84,7 +84,7 @@ func (s *Stats) runner() {
 			Metrics: []*skogul.Metric{metric},
 		}
 
-		if err := s.Handler.H.Send(&container); err != nil {
+		if err := s.Handler.H.TransformAndSend(&container); err != nil {
 			statsLog.WithError(err).Error("Failed to send skogul stats")
 		}
 	}
