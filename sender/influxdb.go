@@ -30,6 +30,7 @@ import (
 	"io"
 	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -46,15 +47,16 @@ InfluxDB posts data to the provided URL and measurement, using the InfluxDB
 line format over HTTP.
 */
 type InfluxDB struct {
-	URL                     string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
-	Measurement             string          `doc:"Measurement name to write to."`
-	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
-	Timeout                 skogul.Duration `doc:"HTTP timeout"`
-	ConvertIntToFloat       bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
-	Token                   skogul.Secret   `doc:"Authorization token used in InfluxDB 2.0"`
-	client                  *http.Client
-	replacer                *strings.Replacer
-	once                    sync.Once
+	URL                          string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
+	Measurement                  string          `doc:"Measurement name to write to."`
+	MeasurementFromMetadata      string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
+	Timeout                      skogul.Duration `doc:"HTTP timeout"`
+	ConvertIntToFloat            bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
+	ConvertFloatMetadataToString bool            `doc:"Convert metadata tags as float to strings not containing scientific notation (1.3844322e10)"`
+	Token                        skogul.Secret   `doc:"Authorization token used in InfluxDB 2.0"`
+	client                       *http.Client
+	replacer                     *strings.Replacer
+	once                         sync.Once
 }
 
 // checkVariable verifies that the relevant variable is of a type we can
@@ -98,6 +100,9 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	idb.once.Do(func() {
 		if idb.ConvertIntToFloat {
 			influxLog.Warn("Influx sender is configured with 'ConvertIntToFloat'. This will convert *all* integers to floats.")
+		}
+		if idb.ConvertFloatMetadataToString {
+			influxLog.Warn("Enabling experimental casting of metadata keys from float to string.")
 		}
 		idb.replacer = strings.NewReplacer("\\", "\\\\", " ", "\\ ", ",", "\\,", "=", "\\=")
 		if idb.Timeout.Duration == 0 {
@@ -153,6 +158,11 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		}
 		fmt.Fprintf(&buffer, "%s", measurement)
 		for key, value := range m.Metadata {
+			// Intentionally not supporting float32 as strconv.FormatFloat doesn't support that.
+			if idb.ConvertFloatMetadataToString && reflect.TypeOf(value).Kind() == reflect.Float64 {
+				v := value.(float64)
+				value = strconv.FormatFloat(v, 'f', -1, 64)
+			}
 			// Tag values and field values are handled differently;
 			// A tag value is always a string, but if you wrap it in
 			// quotes the quotes will be part of the tag value.
