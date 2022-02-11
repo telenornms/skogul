@@ -28,7 +28,6 @@ import (
 	"runtime"
 	"sync"
 	"sync/atomic"
-	"time"
 
 	"strconv"
 
@@ -57,7 +56,6 @@ type UDP struct {
 	failureLevel logrus.Level
 	once         sync.Once
 	stats        *udpStats
-	ticker       *time.Ticker
 }
 
 // udpStats is a type containing internal stats of the UDP receiver
@@ -118,7 +116,6 @@ func (ud *UDP) Start() error {
 	}
 
 	ud.initStats()
-	go ud.sendStats()
 
 	udpLog.Tracef("Got backlog size of %d and number of threads %d", ud.Backlog, ud.Threads)
 	ud.ch = make(chan []byte, ud.Backlog)
@@ -154,6 +151,7 @@ func (ud *UDP) Start() error {
 // for the UDP receiver.
 func (ud *UDP) GetStats() *skogul.Metric {
 	now := skogul.Now()
+	udpLog.WithField("time", now).Warn("Getting stats")
 	metric := skogul.Metric{
 		Time:     &now,
 		Metadata: make(map[string]interface{}),
@@ -175,15 +173,5 @@ func (ud *UDP) initStats() {
 		Received: 0,
 		Errors:   0,
 		Sent:     0,
-	}
-	ud.ticker = time.NewTicker(ud.EmitStats.Duration)
-}
-
-// sendStats sets up a forever-running loop which sends stats
-// to the global skogul stats channel at the configured interval.
-func (ud *UDP) sendStats() {
-	for range ud.ticker.C {
-		udpLog.Trace("sending stats")
-		stats.Chan <- ud.GetStats()
 	}
 }
