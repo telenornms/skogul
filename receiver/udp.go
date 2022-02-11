@@ -151,7 +151,9 @@ func (ud *UDP) Start() error {
 // for the UDP receiver.
 func (ud *UDP) GetStats() *skogul.Metric {
 	now := skogul.Now()
-	udpLog.WithField("time", now).Warn("Getting stats")
+
+	udpLog.WithField("time", now).Trace("Getting stats")
+
 	metric := skogul.Metric{
 		Time:     &now,
 		Metadata: make(map[string]interface{}),
