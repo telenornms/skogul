@@ -1,7 +1,7 @@
 /*
  * skogul, templating tests
  *
- * Copyright (c) 2019-2020 Telenor Norge AS
+ * Copyright (c) 2019-2021 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
@@ -171,6 +171,65 @@ func TestExtract(t *testing.T) {
 	}
 	if _, ok := c.Metrics[0].Data[extracted_value_key]; ok {
 		t.Errorf(`Data key %s is still set after extraction`, extracted_value_key)
+	}
+}
+func TestCopy(t *testing.T) {
+
+	metric := skogul.Metric{}
+	testData := `
+	{
+		"metadata": {
+			"something": "value"
+		},
+		"data": {
+			"leavethis": "123",
+			"deleteme": "456",
+			"newkey": "789"
+		}
+	}`
+	json.Unmarshal([]byte(testData), &metric)
+
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric}
+
+	conf := testConfOk(t, `
+	{ "transformers": {
+		"ok": {
+			"type": "metadata",
+			"copyfromdata": [
+				{ "source": "leavethis", "destination": "meta1" },
+				{ "source": "deleteme", "destination": "meta2", "delete": true },
+				{ "source": "newkey" }
+			]
+		}
+	}
+	}`)
+
+	metadata := conf.Transformers["ok"].Transformer
+
+	err := metadata.Transform(&c)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if c.Metrics[0].Metadata["meta1"] != "123" {
+		t.Errorf(`Expected 123 but got %s`, c.Metrics[0].Metadata["meta1"])
+	}
+	if c.Metrics[0].Metadata["meta2"] != "456" {
+		t.Errorf(`Expected 456 but got %s`, c.Metrics[0].Metadata["meta2"])
+	}
+	if c.Metrics[0].Metadata["newkey"] != "789" {
+		t.Errorf(`Expected 789 but got %s`, c.Metrics[0].Metadata["newkey"])
+	}
+	if c.Metrics[0].Metadata["something"] != "value" {
+		t.Errorf(`Expected value but got %s`, c.Metrics[0].Metadata["something"])
+	}
+	if c.Metrics[0].Data["leavethis"] != "123" {
+		t.Errorf(`Expected 123 but got %s`, c.Metrics[0].Data["leavethis"])
+	}
+	if _, ok := c.Metrics[0].Data["deleteme"]; ok {
+		t.Errorf(`Data key 'deleteme' is set after extraction`)
 	}
 }
 

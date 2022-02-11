@@ -43,6 +43,7 @@ func init() {
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Metadata{} },
 		Help:    "Enforces custom-rules on metadata of metrics.",
+		Extras:  []interface{}{SourceDestination{}},
 	})
 	Auto.Add(skogul.Module{
 		Name:    "data",
