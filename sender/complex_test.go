@@ -74,6 +74,10 @@ func TestHttp_stack(t *testing.T) {
 	if err == nil {
 		t.Errorf("hs2.Send() to invalid url did not fail.")
 	}
+	err = hs2.Send(&skogul.Container{})
+	if err == nil {
+		t.Errorf("hs2.Send() with invalid container did not fail.")
+	}
 }
 
 func TestHttp_rootCa(t *testing.T) {

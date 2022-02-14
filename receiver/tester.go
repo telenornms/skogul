@@ -29,6 +29,7 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
 )
 
@@ -41,6 +42,7 @@ type Tester struct {
 	Threads int               `doc:"Threads to spawn"`
 	Delay   skogul.Duration   `doc:"Sleep time between each metric is generated, if any."`
 	Handler skogul.HandlerRef `doc:"Reference to a handler where the data is sent"`
+	logger  *logrus.Entry
 }
 
 func (tst *Tester) generate(t time.Time) skogul.Container {
@@ -63,9 +65,10 @@ func (tst *Tester) generate(t time.Time) skogul.Container {
 
 // Start never returns.
 func (tst *Tester) Start() error {
+	tst.logger = skogul.Logger("receiver", "tester").WithField("name", skogul.Identity[tst])
 	if tst.Threads == 0 {
 		tst.Threads = runtime.NumCPU()
-		testerLog.WithField("threads", tst.Threads).Debug("No threads set, defaulting to runtime.NumCPU()")
+		tst.logger.WithField("threads", tst.Threads).Debug("No threads set, defaulting to runtime.NumCPU()")
 	}
 	if tst.Metrics < 1 {
 		tst.Metrics = 10

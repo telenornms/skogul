@@ -76,7 +76,7 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 
 	if err != nil {
 		atomic.AddUint64(&x.stats.ParseErrors, 1)
-		return nil, fmt.Errorf("Failed to parse protocol buffer (err: %s)", err)
+		return nil, fmt.Errorf("Failed to parse protocol buffer. Error: %w", err)
 	}
 
 	protobufTimestamp := time.Unix(int64(*parsedProtoBuf.Timestamp/1000), int64(*parsedProtoBuf.Timestamp%1000)*1000000)
@@ -87,6 +87,9 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 		Data:     x.createData(parsedProtoBuf),
 	}
 
+	// XXX: Is this truly invalid? Are there no scenarios where we got
+	// metric metadata but no data? E.g., a sort of ping? Need to
+	// review protobuf spec in detail to know.
 	if metric.Metadata == nil || metric.Data == nil {
 		atomic.AddUint64(&x.stats.NilData, 1)
 		return nil, errors.New("Metric metadata or data was nil; aborting")
@@ -136,21 +139,21 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 		if err != nil {
 			systemID := telemetry.GetSystemId()
 			sensorName := telemetry.GetSensorName()
-			pbLog.Printf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemID, sensorName)
+			pbLog.WithError(err).Warnf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemID, sensorName)
 		}
 	}()
 
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
 		atomic.AddUint64(&x.stats.MissingExtension, 1)
-		pbLog.Debug("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
+		err = errors.New("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
 		return nil
 	}
 
 	enterpriseExtension, ok := extension.(proto.Message)
 	if !ok {
 		atomic.AddUint64(&x.stats.FailedToCastToJuniperMessage, 1)
-		pbLog.Debug("Failed to cast to juniper message")
+		err = errors.New("Failed to cast to juniper message")
 		return nil
 	}
 
@@ -171,20 +174,19 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 		}
 
 		if found {
-			pbLog.Debug("Multiple extensions found, don't know what to do!")
+			err = errors.New("Multiple extensions found, don't know what to do!")
 			return nil
 		}
 
 		messageOnly, ok := ext.(proto.Message)
 		if !ok {
-			pbLog.Debugf("Failed to cast to message: %v", ext)
+			err = errors.New(fmt.Sprintf("Failed to cast to message: %v", ext))
 			return nil
 		}
 
 		jsonMessage, err = json.Marshal(messageOnly)
 		if err != nil {
 			atomic.AddUint64(&x.stats.FailedToJsonMarshal, 1)
-			pbLog.WithError(err).Error("Failed to marshal data to JSON")
 			return nil
 		}
 
@@ -194,7 +196,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 	var metrics map[string]interface{}
 	if err = json.Unmarshal(jsonMessage, &metrics); err != nil {
 		atomic.AddUint64(&x.stats.FailedToJsonUnmarshal, 1)
-		pbLog.WithError(err).Debug("Unmarshalling JSON data to string/interface map failed")
+		err = skogul.Error{Reason: "Unmarshalling JSON data to string/interface map failed", Source: "protobuf", Next: err}
 		return nil
 	}
 

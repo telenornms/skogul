@@ -154,6 +154,7 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 
 	if err := rcvr.Handler.Handle(b); err != nil {
 		atomic.AddUint64(&rcvr.settings.stats.HandlerErrors, 1)
+		httpLog.WithError(err).Warnf("Unable to handle message")
 		return 400, err
 	}
 

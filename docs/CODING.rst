@@ -10,9 +10,7 @@ Division of labour
 ------------------
 
 Senders, receivers, transformers and parsers are written to be isolated and
-modularized. Currently, parsers do now have a module map since none of them
-have configuration options, but the others do. All can be considered
-modules.
+modularized. All four are modules and have configuration.
 
 A module should not be concerned with the inner workings of any other
 module. A module should never modify data outside its own data. And a
@@ -59,6 +57,7 @@ caller, unless configured to do otherwise.
 
 Receivers should never use global scope. Multiple instances of the same
 receiver implementation, with different configuration, might be configured.
+In fact, this is common.
 
 Transformers
 ............
@@ -68,17 +67,14 @@ This one is tricky.
 Transformers can mutate containers and metrics. The mutated result should
 be valid.
 
-Transformers must be concurrency-safe.
+Transformers must be concurrency-safe. But obviously only one transformer
+will work on one container at the same time.
 
 Transformers can copy data, modify data and more. But it is important that
 the resulting metrics do not have multiple references to the same data. If
 they do, this creates a problem if an other transformer subsequently tries
 to modify the content of one of the references - it will unintentionally
 also modify the other reference.
-
-Transformers should never depend on other special configuration items.
-E.g.: It is illegal to write a transformer that assumes that the templating
-transformer will be run later.
 
 Senders
 .......
@@ -87,6 +83,13 @@ Senders. Never. Modify. Containers. Ever.
 
 Senders must be concurrency-safe. They can and will be accessed in multiple
 go-routines at the same time.
+
+Senders should never log data if they also return an error. This still
+happens for historical reasons and creates a mess of duplicated error
+messages. Instead, wrap the error. Whoever used the handler (presumably a
+receiver) will log the top-most error. Exceptions can be made, e.g.: When a
+sender disconnects it's Send() function from the receiver (like the batch
+sender).
 
 Other than that, they are fairly unrestrained.
 
@@ -97,7 +100,9 @@ We currently use logrus.
 
 Each module should acquire a logger that indicates the type of code it is,
 and the name of the implementation. Use additional fields where it makes
-sense.
+sense. Recently, the skogul.Identity[] map was added, which allows a module
+to include it's own configured name, and modules should do this whenever
+possible, but it isn't _yet_ done extensively.
 
 Ideally, what to log should be self-explanatory from the regular log
 levels. They range from:
@@ -133,6 +138,9 @@ Receivers should not log OK requests by default, but logging failed
 requests is acceptable. Logging OK requests can be provided as a
 configuration option. This is to ensure that things do not explode on
 high-throughput installations.
+
+A request-log receiver might be reasonably in the future. E.g.: An internal
+receiver where any other receiver send request log items.
 
 Similar practices should apply to senders and transformers.
 

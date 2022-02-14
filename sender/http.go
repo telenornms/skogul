@@ -61,6 +61,7 @@ type HTTP struct {
 	stats            *httpStats
 	once             sync.Once
 	client           *http.Client
+	logger           *log.Entry
 }
 
 type httpStats struct {
@@ -111,7 +112,7 @@ func getCertPool(path string) (*x509.CertPool, error) {
 func (ht *HTTP) loadClientCert() (*tls.Certificate, error) {
 	cert, err := tls.LoadX509KeyPair(ht.Certfile, ht.Keyfile)
 	if err != nil {
-		httpLog.WithError(err).Error("Failed to load Client Certificate")
+		ht.logger.WithError(err).Error("Failed to load Client Certificate")
 		return nil, err
 	}
 	return &cert, nil
@@ -119,11 +120,12 @@ func (ht *HTTP) loadClientCert() (*tls.Certificate, error) {
 
 func (ht *HTTP) init() {
 	ht.ok = false
+	ht.logger = skogul.Logger("sender", "http").WithField("name", skogul.Identity[ht])
 	if ht.Timeout.Duration == 0 {
 		ht.Timeout.Duration = 20 * time.Second
 	}
 	if ht.Insecure {
-		httpLog.Warning("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
+		ht.logger.Warning("Disabling certificate validation for HTTP sender - vulnerable to man-in-the-middle")
 	}
 	iconsph := ht.IdleConnsPerHost
 
@@ -133,7 +135,7 @@ func (ht *HTTP) init() {
 
 	cp, err := getCertPool(ht.RootCA)
 	if err != nil {
-		httpLog.WithError(err).Error("Failed to initialize root CA pool")
+		ht.logger.WithError(err).Error("Failed to initialize root CA pool")
 		return
 	}
 
@@ -145,10 +147,10 @@ func (ht *HTTP) init() {
 	if ht.Certfile != "" && ht.Keyfile != "" {
 		c, err := ht.loadClientCert()
 		if err != nil {
-			httpLog.WithError(err).Error("Failed to load Client Certificate")
+			ht.logger.WithError(err).Error("Failed to load Client Certificate")
 		}
 		if c == nil {
-			httpLog.Error("Certificate was nil after loading")
+			ht.logger.Error("Certificate was nil after loading")
 			return
 		}
 		tlsConfig.Certificates = []tls.Certificate{*c}
@@ -215,9 +217,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	req, err := http.NewRequest("POST", ht.URL, &buffer)
 	if err != nil {
 		atomic.AddUint64(&ht.stats.Errors, 1)
-		e := skogul.Error{Source: "http sender", Reason: "unable to create request", Next: err}
-		httpLog.WithError(e).Error("Failed to create request")
-		return e
+		return fmt.Errorf("Failed to create a HTTP request (we are %s). Error: %w", skogul.Identity[ht], err)
 	}
 	for header, value := range ht.Headers {
 		req.Header.Add(http.CanonicalHeaderKey(header), value)
@@ -225,27 +225,20 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	resp, err := ht.client.Do(req)
 	if err != nil {
 		atomic.AddUint64(&ht.stats.RequestErrors, 1)
-		e := skogul.Error{Source: "http sender", Reason: "unable to POST request", Next: err}
-		httpLog.WithError(e).Error("Failed to do POST request")
-		return e
+		return fmt.Errorf("Unable to POST request (we are %s). Error: %w", skogul.Identity[ht], err)
 	}
 	if resp.ContentLength > 0 {
 		tmp := make([]byte, resp.ContentLength)
 		if n, err := io.ReadFull(resp.Body, tmp); err != nil {
 			atomic.AddUint64(&ht.stats.Errors, 1)
-			httpLog.WithError(err).WithFields(log.Fields{
-				"expected": resp.ContentLength,
-				"actual":   n,
-			}).Error("Failed to read http response body")
 			resp.Body.Close()
-			return err
+			return fmt.Errorf("Failed to read HTTP response body, ContentLength said %d, got %d. Error: %w", resp.ContentLength, n, err)
 		}
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		httpResponseCodeStats := ht.stats.HttpResponseError[resp.StatusCode]
 		atomic.AddUint64(&httpResponseCodeStats, 1)
-		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d", resp.StatusCode)}
-		httpLog.WithError(e).Error("HTTP response status code was not in OK range")
+		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d / %s", resp.StatusCode, resp.Status)}
 		return e
 	}
 	atomic.AddUint64(&ht.stats.Sent, 1)
@@ -267,19 +260,17 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	if !ht.ok {
 		atomic.AddUint64(&ht.stats.Errors, 1)
 		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
-		httpLog.Print(e)
+		ht.logger.Print(e)
 		return e
 	}
 	b, err := json.Marshal(*c)
 	if err != nil {
 		atomic.AddUint64(&ht.stats.Errors, 1)
-		e := skogul.Error{Source: "http sender", Reason: "unable to marshal JSON", Next: err}
-		httpLog.WithError(e).Error("Configuring HTTP sender failed")
-		return e
+		return fmt.Errorf("HTTP sender (%s) was unable to marshal metric-data into JSON. Error: %w", skogul.Identity[ht], err)
 	}
 	err = ht.sendBytes(b)
 	if err != nil {
-		return err
+		return fmt.Errorf("HTTP sender (%s) was unable to send bytes. Had %d metrics to send for a total of %d bytes. Error: %w", skogul.Identity[ht], len(c.Metrics), len(b), err)
 	}
 	return nil
 }
