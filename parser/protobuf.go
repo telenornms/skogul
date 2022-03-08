@@ -31,7 +31,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/golang/protobuf/proto"
+	//"github.com/golang/protobuf/proto"
+	"github.com/gogo/protobuf/proto"
 
 	"github.com/telenornms/skogul"
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"

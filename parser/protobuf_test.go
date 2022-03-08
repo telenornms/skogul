@@ -30,7 +30,8 @@ import (
 	"testing"
 	"time"
 
-	proto "github.com/golang/protobuf/proto"
+	//proto "github.com/golang/protobuf/proto"
+	"github.com/gogo/protobuf/proto"
 	junos_protobuf_telemetry "github.com/telenornms/skogul/gen/junos/telemetry"
 	"github.com/telenornms/skogul/parser"
 )
