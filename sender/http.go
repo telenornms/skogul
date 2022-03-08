@@ -303,6 +303,9 @@ func (ht *HTTP) GetStats() *skogul.Metric {
 	metric.Metadata["type"] = "HTTP"
 	metric.Metadata["identity"] = skogul.Identity[ht]
 
+	if !ht.ok {
+		return &metric
+	}
 	metric.Data["received"] = ht.stats.Received
 	metric.Data["sent"] = ht.stats.Sent
 	metric.Data["errors"] = ht.stats.Errors
