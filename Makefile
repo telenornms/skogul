@@ -90,7 +90,7 @@ vet:
 
 fmtcheck:
 	@echo 🦉 Checking format with gofmt -d -s
-	@if [ "x$$(find . -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +)" != "x" ]; then find . -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s {} +; exit 1; fi
+	@if [ "x$$(find . -name '*.go' -not -wholename './gen/*' -and -not -wholename './vendor/*' -exec gofmt -d -s {} +)" != "x" ]; then find . -name '*.go' -not -wholename './gen/*' -and -not -wholename './vendor/*' -exec gofmt -d -s {} +; exit 1; fi
 
 fmtfix:
 	@echo 🎨 Fixing formating
