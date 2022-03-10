@@ -94,7 +94,7 @@ fmtcheck:
 
 fmtfix:
 	@echo 🎨 Fixing formating
-	@find . -name '*.go' -not -wholename './gen/*' -exec gofmt -d -s -w {} +
+	@find . -name '*.go' -not -wholename './gen/*' -and -not -wholename './vendor/*' -exec gofmt -d -s -w {} +
 
 test:
 	@echo 🧐 Testing, without SQL-tests

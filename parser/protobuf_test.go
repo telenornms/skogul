@@ -25,7 +25,7 @@ package parser_test
 
 import (
 	"fmt"
-	//"math"
+	"math"
 	"os"
 	"testing"
 	"time"
@@ -34,6 +34,10 @@ import (
 	"github.com/gogo/protobuf/proto"
 	junos_protobuf_telemetry "github.com/telenornms/skogul/gen/junos/telemetry"
 	"github.com/telenornms/skogul/parser"
+)
+
+const (
+	uvneginf = 0xFFF00000
 )
 
 type failer interface {
@@ -174,23 +178,22 @@ func TestParseJunosProtobufTelemetryStreamOptics(t *testing.T) {
 	}
 }
 
-//func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
-//	expected := float64(math.Inf(-1))
-//	telemetry := generateOpticsDiag(math.Inf(-1))
-//
-//	bytes, err := proto.Marshal(&telemetry)
-//	if err != nil {
-//		t.Errorf("Failed to marshal protobuf message to bytes: %v", err)
-//		return
-//	}
-//	if bytes == nil {
-//		t.Error("Bytes marshalling resulted in nil")
-//		return
-//	}
-//
-//	protobuf_parser := parser.ProtoBuf{}
-//	if _, err := protobuf_parser.Parse(bytes); err == nil {
-//		t.Errorf("Expected parsing -Inf values to return an error, ref issue #194.")
-//		return
-//	}
-//}
+func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
+	telemetry := generateOpticsDiag(math.Float32frombits(uvneginf))
+
+	bytes, err := proto.Marshal(&telemetry)
+	if err != nil {
+		t.Errorf("Failed to marshal protobuf message to bytes: %v", err)
+		return
+	}
+	if bytes == nil {
+		t.Error("Bytes marshalling resulted in nil")
+		return
+	}
+
+	protobuf_parser := parser.ProtoBuf{}
+	if _, err := protobuf_parser.Parse(bytes); err == nil {
+		t.Errorf("Expected parsing -Inf values to return an error, ref issue #194.")
+		return
+	}
+}
