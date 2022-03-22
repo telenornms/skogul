@@ -1,3 +1,20 @@
+v0.14.1
+=======
+
+Release date: 2022-03-22
+
+Add Cast transformer, which allows specifying a shallow schema for input.
+It can cast data and metadatafields to strings, integers and 64-bit floats.
+
+It currently ignores missing fields, and for fields already of the correct
+value, it "just works" with no added costs. For fields needing conversion
+it will somewhat cumbersomely go through fmt.Sscanf(fmt.Sprintf(...),...),
+which is somewhat costly, but also ensures that it can convert anything
+that fmt knows how to handle reasonably well.
+
+It is meant to use as a "we can't fix the source data", not as a "we don't
+want to fix the source provider".
+
 v0.14.0
 =======
 
