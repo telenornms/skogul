@@ -166,6 +166,9 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 	}
 
 	availableExtensions, err := proto.GetExtensions(enterpriseExtension, regextensions)
+	if err != nil {
+		return nil
+	}
 
 	var jsonMessage []byte
 	found := false
@@ -194,10 +197,27 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 		found = true
 	}
 
+	if !found {
+		err = fmt.Errorf("found no valid extensions")
+		return nil
+	}
+
 	var metrics map[string]interface{}
 	if err = json.Unmarshal(jsonMessage, &metrics); err != nil {
 		atomic.AddUint64(&x.stats.FailedToJsonUnmarshal, 1)
-		err = skogul.Error{Reason: "Unmarshalling JSON data to string/interface map failed", Source: "protobuf", Next: err}
+		target := 500
+		data := ""
+		if len(jsonMessage) < 500 {
+			target = len(jsonMessage) - 1
+		}
+		if len(jsonMessage) > 0 {
+			data = string(jsonMessage[:target])
+		} else {
+			target = 0
+			data = ""
+		}
+
+		err = fmt.Errorf("unmarshalling %d bytes of JSON data to string/interface map failed: %w. First %d bytes: %s", len(jsonMessage), err, target, data)
 		return nil
 	}
 
