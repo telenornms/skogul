@@ -293,9 +293,30 @@ supports a number of other parsers as well.
 HANDLERS
 ========
 
-There is only one type of handler. It accepts three arguments: A parser to
-parse data, a list of optional transformers, and the first sender that will
-receive the parsed container(s).
+There is only one type of handler. It accepts four arguments: A parser to
+parse data, a list of optional transformers, an option to ignore partial
+metric validation failures, and the first sender that will receive the
+parsed container(s).
+
+E.g.:::
+
+  "handlers": {
+	  "foo": {
+		  "parser": "json",
+		  "transformers": [],
+		  "IgnorePartialFailures": true,
+		  "sender": "blatt"
+	  }
+  }
+
+IgnorePartialFailures
+---------------------
+
+If IgnorePartialFailures is set to true, invalid metrics will be removed
+from a container before a sender is called, and as long as at least 1 valid
+metric remains, the sender will be called. Under normal log levels, this
+filtering is suppressed as long as at least 1 metric is valid, but debug
+logging will reveal it.
 
 JSON parsing
 ------------
