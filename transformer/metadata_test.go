@@ -34,10 +34,16 @@ import (
 	"github.com/telenornms/skogul/transformer"
 )
 
-func check(t *testing.T, m *skogul.Metric, field string, want interface{}) {
+func check_m(t *testing.T, m *skogul.Metric, field string, want interface{}) {
 	t.Helper()
 	if m.Metadata[field] != want {
-		t.Errorf("Metadata transformer failed to enforce rule for field \"%s\". Wanted \"%v\", got \"%v\"", field, want, m.Metadata[field])
+		t.Errorf("Transformer failed to enforce rule for metadata field \"%s\". Wanted \"%#v\"(%T), got \"%#v\"(%T)", field, want, want, m.Metadata[field], m.Metadata[field])
+	}
+}
+func check_d(t *testing.T, m *skogul.Metric, field string, want interface{}) {
+	t.Helper()
+	if m.Data[field] != want {
+		t.Errorf("Transformer failed to enforce rule for data field \"%s\". Wanted \"%#v\", got \"%#v\"", field, want, m.Data[field])
 	}
 }
 
@@ -65,10 +71,10 @@ func TestMetadata(t *testing.T) {
 		t.Errorf("Metadata() returned non-nil err: %v", err)
 	}
 
-	check(t, c.Metrics[0], "set", "new")
-	check(t, c.Metrics[0], "require", "present")
-	check(t, c.Metrics[0], "remove", nil)
-	check(t, c.Metrics[0], "ban", nil)
+	check_m(t, c.Metrics[0], "set", "new")
+	check_m(t, c.Metrics[0], "require", "present")
+	check_m(t, c.Metrics[0], "remove", nil)
+	check_m(t, c.Metrics[0], "ban", nil)
 }
 
 func TestMetadata_config(t *testing.T) {

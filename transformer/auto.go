@@ -52,6 +52,12 @@ func init() {
 		Help:    "Enforces custom-rules for data fields of metrics.",
 	})
 	Auto.Add(skogul.Module{
+		Name:    "cast",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &Cast{} },
+		Help:    "Casts fields to specific data types, where possible. If the fields are already the correct type, the CPU cost is negligible, however, it is better to fix senders where possible.",
+	})
+	Auto.Add(skogul.Module{
 		Name:    "parse",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Parse{} },
