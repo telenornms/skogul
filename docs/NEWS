@@ -1,3 +1,11 @@
+v0.13.2
+=======
+
+Release date: 2022-03-22
+
+Only build fixes since 0.13.0 failed to check on our CI pipeline. See
+v0.13.0 for actual news.
+
 v0.13.1
 =======
 
