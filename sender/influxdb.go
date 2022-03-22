@@ -214,15 +214,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 			body = []byte(fmt.Sprintf("No reply body. Request: %s", buffer.Bytes()))
 		}
 
-		influxLog.WithFields(logrus.Fields{
-			"metricsSent": added,
-			"body":        string(body),
-			"status":      resp.Status,
-			"tags":        nmdata,
-			"fields":      ndata,
-		}).Error("Failed to send data to influx. Bad response from backend.")
-		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad response from InfluxDB: %s - %s", resp.Status, string(body))}
-		return e
+		return fmt.Errorf("Influx sender(%s) failed to send container (%s). Bad response from InfluxDB: %s - %s", skogul.Identity[idb], c.Describe(), resp.Status, string(body))
 	}
 	return nil
 }
