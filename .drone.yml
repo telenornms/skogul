@@ -38,7 +38,7 @@ steps:
     - tag
 
 - name: prepare-centos-release
-  image: centos:8
+  image: rockylinux:8
   environment:
     SHELL: /bin/bash
   commands:
