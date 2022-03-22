@@ -81,6 +81,9 @@ directly to a Sender. This goes for artificially created data too, e.g. if
 a sender wants to emit statistics. This ensures that transformers can be
 used in the future.
 
+IngorePartialFailures should probably be renamed to removeinvalidmetrics or
+something like that, as that's closer to what it does.
+
 To make it configurable, a HandlerRef should be used.
 */
 type Handler struct {

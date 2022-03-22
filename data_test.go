@@ -79,7 +79,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an empty Container")
 	}
 	got := fmt.Sprintf("%s", err)
-	want := "Missing metrics[] data."
+	want := "missing metrics[] data."
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -91,7 +91,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "Empty metrics[] data."
+	want = "empty metrics[] data."
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -104,7 +104,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "Missing timestamp for metric(0 metadatafields and 0 data-fields, Metadata-snippet:  Data-snippet: )"
+	want = "missing timestamp for metric(0 metadatafields and 0 data-fields, First 5 Metadata fields:  Data: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -118,7 +118,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with no data")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "Missing data for metric(0 metadatafields and 0 data-fields, Metadata-snippet:  Data-snippet: )"
+	want = "missing data for metric(0 metadatafields and 0 data-fields, First 5 Metadata fields:  Data: )"
 	if got != want {
 		t.Errorf("Validate() expected reason {%s}, got {%s}", want, got)
 	}
@@ -130,7 +130,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with no data")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "Empty data for metric(0 metadatafields and 0 data-fields, Metadata-snippet:  Data-snippet: )"
+	want = "empty data for metric(0 metadatafields and 0 data-fields, First 5 Metadata fields:  Data: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -171,7 +171,7 @@ func TestValidate_partial(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with bad data")
 	}
 	got := fmt.Sprintf("%s", err)
-	want := "Missing data for metric(1 metadatafields and 0 data-fields, Metadata-snippet:  [ok=nah] Data-snippet: )"
+	want := "missing data for metric(1 metadatafields and 0 data-fields, First 5 Metadata fields:  [ok=nah] Data: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}

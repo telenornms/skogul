@@ -150,13 +150,13 @@ type Metric struct {
 // Validate a single metric.
 func (m *Metric) validate() error {
 	if m.Time == nil {
-		return fmt.Errorf("Missing timestamp for metric(%s)", m.Describe())
+		return fmt.Errorf("missing timestamp for metric(%s)", m.Describe())
 	}
 	if m.Data == nil {
-		return fmt.Errorf("Missing data for metric(%s)", m.Describe())
+		return fmt.Errorf("missing data for metric(%s)", m.Describe())
 	}
 	if len(m.Data) <= 0 {
-		return fmt.Errorf("Empty data for metric(%s)", m.Describe())
+		return fmt.Errorf("empty data for metric(%s)", m.Describe())
 	}
 	return nil
 }
@@ -170,10 +170,10 @@ validated by that time.
 */
 func (c *Container) Validate(IgnorePartialErrors bool) error {
 	if c.Metrics == nil {
-		return fmt.Errorf("Missing metrics[] data.")
+		return fmt.Errorf("missing metrics[] data.")
 	}
 	if len(c.Metrics) <= 0 {
-		return fmt.Errorf("Empty metrics[] data.")
+		return fmt.Errorf("empty metrics[] data.")
 	}
 	var err error
 	ok := 0
@@ -196,7 +196,7 @@ func (c *Container) Validate(IgnorePartialErrors bool) error {
 		ok++
 	}
 	if ok == 0 {
-		return fmt.Errorf("After ignoring %d invalid metrics, there are 0 valid metrics left to send. Last error: %w", ignored, err)
+		return fmt.Errorf("after ignoring %d invalid metrics, there are 0 valid metrics left to send. Last error: %w", ignored, err)
 	}
 	if IgnorePartialErrors {
 		c.Metrics = valids
@@ -204,6 +204,12 @@ func (c *Container) Validate(IgnorePartialErrors bool) error {
 	return nil
 }
 
+// Describe tries to briefly describe a metric.
+//
+// FIXME: In addition to only including the first X fields, it should
+// probably also look at raw size, as logging an entire telemetry packet is
+// a bit much. On the other hand, this should be configurable as it's also
+// useful...
 func (m Metric) Describe() string {
 	metadata := 0
 	mfields := ""
@@ -231,7 +237,7 @@ func (m Metric) Describe() string {
 			dfields = fmt.Sprintf("%s [%s=%v]", dfields, idx, v)
 		}
 	}
-	return fmt.Sprintf("%d metadatafields and %d data-fields, Metadata-snippet: %s Data-snippet: %s", metadata, data, mfields, dfields)
+	return fmt.Sprintf("%d metadatafields and %d data-fields, First 5 Metadata fields: %s Data: %s", metadata, data, mfields, dfields)
 }
 
 // Describe returns key properties of the container useful for debugging
