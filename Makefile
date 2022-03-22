@@ -78,8 +78,10 @@ rpm: build/redhat-skogul.spec
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
-check: test fmtcheck vet lint
+check: test fmtcheck vet
 
+# Can't for the life of me remember where this came from and it's seemingly
+# gone now, so removed from check.
 lint:
 	@echo 🐉 Linting code
 	@golint -set_exit_status
