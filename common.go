@@ -26,10 +26,48 @@ package skogul
 
 import (
 	"fmt"
+	"math"
 	"runtime"
 	"time"
 
 	"github.com/sirupsen/logrus"
+)
+
+/*
+bit patterns for 32-bit infinity. See ../common.go for details.
+
+This is needed because the math package doesn't handle 32-bit variants.
+
+The pattern is:
+
+
+seeeeeee e0000000 00000000 00000000
+01234567 01234567 01234567 01234567
+
+Where s is sign, e is exponent and the rest is the value.
+
+Exponents of all 1's means either Infinity or NaN.
+
+Value of 0, exponent of 1's, mean infinity, sign will determine, well, the
+sign (e.g. Inf vs -Inf).
+
+Could also set this as:
+	uvneginf = 0b11111111100000000000000000000000
+	uvinf    = 0b01111111100000000000000000000000
+
+Hex equivalents are just weird, so I left it as binary after first figuring
+out the hex encoding...
+	uvneginf = 0xFF800000
+	uvinf = 0x7F800000
+
+nanmask, while identical to uvinf, is there to explicitly distinguish
+between checking if this is a nan or not, but isn't currently implemented.
+*/
+const (
+	uvneginf = 0b11111111100000000000000000000000
+	uvinf    = 0b01111111100000000000000000000000
+	nanmask  = 0b01111111100000000000000000000000
+	//           01234567012345670123456701234567
 )
 
 /*
@@ -332,4 +370,20 @@ func (s Secret) String() string {
 // such as to the service that requires the data.
 func (s Secret) Expose() string {
 	return string(s)
+}
+
+// IsInf is a direct copy of Math.IsInf(), converted to 32-bit. This is
+// some times needed when encodings use 32 bit floats (e.g.: Juniper
+// telemetry). The following is the original documentation.
+//
+// IsInf reports whether f is an infinity, according to sign.
+// If sign > 0, IsInf reports whether f is positive infinity.
+// If sign < 0, IsInf reports whether f is negative infinity.
+// If sign == 0, IsInf reports whether f is either infinity.
+func IsInf(f float32, sign int) bool {
+	// Test for infinity by comparing against maximum float.
+	// To avoid the floating-point hardware, could use:
+	x := math.Float32bits(f)
+	return sign >= 0 && x == uvinf || sign <= 0 && x == uvneginf
+	//        return sign >= 0 && f > math.MaxFloat32 || sign <= 0 && f < -math.SmallestNonzeroFloat32
 }

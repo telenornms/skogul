@@ -32,12 +32,17 @@ import (
 
 	//proto "github.com/golang/protobuf/proto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/telenornms/skogul"
 	junos_protobuf_telemetry "github.com/telenornms/skogul/gen/junos/telemetry"
 	"github.com/telenornms/skogul/parser"
 )
 
+/*
+bit patterns for 32-bit infinity. See ../common.go for details.
+*/
+
 const (
-	uvneginf = 0xFFF00000
+	uvneginf = 0b11111111100000000000000000000000
 )
 
 type failer interface {
@@ -179,9 +184,14 @@ func TestParseJunosProtobufTelemetryStreamOptics(t *testing.T) {
 }
 
 func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
-	telemetry := generateOpticsDiag(math.Float32frombits(uvneginf))
+	val := float32(math.Float32frombits(uvneginf))
+	telemetry := generateOpticsDiag(val)
 
 	bytes, err := proto.Marshal(&telemetry)
+	if !skogul.IsInf(val, -1) {
+		t.Errorf("Trying to test negative infinity value, but value isn't interpreted as infinity. Value: %f", val)
+		return
+	}
 	if err != nil {
 		t.Errorf("Failed to marshal protobuf message to bytes: %v", err)
 		return
@@ -192,7 +202,8 @@ func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
 	}
 
 	protobuf_parser := parser.ProtoBuf{}
-	if _, err := protobuf_parser.Parse(bytes); err == nil {
+	_, err = protobuf_parser.Parse(bytes)
+	if err == nil {
 		t.Errorf("Expected parsing -Inf values to return an error, ref issue #194.")
 		return
 	}
