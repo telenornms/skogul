@@ -149,11 +149,14 @@ type Metric struct {
 
 // Validate a single metric.
 func (m *Metric) validate() error {
+	if m.Time == nil {
+		return fmt.Errorf("Missing timestamp for metric(%s)", m.Describe())
+	}
 	if m.Data == nil {
-		return Error{Reason: "Missing data for metric"}
+		return fmt.Errorf("Missing data for metric(%s)", m.Describe())
 	}
 	if len(m.Data) <= 0 {
-		return Error{Reason: "Missing data for metric"}
+		return fmt.Errorf("Empty data for metric(%s)", m.Describe())
 	}
 	return nil
 }
@@ -165,25 +168,72 @@ accepting a Container from an external source. It is NOT required
 nor recommended to use Validate in senders - the data is already
 validated by that time.
 */
-func (c *Container) Validate() error {
+func (c *Container) Validate(IgnorePartialErrors bool) error {
 	if c.Metrics == nil {
-		return Error{Source: "container validation", Reason: "Missing metrics[] data"}
+		return fmt.Errorf("Container validation failed due to missing metrics[] data.")
 	}
 	if len(c.Metrics) <= 0 {
-		return Error{Reason: "Empty metrics[] data"}
+		return fmt.Errorf("Container validation failed due to empty metrics[] data.")
 	}
+	var err error
+	ok := 0
 	for _, m := range c.Metrics {
-		if m.Time == nil && (c.Template == nil || c.Template.Time == nil) {
-			return Error{Reason: "Missing timestamp in both metric and container"}
-		}
-		err := m.validate()
-		if err != nil {
+		err = m.validate()
+		if err != nil && !IgnorePartialErrors {
 			return err
 		}
+		if err != nil {
+			dataLog.WithError(err).Infof("Ignoring metric with failed validation. %s", m.Describe())
+			continue
+		}
+
+		ok++
+	}
+	if ok == 0 {
+		return fmt.Errorf("Validation of container failed. 0 valid metrics left to send, even after ignored failed metrics. Last error: %w", err)
 	}
 	return nil
 }
 
+func (m Metric) Describe() string {
+	metadata := 0
+	mfields := ""
+	data := 0
+	dfields := ""
+	if m.Metadata != nil {
+		metadata = len(m.Metadata)
+		i := 0
+		for idx, v := range m.Metadata {
+			if i >= 5 || i >= metadata {
+				break
+			}
+			i++
+			mfields = fmt.Sprintf("%s [%s=%v]", mfields, idx, v)
+		}
+	}
+	if m.Data != nil {
+		data = len(m.Data)
+		i := 0
+		for idx, v := range m.Data {
+			if i >= 5 || i >= data {
+				break
+			}
+			i++
+			dfields = fmt.Sprintf("%s [%s=%v]", dfields, idx, v)
+		}
+	}
+	return fmt.Sprintf("%d metadatafields and %d data-fields, Metadata-snippet: %s Data-snippet: %s", metadata, data, mfields, dfields)
+}
+
+// Describe returns key properties of the container useful for debugging
+// without excessively spamming the log.
+func (c Container) Describe() string {
+	m0 := ""
+	if c.Metrics != nil && len(c.Metrics) > 0 {
+		m0 = c.Metrics[0].Describe()
+	}
+	return fmt.Sprintf("Container(%d metrics, Metric[0]: %s", len(c.Metrics), m0)
+}
 func (c Container) String() string {
 	b, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {

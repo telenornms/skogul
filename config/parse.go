@@ -66,10 +66,11 @@ type Receiver struct {
 
 // Handler wraps skogul.Handler for configuration parsing.
 type Handler struct {
-	Parser       skogul.ParserRef
-	Transformers []*skogul.TransformerRef
-	Sender       skogul.SenderRef
-	Handler      skogul.Handler `json:"-"`
+	Parser                skogul.ParserRef
+	Transformers          []*skogul.TransformerRef
+	Sender                skogul.SenderRef
+	IgnorePartialFailures bool
+	Handler               skogul.Handler `json:"-"`
 }
 
 // Transformer wraps skogul.Transformer
@@ -484,6 +485,7 @@ func resolveHandlers(c *Config) error {
 
 		h.Handler.Sender = h.Sender.S
 		h.Handler.Transformers = make([]skogul.Transformer, 0)
+		h.Handler.IgnorePartialFailures = h.IgnorePartialFailures
 		h.Handler.SetParser(h.Parser.P)
 
 		for _, t := range h.Transformers {

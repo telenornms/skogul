@@ -270,7 +270,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	}
 	err = ht.sendBytes(b)
 	if err != nil {
-		return fmt.Errorf("HTTP sender (%s) was unable to send bytes. Had %d metrics to send for a total of %d bytes. Error: %w", skogul.Identity[ht], len(c.Metrics), len(b), err)
+		return fmt.Errorf("HTTP sender (%s) was unable to send %d bytes. Container(%s).  Error: %w", skogul.Identity[ht], len(b), c.Describe(), err)
 	}
 	return nil
 }

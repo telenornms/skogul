@@ -74,24 +74,24 @@ func TestString(t *testing.T) {
 
 func TestValidate(t *testing.T) {
 	empty := skogul.Container{}
-	err := empty.Validate()
+	err := empty.Validate(false)
 	if err == nil {
 		t.Errorf("Validate() succeeded on an empty Container")
 	}
 	got := fmt.Sprintf("%s", err)
-	want := "container validation: Missing metrics[] data"
+	want := "Container validation failed due to missing metrics[] data."
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
 
 	noMetrics := skogul.Container{}
 	noMetrics.Metrics = []*skogul.Metric{}
-	err = noMetrics.Validate()
+	err = noMetrics.Validate(false)
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "<nil>: Empty metrics[] data"
+	want = "Container validation failed due to empty metrics[] data."
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -99,12 +99,12 @@ func TestValidate(t *testing.T) {
 	badMetrics := skogul.Container{}
 	metric := skogul.Metric{}
 	badMetrics.Metrics = []*skogul.Metric{&metric}
-	err = badMetrics.Validate()
+	err = badMetrics.Validate(false)
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "<nil>: Missing timestamp in both metric and container"
+	want = "Missing timestamp for metric(0 metadatafields and 0 data-fields, Metadata-snippet:  Data-snippet: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -113,31 +113,31 @@ func TestValidate(t *testing.T) {
 	metric.Time = &now
 	notimeMetrics := skogul.Container{}
 	notimeMetrics.Metrics = []*skogul.Metric{&metric}
-	err = notimeMetrics.Validate()
+	err = notimeMetrics.Validate(false)
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with no data")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "<nil>: Missing data for metric"
+	want = "Missing data for metric(0 metadatafields and 0 data-fields, Metadata-snippet:  Data-snippet: )"
 	if got != want {
-		t.Errorf("Validate() expected reason %s, got %s", want, got)
+		t.Errorf("Validate() expected reason {%s}, got {%s}", want, got)
 	}
 
 	metric.Data = make(map[string]interface{})
 	notimeMetrics.Metrics = []*skogul.Metric{&metric}
-	err = notimeMetrics.Validate()
+	err = notimeMetrics.Validate(false)
 	if err == nil {
 		t.Errorf("Validate() succeeded on an Container with no data")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "<nil>: Missing data for metric"
+	want = "Empty data for metric(0 metadatafields and 0 data-fields, Metadata-snippet:  Data-snippet: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
 	metric.Data["test"] = "foo"
 	okc := skogul.Container{}
 	okc.Metrics = []*skogul.Metric{&metric}
-	err = okc.Validate()
+	err = okc.Validate(false)
 	if err != nil {
 		t.Errorf("Validate() failed when it should work: %v", err)
 	}
@@ -153,7 +153,7 @@ func BenchmarkValidate(b *testing.B) {
 	okc := skogul.Container{}
 	okc.Metrics = []*skogul.Metric{&metric}
 	for i := 0; i < b.N; i++ {
-		okc.Validate()
+		okc.Validate(false)
 	}
 
 }

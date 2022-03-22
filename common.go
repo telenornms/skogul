@@ -84,9 +84,10 @@ used in the future.
 To make it configurable, a HandlerRef should be used.
 */
 type Handler struct {
-	parser       Parser
-	Transformers []Transformer
-	Sender       Sender
+	parser                Parser
+	Transformers          []Transformer
+	Sender                Sender
+	IgnorePartialFailures bool
 }
 
 // Parser is the interface for parsing arbitrary data into a Container
@@ -262,11 +263,11 @@ func (h *Handler) Transform(c *Container) error {
 
 // Send validates the container and sends it to the configured sender
 func (h *Handler) Send(c *Container) error {
-	if err := c.Validate(); err != nil {
-		return Error{Source: "handler", Reason: "validating metrics failed", Next: err}
+	if err := c.Validate(h.IgnorePartialFailures); err != nil {
+		return fmt.Errorf("Handler wont send data, validation failed (%s): %w", c.Describe(), err)
 	}
 	if err := h.Sender.Send(c); err != nil {
-		return Error{Source: "handler", Reason: "sending metrics failed", Next: err}
+		return fmt.Errorf("Handler failed to send data (%s): %w", c.Describe(), err)
 	}
 	return nil
 }
