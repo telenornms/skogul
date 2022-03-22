@@ -177,6 +177,7 @@ func (c *Container) Validate(IgnorePartialErrors bool) error {
 	}
 	var err error
 	ok := 0
+	valids := make([]*Metric,0)
 	for _, m := range c.Metrics {
 		err = m.validate()
 		if err != nil && !IgnorePartialErrors {
@@ -186,11 +187,17 @@ func (c *Container) Validate(IgnorePartialErrors bool) error {
 			dataLog.WithError(err).Infof("Ignoring metric with failed validation. %s", m.Describe())
 			continue
 		}
+		if IgnorePartialErrors {
+			valids = append(valids,m)
+		}
 
 		ok++
 	}
 	if ok == 0 {
 		return fmt.Errorf("Validation of container failed. 0 valid metrics left to send, even after ignored failed metrics. Last error: %w", err)
+	}
+	if IgnorePartialErrors {
+		c.Metrics = valids
 	}
 	return nil
 }

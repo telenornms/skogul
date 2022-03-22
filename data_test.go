@@ -143,6 +143,52 @@ func TestValidate(t *testing.T) {
 	}
 }
 
+func TestValidate_partial(t *testing.T) {
+	p := parser.JSON{}
+	c, err := p.Parse([]byte(`{
+		"metrics": [
+			{
+				"timestamp": "2022-03-22T19:55:15+02:00",
+				"metadata": { "ok": "nah" },
+				"data": { "cakes": 5 }
+			},
+			{
+				"timestamp": "2022-03-22T19:55:15+02:00",
+				"metadata": { "ok": "nah" }
+			},
+			{
+				"timestamp": "2022-03-22T19:55:15+02:00",
+				"metadata": { "ok": "nah" },
+				"data": { "cakes": 5 }
+			}
+		]
+	}`))
+	if err != nil {
+		t.Errorf("Failed to parse basic container, err: %v", err)
+	}
+	err = c.Validate(false)
+	if err == nil {
+		t.Errorf("Validate() succeeded on an Container with bad data")
+	}
+	got := fmt.Sprintf("%s", err)
+	want := "Missing data for metric(1 metadatafields and 0 data-fields, Metadata-snippet:  [ok=nah] Data-snippet: )"
+	if got != want {
+		t.Errorf("Validate() expected reason %s, got %s", want, got)
+	}
+	if len(c.Metrics) != 3 {
+		t.Errorf("Parsed failed to return correct number of metrics. Expected 3 prior to validation, got %d.", len(c.Metrics))
+	}
+	err = c.Validate(true)
+	if err != nil {
+		t.Errorf("Validate() failed on an Container with partially OK data")
+	}
+	if len(c.Metrics) != 2 {
+		t.Errorf("Validate() failed to return correct number of metrics. Expected 2, got %d.", len(c.Metrics))
+	}
+
+}
+
+
 func BenchmarkValidate(b *testing.B) {
 
 	now := time.Now()
