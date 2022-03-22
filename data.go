@@ -170,14 +170,15 @@ validated by that time.
 */
 func (c *Container) Validate(IgnorePartialErrors bool) error {
 	if c.Metrics == nil {
-		return fmt.Errorf("Container validation failed due to missing metrics[] data.")
+		return fmt.Errorf("Missing metrics[] data.")
 	}
 	if len(c.Metrics) <= 0 {
-		return fmt.Errorf("Container validation failed due to empty metrics[] data.")
+		return fmt.Errorf("Empty metrics[] data.")
 	}
 	var err error
 	ok := 0
-	valids := make([]*Metric,0)
+	ignored := 0
+	valids := make([]*Metric, 0)
 	for _, m := range c.Metrics {
 		err = m.validate()
 		if err != nil && !IgnorePartialErrors {
@@ -185,16 +186,17 @@ func (c *Container) Validate(IgnorePartialErrors bool) error {
 		}
 		if err != nil {
 			dataLog.WithError(err).Infof("Ignoring metric with failed validation. %s", m.Describe())
+			ignored++
 			continue
 		}
 		if IgnorePartialErrors {
-			valids = append(valids,m)
+			valids = append(valids, m)
 		}
 
 		ok++
 	}
 	if ok == 0 {
-		return fmt.Errorf("Validation of container failed. 0 valid metrics left to send, even after ignored failed metrics. Last error: %w", err)
+		return fmt.Errorf("After ignoring %d invalid metrics, there are 0 valid metrics left to send. Last error: %w", ignored, err)
 	}
 	if IgnorePartialErrors {
 		c.Metrics = valids

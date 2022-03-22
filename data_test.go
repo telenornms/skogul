@@ -79,7 +79,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an empty Container")
 	}
 	got := fmt.Sprintf("%s", err)
-	want := "Container validation failed due to missing metrics[] data."
+	want := "Missing metrics[] data."
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -91,7 +91,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "Container validation failed due to empty metrics[] data."
+	want = "Empty metrics[] data."
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -187,7 +187,6 @@ func TestValidate_partial(t *testing.T) {
 	}
 
 }
-
 
 func BenchmarkValidate(b *testing.B) {
 

@@ -124,7 +124,7 @@ func (bat *Batch) add(c *skogul.Container) {
 		// It's allowed to exceed Threshold - but only once.
 		if newlen < nl {
 			newlen = nl
-			batchLog.Warning((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
+			batchLog.Debug((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
 		}
 		x := make([]*skogul.Metric, newlen)
 		copy(x, bat.cont.Metrics)
@@ -142,7 +142,8 @@ func (bat *Batch) flusher(ch chan *skogul.Container, sender skogul.Sender) {
 		c := <-ch
 		err := sender.Send(c)
 		if err != nil {
-			batchLog.WithError(err).Error(skogul.Error{Source: "batch sender", Reason: "down stream error", Next: err})
+			err = fmt.Errorf("Batch sender (%s) failed due to down stream error: %w", skogul.Identity[bat], err)
+			batchLog.Error(err)
 		}
 	}
 }

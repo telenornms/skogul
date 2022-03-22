@@ -264,10 +264,10 @@ func (h *Handler) Transform(c *Container) error {
 // Send validates the container and sends it to the configured sender
 func (h *Handler) Send(c *Container) error {
 	if err := c.Validate(h.IgnorePartialFailures); err != nil {
-		return fmt.Errorf("Handler wont send data, validation failed (%s): %w", c.Describe(), err)
+		return fmt.Errorf("validation failed: %w", err)
 	}
 	if err := h.Sender.Send(c); err != nil {
-		return fmt.Errorf("Handler failed to send data (%s): %w", c.Describe(), err)
+		return fmt.Errorf("sender failed: %w", err)
 	}
 	return nil
 }
@@ -289,10 +289,10 @@ func (h *Handler) Handle(b []byte) error {
 // data off.
 func (h *Handler) TransformAndSend(c *Container) error {
 	if err := h.Transform(c); err != nil {
-		return Error{Source: "handler transform&send", Reason: "transforming metrics failed", Next: err}
+		return fmt.Errorf("transforming metrics failed: %w", err)
 	}
 	if err := h.Send(c); err != nil {
-		return Error{Source: "handler transform&send", Reason: "sending metrics failed", Next: err}
+		return fmt.Errorf("sending metrics failed: %w", err)
 	}
 	return nil
 }
