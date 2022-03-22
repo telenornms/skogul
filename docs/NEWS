@@ -1,3 +1,28 @@
+v0.14.0
+=======
+
+Release date: 2022-03-22
+
+Updates juniper telemetry interface, including a change of protobuf
+compiler. Tested on various routers.
+
+Greatly improves error messages, specially for protobuf, this is the
+beginning of a major revamp to use wrapped errors, which will hopefully
+both reduce log spam, and make the log messages more useful for real life
+trouble shooting. For protobuf, this means actually useful errors when
+marshaling fails, including what router and the underlying errors. Next up:
+Workaround for -Infinity.
+
+Also adds http stats, courtesy of eiriktaa <eirikamdal@yahoo.com>.
+
+Also switches rpm builds from CentOS 8 which no longer works at all, to
+Rocky Linux 8. This should have no impact on end users, regardless of
+platform.
+
+PS: This is a verbatim copy of the entire v0.13.x debacle, since it failed
+to build the release. There are 0 code changes between 0.13.0 and 0.14.0,
+and this is just to get the actual NEWS section fixed and a clean start.
+
 v0.13.2
 =======
 
