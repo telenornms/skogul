@@ -26,6 +26,7 @@ package transformer
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/telenornms/skogul"
 )
@@ -34,9 +35,11 @@ type Cast struct {
 	MetadataStrings []string `doc:"List of metadatafields that should be strings"`
 	MetadataInts    []string `doc:"List of metadatafields that should be integers"`
 	MetadataFloats  []string `doc:"List of metadatafields that should be 64-bit floats"`
+	MetadataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
 	DataStrings     []string `doc:"List of datafields that should be strings"`
 	DataInts        []string `doc:"List of datafields that should be integers"`
 	DataFloats      []string `doc:"List of datafields that should be 64-bit floats"`
+	DataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
 }
 
 // Transform enforces the Cast rules
@@ -80,6 +83,15 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					c.Metrics[mi].Data[value] = tmp
 				}
 			}
+			for _, value := range cast.DataFlatFloats {
+				if c.Metrics[mi].Data[value] != nil {
+					f, ok := c.Metrics[mi].Data[value].(float64)
+					if !ok {
+						continue
+					}
+					c.Metrics[mi].Data[value] = strconv.FormatFloat(f, 'f', -1, 64)
+				}
+			}
 		}
 		if c.Metrics[mi].Metadata == nil {
 			continue
@@ -119,6 +131,15 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					return err
 				}
 				c.Metrics[mi].Metadata[value] = tmp
+			}
+		}
+		for _, value := range cast.MetadataFlatFloats {
+			if c.Metrics[mi].Metadata[value] != nil {
+				f, ok := c.Metrics[mi].Metadata[value].(float64)
+				if !ok {
+					continue
+				}
+				c.Metrics[mi].Metadata[value] = strconv.FormatFloat(f, 'f', -1, 64)
 			}
 		}
 	}

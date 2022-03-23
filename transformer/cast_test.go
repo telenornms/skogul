@@ -45,6 +45,7 @@ func TestCast(t *testing.T) {
 	metric.Metadata["minttoint"] = 3
 	metric.Metadata["mfloattoint"] = 3.14
 	metric.Metadata["mstringtoint"] = "3.14"
+	metric.Metadata["mflatten"] = 314159265358979.0
 	metric.Data["dinttostring"] = 3
 	metric.Data["dfloattostring"] = 3.14
 	metric.Data["dstringtostring"] = "pi"
@@ -61,6 +62,7 @@ func TestCast(t *testing.T) {
 		MetadataStrings: []string{"minttostring", "mfloattostring", "mstringtostring"},
 		MetadataFloats:  []string{"minttofloat", "mfloattofloat", "mstringtofloat"},
 		MetadataInts:    []string{"minttoint", "mfloattoint", "mstringtoint"},
+		MetadataFlatFloats: []string{"mflatten"},
 		DataStrings:     []string{"dinttostring", "dfloattostring", "dstringtostring"},
 		DataFloats:      []string{"dinttofloat", "dfloattofloat", "dstringtofloat"},
 		DataInts:        []string{"dinttoint", "dfloattoint", "dstringtoint"},
@@ -81,6 +83,7 @@ func TestCast(t *testing.T) {
 	check_m(t, c.Metrics[0], "minttoint", 3)
 	check_m(t, c.Metrics[0], "mfloattoint", 3)
 	check_m(t, c.Metrics[0], "mstringtoint", 3)
+	check_m(t, c.Metrics[0], "mflatten", "314159265358979")
 
 	check_d(t, c.Metrics[0], "dinttostring", "3")
 	check_d(t, c.Metrics[0], "dfloattostring", "3.14")
