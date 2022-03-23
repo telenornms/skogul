@@ -62,6 +62,7 @@ type HTTP struct {
 	Certfile             string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
 	Keyfile              string                        `doc:"Path to key file for TLS."`
 	ClientCertificateCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
+	Log204OK	     bool			   `doc:"Log successful requests as well as failed. Failed requests are always logged as a warning.Successful requests are logged as info-level."`
 	stats                *httpStats
 }
 
@@ -136,25 +137,18 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 	atomic.AddUint64(&rcvr.settings.stats.Received, 1)
 	if r.ContentLength == 0 {
 		atomic.AddUint64(&rcvr.settings.stats.NoData, 1)
-		return 400, skogul.Error{Source: "http receiver", Reason: "Missing input data"}
+		return 400, fmt.Errorf("no body in HTTP request")
 	}
 
 	b := make([]byte, r.ContentLength)
 
-	if n, err := io.ReadFull(r.Body, b); err != nil {
-		httpLog.WithFields(log.Fields{
-			"address":  r.RemoteAddr,
-			"error":    err,
-			"numbytes": n,
-		}).Error("Read error from client")
-
+	if _, err := io.ReadFull(r.Body, b); err != nil {
 		atomic.AddUint64(&rcvr.settings.stats.ReadFailed, 1)
-		return 400, skogul.Error{Source: "http receiver", Reason: "read failed", Next: err}
+		return 400, fmt.Errorf("read error on http body: %w")
 	}
 
 	if err := rcvr.Handler.Handle(b); err != nil {
 		atomic.AddUint64(&rcvr.settings.stats.HandlerErrors, 1)
-		httpLog.WithError(err).Warnf("Unable to handle message")
 		return 400, err
 	}
 
@@ -165,6 +159,19 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 // Core HTTP handler
 func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	code, err := rcvr.handle(w, r)
+	if err != nil {
+		httpLog.WithFields(log.Fields{
+			"code": code,
+			"remoteAddress":   r.RemoteAddr,
+			"requestUri": r.RequestURI,
+			"ContentLength": r.ContentLength}).WithError(err).Warnf("HTTP request failed")
+	} else if rcvr.settings.Log204OK {
+		httpLog.WithFields(log.Fields{
+			"code": code,
+			"remoteAddress":   r.RemoteAddr,
+			"requestUri": r.RequestURI,
+			"ContentLength": r.ContentLength}).Infof("HTTP request ok")
+	}
 	rcvr.answer(w, r, code, err)
 }
 

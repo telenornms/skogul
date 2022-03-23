@@ -3,6 +3,7 @@
       "api": {
         "type": "http",
         "address": "[::1]:8080",
+	"log204ok": true,
         "handlers": {
           "/": "jsontemplating"
         }
@@ -29,13 +30,7 @@
     "count": {
       "type": "counter",
       "stats": "debugger",
-      "next": "nil"
-    },
-    "nil": {
-      "type": "null"
-    },
-    "print": {
-      "type": "debug"
+      "next": "null"
     }
   }
 }
