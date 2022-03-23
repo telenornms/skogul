@@ -5,8 +5,11 @@
         "address": "[::1]:8080",
 	"log204ok": true,
         "handlers": {
-          "/": "jsontemplating"
-        }
+          "/test": "jsontemplating"
+        },
+	"auth": {
+	 "/test": { "username": "lol", "password": "kek"}
+	}
       }
   },
   "handlers": {

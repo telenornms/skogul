@@ -85,6 +85,12 @@ type receiver struct {
 	auth     *HTTPAuth
 }
 
+// fallback is used to handle the / path if it isn't defined, mainly to
+// unify logging.
+type fallback struct {
+	hasAuth bool // if any auth handler is present, we return 401 instead of 404.
+}
+
 type httpReturn struct {
 	Message string
 }
@@ -94,7 +100,7 @@ func (auth *HTTPAuth) auth(r *http.Request) error {
 		username, pw, ok := r.BasicAuth()
 		success := ok && auth.Username == username && auth.Password == pw
 		if !success {
-			return skogul.Error{Source: "http receiver", Reason: "Invalid credentials"}
+			return fmt.Errorf("Invalid credentials")
 		}
 
 		return nil
@@ -111,7 +117,7 @@ func (auth *HTTPAuth) auth(r *http.Request) error {
 	return skogul.Error{Source: "http receiver", Reason: "No matching authentication method"}
 }
 
-func (rcvr receiver) answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
+func answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
 	answer := "OK"
 
 	w.WriteHeader(code)
@@ -172,7 +178,26 @@ func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			"requestUri": r.RequestURI,
 			"ContentLength": r.ContentLength}).Infof("HTTP request ok")
 	}
-	rcvr.answer(w, r, code, err)
+	answer(w, r, code, err)
+}
+// Fallback HTTP handler
+func (f fallback) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	code := 404
+	err := fmt.Errorf("File not found")
+	extra := ""
+	if f.hasAuth {
+		extra = " Authenticated handlers present, masking 404 as 401."
+	}
+	httpLog.WithFields(log.Fields{
+		"code": code,
+		"remoteAddress":   r.RemoteAddr,
+		"requestUri": r.RequestURI,
+		"ContentLength": r.ContentLength}).WithError(err).Warnf("HTTP request failed%s",extra)
+	if f.hasAuth {
+		code = 401
+		err = fmt.Errorf("Invalid credentials")
+	}
+	answer(w, r, code, err)
 }
 
 // loadClientCertificateCAs loads a given list of strings as paths of
@@ -204,6 +229,15 @@ func (htt *HTTP) Start() error {
 		}).Debug("Adding handler")
 
 		serveMux.Handle(idx, receiver{Handler: h.H, settings: htt, auth: htt.Auth[idx]})
+	}
+	if htt.Handlers["/"] == nil {
+		f := fallback{}
+		if htt.Auth != nil && len(htt.Auth) > 0 {
+			f.hasAuth = true
+		} else {
+			f.hasAuth = false
+		}
+		serveMux.Handle("/", f)
 	}
 
 	if len(htt.ClientCertificateCAs) > 0 {
