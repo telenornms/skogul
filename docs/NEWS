@@ -1,3 +1,14 @@
+v0.14.2
+=======
+
+Release date: 2022-03-22
+
+Introduce IgnorePartialErrors in handlers to let a handler modify a
+container by removing invalid metrics instead of dropping the entire
+container.
+
+Also introduces several small but important log-quality fixes.
+
 v0.14.1
 =======
 
