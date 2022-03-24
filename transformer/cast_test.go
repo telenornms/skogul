@@ -59,13 +59,13 @@ func TestCast(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	cast := transformer.Cast{
-		MetadataStrings: []string{"minttostring", "mfloattostring", "mstringtostring"},
-		MetadataFloats:  []string{"minttofloat", "mfloattofloat", "mstringtofloat"},
-		MetadataInts:    []string{"minttoint", "mfloattoint", "mstringtoint"},
+		MetadataStrings:    []string{"minttostring", "mfloattostring", "mstringtostring"},
+		MetadataFloats:     []string{"minttofloat", "mfloattofloat", "mstringtofloat"},
+		MetadataInts:       []string{"minttoint", "mfloattoint", "mstringtoint"},
 		MetadataFlatFloats: []string{"mflatten"},
-		DataStrings:     []string{"dinttostring", "dfloattostring", "dstringtostring"},
-		DataFloats:      []string{"dinttofloat", "dfloattofloat", "dstringtofloat"},
-		DataInts:        []string{"dinttoint", "dfloattoint", "dstringtoint"},
+		DataStrings:        []string{"dinttostring", "dfloattostring", "dstringtostring"},
+		DataFloats:         []string{"dinttofloat", "dfloattofloat", "dstringtofloat"},
+		DataInts:           []string{"dinttoint", "dfloattoint", "dstringtoint"},
 	}
 
 	err := cast.Transform(&c)

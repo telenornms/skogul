@@ -62,7 +62,7 @@ type HTTP struct {
 	Certfile             string                        `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
 	Keyfile              string                        `doc:"Path to key file for TLS."`
 	ClientCertificateCAs []string                      `doc:"Paths to files containing CAs which are accepted for Client Certificate authentication."`
-	Log204OK	     bool			   `doc:"Log successful requests as well as failed. Failed requests are always logged as a warning.Successful requests are logged as info-level."`
+	Log204OK             bool                          `doc:"Log successful requests as well as failed. Failed requests are always logged as a warning.Successful requests are logged as info-level."`
 	stats                *httpStats
 }
 
@@ -150,7 +150,7 @@ func (rcvr receiver) handle(w http.ResponseWriter, r *http.Request) (int, error)
 
 	if _, err := io.ReadFull(r.Body, b); err != nil {
 		atomic.AddUint64(&rcvr.settings.stats.ReadFailed, 1)
-		return 400, fmt.Errorf("read error on http body: %w")
+		return 400, fmt.Errorf("read error on http body: %w", err)
 	}
 
 	if err := rcvr.Handler.Handle(b); err != nil {
@@ -167,19 +167,20 @@ func (rcvr receiver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	code, err := rcvr.handle(w, r)
 	if err != nil {
 		httpLog.WithFields(log.Fields{
-			"code": code,
-			"remoteAddress":   r.RemoteAddr,
-			"requestUri": r.RequestURI,
+			"code":          code,
+			"remoteAddress": r.RemoteAddr,
+			"requestUri":    r.RequestURI,
 			"ContentLength": r.ContentLength}).WithError(err).Warnf("HTTP request failed")
 	} else if rcvr.settings.Log204OK {
 		httpLog.WithFields(log.Fields{
-			"code": code,
-			"remoteAddress":   r.RemoteAddr,
-			"requestUri": r.RequestURI,
+			"code":          code,
+			"remoteAddress": r.RemoteAddr,
+			"requestUri":    r.RequestURI,
 			"ContentLength": r.ContentLength}).Infof("HTTP request ok")
 	}
 	answer(w, r, code, err)
 }
+
 // Fallback HTTP handler
 func (f fallback) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	code := 404
@@ -189,10 +190,10 @@ func (f fallback) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		extra = " Authenticated handlers present, masking 404 as 401."
 	}
 	httpLog.WithFields(log.Fields{
-		"code": code,
-		"remoteAddress":   r.RemoteAddr,
-		"requestUri": r.RequestURI,
-		"ContentLength": r.ContentLength}).WithError(err).Warnf("HTTP request failed%s",extra)
+		"code":          code,
+		"remoteAddress": r.RemoteAddr,
+		"requestUri":    r.RequestURI,
+		"ContentLength": r.ContentLength}).WithError(err).Warnf("HTTP request failed%s", extra)
 	if f.hasAuth {
 		code = 401
 		err = fmt.Errorf("Invalid credentials")
