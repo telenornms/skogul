@@ -1,3 +1,16 @@
+v0.14.3
+=======
+
+Release date: 2022-04-01
+
+Introduce float flattening to the cast transformer, which allows flattening
+floating point numbers into "non-exponential" string representations. E.g.:
+For serial numbers, instead of having them encoded as 3.141519e+X when sent
+to influx as tags, they'll be encoded as 3141519.
+
+Introduces much better request logging as well for the HTTP receiver.
+
+
 v0.14.2
 =======
 
