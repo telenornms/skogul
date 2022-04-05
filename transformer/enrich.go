@@ -41,7 +41,28 @@ type keyType uint64
 // metric's metadatafields on a hit.
 type entry map[string]interface{}
 
-// Enrich transformer adds additional metadatainformation to metrics.
+/*
+Enrich transformer adds additional metadatainformation to metrics. This
+is a work in progress, see #224 for on-going discussions.
+
+Some items that need to be resolved:
+- Need benchmarks
+- This hash thing is just weird, maybe just use sha512 instead.
+- I think we _have_ to stringify. A weird example is that float 0 and
+  int 0 is binary equivalent, which means that if the source is parsed as
+  float and the metric as int, most numbers wont match, but 0 will, which
+  is just confusing.
+- I don't like the buffer thing at all, but it might be needed I suppose.
+  Need to double check how performant that is for the typical scenario, and
+  possibly make it configurable.
+- Need to warn if the source has more metadata fields than we care about, and fail if has fewer.
+- Need to be able to reload, preferably in the background.
+- We might need to add a Init interface here to give the transformer a
+  chance to load before we start accepting data. All once.Do() works OK for
+  things that are fast, but this could possibly be hundreds of megabytes of
+  JSON that needs to be read and parsed and hashed.
+- Yeah, benchmarks.
+*/
 type Enrich struct {
 	Keys      []string `doc:"Metadatafields to match"`
 	Stringify bool     `doc:"Set to true to convert all metadata to text prior to hashing. Doesn't change actual data, but might simplify matching numbers that might be binary encoded to different formats, at the cost of a slight performance hit."`
@@ -54,7 +75,12 @@ type Enrich struct {
 
 var eLog = skogul.Logger("transformer", "enrich")
 
-func (e *Enrich) hash(m skogul.Metric) keyType {
+// Hash calculates the hash for a metric using relevant settings (e.g.:
+// e.Keys). Only exported for the sake of tests and benchmarks.
+//
+// FIXME: What to do if stringify fails? Logging isn't really a solution.
+// We risk matching the wrong thing.
+func (e *Enrich) Hash(m skogul.Metric) keyType {
 	var h maphash.Hash
 	h.SetSeed(e.seed)
 	buf := new(bytes.Buffer)
@@ -66,22 +92,20 @@ func (e *Enrich) hash(m skogul.Metric) keyType {
 		if e.Stringify {
 			err = binary.Write(buf, binary.LittleEndian, []byte(fmt.Sprintf("%v", m.Metadata[meta])))
 		} else {
-			eLog.Tracef("Field %v is %T", meta, m.Metadata[meta])
 			err = binary.Write(buf, binary.LittleEndian, m.Metadata[meta])
 		}
 		if err != nil {
-			eLog.WithError(err).Warnf("Failed to write binary representation to buffer")
+			eLog.WithError(err).Warnf("Failed to write binary representation to buffer for %s", meta)
 			continue
 		}
 	}
 	h.Write(buf.Bytes())
 	ret := h.Sum64()
-	eLog.Tracef("Calculated sum: %d - seed %v\n", ret, h.Seed())
 	return keyType(ret)
 }
 
 func (e *Enrich) find(m skogul.Metric) *entry {
-	nm := e.store[e.hash(m)]
+	nm := e.store[e.Hash(m)]
 	if nm != nil {
 		eLog.Tracef("Enrichment hit")
 	} else {
@@ -92,32 +116,41 @@ func (e *Enrich) find(m skogul.Metric) *entry {
 
 func (e *Enrich) load() error {
 	ms := []skogul.Metric{}
+	eLog.Debugf("Loading: Reading file")
 	content, err := ioutil.ReadFile(e.Source)
 	if err != nil {
 		return fmt.Errorf("unable to load enrichment from %s: %w", e.Source, err)
 	}
 
+	eLog.Debugf("Loading: Umarshaling")
 	err = json.Unmarshal(content, &ms)
 	if err != nil {
 		return fmt.Errorf("unable to load enrichment data from %s, parsing JSON failed: %w", e.Source, err)
 	}
+	eLog.Debugf("Loading: Populating")
 	for _, m := range ms {
-		eLog.Tracef("adding m %v", m)
 		en := entry(m.Data)
-		h := e.hash(m)
+		h := e.Hash(m)
 		if e.store[h] != nil {
 			eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
 		}
 		e.store[h] = &en
 	}
+	eLog.Debugf("Loading: Done")
 	return nil
+}
+
+// MakeSeed() sets up the seed for an enricher, internal, only exported for
+// tests.
+func (e *Enrich) MakeSeed() {
+	e.seed = maphash.MakeSeed()
 }
 
 func (e *Enrich) Transform(c *skogul.Container) error {
 	e.once.Do(func() {
 		eLog.Warnf("The enrichment transformer is in use. This transformer is highly experimental and not considered production ready. Functionality and configuration parameters will change as it matures. If you use this, PLEASE provide feedback on what your use cases require.")
 		e.ok = false
-		e.seed = maphash.MakeSeed()
+		e.MakeSeed()
 		e.store = make(map[keyType]*entry)
 		err := e.load()
 		if err != nil {

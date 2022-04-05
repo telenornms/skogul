@@ -26,3 +26,6 @@ vendor
 # Ignore typical profiling and coverage artefacts
 *.prof
 coverage.out
+
+# Ignore generated and potentially large enrichment example
+/docs/examples/payloads/enrich_large.json
