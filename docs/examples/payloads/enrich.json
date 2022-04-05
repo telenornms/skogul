@@ -1,0 +1,25 @@
+[
+	{
+		"metadata": { "key1": 1 },
+		"data": {
+			"example": "hei"
+		}
+	},
+	{
+		"metadata": { "key1": 2 },
+		"data": {
+			"customer": "nei",
+			"serial": 123123123
+		}
+	},
+	{
+		"metadata": { "key1": 0 },
+		"data": {
+			"potato": "tomato",
+			"tree": { 
+				"hi": "ho", 
+				"lol": "kek" 
+			}
+		}
+	}
+]

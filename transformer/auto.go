@@ -94,4 +94,11 @@ func init() {
 		Alloc:   func() interface{} { return &Timestamp{} },
 		Help:    "Extract a timestamp from the container data.",
 	})
+	Auto.Add(skogul.Module{
+		Name:     "enrich",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &Enrich{} },
+		Help:     "PROTOTYPE/ALPHA: Static enrichment. Use a json-structured source document to enrich incoming metrics with additional data. See the docs/examples/ directory for an actual example. This is NOT production ready, and should only be used if you are prepared to file bug reports and update your setup as the transformer matures.",
+		AutoMake: true,
+	})
 }

@@ -1,0 +1,19 @@
+{
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 3,
+      "values": 2,
+      "delay": "1s",
+      "threads": 1
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "print"
+    }
+  }
+}
