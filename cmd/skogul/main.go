@@ -31,6 +31,8 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"sort"
 	"strings"
@@ -58,6 +60,7 @@ var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 var fversion = flag.Bool("version", false, "Print skogul version")
+var fprofile = flag.String("pprof", "", "Enable profiling over HTTP, value is http endpoint, e.g: localhost:6060")
 
 // man generates an RST document suited for converting to a manual page
 // using rst2man. The RST document itself is also valid, but some short
@@ -910,6 +913,12 @@ func main() {
 		}
 		fmt.Println(string(out))
 		os.Exit(0)
+	}
+	if *fprofile != "" {
+		log.Warnf("Enabling profiling on %s", *fprofile)
+		go func() {
+			http.ListenAndServe(*fprofile, nil)
+		}()
 	}
 	log.Info("Starting skogul")
 

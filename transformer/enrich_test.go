@@ -46,8 +46,6 @@ func TestEnrich_config1(t *testing.T) {
 func BenchmarkHash(b *testing.B) {
 	e := transformer.Enrich{}
 	e.Keys = []string{"key1", "key2"}
-	e.MakeSeed()
-	e.Stringify = true
 
 	m := skogul.Metric{}
 	m.Metadata = make(map[string]interface{})

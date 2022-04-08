@@ -24,18 +24,16 @@
 package transformer
 
 import (
-	"bytes"
-	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"github.com/telenornms/skogul"
-	"hash/maphash"
-	"io/ioutil"
+	"io"
+	"os"
 	"sync"
 )
 
 // keyType identifies the type the hash returns
-type keyType uint64
+type keyType string
 
 // entry represents what is supposed to be added. An entry is added to a
 // metric's metadatafields on a hit.
@@ -47,30 +45,29 @@ is a work in progress, see #224 for on-going discussions.
 
 Some items that need to be resolved:
 - Need benchmarks
-- This hash thing is just weird, maybe just use sha512 instead.
 - I think we _have_ to stringify. A weird example is that float 0 and
   int 0 is binary equivalent, which means that if the source is parsed as
   float and the metric as int, most numbers wont match, but 0 will, which
   is just confusing.
-- I don't like the buffer thing at all, but it might be needed I suppose.
-  Need to double check how performant that is for the typical scenario, and
-  possibly make it configurable.
-- Need to warn if the source has more metadata fields than we care about, and fail if has fewer.
+- Need to warn if the source has more metadata fields than we care about,
+  and fail if has fewer.
 - Need to be able to reload, preferably in the background.
 - We might need to add a Init interface here to give the transformer a
   chance to load before we start accepting data. All once.Do() works OK for
   things that are fast, but this could possibly be hundreds of megabytes of
   JSON that needs to be read and parsed and hashed.
-- Yeah, benchmarks.
+- Memory usage is a bit high, and it seems to be because of json decoding.
+  Profiling and common sense suggest that the pure storage isn't too
+  bloated, but the json decoder state lingers, so there might be some
+  references there.
+- Loading is way too slow. Need alternatives, but that might be different
+  implementations as the simplicity of json is real nice.
 */
 type Enrich struct {
-	Keys      []string `doc:"Metadatafields to match"`
-	Stringify bool     `doc:"Set to true to convert all metadata to text prior to hashing. Doesn't change actual data, but might simplify matching numbers that might be binary encoded to different formats, at the cost of a slight performance hit."`
-	Source    string   `doc:"Path to enrichment-file."`
-	ok        bool
-	once      sync.Once
-	store     map[keyType]*entry
-	seed      maphash.Seed
+	Keys   []string `doc:"Metadatafields to match"`
+	Source string   `doc:"Path to enrichment-file."`
+	once   sync.Once
+	store  map[keyType]*entry
 }
 
 var eLog = skogul.Logger("transformer", "enrich")
@@ -78,29 +75,13 @@ var eLog = skogul.Logger("transformer", "enrich")
 // Hash calculates the hash for a metric using relevant settings (e.g.:
 // e.Keys). Only exported for the sake of tests and benchmarks.
 //
-// FIXME: What to do if stringify fails? Logging isn't really a solution.
-// We risk matching the wrong thing.
+// XXX: This used to be a manually created hash, now we rely on the
+// underlying map[] implementation instead.
 func (e *Enrich) Hash(m skogul.Metric) keyType {
-	var h maphash.Hash
-	h.SetSeed(e.seed)
-	buf := new(bytes.Buffer)
+	ret := ""
 	for _, meta := range e.Keys {
-		if m.Metadata[meta] == nil {
-			continue
-		}
-		var err error
-		if e.Stringify {
-			err = binary.Write(buf, binary.LittleEndian, []byte(fmt.Sprintf("%v", m.Metadata[meta])))
-		} else {
-			err = binary.Write(buf, binary.LittleEndian, m.Metadata[meta])
-		}
-		if err != nil {
-			eLog.WithError(err).Warnf("Failed to write binary representation to buffer for %s", meta)
-			continue
-		}
+		ret = ret + fmt.Sprintf("%v", m.Metadata[meta])
 	}
-	h.Write(buf.Bytes())
-	ret := h.Sum64()
 	return keyType(ret)
 }
 
@@ -115,48 +96,42 @@ func (e *Enrich) find(m skogul.Metric) *entry {
 }
 
 func (e *Enrich) load() error {
-	ms := []skogul.Metric{}
+
 	eLog.Debugf("Loading: Reading file")
-	content, err := ioutil.ReadFile(e.Source)
+	f, err := os.Open(e.Source)
 	if err != nil {
-		return fmt.Errorf("unable to load enrichment from %s: %w", e.Source, err)
+		return fmt.Errorf("unable to open enrichment from %s: %w", e.Source, err)
 	}
 
 	eLog.Debugf("Loading: Umarshaling")
-	err = json.Unmarshal(content, &ms)
-	if err != nil {
-		return fmt.Errorf("unable to load enrichment data from %s, parsing JSON failed: %w", e.Source, err)
-	}
-	eLog.Debugf("Loading: Populating")
-	for _, m := range ms {
-		en := entry(m.Data)
+	dec := json.NewDecoder(f)
+	for {
+		var m skogul.Metric
+		if err := dec.Decode(&m); err == io.EOF {
+			break
+		} else if err != nil {
+			return fmt.Errorf("Unable to decode JSON message in enrichment: %w", err)
+		}
 		h := e.Hash(m)
 		if e.store[h] != nil {
 			eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
 		}
+		en := entry(m.Data)
 		e.store[h] = &en
 	}
 	eLog.Debugf("Loading: Done")
 	return nil
 }
 
-// MakeSeed() sets up the seed for an enricher, internal, only exported for
-// tests.
-func (e *Enrich) MakeSeed() {
-	e.seed = maphash.MakeSeed()
-}
-
+// Transform looks up a metric in the stored enrichment database (loading
+// it on initial run) and adds metadata if a match is found.
 func (e *Enrich) Transform(c *skogul.Container) error {
 	e.once.Do(func() {
 		eLog.Warnf("The enrichment transformer is in use. This transformer is highly experimental and not considered production ready. Functionality and configuration parameters will change as it matures. If you use this, PLEASE provide feedback on what your use cases require.")
-		e.ok = false
-		e.MakeSeed()
 		e.store = make(map[keyType]*entry)
 		err := e.load()
 		if err != nil {
 			eLog.WithError(err).Error()
-		} else {
-			e.ok = true
 		}
 	})
 
@@ -165,8 +140,8 @@ func (e *Enrich) Transform(c *skogul.Container) error {
 		if hit == nil {
 			continue
 		}
-		for idx, f := range *hit {
-			m.Metadata[idx] = f
+		for idx, field := range *hit {
+			m.Metadata[idx] = field
 		}
 	}
 	return nil
