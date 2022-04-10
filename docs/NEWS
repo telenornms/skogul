@@ -1,3 +1,26 @@
+v0.15.0
+=======
+
+Release date: 2022-04-10
+
+Add an experimental enrichment transformer, and a slightly less
+experimental switch sender.
+
+The enrichment transformer WILL change, but needs testing, so it is
+included. It allows an operator to provide a JSON file to enrich metrics
+based on metadata fields, e.g.: Add customer name to interface stats, or
+add if description. To use it, see docs/examples/tester_to_stdout_enrich.json ,
+you will need a JSON file that has a list of metadata fields to match, and
+the data field will be the fields added *to metadata* (yes, this is
+confusing, this is one of the reasons it's considered experimental).
+
+The switch sender is simpler, but also probably a bit immature, but testing
+is required. It takes a list of conditions and checks if a metric(!)
+matches this, and if it matches a complete set, data will be sent to the
+associated sender. Use case: Dupe sender sends data to your own influxdb,
+and to a switch sender, the switch sender then selectively streams
+customer-specific data to a customer.
+
 v0.14.3
 =======
 
