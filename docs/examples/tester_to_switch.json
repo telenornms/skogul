@@ -1,0 +1,45 @@
+{
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 3,
+      "values": 2,
+      "delay": "1s",
+      "threads": 1
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": ["keyText"],
+      "sender": "switch"
+    }
+  },
+  "transformers": {
+    "keyText": {
+      "type": "cast",
+      "metadatastrings": ["key1"]
+    }
+  },
+  "senders":  {
+    "switch": {
+      "type": "switch",
+      "map": [{
+        "conditions": [{
+          "key1": "1"
+        }],
+        "next": "customerExportA"
+      }],
+      "default": "log-no-customer"
+    },
+    "customerExportA": {
+      "type": "print",
+      "prefix": "customerA"
+    },
+    "log-no-customer": {
+      "type": "print",
+      "prefix": "no customer"
+    }
+  }
+}

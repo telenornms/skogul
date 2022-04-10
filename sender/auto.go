@@ -151,6 +151,12 @@ func init() {
 		Help:  "Sends json data to a network endpoint.",
 	})
 	Auto.Add(skogul.Module{
+		Name:   "switch",
+		Alloc:  func() interface{} { return &Switch{} },
+		Help:   "Sends data selectively based on metedata.",
+		Extras: []interface{}{Match{}},
+	})
+	Auto.Add(skogul.Module{
 		Name:  "test",
 		Alloc: func() interface{} { return &Test{} },
 		Help:  "Used for internal testing. Basically just discards data but provides an internal counter of received data",
