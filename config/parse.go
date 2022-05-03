@@ -42,6 +42,7 @@ import (
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 	"github.com/telenornms/skogul/transformer"
+	"github.com/telenornms/skogul/encoder"
 )
 
 var confLog = skogul.Logger("core", "config")
@@ -62,6 +63,11 @@ type Parser struct {
 type Receiver struct {
 	Type     string
 	Receiver skogul.Receiver `json:"-"`
+}
+
+type Encoder struct {
+	Type	string
+	Encoder skogul.Encoder `json:"-"`
 }
 
 // Handler wraps skogul.Handler for configuration parsing.
@@ -86,6 +92,7 @@ type Config struct {
 	Receivers    map[string]*Receiver
 	Senders      map[string]*Sender
 	Parsers      map[string]*Parser
+	Encoders     map[string]*Encoder
 	Transformers map[string]*Transformer
 }
 
@@ -211,6 +218,51 @@ func (p *Parser) UnmarshalJSON(b []byte) error {
 	VerifyOnlyRequiredConfigProps(&jsonConf, "parser", p.Type, reflect.ValueOf(p.Parser).Elem().Type())
 	return nil
 }
+
+// MarshalJSON marshals Encoder config. See MarshalJSON for receiver - same
+// same.
+func (e *Encoder) MarshalJSON() ([]byte, error) {
+	nest, err := json.Marshal(e.Encoder)
+	if err != nil {
+		return nil, err
+	}
+	var merged map[string]interface{}
+	if err := json.Unmarshal(nest, &merged); err != nil {
+		return nil, err
+	}
+	merged["type"] = e.Type
+	return json.Marshal(merged)
+}
+
+// UnmarshalJSON for Parser. See UnmarshalJSON for Receiver - same same.
+func (e *Encoder) UnmarshalJSON(b []byte) error {
+	type tType struct {
+		Type string
+	}
+	var t tType
+	if err := json.Unmarshal(b, &t); err != nil {
+		return err
+	}
+	e.Type = t.Type
+	if encoder.Auto[e.Type] == nil {
+		return skogul.Error{Source: "config encoder", Reason: fmt.Sprintf("Unknown encoder %v", e.Type)}
+	}
+	if encoder.Auto[e.Type].Alloc == nil {
+		return skogul.Error{Source: "config encoder", Reason: fmt.Sprintf("Bad encoder %v", e.Type)}
+	}
+	var ok bool
+	e.Encoder, ok = (encoder.Auto[e.Type].Alloc()).(skogul.Encoder)
+	skogul.Assert(ok)
+	if err := json.Unmarshal(b, &e.Encoder); err != nil {
+		return skogul.Error{Source: "config encoder", Reason: "Failed marshalling", Next: err}
+	}
+	// Find superfluous config parameters
+	var jsonConf map[string]interface{}
+	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	VerifyOnlyRequiredConfigProps(&jsonConf, "encoder", e.Type, reflect.ValueOf(e.Encoder).Elem().Type())
+	return nil
+}
+
 
 // MarshalJSON marshals Sender config. See MarshalJSON for receiver - same
 // same.

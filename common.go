@@ -136,6 +136,10 @@ type Receiver interface {
 	Start() error
 }
 
+type Encoder interface {
+	Encode(c *Container) ([]byte, error)
+}
+
 /*
 Verifier is an *optional* interface for senders and receivers. If
 implemented, the configuration engine will issue Verify() after all

@@ -34,6 +34,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"runtime"
 	"sort"
 	"strings"
 	"sync"
@@ -45,6 +46,7 @@ import (
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 	"github.com/telenornms/skogul/stats"
+	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/transformer"
 )
 
@@ -272,6 +274,16 @@ The following receivers exist.
 
 `)
 	helpModules(receiver.Auto)
+	fmt.Print(`
+ENCODERS
+========
+
+Encoders are used by a few senders to standardize how data is encoded, they
+are the logical counter-point to parsers. They are mostly optional and most senders
+don't use them, and those who do generally have a sensible default.
+
+`)
+	helpModules(encoder.Auto)
 	fmt.Print(`
 TRANSFORMERS
 ============
@@ -864,13 +876,13 @@ func help() {
 }
 
 func printVersion() {
+	skogulV := versionNo
 	if len(versionNo) == 0 {
 		// Since versionNo has to be explicitly set compile-time
 		// provide a fallback in case it is not.
-		fmt.Println("unknown")
-	} else {
-		fmt.Println(versionNo)
+		skogulV = "unknown"
 	}
+	fmt.Println("Skogul", skogulV, "built using", runtime.Version())
 }
 
 func main() {
