@@ -42,11 +42,11 @@ import (
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 	"github.com/telenornms/skogul/stats"
-	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/transformer"
 )
 

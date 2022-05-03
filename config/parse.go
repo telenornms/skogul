@@ -38,11 +38,11 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/parser"
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 	"github.com/telenornms/skogul/transformer"
-	"github.com/telenornms/skogul/encoder"
 )
 
 var confLog = skogul.Logger("core", "config")
@@ -66,7 +66,7 @@ type Receiver struct {
 }
 
 type Encoder struct {
-	Type	string
+	Type    string
 	Encoder skogul.Encoder `json:"-"`
 }
 
@@ -262,7 +262,6 @@ func (e *Encoder) UnmarshalJSON(b []byte) error {
 	VerifyOnlyRequiredConfigProps(&jsonConf, "encoder", e.Type, reflect.ValueOf(e.Encoder).Elem().Type())
 	return nil
 }
-
 
 // MarshalJSON marshals Sender config. See MarshalJSON for receiver - same
 // same.
