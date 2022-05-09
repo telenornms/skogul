@@ -49,6 +49,9 @@ var TransformerMap []*TransformerRef
 // ParserMap keeps track of the named parsers.
 var ParserMap []*ParserRef
 
+// EncoderMap keeps track of the named parsers.
+var EncoderMap []*EncoderRef
+
 /*
 UnmarshalJSON will unmarshal a sender reference by creating a
 SenderRef object and putting it on the SenderMap list. The
@@ -69,6 +72,28 @@ func (sr *SenderRef) UnmarshalJSON(b []byte) error {
 // MarshalJSON for a reference just prints the name
 func (sr *SenderRef) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("\"%s\"", sr.Name)), nil
+}
+
+/*
+UnmarshalJSON will unmarshal a encoder reference by creating a
+EncoderRef object and putting it on the EncoderMap list. The
+configuration system in question needs to iterate over EncoderMap
+after it has completed the first pass of configuration
+*/
+func (er *EncoderRef) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	er.Name = s
+	er.E = nil
+	EncoderMap = append(EncoderMap, er)
+	return nil
+}
+
+// MarshalJSON for a reference just prints the name
+func (er *EncoderRef) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", er.Name)), nil
 }
 
 // UnmarshalJSON will create an entry on the HandlerMap for the parsed

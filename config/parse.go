@@ -370,6 +370,7 @@ func Bytes(b []byte) (*Config, error) {
 	skogul.SenderMap = skogul.SenderMap[0:0]
 	skogul.ParserMap = skogul.ParserMap[0:0]
 	skogul.TransformerMap = skogul.TransformerMap[0:0]
+	skogul.EncoderMap = skogul.EncoderMap[0:0]
 	if err := json.Unmarshal(b, &jsonData); err != nil {
 		jerr, ok := err.(*json.SyntaxError)
 		if ok {
@@ -521,6 +522,37 @@ func resolveParsers(c *Config) error {
 		p.P = c.Parsers[p.Name].Parser
 	}
 	skogul.ParserMap = skogul.ParserMap[0:0]
+	return nil
+}
+
+// resolveEncoders iterates over the skogul.EncoderMap and resolve any
+// encoders.
+func resolveEncoders(c *Config) error {
+	for _, e := range skogul.EncoderMap {
+		confLog.WithField("encoder", e.Name).Debug("Resolving encoders")
+
+		if c.Encoders[e.Name] == nil {
+			m := encoder.Auto.Lookup(e.Name)
+			if m != nil {
+				tmp := m.Alloc()
+				tmp2 := tmp.(skogul.Encoder)
+				enew := Encoder{}
+				enew.Type = e.Name
+				enew.Encoder = tmp2
+				if c.Encoders == nil {
+					c.Encoders = make(map[string]*Encoder)
+				}
+				c.Encoders[e.Name] = &enew
+			}
+		}
+		if c.Encoders[e.Name] == nil {
+			confLog.WithField("encoder", e.Name).Error("Unresolved encoder reference")
+			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved encoder reference %s", e.Name)}
+		}
+		skogul.Identity[c.Encoders[e.Name].Encoder] = e.Name
+		e.E = c.Encoders[e.Name].Encoder
+	}
+	skogul.EncoderMap = skogul.EncoderMap[0:0]
 	return nil
 }
 

@@ -27,7 +27,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"crypto/x509"
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -40,6 +40,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
 )
 
 var httpLog = skogul.Logger("sender", "http")
@@ -57,6 +58,7 @@ type HTTP struct {
 	RootCA           string            `doc:"Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults."`
 	Certfile         string            `doc:"Path to certificate file for TLS Client Certificate."`
 	Keyfile          string            `doc:"Path to key file for TLS Client Certificate."`
+	Encoder          skogul.EncoderRef `doc:"Encoder to use. Defaults to JSON-encoding."`
 	ok               bool              // set to OK if init worked. FIXME: Should Verify() check if this is OK? I'm thinking yes.
 	stats            *httpStats
 	once             sync.Once
@@ -120,6 +122,9 @@ func (ht *HTTP) loadClientCert() (*tls.Certificate, error) {
 
 func (ht *HTTP) init() {
 	ht.ok = false
+	if ht.Encoder.Name == "" {
+		ht.Encoder.E = encoder.JSON{}
+	}
 	ht.logger = skogul.Logger("sender", "http").WithField("name", skogul.Identity[ht])
 	if ht.Timeout.Duration == 0 {
 		ht.Timeout.Duration = 20 * time.Second
@@ -263,10 +268,11 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		ht.logger.Print(e)
 		return e
 	}
-	b, err := json.Marshal(*c)
+
+	b, err := ht.Encoder.E.Encode(c)
 	if err != nil {
 		atomic.AddUint64(&ht.stats.Errors, 1)
-		return fmt.Errorf("HTTP sender (%s) was unable to marshal metric-data into JSON. Error: %w", skogul.Identity[ht], err)
+		return fmt.Errorf("HTTP sender (%s) was unable to encode metric-data. Error: %w", skogul.Identity[ht], err)
 	}
 	err = ht.sendBytes(b)
 	if err != nil {

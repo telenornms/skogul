@@ -21,6 +21,14 @@
  * 02110-1301  USA
  */
 
+/*
+Package encoder provides a generic method of encoding Skogul containers
+into a byte stream. It is meant to reduce the number of semi-identical
+sender modules that mainly differ in encoding.
+
+At present time, it is not extensively used, but efforts to unify
+particularly the HTTP senders are expected.
+*/
 package encoder
 
 import (

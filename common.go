@@ -136,6 +136,10 @@ type Receiver interface {
 	Start() error
 }
 
+/*
+Encoder is an *optional* way to encode data, it is used by senders where
+data encoding can vary, but not all senders use it.
+*/
 type Encoder interface {
 	Encode(c *Container) ([]byte, error)
 }
@@ -204,6 +208,12 @@ type TransformerRef struct {
 // It is used during configuration setup.
 type ParserRef struct {
 	P    Parser
+	Name string
+}
+
+// EncoderRef is a string mapping to an Encoder.
+type EncoderRef struct {
+	E    Encoder
 	Name string
 }
 
