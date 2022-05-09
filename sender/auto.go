@@ -157,6 +157,12 @@ func init() {
 		Extras: []interface{}{Match{}},
 	})
 	Auto.Add(skogul.Module{
+		Name:   "enrichmentupdater",
+		Aliases: []string{"eupdater"},
+		Alloc:  func() interface{} { return &EnrichmentUpdater{} },
+		Help:   "Updates the enrichment database of an enrichment transformer.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "test",
 		Alloc: func() interface{} { return &Test{} },
 		Help:  "Used for internal testing. Basically just discards data but provides an internal counter of received data",

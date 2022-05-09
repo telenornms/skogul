@@ -7,6 +7,11 @@
       "values": 2,
       "delay": "1s",
       "threads": 1
+    },
+    "updater": {
+	"type": "http",
+	"address": "[::1]:8080",
+	"handlers": { "/": "update" }
     }
   },
   "handlers": {
@@ -14,14 +19,23 @@
       "parser": "json",
       "transformers": ["enrich"],
       "sender": "print"
+    },
+    "update": {
+	"parser": "json",
+	"sender": "updater"
     }
   },
   "transformers": {
 	  "enrich":  {
 		  "type": "enrich",
-		  "stringify": true,
 		  "source": "docs/examples/payloads/enrich.json",
 		  "keys": ["key1"]
+	  }
+  },
+  "senders": {
+	  "updater": {
+		  "type": "enrichmentupdater",
+		  "enricher": "enrich"
 	  }
   }
 }

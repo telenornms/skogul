@@ -66,6 +66,7 @@ Some items that need to be resolved:
 type Enrich struct {
 	Keys   []string `doc:"Metadatafields to match"`
 	Source string   `doc:"Path to enrichment-file."`
+	lock   sync.RWMutex
 	once   sync.Once
 	store  map[keyType]*entry
 }
@@ -85,6 +86,13 @@ func (e *Enrich) Hash(m skogul.Metric) keyType {
 	return keyType(ret)
 }
 
+func (e *Enrich) Update(c *skogul.Container) {
+	for _, m := range c.Metrics {
+		eLog.Infof("Updating metrics %v", m)
+		e.save(m)
+	}
+}
+
 func (e *Enrich) find(m skogul.Metric) *entry {
 	nm := e.store[e.Hash(m)]
 	if nm != nil {
@@ -93,6 +101,16 @@ func (e *Enrich) find(m skogul.Metric) *entry {
 		eLog.Tracef("Enrichment miss")
 	}
 	return nm
+}
+func (e *Enrich) save(m *skogul.Metric) {
+	e.lock.Lock()
+	h := e.Hash(*m)
+	if e.store[h] != nil {
+	   eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
+	}
+	en := entry(m.Data)
+	e.store[h] = &en
+	e.lock.Unlock()
 }
 
 func (e *Enrich) load() error {
@@ -112,12 +130,7 @@ func (e *Enrich) load() error {
 		} else if err != nil {
 			return fmt.Errorf("Unable to decode JSON message in enrichment: %w", err)
 		}
-		h := e.Hash(m)
-		if e.store[h] != nil {
-			eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
-		}
-		en := entry(m.Data)
-		e.store[h] = &en
+		e.save(&m)
 	}
 	eLog.Debugf("Loading: Done")
 	return nil
@@ -134,7 +147,7 @@ func (e *Enrich) Transform(c *skogul.Container) error {
 			eLog.WithError(err).Error()
 		}
 	})
-
+	e.lock.RLock()
 	for _, m := range c.Metrics {
 		hit := e.find(*m)
 		if hit == nil {
@@ -144,5 +157,6 @@ func (e *Enrich) Transform(c *skogul.Container) error {
 			m.Metadata[idx] = field
 		}
 	}
+	e.lock.RUnlock()
 	return nil
 }
