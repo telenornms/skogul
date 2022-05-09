@@ -1,3 +1,21 @@
+v0.15.1
+
+Release date: 2022-05-09
+
+Adds plumbing for modular encoding, but more importantly, an enrichment
+updater sender.
+
+The sender "enrichmentupdater" and the corresponding changes to the
+enrichment transformer will allow on-line updates to the enrichment
+database using regular Skogul pipelines. You can load a JSON file at
+start-up with an initial database of enrichment, then update that database
+on the fly over an HTTP interface for example, if you set up a
+receiver-pipeline that ends in an enrichment updater.
+
+Both the enrichment updater and the enrichment transformer is STILL
+experimental, but I'm feeling good about them, and they will be a major
+addition to medium to large-scale Skogul deployments.
+
 v0.15.0
 =======
 
