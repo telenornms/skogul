@@ -1,4 +1,5 @@
-v0.15.1
+v0.15.2
+=======
 
 Release date: 2022-05-09
 
@@ -15,6 +16,8 @@ receiver-pipeline that ends in an enrichment updater.
 Both the enrichment updater and the enrichment transformer is STILL
 experimental, but I'm feeling good about them, and they will be a major
 addition to medium to large-scale Skogul deployments.
+
+PS: I botched the NEWS in v0.15.1 so let's go lucky v0.15.2.
 
 v0.15.0
 =======
