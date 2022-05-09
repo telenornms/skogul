@@ -106,7 +106,7 @@ func (e *Enrich) save(m *skogul.Metric) {
 	e.lock.Lock()
 	h := e.Hash(*m)
 	if e.store[h] != nil {
-	   eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
+		eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
 	}
 	en := entry(m.Data)
 	e.store[h] = &en

@@ -157,10 +157,10 @@ func init() {
 		Extras: []interface{}{Match{}},
 	})
 	Auto.Add(skogul.Module{
-		Name:   "enrichmentupdater",
+		Name:    "enrichmentupdater",
 		Aliases: []string{"eupdater"},
-		Alloc:  func() interface{} { return &EnrichmentUpdater{} },
-		Help:   "Updates the enrichment database of an enrichment transformer.",
+		Alloc:   func() interface{} { return &EnrichmentUpdater{} },
+		Help:    "Updates the enrichment database of an enrichment transformer.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "test",

@@ -30,7 +30,7 @@ import (
 	"github.com/telenornms/skogul/transformer"
 )
 
-var enrichLog= skogul.Logger("sender", "enrichment")
+var enrichLog = skogul.Logger("sender", "enrichment")
 
 // EnrichmentUpdater sends any received container/metric to the
 // update-function of the provided transformer, allowing on-the-fly updates
