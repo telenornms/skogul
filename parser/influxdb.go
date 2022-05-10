@@ -341,17 +341,17 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 		}
 	}
 
-	skippedWidth := 0
+	data = data[:start]
 	for i, escapedChar := range escapeChars {
 		if removeEscapedCharsFromResult {
-			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:start]))
+			skogul.Assert(escapedChar < len(data))
+			data = []byte(fmt.Sprintf("%s%s", data[0:escapedChar], data[escapedChar+escapeCharsWidth[i]:]))
 		}
-		skippedWidth += escapeCharsWidth[i]
 	}
 
 	// Tell the scanner to skip the amount of characters we processed,
 	// + one. This tells the scanner to skip over the next separator.
 	// Also return the data up until the point we scanned, removing
 	// the skipped characters.
-	return start + 1, data[:start-skippedWidth]
+	return start + 1, data
 }
