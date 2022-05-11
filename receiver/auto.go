@@ -48,6 +48,12 @@ func init() {
 		Help:  "Reads from a file, then stops. Assumes one collection per line. E.g.: If the file has json data, the each line has to be a self-contained document/container.",
 	})
 	Auto.Add(skogul.Module{
+		Name:    "wholefile",
+		Aliases: []string{"wfile"},
+		Alloc:   func() interface{} { return &WholeFile{} },
+		Help:    "Reads an entire file and parses it as a single container, optionally repeatedly.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "fifo",
 		Alloc: func() interface{} { return &LineFile{} },
 		Help:  "Reads continuously from a file. Can technically read from any file, but since it will re-open and re-read the file upon EOF, it is best suited for reading a fifo. Assumes one collection per line.",

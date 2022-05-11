@@ -281,6 +281,7 @@ func TestDuration(t *testing.T) {
 	durationOK(t, `"5h"`, time.Hour*5)
 	durationOK(t, `"1ms"`, time.Millisecond)
 	durationOK(t, `500`, time.Nanosecond*500)
+	durationOK(t, `-1`, -time.Nanosecond)
 	durationBAD(t, `chicken`)
 	durationBAD(t, `"2019-09-12T15:00:00Z"`)
 	durationBAD(t, "four score and seven years ago")

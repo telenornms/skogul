@@ -25,6 +25,7 @@ package receiver
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"time"
 
@@ -99,4 +100,42 @@ func (s *Stdin) Start() error {
 	s.lf.File = "/dev/stdin"
 	s.lf.Handler = s.Handler
 	return s.lf.read()
+}
+
+// WholeFile reads the whole file and parses it as a single container
+type WholeFile struct {
+	File      string            `doc:"Path to the file to read from."`
+	Handler   skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Frequency skogul.Duration   `doc:"How often to re-read the same file. Leave blank or set to a negative value to only read once."`
+}
+
+func (wf *WholeFile) read() error {
+	b, err := os.ReadFile(wf.File)
+	if err != nil {
+		return fmt.Errorf("unable to open file from %s: %w", wf.File, err)
+	}
+	err = wf.Handler.H.Handle(b)
+	if err != nil {
+		return fmt.Errorf("unable to handle content: %w", err)
+	}
+	return nil
+}
+
+// Start never returns
+func (wf *WholeFile) Start() error {
+	freq := wf.Frequency.Duration
+	sleep := freq >= time.Nanosecond
+	for {
+		err := wf.read()
+		if err != nil {
+			lfLog.WithError(err).Errorf("whole file reader %s", skogul.Identity[wf])
+		}
+		if sleep {
+			time.Sleep(freq)
+		} else {
+			for {
+				time.Sleep(time.Hour)
+			}
+		}
+	}
 }

@@ -24,11 +24,8 @@
 package transformer
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/telenornms/skogul"
-	"io"
-	"os"
 	"sync"
 )
 
@@ -42,33 +39,11 @@ type entry map[string]interface{}
 /*
 Enrich transformer adds additional metadatainformation to metrics. This
 is a work in progress, see #224 for on-going discussions.
-
-Some items that need to be resolved:
-- Need benchmarks
-- I think we _have_ to stringify. A weird example is that float 0 and
-  int 0 is binary equivalent, which means that if the source is parsed as
-  float and the metric as int, most numbers wont match, but 0 will, which
-  is just confusing.
-- Need to warn if the source has more metadata fields than we care about,
-  and fail if has fewer.
-- Need to be able to reload, preferably in the background.
-- We might need to add a Init interface here to give the transformer a
-  chance to load before we start accepting data. All once.Do() works OK for
-  things that are fast, but this could possibly be hundreds of megabytes of
-  JSON that needs to be read and parsed and hashed.
-- Memory usage is a bit high, and it seems to be because of json decoding.
-  Profiling and common sense suggest that the pure storage isn't too
-  bloated, but the json decoder state lingers, so there might be some
-  references there.
-- Loading is way too slow. Need alternatives, but that might be different
-  implementations as the simplicity of json is real nice.
 */
 type Enrich struct {
-	Keys   []string `doc:"Metadatafields to match"`
-	Source string   `doc:"Path to enrichment-file."`
-	lock   sync.RWMutex
-	once   sync.Once
-	store  map[keyType]*entry
+	Keys  []string `doc:"Metadatafields to match, e.g.: sysName and ifName."`
+	lock  sync.RWMutex
+	store map[keyType]*entry
 }
 
 var eLog = skogul.Logger("transformer", "enrich")
@@ -86,14 +61,21 @@ func (e *Enrich) Hash(m skogul.Metric) keyType {
 	return keyType(ret)
 }
 
+// Update uses the provided Container to update/bootstrap the enrichment
+// database (e.store). It is used by the enrichmentupdater-sender.
 func (e *Enrich) Update(c *skogul.Container) {
+	e.lock.Lock()
+	eLog.Infof("Updating enrichment database")
 	for _, m := range c.Metrics {
-		eLog.Infof("Updating metrics %v", m)
 		e.save(m)
 	}
+	e.lock.Unlock()
 }
 
 func (e *Enrich) find(m skogul.Metric) *entry {
+	if e.store == nil {
+		return nil
+	}
 	nm := e.store[e.Hash(m)]
 	if nm != nil {
 		eLog.Tracef("Enrichment hit")
@@ -102,51 +84,23 @@ func (e *Enrich) find(m skogul.Metric) *entry {
 	}
 	return nm
 }
+
+// save updates the store, it assumes a write lock is held.
 func (e *Enrich) save(m *skogul.Metric) {
-	e.lock.Lock()
 	h := e.Hash(*m)
+	if e.store == nil {
+		e.store = make(map[keyType]*entry)
+	}
 	if e.store[h] != nil {
 		eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
 	}
 	en := entry(m.Data)
 	e.store[h] = &en
-	e.lock.Unlock()
-}
-
-func (e *Enrich) load() error {
-
-	eLog.Debugf("Loading: Reading file")
-	f, err := os.Open(e.Source)
-	if err != nil {
-		return fmt.Errorf("unable to open enrichment from %s: %w", e.Source, err)
-	}
-
-	eLog.Debugf("Loading: Umarshaling")
-	dec := json.NewDecoder(f)
-	for {
-		var m skogul.Metric
-		if err := dec.Decode(&m); err == io.EOF {
-			break
-		} else if err != nil {
-			return fmt.Errorf("Unable to decode JSON message in enrichment: %w", err)
-		}
-		e.save(&m)
-	}
-	eLog.Debugf("Loading: Done")
-	return nil
 }
 
 // Transform looks up a metric in the stored enrichment database (loading
 // it on initial run) and adds metadata if a match is found.
 func (e *Enrich) Transform(c *skogul.Container) error {
-	e.once.Do(func() {
-		eLog.Warnf("The enrichment transformer is in use. This transformer is highly experimental and not considered production ready. Functionality and configuration parameters will change as it matures. If you use this, PLEASE provide feedback on what your use cases require.")
-		e.store = make(map[keyType]*entry)
-		err := e.load()
-		if err != nil {
-			eLog.WithError(err).Error()
-		}
-	})
 	e.lock.RLock()
 	for _, m := range c.Metrics {
 		hit := e.find(*m)
