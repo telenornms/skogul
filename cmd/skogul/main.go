@@ -44,6 +44,9 @@ import (
 	"github.com/telenornms/skogul/receiver"
 	"github.com/telenornms/skogul/sender"
 	"github.com/telenornms/skogul/stats"
+	"github.com/telenornms/skogul/encoder"
+	"github.com/telenornms/skogul/parser"
+	"github.com/telenornms/skogul/transformer"
 )
 
 // versionNo gets set by passing the -X flag to ld like this
@@ -79,19 +82,28 @@ func prettyPrint(scheme string, desc string) {
 	fmt.Printf("\n")
 }
 
+// modhelp iterates over modules in a ModuleMap and prints short-hand help
+func modhelp(name string, mp skogul.ModuleMap) {
+	fmt.Printf("\n%s:\n", name)
+	for idx, mod := range mp {
+		if idx != mod.Name {
+			continue
+		}
+		prettyPrint(idx, mod.Help)
+	}
+
+}
+
 // help prints the regular command line usage, and lists all receivers and
 // senders.
 func help() {
 	flag.Usage()
-	fmt.Println("\nSenders:")
-	for idx, sen := range sender.Auto {
-		prettyPrint(idx, sen.Help)
-	}
-	fmt.Println("\nReceivers:")
-	for idx, rcv := range receiver.Auto {
-		prettyPrint(idx, rcv.Help)
-	}
-	fmt.Println("\nYou can also see the skogul manual page. It can be generated with `./skogul -make-man > foo; rst2man < foo > skogul.1; man ./skogul.1'.")
+	modhelp("Senders", sender.Auto)
+	modhelp("Receivers", receiver.Auto)
+	modhelp("Transformers", transformer.Auto)
+	modhelp("Parsers", parser.Auto)
+	modhelp("Encoders", encoder.Auto)
+	fmt.Println("\nSee the skogul(1) man page for details and usage. Some modules also have aliases.")
 }
 
 func printVersion() {
