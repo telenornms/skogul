@@ -28,6 +28,7 @@
     },
     "update": {
 	"parser": "json",
+	"transformers": ["now"],
 	"sender": "updater"
     }
   },

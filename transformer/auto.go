@@ -95,6 +95,13 @@ func init() {
 		Help:    "Extract a timestamp from the container data.",
 	})
 	Auto.Add(skogul.Module{
+		Name:     "now",
+		Aliases:  []string{"dummytimestamp"},
+		Alloc:    func() interface{} { return &DummyTimestamp{} },
+		Help:     "Forcibly set a timestamp (set to now/current time) on all metrics to ensure the container is valid even if the source doesn't provide a timestamp.",
+		AutoMake: true,
+	})
+	Auto.Add(skogul.Module{
 		Name:     "enrich",
 		Aliases:  []string{},
 		Alloc:    func() interface{} { return &Enrich{} },

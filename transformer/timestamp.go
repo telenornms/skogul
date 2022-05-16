@@ -34,6 +34,19 @@ import (
 
 var timestampLogger = skogul.Logger("transformer", "timestamp")
 
+// DummyTimestamp adds an artifical timestamp from skogul.Now()
+type DummyTimestamp struct{}
+
+// Transform sets a timestamp on all metrics to ensure the container is
+// valid if the source doesn't have a Timestamp.
+func (config *DummyTimestamp) Transform(c *skogul.Container) error {
+	now := skogul.Now()
+	for i := range c.Metrics {
+		c.Metrics[i].Time = &now
+	}
+	return nil
+}
+
 // Timestamp is the configuration for extracing a timestamp from inside the data
 type Timestamp struct {
 	Source []string `doc:"The source field of the timestamp"`
