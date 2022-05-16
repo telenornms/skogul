@@ -109,6 +109,13 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 	return nil
 }
 
+func (meta *Metadata) Deprecated() error {
+	if len(meta.ExtractFromData) > 0 {
+		return fmt.Errorf("ExtractFromData is replaced by CopyFromData. ExtractFromData will be removed in future versions.")
+	}
+	return nil
+}
+
 // flattenStructure copies a nested object/array to the root level
 func flattenStructure(nestedPath []string, separator string, metric *skogul.Metric) error {
 	nestedObjectPath := nestedPath[0]

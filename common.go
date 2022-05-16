@@ -145,13 +145,25 @@ type Encoder interface {
 }
 
 /*
-Verifier is an *optional* interface for senders and receivers. If
+Verifier is an *optional* interface for modules. If
 implemented, the configuration engine will issue Verify() after all
-configuration is parsed. The sender/receiver should never modify state upon
+configuration is parsed. The module should never modify state upon
 Verify(), but should simply check that internal state is usable.
 */
 type Verifier interface {
 	Verify() error
+}
+
+/*
+Deprecated is an optional interface for modules which, if implemented,
+allows modules to signal deprecated usage. If implemented, the Deprecated()
+method will be called after configuration is loaded and verified. Returning
+an error signals deprecation, and can be used both to deprecate specific
+settings and entire modules. There is currently no plan on how to remove
+deprecated modules over time.
+*/
+type Deprecated interface {
+	Deprecated() error
 }
 
 /*

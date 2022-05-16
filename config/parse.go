@@ -65,6 +65,7 @@ type Receiver struct {
 	Receiver skogul.Receiver `json:"-"`
 }
 
+// Encoder wraps the skogul.Encoder module-type for configuration parsing.
 type Encoder struct {
 	Type    string
 	Encoder skogul.Encoder `json:"-"`
@@ -652,6 +653,9 @@ func secondPass(c *Config) (*Config, error) {
 	if err := resolveHandlers(c); err != nil {
 		return nil, err
 	}
+	if err := resolveEncoders(c); err != nil {
+		return nil, err
+	}
 
 	for idx, h := range c.Handlers {
 		confLog.WithField("handler", idx).Debug("Verifying handler configuration")
@@ -664,21 +668,48 @@ func secondPass(c *Config) (*Config, error) {
 		if err := verifyItem("transformer", idx, t.Transformer); err != nil {
 			return nil, err
 		}
+		deprecateCheck("transformer", idx, t.Transformer)
 	}
 	for idx, s := range c.Senders {
 		confLog.WithField("sender", idx).Debug("Verifying sender configuration")
 		if err := verifyItem("sender", idx, s.Sender); err != nil {
 			return nil, err
 		}
+		deprecateCheck("sender", idx, s.Sender)
 	}
 	for idx, r := range c.Receivers {
 		confLog.WithField("receiver", idx).Debug("Verifying receiver configuration")
 		if err := verifyItem("receiver", idx, r.Receiver); err != nil {
 			return nil, err
 		}
+		deprecateCheck("receiver", idx, r.Receiver)
+	}
+	for idx, e := range c.Encoders {
+		confLog.WithField("encoders", idx).Debug("Verifying encoder configuration")
+		if err := verifyItem("encoder", idx, e.Encoder); err != nil {
+			return nil, err
+		}
+		deprecateCheck("encoder", idx, e.Encoder)
+	}
+	for idx, p := range c.Parsers {
+		confLog.WithField("parsers", idx).Debug("Verifying parser configuration")
+		if err := verifyItem("parser", idx, p.Parser); err != nil {
+			return nil, err
+		}
+		deprecateCheck("parser", idx, p.Parser)
 	}
 
 	return c, nil
+}
+
+func deprecateCheck(family string, name string, item interface{}) {
+	i, ok := item.(skogul.Deprecated)
+	if !ok {
+		return
+	}
+	if err := i.Deprecated(); err != nil {
+		confLog.Warnf("deprecation warning for %s \"%s\": %s", family, name, err)
+	}
 }
 
 // verifyItem checks if the item implements Verifier and if so, verifies
