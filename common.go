@@ -142,6 +142,7 @@ data encoding can vary, but not all senders use it.
 */
 type Encoder interface {
 	Encode(c *Container) ([]byte, error)
+	EncodeMetric(m *Metric) ([]byte, error)
 }
 
 /*

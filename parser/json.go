@@ -40,6 +40,21 @@ func (x JSON) Parse(b []byte) (*skogul.Container, error) {
 	return &container, err
 }
 
+// JSONMetric matches encoder's EncodeMetric - reads the byte as a metric,
+// not container
+type JSONMetric struct{}
+
+// Parse accepts a byte slice of JSON data and marshals it into a metric,
+// then wraps it in a container
+func (x JSONMetric) Parse(b []byte) (*skogul.Container, error) {
+	container := skogul.Container{}
+	metric := skogul.Metric{}
+	err := json.Unmarshal(b, &metric)
+	metrics := []*skogul.Metric{&metric}
+	container.Metrics = metrics
+	return &container, err
+}
+
 // RawJSON can be used when the JSON format does not conform to the final JSON format of skogul,
 // e.g. when it is used as the first step of parsing from a third party source where modifying
 // the source data structure might be hard/impossible

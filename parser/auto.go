@@ -40,6 +40,13 @@ func init() {
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
+		Name:     "skogulmetric",
+		Aliases:  []string{"jsonmetric", "json1"},
+		Alloc:    func() interface{} { return &JSONMetric{} },
+		Help:     "Parses the byte stream as a single json-encoded metric.",
+		AutoMake: true,
+	})
+	Auto.Add(skogul.Module{
 		Name:     "rawjson",
 		Aliases:  []string{"jsonraw", "custom-json"},
 		Alloc:    func() interface{} { return &RawJSON{} },

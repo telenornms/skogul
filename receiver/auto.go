@@ -94,4 +94,9 @@ func init() {
 		Alloc: func() interface{} { return &UDP{} },
 		Help:  "Accept UDP messages, one UDP message is one container. Combine with protobuf parser to receive Juniper telemetry.",
 	})
+	Auto.Add(skogul.Module{
+		Name:  "kafka",
+		Alloc: func() interface{} { return &Kafka{} },
+		Help:  "Connect to a Kafka topic and consume messages.",
+	})
 }

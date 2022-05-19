@@ -167,5 +167,10 @@ func init() {
 		Alloc: func() interface{} { return &Test{} },
 		Help:  "Used for internal testing. Basically just discards data but provides an internal counter of received data",
 	})
+	Auto.Add(skogul.Module{
+		Name:  "kafka",
+		Alloc: func() interface{} { return &Kafka{} },
+		Help:  "EXPERIMENTAL Kafka sender",
+	})
 
 }
