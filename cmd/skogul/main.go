@@ -53,8 +53,8 @@ import (
 // go build -ldflags "-X main.versionNo=0.1.0" ./cmd/skogul
 var versionNo string
 
-var ffile = flag.String("f", "~/.config/skogul.json", "Path to skogul config to read.")
-var fconfigDir = flag.String("d", "", "Path to skogul configuration files.")
+var ffile = flag.String("f", "/etc/skogul/conf.d/", "Path to skogul config to read. Either a file or a directory of .json files.")
+var fconfigDir = flag.String("d", "", "Path to skogul configuration files. Deprecated, use -f.")
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
@@ -138,6 +138,7 @@ func main() {
 	configPath := ""
 
 	if *fconfigDir != "" {
+		log.Warnf("Using -d is deprecated, use -f instead - it has the exact same functionality.")
 		configPath = *fconfigDir
 	} else {
 		configPath = *ffile

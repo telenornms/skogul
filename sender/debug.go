@@ -24,13 +24,13 @@
 package sender
 
 import (
-	"encoding/json"
 	"fmt"
 	"math/rand"
 	"sync/atomic"
 	"time"
 
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
 )
 
 var debugLog = skogul.Logger("sender", "debug")
@@ -40,14 +40,21 @@ Debug sender simply prints the metrics in json-marshalled format to
 stdout.
 */
 type Debug struct {
-	Prefix string `doc:"Prefix to print before any metric"`
+	Prefix  string            `doc:"Prefix to print before any metric"`
+	Encoder skogul.EncoderRef `doc:"Which encoder to use. Defaults to prettyjson."`
 }
 
 // Send prints the JSON-formatted container to stdout
 func (db *Debug) Send(c *skogul.Container) error {
-	b, err := json.MarshalIndent(*c, "", "  ")
+	e := db.Encoder.E
+	if e == nil {
+		x := encoder.JSON{}
+		x.Pretty = true
+		e = x
+	}
+	b, err := e.Encode(c)
 	if err != nil {
-		debugLog.WithError(err).Panic("Unable to marshal json for debug output")
+		debugLog.WithError(err).Panic("Unable to encode for debug output")
 		return err
 	}
 	fmt.Printf("%s%s\n", db.Prefix, b)
@@ -82,7 +89,7 @@ func (sl *Sleeper) Send(c *skogul.Container) error {
 ForwardAndFail sender will pass the container to the Next sender, but
 always returns an error. The use-case for this is to allow the fallback
 Sender or similar to eventually send data to a sender that ALWAYS works,
-e.g. the Debug-sender og just printing a message in the log, but we still
+e.g. the Debug-sender or just printing a message in the log, but we still
 want to propagate the error upwards in the stack so clients can take
 appropriate action.
 

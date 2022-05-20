@@ -61,8 +61,8 @@ This means that:
 */
 type Batch struct {
 	Next      skogul.SenderRef       `doc:"Sender that will receive batched metrics"`
-	Interval  skogul.Duration        `doc:"Flush the bucket after this duration regardless of how full it is"`
-	Threshold int                    `doc:"Flush the bucket after reaching this amount of metrics"`
+	Interval  skogul.Duration        `doc:"Flush the bucket after this duration regardless of how full it is. Default is 1s."`
+	Threshold int                    `doc:"Flush the bucket after reaching this amount of metrics. Default is 10."`
 	Threads   int                    `doc:"Number of threads for batch sender. Defaults to number of CPU cores."`
 	Burner    skogul.SenderRef       `doc:"If the next sender is too slow and containers pile up beyond the backlog, instead of blocking waiting for the regular sender, redirect the overflown data to this burner. If left blank, the batcher will block, waiting for the regular sender. Note that there is no secondary overflow protection, so if the burner-sender is slow as well, the batcher will still block. To just discard the data, just use the null-sender. To measure how frequently this happens, use the count-sender in combination with the null-sender."`
 	allocSize int                    // Precomputed of container to allocate initially
