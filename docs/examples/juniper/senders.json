@@ -1,0 +1,11 @@
+{
+  "senders": {
+    "juniper-data": {
+      "type": "influx",
+      "measurementfrommetadata": "measurement",
+      "URL": "https://somehost:8086/write?db=brut",
+      "Timeout": "4s",
+      "ConvertIntToFloat": true
+    }
+  }
+}

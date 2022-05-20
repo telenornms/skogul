@@ -46,7 +46,7 @@ openssl verify -CAfile ca_cert.pem alice_cert.pem
 echo ""
 
 echo "==> DEBUG Verify that Bob's cert is NOT signed by CA"
-openssl verify -CAfile ca_cert.pem bob_cert.pem
+! openssl verify -CAfile ca_cert.pem bob_cert.pem
 echo ""
 
 echo "==> Summary"

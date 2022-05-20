@@ -4,7 +4,7 @@
       "type": "http",
       "address": "[::1]:8080",
       "handlers": {
-        "/": "jsontemplating"
+        "/": "myjson"
       },
       "auth": {
         "/": {
@@ -17,15 +17,9 @@
     }
   },
   "handlers": {
-    "jsontemplating": {
+    "myjson": {
       "parser": "json",
-      "transformers": ["templater"],
       "sender": "batch"
-    }
-  },
-  "transformers": {
-    "templater": {
-      "type": "templater"
     }
   },
   "senders": {

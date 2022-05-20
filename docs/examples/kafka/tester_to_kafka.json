@@ -1,0 +1,27 @@
+{
+  "receivers": {
+    "test": {
+      "type": "test",
+      "handler": "json",
+      "metrics": 2,
+      "values": 2,
+      "delay": "2s",
+      "threads": 2
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json",
+      "transformers": [],
+      "sender": "kaf"
+    }
+  },
+  "senders": {
+    "kaf": {
+      "type": "kafka",
+      "address": "localhost:9092",
+      "topic": "quickstart",
+      "sync": true
+    }
+  }
+}

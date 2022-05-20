@@ -1,0 +1,26 @@
+{
+	"receivers": {
+		"data": {
+			"type": "test",
+			"metrics": 1,
+			"threads": 1,
+			"values": 1,
+			"delay": "0.4s",
+			"handler": "demo"
+		}
+	},
+	"handlers": {
+		"demo": {
+			"parser": "json",
+			"sender": "mybatch"
+		}
+	},
+	"senders": {
+		"mybatch": {
+			"type": "batch",
+			"interval": "1s",
+			"threshold": 100,
+			"next": "print"
+		}
+	}
+}

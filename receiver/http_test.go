@@ -142,15 +142,15 @@ func TestHttp_stack(t *testing.T) {
 			"type": "http",
 			"address": "localhost:3443",
 			"handlers": { "/": "common"},
-			"certfile": "../docs/examples/cacert-snakeoil.pem",
-			"keyfile": "../docs/examples/privkey-snakeoil.pem"
+			"certfile": "../docs/examples/basics/cacert-snakeoil.pem",
+			"keyfile": "../docs/examples/basics/privkey-snakeoil.pem"
 		},
 		"ssl_auth": {
 			"type": "http",
 			"address": "localhost:5443",
 			"handlers": { "/": "common"},
-			"certfile": "../docs/examples/cacert-snakeoil.pem",
-			"keyfile": "../docs/examples/privkey-snakeoil.pem",
+			"certfile": "../docs/examples/basics/cacert-snakeoil.pem",
+			"keyfile": "../docs/examples/basics/privkey-snakeoil.pem",
 			"auth": {
 				"/": {
 					"username": "god",
@@ -274,8 +274,8 @@ func TestHttpHandlersWithAuth(t *testing.T) {
 				"/": "common",
 				"/auth": "common"
 			},
-			"certfile": "../docs/examples/cacert-snakeoil.pem",
-			"keyfile": "../docs/examples/privkey-snakeoil.pem",
+			"certfile": "../docs/examples/basics/cacert-snakeoil.pem",
+			"keyfile": "../docs/examples/basics/privkey-snakeoil.pem",
 			"auth": {
 				"/auth": {
 					"username": "god",
@@ -355,8 +355,8 @@ func TestMain(m *testing.M) {
 			"type": "http",
 			"address": "localhost:5449",
 			"handlers": { "/": "common"},
-			"certfile": "../docs/examples/cacert-snakeoil.pem",
-			"keyfile": "../docs/examples/privkey-snakeoil.pem",
+			"certfile": "../docs/examples/basics/cacert-snakeoil.pem",
+			"keyfile": "../docs/examples/basics/privkey-snakeoil.pem",
 			"username": "god",
 			"password": "hunter2"
 		}

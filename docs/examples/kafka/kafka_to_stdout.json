@@ -1,0 +1,23 @@
+{
+  "receivers": {
+    "k": {
+      "type": "kafka",
+      "handler": "json",
+      "brokers": ["localhost:9092"],
+      "topic": "quickstart"
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "json1",
+      "transformers": [],
+      "sender": "batch"
+    }
+  },
+  "senders": {
+    "batch": {
+      "type": "batch",
+      "next": "print"
+    }
+  }
+}

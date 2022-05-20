@@ -32,7 +32,7 @@ install: skogul skogul.1 docs/skogul.rst
 	@echo 🙅 Installing
 	@install -D -m 0755 skogul ${DESTDIR}${PREFIX}/bin/skogul
 	@install -D -m 0644 skogul.1 ${DESTDIR}${PREFIX}/share/man/man1/skogul.1
-	@install -D -m 0644 docs/examples/default.json ${DESTDIR}/etc/skogul/default.json
+	@install -D -m 0644 docs/examples/basics/default.json ${DESTDIR}/etc/skogul/default.json
 	@cd docs; \
 	find . -type f -exec install -D -m 0644 {} ${DESTDIR}${DOCDIR}/{} \;
 	@install -D -m 0644 README.rst LICENSE -t ${DESTDIR}${DOCDIR}/
@@ -78,7 +78,7 @@ rpm: build/redhat-skogul.spec
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
-check: test fmtcheck vet
+check: test fmtcheck vet exampletest
 
 # Can't for the life of me remember where this came from and it's seemingly
 # gone now, so removed from check.
@@ -97,6 +97,23 @@ fmtcheck:
 fmtfix:
 	@echo 🎨 Fixing formating
 	@find . -name '*.go' -not -wholename './gen/*' -and -not -wholename './vendor/*' -exec gofmt -d -s -w {} +
+
+exampletest:
+	@echo 📖 Verifying examples
+	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v json); do \
+		./skogul -show -f $$a >/dev/null 2>&1 ; \
+		if [ $$? -ne 0 ]; then \
+			echo 🚩 Example $$a is not valid; \
+			failed=$$(( failed + 1 ));\
+		fi;\
+	done;\
+	exit $${failed}
+	@echo 📖 Verifying junos example
+	@./skogul -show -d docs/examples/juniper >/dev/null 2>&1 ; \
+	if [ $$? -ne 0 ]; then \
+		echo 🚩 Junos-example is not valid; \
+		exit 1;\
+	fi;
 
 test:
 	@echo 🧐 Testing, without SQL-tests

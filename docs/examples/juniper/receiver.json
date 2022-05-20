@@ -1,0 +1,13 @@
+{
+  "receivers": {
+    "telemetry-receiver": {
+      "type": "udp",
+      "address": ":5015",
+      "handler": "juniperxform",
+      "backlog": 1024,
+      "threads": 100,
+      "packetsize": 9530,
+      "buffer": 40960000
+    }
+  }
+}

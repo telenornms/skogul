@@ -1,0 +1,65 @@
+{
+	"receivers": {
+		"data": {
+			"type": "test",
+			"metrics": 1,
+			"threads": 1,
+			"values": 1,
+			"handler": "demo"
+		}
+	},
+	"handlers": {
+		"demo": {
+			"parser": "json",
+			"sender": "mybatch"
+		},
+		"burned-stat": {
+			"parser": "json",
+			"transformers": ["burning"],
+			"sender": "print"
+		},
+		"ok-stat": {
+			"parser": "json",
+			"transformers": ["ok"],
+			"sender": "print"
+		}
+	},
+	"transformers": {
+		"burning": {
+			"type": "metadata",
+			"set": {
+				"info": "Burned metrics"
+			}
+		},
+		"ok": {
+			"type": "metadata",
+			"set": {
+				"info": "OK metrics"
+			}
+		}
+	},
+	"senders": {
+		"mybatch": {
+			"type": "batch",
+			"interval": "1s",
+			"threshold": 100,
+			"burner": "count-burned",
+			"next": "sleep"
+		},
+		"count-burned": {
+			"type": "count",
+			"stats": "burned-stat",
+			"next": "null"
+		},
+		"count-ok": {
+			"type": "count",
+			"stats": "ok-stat",
+			"next": "null"
+		},
+		"sleep": {
+			"type": "sleep",
+			"base": "1s",
+			"next": "count-ok"
+		}
+	}
+}
