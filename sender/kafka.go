@@ -99,6 +99,11 @@ func (k *Kafka) init() {
 		}
 		transport.SASL = mechanism
 	}
+	hasPw := "<not configured>"
+	if k.Password != "" {
+		hasPw = "<configured, redacted>"
+	}
+	kafkaLog.Infof("Kafka settings: TLS: %v, Topic: %s, ClientID: %s, Username: %s, Password: %s", k.TLS, k.Topic, k.ClientID, k.Username, hasPw)
 	k.w.Transport = &transport
 	if k.Encoder.Name == "" {
 		k.Encoder.E = encoder.JSON{}

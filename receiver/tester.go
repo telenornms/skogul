@@ -90,7 +90,7 @@ func (tst *Tester) run() {
 	for {
 		c := tst.generate(time.Now())
 		if err := tst.Handler.H.TransformAndSend(&c); err != nil {
-			testerLog.WithError(err).Errorf("Failed to transform and send metrics: %v", err)
+			testerLog.Errorf("Failed to transform and send metrics: %v", err)
 		}
 		time.Sleep(tst.Delay.Duration)
 	}
