@@ -43,7 +43,7 @@ actual aggregation and calculation.
 type Counter struct {
 	Next   skogul.SenderRef  `doc:"Reference to the next sender in the chain"`
 	Stats  skogul.HandlerRef `doc:"Handler that will receive the stats periodically"`
-	Period skogul.Duration   `doc:"How often to emit stats" example:"5s"`
+	Period skogul.Duration   `doc:"How often to emit stats. Defaults to 1 second." example:"5s"`
 	ch     chan count
 	once   sync.Once
 	up     bool
@@ -62,7 +62,7 @@ func (co *Counter) init() {
 	co.ch = make(chan count, 100)
 	co.up = true
 	if co.Period.Duration == 0 {
-		countLog.Debug("No Period set for Counter-sender. Using 1 second intervals.")
+		countLog.Info("No Period set for Counter-sender. Using 1 second intervals.")
 		co.Period.Duration = 1 * time.Second
 	}
 	go co.getIt()
@@ -111,7 +111,7 @@ func (co *Counter) getIt() {
 			metric := skogul.Metric{}
 			metric.Metadata = make(map[string]interface{})
 			metric.Data = make(map[string]interface{})
-			metric.Metadata["skogul"] = "counter"
+			metric.Metadata["skogul"] = skogul.Identity[co]
 			container.Metrics = []*skogul.Metric{&metric}
 			total.containers += current.containers
 			total.metrics += current.metrics
