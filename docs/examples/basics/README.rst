@@ -93,11 +93,12 @@ that you will see containers printed to stdout with 2 and 3 metrics.
 batch_burner.json
 -----------------
 
-This is a somewhat verbose example.
+This demonstrates how to deal with delays in the sender-path. This
+is simulated with the "sleep" sender, which introduces a variable delay
+before passing the data on - in this case, it passes it to the "null"
+sender which just discards the data for the sake of demonstration. Think of
+this as simulating a slow database or storage backend.
 
-The goal is to demonstrate how to deal with delays in the sender-path. This
-is simulated with the "sleep" sender, which introduces an arbitrary delay.
-Think of this as simulating a slow database or storage backend.
 Additionally, two count-senders are used: One after the sleep-sender, to
 measure the throughput of "good" data, and one to measure "burned" data.
 
@@ -108,24 +109,22 @@ which means data will pile up and possibly slow down your receivers as
 well.
 
 With a burner defined, you can chose an alternate path for this data. The
-most useful thing to do with the data is to just throw it away - using the
-null-sender, but ours is a very common pattern: Send it to a count-sender
-first to gather statistics on how often this happens.
+most useful thing to do with the data is often to just throw it away -
+using the null-sender, but ours is a very common pattern: Send it to a
+count-sender first to gather statistics on how often this happens.
 
-Since we now have TWO count senders, both printing to stdout, the example
-introduces transformers for statically setting metadata. Transformers can
-do a whole range of things, they are used to modify data BEFORE it is
-forwarded to a sender. In this case, we have two handlers that are
-identical, the "burned-stat" and "ok-stat", they only differ in
-transformers.
+The count sender identifies itself in metadata, so you can distinguish
+between them by looking at the "skogul" metadata field, which will have the
+value of the name you give the sender. Here, that will be count-burned and
+count-ok.
 
 The test-receiver is used without a delay, which means it will generate
 data as fast as it can and quickly overwhelm the "sleep"-sender.
 
-It is highly recommended to address what to do if data is coming to fast
+It is highly recommended to address what to do if data is coming too fast
 explicitly, specially if you are using multiple senders. It allows you to
 fail in a more controlled manner. The simplest way to do this is just add a
-burner to a batch sender, with no further options. This is a valid
+burner to a batch sender, with no further options. This is a valid, minimal
 configuration doing just that::
 
         "senders": {
