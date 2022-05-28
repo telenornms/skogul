@@ -90,6 +90,11 @@ func init() {
 		Help:  "Listen for data on a tcp socket, reading one collection per line.",
 	})
 	Auto.Add(skogul.Module{
+		Name:  "sql",
+		Alloc: func() interface{} { return &SQL{} },
+		Help:  "Periodically poll a database for information.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "udp",
 		Alloc: func() interface{} { return &UDP{} },
 		Help:  "Accept UDP messages, one UDP message is one container. Combine with protobuf parser to receive Juniper telemetry.",
