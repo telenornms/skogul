@@ -1,6 +1,6 @@
 module github.com/telenornms/skogul
 
-go 1.17
+go 1.18
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.3.5
@@ -17,5 +17,5 @@ require (
 	github.com/klauspost/compress v1.14.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.14 // indirect
 	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
-	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
+	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 )

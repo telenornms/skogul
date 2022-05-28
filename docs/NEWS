@@ -1,3 +1,36 @@
+v0.16.0
+=======
+
+Release date: 2022-05-28
+
+TL;DR:
+
+- Kafka sender and receiver
+- Default configuration file moved to /etc/skogul/conf.d in systemd units
+- Enricher transformer MUST be used together with enricher updater sender
+- "Wholefile" receiver will read a file and treat it as a single container
+- Much needed docs/examples cleanup
+- Dummy timestamp transformer
+
+If you are using an unaltered systemd unit file and our RPM packages, you
+will have to move your configuration from /etc/skogul/default.json into
+/etc/skogul/conf.d/ - the file name can be whatever, as long as it ends in
+.json - Skogul will load every configuration file present.
+
+This better allows dynamic configuration through, e.g., Ansible and is
+what we've been using for a while.
+
+The Kafka sender has one little quirk: Since Kafka allows batching messages
+natively, it was decided that it is better for overall performance to
+encode each metric in a container as an individual message, instead of
+encoding the entire container as one message. This will better exploit the
+nature of Kafka and make it easier to use the data, hopefully.
+
+The enricher also went through a major simplification: It no longer has a
+native loader function, and instead you have to configure an enricher
+updater sender. The configuration becomes slightly more cumbersome, but the
+end result is a much more elegant solution.
+
 v0.15.2
 =======
 
