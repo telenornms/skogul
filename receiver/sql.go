@@ -61,6 +61,9 @@ func (s *SQL) Start() error {
 	}
 	tRawBytes := reflect.TypeOf(sql.RawBytes{})
 	tString := reflect.TypeOf("")
+
+	// Need a reverse map here to quickly check if columns are metadata
+	// or not
 	isMetadata := make(map[string]bool)
 	for _, name := range s.Metadata {
 		isMetadata[name] = true
@@ -151,5 +154,4 @@ func (s *SQL) Start() error {
 			return nil
 		}
 	}
-
 }

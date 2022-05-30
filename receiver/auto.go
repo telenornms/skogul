@@ -92,7 +92,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:  "sql",
 		Alloc: func() interface{} { return &SQL{} },
-		Help:  "Periodically poll a database for information.",
+		Help:  "Periodically poll a database for information. Single threaded.",
 	})
 	Auto.Add(skogul.Module{
 		Name:  "udp",

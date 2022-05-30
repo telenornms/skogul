@@ -66,10 +66,15 @@ Also see ``make help`` for other make targets.
 About
 -----
 
-Skogul is written to solve a myriad of issues that typically arise when
-dealing with metric data and complex systems. It can be used for very
-simple setups, and expanded to large, multi-datacenter infrastructures with
-a mixture of new and old systems attached to it.
+Skogul collects, mutates and transmits metric data. It was written to
+support an extensive eco system of data collectors and storage engines in
+constant motion. With Skogul, the goal is to disconnect how data is
+collected from how it is stored: If you decide to change storage engine,
+you should not have to even touch your collector. Or vice versa.
+
+It can be used for very simple setups, and expanded to large,
+multi-datacenter infrastructures with a mixture of new and old systems
+attached to it.
 
 To accomplish this, you set up chains that define how data is received, how
 it is treated, where it goes and what happens if something goes wrong.
@@ -106,6 +111,153 @@ documentation:
 https://godoc.org/github.com/telenornms/skogul
 
 More discussion on architecture can be found in `docs/`.
+
+Modules
+-------
+
+Skogul is all based around modulesr. We started out with three modules, but
+today we have a total of five different module types. To see every modules,
+use ``skogul -help``, read the manual, or simply look in the receiver,
+sender, parser, encoder and transformer directory and read the ``auto.go``
+file there which lists all modules.
+
+Each family of module has its own section in the JSON configuration file.
+
+While all modules are fundamentally equal, receivers and senders are so
+important that they are a little bit *more* equal, so we call them core
+modules.
+
+.. image:: docs/imgs/modules-drawio.png
+
+............
+Core modules
+............
+
+Senders and receivers
+.....................
+
+There are two essential module types, the receiver which defines how data
+is acquired, and senders that determine what to do with the data. A handler
+is just a collection of parser, optional transformer and reference to the
+first sender.
+
+Commonly used receivers are the HTTP receiver, UDP, kafka receiver
+(consumer), various file receivers, SQL receiver
+
+Senders all have the same general API, but come in two distinct types
+
+External senders
+................
+
+External senders transmit data out of Skogul and are the classic and
+easy-to-understand senders. Examples are InfluxDB sender to store data in
+InfluxDB, UDP sender, Kafka sender (producer), SQL sender, MQTT, and more.
+
+The debug or "print" sender is a little special: It just prints data to
+stdout and is HIGHLY useful for testing.
+
+Internal/Logic senders
+......................
+
+Logical senders are used internally to route or do something related with
+data. The by far most important internal sender is the batch sender, which
+accepts data, batches it into user-defined sizes, then passes them on to an
+other sender. There are a large amount of small but important logical
+senders that can be combined to form powerful chains.
+
+Other dev favorites are: The count sender for getting statistics about how
+much data passes through Skogul, the switch sender for sending data to
+different other senders based on metadata, dupe sender for sending the same
+data to multiple other senders, the null sender for simply discarding data,
+
+...............
+Support modules
+...............
+
+Additionally, three support-type modules exists:
+
+Parsers
+.......
+
+The parser takes a set of bytes received and decodes it into a Skogul
+internal container. E.g.: JSON decoding, protocol buffers for Juniper-data,
+Influx Line protocol data, etc and is used by receivers through handlers.
+
+Encoders
+........
+
+The encoder does the opposite: It takes an internal Skogul container and
+encodes it as a byte stream for external tranmission. Today, only a small
+amount of senders use encoders, as they are quite new, but they will be
+used more extensively in the future. Currently, only JSON is supported.
+More to come.
+
+Transformers
+............
+
+Transformers are used to, you guessed it, transform or mutate parsed
+containers. Typically used to re-arrange source data to better match target
+data, to add metadata, or to sanitize data.
+
+................
+Implicit modules
+................
+
+All modules can be defined in configuration, but several modules have zero
+configuration options, or very common options. E.g.: The `skogul` parser
+doesn't require any configuration to work, the `debug` sender works fine
+without any settings, the `now` transformer doesn't need any configuration
+to add current time to a metric. To save you from having to define a whole
+lot of empty modules, these type of modules can be referenced by their
+implementation name (class, if you like) and an instance will be created
+behind the scenes. These are listed as "auto modules" in the manual page.
+
+E.g., without this feature::
+
+        {
+                "receivers": {
+                        "foo": {
+                                "type": "test",
+                                "handler": "myhandler"
+                        }
+                },
+		"handlers": {
+			"myhandler": {
+				"parser": "skogul",
+				"sender": "debug"
+			}
+		},
+                "parsers": {
+                        "skogul": {
+                                "type": "skogul"
+                        }
+                },
+                "senders": {
+                        "debug": {
+                                "type": "debug"
+                        }
+                }
+        }
+
+But since the Skogul parser and the debug sender has no configuration, you
+can just omit their definition and Skogul will implicitly create them for
+you::
+
+        {
+                "receivers": {
+                        "foo": {
+                                "type": "test",
+                                "handler": "myhandler"
+                        }
+                },
+		"handlers": {
+			"myhandler": {
+				"parser": "json",
+				"sender": "debug"
+			}
+		}
+        }
+
 
 Performance
 -----------
