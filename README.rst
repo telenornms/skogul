@@ -297,6 +297,7 @@ A few sources for more documentation:
 - docs/CODING
 - doc.go
 
+.......
 Testing
 .......
 
@@ -309,6 +310,7 @@ analysis and open it in a browser.
 Use ``make fmtfix`` to fix formatting issues, which also makes sure to not
 mess with the bundled/generated go files.
 
+.............
 Documentation
 .............
 
