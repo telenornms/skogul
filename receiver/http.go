@@ -343,6 +343,12 @@ func (htt *HTTP) Verify() error {
 		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
 	}
 	for _, auth := range htt.Auth {
+		if auth.Username != "" && auth.Password == "" {
+			return fmt.Errorf("Username specified but no password.")
+		}
+		if auth.Username == "" && auth.Password != "" {
+			return fmt.Errorf("Password specified but no username.")
+		}
 		if auth.SANDNSName != "" && cas == nil {
 			return skogul.Error{Source: "http-receiver", Reason: "No Client Certificate CAs defined, but DNS Name for SAN specified. Specify ClientCertificateCAs configuration element."}
 		}
