@@ -57,21 +57,22 @@ type protobufStats struct {
 	Parsed                       uint64 // Successful parses
 }
 
+func (x *ProtoBuf) initStats() {
+	x.stats = &protobufStats{
+		Received:                     0,
+		ParseErrors:                  0,
+		MissingExtension:             0,
+		FailedToCastToJuniperMessage: 0,
+		FailedToJsonMarshal:          0,
+		FailedToJsonUnmarshal:        0,
+		NilData:                      0,
+		Parsed:                       0,
+	}
+}
+
 // Parse accepts a byte slice of protobuf data and marshals it into a container
 func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
-	x.once.Do(func() {
-		// XXX: This doesn't start until the first message is parsed. But it's probably fine for now.
-		x.stats = &protobufStats{
-			Received:                     0,
-			ParseErrors:                  0,
-			MissingExtension:             0,
-			FailedToCastToJuniperMessage: 0,
-			FailedToJsonMarshal:          0,
-			FailedToJsonUnmarshal:        0,
-			NilData:                      0,
-			Parsed:                       0,
-		}
-	})
+	x.once.Do(x.initStats)
 	atomic.AddUint64(&x.stats.Received, 1)
 	parsedProtoBuf, err := parseTelemetryStream(b)
 
@@ -242,6 +243,9 @@ func (x *ProtoBuf) GetStats() *skogul.Metric {
 	metric.Metadata["component"] = "parser"
 	metric.Metadata["type"] = "protobuf"
 	metric.Metadata["identity"] = skogul.Identity[x]
+
+	// Ensure we init the stats struct in case we havent received a message yet.
+	x.once.Do(x.initStats)
 
 	metric.Data["received"] = x.stats.Received
 	metric.Data["parse_errors"] = x.stats.ParseErrors
