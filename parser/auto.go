@@ -81,4 +81,18 @@ func init() {
 		Help:     "Parse structured data as specified in RFC5424",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "GOB",
+		Aliases:  []string{"gob"},
+		Alloc:    func() interface{} { return &GOB{} },
+		Help:     "Parse GOB",
+		AutoMake: true,
+	})
+	Auto.Add(skogul.Module{
+		Name:     "GOBmetric",
+		Aliases:  []string{"gobmetric"},
+		Alloc:    func() interface{} { return &GOBMetric{} },
+		Help:     "Parses GOBMetric.",
+		AutoMake: true,
+	})
 }
