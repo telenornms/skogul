@@ -54,4 +54,12 @@ func init() {
 		Help:     "Encodes the standard Skogul JSON format with indentation.",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "GOBskogul",
+		Aliases:  []string{"gob"},
+		Alloc:    func() interface{} { return &GOB{} },
+		Help:     "Encodes the GOB format.",
+		AutoMake: true,
+	})
+
 }
