@@ -1,9 +1,9 @@
 /*
  * skogul, Encoder automation
  *
- * Copyright (c) 2019-2020 Telenor Norge AS
+ * Copyright (c) 2022 Telenor Norge AS
  * Author(s):
- *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Roshini NarasimhaRaghavan(roshiragavi@gmail.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
