@@ -29,9 +29,9 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/RoshiniNara/skogul"
-	"github.com/RoshiniNara/skogul/tree/primary/encoder"
-	"github.com/RoshiniNara/skogul/tree/primary/parser"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
+	"github.com/telenornms/skogul/parser"
 )
 
 // TestJSONEncode tests encoding of a simple JSON document from a skogul
