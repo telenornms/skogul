@@ -43,7 +43,7 @@ func TestGOBEncode(t *testing.T) {
 func testGOB(t *testing.T, file string, match bool) {
 	t.Helper()
 	c, orig := parseGOB(t, file)
-	b, err := encoder.GOB.Encode(c)
+	b, err := encoder.GOB{}.Encode(c)
 
 	if err != nil {
 		t.Errorf("Encoding %s failed: %v", file, err)
