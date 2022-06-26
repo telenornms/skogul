@@ -1,10 +1,9 @@
 /*
- * skogul, test json encoder
+ * skogul, test gob encoder
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
- * Author(s):
- *  - Kristian Lyngstøl <kly@kly.no>
- *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
+ * Author:
+ *  - Roshini Narasimha Raghavan <roshiragavi@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,7 +34,7 @@ import (
 	"github.com/telenornms/skogul/parser"
 )
 
-// TestJSONEncode tests encoding of a simple JSON document from a skogul
+// TestGOBEncode tests encoding of a simple GOB format from a skogul
 // container
 func TestGOBEncode(t *testing.T) {
 	testGOB(t, "./testdata/testdata.gob", true)
