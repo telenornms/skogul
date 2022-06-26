@@ -1,7 +1,7 @@
 /*
  * skogul, test gob encoder
  *
- * Copyright (c) 2019-2020 Telenor Norge AS
+ * Copyright (c) 2022 Telenor Norge AS
  * Author:
  *  - Roshini Narasimha Raghavan <roshiragavi@gmail.com>
  *
