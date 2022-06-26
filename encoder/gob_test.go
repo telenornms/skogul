@@ -25,9 +25,14 @@
 package encoder_test
 
 import (
-	"bytes"
 	"io/ioutil"
 	"testing"
+
+	"fmt"
+
+	"strings"
+
+	"bytes"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
@@ -37,7 +42,7 @@ import (
 // TestJSONEncode tests encoding of a simple JSON document from a skogul
 // container
 func TestGOBEncode(t *testing.T) {
-	testGOB(t, "./testdata/simple_container.json", true)
+	testGOB(t, "./testdata/testdata.gob", true)
 }
 
 func testGOB(t *testing.T, file string, match bool) {
@@ -57,17 +62,23 @@ func testGOB(t *testing.T, file string, match bool) {
 		return
 	}
 	sorig := string(orig)
+	sorig_replace_main_with_skogul := strings.Replace(sorig, "main", "skogul", 1)
+
 	snew := string(b)
+
+	fmt.Println("encoded", snew)
 	if len(sorig) < 2 {
 		t.Logf("Encoding %s failed: original pre-encoded length way too short. Shouldn't happen.", file)
 		t.FailNow()
 	}
 	// strip trailing new-line
-	sorig = sorig[:len(sorig)-1]
-	if sorig != snew {
+	//sorig_replace_main_with_skogul = sorig_replace_main_with_skogul[:len(sorig_replace_main_with_skogul)-1]
+	result := strings.Compare(sorig_replace_main_with_skogul, snew)
+	if result != 0 {
 		t.Errorf("Encoding %s failed: original and newly encoded container doesn't match", file)
-		t.Logf("orig:\n'%s'", sorig)
+		t.Logf("orig:\n'%s'", sorig_replace_main_with_skogul)
 		t.Logf("new:\n'%s'", snew)
+		t.Logf("result\n %d", result)
 		return
 	}
 
@@ -84,16 +95,16 @@ func parseGOB(t *testing.T, file string) (*skogul.Container, []byte) {
 		t.FailNow()
 		return nil, nil
 	}
-	container, err := parser.Parse(z)
+	container, err := parser.GOB{}.Parse(*z)
 
 	if err != nil {
-		t.Logf("Failed to parse JSON data: %v", err)
+		t.Logf("Failed to parse GOB data: %v", err)
 		t.FailNow()
 		return nil, nil
 	}
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
-		t.Logf("Expected parsed JSON to return a container with at least 1 metric")
+		t.Logf("Expected parsed GOB to return a container with at least 1 metric")
 		t.FailNow()
 		return nil, nil
 	}
