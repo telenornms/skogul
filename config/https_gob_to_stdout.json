@@ -1,0 +1,17 @@
+{
+	"receivers": {
+		"r": {
+			"type": "http",
+			"address": "localhost:1339",
+			"handlers": {
+				"/": "something"
+			}
+		}
+	},
+	"handlers": {
+		"something": {
+			"parser": "gob",
+			"sender": "print"
+		}
+	}
+}
