@@ -30,7 +30,7 @@ import (
 	"github.com/telenornms/skogul/parser"
 )
 
-func TestGOBEncode(t *testing.T) {
+func TestGOBParser(t *testing.T) {
 	parseGOB(t, "./testdata/testdata.gob")
 }
 
