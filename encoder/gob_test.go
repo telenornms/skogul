@@ -104,14 +104,13 @@ func parseGOB(t *testing.T, file string) (*skogul.Container, []byte) {
 	t.Helper()
 
 	b, err := ioutil.ReadFile(file)
-	z := bytes.NewBuffer(b)
 
 	if err != nil {
 		t.Logf("Failed to read test data file: %v", err)
 		t.FailNow()
 		return nil, nil
 	}
-	container, err := parser.GOB{}.Parse(*z)
+	container, err := parser.GOB{}.Parse(b)
 
 	if err != nil {
 		t.Logf("Failed to parse GOB data: %v", err)

@@ -10,9 +10,10 @@ import (
 type GOB struct{}
 
 // Parser accepts the byte buffer of GOB
-func (x GOB) Parse(b bytes.Buffer) (*skogul.Container, error) {
+func (x GOB) Parse(b []byte) (*skogul.Container, error) {
+	z := bytes.NewBuffer(b)
 	container := skogul.Container{}
-	dec := gob.NewDecoder(&b)
+	dec := gob.NewDecoder(z)
 	err := dec.Decode(&container)
 	return &container, err
 }
@@ -20,10 +21,11 @@ func (x GOB) Parse(b bytes.Buffer) (*skogul.Container, error) {
 type GOBMetric struct{}
 
 // parses the bytes.buffer to skogul metrics and wraps in a container.
-func (x GOBMetric) ParseMetric(b bytes.Buffer) (*skogul.Container, error) {
+func (x GOBMetric) ParseMetric(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	metric := skogul.Metric{}
-	dec := gob.NewDecoder(&b)
+	z := bytes.NewBuffer(b)
+	dec := gob.NewDecoder(z)
 	err := dec.Decode(&metric)
 	metrics := []*skogul.Metric{&metric}
 	container.Metrics = metrics
