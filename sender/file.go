@@ -24,11 +24,12 @@
 package sender
 
 import (
-	"encoding/json"
+	"fmt"
 	"os"
 	"sync"
 
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
 )
 
 var fileLog = skogul.Logger("sender", "file")
@@ -40,12 +41,13 @@ File sender writes data to a file in various different fashions. Typical
 use will be debugging (write to disk) and writing to a FIFO for example.
 */
 type File struct {
-	Path   string `doc:"Absolute path to file to write"`
-	Append bool   `doc:"Whether to append to the file when starting. If false, will empty file before starting writes. Default: false"`
-	ok     bool
-	once   sync.Once
-	f      *os.File
-	c      chan []byte
+	Path    string            `doc:"Absolute path to file to write"`
+	Append  bool              `doc:"Whether to append to the file when starting. If false, will empty file before starting writes. Default: false"`
+	Encoder skogul.EncoderRef `doc:"Which encoder to use. Defaults to JSON."`
+	ok      bool
+	once    sync.Once
+	f       *os.File
+	c       chan []byte
 }
 
 func (f *File) init() {
@@ -54,6 +56,15 @@ func (f *File) init() {
 	var err error
 	var file *os.File
 
+	if f.Encoder.Name == "" {
+		f.Encoder.E = encoder.JSON{}
+	}
+	if f.Encoder.E == nil {
+		err := fmt.Errorf("No valid encoder specified")
+		fileLog.WithError(err).Errorf("No valid encoder")
+		f.ok = false
+		return
+	}
 	// Open file for append-only if it already exists and config says to append
 	if finfo, err := os.Stat(f.Path); !os.IsNotExist(err) && f.Append {
 		fileLog.WithField("path", f.Path).Trace("File exists, let's open it for writing")
@@ -109,7 +120,7 @@ func (f *File) Send(c *skogul.Container) error {
 		return e
 	}
 
-	b, err := json.Marshal(*c)
+	b, err := f.Encoder.E.Encode(c)
 
 	if err != nil {
 		fileLog.WithError(err).Error("Failed to marshal container data to json")
@@ -123,6 +134,9 @@ func (f *File) Send(c *skogul.Container) error {
 
 // Verify checks that the configuration options are set appropriately
 func (f *File) Verify() error {
+	if f.Encoder.E == nil {
+		return fmt.Errorf("No valid encoder specified")
+	}
 	if f.Path == "" {
 		err := skogul.Error{Reason: "Path name for file sender missing", Source: "file sender"}
 		fileLog.WithError(err).Error("Missing path to file for file sender")
