@@ -17,8 +17,7 @@ func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	var A AVRO
 	s, _ := os.ReadFile("./schema/avro_schema")
 	A.Schema = avro.MustParse(string(s))
-	var c skogul.Container
-	err := avro.Unmarshal(A.Schema, b, &c)
-	return &c, err
+	err := avro.Unmarshal(A.Schema, b, &A.In)
+	return &A.In, err
 
 }
