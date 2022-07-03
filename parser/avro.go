@@ -12,7 +12,6 @@ type AVRO struct {
 	In     skogul.Container
 }
 
-// Parser accepts the byte buffer of GOB
 func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	var A AVRO
 	s, _ := os.ReadFile("./schema/avro_schema")
