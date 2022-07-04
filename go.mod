@@ -11,6 +11,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	google.golang.org/protobuf v1.28.0
 )
+
 require (
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hamba/avro v1.8.0 // indirect
