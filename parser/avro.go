@@ -36,6 +36,7 @@ type AVRO struct {
 
 func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	s, _ := os.ReadFile(x.Schema)
+	container := skogul.Container{}
 	schema := avro.MustParse(string(s))
 	err := avro.Unmarshal(schema, b)
 	return b, err
