@@ -31,14 +31,14 @@ import (
 )
 
 type AVRO struct {
-	Schema avro.Schema
-	In     skogul.Container
+	Schema string
 }
 
 func (x AVRO) Encode(c *skogul.Container) ([]byte, error) {
-	var A AVRO
-	b, _ := os.ReadFile("./schema/avro_schema")
-	A.Schema = avro.MustParse(string(b))
-	A.In = *c
-	return avro.Marshal(A.Schema, A.In)
+	b, _ := os.ReadFile(x.Schema)
+	schema := avro.MustParse(string(b))
+	return avro.Marshal(schema, c)
+}
+func (x AVRO) EncodeMetric(m *skogul.Metric) ([]byte, error) {
+	return nil,fmt.Errorf("Not supported")
 }
