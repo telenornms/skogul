@@ -31,15 +31,15 @@ import (
 )
 
 type AVRO struct {
-	Schema avro.Schema
-	In     skogul.Container
+	Schema string
 }
 
 func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
-	var A AVRO
-	s, _ := os.ReadFile("./schema/avro_schema")
-	A.Schema = avro.MustParse(string(s))
-	err := avro.Unmarshal(A.Schema, b, &A.In)
-	return &A.In, err
-
+	s, _ := os.ReadFile(x.Schema)
+	schema := avro.MustParse(string(s))
+	err := avro.Unmarshal(schema, b)
+	return b, err
 }
+func (x AVRO) ParseMetric(m *skogul.Metric) ([]byte, error) {
+	return nil,fmt.Errorf("Not supported")
+	}
