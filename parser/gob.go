@@ -1,5 +1,5 @@
 /*
- * skogul, test gob parser
+ * skogul, gob parser
  *
  * Copyright (c) 2022 Telenor Norge AS
  * Author(s):
