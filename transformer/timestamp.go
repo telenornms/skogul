@@ -61,6 +61,7 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 		if config.Format == "" {
 			config.Format = time.RFC3339
 		}
+		config.Format = parseTimestamp(config.Format)
 	})
 
 	for i, metric := range c.Metrics {
@@ -79,13 +80,11 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 			}
 		}
 
-		format := parseTimestamp(config.Format)
-
-		time, err := time.Parse(format, timestamp)
+		time, err := time.Parse(config.Format, timestamp)
 		if err != nil {
 			timestampLogger.WithFields(logrus.Fields{
 				"timestamp": timestamp,
-				"format":    format,
+				"format":    config.Format,
 			}).Error("Failed to parse timestamp")
 			if config.Fail {
 				return err
@@ -104,7 +103,7 @@ func parseTimestamp(format string) string {
 	case "rfc3339", "iso8601": // 🙈
 		return time.RFC3339
 	default:
-		timestampLogger.WithField("format", format).Info("Could not match format to a named format, using format directly")
+		timestampLogger.WithField("format", format).Debug("Could not match format to a named format, using format directly")
 		return format
 	}
 }
