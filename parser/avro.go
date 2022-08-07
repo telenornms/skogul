@@ -23,6 +23,7 @@
 package parser
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/hamba/avro"
@@ -38,8 +39,8 @@ func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	schema := avro.MustParse(string(s))
 	err := avro.Unmarshal(schema, b, &container)
-	return container, err
+	return &container, err
 }
 func (x AVRO) ParseMetric(m *skogul.Metric) ([]byte, error) {
-	return nil,fmt.Errorf("Not supported")
-	}
+	return nil, fmt.Errorf("Not supported")
+}
