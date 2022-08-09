@@ -56,6 +56,9 @@ func testGOB(t *testing.T, file string, match bool) {
 	if !match {
 		return
 	}
+
+	//The test gob data is generated using a separate program and there are differences in 3 locations compared to the encoded data.
+	//These differences are fixed by replacing the differences with exact matches before the comparison.
 	sorig := string(orig)
 	var origstring1 string
 	var old1 string
@@ -80,9 +83,6 @@ func testGOB(t *testing.T, file string, match bool) {
 
 	sorig_trim := string(result3)
 	snew := string(b)
-
-	//sorig_trim := strings.TrimSpace(string(result3))
-	//snew_trim := strings.TrimSpace(snew)
 
 	if len(sorig) < 2 {
 		t.Logf("Encoding %s failed: original pre-encoded length way too short. Shouldn't happen.", file)
