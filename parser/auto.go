@@ -82,17 +82,17 @@ func init() {
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
-		Name:     "GOB",
-		Aliases:  []string{"gob"},
+		Name:     "gob",
+		Aliases:  []string{},
 		Alloc:    func() interface{} { return &GOB{} },
-		Help:     "Parse GOB",
+		Help:     "Parse a GOB-encoded Skogul Container. GOB is a go-specific encoding, useful for inter-Skogul communication.",
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
-		Name:     "GOBmetric",
-		Aliases:  []string{"gobmetric"},
+		Name:     "gobmetric",
+		Aliases:  []string{},
 		Alloc:    func() interface{} { return &GOBMetric{} },
-		Help:     "Parses GOBMetric.",
+		Help:     "Parse a single GOB-encoded Skogul Metric",
 		AutoMake: true,
 	})
 }
