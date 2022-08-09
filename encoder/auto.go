@@ -55,8 +55,7 @@ func init() {
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
-		Name:     "GOBskogul",
-		Aliases:  []string{"gob"},
+		Name:     "gob",
 		Alloc:    func() interface{} { return &GOB{} },
 		Help:     "Encodes the GOB format.",
 		AutoMake: true,
