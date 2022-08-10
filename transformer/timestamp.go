@@ -49,19 +49,21 @@ func (config *DummyTimestamp) Transform(c *skogul.Container) error {
 
 // Timestamp is the configuration for extracing a timestamp from inside the data
 type Timestamp struct {
-	Source []string `doc:"The source field of the timestamp"`
-	Format string   `doc:"The format to use (default: RFC3339)"`
-	Fail   bool     `doc:"Propagate errors back to the caller. Useful if the timestamp is required for the container."`
-	once   sync.Once
+	Source       []string `doc:"The source field of the timestamp"`
+	Format       string   `doc:"The format to use (default: RFC3339)"`
+	Fail         bool     `doc:"Propagate errors back to the caller. Useful if the timestamp is required for the container."`
+	once         sync.Once
+	parsedFormat string
 }
 
 // Transform sets the timestamp of a set of metrics to the specified field
 func (config *Timestamp) Transform(c *skogul.Container) error {
 	config.once.Do(func() {
 		if config.Format == "" {
-			config.Format = time.RFC3339
+			config.parsedFormat = time.RFC3339
+		} else {
+			config.parsedFormat = parseTimestamp(config.Format)
 		}
-		config.Format = parseTimestamp(config.Format)
 	})
 
 	for i, metric := range c.Metrics {
@@ -80,11 +82,11 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 			}
 		}
 
-		time, err := time.Parse(config.Format, timestamp)
+		time, err := time.Parse(config.parsedFormat, timestamp)
 		if err != nil {
 			timestampLogger.WithFields(logrus.Fields{
 				"timestamp": timestamp,
-				"format":    config.Format,
+				"format":    config.parsedFormat,
 			}).Error("Failed to parse timestamp")
 			if config.Fail {
 				return err
