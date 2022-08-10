@@ -37,6 +37,21 @@ steps:
     event:
     - tag
 
+- name: publish-container-image
+  image: plugins/docker
+  settings:
+    username: telenornms
+    password:
+      from_secret: github_release_api_key
+    repo: ghcr.io/telenornms/skogul
+    tags: ${DRONE_TAG}
+    registry: ghcr.io
+  depends_on:
+    - test
+  when:
+    event:
+    - tag
+
 - name: prepare-centos-release
   image: rockylinux:8
   environment:
