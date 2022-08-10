@@ -52,7 +52,6 @@ type TCPLine struct {
 }
 
 /*
-
 Start the TCP line receiver and run forever.
 
 We close the write-side of the connection leaving it to the other side to

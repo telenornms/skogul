@@ -38,65 +38,65 @@ has to.
 
 Skogul Templates are shallow:
 
-        {
-                "template": {
-                        "metadata": {
-                                "foo": "bar",
-                                "geo": {
-                                        "country": "Norway"
-                                }
-                        }
-                },
-                "metrics": [
-                {
-                        "timestamp": "...",
-                        "metadata": {
-                                "name": "john",
-                                "geo": {
-                                        "city": "Oslo"
-                                }
-                        },
-                        "data": ...
-                },
-                {
-                        "timestamp": "...",
-                        "metadata": {
-                                "name": "fred",
-                                "foo": "BANANA"
-                        },
-                        "data": ...
-                }
-                ]
-        }
+	{
+	        "template": {
+	                "metadata": {
+	                        "foo": "bar",
+	                        "geo": {
+	                                "country": "Norway"
+	                        }
+	                }
+	        },
+	        "metrics": [
+	        {
+	                "timestamp": "...",
+	                "metadata": {
+	                        "name": "john",
+	                        "geo": {
+	                                "city": "Oslo"
+	                        }
+	                },
+	                "data": ...
+	        },
+	        {
+	                "timestamp": "...",
+	                "metadata": {
+	                        "name": "fred",
+	                        "foo": "BANANA"
+	                },
+	                "data": ...
+	        }
+	        ]
+	}
 
 Will result in:
 
-        {
-                "metrics": [
-                {
-                        "timestamp": "...",
-                        "metadata": {
-                                "name": "john",
-                                "foo", "bar",
-                                "geo": {
-                                        "city": "Oslo"
-                                }
-                        },
-                        "data": ...
-                },
-                {
-                        "timestamp": "...",
-                        "metadata": {
-                                "name": "fred",
-                                "foo": "BANANA",
-                                "geo": {
-                                        "country": "Norway"
-                                }
-                        },
-                        "data": ...
-                }
-                ]
-        }
+	{
+	        "metrics": [
+	        {
+	                "timestamp": "...",
+	                "metadata": {
+	                        "name": "john",
+	                        "foo", "bar",
+	                        "geo": {
+	                                "city": "Oslo"
+	                        }
+	                },
+	                "data": ...
+	        },
+	        {
+	                "timestamp": "...",
+	                "metadata": {
+	                        "name": "fred",
+	                        "foo": "BANANA",
+	                        "geo": {
+	                                "country": "Norway"
+	                        }
+	                },
+	                "data": ...
+	        }
+	        ]
+	}
 
 The template just checked if "geo" was present in metadata or not - it did not merge missing keys.
 

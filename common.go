@@ -40,7 +40,6 @@ This is needed because the math package doesn't handle 32-bit variants.
 
 The pattern is:
 
-
 seeeeeee e0000000 00000000 00000000
 01234567 01234567 01234567 01234567
 
@@ -52,11 +51,13 @@ Value of 0, exponent of 1's, mean infinity, sign will determine, well, the
 sign (e.g. Inf vs -Inf).
 
 Could also set this as:
+
 	uvneginf = 0b11111111100000000000000000000000
 	uvinf    = 0b01111111100000000000000000000000
 
 Hex equivalents are just weird, so I left it as binary after first figuring
 out the hex encoding...
+
 	uvneginf = 0xFF800000
 	uvinf = 0x7F800000
 
