@@ -97,7 +97,6 @@ Example use:
 
 faf := sender.ForwardAndFail{Next: skogul.Debug{}}
 fb := sender.Fallback{Next: []skogul.Sender{influx, faf}}
-
 */
 type ForwardAndFail struct {
 	Next skogul.SenderRef `doc:"Sender receiving the metrics"`

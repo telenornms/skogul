@@ -84,7 +84,6 @@ default group is "group". Meaning:
 - If metadata provides "group" key, this is used
 - Otherwise, if DefaultGroup is set in MnR sender, this is used
 - Otherwise, "group" is used.
-
 */
 type MnR struct {
 	Address      string `doc:"Address to send data to" example:"192.168.1.99:1234"`

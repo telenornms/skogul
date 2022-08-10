@@ -54,10 +54,10 @@ on them. This is a separate go routine, one per NumCPU.
 
 This means that:
 
-1. Batch sender will both do a "fan-in" from potentially multiple Send()
-   calls.
-2. ... and do a fan-out afterwards.
-3. Send() will only block if two channels are full.
+ 1. Batch sender will both do a "fan-in" from potentially multiple Send()
+    calls.
+ 2. ... and do a fan-out afterwards.
+ 3. Send() will only block if two channels are full.
 */
 type Batch struct {
 	Next      skogul.SenderRef       `doc:"Sender that will receive batched metrics"`

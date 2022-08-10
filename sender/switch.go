@@ -32,29 +32,29 @@ Switch sender sends metrics selectively based on metadata.
 
 Example config:
 
-{
-	"type": "switch",
-	"map": [
-		{
-			"conditions": [{
-				"router": "foo",
-				"interface": "ae12"
+	{
+		"type": "switch",
+		"map": [
+			{
+				"conditions": [{
+					"router": "foo",
+					"interface": "ae12"
+				},
+				{
+					"router": "bar",
+					"interface": "ae0"
+				}],
+				"next": "customerExportA"
 			},
 			{
-				"router": "bar",
-				"interface": "ae0"
-			}],
-			"next": "customerExportA"
-		},
-		{
-			"conditions": [{
-				"router": "foo",
-				"interface": "ae5"
-			}],
-			"next": "customerExportB"
-		}
-	],
-	"default": "log-no-customer"
+				"conditions": [{
+					"router": "foo",
+					"interface": "ae5"
+				}],
+				"next": "customerExportB"
+			}
+		],
+		"default": "log-no-customer"
 */
 type Switch struct {
 	Default *skogul.SenderRef   `doc:"Default sender to use if no other match is made. If not specified, metrics are discarded."`
