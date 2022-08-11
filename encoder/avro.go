@@ -26,6 +26,7 @@ package encoder
 import (
 	"fmt"
 	"os"
+	"sync"
 
 	"github.com/hamba/avro"
 	"github.com/telenornms/skogul"
@@ -33,13 +34,21 @@ import (
 
 type AVRO struct {
 	Schema string
+	once   sync.Once
 }
 
 func (x AVRO) Encode(c *skogul.Container) ([]byte, error) {
-	b, _ := os.ReadFile(x.Schema)
-	schema := avro.MustParse(string(b))
+	x.once.Do(func() {
+		b, err := os.ReadFile(x.Schema)
+		if err != nil {
+			fmt.Errorf("Schema read error")
+		} else {
+			schema := avro.MustParse(string(b))
+		}
+	})
 	return avro.Marshal(schema, c)
 }
+
 func (x AVRO) EncodeMetric(m *skogul.Metric) ([]byte, error) {
 	return nil, fmt.Errorf("Not supported")
 }
