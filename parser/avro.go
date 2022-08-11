@@ -25,22 +25,28 @@ package parser
 import (
 	"fmt"
 	"os"
-
+	"sync"
 	"github.com/hamba/avro"
 	"github.com/telenornms/skogul"
 )
 
 type AVRO struct {
 	Schema string
+	once sync.Once
 }
 
+
 func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
-	s, _ := os.ReadFile(x.Schema)
-	container := skogul.Container{}
+	x.once.Do(func() {
+	s, error:= os.ReadFile(x.Schema)
+	if error != nil {
+		err = fmt.Errorf("Schema read error")
+	} else {
 	schema := avro.MustParse(string(s))
-	err := avro.Unmarshal(schema, b, &container)
-	return &container, err
-}
+	}})
+	container := skogul.Container{}
+	return avro.Unmarshal(schema, b, &container)
+
 func (x AVRO) ParseMetric(m *skogul.Metric) ([]byte, error) {
 	return nil, fmt.Errorf("Not supported")
 }
