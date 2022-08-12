@@ -34,19 +34,25 @@ import (
 
 type AVRO struct {
 	Schema string
+	s avro.Schema
+	err error
 	once   sync.Once
 }
 
 func (x AVRO) Encode(c *skogul.Container) ([]byte, error) {
 	x.once.Do(func() {
 		b, err := os.ReadFile(x.Schema)
-		if err != nil {
+		x.err = err
+		if x.err != nil {
 			fmt.Errorf("Schema read error")
 		} else {
-			schema := avro.MustParse(string(b))
+			x.s := avro.MustParse(string(b))
 		}
 	})
-	return avro.Marshal(schema, c)
+	if x.err != nil {
+			return nil, x.err
+		}
+	return avro.Marshal(x.s, c)
 }
 
 func (x AVRO) EncodeMetric(m *skogul.Metric) ([]byte, error) {
