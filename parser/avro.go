@@ -32,6 +32,8 @@ import (
 
 type AVRO struct {
 	Schema string
+	s avro.Schema
+	err error
 	once sync.Once
 }
 
@@ -39,13 +41,18 @@ type AVRO struct {
 func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	x.once.Do(func() {
 	s, error:= os.ReadFile(x.Schema)
-	if error != nil {
+        x.err = err
+	if x.err != nil {
 		err = fmt.Errorf("Schema read error")
 	} else {
-	schema := avro.MustParse(string(s))
+	x.s := avro.MustParse(string(s))
 	}})
+	if x.err != nil {
+             return nil, x.err
+	}
 	container := skogul.Container{}
-	return avro.Unmarshal(schema, b, &container)
+	return avro.Unmarshal(x.s, b, &container)
+	}
 
 func (x AVRO) ParseMetric(m *skogul.Metric) ([]byte, error) {
 	return nil, fmt.Errorf("Not supported")
