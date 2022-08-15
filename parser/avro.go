@@ -40,12 +40,12 @@ type AVRO struct {
 
 func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	x.once.Do(func() {
-	s, error:= os.ReadFile(x.Schema)
+	s, err= os.ReadFile(x.Schema)
         x.err = err
 	if x.err != nil {
 		err = fmt.Errorf("Schema read error")
 	} else {
-	x.s := avro.MustParse(string(s))
+	x.s = avro.MustParse(string(s))
 	}})
 	if x.err != nil {
              return nil, x.err
