@@ -42,9 +42,7 @@ func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 	x.once.Do(func() {
 		s, err := os.ReadFile(x.Schema)
 		x.err = err
-		if x.err != nil {
-			fmt.Errorf("Schema read error")
-		} else {
+		if x.err == nil {
 			x.s = avro.MustParse(string(s))
 		}
 	})

@@ -44,8 +44,6 @@ func (x AVRO) Encode(c *skogul.Container) ([]byte, error) {
 		b, err := os.ReadFile(x.Schema)
 		x.err = err
 		if x.err != nil {
-			fmt.Errorf("Schema read error")
-		} else {
 			x.s = avro.MustParse(string(b))
 		}
 	})
