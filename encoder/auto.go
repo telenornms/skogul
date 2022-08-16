@@ -60,5 +60,10 @@ func init() {
 		Help:     "Encodes the GOB format.",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name: "avro",
+		Alloc: func() interface{} {return &AVRO}},
+		Help: "Encodes the avro format",
+		})
 
 }
