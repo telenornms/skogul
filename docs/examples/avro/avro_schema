@@ -13,7 +13,7 @@
 					"fields": [
                         {
 							"name": "Time",
-							"type": "long.timestamp-micros"
+							"type": "long.timestamp-millis"
 							
 						},
 						{
