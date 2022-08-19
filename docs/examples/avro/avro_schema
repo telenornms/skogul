@@ -1,39 +1,33 @@
 {
-	    "type": "record",
-	    "name": "simple",
-	    "namespace": "org.hamba.avro",
-	    "values": "string",
-	    "fields": [
-	    	{
-			"name": "Metrics", "type": {
-				"type": "array",
-				"items": {
-					"type": "record",
-					"name": "metrics",
-					"fields": [
-                        {
-							"name": "Time",
-							"type": "long.timestamp-millis"
-							
-						},
-						{
-							"name": "Metadata",
-							"type": {
-								"type": "map",
-								"values": "string"
-							}
-						},
-                        {
-							"name": "Data",
-							"type": {
-								"type": "map",
-								"values": ["string", "int", "long", "float", "double" ]
-							}
+	"type": "record",
+	"name": "simple",
+	"namespace": "org.hamba.avro",
+	"values": "string",
+	"fields": [
+		{
+		"name": "Metrics", "type": {
+			"type": "array",
+			"items": {
+				"type": "record",
+				"name": "metrics",
+				"fields": [
+					{
+						"name": "Metadata",
+						"type": {
+							"type": "map",
+							"values": ["string", "int", "long", "float", "double" ]
 						}
-						
-					]
-				}
+					},
+					{
+						"name": "Data",
+						"type": {
+							"type": "map",
+							"values": ["string", "int", "long", "float", "double" ]
+						}
+					}
+				]
 			}
 		}
-	]
+	}
+]
 }

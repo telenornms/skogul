@@ -43,8 +43,11 @@ func (x AVRO) Encode(c *skogul.Container) ([]byte, error) {
 	x.once.Do(func() {
 		b, err := os.ReadFile(x.Schema)
 		x.err = err
-		if x.err != nil {
+		if x.err == nil {
 			x.s = avro.MustParse(string(b))
+			if x.s == nil {
+				x.err = fmt.Errorf("parsed schema is nil")
+			}
 		}
 	})
 	if x.err != nil {
