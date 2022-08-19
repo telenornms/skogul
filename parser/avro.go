@@ -44,13 +44,19 @@ func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
 		x.err = err
 		if x.err == nil {
 			x.s = avro.MustParse(string(s))
+			if x.s == nil {
+				x.err = fmt.Errorf("parsed schema is nil")
+			}
 		}
 	})
 	if x.err != nil {
-		return nil, x.err
+		return nil, fmt.Errorf("unable to load schema: %w", x.err)
 	}
 	container := skogul.Container{}
 	err := avro.Unmarshal(x.s, b, &container)
+	if err != nil {
+		return nil, fmt.Errorf("unable to unmarshal avro into container %w", err)
+	}
 	return &container, err
 }
 
