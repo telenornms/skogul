@@ -24,10 +24,11 @@
 package encoder_test
 
 import (
-	"io/ioutil"
+	"encoding/json"
 	"strings"
 	"testing"
 
+	"github.com/hamba/avro"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/parser"
@@ -40,17 +41,20 @@ func TestAVROEncode(t *testing.T) {
 	testAVRO(t, by, true)
 }
 
-func testAVRO(t *testing.T, by byte[], match bool) {
+func testAVRO(t *testing.T, by []byte, match bool) {
 	t.Helper()
 	c, orig := parseAVRO(t, by)
-	b, err := encoder.AVRO{}.Encode(c)
+	e := encoder.AVRO{
+		Schema: "../docs/examples/avro/avro_schema",
+	}
+	b, err := e.Encode(c)
 
 	if err != nil {
-		t.Errorf("Encoding %s failed: %v", file, err)
+		t.Errorf("Encoding failed: %v", err)
 		return
 	}
 	if len(b) <= 0 {
-		t.Errorf("Encoding %s failed: zero length data", file)
+		t.Errorf("Encoding failed: zero length data")
 		return
 	}
 	if !match {
@@ -61,13 +65,13 @@ func testAVRO(t *testing.T, by byte[], match bool) {
 	snew := string(b)
 
 	if len(sorig) < 2 {
-		t.Logf("Encoding %s failed: original pre-encoded length way too short. Shouldn't happen.", file)
+		t.Logf("Encoding failed: original pre-encoded length way too short. Shouldn't happen.")
 		t.FailNow()
 	}
 
 	result := strings.Compare(sorig, snew)
 	if result != 0 {
-		t.Errorf("Encoding %s failed: original and newly encoded container doesn't match", file)
+		t.Errorf("Encoding failed: original and newly encoded container doesn't match")
 		t.Logf("orig:\n'%s'", sorig)
 		t.Logf("new:\n'%s'", snew)
 		t.Logf("result\n %d", result)
@@ -76,7 +80,7 @@ func testAVRO(t *testing.T, by byte[], match bool) {
 
 }
 
-func parseAVRO(t *testing.T, by byte[]) (*skogul.Container, []byte) {
+func parseAVRO(t *testing.T, by []byte) (*skogul.Container, []byte) {
 	t.Helper()
 
 	data_container := skogul.Container{}
