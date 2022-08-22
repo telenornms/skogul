@@ -26,7 +26,6 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/hamba/avro"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/parser"
@@ -34,72 +33,28 @@ import (
 
 func TestAVROParser(t *testing.T) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"0001-01-01T00:00:00Z\",\"metadata\":{\"key\":\"value\"}}]}")
-	p := parser.AVRO{
-		Schema: "../docs/examples/avro/avro.schema",
-	}
-	e := encoder.AVRO{
-		Schema: "../docs/examples/avro/avro.schema",
-	}
-
+	parseAVRO(t, by)
 }
-
 func parseAVRO(t *testing.T, by []byte) {
 	t.Helper()
-
-	//b, err := ioutil.ReadFile(file)
-	data_container := skogul.Container{}
-	json.Unmarshal(by, &data_container)
-	schema, err := avro.Parse(`{
-	    "type": "record",
-	    "name": "simple",
-	    "namespace": "org.hamba.avro",
-	    "values": "string",
-	    "fields": [
-	    	{
-			"name": "Metrics", "type": {
-				"type": "array",
-				"items": {
-					"type": "record",
-					"name": "metrics",
-					"fields": [
-						{
-							"name": "Metadata",
-							"type": {
-								"type": "map",
-								"values": ["string", "int", "long", "float", "double" ]
-							}
-						},
-						{
-							"name": "Data",
-							"type": {
-								"type": "map",
-								"values": ["string", "int", "long", "float", "double" ]
-							}
-						}
-					]
-				}
-			}
-		}
-	]
-}
-`)
-	if err != nil {
-		t.Logf("Failed to parse AVRO schema and test data preparation error: %v", err)
-		t.FailNow()
-
-	}
-
-	b, err := avro.Marshal(schema, data_container)
-
-	if err != nil {
-		t.Logf("Failed to read test data file: %v", err)
-		t.FailNow()
-
-	}
-
 	p := parser.AVRO{
 		Schema: "../docs/examples/avro/avro_schema",
 	}
+	e := encoder.AVRO{
+		Schema: "../docs/examples/avro/avro_schema",
+	}
+	var data_container *skogul.Container
+	err := json.Unmarshal(by, &data_container)
+	if err != nil {
+		t.Logf("Failed to parse AVRO schema and test data preparation error: %v", err)
+		t.FailNow()
+	}
+	b, err := e.Encode(data_container)
+	if err != nil {
+		t.Logf("Failed to read test data file: %v", err)
+		t.FailNow()
+	}
+
 	container, err := p.Parse(b)
 
 	if err != nil {
@@ -111,7 +66,9 @@ func parseAVRO(t *testing.T, by []byte) {
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
 		t.Logf("Expected parsed AVRO to return a container with at least 1 metric. Container: %v", container.Describe())
 		t.FailNow()
-
 	}
-
+	if container.Metrics[0].Metadata["key"] != "value" {
+		t.Logf("Expected parsed AVRO to return a metadata field value")
+		t.FailNow()
+	}
 }
