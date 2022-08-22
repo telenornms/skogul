@@ -28,13 +28,19 @@ import (
 
 	"github.com/hamba/avro"
 	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/parser"
 )
 
 func TestAVROParser(t *testing.T) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"0001-01-01T00:00:00Z\",\"metadata\":{\"key\":\"value\"}}]}")
+	p := parser.AVRO{
+		Schema: "../docs/examples/avro/avro.schema",
+	}
+	e := encoder.AVRO{
+		Schema: "../docs/examples/avro/avro.schema",
+	}
 
-	parseAVRO(t, by)
 }
 
 func parseAVRO(t *testing.T, by []byte) {
