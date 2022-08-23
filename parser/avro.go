@@ -38,7 +38,7 @@ type AVRO struct {
 	once   sync.Once
 }
 
-func (x AVRO) Parse(b []byte) (*skogul.Container, error) {
+func (x *AVRO) Parse(b []byte) (*skogul.Container, error) {
 	x.once.Do(func() {
 		s, err := os.ReadFile(x.Schema)
 		x.err = err
