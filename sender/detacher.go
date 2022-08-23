@@ -98,7 +98,6 @@ sure you understand why.
 
 There only settings provided is "Next" to provide the next sender, and
 "Workers", that defines the size of the worker pool.
-
 */
 type Fanout struct {
 	Next    skogul.SenderRef `doc:"Sender receiving the metrics"`

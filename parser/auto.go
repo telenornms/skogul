@@ -81,4 +81,18 @@ func init() {
 		Help:     "Parse structured data as specified in RFC5424",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "gob",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &GOB{} },
+		Help:     "Parse a GOB-encoded Skogul Container. GOB is a go-specific encoding, useful for inter-Skogul communication.",
+		AutoMake: true,
+	})
+	Auto.Add(skogul.Module{
+		Name:     "gobmetric",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &GOBMetric{} },
+		Help:     "Parse a single GOB-encoded Skogul Metric",
+		AutoMake: true,
+	})
 }
