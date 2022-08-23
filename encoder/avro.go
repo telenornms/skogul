@@ -39,7 +39,7 @@ type AVRO struct {
 	once   sync.Once
 }
 
-func (x AVRO) Encode(c *skogul.Container) ([]byte, error) {
+func (x *AVRO) Encode(c *skogul.Container) ([]byte, error) {
 	x.once.Do(func() {
 		b, err := os.ReadFile(x.Schema)
 		x.err = err
