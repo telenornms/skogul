@@ -1,3 +1,40 @@
+v0.17.0
+=======
+
+Release date: 2022-08-24
+
+In short:
+
+- AVRO and GOB encoding and parsing
+- SQL receiver
+- Encoder-support in file sender
+- Docker images!
+
+Docker images - first release, so let's see how well this works :D
+
+SQL receiver will periodically poll an SQL database for data, it is a bit
+immature, but it should be solid. You write a query, the query needs a
+field named 'time' (select foo as TIME ...) for the timestamp, and you also
+select which columns are metadata - the rest will be data.
+
+While GOB could theoretically improve performance, it's not possible in
+practice because GOB isn't schemaless, but embeds a schema in the initial
+packet. This means that GOB data depends on the receiver having the initial
+packet, and there is no convenient way to achieve that except
+re-initializing the encoder every time. The end result is that gob is no
+better or worse then JSON in regards to performance, but, unlike JSON, it
+can support every data type that Go supports, fully, without losing
+accuracy.
+
+The AVRO format is still missing support for timestamps, see #247, but
+that's being worked on.
+
+To use AVRO, you need to specify a schema. One is provided in
+docs/examples/avro, which is a very generic schema. You can write a more
+specific one as well, for your specific data, but so far there is no
+support for time stamps. To be able to actually USE Avro today, you need to
+add a transformer on the handler to add a timestamp.
+
 v0.16.0
 =======
 
