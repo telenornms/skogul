@@ -5,6 +5,7 @@
  * Author(s):
  *  - Roshini Narasimha Raghavan <roshiragavi@gmail.com>
  *  - Kristian Lyngstøl <kly@kly.no>
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -23,38 +24,43 @@
 package parser_test
 
 import (
-	"io/ioutil"
+	"encoding/json"
 	"testing"
 
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/encoder"
 	"github.com/telenornms/skogul/parser"
 )
 
-func TestGOBParser(t *testing.T) {
-	parseGOB(t, "./testdata/testdata.gob")
-}
-
-func parseGOB(t *testing.T, file string) {
-	t.Helper()
-
-	b, err := ioutil.ReadFile(file)
-
+func TestGOB(t *testing.T) {
+	by := []byte("{\"metrics\":[{\"timestamp\":\"0001-01-01T00:00:00Z\",\"metadata\":{\"key\":\"value\"}}]}")
+	p := parser.GOB{}
+	e := encoder.GOB{}
+	var data_container *skogul.Container
+	err := json.Unmarshal(by, &data_container)
+	if err != nil {
+		t.Logf("Failed to parse GOB schema and test data preparation error: %v", err)
+		t.FailNow()
+	}
+	b, err := e.Encode(data_container)
 	if err != nil {
 		t.Logf("Failed to read test data file: %v", err)
 		t.FailNow()
-
 	}
-	container, err := parser.GOB{}.Parse(b)
+
+	container, err := p.Parse(b)
 
 	if err != nil {
 		t.Logf("Failed to parse GOB data: %v", err)
 		t.FailNow()
-
 	}
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
-		t.Logf("Expected parsed GOB to return a container with at least 1 metric")
+		t.Logf("Expected parsed GOB to return a container with at least 1 metric. Container: %v", container.Describe())
 		t.FailNow()
-
 	}
-
+	if container.Metrics[0].Metadata["key"] != "value" {
+		t.Logf("Expected parsed GOB to return a metadata field value")
+		t.FailNow()
+	}
 }
