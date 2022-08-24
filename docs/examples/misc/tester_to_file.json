@@ -19,6 +19,7 @@
     "file": {
       "type": "file",
       "path": "/tmp/skogul-out",
+      "encoder": "json",
       "append": true
     }
   }

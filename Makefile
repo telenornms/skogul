@@ -100,7 +100,7 @@ fmtfix:
 
 exampletest:
 	@echo 📖 Verifying examples
-	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v json); do \
+	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v juniper); do \
 		./skogul -show -f $$a >/dev/null 2>&1 ; \
 		if [ $$? -ne 0 ]; then \
 			echo 🚩 Example $$a is not valid; \
