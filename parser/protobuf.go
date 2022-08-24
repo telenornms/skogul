@@ -132,8 +132,7 @@ func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) map[string]inte
 }
 
 /*
-	createData creates a string-interface map of skogul.Metric type Data
-
+createData creates a string-interface map of skogul.Metric type Data
 by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
 */
