@@ -33,7 +33,7 @@ import (
 var skogulLogger = logrus.New()
 
 // ConfigureLogger sets up the logger based on calling parameters
-func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
+func ConfigureLogger(requestedLoglevel string, logtimestamp bool, logFormat string) {
 	// Disable output from the root logger; all logging is delegated through hooks
 	logrus.SetLevel(logrus.TraceLevel)
 	logrus.SetOutput(ioutil.Discard)
@@ -41,9 +41,13 @@ func ConfigureLogger(requestedLoglevel string, logtimestamp bool) {
 	loglevel := GetLogLevelFromString(requestedLoglevel)
 	skogulLogger.SetLevel(loglevel)
 
-	skogulLogger.SetFormatter(&logrus.TextFormatter{
-		DisableTimestamp: !logtimestamp,
-	})
+	if strings.ToLower(logFormat) == "json" {
+		skogulLogger.SetFormatter(&logrus.JSONFormatter{})
+	} else {
+		skogulLogger.SetFormatter(&logrus.TextFormatter{
+			DisableTimestamp: !logtimestamp,
+		})
+	}
 
 	copyHook := LoggerCopyHook{
 		Writer: skogulLogger,
