@@ -117,7 +117,7 @@ func (meta *Metadata) Deprecated() error {
 }
 
 // flattenStructure copies a nested object/array to the root level
-func flattenStructure(nestedPath []string, separator string, metric *skogul.Metric) error {
+func flattenStructure(nestedPath []string, separator string, KeepOriginal bool, metric *skogul.Metric) error {
 	nestedObjectPath := nestedPath[0]
 
 	// Create a nested path unless configuration says not to
@@ -165,7 +165,12 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 		}
 
 		for key, val := range nestedObj {
-			metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+			if KeepOriginal {
+				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+			} else {
+				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+				delete(metric.Data, nestedObjectPath)
+			}
 		}
 	} else {
 		return err
@@ -183,6 +188,7 @@ type Data struct {
 	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
 	Remove           []string               `doc:"Remove these data fields."`
 	Ban              []string               `doc:"Fail if any of these data fields are present"`
+	KeepOriginal     bool
 }
 
 // Transform enforces the Metadata rules
@@ -200,7 +206,7 @@ func (data *Data) Transform(c *skogul.Container) error {
 			c.Metrics[mi].Data[key] = value
 		}
 		for _, nestedPath := range data.Flatten {
-			_ = flattenStructure(nestedPath, data.FlattenSeparator, c.Metrics[mi])
+			_ = flattenStructure(nestedPath, data.FlattenSeparator, data.KeepOriginal, c.Metrics[mi])
 		}
 		for _, value := range data.Require {
 			if c.Metrics[mi].Data == nil || c.Metrics[mi].Data[value] == nil {

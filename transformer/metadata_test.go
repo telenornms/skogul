@@ -427,7 +427,8 @@ func TestFlattenArray(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten: [][]string{{path}},
+		Flatten:      [][]string{{path}},
+		KeepOriginal: false,
 	}
 
 	err := data.Transform(&c)
@@ -459,7 +460,8 @@ func TestFlattenArrayOfMaps(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
 	data := transformer.Data{
-		Flatten: [][]string{{path}},
+		Flatten:      [][]string{{path}},
+		KeepOriginal: false,
 	}
 
 	err := data.Transform(&c)
