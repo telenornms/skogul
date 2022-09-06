@@ -36,7 +36,7 @@ import (
 var sqlLog = skogul.Logger("receiver", "sql")
 
 type SQL struct {
-	ConnStr  string            `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
+	ConnStr  string            `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@tcp(host:port)/database. For  MySQL, you need to add parseTime=true at the end to successfully parse a time column, e.g foo:bar@tcp(db2)/blatti?parseTime=true" example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
 	Query    string            `doc:"Query run for each metric. Any column named 'time' will be used as the metric time stamp."`
 	Metadata []string          `doc:"Array of which columns to treat as metadata, the rest will be data fields."`
 	Driver   string            `doc:"Database driver/system. Currently suported: mysql and postgres."`

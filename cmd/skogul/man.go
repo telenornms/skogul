@@ -89,16 +89,11 @@ To facilitate this, Skogul has three core components:
 1. Receivers acquire raw data
 2. Handlers turns raw data into meaningful content, using a parser and 0 or
    more transformers.
-3. Senders determine what happens to the data
+3. Senders determine what happens to the data, optionally with a
+   configurable encoder.
 
 A single instance of Skogul must have at least one receiver, but can have
 multiple. It also, typically, must have at least one handler and sender.
-
-Senders come in two distinct but interchangeable variants: Storage-oriented
-senders are used to send the data to some external resource, e.g., a time
-series database like InfluxDB. Utility-oriented senders are used to add
-logic, such as error handling or duplicating data to multiple storage
-systems.
 
 There are more examples in the the "examples/" directory.
 
@@ -140,6 +135,13 @@ The base configuration set is::
       },
       "other-parser...": ...
     },
+    "encoders": {
+      "ccc": {
+	"type": "type-of-encoder",
+	type-specific-options
+      },
+      "other encoder": { ... }
+    },
     "receivers": {
       "xxx": {
         "type": "type-of-receiver",
@@ -149,7 +151,7 @@ The base configuration set is::
     },
     "handlers": {
       "yyy": {
-        "parser": "json", // other options might come
+        "parser": "reference-to-parser",
         "transformers": [...],
         "sender": "reference-to-sender"
       }
@@ -173,8 +175,8 @@ The base configuration set is::
     }
   }
 
-In the above pseudo-config, "xxx", "yyy", "zzz", "rrr", and "qqq" are
-arbitrary names you chose that are how to reference that specific item
+In the above pseudo-config, "xxx", "ccc", "yyy", "zzz", "rrr", and "qqq"
+are arbitrary names you choose that are how to reference that specific item
 within the same configuration. The "type" field references what
 implementation to use - each implementation have different configuration
 options. You can specify as many senders, receivers and handlers as you
@@ -184,11 +186,10 @@ Upon start-up, all receivers are started.
 
 It is valid to have multiple receivers use the same handler. It is also
 valid for multiple senders to reference the same sender. It is up to the
-operator to avoid setting up feedback loops. In other words: If you tell
-a dupe-sender to send data back to itself, it will happily do so until
-it runs out of memory and dies.
+operator to avoid setting up loops.
 
-Numerous parsers, transformers, senders and receivers exist and they are
+Numerous parsers, transformers, senders, encoders and receivers exist and
+they are
 each documented below. Some of these can be referenced by implementation
 name without defining them in the configuration - this will create a
 "blank" variant of the module with default options. This is noted for each
@@ -199,6 +200,53 @@ will always take precedence over the implicitly created ones.
 
 The documentation for each module also lists all options. In general, you
 do not need to specify all options.
+
+AUTO MODULES
+============
+
+Several modules require no configuration, and some don't even provide any.
+To avoid having to define modules just for the sake of defining them, some
+modules, marked as auto modules, can be referenced by their implementation
+name directly without being explicitly defined.
+
+So::
+
+	{
+		"handlers": {
+			"foo": {
+				"parser": "json",
+				"transformers": [ "now" ],
+				"sender": "print"
+			}
+		},
+		"parsers": {
+			"json": {
+				"type": "json"
+			}
+		},
+		"transformers": {
+			"now": {
+				"type": "now"
+			}
+		},
+		"senders": {
+			"print": {
+				"type": "print"
+			}
+		}
+	}
+
+Is identical to::
+
+	{
+		"handlers": {
+			"foo": {
+				"parser": "json",
+				"transformers": [ "now" ],
+				"sender": "print"
+			}
+		}
+	}
 
 CONFIGURATION DATA TYPES
 ========================
@@ -554,176 +602,14 @@ output::
     },
     "handlers": {
       "myhandler": {
-        "parser": "json", 
-        "transformers": ["templater"], 
+        "parser": "skogul", 
         "sender": "debug"
       }
     }
   }
 
 Note that parser, transformers and senders used here can be used without
-being explicitly configured. This is only true for very simple modules and is
-noted in each module's documentation section.
-
-The same example can be written more verbosly::
-
-  { 
-    "receivers": { 
-      "api": { 
-        "type": "http", 
-        "address": ":8080", 
-        "handlers": { "/": "myhandler" }
-      }
-    },
-    "handlers": {
-      "myhandler": {
-        "parser": "json", 
-        "transformers": ["templater"], 
-        "sender": "debug"
-      }
-    },
-    "parsers": {
-      "json": {
-        "type": "json"
-      }
-    },
-    "transformers": {
-      "templater": {
-	"type": "templater"
-      }
-    },
-    "senders": {
-      "debug": {
-	"type": "debug",
-	"prefix": "foobar"
-      }
-    }
-  }
-
-This is the exact same as the first example, with one minor exception: We
-give the "debug" sender an optional prefix.
-
-You can have multiple variants of the same modules with different options,
-which obviously requires you to configure each with unique names::
-
-  { 
-    "receivers": { 
-      "api": { 
-        "type": "http", 
-        "address": ":8080", 
-        "handlers": { 
-		"/": "silent",
-		"/noise": "noisy" 
-	}
-      }
-    },
-    "handlers": {
-      "silent": {
-        "parser": "json", 
-        "transformers": ["templater"], 
-        "sender": "debug-clean"
-      },
-      "noisy": {
-        "parser": "json", 
-        "transformers": ["templater"], 
-        "sender": "debug-noisy"
-      }
-    },
-    "senders": {
-      "debug-clean": {
-	"type": "debug",
-      },
-      "debug-noisy": {
-	"type": "debug",
-	"prefix": "noise"
-      }
-    }
-  }
-
-The above sets up a HTTP receiver on port 8080 that will use the "silent"
-handler for data sent to  /, which in turn will use the "debug-clean"
-sender without a prefix, while data sent to /noise will use the "noisy"
-handler and "debug-noisy" sender with a prefixed message of "noise".
-
-The following specifies an insecure HTTP-based receiver that will wait up
-to 5 seconds or 1000 metrics before writing data to InfluxDB::
-
-  {
-    "receivers": {
-      "api": {
-        "type": "http",
-        "address": "[::1]:8080",
-        "handlers": {
-          "/": "jsontemplating"
-        }
-      }
-    },
-    "handlers": {
-      "jsontemplating": {
-        "parser": "json",
-        "transformers": [ "templater" ],
-        "sender": "batch"
-      }
-    },
-    "senders": {
-      "batch": {
-        "type": "batch",
-        "interval": "5s",
-        "threshold": 1000,
-        "next": "influx"
-      },
-      "influx": {
-        "type": "influx",
-        "URL": "http://[::1]:8086/write?db=testdb",
-        "measurement": "demo",
-        "Timeout": "10s"
-      }
-    }
-  }
-
-To add a metadata field to signal where data came from before passing it on
-to a central instance::
-
-  {
-    "receivers": {
-      "local": {
-        "type": "http",
-        "address": "[::1]:8080",
-        "handlers": {
-          "/": "jsontemplating"
-        }
-      }
-    },
-    "transformers": {
-      "origin": {
-        "type": "metadata",
-        "set": {
-          "dc": "bergen1",
-          "collector": "serverX"
-        }
-      }
-    },
-    "handlers": {
-      "jsontemplating": {
-        "parser": "json",
-        "transformers": [ "templater","metadata" ],
-        "sender": "batch"
-      }
-    },
-    "senders": {
-      "batch": {
-        "type": "batch",
-        "interval": "5s",
-        "threshold": 1000,
-        "next": "central"
-      },
-      "central": {
-        "type": "http",
-        "url": "https://bergen1X:hunter2@central-skogul.example.com/",
-        "Timeout": "10s"
-      }
-    }
-  }
+being explicitly configured. They are so called AUTO MODULES.
 
 More examples are provided in the examples/ directory of the Skogul source
 package.
@@ -747,7 +633,7 @@ COPYRIGHT
 This document is licensed under the same license as Skogul itself, which
 happens to be LGPLv2 (or later). See LICENSE for details.
 
-* Copyright (c) 2019-2020 - Telenor Norge AS
+* Copyright (c) 2019-2022 - Telenor Norge AS
 
 `)
 
@@ -806,7 +692,7 @@ func thingMan(thing config.Help) {
 		fmt.Printf("Aliases: %s\n\n", thing.Aliases)
 	}
 	if thing.AutoMake {
-		fmt.Printf("This module does not have to be explicitly defined in your configuration file. If you refer to it by one of it's implementation names, a default-variant of it will be used.\n\n")
+		fmt.Printf("Auto-module: Can be referenced by implementation name directly, without being defined in configuration.\n\n")
 	}
 	fieldDoc(thing.Fields)
 	if len(thing.CustomTypes) > 0 {
