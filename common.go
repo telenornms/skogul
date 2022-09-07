@@ -308,10 +308,10 @@ func (h *Handler) Send(c *Container) error {
 func (h *Handler) Handle(b []byte) error {
 	c, err := h.Parse(b)
 	if err != nil {
-		return Error{Source: "handler", Reason: "parsing bytestream failed", Next: err}
+		return err
 	}
 	if err = h.TransformAndSend(c); err != nil {
-		return Error{Source: "handler", Reason: "transforming and sending container failed", Next: err}
+		return err
 	}
 	return nil
 }
