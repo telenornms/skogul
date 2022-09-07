@@ -26,6 +26,7 @@ package parser
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -131,6 +132,47 @@ func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) (map[string]int
 }
 
 /*
+applyHaxx adjusts incoming telemetry packets to make them JSON-compatible, sometimes "mangling" the data.
+
+So far, it's mainly about fixing -Inf.
+*/
+func applyJuniperHaxx(messageOnly proto.Message) {
+	var foo float32
+	foo = -1000.0
+	optics, ok := messageOnly.(*pb.Optics)
+	if !ok {
+		return
+	}
+	for _, odiags := range optics.OpticsDiag {
+		if odiags.OpticsDiagStats == nil {
+			continue
+		}
+		if odiags.OpticsDiagStats.LaserOutputPowerHighAlarmThresholdDbm != nil {
+			if math.IsInf(*odiags.OpticsDiagStats.LaserOutputPowerHighAlarmThresholdDbm, 0) {
+				odiags.OpticsDiagStats.LaserOutputPowerHighAlarmThresholdDbm = nil
+			}
+		}
+		if odiags.OpticsDiagStats.LaserOutputPowerLowAlarmThresholdDbm != nil {
+			if math.IsInf(*odiags.OpticsDiagStats.LaserOutputPowerLowAlarmThresholdDbm, 0) {
+				odiags.OpticsDiagStats.LaserOutputPowerLowAlarmThresholdDbm = nil
+			}
+		}
+		for _, lane := range odiags.OpticsDiagStats.OpticsLaneDiagStats {
+			if lane.LaneLaserReceiverPowerDbm != nil {
+				if skogul.IsInf(*lane.LaneLaserReceiverPowerDbm, -1) {
+					lane.LaneLaserReceiverPowerDbm = &foo
+				}
+			}
+			if lane.LaneLaserOutputPowerDbm != nil {
+				if skogul.IsInf(*lane.LaneLaserOutputPowerDbm, -1) {
+					lane.LaneLaserOutputPowerDbm = &foo
+				}
+			}
+		}
+	}
+}
+
+/*
 createData creates a string-interface map of skogul.Metric type Data
 by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
@@ -181,6 +223,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]interfa
 			err = fmt.Errorf("failed to cast to message: %v", ext)
 			return nil, err
 		}
+		applyJuniperHaxx(messageOnly)
 
 		jsonMessage, err = json.Marshal(messageOnly)
 		if err != nil {
