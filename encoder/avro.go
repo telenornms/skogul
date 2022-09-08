@@ -83,3 +83,6 @@ func (x *AVRO) Encode(c *skogul.Container) ([]byte, error) {
 
 	return avro.Marshal(x.s, &tmpContainer)
 }
+func (x *AVRO) EncodeMetric(m *skogul.Metric) ([]byte, error) {
+	return nil, fmt.Errorf("not supported")
+}
