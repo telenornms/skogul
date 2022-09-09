@@ -71,4 +71,8 @@ func parseAVRO(t *testing.T, by []byte) {
 		t.Logf("Expected parsed AVRO to return a metadata field value")
 		t.FailNow()
 	}
+	if *container.Metrics[0].Time != *data_container.Metrics[0].Time {
+		t.Logf("Expected parsed AVRO to return a time")
+		t.FailNow()
+	}
 }
