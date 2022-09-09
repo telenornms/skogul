@@ -67,6 +67,9 @@ func (x *AVRO) Parse(b []byte) (*skogul.Container, error) {
 
 	tmpContainer := AvroContainer{}
 	err := avro.Unmarshal(x.s, b, &tmpContainer)
+	if err != nil {
+		return nil, fmt.Errorf("unable to unmarshal avro into container %w", err)
+	}
 
 	container := skogul.Container{}
 	container.Metrics = make([]*skogul.Metric, 0, len(tmpContainer.Metrics))
@@ -79,9 +82,6 @@ func (x *AVRO) Parse(b []byte) (*skogul.Container, error) {
 		container.Metrics = append(container.Metrics, &tmpMetric)
 	}
 
-	if err != nil {
-		return nil, fmt.Errorf("unable to unmarshal avro into container %w", err)
-	}
 	return &container, err
 }
 func (x *AVRO) ParseMetric(m *skogul.Metric) ([]byte, error) {
