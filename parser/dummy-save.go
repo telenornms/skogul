@@ -43,17 +43,18 @@ type DummyStore struct {
 // Parse accepts a byte slice of arbitrary data and returns nothing.
 func (x *DummyStore) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
-	container.Metrics = make([]*skogul.Metric,0,1)
+	container.Metrics = make([]*skogul.Metric, 0, 1)
 	m := skogul.Metric{}
 	m.Data = make(map[string]interface{})
 	m.Metadata = make(map[string]interface{})
-	container.Metrics[0] = &m
-	m.Time = &skogul.Now()
+	container.Metrics = append(container.Metrics, &m)
+	now := skogul.Now()
+	m.Time = &now
 	x.lock.Lock()
 	defer x.lock.Unlock()
 	var file *os.File
 	var err error
-	if finfo, err := os.Stat(x.File); !os.IsNotExist(err) && x.Append {
+	if finfo, lilerr := os.Stat(x.File); !os.IsNotExist(lilerr) && x.Append {
 		file, err = os.OpenFile(x.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
 	} else {
 		file, err = os.Create(x.File)
