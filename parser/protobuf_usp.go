@@ -87,9 +87,8 @@ func (p *P) createRecordMetadata(h *usp.Record) map[string]interface{} {
 	var d = make(map[string]interface{})
 
 	d["from_id"] = h.GetFromId()
-	d["payload_security"] = h.GetPayloadSecurity()
 	d["to_id"] = h.GetToId()
-	d["record_type"] = h.GetRecordType()
+	d["payload_security"] = h.GetPayloadSecurity()
 	d["sender_cert"] = h.GetSenderCert()
 	d["version"] = h.GetVersion()
 	d["mac"] = h.GetMacSignature()
