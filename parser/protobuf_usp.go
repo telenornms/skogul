@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"encoding/json"
 	"errors"
 	"sync"
 	"sync/atomic"
@@ -10,7 +11,7 @@ import (
 	"github.com/telenornms/skogul/gen/usp"
 )
 
-type ProtoBuffer struct {
+type P struct {
 	once  sync.Once
 	stats *statistics
 }
@@ -24,7 +25,7 @@ type statistics struct {
 	Parsed                uint64 // Successful parses
 }
 
-func (p *ProtoBuffer) initParserStatistics() {
+func (p *P) initParserStatistics() {
 	p.stats = &statistics{
 		Received:              0,
 		ParseErrors:           0,
@@ -35,28 +36,34 @@ func (p *ProtoBuffer) initParserStatistics() {
 	}
 }
 
-func (p *ProtoBuffer) Parse(b []byte) (*skogul.Container, error) {
+// Parse accepts a byte slice of protobuf data and marshals it into a container
+func (p *P) Parse(b []byte) (*skogul.Container, error) {
 	p.once.Do(p.initParserStatistics)
 
-	record := p.getUspRecord(b)
-	metric := skogul.Metric{
-		Time:     nil,
-		Metadata: p.createMetadata(record),
-		Data:     p.createData(record),
+	if b == nil {
+		atomic.AddUint64(&p.stats.NilData, 1)
 	}
 
-	if metric.Data == nil || metric.Metadata == nil {
+	record := p.getUspRecord(b)
+	recordMetric := skogul.Metric{
+		Time:     nil,
+		Metadata: p.createRecordMetadata(record),
+		Data:     p.createRecordData(record),
+	}
+
+	if recordMetric.Data == nil || recordMetric.Metadata == nil {
+		atomic.AddUint64(&p.stats.NilData, 1)
 		return nil, errors.New("Metric metadata or data was nil; aborting")
 	}
 
 	container := skogul.Container{}
 	container.Metrics = make([]*skogul.Metric, 1)
-	container.Metrics[0] = &metric
-
+	container.Metrics[0] = &recordMetric
 	return &container, nil
 }
 
-func (p *ProtoBuffer) getUspRecord(d []byte) *usp.Record {
+// Unmarshals []byte into a protoc generated struct and returns it
+func (p *P) getUspRecord(d []byte) *usp.Record {
 	unmarshaledMessage := &usp.Record{}
 	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
@@ -64,21 +71,52 @@ func (p *ProtoBuffer) getUspRecord(d []byte) *usp.Record {
 	return unmarshaledMessage
 }
 
-func (p *ProtoBuffer) createMetadata(h *usp.Record) map[string]interface{} {
-	var d = make(map[string]interface{})
-	/*
-		d["message_id"] = h.GetHeader().GetMsgId()
-		d["message_type"] = h.GetHeader().GetMsgType()
+// Unmarshals []byte consisting of the record payload into
+// a protoc generated struct and returns it
+func (p *P) getRecordMsgPayload(payload []byte) *usp.Msg {
+	msgPayload := &usp.Msg{}
 
-		d["request_type"] = h.GetBody().GetRequest().GetReqType()
-	*/
+	if err := proto.Unmarshal(payload, msgPayload); err != nil {
+		atomic.AddUint64(&p.stats.ParseErrors, 1)
+	}
+
+	return msgPayload
+}
+
+// Creates a map[string]interface{} of the metadata for skogul.Metric
+func (p *P) createRecordMetadata(h *usp.Record) map[string]interface{} {
+	var d = make(map[string]interface{})
+
+	d["from_id"] = h.GetFromId()
+	d["payload_security"] = h.GetPayloadSecurity()
+	d["to_id"] = h.GetToId()
+	d["record_type"] = h.GetRecordType()
+	d["sender_cert"] = h.GetSenderCert()
+	d["version"] = h.GetVersion()
+	d["mac"] = h.GetMacSignature()
 	return d
 }
 
-func (p *ProtoBuffer) createData(t *usp.Record) map[string]interface{} {
-	var d = make(map[string]interface{})
+// Unmarshals event parameters from the record payload into jsons
+func (p *P) unmarshalEventParameters(s string) map[string]interface{} {
+	b := []byte(s)
+	var d map[string]interface{}
 
-	// check what body is sent
-	//d["body"] = t.GetBody().GetMsgBody()
+	if err := json.Unmarshal(b, &d); err != nil {
+		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
+	}
 	return d
+}
+
+// Creates a map[string]interface{} of the record payload for skogul.Metric
+func (p *P) createRecordData(t *usp.Record) map[string]interface{} {
+	var jsonMap = make(map[string]interface{})
+	payload := p.getRecordMsgPayload(t.GetNoSessionContext().GetPayload())
+
+	jsonMap["event"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetObjPath()
+	jsonMap["event_type"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetEventName()
+	jsonMap["subscription_id"] = payload.GetBody().GetRequest().GetNotify().GetSubscriptionId()
+	jsonMap["event_parameters"] = p.unmarshalEventParameters(payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"])
+
+	return jsonMap
 }
