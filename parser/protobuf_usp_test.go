@@ -1,6 +1,7 @@
 package parser_test
 
 import (
+	"encoding/json"
 	"os"
 	"testing"
 
@@ -64,5 +65,29 @@ func TestGetRecordMsgPayload(t *testing.T) {
 	payload := unmarshaledMessage.GetNoSessionContext().GetPayload()
 	if err := proto.Unmarshal(payload, msgPayload); err != nil {
 		t.Error("Failed to unmarshall record payload")
+	}
+}
+
+func TestExtractJSON(t *testing.T) {
+	msgPayload := &usp.Msg{}
+
+	d := readFile("testdata/usp.bin", t)
+
+	unmarshaledMessage := &usp.Record{}
+	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
+		t.Error("Error while unmarshalling record", err)
+	}
+
+	payload := unmarshaledMessage.GetNoSessionContext().GetPayload()
+	if err := proto.Unmarshal(payload, msgPayload); err != nil {
+		t.Error("Failed to unmarshall record payload")
+	}
+
+	input := []byte(msgPayload.Body.GetRequest().GetNotify().GetEvent().GetParams()["Data"])
+
+	var k map[string]interface{}
+
+	if err := json.Unmarshal(input, &k); err != nil {
+		t.Error("Failed to unmarshall json")
 	}
 }
