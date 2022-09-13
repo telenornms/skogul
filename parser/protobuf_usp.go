@@ -132,6 +132,11 @@ func (p *P) createRecordData(t *usp.Record) (map[string]interface{}, error) {
 		return nil, err
 	}
 
+	// Check if request contains the Notify event. (It could be a different event by mistake)
+	if d, ok := payload.Body.GetRequest().GetReqType().(*usp.Request_Notify); !ok {
+		return nil, fmt.Errorf("Invalid event %s", d.Notify.GetEvent())
+	}
+
 	jsonData, err := p.extractJSON(payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"])
 
 	if err != nil {
