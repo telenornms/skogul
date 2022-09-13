@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"sync"
@@ -109,15 +110,38 @@ func (p *P) createRecordMetadata(h *usp.Record) map[string]interface{} {
 	return d
 }
 
+// Unmarshals event parameters to json
+func (p *P) extractJSON(s string) (map[string]interface{}, error) {
+	input := []byte(s)
+
+	var d map[string]interface{}
+
+	if err := json.Unmarshal(input, &d); err != nil {
+		return nil, err
+	}
+
+	return d, nil
+}
+
 // Creates a map[string]interface{} of the record payload for skogul.Metric
 func (p *P) createRecordData(t *usp.Record) (map[string]interface{}, error) {
 	var jsonMap = make(map[string]interface{})
 	payload, err := p.getRecordMsgPayload(t.GetNoSessionContext().GetPayload())
 
+	if err != nil {
+		return nil, err
+	}
+
+	jsonData, err := p.extractJSON(payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"])
+
+	if err != nil {
+		return nil, err
+	}
+
 	jsonMap["event"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetObjPath()
 	jsonMap["event_type"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetEventName()
 	jsonMap["subscription_id"] = payload.GetBody().GetRequest().GetNotify().GetSubscriptionId()
-	jsonMap["event_parameters"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"]
+	jsonMap["event_parameters"] = jsonData["Report"]
 
-	return jsonMap, err
+	return jsonMap, nil
 }
