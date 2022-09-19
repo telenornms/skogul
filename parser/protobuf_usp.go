@@ -48,13 +48,13 @@ func (p *P) Parse(b []byte) (*skogul.Container, error) {
 	record, err := p.getUspRecord(b)
 	if err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
-		return nil, fmt.Errorf("Failed to parse protocol buffer. Error: %w", err)
+		return nil, fmt.Errorf("failed to parse protocol buffer: %w", err)
 	}
 
 	data, err := p.createRecordData(record)
 	if err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
-		return nil, fmt.Errorf("Failed to create data. Error: %w", err)
+		return nil, fmt.Errorf("failed to create data: %w", err)
 	}
 
 	recordMetric := skogul.Metric{
@@ -65,7 +65,7 @@ func (p *P) Parse(b []byte) (*skogul.Container, error) {
 
 	if recordMetric.Data == nil || recordMetric.Metadata == nil {
 		atomic.AddUint64(&p.stats.NilData, 1)
-		return nil, errors.New("Metric metadata or data was nil; aborting")
+		return nil, errors.New("metric metadata or data was nil; aborting")
 	}
 
 	container := skogul.Container{}
@@ -79,7 +79,7 @@ func (p *P) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
 	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
-		return nil, fmt.Errorf("Failed to unmarshal protocol buffer. Error: %w", err)
+		return nil, fmt.Errorf("failed to unmarshal protocol buffer: %w", err)
 	}
 	return unmarshaledMessage, nil
 }
@@ -91,7 +91,7 @@ func (p *P) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 
 	if err := proto.Unmarshal(payload, msgPayload); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
-		return nil, fmt.Errorf("Failed to unmarshal payload. Error: %w", err)
+		return nil, fmt.Errorf("failed to unmarshal payload: %w", err)
 	}
 
 	return msgPayload, nil
@@ -134,7 +134,7 @@ func (p *P) createRecordData(t *usp.Record) (map[string]interface{}, error) {
 
 	// Check if request contains the Notify event. (It could be a different event by mistake)
 	if d, ok := payload.Body.GetRequest().GetReqType().(*usp.Request_Notify); !ok {
-		return nil, fmt.Errorf("Invalid event %s", d.Notify.GetEvent())
+		return nil, fmt.Errorf("invalid event %s", d.Notify.GetEvent())
 	}
 
 	jsonData, err := p.extractJSON(payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"])
