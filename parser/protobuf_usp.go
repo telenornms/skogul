@@ -51,16 +51,25 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 		return nil, fmt.Errorf("failed to parse protocol buffer: %w", err)
 	}
 
-	data, err := p.createRecordData(record)
+	recordData, err := p.createRecordData(record)
 	if err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to create data: %w", err)
 	}
 
+	metadata := p.createRecordMetadata(record, recordData)
+
+	json, err := p.extractJSON(recordData["event_data"].(string))
+
+	if err != nil {
+		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
+		return nil, fmt.Errorf("failed to unmarshal json: %w", err)
+	}
+
 	recordMetric := skogul.Metric{
 		Time:     nil,
-		Metadata: p.createRecordMetadata(record),
-		Data:     data,
+		Metadata: metadata,
+		Data:     json,
 	}
 
 	if recordMetric.Data == nil || recordMetric.Metadata == nil {
@@ -100,9 +109,12 @@ func (p *USP_Parser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 }
 
 // createRecordMetadata creates a map[string]interface{} of the metadata for skogul.Metric
-func (p *USP_Parser) createRecordMetadata(h *usp.Record) map[string]interface{} {
+func (p *USP_Parser) createRecordMetadata(h *usp.Record, xh map[string]interface{}) map[string]interface{} {
 	var d = make(map[string]interface{})
 
+	d["event"] = xh["event"]
+	d["event_type"] = xh["event_type"]
+	d["subscription_id"] = xh["subscription_id"]
 	d["from_id"] = h.GetFromId()
 	d["to_id"] = h.GetToId()
 	d["payload_security"] = h.GetPayloadSecurity()
@@ -139,16 +151,10 @@ func (p *USP_Parser) createRecordData(t *usp.Record) (map[string]interface{}, er
 		return nil, fmt.Errorf("invalid event %s", d.Notify.GetEvent())
 	}
 
-	jsonData, err := p.extractJSON(payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"])
-
-	if err != nil {
-		return nil, err
-	}
-
 	jsonMap["event"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetObjPath()
 	jsonMap["event_type"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetEventName()
 	jsonMap["subscription_id"] = payload.GetBody().GetRequest().GetNotify().GetSubscriptionId()
-	jsonMap["event_parameters"] = jsonData["Report"]
+	jsonMap["event_data"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"]
 
 	return jsonMap, nil
 }
