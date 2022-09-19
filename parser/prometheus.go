@@ -35,6 +35,7 @@ type prometheus struct{}
 func (data prometheus) Parse(b []byte) (*skogul.Container, error) {
 	reader := bytes.NewBuffer(b)
 	var parser expfmt.TextParser
+	// parse prometheus metrics 
 	mf, err := parser.TextToMetricFamilies(reader)
 	if err != nil {
 		return nil, err
