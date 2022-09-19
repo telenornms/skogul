@@ -74,7 +74,7 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 	return &container, err
 }
 
-// Unmarshals []byte into a protoc generated struct and returns it
+// getUspRecord Unmarshals []byte into a protoc generated struct and returns it
 func (p *USP_Parser) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
 	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
@@ -84,8 +84,10 @@ func (p *USP_Parser) getUspRecord(d []byte) (*usp.Record, error) {
 	return unmarshaledMessage, nil
 }
 
-// Unmarshals []byte consisting of the record payload into
-// a protoc generated struct and returns it
+/*
+getRecordMsgPayload unmarshals []byte consisting of the record payload into
+a protoc generated struct and returns it
+*/
 func (p *USP_Parser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 	msgPayload := &usp.Msg{}
 
@@ -97,7 +99,7 @@ func (p *USP_Parser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 	return msgPayload, nil
 }
 
-// Creates a map[string]interface{} of the metadata for skogul.Metric
+// createRecordMetadata creates a map[string]interface{} of the metadata for skogul.Metric
 func (p *USP_Parser) createRecordMetadata(h *usp.Record) map[string]interface{} {
 	var d = make(map[string]interface{})
 
@@ -110,7 +112,7 @@ func (p *USP_Parser) createRecordMetadata(h *usp.Record) map[string]interface{} 
 	return d
 }
 
-// Unmarshals event parameters to json
+// extractJSON unmarshals event parameters to json
 func (p *USP_Parser) extractJSON(s string) (map[string]interface{}, error) {
 	input := []byte(s)
 
@@ -123,7 +125,7 @@ func (p *USP_Parser) extractJSON(s string) (map[string]interface{}, error) {
 	return d, nil
 }
 
-// Creates a map[string]interface{} of the record payload for skogul.Metric
+// createRecordData creates a map[string]interface{} of the record payload for skogul.Metric
 func (p *USP_Parser) createRecordData(t *usp.Record) (map[string]interface{}, error) {
 	var jsonMap = make(map[string]interface{})
 	payload, err := p.getRecordMsgPayload(t.GetNoSessionContext().GetPayload())
