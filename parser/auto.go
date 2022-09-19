@@ -71,7 +71,7 @@ func init() {
 		Name:     "protobuf_usp",
 		Aliases:  []string{"usp"},
 		Alloc:    func() interface{} { return &USP_Parser{} },
-		Help:     "Parse Usp telemetry in the form of protocol buffers. Typicially combined with the UDP receiver.",
+		Help:     "Parse Usp message contained within Usp record in the form of protocol buffers.",
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
