@@ -28,10 +28,10 @@ func readFile(file string, t *testing.T) []byte {
 	return b[0:n]
 }
 
-func TestParseFile(t *testing.T) {
+func TestUSPParseFile(t *testing.T) {
 	d := readFile("testdata/usp.bin", t)
 
-	x := parser.P{}
+	x := parser.USP_Parser{}
 	container, err := x.Parse(d)
 
 	if err != nil {
@@ -43,7 +43,7 @@ func TestParseFile(t *testing.T) {
 	}
 }
 
-func TestGetUspRecord(t *testing.T) {
+func TestUSPGetUspRecord(t *testing.T) {
 	d := readFile("testdata/usp.bin", t)
 
 	unmarshaledMessage := &usp.Record{}
@@ -52,7 +52,7 @@ func TestGetUspRecord(t *testing.T) {
 	}
 }
 
-func TestGetRecordMsgPayload(t *testing.T) {
+func TestUSPGetRecordMsgPayload(t *testing.T) {
 	msgPayload := &usp.Msg{}
 
 	d := readFile("testdata/usp.bin", t)
@@ -68,7 +68,7 @@ func TestGetRecordMsgPayload(t *testing.T) {
 	}
 }
 
-func TestExtractJSON(t *testing.T) {
+func TestUSPExtractJSON(t *testing.T) {
 	msgPayload := &usp.Msg{}
 
 	d := readFile("testdata/usp.bin", t)
