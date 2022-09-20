@@ -1,3 +1,41 @@
+v0.18.0
+=======
+
+Release date: 2022-09-20
+
+Adds USP protocol buffer parser and AVRO encoder/parser time support, adds
+worksarounds for Juniper -Inf transceivers, adds dummy parser.
+
+USP
+---
+
+The USP parser will parse a protocol buffer-encoded USP message contained
+in a record, and use the payload as JSON. This might change if hardware
+surfaces that use USP differently.
+
+
+AVRO
+----
+
+The AVRO encoder/parser now handles time fields, using a minor workaround.
+Shouldn't require any changes for users.
+
+
+Juniper
+-------
+
+We now apply various hacks to fix #218, where juniper telemetry reports
+-Infinity, which is impossible to encode as JSON. Intead, we silently
+convert it to -40, horrifying any mathematicians in the room.
+
+
+Dummy parser
+------------
+
+The dummy parser is meant as a developer-tool where we can save un-parsed
+bytes to disk, thereby allowing us to acquire test data for development.
+Not useful in any production environment.
+
 v0.17.0
 =======
 
