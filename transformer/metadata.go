@@ -61,7 +61,7 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 		}
 		for _, value := range meta.Require {
 			if c.Metrics[mi].Metadata == nil || c.Metrics[mi].Metadata[value] == nil {
-				return skogul.Error{Source: "metadata transformer", Reason: fmt.Sprintf("missing required metadata field %s", value)}
+				return fmt.Errorf("missing required metadata field %s", value)
 			}
 		}
 		for _, extract := range meta.ExtractFromData {
@@ -102,7 +102,7 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 				continue
 			}
 			if c.Metrics[mi].Metadata[value] != nil {
-				return skogul.Error{Source: "metadata transformer", Reason: fmt.Sprintf("illegal/banned metadata field %s present", value)}
+				return fmt.Errorf("banned metadata field `%s' present", value)
 			}
 		}
 	}
@@ -141,7 +141,7 @@ func flattenStructure(nestedPath []string, separator string, metric *skogul.Metr
 
 			nestedObjArray, ok := obj[nestedPath[len(nestedPath)-1]].([]interface{})
 			if !ok {
-				return skogul.Error{Reason: "Failed cast"}
+				return fmt.Errorf("failed to cast to array")
 			}
 
 			nestedObj = make(map[string]interface{})
@@ -204,7 +204,7 @@ func (data *Data) Transform(c *skogul.Container) error {
 		}
 		for _, value := range data.Require {
 			if c.Metrics[mi].Data == nil || c.Metrics[mi].Data[value] == nil {
-				return skogul.Error{Source: "datadata transformer", Reason: fmt.Sprintf("missing required datadata field %s", value)}
+				return fmt.Errorf("missing required data field %s", value)
 			}
 		}
 		for _, value := range data.Remove {
@@ -218,7 +218,7 @@ func (data *Data) Transform(c *skogul.Container) error {
 				continue
 			}
 			if c.Metrics[mi].Data[value] != nil {
-				return skogul.Error{Source: "datadata transformer", Reason: fmt.Sprintf("illegal/banned datadata field %s present", value)}
+				return fmt.Errorf("banned data field `%s' present", value)
 			}
 		}
 	}

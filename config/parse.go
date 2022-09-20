@@ -109,16 +109,16 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 	}
 	t.Type = myt.Type
 	if transformer.Auto[t.Type] == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown transformer %v", t.Type)}
+		return fmt.Errorf("unknown transformer %v", t.Type)
 	}
 	if transformer.Auto[t.Type].Alloc == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad transformer %v", t.Type)}
+		return fmt.Errorf("bad transformer %v", t.Type)
 	}
 	var ok bool
 	t.Transformer, ok = (transformer.Auto[t.Type].Alloc()).(skogul.Transformer)
 	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &t.Transformer); err != nil {
-		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
+		return fmt.Errorf("transformer unmarshal: %w", err)
 	}
 
 	// Find superfluous config parameters
@@ -157,16 +157,16 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	}
 	r.Type = t.Type
 	if receiver.Auto[r.Type] == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown receiver %v", r.Type)}
+		return fmt.Errorf("unknown receiver %v", r.Type)
 	}
 	if receiver.Auto[r.Type].Alloc == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad receiver %v", r.Type)}
+		return fmt.Errorf("bad receiver %v", r.Type)
 	}
 	var ok bool
 	r.Receiver, ok = (receiver.Auto[r.Type].Alloc()).(skogul.Receiver)
 	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &r.Receiver); err != nil {
-		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
+		return fmt.Errorf("receiver unmarshalling: %w", err)
 	}
 
 	// Find superfluous config parameters
@@ -202,16 +202,16 @@ func (p *Parser) UnmarshalJSON(b []byte) error {
 	}
 	p.Type = t.Type
 	if parser.Auto[p.Type] == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown parser%v", p.Type)}
+		return fmt.Errorf("unknown parser%v", p.Type)
 	}
 	if parser.Auto[p.Type].Alloc == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad parser %v", p.Type)}
+		return fmt.Errorf("bad parser %v", p.Type)
 	}
 	var ok bool
 	p.Parser, ok = (parser.Auto[p.Type].Alloc()).(skogul.Parser)
 	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &p.Parser); err != nil {
-		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
+		return fmt.Errorf("parser unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
@@ -246,16 +246,16 @@ func (e *Encoder) UnmarshalJSON(b []byte) error {
 	}
 	e.Type = t.Type
 	if encoder.Auto[e.Type] == nil {
-		return skogul.Error{Source: "config encoder", Reason: fmt.Sprintf("Unknown encoder %v", e.Type)}
+		return fmt.Errorf("unknown encoder %v", e.Type)
 	}
 	if encoder.Auto[e.Type].Alloc == nil {
-		return skogul.Error{Source: "config encoder", Reason: fmt.Sprintf("Bad encoder %v", e.Type)}
+		return fmt.Errorf("bad encoder %v", e.Type)
 	}
 	var ok bool
 	e.Encoder, ok = (encoder.Auto[e.Type].Alloc()).(skogul.Encoder)
 	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &e.Encoder); err != nil {
-		return skogul.Error{Source: "config encoder", Reason: "Failed marshalling", Next: err}
+		return fmt.Errorf("encoder unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
@@ -290,16 +290,16 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	}
 	s.Type = t.Type
 	if sender.Auto[s.Type] == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unknown sender %v", s.Type)}
+		return fmt.Errorf("unknown sender %v", s.Type)
 	}
 	if sender.Auto[s.Type].Alloc == nil {
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Bad sender %v", s.Type)}
+		return fmt.Errorf("bad sender %v", s.Type)
 	}
 	var ok bool
 	s.Sender, ok = (sender.Auto[s.Type].Alloc()).(skogul.Sender)
 	skogul.Assert(ok)
 	if err := json.Unmarshal(b, &s.Sender); err != nil {
-		return skogul.Error{Source: "config parser", Reason: "Failed marshalling", Next: err}
+		return fmt.Errorf("sender unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
@@ -377,12 +377,12 @@ func Bytes(b []byte) (*Config, error) {
 		if ok {
 			printSyntaxError(b, int(jerr.Offset), jerr.Error())
 		}
-		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
+		return nil, fmt.Errorf("invalid JSON: %w", err)
 	}
 
 	c := Config{}
 	if err := json.Unmarshal(b, &c); err != nil {
-		return nil, skogul.Error{Source: "config parser", Reason: "Unable to parse JSON config", Next: err}
+		return nil, fmt.Errorf("valid JSON, but not valid Skogul configuration: %w", err)
 	}
 
 	return secondPass(&c)
@@ -392,7 +392,7 @@ func Bytes(b []byte) (*Config, error) {
 func Path(path string) (*Config, error) {
 	stat, err := os.Stat(path)
 	if err != nil {
-		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read configuration path", Next: err}
+		return nil, fmt.Errorf("failed to read configuration path: %w", err)
 	}
 
 	if stat.IsDir() {
@@ -407,7 +407,7 @@ func Path(path string) (*Config, error) {
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
-		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
+		return nil, fmt.Errorf("failed to read configuration file: %w", err)
 	}
 	return Bytes(dat)
 }
@@ -483,8 +483,7 @@ func resolveSenders(c *Config) error {
 			}
 		}
 		if c.Senders[s.Name] == nil {
-			confLog.WithField("sender", s.Name).Error("Unresolved sender reference")
-			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved sender reference %s", s.Name)}
+			return fmt.Errorf("sender `%s' referenced but not defined", s.Name)
 		}
 		skogul.Identity[c.Senders[s.Name].Sender] = s.Name
 		s.S = c.Senders[s.Name].Sender
@@ -514,8 +513,7 @@ func resolveParsers(c *Config) error {
 			}
 		}
 		if c.Parsers[p.Name] == nil {
-			confLog.WithField("parser", p.Name).Error("Unresolved parser reference")
-			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved parser reference %s", p.Name)}
+			return fmt.Errorf("parser `%s' referenced but not defined", p.Name)
 		}
 		skogul.Identity[c.Parsers[p.Name].Parser] = p.Name
 		p.P = c.Parsers[p.Name].Parser
@@ -545,8 +543,7 @@ func resolveEncoders(c *Config) error {
 			}
 		}
 		if c.Encoders[e.Name] == nil {
-			confLog.WithField("encoder", e.Name).Error("Unresolved encoder reference")
-			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved encoder reference %s", e.Name)}
+			return fmt.Errorf("encoder `%s' referenced but not defined", e.Name)
 		}
 		skogul.Identity[c.Encoders[e.Name].Encoder] = e.Name
 		e.E = c.Encoders[e.Name].Encoder
@@ -579,7 +576,7 @@ func resolveHandlers(c *Config) error {
 	}
 	for _, h := range skogul.HandlerMap {
 		if c.Handlers[h.Name] == nil {
-			return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("Unresolved handler reference %s", h.Name)}
+			return fmt.Errorf("handler `%s' referenced but not defined", h.Name)
 		}
 		h.H = &(c.Handlers[h.Name].Handler)
 	}
@@ -612,8 +609,7 @@ func resolveTransformers(c *Config) error {
 		if c.Transformers[t.Name] != nil {
 			logger.Debug("Using predefined transformer")
 		} else {
-			logger.Error("Unknown transformer")
-			return skogul.Error{Source: "config", Reason: fmt.Sprintf("Unknown transformer %s", t.Name)}
+			return fmt.Errorf("transformer `%s' referenced but not defined", t.Name)
 		}
 		skogul.Assert(c.Transformers[t.Name].Transformer != nil)
 		skogul.Identity[c.Transformers[t.Name].Transformer] = t.Name

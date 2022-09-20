@@ -138,13 +138,13 @@ func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 		case marshalMeta:
 			meta, err := json.Marshal(m.Metadata)
 			if err != nil {
-				return skogul.Error{Source: "db sender", Reason: "unable to marshal metadata into json", Next: err}
+				return fmt.Errorf("unable to marshal metadata into json: %w", err)
 			}
 			vals = append(vals, meta)
 		case marshalData:
 			data, err := json.Marshal(m.Data)
 			if err != nil {
-				return skogul.Error{Source: "db sender", Reason: "unable to marshal data into json", Next: err}
+				return fmt.Errorf("unable to marshal data into json: %w", err)
 			}
 			vals = append(vals, data)
 		}
@@ -199,16 +199,16 @@ func (sq *SQL) Send(c *skogul.Container) error {
 // since it is disallowed from connecting to a database and such.
 func (sq *SQL) Verify() error {
 	if sq.ConnStr == "" {
-		return skogul.Error{Source: "sql sender", Reason: "ConnStr is empty"}
+		return fmt.Errorf("ConnStr is empty")
 	}
 	if sq.Query == "" {
-		return skogul.Error{Source: "sql sender", Reason: "Query is empty"}
+		return fmt.Errorf("Query is empty")
 	}
 	if sq.Driver == "" {
-		return skogul.Error{Source: "sql sender", Reason: "Driver is empty"}
+		return fmt.Errorf("Driver is empty")
 	}
 	if sq.Driver != "mysql" && sq.Driver != "postgres" {
-		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)}
+		return fmt.Errorf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)
 	}
 	return nil
 }

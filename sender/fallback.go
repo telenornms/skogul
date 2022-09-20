@@ -24,6 +24,7 @@
 package sender
 
 import (
+	"fmt"
 	"github.com/telenornms/skogul"
 )
 
@@ -49,14 +50,18 @@ type Fallback struct {
 }
 
 // Send sends data down stream
+// XXX: Need to log failures?
 func (fb *Fallback) Send(c *skogul.Container) error {
+	var err error
+	var last string
 	for _, s := range fb.Next {
-		err := s.S.Send(c)
+		err = s.S.Send(c)
+		last = s.Name
 		if err == nil {
 			return nil
 		}
 	}
-	return skogul.Error{Reason: "No working senders left..."}
+	return fmt.Errorf("no valid senders left, last error from sender %s: %w", last, err)
 }
 
 // Dupe sender executes all provided senders in turn.

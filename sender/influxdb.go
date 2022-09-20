@@ -86,8 +86,7 @@ func checkVariable(category string, field string, idx string, value interface{})
 			"index":    idx,
 			"kind":     k,
 		}).Info("Invalid tag/field data type. Flatten/convert data first.")
-		e := skogul.Error{Source: "influxdb sender", Reason: fmt.Sprintf("bad tag/field")}
-		return e
+		return fmt.Errorf("bad tag/field")
 	}
 	return nil
 }
@@ -188,9 +187,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 	req, err := http.NewRequest("POST", idb.URL, &buffer)
 	if err != nil {
-		e := skogul.Error{Source: "influxdb sender", Reason: "unable to create request", Next: err}
-		influxLog.Trace(e)
-		return e
+		return fmt.Errorf("unable to create request: %w", err)
 	}
 	if len(idb.Token) > 0 {
 		req.Header.Add("authorization", fmt.Sprintf("Token %s", idb.Token.Expose()))
@@ -198,9 +195,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 	resp, err := idb.client.Do(req)
 	if err != nil {
-		e := skogul.Error{Source: "influxdb sender", Reason: "unable to POST data", Next: err}
-		influxLog.Trace(e)
-		return e
+		return fmt.Errorf("unable to POST data: %w", err)
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		var body []byte
@@ -235,10 +230,10 @@ func (idb *InfluxDB) toInfluxValue(value interface{}) string {
 // Verify does a shallow verification of settings
 func (idb *InfluxDB) Verify() error {
 	if idb.URL == "" {
-		return skogul.Error{Source: "influxdb sender", Reason: "no URL set"}
+		return skogul.MissingArgument("URL")
 	}
 	if idb.Measurement == "" && idb.MeasurementFromMetadata == "" {
-		return skogul.Error{Source: "influxdb sender", Reason: "no Measurement set or MeasurementFromMetadata"}
+		return skogul.MissingArgument("Measurement or MeasurementFromMetadata")
 	}
 	return nil
 }

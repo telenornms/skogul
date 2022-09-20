@@ -76,7 +76,7 @@ func (p *Parse) Transform(c *skogul.Container) error {
 			return err
 		}
 		if len(parsed.Metrics) == 0 {
-			return skogul.Error{Reason: "Parsed 0 metrics", Source: "transformer-parser"}
+			return fmt.Errorf("parsed 0 metrics? too easy?")
 		}
 
 		if !p.Keep {
@@ -114,7 +114,7 @@ func (p *Parse) Transform(c *skogul.Container) error {
 // configuration options which override each other (if set).
 func (p *Parse) Verify() error {
 	if p.Source == "" {
-		return skogul.Error{Reason: "Missing source field", Source: "transformer-parser"}
+		return fmt.Errorf("parse transformer missing required configuration field `Source'")
 	}
 	if (p.Destination != "" || p.DestinationMetadata != "") && p.Append {
 		parseLog.Warn("Destination or DestinationMetadata configured at the same time as Append - Append takes precedence, and Destination(Metadata) will be ignored.")

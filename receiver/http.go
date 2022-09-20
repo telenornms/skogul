@@ -114,7 +114,7 @@ func (auth *HTTPAuth) auth(r *http.Request) error {
 		return nil
 	}
 
-	return skogul.Error{Source: "http receiver", Reason: "No matching authentication method"}
+	return fmt.Errorf("no matching authentication method")
 }
 
 func answer(w http.ResponseWriter, r *http.Request, code int, inerr error) {
@@ -274,7 +274,7 @@ func (htt *HTTP) Start() error {
 		httpLog.WithField("address", htt.Address).Info("Starting INSECURE http receiver (no TLS)")
 		httpLog.Fatal(server.ListenAndServe())
 	}
-	return skogul.Error{Reason: "Shouldn't reach this"}
+	return fmt.Errorf("unreachable")
 }
 
 // verifyPeerCertificate verifies a client certificate presented to us
@@ -316,7 +316,7 @@ func (auth *HTTPAuth) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509
 	// we return an error to tell the verifying function that this certificate
 	// is not verified, and access is denied.
 	// This will present the user with a 'bad certificate' alert.
-	return skogul.Error{Reason: "Failed to verify x509 SAN DNS Name", Source: "http-receiver"}
+	return fmt.Errorf("failed to verify x509 SAN DNS Name")
 }
 
 // Verify verifies the configuration for the HTTP receiver
@@ -333,7 +333,7 @@ func (htt *HTTP) Verify() error {
 		httpLog.Warn("HTTP receiver configured with authentication but not with TLS! Auth will happen in the open!")
 	}
 	if (htt.Certfile != "" && htt.Keyfile == "") || (htt.Certfile == "" && htt.Keyfile != "") {
-		return skogul.Error{Source: "http-receiver", Reason: "Specify both Certfile and Keyfile if either is specified."}
+		return fmt.Errorf("Specify both Certfile AND Keyfile or none at all")
 	}
 	cas, err := loadClientCertificateCAs(htt.ClientCertificateCAs)
 	if err != nil {
@@ -347,7 +347,7 @@ func (htt *HTTP) Verify() error {
 			return fmt.Errorf("Password specified but no username.")
 		}
 		if auth.SANDNSName != "" && cas == nil {
-			return skogul.Error{Source: "http-receiver", Reason: "No Client Certificate CAs defined, but DNS Name for SAN specified. Specify ClientCertificateCAs configuration element."}
+			return fmt.Errorf("No Client Certificate CAs defined, but DNS Name for SAN specified. Specify ClientCertificateCAs configuration element.")
 		}
 	}
 

@@ -105,7 +105,7 @@ type ForwardAndFail struct {
 func (faf *ForwardAndFail) Send(c *skogul.Container) error {
 	err := faf.Next.S.Send(c)
 	if err == nil {
-		return skogul.Error{Reason: "Forced failure"}
+		return fmt.Errorf("forced failure")
 	}
 	return err
 }
@@ -124,12 +124,18 @@ func (ed *ErrDiverter) Send(c *skogul.Container) error {
 	if err == nil {
 		return nil
 	}
-	cerr, ok := err.(skogul.Error)
-	if !ok {
-		cerr = skogul.Error{Source: "errdiverter sender", Reason: "downstream error", Next: err}
-	}
-	container := cerr.Container()
+	container := skogul.Container{}
+	container.Metrics = make([]*skogul.Metric, 1)
+	m := skogul.Metric{}
+	m.Metadata = make(map[string]interface{})
+	m.Data = make(map[string]interface{})
+	now := skogul.Now()
+	m.Time = &now
+	m.Metadata["source"] = "error diverter"
+	m.Data["description"] = err.Error()
+	container.Metrics[0] = &m
 	newerr := ed.Err.H.TransformAndSend(&container)
+
 	if newerr != nil {
 		return newerr
 	}

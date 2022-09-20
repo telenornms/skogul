@@ -124,7 +124,7 @@ func (bat *Batch) add(c *skogul.Container) {
 		// It's allowed to exceed Threshold - but only once.
 		if newlen < nl {
 			newlen = nl
-			batchLog.Debug((skogul.Error{Source: "batch sender", Reason: fmt.Sprintf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)}))
+			batchLog.Debugf("Warning: slice too small for 50%% slack - need to resize/copy. Performance hit :D(Default alloc size is %d, need %d)", bat.allocSize, newlen)
 		}
 		x := make([]*skogul.Metric, newlen)
 		copy(x, bat.cont.Metrics)

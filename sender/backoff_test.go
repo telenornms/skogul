@@ -23,6 +23,7 @@
 package sender_test
 
 import (
+	"fmt"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/sender"
 	"testing"
@@ -37,7 +38,7 @@ type BackTester struct {
 func (bt *BackTester) Send(c *skogul.Container) error {
 	if bt.fails > 0 {
 		bt.fails--
-		return skogul.Error{Source: "back tester", Reason: "still failing"}
+		return fmt.Errorf("still failing")
 	}
 	return nil
 }

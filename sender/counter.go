@@ -139,10 +139,10 @@ func (co *Counter) getIt() {
 // Verify that the count sender works
 func (co *Counter) Verify() error {
 	if co.Stats.Name == "" {
-		return skogul.Error{Source: "counter sender", Reason: "no stats handler set"}
+		return skogul.MissingArgument("Stats")
 	}
 	if co.Next.Name == "" {
-		return skogul.Error{Source: "counter sender", Reason: "missing next sender"}
+		return skogul.MissingArgument("Next")
 	}
 	return nil
 }

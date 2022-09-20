@@ -135,7 +135,7 @@ func (s *Splunk) Send(c *skogul.Container) error {
 		s.init()
 	})
 	if !s.ok {
-		return skogul.Error{Reason: "Splunk sender not in OK state", Source: "splunk-sender"}
+		return fmt.Errorf("splunk sender not in OK state")
 	}
 
 	events, err := s.prepare(c)
@@ -147,7 +147,7 @@ func (s *Splunk) Send(c *skogul.Container) error {
 	for _, event := range events {
 		b, err := json.Marshal(&event)
 		if err != nil {
-			return skogul.Error{Reason: "Failed to marshal JSON data to Splunk", Source: "splunk-sender", Next: err}
+			return fmt.Errorf("failed to marshal JSON data to Splunk: %w", err)
 		}
 		buffer.Write(b)
 	}
@@ -161,10 +161,10 @@ func (s *Splunk) Send(c *skogul.Container) error {
 // Verify verifies that the sender config is valid
 func (s *Splunk) Verify() error {
 	if s.URL == "" {
-		return skogul.Error{Reason: "Splunk URL cannot be empty", Source: "splunk-sender"}
+		return fmt.Errorf("Splunk URL cannot be empty")
 	}
 	if s.Token == "" {
-		return skogul.Error{Reason: "Splunk Token cannot be empty", Source: "splunk-sender"}
+		return fmt.Errorf("Splunk Token cannot be empty")
 	}
 	if s.Index == "" {
 		splunkLog.Info("No Splunk index configured, Splunk will send events to its default index.")
@@ -177,10 +177,10 @@ func (s *Splunk) Verify() error {
 		// missing URL, disregard it, since we will override that
 		// during our own init().
 		if !strings.Contains(err.Error(), "no URL specified") {
-			return skogul.Error{Reason: "Failed to verify HTTP sender for Splunk", Source: "splunk-sender", Next: err}
+			return fmt.Errorf("failed to verify HTTP sender for Splunk: %w", err)
 		}
 		if s.HTTP.URL != "" && s.URL != "" && s.HTTP.URL != s.URL {
-			return skogul.Error{Reason: "Splunk URL defined in both HTTP.URL and URL fields with different values. Only specify it once.", Source: "splunk-sender"}
+			return fmt.Errorf("Splunk URL defined in both HTTP.URL and URL fields with different values. Only specify it once.")
 		}
 	}
 	return nil

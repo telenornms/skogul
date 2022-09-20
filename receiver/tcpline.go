@@ -25,7 +25,6 @@ package receiver
 
 import (
 	"bufio"
-	"fmt"
 	"net"
 
 	"github.com/telenornms/skogul"
@@ -60,11 +59,11 @@ finish up. We should probably add a read-timeout in the future.
 func (tl *TCPLine) Start() error {
 	tcpip, err := net.ResolveTCPAddr("tcp", tl.Address)
 	if err != nil {
-		return skogul.Error{Source: "tcp receiver", Reason: fmt.Sprintf("unable to resolve address %s", tl.Address), Next: err}
+		return err
 	}
 	ln, err := net.ListenTCP("tcp", tcpip)
 	if err != nil {
-		return skogul.Error{Source: "tcp receiver", Reason: fmt.Sprintf("unable to to listen on %s", tl.Address), Next: err}
+		return err
 	}
 	for {
 		conn, err := ln.AcceptTCP()

@@ -60,7 +60,7 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 		Metrics: make([]*skogul.Metric, 0),
 	}
 
-	errors := make([]skogul.Error, 0)
+	errors := make([]error, 0)
 
 	for i, l := range lines {
 		line := strings.TrimSpace(l)
@@ -70,9 +70,7 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 		}
 		influxLine := InfluxDBLineProtocol{}
 		if err := influxLine.ParseLine(line); err != nil {
-			// skogul.Error.Source shows index in list and actual line that failed parsing.
-			// Skip either? Both?
-			errors = append(errors, skogul.Error{Source: fmt.Sprintf("%d-'%s'", i, line), Reason: "Failed to parse influx line", Next: err})
+			errors = append(errors, fmt.Errorf("failed to parse influx line %d-'%s': %w", i, line, err))
 			influxLogger.WithError(err).Error("Failed to parse influx line protocol")
 			continue
 		}
@@ -81,10 +79,7 @@ func (influxdb InfluxDB) Parse(bytes []byte) (*skogul.Container, error) {
 	}
 
 	if len(errors) > 0 {
-		return &container, skogul.Error{
-			Source: "parser-influxdb",
-			Reason: fmt.Sprintf("One or more influxdb line protocol parse failures. Returning %d successful parses and skipping %d errors.", len(container.Metrics), len(errors)),
-		}
+		return &container, fmt.Errorf("One or more influxdb line protocol parse failures. Returning %d successful parses and skipping %d errors.", len(container.Metrics), len(errors))
 	}
 
 	return &container, nil
@@ -104,7 +99,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	}
 
 	if line.measurement == "" {
-		return skogul.Error{Source: "parser-influxdb", Reason: "Could not find a measurement name"}
+		return fmt.Errorf("could not find a measurement name")
 	}
 
 	// skip the comma trailing measurement name
@@ -116,7 +111,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	canContinue := scanner.Scan()
 
 	if !canContinue && scanner.Err() != nil {
-		return skogul.Error{Source: "parser-influxdb", Reason: "Scanner cannot continue after first scan, received an error", Next: scanner.Err()}
+		return fmt.Errorf("scanner cannot continue after first scan: %w", scanner.Err())
 	}
 
 	tags := scanner.Text()
@@ -124,7 +119,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	canContinue = scanner.Scan()
 
 	if !canContinue && scanner.Err() != nil {
-		return skogul.Error{Source: "parser-influxdb", Reason: "Scanner cannot continue after second scan, received an error", Next: scanner.Err()}
+		return fmt.Errorf("Scanner cannot continue after second scan: %w", scanner.Err())
 	}
 
 	fields := scanner.Text()
@@ -132,7 +127,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 	canContinue = scanner.Scan()
 
 	if !canContinue && scanner.Err() != nil {
-		return skogul.Error{Source: "parser-influxdb", Reason: "Scanner cannot continue after third scan, received an error", Next: scanner.Err()}
+		return fmt.Errorf("Scanner cannot continue after third scan: %w", scanner.Err())
 	}
 
 	// If we get a valid length here we have a value in the timestamp section
@@ -142,10 +137,7 @@ func (line *InfluxDBLineProtocol) ParseLine(s string) error {
 		timestamp := scanner.Text()
 		nsTime, err := strconv.ParseInt(timestamp, 0, 64)
 		if err != nil {
-			return skogul.Error{
-				Source: "parserinfluxdb",
-				Reason: "Failed to parse time for influxdb line",
-				Next:   scanner.Err()}
+			return fmt.Errorf("failed to parse time for influxdb line: %w", err)
 		}
 		line.timestamp = time.Unix(0, nsTime)
 	} else {

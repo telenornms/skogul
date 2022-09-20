@@ -91,8 +91,7 @@ func getCertPool(path string) (*x509.CertPool, error) {
 	cp := x509.NewCertPool()
 	fd, err := os.Open(path)
 	if err != nil {
-		httpLog.Printf("unable to open alternate root CA: %v", err)
-		return nil, skogul.Error{Source: "http sender", Reason: "unable to open custom root CA", Next: err}
+		return nil, fmt.Errorf("unable to open custom root CA: %w", err)
 	}
 	defer func() {
 		fd.Close()
@@ -100,13 +99,11 @@ func getCertPool(path string) (*x509.CertPool, error) {
 	bytes := make([]byte, 1024000)
 	n, err := fd.Read(bytes)
 	if err != nil {
-		httpLog.Printf("unable to read root ca: %v", err)
-		return nil, skogul.Error{Source: "http sender", Reason: "unable to read custom root CA", Next: err}
+		return nil, fmt.Errorf("unable to read custom root CA: %w", err)
 	}
 	ok := cp.AppendCertsFromPEM(bytes[:n])
 	if !ok {
-		httpLog.Printf("unable to append certificate to cert pool")
-		return nil, skogul.Error{Source: "http sender", Reason: "unable to append certificate to root CA pool"}
+		return nil, fmt.Errorf("unable to append certificate to root CA pool")
 	}
 	return cp, nil
 }
@@ -114,7 +111,6 @@ func getCertPool(path string) (*x509.CertPool, error) {
 func (ht *HTTP) loadClientCert() (*tls.Certificate, error) {
 	cert, err := tls.LoadX509KeyPair(ht.Certfile, ht.Keyfile)
 	if err != nil {
-		ht.logger.WithError(err).Error("Failed to load Client Certificate")
 		return nil, err
 	}
 	return &cert, nil
@@ -211,7 +207,7 @@ func (ht *HTTP) initStats() {
 // to re-implement them.
 func (ht *HTTP) sendBytes(b []byte) error {
 	if !ht.ok {
-		return skogul.Error{Reason: "HTTP sender not in OK state", Source: "http-sender"}
+		return fmt.Errorf("HTTP sender not in OK state")
 	}
 
 	var buffer bytes.Buffer
@@ -243,8 +239,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		httpResponseCodeStats := ht.stats.HttpResponseError[resp.StatusCode]
 		atomic.AddUint64(&httpResponseCodeStats, 1)
-		e := skogul.Error{Source: "http sender", Reason: fmt.Sprintf("non-OK status code from target: %d / %s", resp.StatusCode, resp.Status)}
-		return e
+		return fmt.Errorf("non-OK status code from target: %d / %s", resp.StatusCode, resp.Status)
 	}
 	atomic.AddUint64(&ht.stats.Sent, 1)
 	return nil
@@ -264,9 +259,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 	atomic.AddUint64(&ht.stats.Received, 1)
 	if !ht.ok {
 		atomic.AddUint64(&ht.stats.Errors, 1)
-		e := skogul.Error{Source: "http sender", Reason: "initialization failed"}
-		ht.logger.Print(e)
-		return e
+		return fmt.Errorf("initialization failed")
 	}
 
 	b, err := ht.Encoder.E.Encode(c)
@@ -284,14 +277,14 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 // Verify checks that configuration is sensible
 func (ht *HTTP) Verify() error {
 	if ht.URL == "" {
-		return skogul.Error{Source: "http sender", Reason: "no URL specified"}
+		return fmt.Errorf("no URL specified")
 	}
 	_, err := getCertPool(ht.RootCA)
 	if err != nil {
-		return skogul.Error{Source: "http sender", Reason: fmt.Sprintf("failed to read custom root CA (RootCA: %s)", ht.RootCA), Next: err}
+		return fmt.Errorf("failed to read custom root CA (RootCA: %s): %w", ht.RootCA, err)
 	}
 	if (ht.Certfile != "" && ht.Keyfile == "") || (ht.Certfile == "" && ht.Keyfile != "") {
-		return skogul.Error{Source: "http sender", Reason: "Specify both Certfile and Keyfile if either is specified."}
+		return fmt.Errorf("You must provide BOTH Certfile AND Keyfile, or neither.")
 	}
 	return nil
 }

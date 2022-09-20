@@ -52,7 +52,7 @@ type Help struct {
 // also fetches documentation for the struct fields, using reflection.
 func HelpModule(mmap skogul.ModuleMap, mod string) (Help, error) {
 	if mmap[mod] == nil {
-		return Help{}, skogul.Error{Source: "config parser", Reason: "No such module"}
+		return Help{}, fmt.Errorf("module %s: no such module", mod)
 	}
 	mh := Help{}
 	mh.Name = mod
