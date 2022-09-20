@@ -43,8 +43,7 @@ type Net struct {
 func (n *Net) Send(c *skogul.Container) error {
 	d, err := net.Dial(n.Network, n.Address)
 	if err != nil {
-		netLog.WithError(err).WithField("address", n.Address).Error("Failed to connect to target")
-		return skogul.Error{Source: "net sender", Reason: "unable to connect to network address", Next: err}
+		return fmt.Errorf("connection to %s failed: %w", n.Address, err)
 	}
 	// should almost certainly fix some method of retaining the
 	// connection in the future

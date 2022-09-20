@@ -47,8 +47,7 @@ type LineFile struct {
 func (lf *LineFile) read() error {
 	f, err := os.Open(lf.File)
 	if err != nil {
-		lfLog.WithError(err).WithField("file", lf.File).Error("Unable to open file")
-		return err
+		return fmt.Errorf("unable to open file %s: %w", lf.File, err)
 	}
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
@@ -58,8 +57,7 @@ func (lf *LineFile) read() error {
 		}
 	}
 	if err := scanner.Err(); err != nil {
-		lfLog.WithError(err).Error("Error reading file")
-		return skogul.Error{Reason: "Error reading file"}
+		return fmt.Errorf("unable to scan file: %w", err)
 	}
 	return nil
 }
@@ -67,7 +65,10 @@ func (lf *LineFile) read() error {
 // Start never returns.
 func (lf *LineFile) Start() error {
 	for {
-		lf.read()
+		err := lf.read()
+		if err != nil {
+			lfLog.WithError(err).Error("Unable to read file")
+		}
 		if lf.Delay.Duration != 0 {
 			time.Sleep(lf.Delay.Duration)
 		}

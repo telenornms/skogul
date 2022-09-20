@@ -249,6 +249,10 @@ func (c Container) Describe() string {
 	}
 	return fmt.Sprintf("Container(%d metrics, Metric[0]: %s", len(c.Metrics), m0)
 }
+
+// String returns a stringified variant of the container
+// XXX: Do not use? Use Describe instead. Should we just replace String
+// XXX: with Describe?
 func (c Container) String() string {
 	b, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {

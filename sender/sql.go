@@ -162,17 +162,14 @@ func (sq *SQL) Send(c *skogul.Container) error {
 		sq.init()
 	})
 	if sq.initErr != nil {
-		sqlLog.WithError(sq.initErr).Error("Database initialization failed")
-		return sq.initErr
+		return fmt.Errorf("database initialization failed: %w", sq.initErr)
 	}
 	txn, err := sq.db.Begin()
 	if err != nil {
-		sqlLog.WithError(err).Error("Acquiring database transaction failed")
-		return err
+		return fmt.Errorf("beginning database transaction failed: %w", err)
 	}
 	defer func() {
 		if err != nil {
-			sqlLog.WithError(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err}).Error("Failed to send")
 			txn.Rollback()
 		}
 	}()

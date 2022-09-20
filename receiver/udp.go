@@ -125,12 +125,10 @@ func (ud *UDP) Start() error {
 
 	udpip, err := net.ResolveUDPAddr("udp", ud.Address)
 	if err != nil {
-		udpLog.WithError(err).WithField("address", ud.Address).Error("Can't resolve address")
 		return err
 	}
 	ln, err := net.ListenUDP("udp", udpip)
 	if err != nil {
-		udpLog.WithError(err).WithField("address", ud.Address).Error("Can't listen on address")
 		return err
 	}
 	if ud.Buffer > 0 {

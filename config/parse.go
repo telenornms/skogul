@@ -407,7 +407,6 @@ func Path(path string) (*Config, error) {
 func File(f string) (*Config, error) {
 	dat, err := ioutil.ReadFile(f)
 	if err != nil {
-		confLog.WithError(err).Fatal("Failed to read config file")
 		return nil, skogul.Error{Source: "config parser", Reason: "Failed to read config file", Next: err}
 	}
 	return Bytes(dat)
@@ -446,8 +445,7 @@ func ReadFiles(p string) (*Config, error) {
 		b, err := ioutil.ReadFile(f)
 
 		if err != nil {
-			confLog.WithError(err).Error("Failed to read config file")
-			return nil, skogul.Error{Source: "config:parser", Reason: "Failed to read config file", Next: err}
+			return nil, err
 		}
 
 		err = json.Unmarshal(b, &config)
@@ -722,8 +720,7 @@ func verifyItem(family string, name string, item interface{}) error {
 	}
 	err := i.Verify()
 	if err != nil {
-		confLog.WithFields(logrus.Fields{"family": family, "name": name}).Error("Invalid item configuration")
-		return skogul.Error{Source: "config parser", Reason: fmt.Sprintf("%s %s isn't valid", family, name), Next: err}
+		return fmt.Errorf("configuration for %s `%s' doesn't verify: %w", family, name, err)
 	}
 	confLog.WithFields(logrus.Fields{"family": family, "name": name}).Trace("Verified OK")
 	return nil

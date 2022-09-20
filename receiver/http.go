@@ -209,8 +209,7 @@ func loadClientCertificateCAs(paths []string) (*x509.CertPool, error) {
 	for _, path := range paths {
 		data, err := ioutil.ReadFile(path)
 		if err != nil {
-			httpLog.WithError(err).WithField("path", path).Error("Failed to read certificate file")
-			return nil, err
+			return nil, fmt.Errorf("failed to read certificate file: %w", err)
 		}
 		pool.AppendCertsFromPEM(data)
 	}
@@ -244,7 +243,6 @@ func (htt *HTTP) Start() error {
 	if len(htt.ClientCertificateCAs) > 0 {
 		pool, err := loadClientCertificateCAs(htt.ClientCertificateCAs)
 		if err != nil {
-			httpLog.WithError(err).Error("Failed to load Client Certificates")
 			return err
 		}
 		server.TLSConfig = &tls.Config{
@@ -324,8 +322,7 @@ func (auth *HTTPAuth) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509
 // Verify verifies the configuration for the HTTP receiver
 func (htt *HTTP) Verify() error {
 	if htt.Handlers == nil || len(htt.Handlers) == 0 {
-		httpLog.Error("No handlers specified. Need at least one.")
-		return skogul.Error{Source: "http receiver", Reason: "No handlers specified. Need at least one."}
+		return fmt.Errorf("no handlers specified, need at least one")
 	}
 
 	if htt.Address == "" {
@@ -340,7 +337,7 @@ func (htt *HTTP) Verify() error {
 	}
 	cas, err := loadClientCertificateCAs(htt.ClientCertificateCAs)
 	if err != nil {
-		return skogul.Error{Source: "http-receiver", Reason: "Failed to load Client Certificates CAs", Next: err}
+		return fmt.Errorf("unable to load client certificate CAs: %w", err)
 	}
 	for _, auth := range htt.Auth {
 		if auth.Username != "" && auth.Password == "" {

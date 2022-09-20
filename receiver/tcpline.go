@@ -76,7 +76,7 @@ func (tl *TCPLine) Start() error {
 	}
 }
 
-func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
+func (tl *TCPLine) handleConnection(conn *net.TCPConn) {
 	scanner := bufio.NewScanner(conn)
 	conn.CloseWrite()
 	defer conn.CloseRead()
@@ -88,7 +88,7 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	}
 	if err := scanner.Err(); err != nil {
 		tcpLog.WithError(err).Error("Error reading line")
-		return skogul.Error{Reason: "Error reading file"}
+		return
 	}
-	return nil
+	return
 }

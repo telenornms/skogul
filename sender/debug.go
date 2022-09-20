@@ -54,8 +54,7 @@ func (db *Debug) Send(c *skogul.Container) error {
 	}
 	b, err := e.Encode(c)
 	if err != nil {
-		debugLog.WithError(err).Panic("Unable to encode for debug output")
-		return err
+		return fmt.Errorf("encoding failed: %w", err)
 	}
 	fmt.Printf("%s%s\n", db.Prefix, b)
 	return nil
