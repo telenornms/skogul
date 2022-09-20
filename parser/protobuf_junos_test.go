@@ -203,8 +203,8 @@ func TestParseJunosProtobufTelemetryStreamOpticsNegativeInf(t *testing.T) {
 
 	protobuf_parser := parser.ProtoBuf{}
 	_, err = protobuf_parser.Parse(bytes)
-	if err == nil {
-		t.Errorf("Expected parsing -Inf values to return an error, ref issue #194.")
+	if err != nil {
+		t.Errorf("Expected parsing -Inf values to NOT return an error, ref issue #194 which should now be ... resolved.")
 		return
 	}
 }

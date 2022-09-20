@@ -37,7 +37,7 @@ steps:
     event:
     - tag
 
-- name: publish-container-image
+- name: publish-container-image-version
   image: plugins/docker
   settings:
     username: telenornms
@@ -45,6 +45,21 @@ steps:
       from_secret: github_release_api_key
     repo: ghcr.io/telenornms/skogul
     tags: ${DRONE_TAG}
+    registry: ghcr.io
+  depends_on:
+    - test
+  when:
+    event:
+    - tag
+
+- name: publish-container-image-latest
+  image: plugins/docker
+  settings:
+    username: telenornms
+    password:
+      from_secret: github_release_api_key
+    repo: ghcr.io/telenornms/skogul
+    tags: latest
     registry: ghcr.io
   depends_on:
     - test

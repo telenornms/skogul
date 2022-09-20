@@ -25,8 +25,8 @@ package parser
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
+	"math"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -42,6 +42,7 @@ var pbLog = skogul.Logger("parser", "protobuf")
 
 // ProtoBuf parses a byte string-representation of a Container
 type ProtoBuf struct {
+	Debug bool `doc:"Logs the entire protobuf-packet if marshaling fails"`
 	once  sync.Once
 	stats *protobufStats
 }
@@ -53,7 +54,6 @@ type protobufStats struct {
 	FailedToCastToJuniperMessage uint64 // We assumed it was a Juniper TelemetryStream message, but it failed to cast to it.
 	FailedToJsonMarshal          uint64 // Failed to marshal protobuf data to json (this might fail if the data is not representable in JSON, such as the value '-Inf' as float64)
 	FailedToJsonUnmarshal        uint64 // Failed to marshal JSON data back into skogul.Metric
-	NilData                      uint64 // Parsed protobuf contains no data/metadata
 	Parsed                       uint64 // Successful parses
 }
 
@@ -65,7 +65,6 @@ func (x *ProtoBuf) initStats() {
 		FailedToCastToJuniperMessage: 0,
 		FailedToJsonMarshal:          0,
 		FailedToJsonUnmarshal:        0,
-		NilData:                      0,
 		Parsed:                       0,
 	}
 }
@@ -78,23 +77,25 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 
 	if err != nil {
 		atomic.AddUint64(&x.stats.ParseErrors, 1)
-		return nil, fmt.Errorf("Failed to parse protocol buffer. Error: %w", err)
+		return nil, fmt.Errorf("initial parsing failed: %w", err)
 	}
 
 	protobufTimestamp := time.Unix(int64(*parsedProtoBuf.Timestamp/1000), int64(*parsedProtoBuf.Timestamp%1000)*1000000)
 
-	metric := skogul.Metric{
-		Time:     &protobufTimestamp,
-		Metadata: x.createMetadata(parsedProtoBuf),
-		Data:     x.createData(parsedProtoBuf),
-	}
+	metric := skogul.Metric{}
 
-	// XXX: Is this truly invalid? Are there no scenarios where we got
-	// metric metadata but no data? E.g., a sort of ping? Need to
-	// review protobuf spec in detail to know.
-	if metric.Metadata == nil || metric.Data == nil {
-		atomic.AddUint64(&x.stats.NilData, 1)
-		return nil, errors.New("Metric metadata or data was nil; aborting")
+	metric.Time = &protobufTimestamp
+	metric.Metadata, err = x.createMetadata(parsedProtoBuf)
+	if err != nil {
+		systemID := parsedProtoBuf.GetSystemId()
+		sensorName := parsedProtoBuf.GetSensorName()
+		return nil, fmt.Errorf("unable to extract metadata from protobuf packet. SystemID: %v SensorName: %v: %w", systemID, sensorName, err)
+	}
+	metric.Data, err = x.createData(parsedProtoBuf)
+	if err != nil {
+		systemID := parsedProtoBuf.GetSystemId()
+		sensorName := parsedProtoBuf.GetSensorName()
+		return nil, fmt.Errorf("unable to extract data from protobuf packet. SystemID: %v SensorName: %v: %w", systemID, sensorName, err)
 	}
 
 	container := skogul.Container{}
@@ -121,14 +122,65 @@ func parseTelemetryStream(protobuffer []byte) (*pb.TelemetryStream, error) {
 
 // createMetadata extracts the fields containing metadata from the protocol buffer
 // and stores them in a string-interface map to be consumed at a later stage.
-func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) map[string]interface{} {
+func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) (map[string]interface{}, error) {
 	var metadata = make(map[string]interface{})
 
 	metadata["systemId"] = telemetry.GetSystemId()
 	metadata["sensorName"] = telemetry.GetSensorName()
 	metadata["componentId"] = telemetry.GetComponentId()
 	metadata["subComponentId"] = telemetry.GetSubComponentId()
-	return metadata
+	return metadata, nil
+}
+
+/*
+applyJuniperHaxx adjusts incoming telemetry packets to make them JSON-compatible, sometimes "mangling" the data.
+
+So far, it's mainly about fixing -Inf.
+*/
+func applyJuniperHaxx(messageOnly proto.Message) {
+	var foo float32
+	foo = -40.0
+	optics, ok := messageOnly.(*pb.Optics)
+	if !ok {
+		return
+	}
+	for _, odiags := range optics.OpticsDiag {
+		if odiags.OpticsDiagStats == nil {
+			continue
+		}
+		if odiags.OpticsDiagStats.LaserOutputPowerHighAlarmThresholdDbm != nil {
+			if math.IsInf(*odiags.OpticsDiagStats.LaserOutputPowerHighAlarmThresholdDbm, 0) {
+				odiags.OpticsDiagStats.LaserOutputPowerHighAlarmThresholdDbm = nil
+			}
+		}
+		if odiags.OpticsDiagStats.LaserOutputPowerLowAlarmThresholdDbm != nil {
+			if math.IsInf(*odiags.OpticsDiagStats.LaserOutputPowerLowAlarmThresholdDbm, 0) {
+				odiags.OpticsDiagStats.LaserOutputPowerLowAlarmThresholdDbm = nil
+			}
+		}
+		if odiags.OpticsDiagStats.LaserOutputPowerHighWarningThresholdDbm != nil {
+			if math.IsInf(*odiags.OpticsDiagStats.LaserOutputPowerHighWarningThresholdDbm, 0) {
+				odiags.OpticsDiagStats.LaserOutputPowerHighWarningThresholdDbm = nil
+			}
+		}
+		if odiags.OpticsDiagStats.LaserOutputPowerLowWarningThresholdDbm != nil {
+			if math.IsInf(*odiags.OpticsDiagStats.LaserOutputPowerLowWarningThresholdDbm, 0) {
+				odiags.OpticsDiagStats.LaserOutputPowerLowWarningThresholdDbm = nil
+			}
+		}
+		for _, lane := range odiags.OpticsDiagStats.OpticsLaneDiagStats {
+			if lane.LaneLaserReceiverPowerDbm != nil {
+				if skogul.IsInf(*lane.LaneLaserReceiverPowerDbm, -1) {
+					lane.LaneLaserReceiverPowerDbm = &foo
+				}
+			}
+			if lane.LaneLaserOutputPowerDbm != nil {
+				if skogul.IsInf(*lane.LaneLaserOutputPowerDbm, -1) {
+					lane.LaneLaserOutputPowerDbm = &foo
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -136,28 +188,17 @@ createData creates a string-interface map of skogul.Metric type Data
 by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
 */
-func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interface{} {
-	var err error
-	defer func() {
-		if err != nil {
-			systemID := telemetry.GetSystemId()
-			sensorName := telemetry.GetSensorName()
-			pbLog.WithError(err).Warnf("Failed to read protobuf telemetry data. SystemID: %v SensorName: %v", systemID, sensorName)
-		}
-	}()
-
+func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]interface{}, error) {
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
 		atomic.AddUint64(&x.stats.MissingExtension, 1)
-		err = errors.New("Failed to get Juniper protobuf extension, is this really a Juniper protobuf message?")
-		return nil
+		return nil, fmt.Errorf("failed to get Juniper protobuf extension: %w", err)
 	}
 
 	enterpriseExtension, ok := extension.(proto.Message)
 	if !ok {
 		atomic.AddUint64(&x.stats.FailedToCastToJuniperMessage, 1)
-		err = errors.New("Failed to cast to juniper message")
-		return nil
+		return nil, fmt.Errorf("failed to cast to juniper message")
 	}
 
 	registeredExtensions := proto.RegisteredExtensions(enterpriseExtension)
@@ -169,7 +210,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 
 	availableExtensions, err := proto.GetExtensions(enterpriseExtension, regextensions)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 
 	var jsonMessage []byte
@@ -180,28 +221,32 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 		}
 
 		if found {
-			err = errors.New("Multiple extensions found, don't know what to do!")
-			return nil
+			return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do!")
 		}
 
 		messageOnly, ok := ext.(proto.Message)
 		if !ok {
-			err = errors.New(fmt.Sprintf("Failed to cast to message: %v", ext))
-			return nil
+			return nil, fmt.Errorf("failed to cast to message: %v", ext)
 		}
+		applyJuniperHaxx(messageOnly)
 
 		jsonMessage, err = json.Marshal(messageOnly)
 		if err != nil {
+			if x.Debug {
+				pbLog.WithError(err).Infof("failed to marshal protobuf. data: %v", messageOnly)
+			}
 			atomic.AddUint64(&x.stats.FailedToJsonMarshal, 1)
-			return nil
+			return nil, err
 		}
 
 		found = true
 	}
 
 	if !found {
-		err = fmt.Errorf("found no valid extensions")
-		return nil
+		if x.Debug {
+			pbLog.Infof("no valid extensions found. availableExtensions: %v, registered: %v, extensions: %v, telemetry: %v, regextensions: %v", availableExtensions, registeredExtensions, extension, telemetry, regextensions)
+		}
+		return nil, fmt.Errorf("found no valid extensions")
 	}
 
 	var metrics map[string]interface{}
@@ -219,8 +264,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 			data = ""
 		}
 
-		err = fmt.Errorf("unmarshalling %d bytes of JSON data to string/interface map failed: %w. First %d bytes: %s", len(jsonMessage), err, target, data)
-		return nil
+		return nil, fmt.Errorf("unmarshalling %d bytes of JSON data to string/interface map failed: %w. First %d bytes: %s", len(jsonMessage), err, target, data)
 	}
 
 	delete(metrics, "timestamp")
@@ -229,7 +273,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) map[string]interfac
 	delete(metrics, "subComponentId")
 
 	atomic.AddUint64(&x.stats.Parsed, 1)
-	return metrics
+	return metrics, nil
 }
 
 // GetStats prepares a skogul metric with stats
@@ -252,7 +296,6 @@ func (x *ProtoBuf) GetStats() *skogul.Metric {
 	metric.Data["parse_errors"] = x.stats.ParseErrors
 	metric.Data["missing_protobuf_extension"] = x.stats.MissingExtension
 	metric.Data["failed_to_cast_to_juniper_message"] = x.stats.FailedToCastToJuniperMessage
-	metric.Data["nil_data"] = x.stats.NilData
 	metric.Data["failed_to_json_marshal"] = x.stats.FailedToJsonMarshal
 	metric.Data["failed_to_json_unmarshal"] = x.stats.FailedToJsonUnmarshal
 	metric.Data["parsed"] = x.stats.Parsed

@@ -66,8 +66,13 @@ func (e *Enrich) Hash(m skogul.Metric) keyType {
 func (e *Enrich) Update(c *skogul.Container) {
 	e.lock.Lock()
 	eLog.Infof("Updating enrichment database")
+	if e.store == nil {
+		e.store = make(map[keyType]*entry)
+	}
 	for _, m := range c.Metrics {
-		e.save(m)
+		h := e.Hash(*m)
+		en := entry(m.Data)
+		e.store[h] = &en
 	}
 	e.lock.Unlock()
 }
@@ -83,19 +88,6 @@ func (e *Enrich) find(m skogul.Metric) *entry {
 		eLog.Tracef("Enrichment miss")
 	}
 	return nm
-}
-
-// save updates the store, it assumes a write lock is held.
-func (e *Enrich) save(m *skogul.Metric) {
-	h := e.Hash(*m)
-	if e.store == nil {
-		e.store = make(map[keyType]*entry)
-	}
-	if e.store[h] != nil {
-		eLog.Warnf("Hash collision while adding item %v! Overwriting!", m)
-	}
-	en := entry(m.Data)
-	e.store[h] = &en
 }
 
 // Transform looks up a metric in the stored enrichment database (loading

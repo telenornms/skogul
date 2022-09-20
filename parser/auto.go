@@ -102,4 +102,11 @@ func init() {
 		Help:     "Parse a single GOB-encoded Skogul Metric",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:    "dummystore",
+		Aliases: []string{"dstore"},
+		Alloc:   func() interface{} { return &DummyStore{} },
+		Help:    "Stores the raw, unparsed data to disk, then returns an empty container. Used for capturing unsupported encodings for future development.",
+	})
+
 }

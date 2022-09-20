@@ -41,11 +41,17 @@ configuration in ``/etc/skogul/conf.d/default.json``.
 There's also a 64-bit Linux build there, which should work for most
 non-RPM-based installations. But we make no attempt to really maintain it.
 
+Quickstart - Docker
+-------------------
+
+A docker image is published to ghcr.io/telenornms/skogul as of version
+v0.17.0. As of version v0.18.0, it is also published as "latest".
+
 Quickstart - source
 -------------------
 
 Building from source is not difficult. First you need Golang. Get it at 
-https://golang.org/dl/ (I think you want go 1.13 or newer).
+https://golang.org/dl/ (I think you want go 1.19 or newer).
 
 Building ``skogul``, including cloning::
 
@@ -115,8 +121,8 @@ More discussion on architecture can be found in `docs/`.
 Modules
 -------
 
-Skogul is all based around modulesr. We started out with three modules, but
-today we have a total of five different module types. To see every modules,
+Skogul is all based around modules. We started out with three modules, but
+today we have a total of five different module types. To see every module,
 use ``skogul -help``, read the manual, or simply look in the receiver,
 sender, parser, encoder and transformer directory and read the ``auto.go``
 file there which lists all modules.

@@ -17,7 +17,7 @@ to receive the data and what to do with it.
 See also https://kly.no/posts/2020_01_13_Skogul_Junos_Telemetry_and_InfluxDB.html
 
 The biggest task is "flattening" the data, as the telemetry data is a
-nested tree structure. This examples provides a set of transformers that
+nested tree structure. This example provides a set of transformers that
 does this for you.
 
 Configuring Junos
