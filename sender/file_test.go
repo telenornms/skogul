@@ -73,7 +73,7 @@ func TestWriteToNonExistingFile(t *testing.T) {
 
 	// Now let's initialize a config which writes to that file which does not exist
 	sender := &sender.File{
-		Path:   path,
+		File:   path,
 		Append: false,
 	}
 
@@ -118,7 +118,7 @@ func TestAppendToExistingFile(t *testing.T) {
 	time.Sleep(time.Second)
 
 	sender := &sender.File{
-		Path:   path,
+		File:   path,
 		Append: true,
 	}
 

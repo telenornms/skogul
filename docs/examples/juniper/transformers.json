@@ -48,7 +48,7 @@
     },
     "optics_diag_3": {
       "type": "metadata",
-      "extractFromData": ["lane_number"]
+      "copyFromData": [{"source":"lane_number", "delete": true}]
     },
     "flatten": {
       "type": "data",
@@ -84,10 +84,10 @@
     },
     "extract_names": {
       "type": "metadata",
-      "extractFromData": [
-        "if_name",
-        "parent_ae_name",
-        "name"
+      "copyFromData": [
+        {"source": "if_name", "delete": true},
+        {"source": "parent_ae_name", "delete": true},
+        {"source": "name", "delete": true}
       ]
     },
     "extract_measurement_name": {

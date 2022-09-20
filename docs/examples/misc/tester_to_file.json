@@ -18,7 +18,7 @@
   "senders": {
     "file": {
       "type": "file",
-      "path": "/tmp/skogul-out",
+      "file": "/tmp/skogul-out",
       "encoder": "json",
       "append": true
     }

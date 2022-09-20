@@ -78,7 +78,7 @@ rpm: build/redhat-skogul.spec
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
-check: test fmtcheck vet exampletest
+check: test fmtcheck vet exampletest exampletestdep
 
 # Can't for the life of me remember where this came from and it's seemingly
 # gone now, so removed from check.
@@ -112,6 +112,23 @@ exampletest: skogul
 	@./skogul -show -d docs/examples/juniper >/dev/null 2>&1 ; \
 	if [ $$? -ne 0 ]; then \
 		echo 🚩 Junos-example is not valid; \
+		exit 1;\
+	fi;
+
+exampletestdep: exampletest
+	@echo 📖 Checking examples for deprecation warnings
+	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v juniper); do \
+		./skogul -show -f $$a 2>&1 | egrep -q "deprecation warning for" ; \
+		if [ $$? -eq 0 ]; then \
+			echo 🚩 Example $$a has deprecation warnings; \
+			failed=$$(( failed + 1 ));\
+		fi;\
+	done;\
+	exit $${failed}
+	@echo 📖 Checking junos example for deprecation warnings
+	@./skogul -show -d docs/examples/juniper 2>&1 | egrep -q 'deprecation warning for' ; \
+	if [ $$? -eq 0 ]; then \
+		echo 🚩 Junos-example has deprecation warnings; \
 		exit 1;\
 	fi;
 

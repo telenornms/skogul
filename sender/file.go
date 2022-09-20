@@ -41,7 +41,8 @@ File sender writes data to a file in various different fashions. Typical
 use will be debugging (write to disk) and writing to a FIFO for example.
 */
 type File struct {
-	Path    string            `doc:"Absolute path to file to write"`
+	Path    string            `doc:"Absolute path to file to write. DEPRECATED - replaced by option File (to keep options more consistent across modules)."`
+	File    string            `doc:"Absolute path to file to write to."`
 	Append  bool              `doc:"Whether to append to the file when starting. If false, will empty file before starting writes. Default: false"`
 	Encoder skogul.EncoderRef `doc:"Which encoder to use. Defaults to JSON."`
 	ok      bool
@@ -51,12 +52,18 @@ type File struct {
 }
 
 func (f *File) init() {
-	fileLog.WithField("path", f.Path).Debug("Initializing File sender")
 
 	var err error
 	var file *os.File
 
+	// To be removed
+	if f.File == "" {
+		f.File = f.Path
+	}
+	fileLog.WithField("path", f.File).Debug("Initializing File sender")
+
 	if f.Encoder.Name == "" {
+		fileLog.Info("No Encoder specified, using default: json")
 		f.Encoder.E = encoder.JSON{}
 	}
 	if f.Encoder.E == nil {
@@ -66,16 +73,16 @@ func (f *File) init() {
 		return
 	}
 	// Open file for append-only if it already exists and config says to append
-	if finfo, err := os.Stat(f.Path); !os.IsNotExist(err) && f.Append {
-		fileLog.WithField("path", f.Path).Trace("File exists, let's open it for writing")
-		file, err = os.OpenFile(f.Path, os.O_APPEND|os.O_WRONLY, finfo.Mode())
+	if finfo, err := os.Stat(f.File); !os.IsNotExist(err) && f.Append {
+		fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
+		file, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
 	} else {
 		// Otherwise, create the file (which will truncate it if it already exists)
-		fileLog.WithField("path", f.Path).Trace("Creating file since it doesn't exist or we don't want to append to it")
-		file, err = os.Create(f.Path)
+		fileLog.WithField("path", f.File).Trace("Creating file since it doesn't exist or we don't want to append to it")
+		file, err = os.Create(f.File)
 	}
 	if err != nil {
-		fileLog.WithField("path", f.Path).WithError(err).Errorf("Failed to open '%s'", f.Path)
+		fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to open '%s'", f.File)
 		f.ok = false
 		return
 	}
@@ -101,11 +108,11 @@ func (f *File) startChan() {
 		written, err := f.f.Write(append(b, newLineChar))
 		if err != nil {
 			f.ok = false
-			fileLog.WithField("path", f.Path).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+			fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
 		}
 		f.f.Sync()
 	}
-	fileLog.WithField("path", f.Path).Warning("File writer chan closed, not handling any more writes!")
+	fileLog.WithField("path", f.File).Warning("File writer chan closed, not handling any more writes!")
 }
 
 // Send receives a skogul container and writes it to file.
@@ -115,16 +122,13 @@ func (f *File) Send(c *skogul.Container) error {
 	})
 
 	if !f.ok {
-		e := skogul.Error{Reason: "File sender not in OK state", Source: "file sender"}
-		fileLog.WithError(e).Error("Failied to initialize file sender, or an error occurred in runtime")
-		return e
+		return fmt.Errorf("failed to initialize file sender, or an error occurred in runtime")
 	}
 
 	b, err := f.Encoder.E.Encode(c)
 
 	if err != nil {
-		fileLog.WithError(err).Error("Failed to marshal container data to json")
-		return err
+		return fmt.Errorf("file sender unable to encode: %w", err)
 	}
 
 	f.c <- b
@@ -132,15 +136,24 @@ func (f *File) Send(c *skogul.Container) error {
 	return nil
 }
 
+func (f *File) Deprecated() error {
+	if f.Path != "" {
+		return fmt.Errorf("config option Path is replaced by option File, Path will be removed in future versions.")
+	}
+	return nil
+}
+
 // Verify checks that the configuration options are set appropriately
 func (f *File) Verify() error {
 	if f.Encoder.E == nil {
-		return fmt.Errorf("No valid encoder specified")
+		return fmt.Errorf("no valid encoder specified")
 	}
-	if f.Path == "" {
-		err := skogul.Error{Reason: "Path name for file sender missing", Source: "file sender"}
-		fileLog.WithError(err).Error("Missing path to file for file sender")
-		return err
+	if f.File != "" && f.Path != "" {
+		return fmt.Errorf("both File and deprecated option Path specified for file sender - which to use?")
+	}
+
+	if f.File == "" && f.Path == "" {
+		return fmt.Errorf("no File name for file sender")
 	}
 	return nil
 }
