@@ -66,10 +66,10 @@ func (n *Net) Send(c *skogul.Container) error {
 
 func (n *Net) Verify() error {
 	if n.Address == "" {
-		return fmt.Errorf("Missing address for Net sender")
+		return skogul.MissingArgument("Address")
 	}
 	if n.Network == "" {
-		return fmt.Errorf("Missing network for Net sender")
+		return skogul.MissingArgument("Network")
 	}
 	return nil
 }

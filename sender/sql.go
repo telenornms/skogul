@@ -199,13 +199,13 @@ func (sq *SQL) Send(c *skogul.Container) error {
 // since it is disallowed from connecting to a database and such.
 func (sq *SQL) Verify() error {
 	if sq.ConnStr == "" {
-		return fmt.Errorf("ConnStr is empty")
+		return skogul.MissingArgument("ConnStr")
 	}
 	if sq.Query == "" {
-		return fmt.Errorf("Query is empty")
+		return skogul.MissingArgument("Query")
 	}
 	if sq.Driver == "" {
-		return fmt.Errorf("Driver is empty")
+		return skogul.MissingArgument("Driver")
 	}
 	if sq.Driver != "mysql" && sq.Driver != "postgres" {
 		return fmt.Errorf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)

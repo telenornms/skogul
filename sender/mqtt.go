@@ -74,6 +74,9 @@ func (handler *MQTT) Send(c *skogul.Container) error {
 
 // Verify makes sure required configuration options are set
 func (handler *MQTT) Verify() error {
+	if handler.Broker == "" {
+		return skogul.MissingArgument("Broker")
+	}
 	if handler.Topics == nil {
 		mqttLog.Warn("MQTT topic(s) not set, sending all messages to wildcard ('#')")
 	}

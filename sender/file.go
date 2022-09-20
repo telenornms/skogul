@@ -146,14 +146,14 @@ func (f *File) Deprecated() error {
 // Verify checks that the configuration options are set appropriately
 func (f *File) Verify() error {
 	if f.Encoder.E == nil {
-		return fmt.Errorf("no valid encoder specified")
+		return skogul.MissingArgument("Encoder")
 	}
 	if f.File != "" && f.Path != "" {
 		return fmt.Errorf("both File and deprecated option Path specified for file sender - which to use?")
 	}
 
 	if f.File == "" && f.Path == "" {
-		return fmt.Errorf("no File name for file sender")
+		return skogul.MissingArgument("File")
 	}
 	return nil
 }

@@ -277,7 +277,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 // Verify checks that configuration is sensible
 func (ht *HTTP) Verify() error {
 	if ht.URL == "" {
-		return fmt.Errorf("no URL specified")
+		return skogul.MissingArgument("URL")
 	}
 	_, err := getCertPool(ht.RootCA)
 	if err != nil {

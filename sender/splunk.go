@@ -161,10 +161,10 @@ func (s *Splunk) Send(c *skogul.Container) error {
 // Verify verifies that the sender config is valid
 func (s *Splunk) Verify() error {
 	if s.URL == "" {
-		return fmt.Errorf("Splunk URL cannot be empty")
+		return skogul.MissingArgument("URL")
 	}
 	if s.Token == "" {
-		return fmt.Errorf("Splunk Token cannot be empty")
+		return skogul.MissingArgument("Token")
 	}
 	if s.Index == "" {
 		splunkLog.Info("No Splunk index configured, Splunk will send events to its default index.")
@@ -176,7 +176,7 @@ func (s *Splunk) Verify() error {
 		// Verify HTTP handler, but if it contains an error about
 		// missing URL, disregard it, since we will override that
 		// during our own init().
-		if !strings.Contains(err.Error(), "no URL specified") {
+		if !strings.Contains(err.Error(), "missing required configuration option `URL'") {
 			return fmt.Errorf("failed to verify HTTP sender for Splunk: %w", err)
 		}
 		if s.HTTP.URL != "" && s.URL != "" && s.HTTP.URL != s.URL {
