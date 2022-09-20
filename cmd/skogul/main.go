@@ -58,6 +58,7 @@ var fconfigDir = flag.String("d", "", "Path to skogul configuration files. Depre
 var fhelp = flag.Bool("help", false, "Print more help")
 var fconf = flag.Bool("show", false, "Print the parsed JSON config instead of starting")
 var fman = flag.Bool("make-man", false, "Output RST documentation suited for rst2man")
+var flogformat = flag.String("logformat", "auto", "Log format (auto, json, default: auto)")
 var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e]rror, [w]arn, [i]nfo, [d]ebug, [t]race/[v]erbose)")
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 var fversion = flag.Bool("version", false, "Print skogul version")
@@ -119,7 +120,7 @@ func printVersion() {
 func main() {
 	flag.Parse()
 
-	skogul.ConfigureLogger(*floglevel, *ftimestamp)
+	skogul.ConfigureLogger(*floglevel, *ftimestamp, *flogformat)
 	log := skogul.Logger("cmd", "main")
 
 	if *fversion {
