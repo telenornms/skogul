@@ -322,7 +322,7 @@ func (auth *HTTPAuth) verifyPeerCertificate(_ [][]byte, verifiedChains [][]*x509
 // Verify verifies the configuration for the HTTP receiver
 func (htt *HTTP) Verify() error {
 	if htt.Handlers == nil || len(htt.Handlers) == 0 {
-		return fmt.Errorf("no handlers specified, need at least one")
+		return skogul.MissingArgument("Handlers")
 	}
 
 	if htt.Address == "" {

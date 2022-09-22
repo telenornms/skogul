@@ -91,10 +91,10 @@ func (replace *Replace) Transform(c *skogul.Container) error {
 // expression compiles
 func (replace *Replace) Verify() error {
 	if replace.Source == "" {
-		return fmt.Errorf("missing Source field in replace transformer")
+		return skogul.MissingArgument("Source")
 	}
 	if replace.Regex == "" {
-		return fmt.Errorf("missing Regex field in replace transformer")
+		return skogul.MissingArgument("Regex")
 	}
 	regex, err := regexp.Compile(replace.Regex)
 

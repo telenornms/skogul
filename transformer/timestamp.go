@@ -122,7 +122,7 @@ func parseTimestamp(format string) string {
 // Verify will make sure the required fields are set
 func (config *Timestamp) Verify() error {
 	if config.Source == nil {
-		return fmt.Errorf("missing required configuration field Source for timestamp transformer")
+		return skogul.MissingArgument("Source")
 	}
 	if config.Format == "" {
 		timestampLogger.Warn("Timestamp format not set, defaulting to RFC3339.")

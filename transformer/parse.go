@@ -114,7 +114,7 @@ func (p *Parse) Transform(c *skogul.Container) error {
 // configuration options which override each other (if set).
 func (p *Parse) Verify() error {
 	if p.Source == "" {
-		return fmt.Errorf("parse transformer missing required configuration field `Source'")
+		return skogul.MissingArgument("Source")
 	}
 	if (p.Destination != "" || p.DestinationMetadata != "") && p.Append {
 		parseLog.Warn("Destination or DestinationMetadata configured at the same time as Append - Append takes precedence, and Destination(Metadata) will be ignored.")
