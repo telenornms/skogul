@@ -224,7 +224,7 @@ func (sq *SQL) Verify() error {
 		return skogul.Error{Source: "sql sender", Reason: "Driver is empty"}
 	}
 	if sq.Driver != "mysql" && sq.Driver != "postgres" && sq.Driver != "sqlite3" {
-		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)}
+		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres' or 'sqlite3'", sq.Driver)}
 	}
 	return nil
 }
