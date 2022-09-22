@@ -32,6 +32,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/telenornms/skogul"
 )
 
@@ -107,7 +108,7 @@ func (sq *SQL) prep() {
 		} else {
 			sq.list = append(sq.list, dbElement{data, element})
 		}
-		if sq.Driver == "mysql" {
+		if sq.Driver == "mysql" || sq.Driver == "sqlite3" {
 			return "?"
 		}
 		nElement++
@@ -117,12 +118,24 @@ func (sq *SQL) prep() {
 }
 
 func (sq *SQL) init() {
+	if sq.Driver == "sqlite3" && !checkIfSQLiteDBExists(sq.ConnStr) {
+		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection. SQLite db might be missing", sq.ConnStr)
+		return
+	}
+
 	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
 	if sq.initErr != nil {
 		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection")
 		return
 	}
 	sq.prep()
+}
+
+func checkIfSQLiteDBExists(file string) bool {
+	if _, err := os.Stat(file); err != nil {
+		return false
+	}
+	return true
 }
 
 func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
@@ -210,7 +223,7 @@ func (sq *SQL) Verify() error {
 	if sq.Driver == "" {
 		return skogul.Error{Source: "sql sender", Reason: "Driver is empty"}
 	}
-	if sq.Driver != "mysql" && sq.Driver != "postgres" {
+	if sq.Driver != "mysql" && sq.Driver != "postgres" && sq.Driver != "sqlite3" {
 		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)}
 	}
 	return nil

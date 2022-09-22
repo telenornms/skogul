@@ -50,11 +50,12 @@ package sender_test
 
 import (
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/sender"
-	"testing"
-	"time"
 )
 
 var sqlBase = `
@@ -127,6 +128,8 @@ func TestSQL_auto(t *testing.T) {
 	sqlTestAuto(t, `"driver":"mysql","connstr":"foo:bar@/blatt", "query":"foo%20bar"`)
 	sqlTestAutoNeg(t, `"driver":"postgres"`)
 	sqlTestAuto(t, `"driver":"postgres","connstr":"something","query": "blatti"`)
+	sqlTestAutoNeg(t, `"driver":"sqlite3"`)
+	sqlTestAuto(t, `"driver":"sqlite3","connstr":"testdata/skogul.sqlite","query": "blatti"`)
 }
 
 func TestSQL_mysql_basic(t *testing.T) {
@@ -140,6 +143,46 @@ func TestSQL_postgres_basic(t *testing.T) {
 	s := sqlSender(t, `"driver":"postgres","connstr":"database=skogul sslmode=disable user=postgres password=finnlandshette","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
 	if s == nil {
 		t.Errorf("Failed to get sender")
+	}
+}
+
+func TestSQL_sqlite3_basic(t *testing.T) {
+	s := sqlSender(t, `"driver":"sqlite3","connstr":"testdata/skogul.sqlite","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
+	if s == nil {
+		t.Errorf("Failed to get sender")
+	}
+}
+
+func TestSQL_sqlite3_connect(t *testing.T) {
+	createTableQuery := sqlSender(t, `"driver":"sqlite3","connstr": "testdata/skogul.sqlite", "query": "create table test (timestamp varchar(100) not null, src varchar(100) not null, name varchar(100) not null, data varchar(100) not null);"`)
+
+	createTableContainer := getValidContainer()
+
+	if err := createTableQuery.Send(createTableContainer); err != nil {
+		t.Errorf("SQL.Send failed: %v", err)
+	}
+
+	if createTableQuery == nil {
+		t.Errorf("SQL.Send Could not create sqlite test table")
+	}
+
+	s := sqlSender(t, `"driver":"sqlite3","connstr": "testdata/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
+
+	container := getValidContainer()
+
+	if err := s.Send(container); err != nil {
+		t.Errorf("SQL.Send failed: %v", err)
+	}
+
+	container.Metrics[0].Data = make(map[string]interface{})
+	container.Metrics[0].Data["name"] = "Foo Bar"
+	if err := s.Send(container); err == nil {
+		t.Errorf("SQL.Send succeeded with missing data field")
+	}
+
+	container.Metrics[0].Time = nil
+	if err := s.Send(container); err == nil {
+		t.Errorf("SQL.Send succeeded with missing timestamp")
 	}
 }
 
