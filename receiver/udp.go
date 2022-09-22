@@ -88,7 +88,7 @@ func (ud *UDP) process() {
 
 // Verify verifies the configuration for the UDP receiver
 func (ud *UDP) Verify() error {
-	if ud.Handler == nil {
+	if ud.Handler.Name == "" {
 		return skogul.MissingArgument("Handler")
 	}
 	if ud.Address == "" {
