@@ -55,11 +55,11 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			}
 			dataDict[k] = i.GetUntyped()
 			// convert int64 timestamp to time.Time
-			Time = time.Unix(i.GetTimestampMs(), 0)
+			Time = time.UnixMilli(i.GetTimestampMs(), 0)
 			if !Time.IsZero() {
 				tmpMetric.Time = &Time
 			} else {
-				Time = time.Now()
+				Time = skogul.Now()
 				tmpMetric.Time = &Time
 			}
 			Metadatastr, _ := json.Marshal(metadataDict)
@@ -68,7 +68,8 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			if err != nil {
 				return nil, err
 			}
-			err1 := json.Unmarshal(dataDictstr, &tmpMetric.Data)
+			var tmp interface{}
+			err1 := json.Unmarshal(dataDictstr, &tmp)
 			if err1 != nil {
 				return nil, err
 			}
