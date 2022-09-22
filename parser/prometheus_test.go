@@ -75,5 +75,6 @@ func TestPrometheus(t *testing.T) {
 		t.Logf("Expected parsed prometheus to return a metadata field value")
 		t.FailNow()
 	}
-
+        t.Logf("time: %v", container.Metrics[0].Time)
+	t.Logf("container: %s", container.Describe())
 }
