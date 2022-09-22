@@ -516,11 +516,13 @@ func TestBytesWorksWithSuperfluousReceiverConfigProperties(t *testing.T) {
 	rawConfig := []byte(`{"receivers": {
 		"foo": {
 		  "type": "udp",
+		  "handler": "dummy",
 		  "address": "[::1]:5015",
 			"packetsize": 9000,
 		  "superfluousField": "this is not needed"
 		}
-	  }
+	  },
+	  "handlers": { "dummy": { "parser": "json", "sender": "null"} }
 	}`)
 
 	_, err := config.Bytes(rawConfig)
