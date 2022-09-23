@@ -28,7 +28,6 @@ import (
 	"fmt"
 	"math"
 	"runtime"
-	"time"
 
 	"github.com/sirupsen/logrus"
 )
@@ -180,19 +179,6 @@ type Stats interface {
 }
 
 /*
-Error is a typical skogul error. All Skogul functions should provide Source
-and Reason. I'm not entirely sure why, except that it allows chaining errors?
-
-If the Next field is provided, error messages will recurse to the bottom, thus
-propagating errors from the bottom and up.
-*/
-type Error struct {
-	Reason string
-	Source string
-	Next   error
-}
-
-/*
 SenderRef is a reference to a named sender. This is required to allow
 references to be resolved after all senders are loaded. Wherever a
 Sender is loaded from configuration, a SenderRef should be used in its
@@ -231,43 +217,13 @@ type EncoderRef struct {
 	Name string
 }
 
-// Error for use in regular error messages. Also outputs to log.Print().
-// Will also include e.Next, if present.
-func (e Error) Error() string {
-	src := "<nil>"
-	if e.Source != "" {
-		src = e.Source
-	}
-	tail := ""
-	if e.Next != nil {
-		tail = fmt.Sprint(": ", e.Next.Error())
-	}
-	return fmt.Sprintf("%s: %s%s", src, e.Reason, tail)
-}
-
-// Container returns a skogul container representing the error
-func (e Error) Container() Container {
-	c := Container{}
-	now := time.Now()
-	c.Metrics = make([]*Metric, 1)
-	m := Metric{}
-	m.Metadata = make(map[string]interface{})
-	m.Data = make(map[string]interface{})
-	m.Time = &now
-	m.Metadata["source"] = e.Source
-	m.Data["reason"] = e.Reason
-	m.Data["description"] = e.Error()
-	c.Metrics[0] = &m
-	return c
-}
-
 // SetParser sets the parser to use for a Handler
 func (h *Handler) SetParser(p Parser) error {
 	if h.parser != nil {
-		return Error{Source: "handler", Reason: "Handler already has a parser set"}
+		return fmt.Errorf("handler already has a parser set")
 	}
 	if p == nil {
-		return Error{Source: "handler", Reason: "Attempting to set parser to 'nil'"}
+		return fmt.Errorf("attempting to set parser to `nil'")
 	}
 	h.parser = p
 	return nil
@@ -277,7 +233,7 @@ func (h *Handler) SetParser(p Parser) error {
 func (h *Handler) Parse(b []byte) (*Container, error) {
 	c, err := h.parser.Parse(b)
 	if err != nil {
-		return nil, Error{Source: "handler", Reason: "parsing data failed", Next: err}
+		return nil, fmt.Errorf("parsing failed: %w", err)
 	}
 	return c, nil
 }
@@ -331,15 +287,15 @@ func (h *Handler) TransformAndSend(c *Container) error {
 // Verify the basic integrity of a handler. Quite shallow.
 func (h Handler) Verify() error {
 	if h.parser == nil {
-		return Error{Source: "handler verification", Reason: "Missing parser for Handler"}
+		return fmt.Errorf("missing parser")
 	}
 	for i, t := range h.Transformers {
 		if t == nil {
-			return Error{Source: "handler verification", Reason: fmt.Sprintf("nil-transformer %d for Handler", i)}
+			return fmt.Errorf("nil-transformer %d for handler", i)
 		}
 	}
 	if h.Sender == nil {
-		return Error{Source: "handler verification", Reason: "Missing Sender for Handler"}
+		return fmt.Errorf("missing sender")
 	}
 	return nil
 }
@@ -381,7 +337,7 @@ func ExtractNestedObject(object map[string]interface{}, keys []string) (map[stri
 	next, ok := object[keys[0]].(map[string]interface{})
 
 	if !ok {
-		return nil, Error{Reason: "Failed to cast nested object to map[string]interface{}"}
+		return nil, fmt.Errorf("failed to cast nested object to map[string]interface{}")
 	}
 
 	return ExtractNestedObject(next, keys[1:])
@@ -418,4 +374,10 @@ func IsInf(f float32, sign int) bool {
 	x := math.Float32bits(f)
 	return sign >= 0 && x == uvinf || sign <= 0 && x == uvneginf
 	//        return sign >= 0 && f > math.MaxFloat32 || sign <= 0 && f < -math.SmallestNonzeroFloat32
+}
+
+// MissingArgument provides a standard error message for use in Verify to
+// report missing arguments.
+func MissingArgument(field string) error {
+	return fmt.Errorf("missing required configuration option `%s'", field)
 }

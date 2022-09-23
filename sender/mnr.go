@@ -105,8 +105,7 @@ be negligible. But this should, of course, be fixed in the future.
 func (mnr *MnR) Send(c *skogul.Container) error {
 	d, err := net.Dial("tcp", mnr.Address)
 	if err != nil {
-		mnrLog.WithError(err).WithField("address", mnr.Address).Error("Failed to connect to MnR")
-		return skogul.Error{Source: "mnr sender", Reason: "unable to connect to MnR"}
+		return fmt.Errorf("unable to connect to MnR at %s: %w", mnr.Address, err)
 	}
 	for _, m := range c.Metrics {
 		var bufferpre bytes.Buffer

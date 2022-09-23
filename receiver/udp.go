@@ -24,12 +24,11 @@
 package receiver
 
 import (
+	"fmt"
 	"net"
 	"runtime"
 	"sync"
 	"sync/atomic"
-
-	"strconv"
 
 	"github.com/sirupsen/logrus"
 	"github.com/telenornms/skogul"
@@ -89,8 +88,14 @@ func (ud *UDP) process() {
 
 // Verify verifies the configuration for the UDP receiver
 func (ud *UDP) Verify() error {
+	if ud.Handler.Name == "" {
+		return skogul.MissingArgument("Handler")
+	}
+	if ud.Address == "" {
+		return skogul.MissingArgument("Address")
+	}
 	if ud.PacketSize < 0 || ud.PacketSize > UDP_MAX_READ_SIZE {
-		return skogul.Error{Source: "udp-receiver", Reason: "invalid udp packet size, maximum udp read size is between 0 and " + strconv.Itoa(UDP_MAX_READ_SIZE)}
+		return fmt.Errorf("invalid udp packet size, maximum udp read size is between 0 and %d", UDP_MAX_READ_SIZE)
 	}
 	return nil
 }
@@ -125,12 +130,10 @@ func (ud *UDP) Start() error {
 
 	udpip, err := net.ResolveUDPAddr("udp", ud.Address)
 	if err != nil {
-		udpLog.WithError(err).WithField("address", ud.Address).Error("Can't resolve address")
-		return err
+		return fmt.Errorf("unable to resolve address %s: %w", ud.Address, err)
 	}
 	ln, err := net.ListenUDP("udp", udpip)
 	if err != nil {
-		udpLog.WithError(err).WithField("address", ud.Address).Error("Can't listen on address")
 		return err
 	}
 	if ud.Buffer > 0 {

@@ -69,22 +69,6 @@ func TestHandler(t *testing.T) {
 	}
 }
 
-func TestContainer(t *testing.T) {
-	orig := skogul.Error{Source: "int", Reason: "fordi"}
-	c := orig.Container()
-	if c.Metrics[0] == nil {
-		t.Errorf("Failed to get a metric from errror.Container")
-	}
-	if c.Metrics[0].Metadata["source"] != "int" {
-		t.Errorf("error.Container() returned invalid source. Wanted %s got %s", "int", c.Metrics[0].Metadata["source"])
-	}
-	want := "fordi"
-	got := c.Metrics[0].Data["reason"]
-	if want != got {
-		t.Errorf("error.Container() returned unexpected data/reason. Wanted %s got %s", want, got)
-	}
-}
-
 func TestAssert(t *testing.T) {
 	skogul.Assert(true)
 	skogul.Assert(1+1 != 0)
@@ -99,7 +83,7 @@ func TestAssert_fail(t *testing.T) {
 		}
 	}()
 	skogul.Assert(false)
-	t.Errorf("skogul.Error(false,\"test\") called, but execution continued.")
+	t.Errorf("skogul.Assert(false) called, but execution continued.")
 }
 
 func TestAssert_fail_arg(t *testing.T) {
@@ -109,7 +93,7 @@ func TestAssert_fail_arg(t *testing.T) {
 		}
 	}()
 	skogul.Assert(false, "something")
-	t.Errorf("skogul.Error(false,\"test\") called, but execution continued.")
+	t.Errorf("skogul.Assert(false,\"test\") called, but execution continued.")
 }
 
 func TestParseInvalidContainerSuccess(t *testing.T) {

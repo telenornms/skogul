@@ -26,6 +26,7 @@ package parser
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"strconv"
 	"strings"
 	"sync"
@@ -99,8 +100,7 @@ func (mnr *MNR) mnrParseData(data []byte) ([]*skogul.Metric, error) {
 		metrics = append(metrics, metric)
 	}
 	if len(metrics) == 0 {
-		mnrLog.WithField("lines", len(lines)).Warnf("MNR parser failed to parse any of the %d lines", len(lines))
-		return nil, skogul.Error{Reason: "Failed to parse MNR lines", Source: "mnr-parser"}
+		return nil, fmt.Errorf("MNR parser failed to parse any of the %d lines", len(lines))
 	}
 	return metrics, nil
 }
@@ -117,7 +117,7 @@ func (mnr *MNR) mnrParseLine(data []byte) (*skogul.Metric, error) {
 	// First scan should give timestamp or changed symbol
 	ok := scanner.Scan()
 	if !ok {
-		return nil, skogul.Error{Reason: "Failed to extract first value from a MnR line"}
+		return nil, fmt.Errorf("failed to extract first value from a MnR line")
 	}
 	timestamp := scanner.Text()
 
@@ -136,14 +136,14 @@ func (mnr *MNR) mnrParseLine(data []byte) (*skogul.Metric, error) {
 		// The next value should be a timestamp
 		ok := scanner.Scan()
 		if !ok {
-			return nil, skogul.Error{Reason: "Failed to extract timestamp as second value from a MnR line"}
+			return nil, fmt.Errorf("failed to extract timestamp as second value from a MnR line")
 		}
 		timestamp = scanner.Text()
 	}
 
 	tint, err := strconv.ParseInt(timestamp, 10, 64)
 	if err != nil {
-		return nil, skogul.Error{Reason: "Failed to convert string to integer for timestamp", Source: "mnr-parser"}
+		return nil, fmt.Errorf("failed to convert string to integer for timestamp: %w", err)
 	}
 	ts := time.Unix(tint, 0)
 	metric.Time = &ts
@@ -151,7 +151,7 @@ func (mnr *MNR) mnrParseLine(data []byte) (*skogul.Metric, error) {
 	// Fetch MNR group
 	ok = scanner.Scan()
 	if !ok {
-		return nil, skogul.Error{Reason: "Failed to extract MNR group", Source: "mnr-parser"}
+		return nil, fmt.Errorf("failed to extract MNR group")
 	}
 	metric.Metadata["group"] = scanner.Text()
 
@@ -159,7 +159,7 @@ func (mnr *MNR) mnrParseLine(data []byte) (*skogul.Metric, error) {
 	metric.Data = make(map[string]interface{})
 	ok = scanner.Scan()
 	if !ok {
-		return nil, skogul.Error{Reason: "Failed to extract MNR variable name", Source: "mnr-parser"}
+		return nil, fmt.Errorf("failed to extract MNR variable name")
 	}
 	variable := scanner.Text()
 
@@ -169,7 +169,7 @@ func (mnr *MNR) mnrParseLine(data []byte) (*skogul.Metric, error) {
 
 	ok = scanner.Scan()
 	if !ok {
-		return nil, skogul.Error{Reason: "Failed to extract MNR variable value", Source: "mnr-parser"}
+		return nil, fmt.Errorf("failed to extract MNR variable value")
 	}
 	val := parseMNRFieldValue(scanner.Text())
 

@@ -217,42 +217,6 @@ func TestString_invalid(t *testing.T) {
 	}
 }
 
-func TestError(t *testing.T) {
-	e := skogul.Error{}
-
-	str := fmt.Sprintf("%s", e)
-
-	if str == "" {
-		t.Errorf("blank error gave blank text")
-	}
-	want := "<nil>: "
-	if str != want {
-		t.Errorf("blank error gave unexpected result. Wanted %s, got %s", want, str)
-	}
-
-	e.Source = "internal"
-
-	str = fmt.Sprintf("%s", e)
-
-	want = "internal: "
-	if str != want {
-		t.Errorf("error gave unexpected result. Wanted %s, got %s", want, str)
-	}
-
-	e.Reason = "outer error"
-
-	e2 := skogul.Error{Source: "inner", Reason: "inner message"}
-
-	e.Next = e2
-
-	str = fmt.Sprintf("%s", e)
-
-	want = "internal: outer error: inner: inner message"
-	if str != want {
-		t.Errorf("error gave unexpected result. Wanted %s, got %s", want, str)
-	}
-}
-
 func durationOK(t *testing.T, s string, check time.Duration) {
 	t.Helper()
 	d := skogul.Duration{}

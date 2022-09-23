@@ -138,13 +138,13 @@ func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
 		case marshalMeta:
 			meta, err := json.Marshal(m.Metadata)
 			if err != nil {
-				return skogul.Error{Source: "db sender", Reason: "unable to marshal metadata into json", Next: err}
+				return fmt.Errorf("unable to marshal metadata into json: %w", err)
 			}
 			vals = append(vals, meta)
 		case marshalData:
 			data, err := json.Marshal(m.Data)
 			if err != nil {
-				return skogul.Error{Source: "db sender", Reason: "unable to marshal data into json", Next: err}
+				return fmt.Errorf("unable to marshal data into json: %w", err)
 			}
 			vals = append(vals, data)
 		}
@@ -162,17 +162,14 @@ func (sq *SQL) Send(c *skogul.Container) error {
 		sq.init()
 	})
 	if sq.initErr != nil {
-		sqlLog.WithError(sq.initErr).Error("Database initialization failed")
-		return sq.initErr
+		return fmt.Errorf("database initialization failed: %w", sq.initErr)
 	}
 	txn, err := sq.db.Begin()
 	if err != nil {
-		sqlLog.WithError(err).Error("Acquiring database transaction failed")
-		return err
+		return fmt.Errorf("beginning database transaction failed: %w", err)
 	}
 	defer func() {
 		if err != nil {
-			sqlLog.WithError(skogul.Error{Source: "sql sender", Reason: "failed to send", Next: err}).Error("Failed to send")
 			txn.Rollback()
 		}
 	}()
@@ -202,16 +199,16 @@ func (sq *SQL) Send(c *skogul.Container) error {
 // since it is disallowed from connecting to a database and such.
 func (sq *SQL) Verify() error {
 	if sq.ConnStr == "" {
-		return skogul.Error{Source: "sql sender", Reason: "ConnStr is empty"}
+		return skogul.MissingArgument("ConnStr")
 	}
 	if sq.Query == "" {
-		return skogul.Error{Source: "sql sender", Reason: "Query is empty"}
+		return skogul.MissingArgument("Query")
 	}
 	if sq.Driver == "" {
-		return skogul.Error{Source: "sql sender", Reason: "Driver is empty"}
+		return skogul.MissingArgument("Driver")
 	}
 	if sq.Driver != "mysql" && sq.Driver != "postgres" {
-		return skogul.Error{Source: "sql sender", Reason: fmt.Sprintf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)}
+		return fmt.Errorf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)
 	}
 	return nil
 }
