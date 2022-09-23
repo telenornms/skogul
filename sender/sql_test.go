@@ -153,6 +153,32 @@ func TestSQL_sqlite3_basic(t *testing.T) {
 	}
 }
 
+func TestSQL_sqlite3_without_test_db(t *testing.T) {
+	s := sqlSender(t, `"driver":"sqlite3","connstr":"missing_test_file.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
+	if s == nil {
+		t.Errorf("Failed to get sender")
+	}
+
+	defer func() {
+		if r := recover(); r == nil {
+			t.Skip("It's fine. We didn't panic.")
+		}
+	}()
+}
+
+func TestSQL_sqlite3_with_test_db(t *testing.T) {
+	s := sqlSender(t, `"driver":"sqlite3","connstr":"testdata/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
+	if s == nil {
+		t.Errorf("Failed to get sender")
+	}
+
+	container := getValidContainer()
+
+	if err := s.Send(container); err != nil {
+		t.Skip("SQL.Send failed")
+	}
+}
+
 func TestSQL_sqlite3_connect(t *testing.T) {
 	s := sqlSender(t, `"driver":"sqlite3","connstr": "testdata/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
 
