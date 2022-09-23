@@ -57,6 +57,7 @@ type splunkEvent struct {
 	Index  string                 `json:"index,omitempty"`
 	Source string                 `json:"source,omitempty"`
 	Event  map[string]interface{} `json:"event"`
+	Fields map[string]interface{} `json:"fields,omitempty"`
 }
 
 // prepare converts a skogul container into the appropriate
@@ -74,12 +75,14 @@ func (s *Splunk) prepare(c *skogul.Container) ([]splunkEvent, error) {
 		source := ""
 		if s.HostnameField != "" && metric.Metadata != nil && metric.Metadata[s.HostnameField] != nil {
 			host = fmt.Sprintf("%v", metric.Metadata[s.HostnameField])
+			delete(metric.Metadata, s.HostnameField)
 		}
 		if s.SourceField != "" && metric.Metadata != nil && metric.Metadata[s.SourceField] != nil {
 			source = fmt.Sprintf("%v", metric.Metadata[s.SourceField])
 			if source == "" {
 				source = s.Source
 			}
+			delete(metric.Metadata, s.SourceField)
 		}
 		events[i] = splunkEvent{
 			Time:   t,
@@ -87,6 +90,7 @@ func (s *Splunk) prepare(c *skogul.Container) ([]splunkEvent, error) {
 			Index:  s.Index,
 			Host:   host,
 			Source: source,
+			Fields: metric.Metadata,
 		}
 	}
 	return events, nil
