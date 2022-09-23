@@ -24,6 +24,7 @@
 package transformer
 
 import (
+	"fmt"
 	"strings"
 	"sync"
 	"time"
@@ -70,16 +71,22 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 
 		obj, err := skogul.ExtractNestedObject(metric.Data, config.Source)
 		if err != nil {
-			timestampLogger.Warning("Unable to extract timestamp field from a metric")
-			return skogul.Error{Reason: "Failed to extract timestamp field from a metric"}
+			return fmt.Errorf("failed to extract timestamp field from a metric: %w", err)
 		}
 		timestamp, ok := obj[config.Source[len(config.Source)-1]].(string)
 
 		if !ok {
+			// XXX: I imagine this could easily be a log-bomb.
+			// Why log it as ERROR if we don't care enough to
+			// propagate the error up?
 			timestampLogger.Error("Failed to cast timestamp field to a string")
 			if config.Fail {
-				return skogul.Error{Reason: "Failed to cast timestamp field to a string"}
+				return fmt.Errorf("failed to cast timestamp field to a string")
 			}
+			// XXX: Added late, is there a use case where
+			// timestamp isn't a string but we still want to
+			// parse it? O_o
+			return nil
 		}
 
 		time, err := time.Parse(config.parsedFormat, timestamp)
@@ -91,6 +98,8 @@ func (config *Timestamp) Transform(c *skogul.Container) error {
 			if config.Fail {
 				return err
 			}
+			// XXX: Added late, see above comment.
+			return nil
 		}
 
 		c.Metrics[i].Time = &time
@@ -113,7 +122,7 @@ func parseTimestamp(format string) string {
 // Verify will make sure the required fields are set
 func (config *Timestamp) Verify() error {
 	if config.Source == nil {
-		return skogul.Error{Reason: "Missing source field for timestamp transformer", Source: "timestamp transformer"}
+		return skogul.MissingArgument("Source")
 	}
 	if config.Format == "" {
 		timestampLogger.Warn("Timestamp format not set, defaulting to RFC3339.")

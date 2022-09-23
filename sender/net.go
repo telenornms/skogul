@@ -34,6 +34,7 @@ import (
 var netLog = skogul.Logger("sender", "net")
 
 // Net sends metrics to a network address
+// FIXME: Use Encoder
 type Net struct {
 	Address string `doc:"Address to send data to" example:"192.168.1.99:1234"`
 	Network string `doc:"Network, according to net.Dial. Typically udp or tcp."`
@@ -43,8 +44,7 @@ type Net struct {
 func (n *Net) Send(c *skogul.Container) error {
 	d, err := net.Dial(n.Network, n.Address)
 	if err != nil {
-		netLog.WithError(err).WithField("address", n.Address).Error("Failed to connect to target")
-		return skogul.Error{Source: "net sender", Reason: "unable to connect to network address", Next: err}
+		return fmt.Errorf("connection to %s failed: %w", n.Address, err)
 	}
 	// should almost certainly fix some method of retaining the
 	// connection in the future
@@ -52,24 +52,24 @@ func (n *Net) Send(c *skogul.Container) error {
 
 	b, err := json.Marshal(c)
 	if err != nil {
-		return skogul.Error{Source: "net sender", Reason: "unable to marshal json for sending", Next: err}
+		return fmt.Errorf("unable to marshal json for sending: %w", err)
 	}
 	nbytes, err := d.Write(b)
 	if err != nil {
-		return skogul.Error{Source: "net sender", Reason: "unable to send (all) data", Next: err}
+		return fmt.Errorf("unable to send (all) data: %w", err)
 	}
 	if nbytes < len(b) {
-		return skogul.Error{Source: "net sender", Reason: fmt.Sprintf("Write succeeded, but not all data written. Wrote %d of %d bytes.", nbytes, len(b))}
+		return fmt.Errorf("write succeeded, but not all data written. Wrote %d of %d bytes.", nbytes, len(b))
 	}
 	return nil
 }
 
 func (n *Net) Verify() error {
 	if n.Address == "" {
-		return skogul.Error{Reason: "Missing address for Net sender", Source: "net-sender"}
+		return skogul.MissingArgument("Address")
 	}
 	if n.Network == "" {
-		return skogul.Error{Reason: "Missing network for Net sender", Source: "net-sender"}
+		return skogul.MissingArgument("Network")
 	}
 	return nil
 }

@@ -1,0 +1,7 @@
+{
+	"receivers": {
+		"api": {
+			"type": "non-existent"
+		}
+	}
+}

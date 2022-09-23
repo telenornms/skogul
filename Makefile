@@ -78,7 +78,7 @@ rpm: build/redhat-skogul.spec
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
-check: test fmtcheck vet exampletest exampletestdep
+check: test fmtcheck vet exampletest exampletestdep checkconfigs
 
 # Can't for the life of me remember where this came from and it's seemingly
 # gone now, so removed from check.
@@ -114,6 +114,30 @@ exampletest: skogul
 		echo 🚩 Junos-example is not valid; \
 		exit 1;\
 	fi;
+
+checkbadconfigs: skogul
+	@echo 📖 Verifying that invalid configuration files are caught
+	@failed=0; for a in $$(find testdata/invalid_configs/ -name '*json'); do \
+		./skogul -show -f $$a >/dev/null 2>&1 ; \
+		if [ $$? -eq 0 ]; then \
+			echo 🚩 Invalid config $$a was accepted, but should fail; \
+			failed=$$(( failed + 1 ));\
+		fi;\
+	done;\
+	exit $${failed}
+
+checkokconfigs: skogul
+	@echo 📖 Verifying that valid configuration files are accepted
+	@failed=0; for a in $$(find testdata/valid_configs/ -name '*json'); do \
+		./skogul -show -f $$a >/dev/null 2>&1 ; \
+		if [ $$? -ne 0 ]; then \
+			echo 🚩 Valid config $$a was rejected; \
+			failed=$$(( failed + 1 ));\
+		fi;\
+	done;\
+	exit $${failed}
+
+checkconfigs: checkbadconfigs checkokconfigs
 
 exampletestdep: exampletest
 	@echo 📖 Checking examples for deprecation warnings
@@ -166,6 +190,8 @@ help:
 	@echo " - skogul - build the binary (the default)"
 	@echo " - all - build binary and documentation"
 	@echo " - install - install binary and docs. Honors PREFIX, default prefix: ${PREFIX}"
+	@echo " - check - run all tests we know and care about - run automatically on every push/tag/pr"
+	@echo ""
 	@echo " - rpm - build RPM"
 	@echo " - clean - remove known build crap - use git clean -fdx for more thorough cleaning"
 	@echo " - test / bench - run go test, with and without benchmarks "

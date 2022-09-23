@@ -102,7 +102,7 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 
 			if len(tagValue) == 1 {
 				if strings.TrimSpace(tagValue[0]) == "" {
-					return nil, skogul.Error{Reason: "Got invalid data in the middle of a structured data line", Source: "structured_data-parser"}
+					return nil, fmt.Errorf("got invalid data in the middle of a structured data line")
 				}
 				continue
 			}
@@ -119,7 +119,7 @@ func (sd *StructuredData) parseStructuredData(data []byte) ([]*skogul.Metric, er
 	}
 	if len(metrics) == 0 {
 		sdLog.WithField("bytes", len(data)).Warnf("RFC5424/Structured Data parser failed to parse any lines")
-		return nil, skogul.Error{Reason: "Failed to parse RFC5424 lines", Source: "structured_data-parser"}
+		return nil, fmt.Errorf("failed to parse RFC5424 lines")
 	}
 	return metrics, nil
 }

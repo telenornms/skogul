@@ -92,5 +92,8 @@ func (s *Stats) runner() {
 
 // Verify makes sure all required parameters are set
 func (s *Stats) Verify() error {
+	if s.Handler == nil {
+		return skogul.MissingArgument("Handler")
+	}
 	return nil
 }

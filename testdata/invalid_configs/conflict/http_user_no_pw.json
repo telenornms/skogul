@@ -1,0 +1,15 @@
+{
+	"receivers": {
+		"api": {
+			"type": "http",
+			"handlers": {"/": "dummy" },
+			"auth": { "/": { "username": "lol", "pasword": "foo" } }
+		}
+	},
+	"handlers": {
+		"dummy": {
+			"parser": "json",
+			"sender": "null"
+		}
+	}
+}

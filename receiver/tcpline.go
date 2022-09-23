@@ -60,11 +60,11 @@ finish up. We should probably add a read-timeout in the future.
 func (tl *TCPLine) Start() error {
 	tcpip, err := net.ResolveTCPAddr("tcp", tl.Address)
 	if err != nil {
-		return skogul.Error{Source: "tcp receiver", Reason: fmt.Sprintf("unable to resolve address %s", tl.Address), Next: err}
+		return fmt.Errorf("unable to resolve address %s: %w", tl.Address, err)
 	}
 	ln, err := net.ListenTCP("tcp", tcpip)
 	if err != nil {
-		return skogul.Error{Source: "tcp receiver", Reason: fmt.Sprintf("unable to to listen on %s", tl.Address), Next: err}
+		return err
 	}
 	for {
 		conn, err := ln.AcceptTCP()
@@ -76,7 +76,7 @@ func (tl *TCPLine) Start() error {
 	}
 }
 
-func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
+func (tl *TCPLine) handleConnection(conn *net.TCPConn) {
 	scanner := bufio.NewScanner(conn)
 	conn.CloseWrite()
 	defer conn.CloseRead()
@@ -88,7 +88,7 @@ func (tl *TCPLine) handleConnection(conn *net.TCPConn) error {
 	}
 	if err := scanner.Err(); err != nil {
 		tcpLog.WithError(err).Error("Error reading line")
-		return skogul.Error{Reason: "Error reading file"}
+		return
 	}
-	return nil
+	return
 }

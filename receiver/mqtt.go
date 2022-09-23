@@ -25,6 +25,7 @@
 package receiver
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/telenornms/skogul"
@@ -93,16 +94,16 @@ func (handler *MQTT) Start() error {
 	timer := time.NewTicker(10 * time.Second)
 	for range timer.C {
 	}
-	return skogul.Error{Reason: "Shouldn't reach this"}
+	return fmt.Errorf("unreachable")
 }
 
 // Verify makes sure required configuration options are set
 func (handler *MQTT) Verify() error {
 	if handler.Broker == "" {
-		return skogul.Error{Reason: "Missing address for MQTT receiver", Source: "MQTT receiver"}
+		return skogul.MissingArgument("Broker")
 	}
 	if handler.Topics == nil {
-		return skogul.Error{Reason: "MQTT topic(s) not set", Source: "MQTT receiver"}
+		return skogul.MissingArgument("Topics")
 	}
 	if handler.RenewClientID && handler.ClientID != "" {
 		mqttLog.Warning("RenewClientID AND ClientID is set - ClientID will change!")
