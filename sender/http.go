@@ -284,7 +284,7 @@ func (ht *HTTP) Verify() error {
 		return fmt.Errorf("failed to read custom root CA (RootCA: %s): %w", ht.RootCA, err)
 	}
 	if (ht.Certfile != "" && ht.Keyfile == "") || (ht.Certfile == "" && ht.Keyfile != "") {
-		return fmt.Errorf("You must provide BOTH Certfile AND Keyfile, or neither.")
+		return fmt.Errorf("either provide BOTH Certfile AND Keyfile, or neither.")
 	}
 	return nil
 }

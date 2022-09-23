@@ -180,7 +180,7 @@ func (s *Splunk) Verify() error {
 			return fmt.Errorf("failed to verify HTTP sender for Splunk: %w", err)
 		}
 		if s.HTTP.URL != "" && s.URL != "" && s.HTTP.URL != s.URL {
-			return fmt.Errorf("Splunk URL defined in both HTTP.URL and URL fields with different values. Only specify it once.")
+			return fmt.Errorf("duplicate conflicting URLs specified: URL defined in both HTTP.URL and URL - pick one")
 		}
 	}
 	return nil
