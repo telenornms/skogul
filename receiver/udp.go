@@ -130,7 +130,7 @@ func (ud *UDP) Start() error {
 
 	udpip, err := net.ResolveUDPAddr("udp", ud.Address)
 	if err != nil {
-		return err
+		return fmt.Errorf("unable to resolve address %s: %w", ud.Address, err)
 	}
 	ln, err := net.ListenUDP("udp", udpip)
 	if err != nil {

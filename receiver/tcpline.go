@@ -25,6 +25,7 @@ package receiver
 
 import (
 	"bufio"
+	"fmt"
 	"net"
 
 	"github.com/telenornms/skogul"
@@ -59,7 +60,7 @@ finish up. We should probably add a read-timeout in the future.
 func (tl *TCPLine) Start() error {
 	tcpip, err := net.ResolveTCPAddr("tcp", tl.Address)
 	if err != nil {
-		return err
+		return fmt.Errorf("unable to resolve address %s: %w", tl.Address, err)
 	}
 	ln, err := net.ListenTCP("tcp", tcpip)
 	if err != nil {

@@ -65,8 +65,7 @@ func (lf *LineFile) read() error {
 // Start never returns.
 func (lf *LineFile) Start() error {
 	for {
-		err := lf.read()
-		if err != nil {
+		if err := lf.read(); err != nil {
 			lfLog.WithError(err).Error("Unable to read file")
 		}
 		if lf.Delay.Duration != 0 {
