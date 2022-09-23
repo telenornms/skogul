@@ -53,7 +53,7 @@ type dbElement struct {
 
 /*
 SQL sender connects to a SQL Database, currently either MySQL(or Mariadb I
-suppose) or Postgres. The Connection String for MySQL is specified at
+suppose), Postgres or Sqlite3. The Connection String for MySQL is specified at
 https://github.com/go-sql-driver/mysql/ and postgres at
 http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
 .
@@ -118,8 +118,8 @@ func (sq *SQL) prep() {
 }
 
 func (sq *SQL) init() {
-	if sq.Driver == "sqlite3" && !checkIfSQLiteDBExists(sq.ConnStr) {
-		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection. SQLite db might be missing", sq.ConnStr)
+	if sq.Driver == "sqlite3" && !SQLiteDBExists(sq.ConnStr) {
+		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize. SQLite db might be missing", sq.ConnStr)
 		return
 	}
 
@@ -131,7 +131,7 @@ func (sq *SQL) init() {
 	sq.prep()
 }
 
-func checkIfSQLiteDBExists(file string) bool {
+func SQLiteDBExists(file string) bool {
 	if _, err := os.Stat(file); err != nil {
 		return false
 	}

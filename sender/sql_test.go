@@ -154,18 +154,6 @@ func TestSQL_sqlite3_basic(t *testing.T) {
 }
 
 func TestSQL_sqlite3_connect(t *testing.T) {
-	createTableQuery := sqlSender(t, `"driver":"sqlite3","connstr": "testdata/skogul.sqlite", "query": "create table test (timestamp varchar(100) not null, src varchar(100) not null, name varchar(100) not null, data varchar(100) not null);"`)
-
-	createTableContainer := getValidContainer()
-
-	if err := createTableQuery.Send(createTableContainer); err != nil {
-		t.Errorf("SQL.Send failed: %v", err)
-	}
-
-	if createTableQuery == nil {
-		t.Errorf("SQL.Send Could not create sqlite test table")
-	}
-
 	s := sqlSender(t, `"driver":"sqlite3","connstr": "testdata/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
 
 	container := getValidContainer()
