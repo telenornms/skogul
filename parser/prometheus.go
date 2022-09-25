@@ -68,7 +68,6 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			if err != nil {
 				return nil, err
 			}
-
 			type internal struct {
 				Value interface{}
 			}
