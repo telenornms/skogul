@@ -49,7 +49,6 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 
 	for k, v := range mf {
 		for _, i := range v.GetMetric() {
-
 			container.Metrics = make([]*skogul.Metric, 0, len(v.GetMetric()))
 			for _, l := range i.GetLabel() {
 				metadataDict[l.GetName()] = l.GetValue()	
@@ -58,7 +57,6 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			// convert int64 timestamp to time.Time 
 			Time = time.Unix(i.GetTimestampMs(), 0)
 			if !Time.IsZero() {
-				
 				tmpMetric.Time = &Time 
 			} else {
 				Time = time.Now()
