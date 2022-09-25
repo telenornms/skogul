@@ -24,15 +24,16 @@ package parser
 
 import (
 	"bytes"
-	"github.com/prometheus/common/expfmt"
-	"github.com/telenornms/skogul"
 	"encoding/json"
 	"time"
+
+	"github.com/prometheus/common/expfmt"
+	"github.com/telenornms/skogul"
 )
 
-type prometheus struct{}
+type PROMETHEUS struct{}
 
-func (data prometheus) Parse(b []byte) (*skogul.Container, error) {
+func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 	reader := bytes.NewBuffer(b)
 	var parser expfmt.TextParser
 	// parse prometheus metrics 
