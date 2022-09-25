@@ -55,7 +55,7 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			}
 			dataDict[k] = i.GetUntyped()
 			// convert int64 timestamp to time.Time
-			Time = time.UnixMilli(i.GetTimestampMs(), 0)
+			Time = time.UnixMilli(i.GetTimestampMs())
 			if !Time.IsZero() {
 				tmpMetric.Time = &Time
 			} else {
