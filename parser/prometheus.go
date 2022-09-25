@@ -36,7 +36,7 @@ type PROMETHEUS struct{}
 func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 	reader := bytes.NewBuffer(b)
 	var parser expfmt.TextParser
-	// parse prometheus metrics 
+	// parse prometheus metrics
 	mf, err := parser.TextToMetricFamilies(reader)
 	if err != nil {
 		return nil, err
@@ -45,25 +45,25 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 	var tmpMetric skogul.Metric
 	metadataDict := make(map[string]interface{})
 	dataDict := make(map[string]interface{})
-	var Time time.Time 
+	var Time time.Time
 
 	for k, v := range mf {
 		for _, i := range v.GetMetric() {
 			container.Metrics = make([]*skogul.Metric, 0, len(v.GetMetric()))
 			for _, l := range i.GetLabel() {
-				metadataDict[l.GetName()] = l.GetValue()	
+				metadataDict[l.GetName()] = l.GetValue()
 			}
 			dataDict[k] = i.GetUntyped()
-			// convert int64 timestamp to time.Time 
+			// convert int64 timestamp to time.Time
 			Time = time.Unix(i.GetTimestampMs(), 0)
 			if !Time.IsZero() {
-				tmpMetric.Time = &Time 
+				tmpMetric.Time = &Time
 			} else {
 				Time = time.Now()
-				tmpMetric.Time = &Time 
+				tmpMetric.Time = &Time
 			}
 			Metadatastr, _ := json.Marshal(metadataDict)
-			dataDictstr, _ := json.Marshal(dataDict) 
+			dataDictstr, _ := json.Marshal(dataDict)
 			err := json.Unmarshal(Metadatastr, &tmpMetric.Metadata)
 			if err != nil {
 				return nil, err
@@ -73,7 +73,7 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 				return nil, err
 			}
 		}
-		container.Metrics = append(container.Metrics, &tmpMetric) 
+		container.Metrics = append(container.Metrics, &tmpMetric)
 	}
-	return &container, err 
+	return &container, err
 }
