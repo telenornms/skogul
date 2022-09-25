@@ -45,7 +45,7 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 	var tmpMetric skogul.Metric
 	metadataDict := make(map[string]interface{})
 	dataDict := make(map[string]interface{})
-	var Time time.Time
+	var tm time.Time
 
 	for k, v := range mf {
 		for _, i := range v.GetMetric() {
@@ -55,12 +55,12 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			}
 			dataDict[k] = i.GetUntyped()
 			// convert int64 timestamp to time.Time
-			Time = time.UnixMilli(i.GetTimestampMs())
-			if !Time.IsZero() {
-				tmpMetric.Time = &Time
+			tm = time.UnixMilli(i.GetTimestampMs())
+			if !tm.IsZero() {
+				tmpMetric.Time = &tm
 			} else {
-				Time = skogul.Now()
-				tmpMetric.Time = &Time
+				tm = skogul.Now()
+				tmpMetric.Time = &tm
 			}
 			Metadatastr, _ := json.Marshal(metadataDict)
 			dataDictstr, _ := json.Marshal(dataDict)
@@ -68,10 +68,18 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			if err != nil {
 				return nil, err
 			}
-			var tmp interface{}
+
+			type internal struct {
+				Value interface{}
+			}
+			var tmp map[string]internal
 			err1 := json.Unmarshal(dataDictstr, &tmp)
 			if err1 != nil {
 				return nil, err
+			}
+			tmpMetric.Data = make(map[string]interface{})
+			for key, value := range tmp {
+				tmpMetric.Data[key] = value.Value
 			}
 		}
 		container.Metrics = append(container.Metrics, &tmpMetric)
