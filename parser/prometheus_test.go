@@ -54,8 +54,9 @@ func TestPrometheus(t *testing.T) {
 	metricValue2 := "localhost:9090"
 	metricKey3 := "job"
 	metricValue3 := "prometheus"
-	//	dataValue := 1
-	//	dataKey := "net_conntrack_dialer_conn_attempted_total"
+	var dataValue float64
+	dataValue = 1
+	dataKey := "net_conntrack_dialer_conn_attempted_total"
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
 		t.Logf("Expected parsed prometheus to return a container with at least 1 metric. Container: %v", container.Describe())
@@ -75,6 +76,10 @@ func TestPrometheus(t *testing.T) {
 		t.Logf("Expected parsed prometheus to return a metadata field value")
 		t.FailNow()
 	}
-        t.Logf("time: %v", container.Metrics[0].Time)
+	if container.Metrics[0].Data[dataKey] != dataValue {
+		t.Logf("Expected parsed prometheus to return a metadata field value %v", container.Metrics[0].Data[dataKey])
+		t.FailNow()
+	}
+	t.Logf("time: %v", container.Metrics[0].Time)
 	t.Logf("container: %s", container.Describe())
 }
