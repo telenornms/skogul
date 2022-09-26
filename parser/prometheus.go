@@ -41,19 +41,23 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 	if err != nil {
 		return nil, err
 	}
-	container := skogul.Container{}
+	container := skogul.Container{
+		Metrics: make([]*skogul.Metric, 0, len(mf)),
+	}
 	var tmpMetric skogul.Metric
 	metadataDict := make(map[string]interface{})
 	dataDict := make(map[string]interface{})
 	var tm time.Time
 
+	//type internal struct {
+	//	Value interface{}
+	//}
+	//var tmp map[string]internal
 	for k, v := range mf {
 		for _, i := range v.GetMetric() {
-			container.Metrics = make([]*skogul.Metric, 0, len(v.GetMetric()))
 			for _, l := range i.GetLabel() {
 				metadataDict[l.GetName()] = l.GetValue()
 			}
-			dataDict[k] = i.GetUntyped()
 			// convert int64 timestamp to time.Time
 			tm = time.UnixMilli(i.GetTimestampMs())
 			if !tm.IsZero() {
@@ -63,25 +67,27 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 				tmpMetric.Time = &tm
 			}
 			Metadatastr, _ := json.Marshal(metadataDict)
-			dataDictstr, _ := json.Marshal(dataDict)
 			err := json.Unmarshal(Metadatastr, &tmpMetric.Metadata)
 			if err != nil {
 				return nil, err
 			}
-			type internal struct {
-				Value interface{}
-			}
-			var tmp map[string]internal
-			err1 := json.Unmarshal(dataDictstr, &tmp)
+			// we do not need tmp to iteratate to get to the value. The library offers GetUntyped().Value call to directly get the value.
+			dataDict[k] = i.GetUntyped().Value
+			dataDictstr, _ := json.Marshal(dataDict)
+			err1 := json.Unmarshal(dataDictstr, &tmpMetric.Data)
 			if err1 != nil {
 				return nil, err
 			}
-			tmpMetric.Data = make(map[string]interface{})
-			for key, value := range tmp {
-				tmpMetric.Data[key] = value.Value
-			}
+			//for key, value := range tmp {
+			//	tmpMetric.Data[key] = value.Value
+			//}
+			container.Metrics = append(container.Metrics, &tmpMetric)
+			// clean up the old values of the dictionary so that they don't get carried to the next iteration.
+			metadataDict = make(map[string]interface{})
+			dataDict = make(map[string]interface{})
+			// tmpMetric is a bit difficult to clean up since the container.Metrics stores the pointer to tmpMetric. The oldvalues of tmpMetric gets carried to the next iteration.
+			//	tmpMetric = skogul.Metric{}
 		}
-		container.Metrics = append(container.Metrics, &tmpMetric)
 	}
 	return &container, err
 }
