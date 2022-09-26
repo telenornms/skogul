@@ -50,6 +50,7 @@ package sender_test
 
 import (
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -120,6 +121,21 @@ func getValidContainer() *skogul.Container {
 	return &c
 }
 
+func prepareSQLiteTest(t *testing.T) {
+	_, err := os.Create("/tmp/skogul.sqlite")
+	if err != nil {
+		t.Errorf("failed to create sqlite test db %v", err)
+	}
+
+	s := sqlSender(t, `"driver":"sqlite3","connstr": "/tmp/skogul.sqlite", "query": "create table test (timestamp varchar(100) not null, src varchar(100) not null, name varchar(100) not null, data varchar(100) not null);"`)
+
+	container := getValidContainer()
+
+	if err := s.Send(container); err != nil {
+		t.Errorf("SQL.Send failed: %v", err)
+	}
+}
+
 func TestSQL_auto(t *testing.T) {
 	sqlTestAutoNeg(t, `"driver":"mysql"`)
 	sqlTestAutoNeg(t, `"driver":"mysql","connstr": "something"`)
@@ -147,7 +163,8 @@ func TestSQL_postgres_basic(t *testing.T) {
 }
 
 func TestSQL_sqlite3_basic(t *testing.T) {
-	s := sqlSender(t, `"driver":"sqlite3","connstr":"testdata/skogul.sqlite","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
+	prepareSQLiteTest(t)
+	s := sqlSender(t, `"driver":"sqlite3","connstr":"/tmp/skogul.sqlite","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
 	if s == nil {
 		t.Errorf("Failed to get sender")
 	}
@@ -167,7 +184,8 @@ func TestSQL_sqlite3_without_test_db(t *testing.T) {
 }
 
 func TestSQL_sqlite3_with_test_db(t *testing.T) {
-	s := sqlSender(t, `"driver":"sqlite3","connstr":"testdata/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
+	prepareSQLiteTest(t)
+	s := sqlSender(t, `"driver":"sqlite3","connstr":"/tmp/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
 	if s == nil {
 		t.Errorf("Failed to get sender")
 	}
@@ -175,12 +193,13 @@ func TestSQL_sqlite3_with_test_db(t *testing.T) {
 	container := getValidContainer()
 
 	if err := s.Send(container); err != nil {
-		t.Skip("SQL.Send failed")
+		t.Error("SQL.Send failed")
 	}
 }
 
 func TestSQL_sqlite3_connect(t *testing.T) {
-	s := sqlSender(t, `"driver":"sqlite3","connstr": "testdata/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
+	prepareSQLiteTest(t)
+	s := sqlSender(t, `"driver":"sqlite3","connstr": "/tmp/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
 
 	container := getValidContainer()
 
