@@ -54,9 +54,13 @@ func TestPrometheus(t *testing.T) {
 	metricValue2 := "localhost:9090"
 	metricKey3 := "job"
 	metricValue3 := "prometheus"
-	var dataValue float64
+	var dataValue, data1Value, data2Value float64
 	dataValue = 1
 	dataKey := "net_conntrack_dialer_conn_attempted_total"
+	data1Key := "conntrack_dialer_conn_attempted_total"
+	data1Value = 1
+	data2Key := "dialer_conn_attempted_total"
+	data2Value = 1
 
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
 		t.Logf("Expected parsed prometheus to return a container with at least 1 metric. Container: %v", container.Describe())
@@ -76,10 +80,27 @@ func TestPrometheus(t *testing.T) {
 		t.Logf("Expected parsed prometheus to return a metadata field value")
 		t.FailNow()
 	}
+	t.Logf("time: %v, %v, %v", container.Metrics[0].Time, container.Metrics[1].Time, container.Metrics[2].Time)
+	t.Logf("container: %s", container.Describe())
 	if container.Metrics[0].Data[dataKey] != dataValue {
-		t.Logf("Expected parsed prometheus to return a metadata field value %v", container.Metrics[0].Data[dataKey])
+		t.Logf("Expected parsed prometheus to return a data field value %v", container.Metrics[0].Data[dataKey])
 		t.FailNow()
 	}
-	t.Logf("time: %v", container.Metrics[0].Time)
-	t.Logf("container: %s", container.Describe())
+	if container.Metrics[1].Data[data1Key] != data1Value {
+		t.Logf("Expected parsed prometheus to return a data field value %v", container.Metrics[1].Data[data1Key])
+		t.FailNow()
+	}
+	if container.Metrics[2].Data[data2Key] != data2Value {
+		t.Logf("Expected parsed prometheus to return a data field value %v", container.Metrics[2].Data[data2Key])
+		t.FailNow()
+	}
+	if len(container.Metrics[0].Metadata) != 3 || len(container.Metrics[2].Metadata) != 3 || len(container.Metrics[1].Metadata) != 0 {
+		t.Logf("Length of the container Metrics Metadata fields are not correct %v, %v, %v", len(container.Metrics[0].Metadata), len(container.Metrics[1].Metadata), len(container.Metrics[2].Metadata))
+		t.FailNow()
+	}
+	if len(container.Metrics[0].Data) != 1 || len(container.Metrics[1].Data) != 1 || len(container.Metrics[2].Data) != 1 {
+		t.Logf("Length of the container Metrics data are not correct %v, %v, %v", len(container.Metrics[0].Data), len(container.Metrics[1].Data), len(container.Metrics[2].Data))
+		t.FailNow()
+	}
+
 }

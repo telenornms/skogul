@@ -44,15 +44,11 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{
 		Metrics: make([]*skogul.Metric, 0, len(mf)),
 	}
-	var tmpMetric skogul.Metric
+	tmpMetric := make([]skogul.Metric, len(mf))
 	metadataDict := make(map[string]interface{})
 	dataDict := make(map[string]interface{})
 	var tm time.Time
-
-	//type internal struct {
-	//	Value interface{}
-	//}
-	//var tmp map[string]internal
+	indexCounter := 0
 	for k, v := range mf {
 		for _, i := range v.GetMetric() {
 			for _, l := range i.GetLabel() {
@@ -61,32 +57,28 @@ func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
 			// convert int64 timestamp to time.Time
 			tm = time.UnixMilli(i.GetTimestampMs())
 			if !tm.IsZero() {
-				tmpMetric.Time = &tm
+				tmpMetric[indexCounter].Time = &tm
 			} else {
 				tm = skogul.Now()
-				tmpMetric.Time = &tm
+				tmpMetric[indexCounter].Time = &tm
 			}
 			Metadatastr, _ := json.Marshal(metadataDict)
-			err := json.Unmarshal(Metadatastr, &tmpMetric.Metadata)
+			err := json.Unmarshal(Metadatastr, &tmpMetric[indexCounter].Metadata)
 			if err != nil {
 				return nil, err
 			}
 			// we do not need tmp to iteratate to get to the value. The library offers GetUntyped().Value call to directly get the value.
 			dataDict[k] = i.GetUntyped().Value
 			dataDictstr, _ := json.Marshal(dataDict)
-			err1 := json.Unmarshal(dataDictstr, &tmpMetric.Data)
+			err1 := json.Unmarshal(dataDictstr, &tmpMetric[indexCounter].Data)
 			if err1 != nil {
 				return nil, err
 			}
-			//for key, value := range tmp {
-			//	tmpMetric.Data[key] = value.Value
-			//}
-			container.Metrics = append(container.Metrics, &tmpMetric)
+			container.Metrics = append(container.Metrics, &tmpMetric[indexCounter])
 			// clean up the old values of the dictionary so that they don't get carried to the next iteration.
 			metadataDict = make(map[string]interface{})
 			dataDict = make(map[string]interface{})
-			// tmpMetric is a bit difficult to clean up since the container.Metrics stores the pointer to tmpMetric. The oldvalues of tmpMetric gets carried to the next iteration.
-			//	tmpMetric = skogul.Metric{}
+			indexCounter++
 		}
 	}
 	return &container, err
