@@ -118,9 +118,9 @@ func (sq *SQL) prep() {
 }
 
 func (sq *SQL) init() {
-	if sq.Driver == "sqlite3" && !SQLiteDBExists(sq.ConnStr) {
-		sq.initErr = fmt.Errorf("failed to initialize. SQLite db might be missing %s", sq.ConnStr)
-		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver)
+	if sq.Driver == "sqlite3" && !verifySQLiteConn(sq.ConnStr) {
+		sq.initErr = fmt.Errorf("failed to initialize. Verify that %s file exists or has correct permissions", sq.ConnStr)
+		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error()
 		return
 	}
 
