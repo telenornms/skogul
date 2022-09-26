@@ -132,10 +132,18 @@ func (sq *SQL) init() {
 	sq.prep()
 }
 
-func SQLiteDBExists(file string) bool {
-	if _, err := os.Stat(file); err != nil {
+func verifySQLiteConn(file string) bool {
+	fd, err := os.Stat(file)
+
+	if os.IsNotExist(err) || fd.IsDir() {
 		return false
 	}
+
+	// Check if user has RW permissions to file. Both required.
+	if ((fd.Mode() & 0b010000000) != 0b010000000) || ((fd.Mode() & 0b100000000) != 0b100000000) {
+		return false
+	}
+
 	return true
 }
 
