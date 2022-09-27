@@ -39,7 +39,7 @@ func TestPrometheus(t *testing.T) {
 		return
 	}
 	// convert byte array to json
-	p := parser.PROMETHEUS{}
+	p := parser.Prometheus{}
 
 	container, err := p.Parse(b)
 
