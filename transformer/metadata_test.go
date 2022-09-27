@@ -270,9 +270,9 @@ func TestFlattenMap(t *testing.T) {
 		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
 	}
 
-	// Expect data to still be accessible at its original location
-	if c.Metrics[0].Data[path] == nil {
-		t.Errorf(`Expected "%s" but got "%s" in %+v`, extracted_value, c.Metrics[0].Data[path], c.Metrics[0].Data)
+	// Expect data be removed at its original location
+	if c.Metrics[0].Data[path] != nil {
+		t.Errorf(`Expected nil-value but got value`)
 	}
 
 	// Expect data unrelated to the flattening to still be accessible
@@ -313,9 +313,9 @@ func TestFlattenMapDefaultSeparator(t *testing.T) {
 		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
 	}
 
-	// Expect data to still be accessible at its original location
-	if c.Metrics[0].Data[path] == nil {
-		t.Errorf(`Expected "%s" but got "%s" in %+v`, extracted_value, c.Metrics[0].Data[path], c.Metrics[0].Data)
+	// Expect data to be removed at its original location
+	if c.Metrics[0].Data[path] != nil {
+		t.Errorf(`Expected nil-value but got value`)
 	}
 
 	// Expect data unrelated to the flattening to still be accessible
@@ -357,9 +357,9 @@ func TestFlattenMapCustomSeparator(t *testing.T) {
 		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
 	}
 
-	// Expect data to still be accessible at its original location
-	if c.Metrics[0].Data[path] == nil {
-		t.Errorf(`Expected "%s" but got "%s" in %+v`, extracted_value, c.Metrics[0].Data[path], c.Metrics[0].Data)
+	// Expect data to removed at its original location
+	if c.Metrics[0].Data[path] != nil {
+		t.Errorf(`Expected nil-value but got value`)
 	}
 
 	// Expect data unrelated to the flattening to still be accessible
