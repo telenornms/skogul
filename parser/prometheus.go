@@ -31,9 +31,9 @@ import (
 	"github.com/telenornms/skogul"
 )
 
-type PROMETHEUS struct{}
+type Prometheus struct{}
 
-func (data PROMETHEUS) Parse(b []byte) (*skogul.Container, error) {
+func (data Prometheus) Parse(b []byte) (*skogul.Container, error) {
 	reader := bytes.NewBuffer(b)
 	var parser expfmt.TextParser
 	// parse prometheus metrics

@@ -111,8 +111,8 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:     "prometheus",
 		Aliases:  []string{},
-		Alloc:    func() interface{} { return &PROMETHEUS{} },
-		Help:     "Parse a prometheus formatted data into a skogula container",
+		Alloc:    func() interface{} { return &Prometheus{} },
+		Help:     "Parse a prometheus formatted document into a skogul container, one metric per line.",
 		AutoMake: true,
 	})
 }
