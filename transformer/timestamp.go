@@ -35,7 +35,7 @@ import (
 
 var timestampLogger = skogul.Logger("transformer", "timestamp")
 
-// DummyTimestamp adds an artifical timestamp from skogul.Now()
+// DummyTimestamp adds an artificial timestamp from skogul.Now()
 type DummyTimestamp struct{}
 
 // Transform sets a timestamp on all metrics to ensure the container is
