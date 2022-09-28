@@ -201,3 +201,10 @@ func (bat *Batch) Send(c *skogul.Container) error {
 	bat.ch <- c
 	return nil
 }
+
+func (bat *Batch) Verify() error {
+	if bat.Next.Name == "" {
+		return skogul.MissingArgument("Next")
+	}
+	return nil
+}

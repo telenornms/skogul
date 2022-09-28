@@ -1,0 +1,7 @@
+{
+	"senders": {
+		"b": {
+			"type": "batch"
+		}
+	}
+}
