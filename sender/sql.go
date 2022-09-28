@@ -139,11 +139,6 @@ func verifySQLiteConn(file string) bool {
 		return false
 	}
 
-	// Check if user has RW permissions to file. Both required.
-	if ((fd.Mode() & 0b010000000) != 0b010000000) || ((fd.Mode() & 0b100000000) != 0b100000000) {
-		return false
-	}
-
 	return true
 }
 
