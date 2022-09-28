@@ -13,8 +13,9 @@ require (
 	google.golang.org/protobuf v1.28.1
 )
 
+require github.com/mattn/go-sqlite3 v1.14.15
+
 require (
-	github.com/golang/protobuf v1.5.2
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.15.6 // indirect
