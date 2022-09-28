@@ -1,0 +1,5 @@
+# HELP net_conntrack_dialer_conn_attempted_total
+# TYPE net_conntrack_dialer_conn_attempted_total untyped
+net_conntrack_dialer_conn_attempted_total{dialer_name="federate",instance="localhost:9090",job="prometheus"} 1 1608520832877
+conntrack_dialer_conn_attempted_total 1 1608520832877
+dialer_conn_attempted_total{dialer_name="federate",instance="localhost:9090",job="prometheus"} 1

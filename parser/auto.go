@@ -108,5 +108,11 @@ func init() {
 		Alloc:   func() interface{} { return &DummyStore{} },
 		Help:    "Stores the raw, unparsed data to disk, then returns an empty container. Used for capturing unsupported encodings for future development.",
 	})
-
+	Auto.Add(skogul.Module{
+		Name:     "prometheus",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &Prometheus{} },
+		Help:     "Parse a prometheus formatted document into a skogul container, one metric per line.",
+		AutoMake: true,
+	})
 }
