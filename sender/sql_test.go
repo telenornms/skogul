@@ -177,8 +177,8 @@ func TestSQL_sqlite3_without_test_db(t *testing.T) {
 	}
 
 	defer func() {
-		if r := recover(); r == nil {
-			t.Skip("It's fine. We didn't panic.")
+		if r := recover(); r != nil {
+			t.Error("It's fine. We didn't panic.")
 		}
 	}()
 }
@@ -186,6 +186,13 @@ func TestSQL_sqlite3_without_test_db(t *testing.T) {
 func TestSQL_sqlite3_with_test_db(t *testing.T) {
 	prepareSQLiteTest(t)
 	s := sqlSender(t, `"driver":"sqlite3","connstr":"/tmp/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
+
+	defer func() {
+		if r := recover(); r != nil {
+			t.Error("It's fine. We didn't panic.")
+		}
+	}()
+
 	if s == nil {
 		t.Errorf("Failed to get sender")
 	}

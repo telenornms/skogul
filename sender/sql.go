@@ -118,10 +118,10 @@ func (sq *SQL) prep() {
 }
 
 func (sq *SQL) init() {
-	if sq.Driver == "sqlite3" && !verifySQLiteConn(sq.ConnStr) {
-		sq.initErr = fmt.Errorf("failed to initialize. Verify that %s file exists or has correct permissions", sq.ConnStr)
-		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error()
-		return
+	if sq.Driver == "sqlite3" {
+		if sq.initErr = verifySQLiteConn(sq.ConnStr); sq.initErr != nil {
+			return
+		}
 	}
 
 	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
@@ -132,14 +132,18 @@ func (sq *SQL) init() {
 	sq.prep()
 }
 
-func verifySQLiteConn(file string) bool {
+func verifySQLiteConn(file string) error {
 	fd, err := os.Stat(file)
 
-	if os.IsNotExist(err) || fd.IsDir() {
-		return false
+	if err != nil {
+		return err
 	}
 
-	return true
+	if fd.IsDir() {
+		return fmt.Errorf("db file is a directory")
+	}
+
+	return nil
 }
 
 func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
