@@ -29,7 +29,6 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
-	"time"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
@@ -112,9 +111,9 @@ func (f *File) startChan() {
 	signal.Notify(f.sighup, syscall.SIGHUP)
 	go func() {
 		for _ = range f.sighup {
-			fmt.Fprintf(os.Stderr, "%s: Reopening %q\n", time.Now(), f.Path)
+			fmt.Errorf("%s: Reopening %q\n", skogul.Now(), f.Path)
 			if err := f.reopen(); err != nil {
-				fmt.Fprintf(os.Stderr, "%s: Error reopening: %s\n", time.Now(), err)
+				fmt.Errorf("%s: Error reopening: %s\n", skogul.Now(), err)
 			}
 		}
 	}()
