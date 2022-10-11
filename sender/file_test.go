@@ -29,6 +29,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"syscall"
 	"testing"
 	"time"
 
@@ -139,4 +140,57 @@ func TestAppendToExistingFile(t *testing.T) {
 	if !strings.Contains(str, "some data") {
 		t.Errorf("Test file does not contain test string 'some data', was it overwritten? Contents: %s", str)
 	}
+}
+
+func TestSignals(t *testing.T) {
+	filename := "skogul-file-1.txt"
+	path := path.Join(os.TempDir(), filename)
+
+	f, err := os.Create(path)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	f.Write([]byte("some data\n"))
+	f.Sync()
+
+	time.Sleep(time.Second)
+
+	sender := &sender.File{
+		File:   path,
+		Append: true,
+	}
+
+	c := createContainer()
+	sender.Send(&c)
+
+	// Since the write is done by a goroutine
+	// we have to make sure it is properly
+	// flushed before we try to read it back
+	time.Sleep(time.Second)
+	proc, err := os.FindProcess(os.Getpid())
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	// provides an interrup signal to the current process handling the file.
+	if err := proc.Signal(syscall.SIGHUP); err != nil {
+		t.Error(err)
+		return
+	}
+	time.Sleep(time.Second / 2)
+
+	// the file can't be read without open. hence readfile is a good indicator if the file is reopened or not.
+	b, err := ioutil.ReadFile(path)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	str := string(b)
+	if !strings.Contains(str, "some data") {
+		t.Errorf("Test file does not contain test string 'some data', was it overwritten? Contents: %s", str)
+	}
+
 }
