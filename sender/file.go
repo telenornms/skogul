@@ -109,25 +109,23 @@ func (f *File) startChan() {
 	defer f.f.Close()
 	f.sighup = make(chan os.Signal, 1)
 	signal.Notify(f.sighup, syscall.SIGHUP)
-	go func() {
-		for _ = range f.sighup {
+	for {
+		select {
+		case b := <-f.c:
+			written, err := f.f.Write(append(b, newLineChar))
+			if err != nil {
+				f.ok = false
+				fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+			}
+			f.f.Sync()
+		case <-f.sighup:
 			fmt.Errorf("%s: Reopening %q\n", skogul.Now(), f.Path)
 			if err := f.reopen(); err != nil {
 				fmt.Errorf("%s: Error reopening: %s\n", skogul.Now(), err)
 			}
 		}
-	}()
-	for b := range f.c {
-		written, err := f.f.Write(append(b, newLineChar))
-		if err != nil {
-			f.ok = false
-			fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
-		}
-		f.f.Sync()
 	}
-	fileLog.WithField("path", f.File).Warning("File writer chan closed, not handling any more writes!")
 }
-
 func (f *File) reopen() (err error) {
 	f.f.Close()
 	f.f, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, 0644)
