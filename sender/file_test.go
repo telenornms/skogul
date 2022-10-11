@@ -180,17 +180,15 @@ func TestSignals(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	time.Sleep(time.Second / 2)
+	time.Sleep(time.Second)
 
-	// the file can't be read without open. hence readfile is a good indicator if the file is reopened or not.
-	b, err := ioutil.ReadFile(path)
+	// If the file is interrupted/closed, then the following commands will fail the test.
+	details, err := f.Stat()
 	if err != nil {
 		t.Error(err)
 		return
-	}
-	str := string(b)
-	if !strings.Contains(str, "some data") {
-		t.Errorf("Test file does not contain test string 'some data', was it overwritten? Contents: %s", str)
+	} else {
+		t.Logf("%s", details)
 	}
 
 }
