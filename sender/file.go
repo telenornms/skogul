@@ -26,7 +26,10 @@ package sender
 import (
 	"fmt"
 	"os"
+	"os/signal"
 	"sync"
+	"syscall"
+	"time"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
@@ -49,6 +52,7 @@ type File struct {
 	once    sync.Once
 	f       *os.File
 	c       chan []byte
+	sighup  chan os.Signal
 }
 
 func (f *File) init() {
@@ -104,6 +108,16 @@ func (f *File) startChan() {
 	fileLog.Trace("Starting file writer channel")
 	// Making sure we close the file if this function exits
 	defer f.f.Close()
+	f.sighup = make(chan os.Signal, 1)
+	signal.Notify(f.sighup, syscall.SIGHUP)
+	go func() {
+		for _ = range f.sighup {
+			fmt.Fprintf(os.Stderr, "%s: Reopening %q\n", time.Now(), f.Path)
+			if err := f.reopen(); err != nil {
+				fmt.Fprintf(os.Stderr, "%s: Error reopening: %s\n", time.Now(), err)
+			}
+		}
+	}()
 	for b := range f.c {
 		written, err := f.f.Write(append(b, newLineChar))
 		if err != nil {
@@ -113,6 +127,12 @@ func (f *File) startChan() {
 		f.f.Sync()
 	}
 	fileLog.WithField("path", f.File).Warning("File writer chan closed, not handling any more writes!")
+}
+
+func (f *File) reopen() (err error) {
+	f.f.Close()
+	f.f, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, 0644)
+	return
 }
 
 // Send receives a skogul container and writes it to file.
