@@ -3,6 +3,8 @@
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
+ *  - Roshini Narasimha Raghavan <roshiragavi@gmail.com>
+ *  - Kristian Lyngstøl <kly@kly.no>
  *  - Håkon Solbjørg <Hakon.Solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
