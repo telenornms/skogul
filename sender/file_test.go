@@ -171,6 +171,7 @@ func TestSignals(t *testing.T) {
 
 	sender.Send(&c)
 
+	// the file should not exists since we renamed. If it continues to exists, then fail the test.
 	if _, err := os.Stat(path); err == nil {
 		t.Error(err)
 		t.FailNow()
@@ -191,11 +192,12 @@ func TestSignals(t *testing.T) {
 		t.Error(err)
 		return
 	}
+
+	// give enough time for the sighup signal to be handled and send the container again. This should reopen the file and write the values sent by the container.
 	time.Sleep(time.Second * 4)
-
 	sender.Send(&c)
-	// If the file is closed, then the following commands will fail the test.
 
+	// If the file remains closed, then the following commands will fail the test.
 	_, err = os.Stat(path)
 	if err != nil {
 		t.Error(err)
