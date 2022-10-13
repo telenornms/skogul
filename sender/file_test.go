@@ -3,6 +3,7 @@
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
+ *  - Roshini Narasimha Raghavan <roshiragavi@gmail.com>
  *  - Håkon Solbjørg <Hakon.Solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -159,11 +160,21 @@ func TestSignals(t *testing.T) {
 
 	sender := &sender.File{
 		File:   path,
-		Append: true,
+		Append: false,
 	}
 
 	c := createContainer()
+
 	sender.Send(&c)
+
+	os.Rename(path, path+".old")
+
+	sender.Send(&c)
+
+	if _, err := os.Stat(path); err == nil {
+		t.Error(err)
+		t.FailNow()
+	}
 
 	// Since the write is done by a goroutine
 	// we have to make sure it is properly
@@ -180,15 +191,15 @@ func TestSignals(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	time.Sleep(time.Second)
+	time.Sleep(time.Second * 4)
 
-	// If the file is interrupted/closed, then the following commands will fail the test.
-	details, err := f.Stat()
+	sender.Send(&c)
+	// If the file is closed, then the following commands will fail the test.
+
+	_, err = os.Stat(path)
 	if err != nil {
 		t.Error(err)
 		return
-	} else {
-		t.Logf("%s", details)
 	}
 
 }
