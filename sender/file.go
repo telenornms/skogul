@@ -121,17 +121,19 @@ func (f *File) startChan() {
 			}
 			f.f.Sync()
 		case <-f.sighup:
-			f.Reopen()
 			f.f.Close()
 			if finfo, err := os.Stat(f.File); !os.IsNotExist(err) && f.Append {
 				fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
 				_, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
+				f.f = file
 			} else {
 				// Otherwise, create the file (which will truncate it if it already exists)
 				fileLog.WithField("path", f.File).Trace("Creating file since it doesn't exist or we don't want to append to it")
 				_, err = os.Create(f.File)
 				if err != nil {
 					fmt.Errorf("%s: Error reopening: %s\n", skogul.Now(), err)
+					f.ok = false
+					return
 				}
 			}
 		}
