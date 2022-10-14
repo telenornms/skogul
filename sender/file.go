@@ -122,9 +122,10 @@ func (f *File) startChan() {
 			f.f.Sync()
 		case <-f.sighup:
 			f.f.Close()
+			var file *os.File
 			if finfo, err := os.Stat(f.File); !os.IsNotExist(err) && f.Append {
 				fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
-				_, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
+				file, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
 				f.f = file
 			} else {
 				// Otherwise, create the file (which will truncate it if it already exists)
@@ -138,11 +139,6 @@ func (f *File) startChan() {
 			}
 		}
 	}
-}
-
-func (f *File) Reopen() (err error) {
-	f.sighup <- syscall.SIGHUP
-	return
 }
 
 // Send receives a skogul container and writes it to file.
