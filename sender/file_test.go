@@ -170,7 +170,7 @@ func TestSignals(t *testing.T) {
 
 	os.Rename(path, path+".old")
 
-	// file is closed and it will just log that file is closed and wrote 0 bytes
+	// file is closed and it will just log that file is closed and wrote 0 bytes.
 	sender.Send(&c)
 
 	// the file should not exists since we renamed. If it continues to exists, then fail the test.

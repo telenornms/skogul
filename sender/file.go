@@ -127,6 +127,7 @@ func (f *File) startChan() {
 				fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
 				file, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
 				f.f = file
+				f.ok = true
 			} else {
 				// Otherwise, create the file (which will truncate it if it already exists)
 				fileLog.WithField("path", f.File).Trace("Creating file since it doesn't exist or we don't want to append to it")
@@ -136,6 +137,7 @@ func (f *File) startChan() {
 					f.ok = false
 					return
 				}
+				f.ok = true
 			}
 		}
 	}
