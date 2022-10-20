@@ -32,20 +32,26 @@
 )
 
 var natsLog = skogul.Logger("sender", "nats")
+/*
+Nats.io sender. A small Nats, non-jetstream, publisher with:
 
+- Authentication: Username/Password, TLS
+- Authorization: Username/Password, UserCredentials/JWT
+
+*/
 
 type Nats struct {
-	Servers		string   `doc:""`
-	Subject		string   `doc:""`
-	Name		string	 `doc:""`
-	Username	string   `doc:""`
-	Password	string	 `doc:""`
-	TLSClientKey    string   `doc:""`
-	TLSClientCert   string   `doc:""`
-	TLSCACert	string   `doc:""`
-	UserCreds       string   `doc:""`
-	NKeyFile        string   `doc:""`
-	Insecure	bool
+	Servers		string   `doc:"Comma separated list of nats URLs"`
+	Subject		string   `doc:"Subject to publish messages on"`
+	Name		string	 `doc:"Client name"`
+	Username	string   `doc:"Client username"`
+	Password	string	 `doc:"Client password"`
+	TLSClientKey    string   `doc:"TLS client key file path"`
+	TLSClientCert   string   `doc:"TLS client cert file path"`
+	TLSCACert	string   `doc:"CA cert file path"`
+	UserCreds       string   `doc:"Nats credentials file path"`
+	NKeyFile        string   `doc:"Nats nkey file path"`
+	Insecure	bool	 `doc:"TLS InsecureSkipVerify"`
 	Encoder		skogul.EncoderRef
 	o		*[]nats.Option
 	nc		*nats.Conn
