@@ -126,7 +126,7 @@ func init() {
         Auto.Add(skogul.Module{
                 Name:  "nats",
                 Alloc: func() interface{} { return &Nats{} },
-                Help:  "Publishes received metrics to an NATS server/cluster.",
+                Help:  "Publishes received metrics to a NATS server/cluster.",
         })
 	Auto.Add(skogul.Module{
 		Name:  "sql",
