@@ -63,9 +63,6 @@ func (n *Nats) Verify() error {
 	if n.Handler.Name == "" {
 		return skogul.MissingArgument("Handler")
 	}
-	if n.Servers == "" {
-		return skogul.MissingArgument("Address")
-	}
         if n.Subject == "" {
                 return skogul.MissingArgument("Subject")
         }
