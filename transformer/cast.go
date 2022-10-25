@@ -25,10 +25,13 @@
 package transformer
 
 import (
+	"encoding/hex"
 	"fmt"
 	"math/big"
 	"net"
+	"net/netip"
 	"strconv"
+	"strings"
 
 	"github.com/telenornms/skogul"
 )
@@ -179,13 +182,20 @@ func (cast *Cast) inet6Aton(ipAddress string) int {
 	return int(ipInt.Int64())
 }
 
-func (cast *Cast) inet6Nton(dec int) {
-	b := byte(dec)
-	ip := net.IP([]byte{b})
-
-	if ip.To4() != nil {
-		
+// Convers decimals to IPv4 or IPv6
+func (cast *Cast) inet6Ntoa(dec string) (ip netip.Addr, err error) {
+	HEX, err := hex.DecodeString(dec)
+	if err != nil {
+		err = fmt.Errorf("error decoding hex %w", err)
+		return
+	}
+	if len(HEX) > 16 {
+		HEX = append(make([]byte, 16-len(HEX)), HEX...)
 	}
 
+	ip, ok := netip.AddrFromSlice(HEX)
+	if !ok {
+		err = fmt.Errorf("invalid ip hax")
+	}
 	return
 }
