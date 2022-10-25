@@ -26,6 +26,8 @@ package transformer
 
 import (
 	"fmt"
+	"math/big"
+	"net"
 	"strconv"
 
 	"github.com/telenornms/skogul"
@@ -36,10 +38,12 @@ type Cast struct {
 	MetadataInts       []string `doc:"List of metadatafields that should be integers"`
 	MetadataFloats     []string `doc:"List of metadatafields that should be 64-bit floats"`
 	MetadataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
+	MetadataIpToDec	   []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
 	DataStrings        []string `doc:"List of datafields that should be strings"`
 	DataInts           []string `doc:"List of datafields that should be integers"`
 	DataFloats         []string `doc:"List of datafields that should be 64-bit floats"`
 	DataFlatFloats     []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
+	DataIpToDec		   []string `doc:"List of datafields containing IP addresses that should be decimals"`
 }
 
 // Transform enforces the Cast rules
@@ -92,6 +96,11 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					c.Metrics[mi].Data[value] = strconv.FormatFloat(f, 'f', -1, 64)
 				}
 			}
+			for _, value := range cast.DataIpToDec {
+				if c.Metrics[mi].Data[value] != nil {
+					c.Metrics[mi].Data[value] = cast.inet6Aton(c.Metrics[mi].Data[value].(string))
+				}
+			}
 		}
 		if c.Metrics[mi].Metadata == nil {
 			continue
@@ -142,6 +151,41 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 				c.Metrics[mi].Metadata[value] = strconv.FormatFloat(f, 'f', -1, 64)
 			}
 		}
+		for _, value := range cast.MetadataIpToDec {
+			if c.Metrics[mi].Metadata[value] != nil {
+				c.Metrics[mi].Metadata[value] = cast.inet6Aton(c.Metrics[mi].Metadata[value].(string))
+			}
+		}
 	}
 	return nil
+}
+
+// Convers IPv4 or IPv6 to decimals
+func (cast *Cast) inet6Aton(ipAddress string) int {
+	ip := net.ParseIP(ipAddress)
+
+	ipv4 := false
+	if ip.To4() != nil {
+		ipv4 = true
+	}
+
+	ipInt := big.NewInt(0)
+	if ipv4 {
+		ipInt.SetBytes(ip.To4())
+		return int(ipInt.Int64())
+	}
+
+	ipInt.SetBytes(ip.To16())
+	return int(ipInt.Int64())
+}
+
+func (cast *Cast) inet6Nton(dec int) {
+	b := byte(dec)
+	ip := net.IP([]byte{b})
+
+	if ip.To4() != nil {
+		
+	}
+
+	return
 }

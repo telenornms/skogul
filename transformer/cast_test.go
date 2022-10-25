@@ -46,6 +46,8 @@ func TestCast(t *testing.T) {
 	metric.Metadata["mfloattoint"] = 3.14
 	metric.Metadata["mstringtoint"] = "3.14"
 	metric.Metadata["mflatten"] = 314159265358979.0
+	metric.Metadata["mipv4"] = "127.0.0.1"
+	metric.Metadata["mipv6"] = "0:0:0:0:0:0:0:1"
 	metric.Data["dinttostring"] = 3
 	metric.Data["dfloattostring"] = 3.14
 	metric.Data["dstringtostring"] = "pi"
@@ -55,6 +57,9 @@ func TestCast(t *testing.T) {
 	metric.Data["dinttoint"] = 3
 	metric.Data["dfloattoint"] = 3.14
 	metric.Data["dstringtoint"] = "3.14"
+	metric.Data["dipv4"] = "127.0.0.1"
+	metric.Data["dipv6"] = "0:0:0:0:0:0:0:1"
+
 	c := skogul.Container{}
 	c.Metrics = []*skogul.Metric{&metric}
 
@@ -63,9 +68,11 @@ func TestCast(t *testing.T) {
 		MetadataFloats:     []string{"minttofloat", "mfloattofloat", "mstringtofloat"},
 		MetadataInts:       []string{"minttoint", "mfloattoint", "mstringtoint"},
 		MetadataFlatFloats: []string{"mflatten"},
+		MetadataIpToDec:    []string{"mipv4", "mipv6"},
 		DataStrings:        []string{"dinttostring", "dfloattostring", "dstringtostring"},
 		DataFloats:         []string{"dinttofloat", "dfloattofloat", "dstringtofloat"},
 		DataInts:           []string{"dinttoint", "dfloattoint", "dstringtoint"},
+		DataIpToDec: 		[]string{"dipv4", "dipv6"},
 	}
 
 	err := cast.Transform(&c)
@@ -84,6 +91,8 @@ func TestCast(t *testing.T) {
 	check_m(t, c.Metrics[0], "mfloattoint", 3)
 	check_m(t, c.Metrics[0], "mstringtoint", 3)
 	check_m(t, c.Metrics[0], "mflatten", "314159265358979")
+	check_d(t, c.Metrics[0], "mipv4", 2130706433)
+	check_d(t, c.Metrics[0], "mipv6", 1)
 
 	check_d(t, c.Metrics[0], "dinttostring", "3")
 	check_d(t, c.Metrics[0], "dfloattostring", "3.14")
@@ -94,6 +103,8 @@ func TestCast(t *testing.T) {
 	check_d(t, c.Metrics[0], "dinttoint", 3)
 	check_d(t, c.Metrics[0], "dfloattoint", 3)
 	check_d(t, c.Metrics[0], "dstringtoint", 3)
+	check_d(t, c.Metrics[0], "dipv4", 2130706433)
+	check_d(t, c.Metrics[0], "dipv6", 1)
 }
 
 func TestCast_config(t *testing.T) {
