@@ -31,7 +31,6 @@ import (
 	"net"
 	"net/netip"
 	"strconv"
-	"strings"
 
 	"github.com/telenornms/skogul"
 )
