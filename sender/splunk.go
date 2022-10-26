@@ -38,13 +38,13 @@ var splunkLog = skogul.Logger("sender", "splunk")
 
 // Splunk contains the configuration parameters for this sender.
 type Splunk struct {
-	URL           string `doc:"URL to Splunk HTTP Event Collector (HEC)"`
-	Token         string `doc:"Token for HTTP Authorization header for HEC endpoint."`
-	Index         string `doc:"Custom Splunk index to send event to."`
-	HostnameField string `doc:"Name of the metadata field with the hostname. Note, this might have to be transformed into metadata depending on the input data."`
-	SourceField   string `doc:"Name of the metadata field with the source. Will fallback to the value set in Source if not found."`
-	Source        string `doc:"Set the source of the data. If used in conjunction with SourceField, SourceField will take precedence and this will be the fallback."`
-	HTTP          *HTTP  `doc:"HTTP sender options. URL is overwritten from this config, the rest will be HTTP sender defaults unless overridden."`
+	URL           string        `doc:"URL to Splunk HTTP Event Collector (HEC)"`
+	Token         skogul.Secret `doc:"Token for HTTP Authorization header for HEC endpoint."`
+	Index         string        `doc:"Custom Splunk index to send event to."`
+	HostnameField string        `doc:"Name of the metadata field with the hostname. Note, this might have to be transformed into metadata depending on the input data."`
+	SourceField   string        `doc:"Name of the metadata field with the source. Will fallback to the value set in Source if not found."`
+	Source        string        `doc:"Set the source of the data. If used in conjunction with SourceField, SourceField will take precedence and this will be the fallback."`
+	HTTP          *HTTP         `doc:"HTTP sender options. URL is overwritten from this config, the rest will be HTTP sender defaults unless overridden."`
 	ok            bool
 	once          sync.Once
 }
@@ -129,7 +129,7 @@ func (e *splunkEvent) MarshalJSON() ([]byte, error) {
 func (s *Splunk) init() {
 	s.HTTP.URL = s.URL
 	s.HTTP.init()
-	s.HTTP.Headers["authorization"] = fmt.Sprintf("Splunk %s", s.Token)
+	s.HTTP.Headers["authorization"] = fmt.Sprintf("Splunk %s", s.Token.Expose())
 	s.ok = s.HTTP.ok
 }
 
@@ -167,7 +167,7 @@ func (s *Splunk) Verify() error {
 	if s.URL == "" {
 		return skogul.MissingArgument("URL")
 	}
-	if s.Token == "" {
+	if s.Token.Expose() == "" {
 		return skogul.MissingArgument("Token")
 	}
 	if s.Index == "" {
