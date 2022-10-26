@@ -35,7 +35,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:     "skogul",
 		Aliases:  []string{"json"},
-		Alloc:    func() interface{} { return &JSON{} },
+		Alloc:    func() interface{} { return &SkogulJSON{} },
 		Help:     "Parses the standard Skogul JSON format.",
 		AutoMake: true,
 	})

@@ -30,11 +30,12 @@ import (
 	"github.com/telenornms/skogul"
 )
 
-// JSON parses a byte string-representation of a Container
-type JSON struct{}
+// SkogulJSON parses a byte string-representation of a Container in the
+// format Skogul produces.
+type SkogulJSON struct{}
 
 // Parse accepts a byte slice of JSON data and marshals it into a container
-func (x JSON) Parse(b []byte) (*skogul.Container, error) {
+func (x SkogulJSON) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	err := json.Unmarshal(b, &container)
 	return &container, err

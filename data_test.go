@@ -59,7 +59,7 @@ func TestString(t *testing.T) {
   ]
 }`
 	b := []byte(want)
-	j := parser.JSON{}
+	j := parser.SkogulJSON{}
 	c, err := j.Parse(b)
 	if err != nil {
 		t.Errorf("JSON.Parse(b) failed: %v", err)
@@ -144,7 +144,7 @@ func TestValidate(t *testing.T) {
 }
 
 func TestValidate_partial(t *testing.T) {
-	p := parser.JSON{}
+	p := parser.SkogulJSON{}
 	c, err := p.Parse([]byte(`{
 		"metrics": [
 			{

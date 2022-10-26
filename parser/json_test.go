@@ -33,18 +33,18 @@ import (
 
 // TestJSONParse tests parsing of a simple JSON document to skogul
 // container
-func TestJSONParse(t *testing.T) {
+func TestSkogulJSONParse(t *testing.T) {
 	b := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
-	x := parser.JSON{}
+	x := parser.SkogulJSON{}
 	_, err := x.Parse(b)
 	if err != nil {
 		t.Errorf("JSON.Parse(b) failed: %s", err)
 	}
 }
 
-func BenchmarkJSONParse(b *testing.B) {
+func BenchmarkSkogulJSONParse(b *testing.B) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
-	x := parser.JSON{}
+	x := parser.SkogulJSON{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}

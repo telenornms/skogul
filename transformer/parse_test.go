@@ -42,7 +42,7 @@ func TestParseTransformer(t *testing.T) {
         }
     }]}`)
 
-	j := parser.JSON{}
+	j := parser.SkogulJSON{}
 	c, err := j.Parse(b)
 	if err != nil {
 		t.Errorf("Failed to parse container")
@@ -84,7 +84,7 @@ func TestParseTransformerAppend(t *testing.T) {
         }
     }]}`)
 
-	j := parser.JSON{}
+	j := parser.SkogulJSON{}
 	c, err := j.Parse(b)
 	if err != nil {
 		t.Errorf("Failed to parse container")
