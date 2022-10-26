@@ -193,7 +193,7 @@ func TestParseInvalidContainerAndTransformItValid(t *testing.T) {
 	data := []byte(fmt.Sprintf(`{"data": 1, "ts": "%s"}`, timestring))
 
 	h := skogul.Handler{}
-	h.SetParser(parser.RawJSON{})
+	h.SetParser(parser.JSON{})
 
 	// Parse the data using the custom JSON handler
 	c, err := h.Parse(data)
