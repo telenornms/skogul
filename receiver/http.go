@@ -43,10 +43,10 @@ var httpLog = skogul.Logger("receiver", "http")
 
 // HTTPAuth contains ways to authenticate a HTTP request, e.g. Username/Password for Basic Auth.
 type HTTPAuth struct {
-	Username              string `doc:"Username for basic authentication. No authentication is required if left blank."`
-	Password              string `doc:"Password for basic authentication."`
-	SANDNSName            string `doc:"DNS name which has to be present in SAN extension of x509 certificate when using Client Certificate authentication"`
-	SkipCertificateVerify bool   `doc:"Skip verifying certificate. (default: false)"`
+	Username              string        `doc:"Username for basic authentication. No authentication is required if left blank."`
+	Password              skogul.Secret `doc:"Password for basic authentication."`
+	SANDNSName            string        `doc:"DNS name which has to be present in SAN extension of x509 certificate when using Client Certificate authentication"`
+	SkipCertificateVerify bool          `doc:"Skip verifying certificate. (default: false)"`
 	path                  string
 }
 
@@ -98,7 +98,7 @@ type httpReturn struct {
 func (auth *HTTPAuth) auth(r *http.Request) error {
 	if auth.Username != "" && auth.Password != "" {
 		username, pw, ok := r.BasicAuth()
-		success := ok && auth.Username == username && auth.Password == pw
+		success := ok && auth.Username == username && auth.Password.Expose() == pw
 		if !success {
 			return fmt.Errorf("Invalid credentials")
 		}
