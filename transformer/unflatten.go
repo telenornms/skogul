@@ -1,7 +1,6 @@
 package transformer
 
 import (
-	"sort"
 	"strings"
 
 	"github.com/telenornms/skogul"
@@ -34,8 +33,6 @@ func (u *Unflatten) convertValues(d *skogul.Metric) *skogul.Metric {
 	for k := range d.Data {
 		keys = append(keys, k)
 	}
-
-	sort.Strings(keys)
 
 	for _, k := range keys {
 		spl := strings.Split(k, ".")
