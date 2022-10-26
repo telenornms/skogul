@@ -9,12 +9,12 @@
   },
   "handlers": {
     "none": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [],
       "sender": "count"
     },
     "all": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [
         "interfaceexp_stats",
         "interface_stats",
@@ -31,14 +31,14 @@
       "sender": "count"
     },
     "conditional": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [
         "conditional-transform"
       ],
       "sender": "count"
     },
     "accounting": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [],
       "sender": "debug"
    }

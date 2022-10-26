@@ -7,7 +7,7 @@
     },
     "handlers": {
         "baz": {
-            "parser": "json",
+            "parser": "skogul",
             "sender": "qux"
         }
     },
