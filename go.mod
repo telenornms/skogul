@@ -15,6 +15,8 @@ require (
 
 require github.com/mattn/go-sqlite3 v1.14.15
 
+require github.com/dolmen-go/jsonptr v0.0.0-20220904212016-e3f38a361346
+
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
