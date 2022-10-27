@@ -33,7 +33,7 @@ import (
 // for the set of transformers to run
 type Case struct {
 	When         string                   `doc:"Used as a conditional statement on a field"`
-	Is           string                   `doc:"Used for the specific value (string) of the stated metadata field"`
+	Is           interface{}              `doc:"Used for the specific value of the stated metadata field"`
 	Transformers []*skogul.TransformerRef `doc:"The transformers to run when the defined conditional is true"`
 }
 
@@ -61,23 +61,10 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 					switchLogger.WithField("field", field).Warn("Failed to get field value from JSON pointer")
 					continue
 				}
-				var ok bool
-				fieldValue, ok = fieldValue.(string)
-				if !ok {
-					switchLogger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
-					continue
-				}
 			} else if metric.Metadata[field] == nil || metric.Metadata[field] == "" {
 				continue
-			}
-
-			if fieldValue == nil {
-				var ok bool
-				fieldValue, ok = metric.Metadata[field].(string)
-				if !ok {
-					switchLogger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
-					continue
-				}
+			} else {
+				fieldValue = metric.Metadata[field]
 			}
 
 			if fieldValue != condition {
