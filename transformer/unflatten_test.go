@@ -38,9 +38,9 @@ func TestTransformData(t *testing.T) {
 	}
 
 	u := transformer.Unflatten{}
-	unflatten, err := u.Transform(container)
+	err = u.Transform(container)
 
-	jsonData, err := json.MarshalIndent(unflatten, "", "	")
+	jsonData, err := json.MarshalIndent(container.Metrics[0].Data["Report"], "", "	")
 
 	if err != nil {
 		t.Error("Could not json marshal container")
