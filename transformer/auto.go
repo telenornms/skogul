@@ -112,7 +112,7 @@ func init() {
 		Name:     "unflatten",
 		Aliases:  []string{},
 		Alloc:    func() interface{} { return &Unflatten{} },
-		Help:     "Create structured data from flat structure",
+		Help:     "Create structured data from flat keys, e.g.: foo.bar.zoo: 1, foo.baz.zoo: 2 to { foo: { bar: { zoo: 1 }, baz: { zoo: 2 } } }",
 		AutoMake: true,
-		})
+	})
 }
