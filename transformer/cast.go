@@ -28,6 +28,7 @@ import (
 	"fmt"
 	"math/big"
 	"net"
+	"reflect"
 	"strconv"
 
 	"github.com/telenornms/skogul"
@@ -38,12 +39,12 @@ type Cast struct {
 	MetadataInts       []string `doc:"List of metadatafields that should be integers"`
 	MetadataFloats     []string `doc:"List of metadatafields that should be 64-bit floats"`
 	MetadataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
-	MetadataIpToDec	   []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
+	MetadataIpToDec    []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
 	DataStrings        []string `doc:"List of datafields that should be strings"`
 	DataInts           []string `doc:"List of datafields that should be integers"`
 	DataFloats         []string `doc:"List of datafields that should be 64-bit floats"`
 	DataFlatFloats     []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
-	DataIpToDec		   []string `doc:"List of datafields containing IP addresses that should be decimals"`
+	DataIpToDec        []string `doc:"List of datafields containing IP addresses that should be decimals"`
 }
 
 // Transform enforces the Cast rules
@@ -153,7 +154,11 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 		}
 		for _, value := range cast.MetadataIpToDec {
 			if c.Metrics[mi].Metadata[value] != nil {
-				c.Metrics[mi].Metadata[value] = cast.inet6Aton(c.Metrics[mi].Metadata[value].(string))
+				s, ok := c.Metrics[mi].Metadata[value].(string)
+				if !ok {
+					continue
+				}
+                c.Metrics[mi].Metadata[value] = cast.inet6Aton(s)
 			}
 		}
 	}
@@ -161,20 +166,21 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 }
 
 // Convers IPv4 or IPv6 to decimals
-func (cast *Cast) inet6Aton(ipAddress string) int {
+func (cast *Cast) inet6Aton(ipAddress string) int64 {
 	ip := net.ParseIP(ipAddress)
 
-	ipv4 := false
-	if ip.To4() != nil {
-		ipv4 = true
+	if ip == nil {
+		return 0
 	}
 
 	ipInt := big.NewInt(0)
-	if ipv4 {
+	if ip.To4() != nil {
 		ipInt.SetBytes(ip.To4())
-		return int(ipInt.Int64())
+		v := ipInt.Int64()
+		return v
 	}
 
 	ipInt.SetBytes(ip.To16())
-	return int(ipInt.Int64())
+	v := ipInt.Int64()
+	return v
 }
