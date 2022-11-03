@@ -8,11 +8,11 @@ import (
 
 func TestTransformData(t *testing.T) {
 	testData := map[string]interface{}{
-		"foo": "bar",
-		"bar.baz": "bar.baz",
-		"bar.foo": "bar.foo",
-		"bar.1.baz.1.foo": "bar.1.baz.1.foo",
-		"bar.1.baz.1.bar": "bar.1.baz.1.bar",
+		"foo":                   "bar",
+		"bar.baz":               "bar.baz",
+		"bar.foo":               "bar.foo",
+		"bar.1.baz.1.foo":       "bar.1.baz.1.foo",
+		"bar.1.baz.1.bar":       "bar.1.baz.1.bar",
 		"bar.1.foo.1.baz.1.foo": "bar.1.foo.1.baz.1.foo",
 	}
 
@@ -41,9 +41,9 @@ func TestTransformData(t *testing.T) {
 		t.Errorf("%v", err)
 	}
 
-    data := container.Metrics[0].Data["bar"].(map[string]interface{})
+	data := container.Metrics[0].Data["bar"].(map[string]interface{})
 
-    if _, ok := data["1"]; !ok {
-        t.Error("faile to create nested structure")
-    }
+	if _, ok := data["1"]; !ok {
+		t.Error("faile to create nested structure")
+	}
 }
