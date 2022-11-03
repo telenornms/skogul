@@ -28,7 +28,6 @@ import (
 	"fmt"
 	"math/big"
 	"net"
-	"reflect"
 	"strconv"
 
 	"github.com/telenornms/skogul"
