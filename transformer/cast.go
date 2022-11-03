@@ -157,7 +157,7 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 				if !ok {
 					continue
 				}
-                c.Metrics[mi].Metadata[value] = cast.inet6Aton(s)
+				c.Metrics[mi].Metadata[value] = cast.inet6Aton(s)
 			}
 		}
 	}
