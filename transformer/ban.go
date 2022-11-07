@@ -7,25 +7,25 @@ import (
 )
 
 type Ban struct {
-    DPaths []string `doc:"Data array of strings that are . separated tree paths e.g foo.bar.baz"`
-    MPaths []string `doc:"Metadata array of strings that are . separated tree paths e.g foo.bar.baz"`
+    DPaths map[string]interface{} `doc:"Data map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
+    MPaths map[string]interface{} `doc:"Data map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
 }
 
 func (b *Ban) Transform(c *skogul.Container) error {
     var err error
 
     for _, mi := range c.Metrics {
-        for _, path := range b.DPaths {
-            splittedPath := strings.Split(path, ".")
+        for pathKey, pathValue := range b.DPaths {
+            splittedPath := strings.Split(pathKey, ".")
             if _, ok := mi.Data[splittedPath[0]]; ok {
-                mi.Data, err = b.traverseDepths(mi.Data, splittedPath, 0)
+                mi.Data, err = b.traverseDepths(mi.Data, splittedPath, pathValue, 0)
             }
         }
 
-        for _, path := range b.MPaths {
-            splittedPath := strings.Split(path, ".")
+        for pathKey, pathValue := range b.MPaths {
+            splittedPath := strings.Split(pathKey, ".")
             if _, ok := mi.Metadata[splittedPath[0]]; ok {
-                mi.Metadata, err = b.traverseDepths(mi.Metadata, splittedPath, 0)
+                mi.Metadata, err = b.traverseDepths(mi.Metadata, splittedPath, pathValue, 0)
             }
         }
     }
@@ -36,10 +36,13 @@ func (b *Ban) Transform(c *skogul.Container) error {
 /*
     Recursively traverse a nested tree of elements based on path and remove last element in the tree
 */
-func (b *Ban) traverseDepths(d map[string]interface{}, path []string, depth int) (map[string]interface{}, error) {
+func (b *Ban) traverseDepths(d map[string]interface{}, path []string, pathValue interface{}, depth int) (map[string]interface{}, error) {
     var err error
     if depth == len(path) - 1 {
-        delete(d, path[len(path) - 1])
+        if d[path[len(path) - 1]] == pathValue {
+            delete(d, path[len(path) - 1])
+            return d, err
+        }
         return d, err
     }
 
@@ -49,7 +52,7 @@ func (b *Ban) traverseDepths(d map[string]interface{}, path []string, depth int)
             return d, errors.New("could not cast key to map")
         }
 
-        d[path[depth]], err = b.traverseDepths(key, path, depth + 1)
+        d[path[depth]], err = b.traverseDepths(key, path, pathValue, depth + 1)
         return d, err
     }
 

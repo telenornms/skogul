@@ -38,15 +38,17 @@ func TestBan(t *testing.T) {
 
     ban := &transformer.Ban{}
 
-    ban.DPaths = []string{
-        "foo.bar.1.baz",
-        "foo.foobar.1.baz.bar",
-        "bar.baz",
-        "baz",
+    ban.DPaths = map[string]interface{}{
+        "foo.bar.1.baz": "foo",
+        "foo.foobar.1.baz.bar": "foo.foobar.1.baz.bar",
+        "bar.baz": "bar.baz",
+        "baz": 9,
     }
 
     err := ban.Transform(&c)
     if err != nil {
         t.Fatalf("error occurred %v", err.Error())
     }
+
+    t.Log(c)
 }
