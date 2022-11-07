@@ -8,7 +8,7 @@ import (
 
 type Ban struct {
     DPaths map[string]interface{} `doc:"Data map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
-    MPaths map[string]interface{} `doc:"Data map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
+    MPaths map[string]interface{} `doc:"Metadata map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
 }
 
 func (b *Ban) Transform(c *skogul.Container) error {
