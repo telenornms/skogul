@@ -35,13 +35,25 @@ func TestTransformData(t *testing.T) {
 	}
 
 	u := &transformer.Unflatten{}
+    u.Separator = "."
 	err := u.Transform(container)
 
 	if err != nil {
 		t.Errorf("%v", err)
+        return
 	}
 
-	data := container.Metrics[0].Data["bar"].(map[string]interface{})
+    if container.Metrics[0].Data == nil {
+        t.Errorf("failed to parse %+v", container.Metrics[0].Data)
+        return
+    }
+
+	data, ok := container.Metrics[0].Data["bar"].(map[string]interface{})
+
+    if !ok {
+        t.Errorf("failed to cast structure %+v", data)
+        return
+    }
 
 	if _, ok := data["1"]; !ok {
 		t.Error("faile to create nested structure")

@@ -3,12 +3,14 @@ package transformer
 import (
 	"errors"
 	"fmt"
-	"strings"
+    "strings"
 
 	"github.com/telenornms/skogul"
 )
 
-type Unflatten struct{}
+type Unflatten struct{
+    Separator string `doc:"Separator for path strings. Default fallback is ."`
+}
 
 // Transform created a container of metrics
 func (u *Unflatten) Transform(c *skogul.Container) error {
@@ -56,7 +58,6 @@ Creates a nested structure from keys passed as a an array.
 	        As you can notice there's two keys, one ending with "baz" and the seconds one has deeper structure, but both contain "baz" in the same place.
 	        The algorithm will proceed and write "foo" to "bar.1.baz" key.
 	        The next iteration will genererate an error because bar.1.baz is a string.
-	        Turning the array upside down will continue without any errors because "bar.1.baz".
 */
 func (u *Unflatten) convertValues(d *skogul.Metric) (*skogul.Metric, error) {
 	var err error
@@ -66,6 +67,12 @@ func (u *Unflatten) convertValues(d *skogul.Metric) (*skogul.Metric, error) {
 		Metadata: d.Metadata,
 		Data:     nil,
 	}
+
+    // Fallback to default separator
+    if u.Separator == "" {
+        u.Separator = "."
+    }
+
 	keys := make([]string, 0, len(d.Data))
 
 	// Create a list of keys
@@ -75,7 +82,7 @@ func (u *Unflatten) convertValues(d *skogul.Metric) (*skogul.Metric, error) {
 
 	// Populate keys to make sure they exist before we try writing to them.
 	for _, k := range keys {
-		s := strings.Split(k, ".")
+		s := strings.Split(k, u.Separator)
 		tmp[s[0]] = map[string]interface{}{}
 	}
 
@@ -84,7 +91,7 @@ func (u *Unflatten) convertValues(d *skogul.Metric) (*skogul.Metric, error) {
 	      Notice that since we have already populated the map with first part of the key, we skip it.
 	*/
 	for _, k := range keys {
-		s := strings.Split(k, ".")
+		s := strings.Split(k, u.Separator)
 		tmp[s[0]], err = u.recursivelyCreateMap(tmp[s[0]].(map[string]interface{}), s[1:], d.Data[k], 0)
 
 		if err != nil {
