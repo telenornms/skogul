@@ -80,7 +80,7 @@ func parseJSON(t *testing.T, file string) (*skogul.Container, []byte) {
 		t.FailNow()
 		return nil, nil
 	}
-	container, err := parser.JSON{}.Parse(b)
+	container, err := parser.SkogulJSON{}.Parse(b)
 
 	if err != nil {
 		t.Logf("Failed to parse JSON data: %v", err)

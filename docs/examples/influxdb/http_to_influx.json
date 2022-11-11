@@ -10,7 +10,7 @@
   },
   "handlers": {
     "somejson": {
-      "parser": "json",
+      "parser": "skogul",
       "sender": "batch"
     }
   },

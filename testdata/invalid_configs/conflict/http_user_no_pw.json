@@ -8,7 +8,7 @@
 	},
 	"handlers": {
 		"dummy": {
-			"parser": "json",
+			"parser": "skogul",
 			"sender": "null"
 		}
 	}

@@ -1,7 +1,7 @@
 {
   "handlers": {
     "juniperxform": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [
         "interfaceexp_stats",
         "interface_stats",

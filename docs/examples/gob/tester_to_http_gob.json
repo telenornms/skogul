@@ -11,7 +11,7 @@
 	},
 	"handlers": {
 		"something": {
-			"parser": "json",
+			"parser": "skogul",
 			"sender": "tohttps"
 		}
 	},

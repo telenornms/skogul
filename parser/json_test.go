@@ -33,24 +33,24 @@ import (
 
 // TestJSONParse tests parsing of a simple JSON document to skogul
 // container
-func TestJSONParse(t *testing.T) {
+func TestSkogulJSONParse(t *testing.T) {
 	b := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
-	x := parser.JSON{}
+	x := parser.SkogulJSON{}
 	_, err := x.Parse(b)
 	if err != nil {
 		t.Errorf("JSON.Parse(b) failed: %s", err)
 	}
 }
 
-func BenchmarkJSONParse(b *testing.B) {
+func BenchmarkSkogulJSONParse(b *testing.B) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
-	x := parser.JSON{}
+	x := parser.SkogulJSON{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}
 }
 
-func TestRawJSONParse(t *testing.T) {
+func TestJSONParse(t *testing.T) {
 	b, err := ioutil.ReadFile("./testdata/raw.json")
 
 	if err != nil {
@@ -58,7 +58,7 @@ func TestRawJSONParse(t *testing.T) {
 		return
 	}
 
-	container, err := parser.RawJSON{}.Parse(b)
+	container, err := parser.JSON{}.Parse(b)
 
 	if err != nil {
 		t.Errorf("Failed to parse JSON data: %v", err)
@@ -71,7 +71,7 @@ func TestRawJSONParse(t *testing.T) {
 	}
 }
 
-func TestRawJSONArrayParse(t *testing.T) {
+func TestJSONArrayParse(t *testing.T) {
 	b, err := ioutil.ReadFile("./testdata/raw_array.json")
 
 	if err != nil {
@@ -79,7 +79,7 @@ func TestRawJSONArrayParse(t *testing.T) {
 		return
 	}
 
-	container, err := parser.RawJSON{}.Parse(b)
+	container, err := parser.JSON{}.Parse(b)
 
 	if err != nil {
 		t.Errorf("Failed to parse JSON data: %v", err)
@@ -92,9 +92,9 @@ func TestRawJSONArrayParse(t *testing.T) {
 	}
 }
 
-func BenchmarkRawJSONParse(b *testing.B) {
+func BenchmarkJSONParse(b *testing.B) {
 	by := []byte(`{"string":"text","float":1.11,"integer":5,"timestamp":"2019-03-15T11:08:02+01:00","key":"value"}`)
-	x := parser.RawJSON{}
+	x := parser.JSON{}
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}

@@ -21,12 +21,12 @@
   },
   "handlers": {
     "json": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": ["someEnricher"],
       "sender": "print"
     },
     "update": {
-	"parser": "json",
+	"parser": "skogul",
 	"transformers": ["now"],
 	"sender": "updater"
     }
