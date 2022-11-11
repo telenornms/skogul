@@ -37,6 +37,7 @@ func TestBan(t *testing.T) {
 	c.Metrics = []*skogul.Metric{&metric}
 
     ban := &transformer.Ban{}
+    ban.Separator = "."
 
     ban.DPaths = map[string]interface{}{
         "foo.bar.1.baz": "foo",

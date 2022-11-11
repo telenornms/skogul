@@ -7,6 +7,7 @@ import (
 )
 
 type Ban struct {
+    Separator string `doc:"Separator for path strings. Default fallback is ."`
     DPaths map[string]interface{} `doc:"Data map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
     MPaths map[string]interface{} `doc:"Metadata map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
 }
@@ -14,16 +15,20 @@ type Ban struct {
 func (b *Ban) Transform(c *skogul.Container) error {
     var err error
 
+    if b.Separator == "" {
+        b.Separator = "."
+    }
+
     for _, mi := range c.Metrics {
         for pathKey, pathValue := range b.DPaths {
-            splittedPath := strings.Split(pathKey, ".")
+            splittedPath := strings.Split(pathKey, b.Separator)
             if _, ok := mi.Data[splittedPath[0]]; ok {
                 mi.Data, err = b.traverseDepths(mi.Data, splittedPath, pathValue, 0)
             }
         }
 
         for pathKey, pathValue := range b.MPaths {
-            splittedPath := strings.Split(pathKey, ".")
+            splittedPath := strings.Split(pathKey, b.Separator)
             if _, ok := mi.Metadata[splittedPath[0]]; ok {
                 mi.Metadata, err = b.traverseDepths(mi.Metadata, splittedPath, pathValue, 0)
             }
@@ -34,7 +39,7 @@ func (b *Ban) Transform(c *skogul.Container) error {
 }
 
 /*
-    Recursively traverse a nested tree of elements based on path and remove last element in the tree
+    Recursively traverse a nested tree of elements based on path and remove last path element from tree
 */
 func (b *Ban) traverseDepths(d map[string]interface{}, path []string, pathValue interface{}, depth int) (map[string]interface{}, error) {
     var err error
