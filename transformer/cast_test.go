@@ -25,7 +25,7 @@
 package transformer_test
 
 import (
-	"testing"
+    "testing"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/transformer"
@@ -91,8 +91,8 @@ func TestCast(t *testing.T) {
 	check_m(t, c.Metrics[0], "mfloattoint", 3)
 	check_m(t, c.Metrics[0], "mstringtoint", 3)
 	check_m(t, c.Metrics[0], "mflatten", "314159265358979")
-	check_m(t, c.Metrics[0], "mipv4", int64(2130706433))
-	check_m(t, c.Metrics[0], "mipv6", int64(1))
+    check_m(t, c.Metrics[0], "mipv4", "2130706433")
+    check_m(t, c.Metrics[0], "mipv6", "1")
 
 	check_d(t, c.Metrics[0], "dinttostring", "3")
 	check_d(t, c.Metrics[0], "dfloattostring", "3.14")
@@ -103,8 +103,8 @@ func TestCast(t *testing.T) {
 	check_d(t, c.Metrics[0], "dinttoint", 3)
 	check_d(t, c.Metrics[0], "dfloattoint", 3)
 	check_d(t, c.Metrics[0], "dstringtoint", 3)
-	check_d(t, c.Metrics[0], "dipv4", int64(2130706433))
-	check_d(t, c.Metrics[0], "dipv6", int64(1))
+    check_d(t, c.Metrics[0], "dipv4", "2130706433")
+    check_d(t, c.Metrics[0], "dipv6", "1")
 }
 
 func TestCast_config(t *testing.T) {
