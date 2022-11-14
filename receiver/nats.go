@@ -23,12 +23,9 @@
 package receiver
 
 import (
-	"fmt"
-	"os"
 	"github.com/nats-io/nats.go"
 	"github.com/telenornms/skogul"
 	"crypto/tls"
-	"crypto/x509"
 )
 
 var natsLog = skogul.Logger("receiver", "nats")
@@ -70,32 +67,6 @@ func (n *Nats) Verify() error {
 	return nil
 }
 
-//Unsure on how "Self contained" the receiver should be.
-func getCertPool(path string) (*x509.CertPool, error) {
-	// this means "use system default"
-	if path == "" {
-		return nil, nil
-	}
-	cp := x509.NewCertPool()
-	fd, err := os.Open(path)
-	if err != nil {
-		return nil, fmt.Errorf("unable to open custom root CA: %w", err)
-	}
-	defer func() {
-		fd.Close()
-	}()
-	bytes := make([]byte, 1024000)
-	n, err := fd.Read(bytes)
-	if err != nil {
-		return nil, fmt.Errorf("unable to read custom root CA: %w", err)
-	}
-	ok := cp.AppendCertsFromPEM(bytes[:n])
-	if !ok {
-		return nil, fmt.Errorf("unable to append certificate to root CA pool")
-	}
-	return cp, nil
-}
-
 func (n *Nats) Start() error {
 	if n.Name == "" {
 		n.Name = "skogul"
@@ -130,7 +101,7 @@ func (n *Nats) Start() error {
 			return err
 		}
 
-		cp, err := getCertPool(n.TLSCACert)
+		cp, err := skogul.GetCertPool(n.TLSCACert)
                 if err != nil {
                         natsLog.Fatalf("Failed to initialize root CA pool")
 			return err

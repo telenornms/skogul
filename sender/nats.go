@@ -97,7 +97,7 @@ func (n *Nats) init() {
 			return
 		}
 
-		cp, err := getCertPool(n.TLSCACert)
+		cp, err := skogul.GetCertPool(n.TLSCACert)
                 if err != nil {
                         natsLog.Fatalf("Failed to initialize root CA pool")
 			return
