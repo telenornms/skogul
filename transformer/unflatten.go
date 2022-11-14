@@ -3,13 +3,13 @@ package transformer
 import (
 	"errors"
 	"fmt"
-    "strings"
+	"strings"
 
 	"github.com/telenornms/skogul"
 )
 
-type Unflatten struct{
-    Separator string `doc:"Separator for path strings. Default fallback is ."`
+type Unflatten struct {
+	Separator string `doc:"Separator for path strings. Default fallback is ."`
 }
 
 // Transform created a container of metrics
@@ -68,10 +68,10 @@ func (u *Unflatten) convertValues(d *skogul.Metric) (*skogul.Metric, error) {
 		Data:     nil,
 	}
 
-    // Fallback to default separator
-    if u.Separator == "" {
-        u.Separator = "."
-    }
+	// Fallback to default separator
+	if u.Separator == "" {
+		u.Separator = "."
+	}
 
 	keys := make([]string, 0, len(d.Data))
 
