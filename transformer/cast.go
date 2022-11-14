@@ -98,11 +98,11 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 			}
 			for _, value := range cast.DataIpToDec {
 				if c.Metrics[mi].Data[value] != nil {
-                    s, ok := c.Metrics[mi].Data[value].(string)
-                    if !ok {
-                        continue
-                    }
-                    c.Metrics[mi].Data[value] = fmt.Sprintf("%s", cast.inet6Aton(s).String())
+					s, ok := c.Metrics[mi].Data[value].(string)
+					if !ok {
+						continue
+					}
+					c.Metrics[mi].Data[value] = cast.Inet6Aton(s)
 				}
 			}
 		}
@@ -161,7 +161,7 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 				if !ok {
 					continue
 				}
-                c.Metrics[mi].Metadata[value] = fmt.Sprintf("%s", cast.inet6Aton(s).String())
+				c.Metrics[mi].Metadata[value] = cast.Inet6Aton(s)
 			}
 		}
 	}
@@ -169,11 +169,11 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 }
 
 // Convers IPv4 or IPv6 to decimals
-func (cast *Cast) inet6Aton(ipAddress string) *big.Int {
+func (cast *Cast) Inet6Aton(ipAddress string) *big.Int {
 	ip := net.ParseIP(ipAddress)
 
 	if ip == nil {
-        x := big.NewInt(0)
+		x := big.NewInt(0)
 		return x
 	}
 
@@ -184,5 +184,5 @@ func (cast *Cast) inet6Aton(ipAddress string) *big.Int {
 	}
 
 	ipInt.SetBytes(ip.To16())
-    return ipInt
+	return ipInt
 }

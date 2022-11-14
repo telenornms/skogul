@@ -25,7 +25,8 @@
 package transformer_test
 
 import (
-    "testing"
+	"math/big"
+	"testing"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/transformer"
@@ -81,6 +82,9 @@ func TestCast(t *testing.T) {
 		t.Errorf("Cast() returned non-nil err: %v", err)
 	}
 
+	bigIntTestIpv4 := big.NewInt(2130706433)
+	bigIntTestIpv6 := big.NewInt(1)
+
 	check_m(t, c.Metrics[0], "minttostring", "3")
 	check_m(t, c.Metrics[0], "mfloattostring", "3.14")
 	check_m(t, c.Metrics[0], "mstringtostring", "pi")
@@ -91,8 +95,15 @@ func TestCast(t *testing.T) {
 	check_m(t, c.Metrics[0], "mfloattoint", 3)
 	check_m(t, c.Metrics[0], "mstringtoint", 3)
 	check_m(t, c.Metrics[0], "mflatten", "314159265358979")
-    check_m(t, c.Metrics[0], "mipv4", "2130706433")
-    check_m(t, c.Metrics[0], "mipv6", "1")
+
+	//check_m(t, c.Metrics[0], "mipv4", bigIntTestIpv4)
+	//check_m(t, c.Metrics[0], "mipv6", big.NewInt(1).Cmp(metric.Metadata["mipv6"].(*big.Int)))
+	if bigIntTestIpv4.Cmp(metric.Metadata["mipv4"].(*big.Int)) != 0 {
+		t.Error("ip to dec not equal")
+	}
+	if bigIntTestIpv6.Cmp(metric.Metadata["mipv6"].(*big.Int)) != 0 {
+		t.Error("ip to dec not equal")
+	}
 
 	check_d(t, c.Metrics[0], "dinttostring", "3")
 	check_d(t, c.Metrics[0], "dfloattostring", "3.14")
@@ -103,8 +114,16 @@ func TestCast(t *testing.T) {
 	check_d(t, c.Metrics[0], "dinttoint", 3)
 	check_d(t, c.Metrics[0], "dfloattoint", 3)
 	check_d(t, c.Metrics[0], "dstringtoint", 3)
-    check_d(t, c.Metrics[0], "dipv4", "2130706433")
-    check_d(t, c.Metrics[0], "dipv6", "1")
+
+	//check_d(t, c.Metrics[0], "dipv4", big.NewInt(2130706433).Cmp(metric.Metadata["dipv4"].(*big.Int)))
+	//check_d(t, c.Metrics[0], "dipv6", big.NewInt(1).Cmp(metric.Metadata["dipv6"].(*big.Int)))
+	if bigIntTestIpv4.Cmp(metric.Data["dipv4"].(*big.Int)) != 0 {
+		t.Error("ip to dec not equal")
+	}
+	if bigIntTestIpv6.Cmp(metric.Data["dipv6"].(*big.Int)) != 0 {
+		t.Error("ip to dec not equal")
+	}
+
 }
 
 func TestCast_config(t *testing.T) {
