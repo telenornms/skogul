@@ -1,0 +1,14 @@
+FROM rockylinux:8
+ENV SHELL=/bin/bash
+RUN yum install -y git python3-docutils rpm-build wget make gcc
+RUN wget https://storage.googleapis.com/golang/getgo/installer_linux
+RUN chmod +x installer_linux
+RUN ./installer_linux
+RUN source /root/.bash_profile
+VOLUME /git
+WORKDIR /git
+RUN pwd
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/bin:/root/.go/bin:/root/go/bin
+ENV GOPATH=/root/go
+
+ENTRYPOINT ["make"]
