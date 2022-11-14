@@ -8,8 +8,8 @@ jobs:
      with:
        go-version: 1.19
    - uses: actions/checkout@v3
-   - run: apt-get update
-   - run: apt-get -y install make
+   - run: sudo apt-get update
+   - run: sudo apt-get -y install make
    - run: make check
   test:
     strategy:
