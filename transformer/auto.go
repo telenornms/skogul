@@ -108,4 +108,11 @@ func init() {
 		Help:     "PROTOTYPE/ALPHA: Static enrichment. Use a json-structured source document to enrich incoming metrics with additional data. See the docs/examples/ directory for an actual example. This is NOT production ready, and should only be used if you are prepared to file bug reports and update your setup as the transformer matures.",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "unflatten",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &Unflatten{} },
+		Help:     "Create structured data from flat keys, e.g.: foo.bar.zoo: 1, foo.baz.zoo: 2 to { foo: { bar: { zoo: 1 }, baz: { zoo: 2 } } }",
+		AutoMake: true,
+	})
 }

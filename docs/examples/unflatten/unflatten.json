@@ -1,0 +1,25 @@
+{
+    "receivers": {
+        "test":{
+            "type": "wholefile",
+            "file": "./parser/testdata/usp.bin",
+            "handler": "json"
+        }
+    },
+    "handlers": {
+        "json": {
+            "parser": "protobuf_usp",
+            "transformers": ["split_input", "now", "unflatten"],
+            "sender": "print"
+        }
+    },
+    "transformers": {
+        "split_input": {
+            "type": "split",
+            "field": ["Report"]
+        },
+        "unflatten": {
+            "type": "unflatten"
+        }
+    }
+}
