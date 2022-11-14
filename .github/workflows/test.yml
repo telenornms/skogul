@@ -1,16 +1,6 @@
 on: [push, pull_request]
 name: Test
 jobs:
-  check:
-   runs-on: ubuntu-latest
-   steps:
-   - uses: actions/setup-go@v3
-     with:
-       go-version: 1.19
-   - uses: actions/checkout@v3
-   - run: sudo apt-get update
-   - run: sudo apt-get -y install make
-   - run: make check
   test:
     strategy:
       matrix:
@@ -22,4 +12,4 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
     - uses: actions/checkout@v3
-    - run: go test -short ./...
+    - run: make check
