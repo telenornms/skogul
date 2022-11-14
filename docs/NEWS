@@ -1,3 +1,32 @@
+v0.19.0
+=======
+
+Release date: 2022-11-14
+
+Somewhat large release, but:
+
+- Drone is on the fringe, so manual release. GH actions incoming.
+- New SQLite sender
+- New *Experimental* prometheus parser
+- New unflatten transformer
+- Cast transformer: Add casting of IPs to integers
+
+Minor:
+
+- Several minor chores from Håkon Solbjørg that increases consistency and
+  correctness, with minor negative user-impact.
+- Splunk: Send metadata as fields to spluk HEC
+- Deperecate "Path" and use "File" instead for consistency (deprecation,
+  old configs will keep working)
+- Add KeepOriginal flag to the Data transformer to 
+- Many log cleanups
+
+All in all, this is a larger release than we'd like, but also largely
+isolated features.
+
+Since this will be a manual release, it might deviate SLIGHTLY from the
+other releases, but should be mostly the same.
+
 v0.18.0
 =======
 
