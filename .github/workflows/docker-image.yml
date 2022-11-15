@@ -1,6 +1,6 @@
 # Example from https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
 
-name: Create and publish a Docker image
+name: Create and publish a Container image
 
 on:
   push:
@@ -28,9 +28,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Container image
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: ${{ github.ref_name }}
+          tags: "ghcr.io/sklirg/skogul:${{ github.ref_name }}"
