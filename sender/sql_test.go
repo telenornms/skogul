@@ -50,13 +50,11 @@ package sender_test
 
 import (
 	"fmt"
-	"os"
-	"testing"
-	"time"
-
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/sender"
+	"testing"
+	"time"
 )
 
 var sqlBase = `
@@ -121,21 +119,6 @@ func getValidContainer() *skogul.Container {
 	return &c
 }
 
-func prepareSQLiteTest(t *testing.T) {
-	_, err := os.Create("/tmp/skogul.sqlite")
-	if err != nil {
-		t.Errorf("failed to create sqlite test db %v", err)
-	}
-
-	s := sqlSender(t, `"driver":"sqlite3","connstr": "/tmp/skogul.sqlite", "query": "create table test (timestamp varchar(100) not null, src varchar(100) not null, name varchar(100) not null, data varchar(100) not null);"`)
-
-	container := getValidContainer()
-
-	if err := s.Send(container); err != nil {
-		t.Errorf("SQL.Send failed: %v", err)
-	}
-}
-
 func TestSQL_auto(t *testing.T) {
 	sqlTestAutoNeg(t, `"driver":"mysql"`)
 	sqlTestAutoNeg(t, `"driver":"mysql","connstr": "something"`)
@@ -144,8 +127,6 @@ func TestSQL_auto(t *testing.T) {
 	sqlTestAuto(t, `"driver":"mysql","connstr":"foo:bar@/blatt", "query":"foo%20bar"`)
 	sqlTestAutoNeg(t, `"driver":"postgres"`)
 	sqlTestAuto(t, `"driver":"postgres","connstr":"something","query": "blatti"`)
-	sqlTestAutoNeg(t, `"driver":"sqlite3"`)
-	sqlTestAuto(t, `"driver":"sqlite3","connstr":"testdata/skogul.sqlite","query": "blatti"`)
 }
 
 func TestSQL_mysql_basic(t *testing.T) {
@@ -159,70 +140,6 @@ func TestSQL_postgres_basic(t *testing.T) {
 	s := sqlSender(t, `"driver":"postgres","connstr":"database=skogul sslmode=disable user=postgres password=finnlandshette","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
 	if s == nil {
 		t.Errorf("Failed to get sender")
-	}
-}
-
-func TestSQL_sqlite3_basic(t *testing.T) {
-	prepareSQLiteTest(t)
-	s := sqlSender(t, `"driver":"sqlite3","connstr":"/tmp/skogul.sqlite","query":"INSERT INTO test (ts, meta,data) VALUES(${timestamp},${json.metadata},${json.data})"`)
-	if s == nil {
-		t.Errorf("Failed to get sender")
-	}
-}
-
-func TestSQL_sqlite3_without_test_db(t *testing.T) {
-	s := sqlSender(t, `"driver":"sqlite3","connstr":"missing_test_file.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
-	if s == nil {
-		t.Errorf("Failed to get sender")
-	}
-
-	defer func() {
-		if r := recover(); r != nil {
-			t.Error("It's fine. We didn't panic.")
-		}
-	}()
-}
-
-func TestSQL_sqlite3_with_test_db(t *testing.T) {
-	prepareSQLiteTest(t)
-	s := sqlSender(t, `"driver":"sqlite3","connstr":"/tmp/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
-
-	defer func() {
-		if r := recover(); r != nil {
-			t.Error("It's fine. We didn't panic.")
-		}
-	}()
-
-	if s == nil {
-		t.Errorf("Failed to get sender")
-	}
-
-	container := getValidContainer()
-
-	if err := s.Send(container); err != nil {
-		t.Error("SQL.Send failed")
-	}
-}
-
-func TestSQL_sqlite3_connect(t *testing.T) {
-	prepareSQLiteTest(t)
-	s := sqlSender(t, `"driver":"sqlite3","connstr": "/tmp/skogul.sqlite", "query": "INSERT INTO test VALUES(${timestamp},${metadata.src},${name},${data});"`)
-
-	container := getValidContainer()
-
-	if err := s.Send(container); err != nil {
-		t.Errorf("SQL.Send failed: %v", err)
-	}
-
-	container.Metrics[0].Data = make(map[string]interface{})
-	container.Metrics[0].Data["name"] = "Foo Bar"
-	if err := s.Send(container); err == nil {
-		t.Errorf("SQL.Send succeeded with missing data field")
-	}
-
-	container.Metrics[0].Time = nil
-	if err := s.Send(container); err == nil {
-		t.Errorf("SQL.Send succeeded with missing timestamp")
 	}
 }
 
