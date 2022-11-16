@@ -124,14 +124,26 @@ func (n *Nats) Start() error {
 		*n.o = append(*n.o, opt)
 	}
 
+	//Append options
+        *n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
+                natsLog.WithError(err).Error("Got disconnected!")
+        }))
+        *n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
+                natsLog.Info("Reconnected")
+        }))
+        *n.o = append(*n.o, nats.RetryOnFailedConnect(true))
+        *n.o = append(*n.o, nats.MaxReconnects(-1))
+
 	var err error
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	cb := func(msg *nats.Msg) {
+		natsLog.Debugf('Received message on %v', msg.Subject)
 		if err:= n.Handler.H.Handle(msg.Data); err != nil {
 			natsLog.WithError(err).Warn("Unable to handle Nats message")
 		}
 		return
 	}
+
 	if err != nil {
 		natsLog.Errorf("Encountered an error while connecting to Nats: %w", err)
 	}

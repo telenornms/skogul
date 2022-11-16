@@ -120,12 +120,25 @@ func (n *Nats) init() {
 		*n.o = append(*n.o, opt)
 	}
 
+	//Append options
+	*n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
+                natsLog.WithError(err).Error("Got disconnected!")
+        }))
+	*n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
+                natsLog.Info("Reconnected")
+        }))
+	*n.o = append(*n.o, nats.RetryOnFailedConnect(true))
+	*n.o = append(*n.o, nats.MaxReconnects(-1))
 	var err error
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	if err != nil {
 		natsLog.Errorf("Encountered an error while connecting to Nats: %w", err)
 	}
+
 }
+
+
+
 func (n *Nats) Send(c *skogul.Container) error {
 	n.once.Do(func() {
 		n.init()
