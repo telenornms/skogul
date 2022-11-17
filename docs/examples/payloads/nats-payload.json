@@ -1,0 +1,1 @@
+{"metrics":[{"timestamp":"{{TimeStamp}}","metadata":{"id":"{{ID}}"},"data":{"string":"{{Random 5 10}}","float":1.11,"integer":{{Count}}}}]}
