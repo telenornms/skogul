@@ -126,18 +126,20 @@ func (n *Nats) Start() error {
 		*n.o = append(*n.o, opt)
 	}
 
-	//Append options
+	//Log disconnects
         *n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
                 natsLog.WithError(err).Error("Got disconnected!")
         }))
+	//Log reconnects
         *n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
                 natsLog.Info("Reconnected")
         }))
+	//Always try to reconnect
         *n.o = append(*n.o, nats.RetryOnFailedConnect(true))
+	//Try to reconnect forever
         *n.o = append(*n.o, nats.MaxReconnects(-1))
 
 	var err error
-
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	cb := func(msg *nats.Msg) {
 		natsLog.Debugf("Received message on %v", msg.Subject)
