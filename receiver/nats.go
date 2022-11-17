@@ -23,6 +23,7 @@
 package receiver
 
 import (
+	"sync"
 	"github.com/nats-io/nats.go"
 	"github.com/telenornms/skogul"
 	"crypto/tls"
@@ -53,6 +54,7 @@ type Nats struct {
 	Insecure	bool		  `doc:"TLS InsecureSkipVerify"`
 	o		*[]nats.Option
 	nc		*nats.Conn
+	wg		sync.WaitGroup
 }
 
 // Verify configuration
@@ -135,15 +137,17 @@ func (n *Nats) Start() error {
         *n.o = append(*n.o, nats.MaxReconnects(-1))
 
 	var err error
+
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	cb := func(msg *nats.Msg) {
-		natsLog.Debugf('Received message on %v', msg.Subject)
+		natsLog.Debugf("Received message on %v", msg.Subject)
 		if err:= n.Handler.H.Handle(msg.Data); err != nil {
 			natsLog.WithError(err).Warn("Unable to handle Nats message")
 		}
 		return
 	}
 
+	n.wg.Add(1)
 	if err != nil {
 		natsLog.Errorf("Encountered an error while connecting to Nats: %w", err)
 	}
@@ -153,5 +157,6 @@ func (n *Nats) Start() error {
 	} else {
 		n.nc.Subscribe(n.Subject, cb)
 	}
+	n.wg.Wait()
 	return n.nc.LastError()
 }
