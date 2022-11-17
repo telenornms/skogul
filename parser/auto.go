@@ -35,7 +35,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:     "skogul",
 		Aliases:  []string{"json"},
-		Alloc:    func() interface{} { return &JSON{} },
+		Alloc:    func() interface{} { return &SkogulJSON{} },
 		Help:     "Parses the standard Skogul JSON format.",
 		AutoMake: true,
 	})
@@ -49,7 +49,7 @@ func init() {
 	Auto.Add(skogul.Module{
 		Name:     "rawjson",
 		Aliases:  []string{"jsonraw", "custom-json"},
-		Alloc:    func() interface{} { return &RawJSON{} },
+		Alloc:    func() interface{} { return &JSON{} },
 		Help:     "Parses any generic JSON data into a single metric which can then be potentially transformed into multiple metrics if need be.",
 		AutoMake: true,
 	})

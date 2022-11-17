@@ -23,6 +23,10 @@
 
 package skogul
 
+import (
+	log "github.com/sirupsen/logrus"
+)
+
 // Module is metadata for a skogul module. It is used by the receiver,
 // sender and transformer package. The Alloc() function must return a
 // data structure that implements the relevant module interface, which is
@@ -63,6 +67,11 @@ var Identity map[interface{}]string
 func (mm ModuleMap) Lookup(name string) *Module {
 	if mm[name] == nil {
 		return nil
+	}
+	// XXX: https://github.com/telenornms/skogul/issues/182
+	if name == "json" {
+		log.Warn("Parser 'json' is deprecated, use 'skogul' instead.")
+		return mm["skogul"]
 	}
 	if mm[name].AutoMake {
 		return mm[name]

@@ -13,7 +13,7 @@ require (
 	google.golang.org/protobuf v1.28.1
 )
 
-require github.com/mattn/go-sqlite3 v1.14.15
+require github.com/dolmen-go/jsonptr v0.0.0-20220904212016-e3f38a361346
 
 require (
 	github.com/nats-io/nats.go v1.18.0 // indirect

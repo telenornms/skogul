@@ -65,9 +65,9 @@ func TestLogrusLogReceivesData(t *testing.T) {
 	sTest := config.Senders["test"].Sender.(*sender.Test)
 	rLog := config.Receivers["logrus"].Receiver.(*receiver.LogrusLog)
 	go rLog.Start()
-	time.Sleep(time.Duration(100 * time.Millisecond))
+	time.Sleep(time.Duration(1000 * time.Millisecond))
 	logrus.Info("This works!")
-	time.Sleep(time.Duration(10 * time.Millisecond))
+	time.Sleep(time.Duration(1000 * time.Millisecond))
 	got := sTest.Received()
 	if got != 1 {
 		t.Errorf("receiver.Tester{}, x.Start() failed to receive data. Expected some data, got 0.")

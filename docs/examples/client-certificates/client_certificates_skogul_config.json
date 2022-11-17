@@ -30,12 +30,12 @@
   },
   "handlers": {
     "json": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [],
       "sender": "http"
     },
     "debug": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [],
       "sender": "debug"
     }

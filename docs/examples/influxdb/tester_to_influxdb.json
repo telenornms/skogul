@@ -10,7 +10,7 @@
   },
   "handlers": {
     "json": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [],
       "sender": "influxdb"
     }

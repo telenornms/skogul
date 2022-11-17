@@ -30,11 +30,12 @@ import (
 	"github.com/telenornms/skogul"
 )
 
-// JSON parses a byte string-representation of a Container
-type JSON struct{}
+// SkogulJSON parses a byte string-representation of a Container in the
+// format Skogul produces.
+type SkogulJSON struct{}
 
 // Parse accepts a byte slice of JSON data and marshals it into a container
-func (x JSON) Parse(b []byte) (*skogul.Container, error) {
+func (x SkogulJSON) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	err := json.Unmarshal(b, &container)
 	return &container, err
@@ -55,13 +56,16 @@ func (x JSONMetric) Parse(b []byte) (*skogul.Container, error) {
 	return &container, err
 }
 
-// RawJSON can be used when the JSON format does not conform to the final JSON format of skogul,
-// e.g. when it is used as the first step of parsing from a third party source where modifying
+// JSON is schemaless JSON. If data is sent between Skogul instances, SkogulJSON should be used instead
+// which retains the data structure Skogul works with. A distinction between 'Skogul' and 'JSON' is made
+// because historically, Skogul accepted 'json' as a configuration option for its own JSON format, now
+// named 'skogul'.
+// JSON can be useful e.g. as the first step of parsing from a third party source where modifying
 // the source data structure might be hard/impossible
-type RawJSON struct{}
+type JSON struct{}
 
 // Parse accepts a byte slice of JSON data and marshals it into an empty skogul.Container
-func (data RawJSON) Parse(b []byte) (*skogul.Container, error) {
+func (data JSON) Parse(b []byte) (*skogul.Container, error) {
 
 	// The Validate() func of a container expects a timestamp to be valid.
 	// Better way to fix?

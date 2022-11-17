@@ -36,7 +36,7 @@ func TestCounter(t *testing.T) {
 	two := &(sender.Test{})
 
 	h := skogul.Handler{Sender: one}
-	h.SetParser(parser.JSON{})
+	h.SetParser(parser.SkogulJSON{})
 	cnt := sender.Counter{Next: skogul.SenderRef{S: two}, Stats: skogul.HandlerRef{H: &h}, Period: skogul.Duration{Duration: time.Duration(50 * time.Millisecond)}}
 	two.TestQuick(t, &cnt, &validContainer, 1)
 	if one.Received() != 0 {

@@ -10,11 +10,11 @@
 	},
 	"handlers": {
 		"demo": {
-			"parser": "json",
+			"parser": "skogul",
 			"sender": "mybatch"
 		},
 		"stat": {
-			"parser": "json",
+			"parser": "skogul",
 			"sender": "print"
 		}
 	},

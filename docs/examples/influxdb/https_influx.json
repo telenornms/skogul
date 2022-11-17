@@ -18,7 +18,7 @@
   },
   "handlers": {
     "myjson": {
-      "parser": "json",
+      "parser": "skogul",
       "sender": "batch"
     }
   },

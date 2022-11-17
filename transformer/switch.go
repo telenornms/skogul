@@ -24,14 +24,16 @@
 package transformer
 
 import (
+	"github.com/dolmen-go/jsonptr"
+
 	"github.com/telenornms/skogul"
 )
 
-// Case requires a field ("when") and a value ("is") to match
+// Case requires the path to a field ("when") and a value ("is") to match
 // for the set of transformers to run
 type Case struct {
 	When         string                   `doc:"Used as a conditional statement on a field"`
-	Is           string                   `doc:"Used for the specific value (string) of the stated metadata field"`
+	Is           interface{}              `doc:"Used for the specific value of the stated metadata field"`
 	Transformers []*skogul.TransformerRef `doc:"The transformers to run when the defined conditional is true"`
 }
 
@@ -45,21 +47,27 @@ var switchLogger = skogul.Logger("transformer", "switch")
 // Transform checks the cases and applies the matching transformers
 func (sw *Switch) Transform(c *skogul.Container) error {
 	for _, cas := range sw.Cases {
+
 		field := cas.When
 		condition := cas.Is
 
 		for _, metric := range c.Metrics {
-			if metric.Metadata[field] == nil || metric.Metadata[field] == "" {
+			var fieldValue interface{}
+			// If Case.When starts with a '/', we use it as a JSON pointer.
+			if cas.When[0] == '/' {
+				var err error
+				fieldValue, err = jsonptr.Get(metric.Metadata, cas.When)
+				if err != nil {
+					switchLogger.WithField("field", field).Warn("Failed to get field value from JSON pointer")
+					continue
+				}
+			} else if metric.Metadata[field] == nil || metric.Metadata[field] == "" {
 				continue
+			} else {
+				fieldValue = metric.Metadata[field]
 			}
 
-			metadataField, ok := metric.Metadata[field].(string)
-			if !ok {
-				switchLogger.WithField("field", field).Warn("Cast to string for value of metadata field failed")
-				continue
-			}
-
-			if metadataField != condition {
+			if fieldValue != condition {
 				continue
 			}
 

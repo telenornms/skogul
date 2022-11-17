@@ -14,12 +14,12 @@
   },
   "handlers": {
     "jsontemplating": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [  ],
       "sender": "count"
     },
     "debugger": {
-      "parser": "json",
+      "parser": "skogul",
       "transformers": [],
       "sender": "print"
     }

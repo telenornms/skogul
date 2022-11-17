@@ -32,7 +32,6 @@ import (
 
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/telenornms/skogul"
 )
 
@@ -53,7 +52,7 @@ type dbElement struct {
 
 /*
 SQL sender connects to a SQL Database, currently either MySQL(or Mariadb I
-suppose), Postgres or Sqlite3. The Connection String for MySQL is specified at
+suppose) or Postgres. The Connection String for MySQL is specified at
 https://github.com/go-sql-driver/mysql/ and postgres at
 http://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
 .
@@ -108,7 +107,7 @@ func (sq *SQL) prep() {
 		} else {
 			sq.list = append(sq.list, dbElement{data, element})
 		}
-		if sq.Driver == "mysql" || sq.Driver == "sqlite3" {
+		if sq.Driver == "mysql" {
 			return "?"
 		}
 		nElement++
@@ -118,32 +117,12 @@ func (sq *SQL) prep() {
 }
 
 func (sq *SQL) init() {
-	if sq.Driver == "sqlite3" {
-		if sq.initErr = verifySQLiteConn(sq.ConnStr); sq.initErr != nil {
-			return
-		}
-	}
-
 	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
 	if sq.initErr != nil {
 		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection")
 		return
 	}
 	sq.prep()
-}
-
-func verifySQLiteConn(file string) error {
-	fd, err := os.Stat(file)
-
-	if err != nil {
-		return err
-	}
-
-	if fd.IsDir() {
-		return fmt.Errorf("db file is a directory")
-	}
-
-	return nil
 }
 
 func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
@@ -228,8 +207,8 @@ func (sq *SQL) Verify() error {
 	if sq.Driver == "" {
 		return skogul.MissingArgument("Driver")
 	}
-	if sq.Driver != "mysql" && sq.Driver != "postgres" && sq.Driver != "sqlite3" {
-		return fmt.Errorf("unsuported database driver %s - must be `mysql` or `postgres` or `sqlite3`", sq.Driver)
+	if sq.Driver != "mysql" && sq.Driver != "postgres" {
+		return fmt.Errorf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)
 	}
 	return nil
 }

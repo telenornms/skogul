@@ -32,7 +32,7 @@
   },
   "handlers": {
     "plain": {
-      "parser": "json",
+      "parser": "skogul",
       "sender": "batch",
       "transformers": []
     }

@@ -8,21 +8,6 @@ platform:
   arch: amd64
 
 steps:
-- name: build
-  image: golang
-  commands:
-  - go build ./cmd/skogul
-
-- name: test
-  image: golang
-  commands:
-  - apt-get update
-  - apt-get -y install make
-  - go get golang.org/x/lint/golint
-  - make check
-  depends_on:
-    - build
-
 - name: prepare-release
   image: golang
   commands:
@@ -103,5 +88,3 @@ steps:
   when:
     event:
     - tag
-
-...
