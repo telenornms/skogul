@@ -58,6 +58,16 @@ type Nats struct {
 	once		sync.Once
 }
 
+// Verify configuration
+func (n *Nats) Verify() error {
+        if n.Subject == "" {
+                return skogul.MissingArgument("Subject")
+        }
+
+        return nil
+}
+
+
 func (n *Nats) init() {
 
 	if n.Encoder.Name == "" {
