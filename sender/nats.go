@@ -146,7 +146,7 @@ func (n *Nats) init() {
 	var err error
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	if err != nil {
-		natsLog.Errorf("Encountered an error while connecting to Nats: %w", err)
+		natsLog.Errorf("Encountered an error while connecting to Nats: %v", err)
 	}
 
 }
