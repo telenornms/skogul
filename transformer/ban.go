@@ -1,65 +1,41 @@
 package transformer
 
 import (
-    "errors"
-    "github.com/telenornms/skogul"
-    "strings"
+	"log"
+
+	"github.com/dolmen-go/jsonptr"
+	"github.com/telenornms/skogul"
 )
 
 type Ban struct {
-    Separator string `doc:"Separator for path strings. Default fallback is ."`
-    DPaths map[string]interface{} `doc:"Data map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
-    MPaths map[string]interface{} `doc:"Metadata map of key value pairs where the keys are . separated tree paths e.g foo.bar.baz: true"`
+	Lookup map[string]interface{} `doc:"Map of key value pairs to lookup in metrics. Looks in data and metadata fields. Key is json pointer, value any. E.g. /foo/bar: \"bar\""`
 }
 
 func (b *Ban) Transform(c *skogul.Container) error {
-    var err error
+	for pathKey, pathValue := range b.Lookup {
+		for metricKey, mi := range c.Metrics {
+			var ptr interface{}
 
-    if b.Separator == "" {
-        b.Separator = "."
-    }
+			ptr, _ = jsonptr.Get(mi.Data, pathKey)
 
-    for _, mi := range c.Metrics {
-        for pathKey, pathValue := range b.DPaths {
-            splittedPath := strings.Split(pathKey, b.Separator)
-            if _, ok := mi.Data[splittedPath[0]]; ok {
-                mi.Data, err = b.traverseDepths(mi.Data, splittedPath, pathValue, 0)
-            }
-        }
+			if ptr == pathValue {
+				c.Metrics[metricKey] = &skogul.Metric{}
+			}
+		}
+	}
 
-        for pathKey, pathValue := range b.MPaths {
-            splittedPath := strings.Split(pathKey, b.Separator)
-            if _, ok := mi.Metadata[splittedPath[0]]; ok {
-                mi.Metadata, err = b.traverseDepths(mi.Metadata, splittedPath, pathValue, 0)
-            }
-        }
-    }
+	for pathKey, pathValue := range b.Lookup {
+		for metricKey, mi := range c.Metrics {
+			var ptr interface{}
 
-    return err
-}
+			ptr, _ = jsonptr.Get(mi.Metadata, pathKey)
 
-/*
-    Recursively traverse a nested tree of elements based on path and remove last path element from tree
-*/
-func (b *Ban) traverseDepths(d map[string]interface{}, path []string, pathValue interface{}, depth int) (map[string]interface{}, error) {
-    var err error
-    if depth == len(path) - 1 {
-        if d[path[len(path) - 1]] == pathValue {
-            delete(d, path[len(path) - 1])
-            return d, err
-        }
-        return d, err
-    }
+			if ptr == pathValue {
+				log.Printf("%v %v", ptr, pathValue)
+				c.Metrics[metricKey] = &skogul.Metric{}
+			}
+		}
+	}
 
-    if _, ok := d[path[depth]]; ok {
-        key, okk := d[path[depth]].(map[string]interface{})
-        if !okk {
-            return d, errors.New("could not cast key to map")
-        }
-
-        d[path[depth]], err = b.traverseDepths(key, path, pathValue, depth + 1)
-        return d, err
-    }
-
-    return d, errors.New("invalid key occurred")
+	return nil
 }

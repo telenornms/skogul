@@ -1,55 +1,130 @@
 package transformer_test
 
 import (
-    "github.com/telenornms/skogul/transformer"
-    "testing"
+	"testing"
+
+	"github.com/telenornms/skogul/transformer"
 
 	"github.com/telenornms/skogul"
 )
 
 func TestBan(t *testing.T) {
-	metric := skogul.Metric{}
-    metric.Data = map[string]interface{}{
-        "foo": nil,
-        "bar": map[string]interface{}{
-            "baz": "bar.baz",
-        },
-        "baz": 1,
-    }
+	metric := skogul.Metric{
+		Data: map[string]interface{}{
+			"foo": map[string]interface{}{
+				"bar": map[string]interface{}{
+					"baz": "foo.bar.baz",
+					"1": map[string]interface{}{
+						"baz": "foo.bar.1.baz",
+						"ble": "ble123",
+						"321": "12345",
+					},
+					"2": map[string]interface{}{
+						"baz": "foo.bar.2.baz",
+						"ble": "ble123",
+						"321": "12345",
+					},
+					"3": map[string]interface{}{
+						"baz": "foo.bar.1.baz",
+						"ble": "ble123",
+						"321": "12345",
+					},
+					"4": map[string]interface{}{
+						"baz": "foo.bar.4.baz",
+						"ble": "ble1234",
+						"321": "12345",
+					},
+				},
+			},
+		},
+	}
 
-	metric.Data["foo"] = map[string]interface{}{
-        "bar": map[string]interface{}{
-            "baz": "foo.bar.baz",
-            "1": map[string]interface{}{
-                "baz": "foo.bar.1.baz",
-            },
-        },
-        "foobar": map[string]interface{}{
-            "1": map[string]interface{}{
-                "baz": map[string]interface{}{
-                    "bar": "foo.foobar.1.baz.bar",
-                },
-            },
-        },
-    }
+	metric2 := skogul.Metric{
+		Data: map[string]interface{}{
+			"baz": map[string]interface{}{
+				"bar": map[string]interface{}{
+					"baz": "baz.bar.baz",
+				},
+				"foobar": map[string]interface{}{
+					"1": map[string]interface{}{
+						"baz": map[string]interface{}{
+							"bar": "foo.foobar.1.baz.bar",
+						},
+					},
+				},
+			},
+		},
+	}
 
-    c := skogul.Container{}
-	c.Metrics = []*skogul.Metric{&metric}
+	metric3 := skogul.Metric{
+		Data: map[string]interface{}{
+			"bar": map[string]interface{}{
+				"bar": map[string]interface{}{
+					"baz": "foo.bar.baz",
+					"1": map[string]interface{}{
+						"baz": "foo.bar.1.baz",
+						"ble": "ble123",
+						"321": "12345",
+					},
+					"2": map[string]interface{}{
+						"baz": "foo.bar.2.baz",
+						"ble": "ble123",
+						"321": "12345",
+					},
+					"3": map[string]interface{}{
+						"baz": "foo.bar.1.baz",
+						"ble": "ble123",
+						"321": "12345",
+					},
+					"4": map[string]interface{}{
+						"baz": "foo.bar.4.baz",
+						"ble": "ble1234",
+						"321": "12345",
+					},
+				},
+				"foobar": map[string]interface{}{
+					"1": map[string]interface{}{
+						"baz": map[string]interface{}{
+							"bar": "foo.foobar.1.baz.bar",
+						},
+					},
+				},
+			},
+			"fee": "5",
+		},
+	}
 
-    ban := &transformer.Ban{}
-    ban.Separator = "."
+	metric4 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"funny": "notfunny",
+		},
+	}
 
-    ban.DPaths = map[string]interface{}{
-        "foo.bar.1.baz": "foo",
-        "foo.foobar.1.baz.bar": "foo.foobar.1.baz.bar",
-        "bar.baz": "bar.baz",
-        "baz": 9,
-    }
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric, &metric2, &metric3, &metric4}
 
-    err := ban.Transform(&c)
-    if err != nil {
-        t.Fatalf("error occurred %v", err.Error())
-    }
+	ban := &transformer.Ban{}
 
-    t.Log(c)
+	ban.Lookup = map[string]interface{}{
+		"/baz/bar/baz":   "baz.bar.baz",
+		"/bar/bar/1/321": "12345",
+		"/funny":         "notfunny",
+	}
+
+	t.Log(c)
+	err := ban.Transform(&c)
+	if err != nil {
+		t.Fatalf("error occurred %v", err.Error())
+	}
+	t.Log(c)
+
+	if baz, ok := c.Metrics[1].Data["baz"]; ok {
+		r := baz.(map[string]interface{})
+		r2 := r["bar"].(map[string]interface{})
+
+		if _, ok := r2["baz"]; ok {
+			t.Fatal("/baz/bar/baz has not been deleted")
+		}
+	}
+
 }
