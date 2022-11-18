@@ -151,7 +151,7 @@ func (n *Nats) Start() error {
 
 	n.wg.Add(1)
 	if err != nil {
-		natsLog.Errorf("Encountered an error while connecting to Nats: %w", err)
+		natsLog.Errorf("Encountered an error while connecting to Nats: %v", err)
 	}
 
 	if n.Queue == "" {
