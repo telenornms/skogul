@@ -1,0 +1,88 @@
+name: "Build tarball and rpm package"
+
+on:
+  push:
+    tags: ["*"]
+
+jobs:
+  prepare-release:
+    strategy:
+      matrix:
+        go-version: [1.19.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache: true
+      - name: Test
+        run: make check
+      - name: Build tarball
+        id: build
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install make python3-docutils bzip2 gawk
+          make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
+          make GIT_DESCRIBE=${{github.ref_name}} notes
+          tar cvjf skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}
+      - name: Checksum tarball
+        run: |
+          echo "$(shasum skogul-${{github.ref_name}}.tar.bz2 | awk '{ print $1 }')" >> checksum_tarball.txt
+      - name: Import release notes
+        id: read_release_notes
+        run: |
+          r=$(cat notes)
+          echo "release_body=$r" >> $GITHUB_OUTPUT
+      - name: Upload artifacts
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          file: skogul-${{github.ref_name}}.tar.bz2
+          asset_name: skogul-${{github.ref_name}}.tar.bz2
+          tag: ${{ github.ref }}
+          body: |
+            ${{ steps.read_release_notes.outputs.release_body }}
+      - name: Upload checksum
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          file: checksum_tarball.txt
+          asset_name: checksum_tarball.txt
+          tag: ${{ github.ref }}
+  prepare-centos-release:
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    container:
+        image: rockylinux:8
+        env:
+          GIT_DESCRIBE: ${{ github.ref_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Build rpm package
+        run: |
+          export PATH=$PATH:/usr/local/go/bin
+          yum install -y git python3-docutils rpm-build wget make
+          wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
+          tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
+          go version
+          make GIT_DESCRIBE=$GIT_DESCRIBE rpm
+      - name: Checksum rpm
+        run: |
+          echo "$(shasum skogul-${{github.ref_name}}-1.x86_64.rpm | awk '{ print $1 }')" >> checksum_rpm.txt
+      - name: Upload artifacts
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          file: skogul-${{github.ref_name}}-1.x86_64.rpm
+          asset_name: skogul-${{github.ref_name}}-1.x86_64.rpm
+          tag: ${{ github.ref }}
+      - name: Upload checksum
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          file: checksum_rpm.txt
+          asset_name: checksum_rpm.txt
+          tag: ${{ github.ref }}
