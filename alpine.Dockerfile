@@ -1,8 +1,10 @@
+ARG ALPINE_VERSION
+
 FROM ghcr.io/telenornms/skogul:latest
 RUN mkdir dist
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o skogul ./cmd/skogul
 
-FROM alpine:latest
+FROM alpine:${ALPINE_VERSION}
 
 #Install ca-certficates and dumb-init.
 RUN apk --no-cache add ca-certificates dumb-init
