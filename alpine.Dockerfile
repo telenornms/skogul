@@ -18,5 +18,7 @@ RUN chmod +x /usr/local/bin/skogul
 
 RUN addgroup -g 450 -S skogul && adduser -s /bin/sh -SD -G skogul skogul
 
+USER skogul
+
 ENTRYPOINT ["/usr/bin/dumb-init"]
 CMD ["/usr/local/bin/skogul"]
