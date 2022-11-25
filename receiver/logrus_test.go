@@ -24,6 +24,7 @@
 package receiver_test
 
 import (
+	"os"
 	"testing"
 	"time"
 
@@ -62,12 +63,24 @@ func TestLogrusLogReceivesData(t *testing.T) {
 		return
 	}
 
+	sleepDuration := 1000 * time.Millisecond
+	// Allow overriding the sleep duration for this package in e.g. CI environments
+	// which might be more unpredictable with timings.
+	if testSleepDuration := os.Getenv("SKOGUL_TEST_SLEEP_DURATION"); testSleepDuration != "" {
+		d, err := time.ParseDuration(testSleepDuration)
+		if err != nil {
+			t.Errorf("Failed to parse custom sleep duration for logrus test: %s", err)
+			return
+		}
+		sleepDuration = d
+	}
+
 	sTest := config.Senders["test"].Sender.(*sender.Test)
 	rLog := config.Receivers["logrus"].Receiver.(*receiver.LogrusLog)
 	go rLog.Start()
-	time.Sleep(time.Duration(1000 * time.Millisecond))
+	time.Sleep(sleepDuration)
 	logrus.Info("This works!")
-	time.Sleep(time.Duration(1000 * time.Millisecond))
+	time.Sleep(sleepDuration)
 	got := sTest.Received()
 	if got != 1 {
 		t.Errorf("receiver.Tester{}, x.Start() failed to receive data. Expected some data, got 0.")
