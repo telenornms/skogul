@@ -23,13 +23,13 @@
 package sender
 
 import (
-	"fmt"
-	"sync"
-	"strings"
 	"crypto/tls"
+	"fmt"
 	"github.com/nats-io/nats.go"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
+	"strings"
+	"sync"
 )
 
 var natsLog = skogul.Logger("sender", "nats")
