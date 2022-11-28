@@ -46,6 +46,8 @@ Quickstart - Docker
 
 A docker image is published to ghcr.io/telenornms/skogul as of version
 v0.17.0. As of version v0.18.0, it is also published as "latest".
+See the container image repository page for details:
+https://github.com/telenornms/skogul/pkgs/container/skogul
 
 Quickstart - source
 -------------------
