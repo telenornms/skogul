@@ -35,11 +35,8 @@ import (
 var natsLog = skogul.Logger("sender", "nats")
 
 /*
-Nats sender. A small Nats, non-jetstream, publisher with:
-
-- Authentication: Username/Password, TLS
-- Authorization: Username/Password, UserCredentials/JWT
-
+Nats sender. A small Nats, non-jetstream, publisher implementing all
+Authentication & Authorization features in the nats golang client. 
 */
 
 type Nats struct {

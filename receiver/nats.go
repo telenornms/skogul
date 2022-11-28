@@ -33,11 +33,8 @@ import (
 var natsLog = skogul.Logger("receiver", "nats")
 
 /*
-Nats.io simple pub/sub receiver with:
-
-- Authentication: Username/Password, TLS
-- Authorization: Username/Password, UserCredentials/JWT
-- Queue: Load balancing for multiple receivers in the same Queue.
+Nats basic pub/sub receiver implementing all Authentication & Authorization
+features in the nats golang client. Basic queue groups is also supported.
 */
 type Nats struct {
 	Handler       skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
