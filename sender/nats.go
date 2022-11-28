@@ -23,12 +23,13 @@
 package sender
 
 import (
-	"crypto/tls"
 	"fmt"
+	"sync"
+	"strings"
+	"crypto/tls"
 	"github.com/nats-io/nats.go"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
-	"sync"
 )
 
 var natsLog = skogul.Logger("sender", "nats")
@@ -44,6 +45,7 @@ Nats.io sender. A small Nats, non-jetstream, publisher with:
 type Nats struct {
 	Servers       string `doc:"Comma separated list of nats URLs"`
 	Subject       string `doc:"Subject to publish messages on"`
+	SubjectAppend string `doc:"Append this Metadata field to subject"`
 	Name          string `doc:"Client name"`
 	Username      string `doc:"Client username"`
 	Password      string `doc:"Client password"`
@@ -67,13 +69,13 @@ func (n *Nats) Verify() error {
 
 	//User Credentials, use either.
 	if n.UserCreds != "" && n.NKeyFile != "" {
-		return fmt.Error("Please configure usercreds or nkeyfile.")
+		return fmt.Errorf("Please configure usercreds or nkeyfile.")
 	}
 
 	return nil
 }
 
-func (n *Nats) init() {
+func (n *Nats) init() error {
 
 	if n.Encoder.Name == "" {
 		n.Encoder.E = encoder.JSON{}
@@ -147,22 +149,31 @@ func (n *Nats) init() {
 	if err != nil {
 		natsLog.Errorf("Encountered an error while connecting to Nats: %v", err)
 	}
-
+	return err
 }
 
 func (n *Nats) Send(c *skogul.Container) error {
 	n.once.Do(func() {
 		n.init()
 	})
-	nm := make([]byte, 0, len(c.Metrics))
 	for _, m := range c.Metrics {
+		subject := n.Subject
+		a_subject := m.Metadata[n.SubjectAppend]
+		//Append metadata field to subject.
+		if n.SubjectAppend != "" && a_subject.(string) != "" {
+			if !strings.HasSuffix(m.Metadata[n.SubjectAppend].(string), ".") {
+				subject = subject + "."
+			}
+			subject = subject + m.Metadata[n.SubjectAppend].(string)
+		}
+
 		b, err := n.Encoder.E.EncodeMetric(m)
 		if err != nil {
-			return fmt.Errorf("couldn't encode metric: %w", err)
+			natsLog.Warnf("couldn't encode metric: %w", err)
+			continue
 		}
-		nm = append(nm, b...)
+		n.nc.Publish(subject, b)
 	}
 
-	n.nc.Publish(n.Subject, nm)
 	return n.nc.LastError()
 }
