@@ -23,38 +23,39 @@
 package receiver
 
 import (
-	"sync"
+	"crypto/tls"
+	"fmt"
 	"github.com/nats-io/nats.go"
 	"github.com/telenornms/skogul"
-	"crypto/tls"
+	"sync"
 )
 
 var natsLog = skogul.Logger("receiver", "nats")
+
 /*
 Nats.io simple pub/sub receiver with:
 
 - Authentication: Username/Password, TLS
 - Authorization: Username/Password, UserCredentials/JWT
 - Queue: Load balancing for multiple receivers in the same Queue.
-
 */
 type Nats struct {
-	Handler		skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
-	Servers		string		  `doc:"Comma separated list of nats URLs"`
-	Subject		string		  `doc:"Subject to subscribe to messages on"`
-	Queue		string		  `doc:"Worker queue to distribute messages on"`
-	Name		string		  `doc:"Client name"`
-	Username	string		  `doc:"Client username"`
-	Password	string		  `doc:"Client password"`
-	TLSClientKey    string		  `doc:"TLS client key file path"`
-	TLSClientCert   string		  `doc:"TLS client cert file path"`
-	TLSCACert	string		  `doc:"CA cert file path"`
-	UserCreds       string		  `doc:"Nats credentials file path"`
-	NKeyFile        string		  `doc:"Nats nkey file path"`
-	Insecure	bool		  `doc:"TLS InsecureSkipVerify"`
-	o		*[]nats.Option
-	nc		*nats.Conn
-	wg		sync.WaitGroup
+	Handler       skogul.HandlerRef `doc:"Handler used to parse, transform and send data."`
+	Servers       string            `doc:"Comma separated list of nats URLs"`
+	Subject       string            `doc:"Subject to subscribe to messages on"`
+	Queue         string            `doc:"Worker queue to distribute messages on"`
+	Name          string            `doc:"Client name"`
+	Username      string            `doc:"Client username"`
+	Password      string            `doc:"Client password"`
+	TLSClientKey  string            `doc:"TLS client key file path"`
+	TLSClientCert string            `doc:"TLS client cert file path"`
+	TLSCACert     string            `doc:"CA cert file path"`
+	UserCreds     string            `doc:"Nats credentials file path"`
+	NKeyFile      string            `doc:"Nats nkey file path"`
+	Insecure      bool              `doc:"TLS InsecureSkipVerify"`
+	o             *[]nats.Option
+	nc            *nats.Conn
+	wg            sync.WaitGroup
 }
 
 // Verify configuration
@@ -62,9 +63,14 @@ func (n *Nats) Verify() error {
 	if n.Handler.Name == "" {
 		return skogul.MissingArgument("Handler")
 	}
-        if n.Subject == "" {
-                return skogul.MissingArgument("Subject")
-        }
+	if n.Subject == "" {
+		return skogul.MissingArgument("Subject")
+	}
+	//User Credentials
+	if n.UserCreds != "" && n.NKeyFile != "" {
+		//Cred file contains nkey.
+		natsLog.Fatal("Please configure usercreds or nkeyfile.")
+	}
 
 	return nil
 }
@@ -79,11 +85,6 @@ func (n *Nats) Start() error {
 		n.Servers = nats.DefaultURL
 	}
 
-	//User Credentials
-	if n.UserCreds != "" && n.NKeyFile != "" {
-		//Cred file contains nkey.
-		natsLog.Fatal("Please configure usercreds or nkeyfile.")
-	}
 	if n.UserCreds != "" {
 		*n.o = append(*n.o, nats.UserCredentials(n.UserCreds))
 	}
@@ -99,20 +100,18 @@ func (n *Nats) Start() error {
 	if n.TLSClientKey != "" && n.TLSClientCert != "" {
 		cert, err := tls.LoadX509KeyPair(n.TLSClientCert, n.TLSClientKey)
 		if err != nil {
-			natsLog.Fatalf("error parsing X509 certificate/key pair: %v", err)
-			return err
+			return fmt.Errorf("error parsing X509 certificate/key pair: %v", err)
 		}
 
 		cp, err := skogul.GetCertPool(n.TLSCACert)
-                if err != nil {
-                        natsLog.Fatalf("Failed to initialize root CA pool")
-			return err
-                }
+		if err != nil {
+			return fmt.Error("Failed to initialize root CA pool")
+		}
 
 		config := &tls.Config{
-			InsecureSkipVerify:	n.Insecure,
-			Certificates:		[]tls.Certificate{cert},
-			RootCAs:		cp,
+			InsecureSkipVerify: n.Insecure,
+			Certificates:       []tls.Certificate{cert},
+			RootCAs:            cp,
 		}
 		*n.o = append(*n.o, nats.Secure(config))
 	}
@@ -127,23 +126,23 @@ func (n *Nats) Start() error {
 	}
 
 	//Log disconnects
-        *n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
-                natsLog.WithError(err).Error("Got disconnected!")
-        }))
+	*n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
+		natsLog.WithError(err).Error("Got disconnected!")
+	}))
 	//Log reconnects
-        *n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
-                natsLog.Info("Reconnected")
-        }))
+	*n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
+		natsLog.Info("Reconnected")
+	}))
 	//Always try to reconnect
-        *n.o = append(*n.o, nats.RetryOnFailedConnect(true))
+	*n.o = append(*n.o, nats.RetryOnFailedConnect(true))
 	//Try to reconnect forever
-        *n.o = append(*n.o, nats.MaxReconnects(-1))
+	*n.o = append(*n.o, nats.MaxReconnects(-1))
 
 	var err error
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	cb := func(msg *nats.Msg) {
 		natsLog.Debugf("Received message on %v", msg.Subject)
-		if err:= n.Handler.H.Handle(msg.Data); err != nil {
+		if err := n.Handler.H.Handle(msg.Data); err != nil {
 			natsLog.WithError(err).Warn("Unable to handle Nats message")
 		}
 		return

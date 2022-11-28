@@ -20,18 +20,19 @@
  * 02110-1301  USA
  */
 
- package sender
+package sender
 
- import (
+import (
+	"crypto/tls"
 	"fmt"
 	"github.com/nats-io/nats.go"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
 	"sync"
-	"crypto/tls"
 )
 
 var natsLog = skogul.Logger("sender", "nats")
+
 /*
 Nats.io sender. A small Nats, non-jetstream, publisher with:
 
@@ -41,32 +42,36 @@ Nats.io sender. A small Nats, non-jetstream, publisher with:
 */
 
 type Nats struct {
-	Servers		string   `doc:"Comma separated list of nats URLs"`
-	Subject		string   `doc:"Subject to publish messages on"`
-	Name		string	 `doc:"Client name"`
-	Username	string   `doc:"Client username"`
-	Password	string	 `doc:"Client password"`
-	TLSClientKey    string   `doc:"TLS client key file path"`
-	TLSClientCert   string   `doc:"TLS client cert file path"`
-	TLSCACert	string   `doc:"CA cert file path"`
-	UserCreds       string   `doc:"Nats credentials file path"`
-	NKeyFile        string   `doc:"Nats nkey file path"`
-	Insecure	bool	 `doc:"TLS InsecureSkipVerify"`
-	Encoder		skogul.EncoderRef
-	o		*[]nats.Option
-	nc		*nats.Conn
-	once		sync.Once
+	Servers       string `doc:"Comma separated list of nats URLs"`
+	Subject       string `doc:"Subject to publish messages on"`
+	Name          string `doc:"Client name"`
+	Username      string `doc:"Client username"`
+	Password      string `doc:"Client password"`
+	TLSClientKey  string `doc:"TLS client key file path"`
+	TLSClientCert string `doc:"TLS client cert file path"`
+	TLSCACert     string `doc:"CA cert file path"`
+	UserCreds     string `doc:"Nats credentials file path"`
+	NKeyFile      string `doc:"Nats nkey file path"`
+	Insecure      bool   `doc:"TLS InsecureSkipVerify"`
+	Encoder       skogul.EncoderRef
+	o             *[]nats.Option
+	nc            *nats.Conn
+	once          sync.Once
 }
 
 // Verify configuration
 func (n *Nats) Verify() error {
-        if n.Subject == "" {
-                return skogul.MissingArgument("Subject")
-        }
+	if n.Subject == "" {
+		return skogul.MissingArgument("Subject")
+	}
 
-        return nil
+	//User Credentials, use either.
+	if n.UserCreds != "" && n.NKeyFile != "" {
+		return fmt.Error("Please configure usercreds or nkeyfile.")
+	}
+
+	return nil
 }
-
 
 func (n *Nats) init() {
 
@@ -83,10 +88,6 @@ func (n *Nats) init() {
 		n.Servers = nats.DefaultURL
 	}
 
-	//User Credentials, use either.
-	if n.UserCreds != "" && n.NKeyFile != "" {
-		natsLog.Fatal("Please configure usercreds or nkeyfile.")
-	}
 	if n.UserCreds != "" {
 		*n.o = append(*n.o, nats.UserCredentials(n.UserCreds))
 	}
@@ -103,20 +104,18 @@ func (n *Nats) init() {
 	if n.TLSClientKey != "" && n.TLSClientCert != "" {
 		cert, err := tls.LoadX509KeyPair(n.TLSClientCert, n.TLSClientKey)
 		if err != nil {
-			natsLog.Fatalf("error parsing X509 certificate/key pair: %v", err)
-			return
+			return fmt.Errorf("error parsing X509 certificate/key pair: %v", err)
 		}
 
 		cp, err := skogul.GetCertPool(n.TLSCACert)
-                if err != nil {
-                        natsLog.Fatalf("Failed to initialize root CA pool")
-			return
-                }
+		if err != nil {
+			return fmt.Errorf("Failed to initialize root CA pool")
+		}
 
 		config := &tls.Config{
-			InsecureSkipVerify:	n.Insecure,
-			Certificates:		[]tls.Certificate{cert},
-			RootCAs:		cp,
+			InsecureSkipVerify: n.Insecure,
+			Certificates:       []tls.Certificate{cert},
+			RootCAs:            cp,
 		}
 		*n.o = append(*n.o, nats.Secure(config))
 	}
@@ -132,12 +131,12 @@ func (n *Nats) init() {
 
 	//Log disconnects
 	*n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
-                natsLog.WithError(err).Error("Got disconnected!")
-        }))
+		natsLog.WithError(err).Error("Got disconnected!")
+	}))
 	//Log reconnects
 	*n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
-                natsLog.Info("Reconnected")
-        }))
+		natsLog.Info("Reconnected")
+	}))
 	//Always try reconnecting
 	*n.o = append(*n.o, nats.RetryOnFailedConnect(true))
 	//Keep doing reconnects
@@ -150,8 +149,6 @@ func (n *Nats) init() {
 	}
 
 }
-
-
 
 func (n *Nats) Send(c *skogul.Container) error {
 	n.once.Do(func() {
