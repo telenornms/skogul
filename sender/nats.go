@@ -56,8 +56,8 @@ type Nats struct {
 	NKeyFile      string `doc:"Nats nkey file path"`
 	Insecure      bool   `doc:"TLS InsecureSkipVerify"`
 	Encoder       skogul.EncoderRef
-	o             *[]nats.Option
-	nc            *nats.Conn
+	conOpts       *[]nats.Option
+	natsCon       *nats.Conn
 	once          sync.Once
 	init_error    error
 }
@@ -88,10 +88,10 @@ func (n *Nats) init() error {
 	if n.Name == "" {
 		n.Name = "skogul"
 	}
-	n.o = &[]nats.Option{nats.Name(n.Name)}
+	n.conOpts = &[]nats.Option{nats.Name(n.Name)}
 
 	if n.UserCreds != "" {
-		*n.o = append(*n.o, nats.UserCredentials(n.UserCreds))
+		*n.conOpts = append(*n.conOpts, nats.UserCredentials(n.UserCreds))
 	}
 
 	//Plain text passwords
@@ -99,7 +99,7 @@ func (n *Nats) init() error {
 		if n.TLSClientKey != "" {
 			natsLog.Warnf("Using plain text password over a non encrypted transport!")
 		}
-		*n.o = append(*n.o, nats.UserInfo(n.Username, n.Password))
+		*n.conOpts = append(*n.conOpts, nats.UserInfo(n.Username, n.Password))
 	}
 
 	//TLS authentication, Note: Fix selfsigned certificates.
@@ -120,7 +120,7 @@ func (n *Nats) init() error {
 				Certificates:       []tls.Certificate{cert},
 				RootCAs:            cp,
 			}
-			*n.o = append(*n.o, nats.Secure(config))
+			*n.conOpts = append(*n.conOpts, nats.Secure(config))
 		}
 	}
 
@@ -130,24 +130,24 @@ func (n *Nats) init() error {
 		if err != nil {
 			natsLog.Fatal(err)
 		}
-		*n.o = append(*n.o, opt)
+		*n.conOpts = append(*n.conOpts, opt)
 	}
 
 	//Log disconnects
-	*n.o = append(*n.o, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
+	*n.conOpts = append(*n.conOpts, nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
 		natsLog.WithError(err).Error("Got disconnected!")
 	}))
 	//Log reconnects
-	*n.o = append(*n.o, nats.ReconnectHandler(func(nc *nats.Conn) {
+	*n.conOpts = append(*n.conOpts, nats.ReconnectHandler(func(nc *nats.Conn) {
 		natsLog.Info("Reconnected")
 	}))
 	//Always try reconnecting
-	*n.o = append(*n.o, nats.RetryOnFailedConnect(true))
+	*n.conOpts = append(*n.conOpts, nats.RetryOnFailedConnect(true))
 	//Keep doing reconnects
-	*n.o = append(*n.o, nats.MaxReconnects(-1))
+	*n.conOpts = append(*n.conOpts, nats.MaxReconnects(-1))
 
 	var err error
-	n.nc, err = nats.Connect(n.Servers, *n.o...)
+	n.natsCon, err = nats.Connect(n.Servers, *n.conOpts...)
 	if err != nil {
 		n.init_error = fmt.Errorf("Encountered an error while connecting to Nats: %v", err)
 	}
@@ -177,8 +177,8 @@ func (n *Nats) Send(c *skogul.Container) error {
 			natsLog.Warnf("couldn't encode metric: %w", err)
 			continue
 		}
-		n.nc.Publish(subject, b)
+		n.natsCon.Publish(subject, b)
 	}
 
-	return n.nc.LastError()
+	return n.natsCon.LastError()
 }
