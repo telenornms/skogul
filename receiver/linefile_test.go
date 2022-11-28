@@ -26,14 +26,15 @@ package receiver_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/telenornms/skogul/config"
-	"github.com/telenornms/skogul/receiver"
-	"github.com/telenornms/skogul/sender"
 	"math/rand"
 	"os"
 	"syscall"
 	"testing"
 	"time"
+
+	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/receiver"
+	"github.com/telenornms/skogul/sender"
 )
 
 func deleteFile(t *testing.T, file string) {
@@ -148,5 +149,100 @@ func TestLineFile(t *testing.T) {
 	f.WriteString(fmt.Sprintf("bad idea♥\n"))
 	if sTest.Received() != 0 {
 		t.Errorf("Receive thing on other end despite bogus data")
+	}
+}
+
+func TestLineFileAdvanced(t *testing.T) {
+	file, err := lfMakeFile(t)
+	if err != nil {
+		return
+	}
+
+	sconf := fmt.Sprintf(`
+		{
+			"receivers": {
+					"x": {
+							"type": "fileadvanced",
+							"file": "%s",
+							"handler": "kek",
+							"delay": "1s",
+							"newfile": "%s_copy",
+							"pre": {
+									"cmd": "mv",
+									"args": [
+											"%s",
+											"%s_copy"
+									]
+							},
+							"post": {
+									"cmd": "mv",
+									"args": [
+										"%s_copy",
+										"%s_copy-archive"
+									]
+							}
+					}
+			},
+			"handlers": {
+					"kek": {
+							"parser": "skogulmetric",
+							"transformers": [
+									"now"
+							],
+							"sender": "test"
+					}
+			} ,
+			"senders": {
+				"test": {
+					"type": "test"
+				}
+			}
+	}`, file, file, file, file, file, file)
+
+	conf, err := config.Bytes([]byte(sconf))
+
+	if err != nil {
+		t.Errorf("Failed to load config: %v", err)
+		return
+	}
+
+	sTest := conf.Senders["test"].Sender.(*sender.Test)
+	rcv := conf.Receivers["x"].Receiver.(*receiver.LineFileAdvanced)
+
+	if rcv == nil {
+		t.Errorf("failed to get receiver")
+		return
+	}
+
+	skogulMetric := map[string]interface{}{
+		"data": map[string]interface{}{
+			"Test": "data",
+			"foo":  "bar",
+		},
+	}
+
+	go rcv.Start()
+	b, err := json.Marshal(skogulMetric)
+	if err != nil {
+		t.Errorf("Failed to marshal container: %v", err)
+		return
+	}
+	f, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
+	if err != nil {
+		t.Errorf("Unable to open file/fifo for writing: %v", err)
+		return
+	}
+	defer func() {
+		f.Close()
+	}()
+
+	f.WriteString(fmt.Sprintf("%s\n", b))
+	time.Sleep(time.Duration(10 * time.Millisecond))
+
+	f.WriteString(fmt.Sprintf("%s\n", b))
+	time.Sleep(time.Duration(10 * time.Millisecond))
+
+	if sTest.Received() != 2 {
+		t.Errorf("Didn't receive thing on other end!")
 	}
 }

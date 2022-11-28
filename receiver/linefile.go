@@ -27,6 +27,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/telenornms/skogul"
@@ -136,6 +137,61 @@ func (wf *WholeFile) Start() error {
 			for {
 				time.Sleep(time.Hour)
 			}
+		}
+	}
+}
+
+type CMD struct {
+	Cmd  string   `doc:"Shell command to execute"`
+	Args []string `doc:"Arguments to the 'cmd' option."`
+}
+
+type LineFileAdvanced struct {
+	File    string            `doc:"Path to the fifo or file from which to read from repeatedly."`
+	NewFile string            `doc:"Path to the fifo or file that 'File' has been moved to."`
+	Handler skogul.HandlerRef `doc:"Handler used to parse and transform and send data."`
+	Delay   skogul.Duration   `doc:"Delay before re-opening the file, if any."`
+	Pre     CMD               `doc:"Shell command to execute before reading file."`
+	Post    CMD               `doc:"Shell command to execute after reading file is finished."`
+}
+
+func (lf *LineFileAdvanced) read() error {
+	if lf.Pre.Cmd != "" {
+		cmd := exec.Command(lf.Pre.Cmd, lf.Pre.Args...)
+		cmd.Output()
+	}
+
+	f, err := os.Open(lf.NewFile)
+	if err != nil {
+		return fmt.Errorf("unable to open file %s: %w", lf.NewFile, err)
+	}
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		bytes := scanner.Bytes()
+		if err := lf.Handler.H.Handle(bytes); err != nil {
+			lfLog.WithError(err).Error("Failed to send metric")
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		return fmt.Errorf("unable to scan file: %w", err)
+	}
+
+	if lf.Post.Cmd != "" {
+		cmd := exec.Command(lf.Post.Cmd, lf.Post.Args...)
+		cmd.Output()
+	}
+
+	return nil
+}
+
+// Start never returns.
+func (lf *LineFileAdvanced) Start() error {
+	for {
+		if err := lf.read(); err != nil {
+			lfLog.WithError(err).Error("Unable to read file")
+		}
+		if lf.Delay.Duration != 0 {
+			time.Sleep(lf.Delay.Duration)
 		}
 	}
 }
