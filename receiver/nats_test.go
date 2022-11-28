@@ -1,9 +1,9 @@
 package receiver_test
 
 import (
-	"testing"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/receiver"
+	"testing"
 )
 
 func TestNats(t *testing.T) {
@@ -33,7 +33,7 @@ func TestNats(t *testing.T) {
 	}`))
 
 	if err != nil {
-		t.Errorf("Failed to load config: %s" , err)
+		t.Errorf("Failed to load config: %s", err)
 	}
 
 	nr := config.Receivers["nats_r"].Receiver.(*receiver.Nats)

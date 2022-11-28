@@ -70,10 +70,10 @@ func init() {
 		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint.",
 	})
 	Auto.Add(skogul.Module{
-                Name:  "nats",
-                Alloc: func() interface{} { return &Nats{} },
-                Help:  "Connect to a Nats.io server/cluster and subscribe to a subject.",
-        })
+		Name:  "nats",
+		Alloc: func() interface{} { return &Nats{} },
+		Help:  "Connect to a Nats.io server/cluster and subscribe to a subject.",
+	})
 	Auto.Add(skogul.Module{
 		Name:  "stats",
 		Alloc: func() interface{} { return &Stats{} },
