@@ -35,7 +35,7 @@ import (
 var natsLog = skogul.Logger("sender", "nats")
 
 /*
-Nats.io sender. A small Nats, non-jetstream, publisher with:
+Nats sender. A small Nats, non-jetstream, publisher with:
 
 - Authentication: Username/Password, TLS
 - Authorization: Username/Password, UserCredentials/JWT
@@ -67,6 +67,9 @@ func (n *Nats) Verify() error {
 	if n.Subject == "" {
 		return skogul.MissingArgument("Subject")
 	}
+	if n.Servers == "" {
+		return skogul.MissingArgument("Servers")
+	}
 
 	//User Credentials, use either.
 	if n.UserCreds != "" && n.NKeyFile != "" {
@@ -86,10 +89,6 @@ func (n *Nats) init() error {
 		n.Name = "skogul"
 	}
 	n.o = &[]nats.Option{nats.Name(n.Name)}
-
-	if n.Servers == "" {
-		n.Servers = nats.DefaultURL
-	}
 
 	if n.UserCreds != "" {
 		*n.o = append(*n.o, nats.UserCredentials(n.UserCreds))

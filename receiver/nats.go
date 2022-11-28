@@ -66,6 +66,9 @@ func (n *Nats) Verify() error {
 	if n.Subject == "" {
 		return skogul.MissingArgument("Subject")
 	}
+	if n.Servers == "" {
+		return skogul.MissingArgument("Servers")	
+	}
 	//User Credentials
 	if n.UserCreds != "" && n.NKeyFile != "" {
 		//Cred file contains nkey.
@@ -80,10 +83,6 @@ func (n *Nats) Start() error {
 		n.Name = "skogul"
 	}
 	n.o = &[]nats.Option{nats.Name(n.Name)}
-
-	if n.Servers == "" {
-		n.Servers = nats.DefaultURL
-	}
 
 	if n.UserCreds != "" {
 		*n.o = append(*n.o, nats.UserCredentials(n.UserCreds))
