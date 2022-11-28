@@ -384,7 +384,7 @@ func MissingArgument(field string) error {
 	return fmt.Errorf("missing required configuration option `%s'", field)
 }
 
-// Make GetCertPool a common function.
+// GetCertPool accepts a path to a directory of certificate authorities to trust. Pass in the empty string to use system defaults
 func GetCertPool(path string) (*x509.CertPool, error) {
 	// this means "use system default"
 	if path == "" {
