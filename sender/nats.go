@@ -36,7 +36,7 @@ var natsLog = skogul.Logger("sender", "nats")
 
 /*
 Nats sender. A small Nats, non-jetstream, publisher implementing all
-Authentication & Authorization features in the nats golang client. 
+Authentication & Authorization features in the nats golang client.
 */
 
 type Nats struct {

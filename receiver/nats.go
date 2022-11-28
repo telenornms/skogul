@@ -51,7 +51,7 @@ type Nats struct {
 	NKeyFile      string            `doc:"Nats nkey file path"`
 	Insecure      bool              `doc:"TLS InsecureSkipVerify"`
 	conOpts       *[]nats.Option
-	natsCon		  *nats.Conn
+	natsCon       *nats.Conn
 	wg            sync.WaitGroup
 }
 
@@ -64,7 +64,7 @@ func (n *Nats) Verify() error {
 		return skogul.MissingArgument("Subject")
 	}
 	if n.Servers == "" {
-		return skogul.MissingArgument("Servers")	
+		return skogul.MissingArgument("Servers")
 	}
 	//User Credentials
 	if n.UserCreds != "" && n.NKeyFile != "" {
