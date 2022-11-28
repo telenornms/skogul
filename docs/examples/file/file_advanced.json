@@ -1,34 +1,22 @@
 {
-  "receivers": {
-      "x": {
-          "type": "fileadvanced",
-          "file": "/Users/t966849/Documents/skogul/testdata.json",
-          "handler": "kek",
-          "delay": "1s",
-          "newfile": "/Users/t966849/Documents/skogul/testdata_copy.json",
-          "pre": {
-              "cmd": "mv",
-              "args": [
-                  "testdata.json",
-                  "testdata_copy.json"
-              ]
-          },
-          "post": {
-              "cmd": "mv",
-              "args": [
-                  "testdata_copy.json",
-                  "testdata_copy-archive.json"
-              ]
-          }
-      }
-  },
-  "handlers": {
-      "kek": {
-          "parser": "skogulmetric",
-          "transformers": [
-              "now"
-          ],
-          "sender": "print"
-      }
-  }
+    "receivers": {
+        "x": {
+            "type": "fileadvanced",
+            "file": "testdata.json",
+            "handler": "kek",
+            "delay": "1s",
+            "newfile": "testdata_copy.json",
+            "shell": "/bin/bash",
+            "post": "mv testdata_copy.json testdata_copy-archive-\"$(date)\".json"
+        }
+    },
+    "handlers": {
+        "kek": {
+            "parser": "skogulmetric",
+            "transformers": [
+                "now"
+            ],
+            "sender": "print"
+        }
+    }
 }

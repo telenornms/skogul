@@ -162,25 +162,13 @@ func TestLineFileAdvanced(t *testing.T) {
 		{
 			"receivers": {
 					"x": {
-							"type": "fileadvanced",
-							"file": "%s",
-							"handler": "kek",
-							"delay": "1s",
-							"newfile": "%s_copy",
-							"pre": {
-									"cmd": "mv",
-									"args": [
-											"%s",
-											"%s_copy"
-									]
-							},
-							"post": {
-									"cmd": "mv",
-									"args": [
-										"%s_copy",
-										"%s_copy-archive"
-									]
-							}
+						"type": "fileadvanced",
+            "file": "%s",
+            "handler": "kek",
+            "delay": "1s",
+            "newfile": "%s_copy.json",
+            "shell": "/bin/bash",
+            "post": "mv %s_copy.json %s_copy-archive-\"$(date)\".json"
 					}
 			},
 			"handlers": {
@@ -191,13 +179,13 @@ func TestLineFileAdvanced(t *testing.T) {
 							],
 							"sender": "test"
 					}
-			} ,
+			},
 			"senders": {
 				"test": {
 					"type": "test"
 				}
 			}
-	}`, file, file, file, file, file, file)
+	}`, file, file, file, file)
 
 	conf, err := config.Bytes([]byte(sconf))
 
