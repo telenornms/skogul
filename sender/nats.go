@@ -59,6 +59,7 @@ type Nats struct {
 	o             *[]nats.Option
 	nc            *nats.Conn
 	once          sync.Once
+	init_error    error
 }
 
 // Verify configuration
@@ -106,20 +107,22 @@ func (n *Nats) init() error {
 	if n.TLSClientKey != "" && n.TLSClientCert != "" {
 		cert, err := tls.LoadX509KeyPair(n.TLSClientCert, n.TLSClientKey)
 		if err != nil {
-			return fmt.Errorf("error parsing X509 certificate/key pair: %v", err)
+			n.init_error = fmt.Errorf("error parsing X509 certificate/key pair: %v", err)
 		}
 
 		cp, err := skogul.GetCertPool(n.TLSCACert)
 		if err != nil {
-			return fmt.Errorf("Failed to initialize root CA pool")
+			n.init_error = fmt.Errorf("Failed to initialize root CA pool")
 		}
 
-		config := &tls.Config{
-			InsecureSkipVerify: n.Insecure,
-			Certificates:       []tls.Certificate{cert},
-			RootCAs:            cp,
+		if n.init_error == nil {
+			config := &tls.Config{
+				InsecureSkipVerify: n.Insecure,
+				Certificates:       []tls.Certificate{cert},
+				RootCAs:            cp,
+			}
+			*n.o = append(*n.o, nats.Secure(config))
 		}
-		*n.o = append(*n.o, nats.Secure(config))
 	}
 
 	//NKey auth
@@ -147,7 +150,7 @@ func (n *Nats) init() error {
 	var err error
 	n.nc, err = nats.Connect(n.Servers, *n.o...)
 	if err != nil {
-		natsLog.Errorf("Encountered an error while connecting to Nats: %v", err)
+		n.init_error = fmt.Errorf("Encountered an error while connecting to Nats: %v", err)
 	}
 	return err
 }
@@ -156,6 +159,9 @@ func (n *Nats) Send(c *skogul.Container) error {
 	n.once.Do(func() {
 		n.init()
 	})
+	if n.init_error != nil {
+		return n.init_error
+	}
 	for _, m := range c.Metrics {
 		subject := n.Subject
 		a_subject := m.Metadata[n.SubjectAppend]
