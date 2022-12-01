@@ -14,3 +14,5 @@ jobs:
         go-version: ${{ matrix.go-version }}
         cache: true
     - run: make check
+      env:
+        SKOGUL_TEST_SLEEP_DURATION: 10s
