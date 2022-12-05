@@ -171,8 +171,8 @@ func (n *Nats) Send(c *skogul.Container) error {
 
 		b, err := n.Encoder.E.EncodeMetric(m)
 		if err != nil {
-			natsLog.WithErr(err).Warnf("Couldn't send metric[%v], encountered and error while encoding.", i)
-			natsLog.WithErr(err).Debugf("Metadata of incorrect metric: %v", m.Metadata)
+			natsLog.WithError(err).Warnf("Couldn't send metric[%v], encountered and error while encoding.", i)
+			natsLog.WithError(err).Debugf("Metadata of incorrect metric: %v", m.Metadata)
 			continue
 		}
 		n.natsCon.Publish(subject, b)
