@@ -136,6 +136,10 @@ func (n *Nats) Start() error {
 
 	var err error
 	n.natsCon, err = nats.Connect(n.Servers, *n.conOpts...)
+	if err != nil {
+		natsLog.Errorf("Encountered an error while connecting to Nats: %v", err)
+	}
+
 	cb := func(msg *nats.Msg) {
 		natsLog.Debugf("Received message on %v", msg.Subject)
 		if err := n.Handler.H.Handle(msg.Data); err != nil {
@@ -145,10 +149,6 @@ func (n *Nats) Start() error {
 	}
 
 	n.wg.Add(1)
-	if err != nil {
-		natsLog.Errorf("Encountered an error while connecting to Nats: %v", err)
-	}
-
 	if n.Queue == "" {
 		n.natsCon.QueueSubscribe(n.Subject, n.Queue, cb)
 	} else {
