@@ -158,7 +158,7 @@ func (n *Nats) Send(c *skogul.Container) error {
 	if n.init_error != nil {
 		return n.init_error
 	}
-	for _, m := range c.Metrics {
+	for i, m := range c.Metrics {
 		subject := n.Subject
 		a_subject := m.Metadata[n.SubjectAppend]
 		//Append metadata field to subject.
@@ -171,7 +171,8 @@ func (n *Nats) Send(c *skogul.Container) error {
 
 		b, err := n.Encoder.E.EncodeMetric(m)
 		if err != nil {
-			natsLog.Warnf("couldn't encode metric: %w", err)
+			natsLog.WithErr(err).Warnf("Couldn't send metric[%v], encountered and error while encoding.", i)
+			natsLog.WithErr(err).Debugf("Metadata of incorrect metric: %v", m.Metadata)
 			continue
 		}
 		n.natsCon.Publish(subject, b)
