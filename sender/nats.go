@@ -99,7 +99,7 @@ func (n *Nats) init() error {
 		*n.conOpts = append(*n.conOpts, nats.UserInfo(n.Username, n.Password))
 	}
 
-	//TLS authentication, Note: Fix selfsigned certificates.
+	//TLS authentication
 	if n.TLSClientKey != "" && n.TLSClientCert != "" {
 		cert, err := tls.LoadX509KeyPair(n.TLSClientCert, n.TLSClientKey)
 		if err != nil {
