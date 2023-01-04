@@ -82,7 +82,10 @@ func TestLogrusLogReceivesData(t *testing.T) {
 	logrus.Info("This works!")
 	time.Sleep(sleepDuration)
 	got := sTest.Received()
-	if got != 1 {
+	// XXX: This needs to be <1 instead of !=1, in case other test
+	// cases log in parallel here, so there could be more than just
+	// this test case doing actual logging.
+	if got < 1 {
 		t.Errorf("receiver.Tester{}, x.Start() failed to receive data. Expected some data, got 0.")
 	}
 }
