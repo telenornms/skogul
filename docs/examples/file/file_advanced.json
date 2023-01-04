@@ -1,0 +1,22 @@
+{
+    "receivers": {
+        "x": {
+            "type": "fileadvanced",
+            "file": "testdata.json",
+            "handler": "kek",
+            "delay": "1s",
+            "newfile": "testdata_copy.json",
+            "shell": "/bin/bash",
+            "post": "mv testdata_copy.json testdata_copy-archive-\"$(date)\".json"
+        }
+    },
+    "handlers": {
+        "kek": {
+            "parser": "skogulmetric",
+            "transformers": [
+                "now"
+            ],
+            "sender": "print"
+        }
+    }
+}

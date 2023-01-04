@@ -27,6 +27,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
+	"os/signal"
+	"strings"
+	"syscall"
 	"time"
 
 	"github.com/telenornms/skogul"
@@ -137,5 +141,73 @@ func (wf *WholeFile) Start() error {
 				time.Sleep(time.Hour)
 			}
 		}
+	}
+}
+
+type LineFileAdvanced struct {
+	File    string            `doc:"Path to the fifo or file from which to read from repeatedly."`
+	NewFile string            `doc:"Path to the fifo or file that 'File'will be moved to."`
+	Handler skogul.HandlerRef `doc:"Handler used to parse and transform and send data."`
+	Delay   skogul.Duration   `doc:"Delay before re-opening the file, if any."`
+	Post    string            `doc:"Shell command to execute after reading file is finished."`
+	Shell   string            `doc:"Shell used to execute post command."`
+	signals chan os.Signal
+}
+
+func (lf *LineFileAdvanced) read() error {
+	lf.moveFile(lf.File, lf.NewFile)
+
+	signal.Notify(lf.signals, syscall.SIGHUP)
+	f, err := os.Open(lf.NewFile)
+	if err != nil {
+		return fmt.Errorf("unable to open file %s: %w", lf.NewFile, err)
+	}
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		bytes := scanner.Bytes()
+		if err := lf.Handler.H.Handle(bytes); err != nil {
+			lfLog.WithError(err).Error("Failed to send metric")
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		return fmt.Errorf("unable to scan file: %w", err)
+	}
+
+	if lf.Post != "" {
+		shell := strings.Split(lf.Shell, " ")
+		c := exec.Command(shell[0], "-c", lf.Post)
+		_, err := c.Output()
+
+		if err != nil {
+			lfLog.WithError(err).Errorf("executing post command %s failed", lf.Post)
+			return err
+		}
+	}
+
+	return nil
+}
+
+// Start never returns.
+func (lf *LineFileAdvanced) Start() error {
+	lf.signals = make(chan os.Signal)
+	if lf.Shell == "" {
+		lf.Shell = "/bin/sh"
+	}
+
+	for {
+		if err := lf.read(); err != nil {
+			lfLog.WithError(err).Error("Unable to read file")
+		}
+		if lf.Delay.Duration != 0 {
+			time.Sleep(lf.Delay.Duration)
+		}
+	}
+}
+
+func (lf *LineFileAdvanced) moveFile(oldPath string, newPath string) {
+	err := os.Rename(oldPath, newPath)
+	if err != nil {
+		lfLog.WithError(err).Errorf("could not move file from %s to %s", oldPath, newPath)
+		return
 	}
 }
