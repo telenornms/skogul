@@ -204,3 +204,37 @@ func TestSwitchCaseConditionNonString(t *testing.T) {
 		t.Error("failed to run switch transformer based on nested field")
 	}
 }
+
+func TestSwitchCaseFieldExists(t *testing.T) {
+	data := `{"metrics": [{"metadata": {"foo": true, "remove": "me"}}]}`
+	caseTransformer := transformer.Metadata{
+		Remove: []string{"remove"},
+	}
+	tref := skogul.TransformerRef{
+		T: &caseTransformer,
+	}
+	transform := transformer.Switch{
+		Cases: []transformer.Case{
+			{
+				When:         "/foo",
+				Exists:       true,
+				Transformers: []*skogul.TransformerRef{&tref},
+			},
+		},
+	}
+
+	c := skogul.Container{}
+	if err := json.Unmarshal([]byte(data), &c); err != nil {
+		t.Errorf("failed to parse test case data: %s", err)
+		return
+	}
+
+	if err := transform.Transform(&c); err != nil {
+		t.Errorf("failed to run transform: %s", err)
+		return
+	}
+
+	if c.Metrics[0].Metadata["remove"] != nil {
+		t.Error("switch transformer did not remove field based on 'exists' option")
+	}
+}
