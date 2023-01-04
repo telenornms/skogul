@@ -28,9 +28,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"os/signal"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/telenornms/skogul"
@@ -151,13 +149,11 @@ type LineFileAdvanced struct {
 	Delay   skogul.Duration   `doc:"Delay before re-opening the file, if any."`
 	Post    string            `doc:"Shell command to execute after reading file is finished."`
 	Shell   string            `doc:"Shell used to execute post command."`
-	signals chan os.Signal
 }
 
 func (lf *LineFileAdvanced) read() error {
 	lf.moveFile(lf.File, lf.NewFile)
 
-	signal.Notify(lf.signals, syscall.SIGHUP)
 	f, err := os.Open(lf.NewFile)
 	if err != nil {
 		return fmt.Errorf("unable to open file %s: %w", lf.NewFile, err)
@@ -189,7 +185,6 @@ func (lf *LineFileAdvanced) read() error {
 
 // Start never returns.
 func (lf *LineFileAdvanced) Start() error {
-	lf.signals = make(chan os.Signal)
 	if lf.Shell == "" {
 		lf.Shell = "/bin/sh"
 	}
