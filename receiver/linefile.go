@@ -147,12 +147,36 @@ type LineFileAdvanced struct {
 	NewFile string            `doc:"Path to the fifo or file that 'File'will be moved to."`
 	Handler skogul.HandlerRef `doc:"Handler used to parse and transform and send data."`
 	Delay   skogul.Duration   `doc:"Delay before re-opening the file, if any."`
+	Pre     string            `doc:"Command to run AFTER moving the file, but BEFORE reading it. E.g.: Sighup/reload."`
 	Post    string            `doc:"Shell command to execute after reading file is finished."`
-	Shell   string            `doc:"Shell used to execute post command."`
+	Shell   string            `doc:"Shell used to execute post command. Default: /bin/sh -c"`
+}
+
+func (lf *LineFileAdvanced) runCmd(cmd string) error {
+	if cmd == "" {
+		return nil
+	}
+	rcmd := strings.Split(lf.Shell, " ")
+	rcmd = append(rcmd, cmd)
+	c := exec.Command(rcmd[0], rcmd[1:]...)
+	_, err := c.Output()
+
+	if err != nil {
+		return fmt.Errorf("failed to execute command %s: %w", cmd, err)
+	}
+	return nil
 }
 
 func (lf *LineFileAdvanced) read() error {
-	lf.moveFile(lf.File, lf.NewFile)
+	err := os.Rename(lf.File, lf.NewFile)
+	if err != nil {
+		return fmt.Errorf("could not move file from %s to %s: %w", lf.File, lf.NewFile, err)
+	}
+
+	err = lf.runCmd(lf.Pre)
+	if err != nil {
+		lfLog.WithError(err).Error("unable to run pre-command, but continuing anyway.")
+	}
 
 	f, err := os.Open(lf.NewFile)
 	if err != nil {
@@ -165,44 +189,26 @@ func (lf *LineFileAdvanced) read() error {
 			lfLog.WithError(err).Error("Failed to send metric")
 		}
 	}
+
 	if err := scanner.Err(); err != nil {
 		return fmt.Errorf("unable to scan file: %w", err)
 	}
 
-	if lf.Post != "" {
-		shell := strings.Split(lf.Shell, " ")
-		c := exec.Command(shell[0], "-c", lf.Post)
-		_, err := c.Output()
-
-		if err != nil {
-			lfLog.WithError(err).Errorf("executing post command %s failed", lf.Post)
-			return err
-		}
-	}
-
-	return nil
+	return lf.runCmd(lf.Post)
 }
 
 // Start never returns.
 func (lf *LineFileAdvanced) Start() error {
 	if lf.Shell == "" {
-		lf.Shell = "/bin/sh"
+		lf.Shell = "/bin/sh -c"
 	}
 
 	for {
 		if err := lf.read(); err != nil {
-			lfLog.WithError(err).Error("Unable to read file")
+			lfLog.WithError(err).Error("Unable to handle file")
 		}
 		if lf.Delay.Duration != 0 {
 			time.Sleep(lf.Delay.Duration)
 		}
-	}
-}
-
-func (lf *LineFileAdvanced) moveFile(oldPath string, newPath string) {
-	err := os.Rename(oldPath, newPath)
-	if err != nil {
-		lfLog.WithError(err).Errorf("could not move file from %s to %s", oldPath, newPath)
-		return
 	}
 }
