@@ -20,7 +20,7 @@ jobs:
       - name: Test
         run: |
           export PATH=$PATH:/usr/local/go/bin
-          yum install -y git python3-docutils rpm-build wget make
+          yum install -y git python3-docutils rpm-build wget make gcc
           wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
           tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
           make check
