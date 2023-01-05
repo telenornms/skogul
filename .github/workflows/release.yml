@@ -20,7 +20,7 @@ jobs:
       - name: Test
         run: |
           export PATH=$PATH:/usr/local/go/bin
-          yum install -y git python3-docutils rpm-build wget make gcc
+          yum install -y git python3-docutils rpm-build wget make gcc coreutils-single
           wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
           tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
           make check
@@ -35,7 +35,7 @@ jobs:
           tar cvjf skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}
       - name: Checksum tarball
         run: |
-          echo "$(sha256sum skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}-1.x86_64.rpm | awk '{ print $1 }')" >> checksum_tarball.txt
+          sha256sum skogul-${{github.ref_name}}.tar.bz2 skogul-*-1.x86_64.rpm >> checksum_tarball.txt
       - name: Upload artifacts
         uses: softprops/action-gh-release@v1
         with:
