@@ -1,3 +1,17 @@
+v0.20.0
+=======
+
+Release date: 2023-01-05
+
+This is a small, but important release that adds support for loadable
+plugins, and also the LineFileAdvanced file reader that allows log
+rotation-based file reading (e.g.: Move a file, send sigup, then parse it).
+
+The plugin support is very much experimental, see docs/plugins.rst for
+discussion. There's also an example-plugin at
+https://github.com/telenornms/skogul-plugin-example which demonstrates how
+to build an out-of-tree plugin.
+
 v0.19.1
 =======
 
