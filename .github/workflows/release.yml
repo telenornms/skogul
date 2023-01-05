@@ -18,12 +18,13 @@ jobs:
           go-version: 1.19
           cache: true
       - name: Test
-        run: make check
-      - name: Build tarball
-        id: build
         run: |
           sudo apt-get -y update
           sudo apt-get -y install make python3-docutils bzip2 gawk
+          make check
+      - name: Build tarball
+        id: build
+        run: |
           make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
           make GIT_DESCRIBE=${{github.ref_name}} notes rpm
           tar cvjf skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}
