@@ -34,6 +34,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"plugin"
 	"runtime"
 	"strings"
 	"sync"
@@ -63,6 +64,7 @@ var floglevel = flag.String("loglevel", "warn", "Minimum loglevel to display ([e
 var ftimestamp = flag.Bool("timestamp", true, "Include timestamp in log entries")
 var fversion = flag.Bool("version", false, "Print skogul version")
 var fprofile = flag.String("pprof", "", "Enable profiling over HTTP, value is http endpoint, e.g: localhost:6060")
+var fplugins = flag.String("experimental-plugins", "", "Comma-separated list of .so files to load as plugins. This is completely unsupported tech preview to get experience with it.")
 
 // Console width :D
 const helpWidth = 66
@@ -117,11 +119,30 @@ func printVersion() {
 	fmt.Println("Skogul", skogulV, "built using", runtime.Version())
 }
 
+func loadPlugins() error {
+	if *fplugins == "" {
+		return nil
+	}
+	toLoad := strings.Split(*fplugins, ",")
+	for _, p := range toLoad {
+		_, err := plugin.Open(p)
+		if err != nil {
+			return fmt.Errorf("plugin %s failed to load: %v", p, err)
+		}
+	}
+	return nil
+}
+
 func main() {
 	flag.Parse()
 
 	skogul.ConfigureLogger(*floglevel, *ftimestamp, *flogformat)
 	log := skogul.Logger("cmd", "main")
+	err := loadPlugins()
+	if err != nil {
+		fmt.Printf("Unable to load plugins: %v\n", err)
+		os.Exit(1)
+	}
 
 	if *fversion {
 		printVersion()
