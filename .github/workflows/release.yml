@@ -27,13 +27,12 @@ jobs:
       - name: Build tarball
         id: build
         run: |
+          set -x
+          pwd
           export PATH=$PATH:/usr/local/go/bin
-          echo make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
-          echo pølser
           make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
           make GIT_DESCRIBE=${{github.ref_name}} notes rpm
           tar cvjf skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}
-          cp notes ${{ github.workspace }}-release-notes.txt
       - name: Checksum tarball
         run: |
           echo "$(shasum skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}-1.x86_64.rpm | awk '{ print $1 }')" >> checksum_tarball.txt
@@ -45,5 +44,5 @@ jobs:
               skogul-${{github.ref_name}}.tar.bz2
               skogul-*-1.x86_64.rpm
               checksum_tarball.txt
-          body_path: ${{ github.workspace }}-release-notes.txt
+          body_path: ./notes
           draft: true
