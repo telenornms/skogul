@@ -28,6 +28,8 @@ jobs:
         id: build
         run: |
           export PATH=$PATH:/usr/local/go/bin
+          echo make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
+          echo pølser
           make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
           make GIT_DESCRIBE=${{github.ref_name}} notes rpm
           tar cvjf skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}
