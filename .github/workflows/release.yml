@@ -19,12 +19,15 @@ jobs:
           cache: true
       - name: Test
         run: |
-          sudo apt-get -y update
-          sudo apt-get -y install make python3-docutils bzip2 gawk
+          export PATH=$PATH:/usr/local/go/bin
+          yum install -y git python3-docutils rpm-build wget make
+          wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
+          tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
           make check
       - name: Build tarball
         id: build
         run: |
+          export PATH=$PATH:/usr/local/go/bin
           make clean install GIT_DESCRIBE=${{github.ref_name}} DESTDIR=skogul-${{github.ref_name}}
           make GIT_DESCRIBE=${{github.ref_name}} notes rpm
           tar cvjf skogul-${{github.ref_name}}.tar.bz2 skogul-${{github.ref_name}}
