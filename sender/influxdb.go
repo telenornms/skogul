@@ -3,8 +3,8 @@
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
- *  - Kristian Lyngstøl <kly@kly.no>
- *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
+ *  - Kristian Lyngst�l <kly@kly.no>
+ *  - H�kon Solbj�rg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"reflect"
 	"strings"
 	"sync"
@@ -44,6 +45,31 @@ var influxLog = skogul.Logger("sender", "influxdb")
 /*
 InfluxDB posts data to the provided URL and measurement, using the InfluxDB
 line format over HTTP.
+
+Optionally metadata field can define what bucket to write to.
+Defining these fields in metadata WILL override existing query parameters
+provided in the URL config field.
+
+E.g
+
+		InfluxDB >= 2.0
+		"metrics": [{
+		                "timestamp": "2019-03-25T12:00:00Z",
+		                "metadata": {
+		                        "bucket": "foobar"
+								"org_id": "1234567890"
+		                },
+		                "data": {}
+		        }]
+
+		InfluxDB < 2.0
+		"metrics": [{
+	                "timestamp": "2019-03-25T12:00:00Z",
+	                "metadata": {
+	                        "bucket": "foobar"
+	                },
+	                "data": {}
+	        }]
 */
 type InfluxDB struct {
 	URL                     string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
@@ -132,108 +158,143 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 				continue
 			}
 		}
-		failed := 0
-		for key, value := range m.Metadata {
-			e1 := checkVariable("metadata", "key", "0", key)
-			e2 := checkVariable("metadata", "value", key, value)
-			if e1 != nil || e2 != nil {
-				failed++
+
+		bucket, ok := m.Metadata["bucket"]
+		if ok {
+			if bucket != "" {
+				orgId, ook := m.Metadata["org_id"]
+
+				url, err := url.Parse(idb.URL)
+				if err != nil {
+					// Could not parse url
+					continue
+				}
+
+				// InfluxDB2.0
+				if ook {
+					// This request will fail, if orgId is empty.
+					if orgId == "" {
+						continue
+					}
+
+					query := url.Query()
+					query.Set("orgID", orgId.(string))
+					query.Set("bucket", bucket.(string))
+
+					url.RawQuery = query.Encode()
+					idb.URL = url.String()
+				} else {
+					query := url.Query()
+					query.Set("db", bucket.(string))
+
+					url.RawQuery = query.Encode()
+					idb.URL = url.String()
+				}
 			}
 		}
-		for key, value := range m.Data {
-			e1 := checkVariable("data", "key", "0", key)
-			e2 := checkVariable("data", "value", key, value)
-			if e1 != nil || e2 != nil {
-				failed++
-			}
-		}
-		if failed > 0 {
-			continue
-		}
-		fmt.Fprintf(&buffer, "%s", measurement)
-		for key, value := range m.Metadata {
-			// Tag values and field values are handled differently;
-			// A tag value is always a string, but if you wrap it in
-			// quotes the quotes will be part of the tag value.
-			// Therefore you need to escape any invalid character instead.
-			// Run the replacer for tags (keys and values), and field keys,
-			// but not for field values.
-			var tagValue interface{}
-			v, ok := value.(string)
 
-			if ok {
-				tagValue = idb.replacer.Replace(v)
-			} else {
-				tagValue = value
-			}
-			fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), tagValue)
-			nmdata++
-		}
-		fmt.Fprintf(&buffer, " ")
-		comma := ""
-		for key, value := range m.Data {
+        failed := 0
+        for key, value := range m.Metadata {
+            e1 := checkVariable("metadata", "key", "0", key)
+            e2 := checkVariable("metadata", "value", key, value)
+            if e1 != nil || e2 != nil {
+                failed++
+            }
+        }
+        for key, value := range m.Data {
+            e1 := checkVariable("data", "key", "0", key)
+            e2 := checkVariable("data", "value", key, value)
+            if e1 != nil || e2 != nil {
+                failed++
+            }
+        }
+        if failed > 0 {
+            continue
+        }
+        fmt.Fprintf(&buffer, "%s", measurement)
+        for key, value := range m.Metadata {
+            // Tag values and field values are handled differently;
+            // A tag value is always a string, but if you wrap it in
+            // quotes the quotes will be part of the tag value.
+            // Therefore you need to escape any invalid character instead.
+            // Run the replacer for tags (keys and values), and field keys,
+            // but not for field values.
+            var tagValue interface{}
+            v, ok := value.(string)
 
-			fmt.Fprintf(&buffer, "%s%s=%s", comma, idb.replacer.Replace(key), idb.toInfluxValue(value))
-			comma = ","
-			ndata++
-		}
-		fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
-		added++
-	}
-	if added == 0 {
-		influxLog.Trace("Tried to send 0 metrics to influx. Probably no viable metrics after filtering out invalid tags and such. You may have to transform your data.")
-		return nil
-	}
+            if ok {
+                tagValue = idb.replacer.Replace(v)
+            } else {
+                tagValue = value
+            }
+            fmt.Fprintf(&buffer, ",%s=%v", idb.replacer.Replace(key), tagValue)
+            nmdata++
+        }
+        fmt.Fprintf(&buffer, " ")
+        comma := ""
+        for key, value := range m.Data {
 
-	req, err := http.NewRequest("POST", idb.URL, &buffer)
-	if err != nil {
-		return fmt.Errorf("unable to create request: %w", err)
-	}
-	if len(idb.Token) > 0 {
-		req.Header.Add("authorization", fmt.Sprintf("Token %s", idb.Token.Expose()))
-	}
+            fmt.Fprintf(&buffer, "%s%s=%s", comma, idb.replacer.Replace(key), idb.toInfluxValue(value))
+            comma = ","
+            ndata++
+        }
+        fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
+        added++
+    }
+    if added == 0 {
+        influxLog.Trace("Tried to send 0 metrics to influx. Probably no viable metrics after filtering out invalid tags and such. You may have to transform your data.")
+        return nil
+    }
 
-	resp, err := idb.client.Do(req)
-	if err != nil {
-		return fmt.Errorf("unable to POST data: %w", err)
-	}
-	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		var body []byte
-		if resp.ContentLength > 0 {
-			body = make([]byte, resp.ContentLength)
+    req, err := http.NewRequest("POST", idb.URL, &buffer)
+    if err != nil {
+        return fmt.Errorf("unable to create request: %w", err)
+    }
+    if len(idb.Token) > 0 {
+        req.Header.Add("authorization", fmt.Sprintf("Token %s", idb.Token.Expose()))
+    }
 
-			if _, err := io.ReadFull(resp.Body, body); err != nil {
-				body = []byte(`unable to ready body`)
-			}
-		} else {
-			body = []byte(fmt.Sprintf("No reply body. Request: %s", buffer.Bytes()))
-		}
+    resp, err := idb.client.Do(req)
+    if err != nil {
+        return fmt.Errorf("unable to POST data: %w", err)
+    }
+    if resp.StatusCode < 200 || resp.StatusCode > 299 {
+        var body []byte
+        if resp.ContentLength > 0 {
+            body = make([]byte, resp.ContentLength)
 
-		return fmt.Errorf("Influx sender(%s) failed to send container (%s). Bad response from InfluxDB: %s - %s", skogul.Identity[idb], c.Describe(), resp.Status, string(body))
-	}
-	return nil
+            if _, err := io.ReadFull(resp.Body, body); err != nil {
+                body = []byte(`unable to ready body`)
+            }
+        } else {
+            body = []byte(fmt.Sprintf("No reply body. Request: %s", buffer.Bytes()))
+        }
+
+        return fmt.Errorf("Influx sender(%s) failed to send container (%s). Bad response from InfluxDB: %s - %s", skogul.Identity[idb], c.Describe(), resp.Status, string(body))
+    }
+    return nil
 }
 
 // toInfluxValue handles converting values to values known by InfluxDB.
 // E.g. an integer should end with the char 'i', so if the value is an int,
 // we need to add that 'i'.
 func (idb *InfluxDB) toInfluxValue(value interface{}) string {
-	if !idb.ConvertIntToFloat {
-		i, ok := value.(int64)
-		if ok {
-			return fmt.Sprintf("%di", i)
-		}
-	}
-	return fmt.Sprintf("%#v", value)
+    if !idb.ConvertIntToFloat {
+        i, ok := value.(int64)
+        if ok {
+            return fmt.Sprintf("%di", i)
+        }
+    }
+    return fmt.Sprintf("%#v", value)
 }
 
 // Verify does a shallow verification of settings
 func (idb *InfluxDB) Verify() error {
-	if idb.URL == "" {
-		return skogul.MissingArgument("URL")
-	}
-	if idb.Measurement == "" && idb.MeasurementFromMetadata == "" {
-		return skogul.MissingArgument("Measurement or MeasurementFromMetadata")
-	}
-	return nil
+    if idb.URL == "" {
+        return skogul.MissingArgument("URL")
+    }
+    if idb.Measurement == "" && idb.MeasurementFromMetadata == "" {
+        return skogul.MissingArgument("Measurement or MeasurementFromMetadata")
+    }
+    return nil
 }
