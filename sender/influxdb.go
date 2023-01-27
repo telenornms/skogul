@@ -3,8 +3,8 @@
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
- *  - Kristian Lyngst�l <kly@kly.no>
- *  - H�kon Solbj�rg <hakon.solbjorg@telenor.com>
+ *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
