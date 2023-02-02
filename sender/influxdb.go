@@ -3,8 +3,8 @@
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
- *  - Kristian Lyngstøl <kly@kly.no>
- *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
+ *  - Kristian Lyngst�l <kly@kly.no>
+ *  - H�kon Solbj�rg <hakon.solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
+	"os"
 	"reflect"
 	"strings"
 	"sync"
@@ -47,29 +47,6 @@ InfluxDB posts data to the provided URL and measurement, using the InfluxDB
 line format over HTTP.
 
 Optionally metadata field can define what bucket to write to.
-Defining these fields in metadata WILL override existing query parameters
-provided in the URL config field.
-
-E.g
-
-		InfluxDB >= 2.0
-		"metrics": [{
-		                "timestamp": "2019-03-25T12:00:00Z",
-		                "metadata": {
-		                        "bucket": "foobar"
-								"org_id": "1234567890"
-		                },
-		                "data": {}
-		        }]
-
-		InfluxDB < 2.0
-		"metrics": [{
-	                "timestamp": "2019-03-25T12:00:00Z",
-	                "metadata": {
-	                        "bucket": "foobar"
-	                },
-	                "data": {}
-	        }]
 */
 type InfluxDB struct {
 	URL                     string          `doc:"URL to InfluxDB API. Must include write end-point and database to write to." example:"http://[::1]:8086/write?db=foo"`
@@ -81,6 +58,8 @@ type InfluxDB struct {
 	client                  *http.Client
 	replacer                *strings.Replacer
 	once                    sync.Once
+	MetadataBucket          string `doc:"Field containing the name of a bucket"`
+	MetadataOrgID           string `doc:"Field containing the id of an organization"`
 }
 
 // checkVariable verifies that the relevant variable is of a type we can
@@ -130,6 +109,9 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		}
 		idb.client = &http.Client{Timeout: idb.Timeout.Duration}
 	})
+
+	newUrl := idb.URL
+
 	added := 0
 	nmdata := 0
 	ndata := 0
@@ -159,37 +141,25 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 			}
 		}
 
-		bucket, ok := m.Metadata["bucket"]
-		if ok {
-			if bucket != "" {
-				orgId, ook := m.Metadata["org_id"]
-
-				url, err := url.Parse(idb.URL)
-				if err != nil {
-					// Could not parse url
-					continue
+		mapper := func(value string) string {
+			switch value {
+			case "metadata.bucket":
+				if bucket, ok := m.Metadata[idb.MetadataBucket]; ok {
+					return bucket.(string)
 				}
-
-				// InfluxDB2.0
-				if ook {
-					// This request will fail, if orgId is empty.
-					if orgId == "" {
-						continue
-					}
-
-					query := url.Query()
-					query.Set("orgID", orgId.(string))
-					query.Set("bucket", bucket.(string))
-
-					url.RawQuery = query.Encode()
-					idb.URL = url.String()
-				} else {
-					query := url.Query()
-					query.Set("db", bucket.(string))
-
-					url.RawQuery = query.Encode()
-					idb.URL = url.String()
+			case "metadata.orgId":
+				if orgId, ok := m.Metadata[idb.MetadataOrgID]; ok {
+					return orgId.(string)
 				}
+			}
+			return ""
+		}
+
+		if _, ok := m.Metadata[idb.MetadataBucket]; ok {
+			newUrl = os.Expand(newUrl, mapper)
+
+			if _, ook := m.Metadata[idb.MetadataOrgID]; ook {
+				newUrl = os.Expand(newUrl, mapper)
 			}
 		}
 
@@ -246,7 +216,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		return nil
 	}
 
-	req, err := http.NewRequest("POST", idb.URL, &buffer)
+	req, err := http.NewRequest("POST", newUrl, &buffer)
 	if err != nil {
 		return fmt.Errorf("unable to create request: %w", err)
 	}
