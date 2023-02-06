@@ -24,6 +24,8 @@
 package transformer
 
 import (
+	"fmt"
+
 	"github.com/dolmen-go/jsonptr"
 
 	"github.com/telenornms/skogul"
@@ -33,6 +35,7 @@ import (
 // for the set of transformers to run
 type Case struct {
 	When         string                   `doc:"Used as a conditional statement on a field"`
+	Exists       bool                     `doc:"Used to check if the 'when' field exists"`
 	Is           interface{}              `doc:"Used for the specific value of the stated metadata field"`
 	Transformers []*skogul.TransformerRef `doc:"The transformers to run when the defined conditional is true"`
 }
@@ -67,7 +70,11 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 				fieldValue = metric.Metadata[field]
 			}
 
-			if fieldValue != condition {
+			if cas.Exists && fieldValue == nil {
+				// If case has Exists enabled, skip if the field does not have a value.
+				continue
+			} else if !cas.Exists && fieldValue != condition {
+				// If case has Exists disabled, skip if the field does not match the condition.
 				continue
 			}
 
@@ -78,5 +85,17 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 		}
 	}
 
+	return nil
+}
+
+func (sw *Switch) Verify() error {
+	for _, cas := range sw.Cases {
+		if len(cas.Transformers) == 0 {
+			return fmt.Errorf("No transformers defined for switch case '%s'", cas.When)
+		}
+		if cas.Exists && cas.Is != nil {
+			return fmt.Errorf("Case for '%s' configured with both Exists and Is. Only one of these makes sense.", cas.When)
+		}
+	}
 	return nil
 }
