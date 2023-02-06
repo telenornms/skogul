@@ -76,6 +76,11 @@ func init() {
 		Help:  "Listen for Skogul-formatted JSON on a MQTT endpoint.",
 	})
 	Auto.Add(skogul.Module{
+		Name:  "nats",
+		Alloc: func() interface{} { return &Nats{} },
+		Help:  "Connect to a Nats.io server/cluster and subscribe to a subject.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "stats",
 		Alloc: func() interface{} { return &Stats{} },
 		Help:  "Gather internal Skogul metrics and send them on to the specified handler. Metrics gathered depends on modules used, and verbosity and completeness also depends on the modules. Examples of metrics gathered are: parse errors, send errors, number of received messages.",

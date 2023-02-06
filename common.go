@@ -25,8 +25,10 @@
 package skogul
 
 import (
+	"crypto/x509"
 	"fmt"
 	"math"
+	"os"
 	"runtime"
 
 	"github.com/sirupsen/logrus"
@@ -380,4 +382,30 @@ func IsInf(f float32, sign int) bool {
 // report missing arguments.
 func MissingArgument(field string) error {
 	return fmt.Errorf("missing required configuration option `%s'", field)
+}
+
+// GetCertPool accepts a path to a directory of certificate authorities to trust. Pass in the empty string to use system defaults
+func GetCertPool(path string) (*x509.CertPool, error) {
+	// this means "use system default"
+	if path == "" {
+		return nil, nil
+	}
+	cp := x509.NewCertPool()
+	fd, err := os.Open(path)
+	if err != nil {
+		return nil, fmt.Errorf("unable to open custom root CA: %w", err)
+	}
+	defer func() {
+		fd.Close()
+	}()
+	bytes := make([]byte, 1024000)
+	n, err := fd.Read(bytes)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read custom root CA: %w", err)
+	}
+	ok := cp.AppendCertsFromPEM(bytes[:n])
+	if !ok {
+		return nil, fmt.Errorf("unable to append certificate to root CA pool")
+	}
+	return cp, nil
 }

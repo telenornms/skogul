@@ -124,6 +124,11 @@ func init() {
 		Help:  "Publishes received metrics to an MQTT broker/topic.",
 	})
 	Auto.Add(skogul.Module{
+		Name:  "nats",
+		Alloc: func() interface{} { return &Nats{} },
+		Help:  "Publishes received metrics to a NATS server/cluster.",
+	})
+	Auto.Add(skogul.Module{
 		Name:  "sql",
 		Alloc: func() interface{} { return &SQL{} },
 		Help:  "Execute a SQL query for each received metric, using a template. Any query can be run, and if multiple metrics are present in the same container, they are all executed in a single transaction, which means the batch-sender will greatly increase performance. Supported engines are MySQL/MariaDB and Postgres.",
