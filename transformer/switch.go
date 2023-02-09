@@ -64,7 +64,7 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 					switchLogger.WithField("field", field).Warn("Failed to get field value from JSON pointer")
 					continue
 				}
-			} else if metric.Metadata[field] == nil || metric.Metadata[field] == "" {
+			} else if metric.Metadata[field] == nil {
 				continue
 			} else {
 				fieldValue = metric.Metadata[field]
