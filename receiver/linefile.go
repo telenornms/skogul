@@ -114,7 +114,7 @@ type WholeFile struct {
 func (wf *WholeFile) read() error {
 	b, err := os.ReadFile(wf.File)
 	if err != nil {
-		return fmt.Errorf("unable to open file from %s: %w", wf.File, err)
+		return err
 	}
 	err = wf.Handler.H.Handle(b)
 	if err != nil {
@@ -129,15 +129,13 @@ func (wf *WholeFile) Start() error {
 	sleep := freq >= time.Nanosecond
 	for {
 		err := wf.read()
-		if err != nil {
-			lfLog.WithError(err).Errorf("whole file reader %s", skogul.Identity[wf])
-		}
 		if sleep {
+			if err != nil {
+				lfLog.WithError(err).Errorf("whole file reader %s", skogul.Identity[wf])
+			}
 			time.Sleep(freq)
 		} else {
-			for {
-				time.Sleep(time.Hour)
-			}
+			return err
 		}
 	}
 }
