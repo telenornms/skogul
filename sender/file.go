@@ -26,7 +26,9 @@ package sender
 import (
 	"fmt"
 	"os"
+	"os/signal"
 	"sync"
+	"syscall"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
@@ -39,16 +41,25 @@ const newLineChar byte = 10
 /*
 File sender writes data to a file in various different fashions. Typical
 use will be debugging (write to disk) and writing to a FIFO for example.
+
+Created file under path given by File option.
+
+When SIGHUP signal is received File will be truncated.
+In case SIGHUP is received and the file doesn't exists the file will be created.
+
+When Append option is supplied, and this sender receives a SIGHUP data will
+be appended to file, if the file exists.
 */
 type File struct {
 	Path    string            `doc:"Absolute path to file to write. DEPRECATED - replaced by option File (to keep options more consistent across modules)."`
 	File    string            `doc:"Absolute path to file to write to."`
-	Append  bool              `doc:"Whether to append to the file when starting. If false, will empty file before starting writes. Default: false"`
+	Append  bool              `doc:"When sighup is received data will be appended to file. When this option is false, the file will be truncated before writing."`
 	Encoder skogul.EncoderRef `doc:"Which encoder to use. Defaults to JSON."`
 	ok      bool
 	once    sync.Once
 	f       *os.File
 	c       chan []byte
+	sighup  chan os.Signal
 }
 
 func (f *File) init() {
@@ -60,20 +71,22 @@ func (f *File) init() {
 	if f.File == "" {
 		f.File = f.Path
 	}
+
 	fileLog.WithField("path", f.File).Debug("Initializing File sender")
 
 	if f.Encoder.Name == "" {
 		fileLog.Info("No Encoder specified, using default: json")
 		f.Encoder.E = encoder.JSON{}
 	}
+
 	if f.Encoder.E == nil {
-		err := fmt.Errorf("No valid encoder specified")
-		fileLog.WithError(err).Errorf("No valid encoder")
+		fileLog.Errorf("No valid encoder specified")
 		f.ok = false
 		return
 	}
+
 	// Open file for append-only if it already exists and config says to append
-	if finfo, err := os.Stat(f.File); !os.IsNotExist(err) && f.Append {
+	if finfo, statErr := os.Stat(f.File); !os.IsNotExist(statErr) && f.Append {
 		fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
 		file, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
 	} else {
@@ -81,6 +94,7 @@ func (f *File) init() {
 		fileLog.WithField("path", f.File).Trace("Creating file since it doesn't exist or we don't want to append to it")
 		file, err = os.Create(f.File)
 	}
+
 	if err != nil {
 		fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to open '%s'", f.File)
 		f.ok = false
@@ -90,6 +104,8 @@ func (f *File) init() {
 	// startChan() handles closing the file as this function returns
 	// and consequently would close the file
 	f.f = file
+
+	f.sighup = make(chan os.Signal, 1)
 
 	// Listening to a channel is blocking so we have
 	// to start the channel listening in a goroutine
@@ -101,18 +117,49 @@ func (f *File) init() {
 }
 
 func (f *File) startChan() {
-	fileLog.Trace("Starting file writer channel")
-	// Making sure we close the file if this function exits
+	fileLog.Trace("Starting file writer routine")
 	defer f.f.Close()
-	for b := range f.c {
-		written, err := f.f.Write(append(b, newLineChar))
-		if err != nil {
-			f.ok = false
-			fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+
+	signal.Notify(f.sighup, syscall.SIGHUP)
+	for {
+		select {
+		case b := <-f.c:
+			written, err := f.f.Write(append(b, newLineChar))
+			if err != nil {
+				f.ok = false
+				fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+			}
+			f.f.Sync()
+		case <-f.sighup: // Hung up
+			var file *os.File
+			var err error
+
+			if f.Append {
+				if finfo, statErr := os.Stat(f.File); !os.IsNotExist(statErr) && f.Append {
+					fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
+					file, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
+				}
+			} else {
+				file, err = os.Create(f.File)
+			}
+
+			if err != nil {
+				f.ok = false
+				// Prevent handle leak
+				f.f.Close()
+				file.Close()
+				fileLog.WithField("path", file).WithError(err).Errorf("Error with file")
+				continue
+			}
+			// Prevent handle leak
+			// f.f is poiting to the previous file.
+			f.f.Close()
+
+			// Override file handler
+			f.f = file
+			f.ok = true
 		}
-		f.f.Sync()
 	}
-	fileLog.WithField("path", f.File).Warning("File writer chan closed, not handling any more writes!")
 }
 
 // Send receives a skogul container and writes it to file.
