@@ -3,6 +3,8 @@
  *
  * Copyright (c) 2019-2020 Telenor Norge AS
  * Author(s):
+ *  - Roshini Narasimha Raghavan <roshiragavi@gmail.com>
+ *  - Kristian Lyngstøl <kly@kly.no>
  *  - Håkon Solbjørg <Hakon.Solbjorg@telenor.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -26,7 +28,9 @@ package sender
 import (
 	"fmt"
 	"os"
+	"os/signal"
 	"sync"
+	"syscall"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/encoder"
@@ -49,6 +53,7 @@ type File struct {
 	once    sync.Once
 	f       *os.File
 	c       chan []byte
+	sighup  chan os.Signal
 }
 
 func (f *File) init() {
@@ -104,15 +109,38 @@ func (f *File) startChan() {
 	fileLog.Trace("Starting file writer channel")
 	// Making sure we close the file if this function exits
 	defer f.f.Close()
-	for b := range f.c {
-		written, err := f.f.Write(append(b, newLineChar))
-		if err != nil {
-			f.ok = false
-			fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+	f.sighup = make(chan os.Signal, 1)
+	signal.Notify(f.sighup, syscall.SIGHUP)
+	for {
+		select {
+		case b := <-f.c:
+			written, err := f.f.Write(append(b, newLineChar))
+			if err != nil {
+				f.ok = false
+				fileLog.WithField("path", f.File).WithError(err).Errorf("Failed to write to file. Wrote %d of %d bytes", written, len(b))
+			}
+			f.f.Sync()
+		case <-f.sighup:
+			f.f.Close()
+			var file *os.File
+			if finfo, err := os.Stat(f.File); !os.IsNotExist(err) && f.Append {
+				fileLog.WithField("path", f.File).Trace("File exists, let's open it for writing")
+				file, err = os.OpenFile(f.File, os.O_APPEND|os.O_WRONLY, finfo.Mode())
+				f.f = file
+				f.ok = true
+			} else {
+				// Otherwise, create the file (which will truncate it if it already exists)
+				fileLog.WithField("path", f.File).Trace("Creating file since it doesn't exist or we don't want to append to it")
+				_, err = os.Create(f.File)
+				if err != nil {
+					fmt.Errorf("%s: Error reopening: %s\n", skogul.Now(), err)
+					f.ok = false
+					return
+				}
+				f.ok = true
+			}
 		}
-		f.f.Sync()
 	}
-	fileLog.WithField("path", f.File).Warning("File writer chan closed, not handling any more writes!")
 }
 
 // Send receives a skogul container and writes it to file.
