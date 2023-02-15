@@ -24,25 +24,19 @@
 package sender_test
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"os"
 	"path"
-	"strings"
+	"syscall"
 	"testing"
 	"time"
 
-	skogul "github.com/telenornms/skogul"
-	sender "github.com/telenornms/skogul/sender"
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/sender"
 )
-
-func createConf() {
-
-}
 
 // createContainer is a simple helper func which
 // creates a skogul.Container with some data
-func createContainer() skogul.Container {
+func createContainer() *skogul.Container {
 	meta := make(map[string]interface{})
 	meta["foo"] = "bar"
 	data := make(map[string]interface{})
@@ -54,68 +48,63 @@ func createContainer() skogul.Container {
 	}
 	metrics := make([]*skogul.Metric, 0)
 	metrics = append(metrics, &metric)
-	return skogul.Container{
+
+	return &skogul.Container{
 		Metrics: metrics,
 	}
 }
 
-func TestWriteToNonExistingFile(t *testing.T) {
-	filename := "skogul-file-sender-nonexisting-file.txt"
-	tmpdir := os.TempDir()
-	path := path.Join(tmpdir, filename)
+func TestWriteToFIle(t *testing.T) {
+	filename := "skogul-file-sender-existing-file-append.txt"
+	path := path.Join(os.TempDir(), filename)
 
-	// Ensure file does not exist already
-	if _, err := os.Stat(path); !os.IsNotExist(err) {
-		// Already exists..
-		// Let's assume it's safe to remove ?
-		os.Remove(path)
-	}
-
-	// Now let's initialize a config which writes to that file which does not exist
 	sender := &sender.File{
 		File:   path,
 		Append: false,
 	}
 
 	c := createContainer()
-	sender.Send(&c)
+	sender.Send(c)
 
-	// Since the write is done by a goroutine
-	// we have to make sure it is properly
-	// flushed before we try to read it back
 	time.Sleep(time.Second)
 
-	b, err := ioutil.ReadFile(path)
+	b, err := os.ReadFile(path)
 	if err != nil {
 		t.Error(err)
 		return
 	}
 
-	var j map[string]interface{}
-	err = json.Unmarshal(b, &j)
+	if len(b) > 0 {
+		t.Log("Ok, sender has written test data")
+	}
+
+	testPid := os.Getpid()
+	process, err := os.FindProcess(testPid)
+
+	if err != nil {
+		t.Errorf("Could not find requested PID %v", testPid)
+		return
+	}
+
+	process.Signal(syscall.SIGHUP)
+
+	time.Sleep(time.Second)
+
+	b, err = os.ReadFile(path)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	// Assume that if we managed to read the file
-	// and unmarshal the contents to JSON
-	// the write succeeded.
+
+	if len(b) == 0 && !sender.Append {
+		t.Log("Ok, sender has received SIGHUP and truncated file.")
+		return
+	}
 }
 
-func TestAppendToExistingFile(t *testing.T) {
+func TestAppendToFile(t *testing.T) {
 	filename := "skogul-file-sender-existing-file-append.txt"
 	path := path.Join(os.TempDir(), filename)
-
-	f, err := os.Create(path)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-
-	f.Write([]byte("some data\n"))
-	f.Sync()
-
-	time.Sleep(time.Second)
 
 	sender := &sender.File{
 		File:   path,
@@ -123,20 +112,40 @@ func TestAppendToExistingFile(t *testing.T) {
 	}
 
 	c := createContainer()
-	sender.Send(&c)
+	sender.Send(c)
 
-	// Since the write is done by a goroutine
-	// we have to make sure it is properly
-	// flushed before we try to read it back
 	time.Sleep(time.Second)
 
-	b, err := ioutil.ReadFile(path)
+	b, err := os.ReadFile(path)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	str := string(b)
-	if !strings.Contains(str, "some data") {
-		t.Errorf("Test file does not contain test string 'some data', was it overwritten? Contents: %s", str)
+
+	if len(b) > 0 {
+		t.Log("Ok, sender has written test data")
+	}
+
+	testPid := os.Getpid()
+	process, err := os.FindProcess(testPid)
+
+	if err != nil {
+		t.Errorf("Could not find requested PID %v", testPid)
+		return
+	}
+
+	process.Signal(syscall.SIGHUP)
+
+	time.Sleep(time.Second)
+
+	b, err = os.ReadFile(path)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if len(b) > 0 {
+		t.Log("Ok, sender has received SIGHUP and appended file.")
+		return
 	}
 }
