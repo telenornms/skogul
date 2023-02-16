@@ -106,10 +106,14 @@ func TestBan(t *testing.T) {
 	originalMetricsCount := len(c.Metrics)
 	ban := &transformer.Ban{}
 
-	ban.Lookup = map[string]interface{}{
+	ban.LookupData = map[string]interface{}{
 		"/baz/bar/baz":   "baz.bar.baz",
 		"/bar/bar/1/321": "12345",
-		"/funny":         "notfunny",
+		"/foo/bar/baz":   "foo.bar.baz",
+	}
+
+	ban.LookupMetadata = map[string]interface{}{
+		"/funny": "notfunny",
 	}
 
 	err := ban.Transform(&c)

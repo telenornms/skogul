@@ -6,11 +6,12 @@ import (
 )
 
 type Ban struct {
-	Lookup map[string]interface{} `doc:"Map of key value pairs to lookup in metrics. Looks in data and metadata fields. Key is json pointer, value any. E.g. /foo/bar: \"bar\""`
+	LookupData     map[string]interface{} `doc:"Map of key value pairs to lookup in metrics. Looks in data fields. Key is json pointer, value any. E.g. /foo/bar: \"bar\""`
+	LookupMetadata map[string]interface{} `doc:"Map of key value pairs to lookup in metrics. Looks in metadata fields. Key is json pointer, value any. E.g. /foo/bar: \"bar\""`
 }
 
 func (b *Ban) Transform(c *skogul.Container) error {
-	for pathKey, pathValue := range b.Lookup {
+	for pathKey, pathValue := range b.LookupData {
 		for metricKey, mi := range c.Metrics {
 			var ptr interface{}
 
@@ -19,6 +20,12 @@ func (b *Ban) Transform(c *skogul.Container) error {
 			if ptr == pathValue {
 				c.Metrics = append(c.Metrics[:metricKey], c.Metrics[metricKey+1:]...)
 			}
+		}
+	}
+
+	for pathKey, pathValue := range b.LookupMetadata {
+		for metricKey, mi := range c.Metrics {
+			var ptr interface{}
 
 			ptr, _ = jsonptr.Get(mi.Metadata, pathKey)
 
