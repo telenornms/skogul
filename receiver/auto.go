@@ -62,7 +62,7 @@ func init() {
 		Name:    "fileadvanced",
 		Aliases: []string{"filea"},
 		Alloc:   func() interface{} { return &LineFileAdvanced{} },
-		Help:    "Reads an entire file line by line. Assumes one collection per line. Allows to define what to do after file has been read.",
+		Help:    "Reads a file line by line. Assumes one collection per line. Renames the file after reading it, and optionally executes a shell command (e.g.: reload a service or send SIGHUP).",
 	})
 	Auto.Add(skogul.Module{
 		Name:    "logrus",
