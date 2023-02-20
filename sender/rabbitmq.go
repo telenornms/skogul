@@ -90,6 +90,7 @@ func (r *Rabbitmq) init() {
 
 	if err != nil {
 		fmt.Errorf("Error %v", err)
+		r.channel.Close()
 	}
 }
 
@@ -102,10 +103,9 @@ func (r *Rabbitmq) Send(c *skogul.Container) error {
 		return fmt.Errorf("No active rabbitmq connections")
 	}
 
-	defer r.channel.Close()
-
 	body, err := r.Encoder.E.Encode(c)
 	if err != nil {
+		r.channel.Close()
 		return err
 	}
 
@@ -124,5 +124,10 @@ func (r *Rabbitmq) Send(c *skogul.Container) error {
 		},
 	)
 
-	return err
+	if err != nil {
+		r.channel.Close()
+		return err
+	}
+
+	return nil
 }

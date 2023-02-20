@@ -62,3 +62,23 @@ func TestRabbitmq(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestRabbitmqTonsOfMessages(t *testing.T) {
+	data := createContainer()
+
+	r := Rabbitmq{
+		Username: "guest",
+		Password: "guest",
+		Queue:    "test-queue",
+	}
+
+	i := 0
+	for i < 100000 {
+		err := r.Send(data)
+
+		if err != nil {
+			t.Error(err)
+		}
+		i++
+	}
+}
