@@ -1,5 +1,5 @@
 /*
- * skogul, rabbitmq producer/sender test
+ * skogul, rabbitmq-receiver test
  *
  * Copyright (c) 2023 Telenor Norge AS
  * Author(s):
@@ -21,66 +21,55 @@
  * 02110-1301  USA
  */
 
-package sender
+package receiver
 
 import (
+	"fmt"
 	"testing"
-	"time"
 
-	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/config"
 )
 
-func createContainer() *skogul.Container {
-	meta := make(map[string]interface{})
-	meta["foo"] = "bar"
-	data := make(map[string]interface{})
-	data["baz"] = "qux"
-
-	metric := skogul.Metric{
-		Time:     &time.Time{},
-		Metadata: meta,
-		Data:     data,
-	}
-	metrics := make([]*skogul.Metric, 0)
-	metrics = append(metrics, &metric)
-
-	return &skogul.Container{
-		Metrics: metrics,
-	}
-}
-
 func TestRabbitmq(t *testing.T) {
-	data := createContainer()
+	sconf := fmt.Sprintf(`
+		 {
+			 "receivers": {
+					 "x": {
+						 "type": "rabbitmq",
+						 "handler": "kek",
+						 "username":"guest",
+						 "password":"guest",
+						 "queue":"test-queue"
+					 }
+			 },
+			 "handlers": {
+					 "kek": {
+							 "parser": "skogulmetric",
+							 "transformers": [
+									 "now"
+							 ],
+							 "sender": "test"
+					 }
+			 },
+			 "senders": {
+				 "test": {
+					 "type": "test"
+				 }
+			 }
+	 }`)
 
-	r := Rabbitmq{
-		Username: "guest",
-		Password: "guest",
-		Queue:    "test-queue",
+	conf, err := config.Bytes([]byte(sconf))
+
+	if err != nil {
+		t.Errorf("Failed to load config: %v", err)
+		return
 	}
 
-	err := r.Send(data)
+	rcv := conf.Receivers["x"].Receiver.(*Rabbitmq)
+
+	err = rcv.Start()
 
 	if err != nil {
 		t.Error(err)
-	}
-}
-
-func TestRabbitmqTonsOfMessages(t *testing.T) {
-	data := createContainer()
-
-	r := Rabbitmq{
-		Username: "guest",
-		Password: "guest",
-		Queue:    "test-queue",
-	}
-
-	i := 0
-	for i < 100000 {
-		err := r.Send(data)
-
-		if err != nil {
-			t.Error(err)
-		}
-		i++
 	}
 }

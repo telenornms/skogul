@@ -1,5 +1,5 @@
 /*
- * skogul, rabbitmq producer/sender
+ * skogul, rabbitmq-receiver
  *
  * Copyright (c) 2023 Telenor Norge AS
  * Author(s):
@@ -21,32 +21,25 @@
  * 02110-1301  USA
  */
 
-package sender
+package receiver
 
 import (
-	"context"
 	"fmt"
-	"sync"
-	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/telenornms/skogul"
-	"github.com/telenornms/skogul/encoder"
 )
 
 type Rabbitmq struct {
-	Username string            `doc:"Username for rabbitmq instance"`
-	Password string            `doc:"Password for rabbitmq instance"`
-	Host     string            `doc:"Hostname for rabbitmq instance. Fallback is localhost"`
-	Port     string            `doc:"Port for rabbitmq instance. Fallback is 5672"`
-	Queue    string            `doc:"Queue to write to"`
-	Encoder  skogul.EncoderRef `doc:"Encoder to use. Fallback is json"`
-	Timeout  int               `doc:"Timeout for rabbitmq instance connection. Fallback is 10 seconds."`
-	channel  *amqp.Channel
-	once     sync.Once
+	Username string             `doc:"Username for rabbitmq instance"`
+	Password string             `doc:"Password for rabbitmq instance"`
+	Host     string             `doc:"Hostname for rabbitmq instance. Fallback is localhost"`
+	Port     string             `doc:"Port for rabbitmq instance. Fallback is 5672"`
+	Queue    string             `doc:"Queue to read from"`
+	Handler  *skogul.HandlerRef `doc:"Handler used to parse, transform and send data. Default skogul."`
 }
 
-func (r *Rabbitmq) init() {
+func (r *Rabbitmq) Start() error {
 	if r.Username == "" || r.Password == "" {
 		fmt.Print("Error missing username or password")
 	}
@@ -59,25 +52,20 @@ func (r *Rabbitmq) init() {
 		r.Host = "localhost"
 	}
 
-	if r.Timeout == 0 {
-		r.Timeout = 10
-	}
-
-	if r.Encoder.E == nil {
-		r.Encoder.E = encoder.JSON{}
+	if r.Handler == nil {
+		r.Handler = &skogul.HandlerRef{}
 	}
 
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username, r.Password, r.Host, r.Port))
 	if err != nil {
-		fmt.Errorf("Failed initializing broker connection: %v", err)
+		return err
 	}
 
 	ch, err := conn.Channel()
-	if err != nil {
-		fmt.Errorf("Error %v", err)
-	}
 
-	r.channel = ch
+	if err != nil {
+		return err
+	}
 
 	_, err = ch.QueueDeclare(
 		r.Queue,
@@ -89,43 +77,36 @@ func (r *Rabbitmq) init() {
 	)
 
 	if err != nil {
-		fmt.Errorf("Error %v", err)
-	}
-}
-
-func (r *Rabbitmq) Send(c *skogul.Container) error {
-	r.once.Do(func() {
-		r.init()
-	})
-
-	if r.channel == nil {
-		return fmt.Errorf("No active rabbitmq connections")
-	}
-
-	body, err := r.Encoder.E.Encode(c)
-	if err != nil {
-		r.channel.Close()
 		return err
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(r.Timeout)*time.Second)
-	defer cancel()
-
-	err = r.channel.PublishWithContext(
-		ctx,
-		"",
+	msgs, err := ch.Consume(
 		r.Queue,
+		"",
+		true,
 		false,
 		false,
-		amqp.Publishing{
-			ContentType: "text/plain",
-			Body:        body,
-		},
+		false,
+		nil,
 	)
 
 	if err != nil {
-		r.channel.Close()
 		return err
+	}
+
+	for message := range msgs {
+		container, err := r.Handler.H.Parse(message.Body)
+
+		if err != nil {
+			// fmt.Errorf("Error failed to parse body %v", err)
+			return err
+		}
+
+		err = r.Handler.H.TransformAndSend(container)
+		if err != nil {
+			// fmt.Errorf("Error transforming %v", err)
+			return err
+		}
 	}
 
 	return nil

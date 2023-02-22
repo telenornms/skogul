@@ -177,5 +177,9 @@ func init() {
 		Alloc: func() interface{} { return &Kafka{} },
 		Help:  "EXPERIMENTAL Kafka sender",
 	})
-
+	Auto.Add(skogul.Module{
+		Name:  "rabbitmq",
+		Alloc: func() interface{} { return &Rabbitmq{} },
+		Help:  "Rabbitmq sender",
+	})
 }

@@ -115,4 +115,9 @@ func init() {
 		Alloc: func() interface{} { return &Kafka{} },
 		Help:  "Connect to a Kafka topic and consume messages.",
 	})
+	Auto.Add(skogul.Module{
+		Name:  "rabbitmq",
+		Alloc: func() interface{} { return &Rabbitmq{} },
+		Help:  "Connect to a Rabbitmq topic and consume messages.",
+	})
 }
