@@ -41,7 +41,7 @@ type Rabbitmq struct {
 
 func (r *Rabbitmq) Start() error {
 	if r.Username == "" || r.Password == "" {
-		fmt.Print("Error missing username or password")
+		return fmt.Errorf("Error missing username or password")
 	}
 
 	if r.Port == "" {
@@ -98,13 +98,11 @@ func (r *Rabbitmq) Start() error {
 		container, err := r.Handler.H.Parse(message.Body)
 
 		if err != nil {
-			// fmt.Errorf("Error failed to parse body %v", err)
 			return err
 		}
 
 		err = r.Handler.H.TransformAndSend(container)
 		if err != nil {
-			// fmt.Errorf("Error transforming %v", err)
 			return err
 		}
 	}

@@ -48,7 +48,8 @@ type Rabbitmq struct {
 
 func (r *Rabbitmq) init() {
 	if r.Username == "" || r.Password == "" {
-		fmt.Print("Error missing username or password")
+		fmt.Errorf("Error missing username or password")
+		return
 	}
 
 	if r.Port == "" {
@@ -70,11 +71,13 @@ func (r *Rabbitmq) init() {
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username, r.Password, r.Host, r.Port))
 	if err != nil {
 		fmt.Errorf("Failed initializing broker connection: %v", err)
+		return
 	}
 
 	ch, err := conn.Channel()
 	if err != nil {
 		fmt.Errorf("Error %v", err)
+		return
 	}
 
 	r.channel = ch
@@ -90,6 +93,7 @@ func (r *Rabbitmq) init() {
 
 	if err != nil {
 		fmt.Errorf("Error %v", err)
+		return
 	}
 }
 
