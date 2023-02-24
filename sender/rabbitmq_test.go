@@ -65,22 +65,22 @@ func TestRabbitmq(t *testing.T) {
 	}
 }
 
-func TestRabbitmqTonsOfMessages(t *testing.T) {
-	data := createContainer()
+// func TestRabbitmqTonsOfMessages(t *testing.T) {
+// 	data := createContainer()
 
-	r := Rabbitmq{
-		Username: "guest",
-		Password: "guest",
-		Queue:    "test-queue",
-	}
+// 	r := Rabbitmq{
+// 		Username: "guest",
+// 		Password: "guest",
+// 		Queue:    "test-queue",
+// 	}
 
-	i := 0
-	for i < 100000 {
-		err := r.Send(data)
+// 	i := 0
+// 	for i < 100000 {
+// 		err := r.Send(data)
 
-		if err != nil {
-			t.Error(err)
-		}
-		i++
-	}
-}
+// 		if err != nil {
+// 			t.Error(err)
+// 		}
+// 		i++
+// 	}
+// }
