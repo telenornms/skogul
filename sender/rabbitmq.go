@@ -46,7 +46,7 @@ type Rabbitmq struct {
 	once     sync.Once
 }
 
-var log = skogul.Logger("sender", "rabbitmq")
+var rabbitmqLog = skogul.Logger("sender", "rabbitmq")
 
 func (r *Rabbitmq) init() {
 	if r.Port == "" {
@@ -67,13 +67,13 @@ func (r *Rabbitmq) init() {
 
 	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username.Expose(), r.Password.Expose(), r.Host, r.Port))
 	if err != nil {
-		log.WithError(err).Error("Failed initializing broker connection")
+		rabbitmqLog.WithError(err).Error("Failed initializing broker connection")
 		return
 	}
 
 	ch, err := conn.Channel()
 	if err != nil {
-		log.WithError(err).Error("Failed initializing channel")
+		rabbitmqLog.WithError(err).Error("Failed initializing channel")
 		return
 	}
 
@@ -89,7 +89,7 @@ func (r *Rabbitmq) init() {
 	)
 
 	if err != nil {
-		log.WithError(err).Error("Failed to declare a queue")
+		rabbitmqLog.WithError(err).Error("Failed to declare a queue")
 		return
 	}
 }
