@@ -29,6 +29,7 @@ import (
 	"math/big"
 	"net"
 	"strconv"
+	"encoding/json"
 
 	"github.com/telenornms/skogul"
 )
@@ -39,11 +40,16 @@ type Cast struct {
 	MetadataFloats     []string `doc:"List of metadatafields that should be 64-bit floats"`
 	MetadataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
 	MetadataIpToDec    []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
+	MetadataJson       []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
+	MetadataTopJson    string `doc:"Metadata-field containing text-encoded JSON which will replace all other metadata after being decoded."`
 	DataStrings        []string `doc:"List of datafields that should be strings"`
 	DataInts           []string `doc:"List of datafields that should be integers"`
 	DataFloats         []string `doc:"List of datafields that should be 64-bit floats"`
 	DataFlatFloats     []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
 	DataIpToDec        []string `doc:"List of datafields containing IP addresses that should be decimals"`
+	DataJson           []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
+	DataTopJson        string `doc:"Data-field containing text-encoded JSON which will replace all other data after being decoded."`
+
 }
 
 // Transform enforces the Cast rules
@@ -59,6 +65,70 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					c.Metrics[mi].Data[value] = fmt.Sprintf("%v", c.Metrics[mi].Data[value])
 				}
 			}
+			for _, value := range cast.DataJson {
+				if c.Metrics[mi].Data[value] != nil {
+					tmp1, ok := c.Metrics[mi].Data[value].(string)
+					if !ok {
+						continue
+					}
+					var tmp interface{}
+					e := json.Unmarshal([]byte(tmp1), &tmp)
+					if e!= nil {
+						return e
+					}
+
+					c.Metrics[mi].Data[value] = tmp
+				}
+			}
+			if cast.DataTopJson != "" {
+				value := cast.DataTopJson
+				if c.Metrics[mi].Data[value] != nil {
+					tmp1, ok := c.Metrics[mi].Data[value].(string)
+					if !ok {
+						continue
+					}
+					var lol map[string]interface{}
+					e := json.Unmarshal([]byte(tmp1), &lol)
+					if e!= nil {
+						return e
+					}
+					c.Metrics[mi].Data = lol
+
+				}
+			}
+			for _, value := range cast.MetadataJson {
+				if c.Metrics[mi].Metadata[value] != nil {
+					tmp1, ok := c.Metrics[mi].Metadata[value].(string)
+					if !ok {
+						continue
+					}
+					var tmp interface{}
+					e := json.Unmarshal([]byte(tmp1), &tmp)
+					if e!= nil {
+						return e
+					}
+
+					c.Metrics[mi].Metadata[value] = tmp
+				}
+			}
+			if cast.MetadataTopJson != "" {
+				value := cast.MetadataTopJson
+				if c.Metrics[mi].Metadata[value] != nil {
+					tmp1, ok := c.Metrics[mi].Metadata[value].(string)
+					if !ok {
+						continue
+					}
+					var lol map[string]interface{}
+					e := json.Unmarshal([]byte(tmp1), &lol)
+					if e!= nil {
+						return e
+					}
+					c.Metrics[mi].Metadata = lol
+
+				}
+			}
+
+
 			for _, value := range cast.DataFloats {
 				if c.Metrics[mi].Data[value] != nil {
 					_, ok := c.Metrics[mi].Data[value].(float64)
