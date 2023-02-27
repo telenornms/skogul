@@ -25,11 +25,11 @@
 package transformer
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/big"
 	"net"
 	"strconv"
-	"encoding/json"
 
 	"github.com/telenornms/skogul"
 )
@@ -41,15 +41,14 @@ type Cast struct {
 	MetadataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
 	MetadataIpToDec    []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
 	MetadataJson       []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
-	MetadataTopJson    string `doc:"Metadata-field containing text-encoded JSON which will replace all other metadata after being decoded."`
+	MetadataTopJson    string   `doc:"Metadata-field containing text-encoded JSON which will replace all other metadata after being decoded."`
 	DataStrings        []string `doc:"List of datafields that should be strings"`
 	DataInts           []string `doc:"List of datafields that should be integers"`
 	DataFloats         []string `doc:"List of datafields that should be 64-bit floats"`
 	DataFlatFloats     []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
 	DataIpToDec        []string `doc:"List of datafields containing IP addresses that should be decimals"`
 	DataJson           []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
-	DataTopJson        string `doc:"Data-field containing text-encoded JSON which will replace all other data after being decoded."`
-
+	DataTopJson        string   `doc:"Data-field containing text-encoded JSON which will replace all other data after being decoded."`
 }
 
 // Transform enforces the Cast rules
@@ -73,7 +72,7 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					}
 					var tmp interface{}
 					e := json.Unmarshal([]byte(tmp1), &tmp)
-					if e!= nil {
+					if e != nil {
 						return e
 					}
 
@@ -89,7 +88,7 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					}
 					var lol map[string]interface{}
 					e := json.Unmarshal([]byte(tmp1), &lol)
-					if e!= nil {
+					if e != nil {
 						return e
 					}
 					c.Metrics[mi].Data = lol
@@ -104,7 +103,7 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					}
 					var tmp interface{}
 					e := json.Unmarshal([]byte(tmp1), &tmp)
-					if e!= nil {
+					if e != nil {
 						return e
 					}
 
@@ -120,14 +119,13 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					}
 					var lol map[string]interface{}
 					e := json.Unmarshal([]byte(tmp1), &lol)
-					if e!= nil {
+					if e != nil {
 						return e
 					}
 					c.Metrics[mi].Metadata = lol
 
 				}
 			}
-
 
 			for _, value := range cast.DataFloats {
 				if c.Metrics[mi].Data[value] != nil {
