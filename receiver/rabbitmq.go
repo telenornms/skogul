@@ -31,8 +31,8 @@ import (
 )
 
 type Rabbitmq struct {
-	Username string             `doc:"Username for rabbitmq instance"`
-	Password string             `doc:"Password for rabbitmq instance"`
+	Username skogul.Secret      `doc:"Username for rabbitmq instance"`
+	Password skogul.Secret      `doc:"Password for rabbitmq instance"`
 	Host     string             `doc:"Hostname for rabbitmq instance. Fallback is localhost"`
 	Port     string             `doc:"Port for rabbitmq instance. Fallback is 5672"`
 	Queue    string             `doc:"Queue to read from"`
@@ -40,10 +40,6 @@ type Rabbitmq struct {
 }
 
 func (r *Rabbitmq) Start() error {
-	if r.Username == "" || r.Password == "" {
-		return fmt.Errorf("Error missing username or password")
-	}
-
 	if r.Port == "" {
 		r.Port = "5672"
 	}
@@ -52,11 +48,7 @@ func (r *Rabbitmq) Start() error {
 		r.Host = "localhost"
 	}
 
-	if r.Handler == nil {
-		r.Handler = &skogul.HandlerRef{}
-	}
-
-	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username, r.Password, r.Host, r.Port))
+	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username.Expose(), r.Password.Expose(), r.Host, r.Port))
 	if err != nil {
 		return err
 	}
@@ -105,6 +97,26 @@ func (r *Rabbitmq) Start() error {
 		if err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (r *Rabbitmq) Verify() error {
+	if r.Handler.Name == "" {
+		return skogul.MissingArgument("Handler")
+	}
+
+	if r.Username.Expose() == "" {
+		return skogul.MissingArgument("Username")
+	}
+
+	if r.Password.Expose() == "" {
+		return skogul.MissingArgument("Password")
+	}
+
+	if r.Queue == "" {
+		return skogul.MissingArgument("Queue")
 	}
 
 	return nil

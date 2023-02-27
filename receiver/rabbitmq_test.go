@@ -23,46 +23,57 @@
 
 package receiver
 
-// func TestRabbitmq(t *testing.T) {
-// 	sconf := fmt.Sprintf(`
-// 		 {
-// 			 "receivers": {
-// 					 "x": {
-// 						 "type": "rabbitmq",
-// 						 "handler": "kek",
-// 						 "username":"guest",
-// 						 "password":"guest",
-// 						 "queue":"test-queue"
-// 					 }
-// 			 },
-// 			 "handlers": {
-// 					 "kek": {
-// 							 "parser": "skogulmetric",
-// 							 "transformers": [
-// 									 "now"
-// 							 ],
-// 							 "sender": "test"
-// 					 }
-// 			 },
-// 			 "senders": {
-// 				 "test": {
-// 					 "type": "test"
-// 				 }
-// 			 }
-// 	 }`)
+import (
+	"fmt"
+	"testing"
 
-// 	conf, err := config.Bytes([]byte(sconf))
+	"github.com/telenornms/skogul/config"
+)
 
-// 	if err != nil {
-// 		t.Errorf("Failed to load config: %v", err)
-// 		return
-// 	}
+func TestRabbitmq(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Short test: Not connecting to a Rabbitmq instance")
+	}
 
-// 	rcv := conf.Receivers["x"].Receiver.(*receiver.Rabbitmq)
+	sconf := fmt.Sprintf(`
+		 {
+			 "receivers": {
+					 "x": {
+						 "type": "rabbitmq",
+						 "handler": "kek",
+						 "username":"guest",
+						 "password":"guest",
+						 "queue":"test-queue"
+					 }
+			 },
+			 "handlers": {
+					 "kek": {
+							 "parser": "skogulmetric",
+							 "transformers": [
+									 "now"
+							 ],
+							 "sender": "test"
+					 }
+			 },
+			 "senders": {
+				 "test": {
+					 "type": "test"
+				 }
+			 }
+	 }`)
 
-// 	err = rcv.Start()
+	conf, err := config.Bytes([]byte(sconf))
 
-// 	if err != nil {
-// 		t.Error(err)
-// 	}
-// }
+	if err != nil {
+		t.Errorf("Failed to load config: %v", err)
+		return
+	}
+
+	rcv := conf.Receivers["x"].Receiver.(*receiver.Rabbitmq)
+
+	err = rcv.Start()
+
+	if err != nil {
+		t.Error(err)
+	}
+}
