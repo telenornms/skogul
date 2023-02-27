@@ -50,6 +50,10 @@ func createContainer() *skogul.Container {
 }
 
 func TestRabbitmq(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Short test: Not connecting to a Rabbitmq instance")
+	}
+
 	data := createContainer()
 
 	r := Rabbitmq{
@@ -65,22 +69,26 @@ func TestRabbitmq(t *testing.T) {
 	}
 }
 
-// func TestRabbitmqTonsOfMessages(t *testing.T) {
-// 	data := createContainer()
+func TestRabbitmqTonsOfMessages(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Short test: Not connecting to a Rabbitmq instance")
+	}
 
-// 	r := Rabbitmq{
-// 		Username: "guest",
-// 		Password: "guest",
-// 		Queue:    "test-queue",
-// 	}
+	data := createContainer()
 
-// 	i := 0
-// 	for i < 100000 {
-// 		err := r.Send(data)
+	r := Rabbitmq{
+		Username: "guest",
+		Password: "guest",
+		Queue:    "test-queue",
+	}
 
-// 		if err != nil {
-// 			t.Error(err)
-// 		}
-// 		i++
-// 	}
-// }
+	i := 0
+	for i < 100000 {
+		err := r.Send(data)
+
+		if err != nil {
+			t.Error(err)
+		}
+		i++
+	}
+}

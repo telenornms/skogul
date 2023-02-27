@@ -35,8 +35,8 @@ import (
 )
 
 type Rabbitmq struct {
-	Username string            `doc:"Username for rabbitmq instance"`
-	Password string            `doc:"Password for rabbitmq instance"`
+	Username skogul.Secret     `doc:"Username for rabbitmq instance"`
+	Password skogul.Secret     `doc:"Password for rabbitmq instance"`
 	Host     string            `doc:"Hostname for rabbitmq instance. Fallback is localhost"`
 	Port     string            `doc:"Port for rabbitmq instance. Fallback is 5672"`
 	Queue    string            `doc:"Queue to write to"`
@@ -46,12 +46,9 @@ type Rabbitmq struct {
 	once     sync.Once
 }
 
-func (r *Rabbitmq) init() {
-	if r.Username == "" || r.Password == "" {
-		fmt.Errorf("Error missing username or password")
-		return
-	}
+var log = skogul.Logger("sender", "rabbitmq")
 
+func (r *Rabbitmq) init() {
 	if r.Port == "" {
 		r.Port = "5672"
 	}
@@ -68,15 +65,15 @@ func (r *Rabbitmq) init() {
 		r.Encoder.E = encoder.JSON{}
 	}
 
-	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username, r.Password, r.Host, r.Port))
+	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%s/", r.Username.Expose(), r.Password.Expose(), r.Host, r.Port))
 	if err != nil {
-		fmt.Errorf("Failed initializing broker connection: %v", err)
+		log.WithError(err).Error("Failed initializing broker connection")
 		return
 	}
 
 	ch, err := conn.Channel()
 	if err != nil {
-		fmt.Errorf("Error %v", err)
+		log.WithError(err).Error("Failed initializing channel")
 		return
 	}
 
@@ -92,7 +89,7 @@ func (r *Rabbitmq) init() {
 	)
 
 	if err != nil {
-		fmt.Errorf("Error %v", err)
+		log.WithError(err).Error("Failed to declare a queue")
 		return
 	}
 }
@@ -130,6 +127,22 @@ func (r *Rabbitmq) Send(c *skogul.Container) error {
 	if err != nil {
 		r.channel.Close()
 		return err
+	}
+
+	return nil
+}
+
+func (r *Rabbitmq) Verify() error {
+	if r.Username.Expose() == "" {
+		return skogul.MissingArgument("Username")
+	}
+
+	if r.Password.Expose() == "" {
+		return skogul.MissingArgument("Password")
+	}
+
+	if r.Queue == "" {
+		return skogul.MissingArgument("Queue")
 	}
 
 	return nil
