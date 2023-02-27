@@ -1,3 +1,14 @@
+v0.21.1
+=======
+
+Release date: 2023-02-27
+
+Add SIGHUP-handling to file-sender.
+
+Add JSON-casting to cast transformer.
+
+Upgrade to Go 1.20, and bump various libs past security lol.
+
 v0.21.0
 =======
 Release date: 2023-02-10
