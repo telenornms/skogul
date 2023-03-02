@@ -120,6 +120,6 @@ func init() {
 		Aliases:  []string{},
 		Alloc:    func() interface{} { return &Ban{} },
 		Help:     "Ban values from nested structure using a path e.g. Path looking like this foo.bar.1 has a structure looking like this { foo: { bar: { 1: hello } } }. The last element in the path will get removed from the tree in this case 1: hello, you will end up having a tree looking like this { foo: { bar: {} } }.",
-		AutoMake: true,
+		AutoMake: false,
 	})
 }
