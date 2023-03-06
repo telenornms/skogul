@@ -21,13 +21,14 @@
  * 02110-1301  USA
  */
 
-package receiver
+package receiver_test
 
 import (
 	"fmt"
 	"testing"
 
 	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/receiver"
 )
 
 func TestRabbitmq(t *testing.T) {
