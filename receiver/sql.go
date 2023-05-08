@@ -25,23 +25,26 @@ package receiver
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
+	"reflect"
+	"time"
+
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
 	"github.com/telenornms/skogul"
-	"reflect"
-	"time"
 )
 
 var sqlLog = skogul.Logger("receiver", "sql")
 
 type SQL struct {
-	ConnStr  string            `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@tcp(host:port)/database. For  MySQL, you need to add parseTime=true at the end to successfully parse a time column, e.g foo:bar@tcp(db2)/blatti?parseTime=true" example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
-	Query    string            `doc:"Query run for each metric. Any column named 'time' will be used as the metric time stamp."`
-	Metadata []string          `doc:"Array of which columns to treat as metadata, the rest will be data fields."`
-	Driver   string            `doc:"Database driver/system. Currently suported: mysql and postgres."`
-	Interval skogul.Duration   `doc:"How often to run the query. Set to negative value to run it just once."`
-	Handler  skogul.HandlerRef `doc:"Handler to use for data transmission."`
+	ConnStr       string            `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@tcp(host:port)/database. For  MySQL, you need to add parseTime=true at the end to successfully parse a time column, e.g foo:bar@tcp(db2)/blatti?parseTime=true" example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
+	Query         string            `doc:"Query run for each metric. Any column named 'time' will be used as the metric time stamp."`
+	Metadata      []string          `doc:"Array of which columns to treat as metadata, the rest will be data fields."`
+	Driver        string            `doc:"Database driver/system. Currently suported: mysql and postgres."`
+	Interval      skogul.Duration   `doc:"How often to run the query. Set to negative value to run it just once."`
+	Handler       skogul.HandlerRef `doc:"Handler to use for data transmission."`
+	UnmarshalJson []string          `doc:"Unmarshal fields containing json strings into objects "`
 }
 
 // Start the SQL receiver and never return
@@ -115,6 +118,19 @@ func (s *SQL) Start() error {
 				name := columnt[idx].Name()
 				oldValue := reflect.ValueOf(values[idx])
 				newValue := reflect.Indirect(oldValue).Interface()
+
+				if len(s.UnmarshalJson) > 0 {
+					for _, v := range s.UnmarshalJson {
+						if name == v {
+							json.Unmarshal([]byte(fmt.Sprintf("%s", newValue)), &newValue)
+							if isMetadata[name] {
+								metric.Metadata[v] = newValue
+							} else {
+								metric.Data[v] = newValue
+							}
+						}
+					}
+				}
 
 				if isMetadata[name] {
 					metric.Metadata[name] = newValue

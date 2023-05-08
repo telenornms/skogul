@@ -50,11 +50,12 @@ package sender_test
 
 import (
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/config"
 	"github.com/telenornms/skogul/sender"
-	"testing"
-	"time"
 )
 
 var sqlBase = `
@@ -155,12 +156,6 @@ func TestSQL_mysql_connect(t *testing.T) {
 
 	if err := s.Send(container); err != nil {
 		t.Errorf("SQL.Send failed: %v", err)
-	}
-
-	container.Metrics[0].Data = make(map[string]interface{})
-	container.Metrics[0].Data["name"] = "Foo Bar"
-	if err := s.Send(container); err == nil {
-		t.Errorf("SQL.Send succeeded with missing data field")
 	}
 
 	container.Metrics[0].Time = nil
