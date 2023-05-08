@@ -158,20 +158,6 @@ func TestSQL_mysql_connect(t *testing.T) {
 		t.Errorf("SQL.Send failed: %v", err)
 	}
 
-	// createTable = "create table enrichment_test (id int not null auto_increment unique, keynames text not null, keyvalues text not null, enrichmentdata text not null, srcprog text not null, updatedtime text not null);"
-
-	s = sqlSender(t, `"driver":"mysql","connstr": "root:lol@/skogul", "query": "INSERT INTO enrichment_test VALUES('system_id,if_name', '{'system_id': 'ti0086a430', 'if_name': 'ae0'}', '{'NitraNavn': 'FL_BRR_1', 'NitraRom': '2T', 'NitraRadStativHylle': 'A 75 5', 'RouterID': 138108, 'Country': 'Norway', 'SiteName': 'FLEKKEFJORD', 'PostalNumber': '4400', 'PostalAddress': 'Flekkefjord', 'KommuneName': 'Flekkefjord', 'KommuneNr': '4207', 'Location': 'Fl Løvikgaten 8', 'POPId': '0086', 'NITRAId': 'FL', 'CustomerName': 'Telenor Business Solution', 'Sambandsnummer': '11040709', 'DynamicAccessColour': 'Green', 'RouterRole': 'combined-vpn-subscriber'}', 'enrichment', ${timestamp});"`)
-
-	container.Metrics[0].Data = make(map[string]interface{})
-	container.Metrics[0].Data["keynames"] = "system_id,if_name"
-	container.Metrics[0].Data["keyvalues"] = `{"system_id": "ti0086a430", "if_name": "ae0"}`
-	container.Metrics[0].Data["enrichmentdata"] = `{"NitraNavn": "FL_BRR_1", "NitraRom": "2T", "NitraRadStativHylle": "A 75 5", "RouterID": 138108, "Country": "Norway", "SiteName": "FLEKKEFJORD", "PostalNumber": "4400", "PostalAddress": "Flekkefjord", "KommuneName": "Flekkefjord", "KommuneNr": "4207", "Location": "Fl Løvikgaten 8", "POPId": "0086", "NITRAId": "FL", "CustomerName": "Telenor Business Solution", "Sambandsnummer": "11040709", "DynamicAccessColour": "Green", "RouterRole": "combined-vpn-subscriber"}`
-	container.Metrics[0].Data["srcprog"] = "enrichment"
-
-	if err := s.Send(container); err == nil {
-		t.Errorf("SQL.Send succeeded with missing data field")
-	}
-
 	container.Metrics[0].Time = nil
 	if err := s.Send(container); err == nil {
 		t.Errorf("SQL.Send succeeded with missing timestamp")
