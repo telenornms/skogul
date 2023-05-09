@@ -1,3 +1,11 @@
+v0.22.0
+=======
+
+Release date: 2023-05-09
+
+Add JSON unmarshalling to SQL receiver, add unflatten to metadata
+transformer as well, and allow banning with ban transformer by path.
+
 v0.21.1
 =======
 
