@@ -1,3 +1,26 @@
+v0.23.0
+=======
+
+Release date: 2023-06-06
+
+Bump Juniper telemetry protocolbuffers from Junos 21.3R1 to 23.2R1.
+
+Adds a small fix to the influx sender, preventing it from sending
+empty tag strings to Influx. Fixes #294.
+
+Adds support for renaming metadata and data fields using the "rename"
+key to the metadata/data transformer. Example::
+
+	"transformers": {
+		"ok": {
+			"type": "data",
+			"rename": [
+				{ "source": "old_key_name", "destination": "new_key_name" }
+			]
+	}
+
+
+
 v0.22.0
 =======
 
