@@ -61,6 +61,7 @@ func (m *NetworkInstances_SRTE) GetNetworkInstance() []*NetworkInstances_SRTENet
 type NetworkInstances_SRTENetworkInstanceList struct {
 	Name                 *string                                                     `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
 	SegmentRouting       *NetworkInstances_SRTENetworkInstanceListSegmentRoutingType `protobuf:"bytes,151,opt,name=segment_routing,json=segmentRouting" json:"segment_routing,omitempty"`
+	Mpls                 *NetworkInstances_SRTENetworkInstanceListMplsType           `protobuf:"bytes,152,opt,name=mpls" json:"mpls,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                                    `json:"-"`
 	XXX_unrecognized     []byte                                                      `json:"-"`
 	XXX_sizecache        int32                                                       `json:"-"`
@@ -102,6 +103,13 @@ func (m *NetworkInstances_SRTENetworkInstanceList) GetName() string {
 func (m *NetworkInstances_SRTENetworkInstanceList) GetSegmentRouting() *NetworkInstances_SRTENetworkInstanceListSegmentRoutingType {
 	if m != nil {
 		return m.SegmentRouting
+	}
+	return nil
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceList) GetMpls() *NetworkInstances_SRTENetworkInstanceListMplsType {
+	if m != nil {
+		return m.Mpls
 	}
 	return nil
 }
@@ -449,6 +457,7 @@ type NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTypeTeP
 	Discriminator        *uint32  `protobuf:"varint,54,opt,name=discriminator" json:"discriminator,omitempty"`
 	Preference           *uint32  `protobuf:"varint,55,opt,name=preference" json:"preference,omitempty"`
 	Enlp                 *string  `protobuf:"bytes,56,opt,name=enlp" json:"enlp,omitempty"`
+	Valid                *bool    `protobuf:"varint,57,opt,name=valid" json:"valid,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -523,6 +532,13 @@ func (m *NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTyp
 		return *m.Enlp
 	}
 	return ""
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTypeTePolicyListCandidatePathsTypeCandidatePathListStateType) GetValid() bool {
+	if m != nil && m.Valid != nil {
+		return *m.Valid
+	}
+	return false
 }
 
 type NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTypeTePolicyListCandidatePathsTypeCandidatePathListSegmentListsType struct {
@@ -839,6 +855,372 @@ func (m *NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTyp
 	return ""
 }
 
+type NetworkInstances_SRTENetworkInstanceListMplsType struct {
+	SignalingProtocols   *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType `protobuf:"bytes,151,opt,name=signaling_protocols,json=signalingProtocols" json:"signaling_protocols,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                `json:"-"`
+	XXX_unrecognized     []byte                                                                  `json:"-"`
+	XXX_sizecache        int32                                                                   `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsType) ProtoMessage() {}
+func (*NetworkInstances_SRTENetworkInstanceListMplsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsType) GetSignalingProtocols() *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType {
+	if m != nil {
+		return m.SignalingProtocols
+	}
+	return nil
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType struct {
+	SegmentRouting       *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType `protobuf:"bytes,151,opt,name=segment_routing,json=segmentRouting" json:"segment_routing,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                                     `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) ProtoMessage() {}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType) GetSegmentRouting() *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType {
+	if m != nil {
+		return m.SegmentRouting
+	}
+	return nil
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType struct {
+	Interfaces           *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType `protobuf:"bytes,151,opt,name=interfaces" json:"interfaces,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                `json:"-"`
+	XXX_unrecognized     []byte                                                                                                  `json:"-"`
+	XXX_sizecache        int32                                                                                                   `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) ProtoMessage() {
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0, 0}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType) GetInterfaces() *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType {
+	if m != nil {
+		return m.Interfaces
+	}
+	return nil
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType struct {
+	Interface            []*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                               `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                 `json:"-"`
+	XXX_sizecache        int32                                                                                                                  `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) ProtoMessage() {
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0, 0, 0}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType) GetInterface() []*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList {
+	if m != nil {
+		return m.Interface
+	}
+	return nil
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList struct {
+	InterfaceId          *string                                                                                                                              `protobuf:"bytes,51,opt,name=interface_id,json=interfaceId" json:"interface_id,omitempty"`
+	State                *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType        `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	InterfaceRef         *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType `protobuf:"bytes,152,opt,name=interface_ref,json=interfaceRef" json:"interface_ref,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                             `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                               `json:"-"`
+	XXX_sizecache        int32                                                                                                                                `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) ProtoMessage() {
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0, 0, 0, 0}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) GetInterfaceId() string {
+	if m != nil && m.InterfaceId != nil {
+		return *m.InterfaceId
+	}
+	return ""
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) GetState() *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList) GetInterfaceRef() *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType {
+	if m != nil {
+		return m.InterfaceRef
+	}
+	return nil
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType struct {
+	InterfaceId          *string  `protobuf:"bytes,51,opt,name=interface_id,json=interfaceId" json:"interface_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) ProtoMessage() {
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0, 0, 0, 0, 0}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType) GetInterfaceId() string {
+	if m != nil && m.InterfaceId != nil {
+		return *m.InterfaceId
+	}
+	return ""
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType struct {
+	State                *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                                      `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                                        `json:"-"`
+	XXX_sizecache        int32                                                                                                                                         `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) ProtoMessage() {
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0, 0, 0, 0, 1}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType) GetState() *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType struct {
+	Interface            *string  `protobuf:"bytes,51,opt,name=interface" json:"interface,omitempty"`
+	Subinterface         *uint32  `protobuf:"varint,52,opt,name=subinterface" json:"subinterface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) Reset() {
+	*m = NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType{}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) ProtoMessage() {
+}
+func (*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8bec8c37fbdbee5, []int{0, 0, 1, 0, 0, 0, 0, 1, 0}
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType.Merge(m, src)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType.Size(m)
+}
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType proto.InternalMessageInfo
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) GetInterface() string {
+	if m != nil && m.Interface != nil {
+		return *m.Interface
+	}
+	return ""
+}
+
+func (m *NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType) GetSubinterface() uint32 {
+	if m != nil && m.Subinterface != nil {
+		return *m.Subinterface
+	}
+	return 0
+}
+
 var E_JnprNetworkInstances_SRTEExt = &proto.ExtensionDesc{
 	ExtendedType:  (*JuniperNetworksSensors)(nil),
 	ExtensionType: (*NetworkInstances_SRTE)(nil),
@@ -864,63 +1246,86 @@ func init() {
 	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTypeTePolicyListCandidatePathsTypeCandidatePathListSegmentListsTypeSegmentListListSidsType)(nil), "network_instances_SRTE.network_instance_list.segment_routing_type.te_policies_type.te_policy_list.candidate_paths_type.candidate_path_list.segment_lists_type.segment_list_list.sids_type")
 	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTypeTePolicyListCandidatePathsTypeCandidatePathListSegmentListsTypeSegmentListListSidsTypeSidList)(nil), "network_instances_SRTE.network_instance_list.segment_routing_type.te_policies_type.te_policy_list.candidate_paths_type.candidate_path_list.segment_lists_type.segment_list_list.sids_type.sid_list")
 	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListSegmentRoutingTypeTePoliciesTypeTePolicyListCandidatePathsTypeCandidatePathListSegmentListsTypeSegmentListListSidsTypeSidListStateType)(nil), "network_instances_SRTE.network_instance_list.segment_routing_type.te_policies_type.te_policy_list.candidate_paths_type.candidate_path_list.segment_lists_type.segment_list_list.sids_type.sid_list.state_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsType)(nil), "network_instances_SRTE.network_instance_list.mpls_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsType)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingType)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type.segment_routing_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesType)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type.segment_routing_type.interfaces_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceList)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type.segment_routing_type.interfaces_type.interface_list")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListStateType)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type.segment_routing_type.interfaces_type.interface_list.state_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefType)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type.segment_routing_type.interfaces_type.interface_list.interface_ref_type")
+	proto.RegisterType((*NetworkInstances_SRTENetworkInstanceListMplsTypeSignalingProtocolsTypeSegmentRoutingTypeInterfacesTypeInterfaceListInterfaceRefTypeStateType)(nil), "network_instances_SRTE.network_instance_list.mpls_type.signaling_protocols_type.segment_routing_type.interfaces_type.interface_list.interface_ref_type.state_type")
 	proto.RegisterExtension(E_JnprNetworkInstances_SRTEExt)
 }
 
 func init() { proto.RegisterFile("rpd_srte_policy_oc.proto", fileDescriptor_a8bec8c37fbdbee5) }
 
 var fileDescriptor_a8bec8c37fbdbee5 = []byte{
-	// 821 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xdc, 0x97, 0xbf, 0x6f, 0x1c, 0x45,
-	0x14, 0xc7, 0xb5, 0xe7, 0x3b, 0x74, 0x7e, 0xe7, 0xbb, 0x33, 0xe3, 0xb3, 0xbd, 0x1e, 0x4b, 0x60,
-	0x21, 0x10, 0x6e, 0xb8, 0xc2, 0xfc, 0xb2, 0xa8, 0xb0, 0x25, 0x17, 0x20, 0x64, 0xac, 0x35, 0x0d,
-	0xd5, 0x6a, 0x7d, 0x33, 0x9c, 0x07, 0xf6, 0x66, 0x97, 0x99, 0x39, 0xce, 0xd7, 0x21, 0x44, 0x47,
-	0x43, 0x05, 0x54, 0x48, 0x74, 0xd0, 0x20, 0x84, 0x28, 0x10, 0x94, 0x88, 0x26, 0x8a, 0xa2, 0x44,
-	0x51, 0x94, 0x22, 0x45, 0xba, 0x14, 0xf9, 0x17, 0x92, 0x22, 0x9a, 0x99, 0xdd, 0xbb, 0xdd, 0xbd,
-	0x4d, 0x91, 0x44, 0x4e, 0xce, 0xe9, 0x66, 0x3e, 0xf3, 0x6e, 0xe6, 0xcd, 0xf7, 0xcd, 0x77, 0x76,
-	0x0e, 0x5c, 0x11, 0x13, 0x5f, 0x0a, 0x45, 0xfd, 0x38, 0x0a, 0x59, 0x6f, 0xec, 0x47, 0xbd, 0x6e,
-	0x2c, 0x22, 0x15, 0xe1, 0x15, 0x45, 0x43, 0x3a, 0xa0, 0x4a, 0x8c, 0x7d, 0x15, 0xc5, 0x16, 0xbe,
-	0x72, 0x0d, 0xc3, 0x1a, 0xa7, 0x6a, 0x14, 0x89, 0x2f, 0x7c, 0xc6, 0xa5, 0x0a, 0x78, 0x8f, 0x4a,
-	0xff, 0xd8, 0xfb, 0xe4, 0x00, 0x7d, 0x0a, 0xcb, 0xc5, 0x11, 0xf7, 0x47, 0x67, 0x6b, 0x61, 0xbb,
-	0xb1, 0xf3, 0x46, 0xb7, 0xfc, 0x37, 0x33, 0xd8, 0x0f, 0x99, 0x54, 0x5e, 0x3b, 0xc1, 0x1f, 0x24,
-	0x14, 0xdf, 0xda, 0x80, 0xd5, 0xd2, 0x50, 0xb4, 0x01, 0x55, 0x1e, 0x0c, 0xa8, 0xfb, 0xe6, 0x96,
-	0xb3, 0xbd, 0xb8, 0x5f, 0xfb, 0xe6, 0xfd, 0x4a, 0xdd, 0xf1, 0x0c, 0x42, 0x21, 0xb4, 0x25, 0xed,
-	0x0f, 0x28, 0x57, 0xbe, 0x88, 0x86, 0x8a, 0xf1, 0xbe, 0x4e, 0xc7, 0xd9, 0x6e, 0xec, 0xec, 0x3f,
-	0x52, 0x3a, 0xdd, 0xc2, 0x2c, 0xbe, 0x1a, 0xc7, 0xd4, 0x6b, 0x25, 0xd4, 0xb3, 0x10, 0xff, 0xed,
-	0x42, 0xa7, 0x2c, 0x10, 0x0d, 0xa1, 0x91, 0x8a, 0xcb, 0xa8, 0x4c, 0x53, 0x38, 0x7e, 0xf2, 0x14,
-	0xba, 0x99, 0x69, 0x6d, 0x4e, 0xa0, 0xe8, 0x51, 0x02, 0xf0, 0xaf, 0xeb, 0xb0, 0x5c, 0x0c, 0x40,
-	0x5f, 0x3b, 0xb0, 0x38, 0xa9, 0x74, 0x5a, 0x9c, 0x93, 0x73, 0x48, 0xa5, 0x3b, 0x3d, 0x4f, 0xa6,
-	0xa2, 0xf5, 0x24, 0xb3, 0x31, 0xfe, 0x7e, 0x0d, 0x5a, 0xf9, 0x41, 0xd4, 0x81, 0x5a, 0x2f, 0x0a,
-	0x23, 0x61, 0x8a, 0xd8, 0xf4, 0x6c, 0x07, 0x61, 0xa8, 0x53, 0x4e, 0xe2, 0x88, 0x71, 0xe5, 0xbe,
-	0xa5, 0xab, 0xeb, 0x4d, 0xfa, 0xe8, 0x5b, 0x07, 0x6a, 0x52, 0x05, 0x8a, 0xa6, 0x72, 0x0e, 0xce,
-	0x7f, 0x0f, 0x5d, 0xb3, 0xa0, 0x15, 0xda, 0x2e, 0x8e, 0x7e, 0x71, 0xa0, 0xdd, 0x0b, 0x38, 0x61,
-	0x44, 0x8f, 0xc4, 0x81, 0x3a, 0x95, 0xee, 0x4f, 0x36, 0xa1, 0xd1, 0x53, 0x48, 0xa8, 0xb0, 0x74,
-	0x72, 0x2e, 0x27, 0xf4, 0x48, 0x43, 0xec, 0x01, 0x4c, 0x13, 0x7f, 0x0c, 0xa9, 0x11, 0x54, 0x4f,
-	0x24, 0x23, 0xee, 0xdb, 0x86, 0x9b, 0x36, 0xbe, 0x8c, 0xa0, 0x53, 0xb6, 0x38, 0xfa, 0xcb, 0x81,
-	0x56, 0x7e, 0x20, 0x3d, 0x64, 0xdf, 0x39, 0xcf, 0x48, 0x90, 0x02, 0xb4, 0xc7, 0xb1, 0x99, 0x13,
-	0x09, 0xdf, 0x5f, 0x86, 0x95, 0x92, 0x30, 0xf4, 0x3a, 0xb4, 0xcd, 0xad, 0xd7, 0x8b, 0x42, 0x3f,
-	0x12, 0xac, 0xcf, 0xb8, 0xbd, 0x67, 0xbc, 0x56, 0x8a, 0x3f, 0x36, 0x14, 0xbd, 0x06, 0x2d, 0x3b,
-	0x1e, 0xa8, 0x48, 0xf8, 0x81, 0xe4, 0x46, 0xc6, 0xa6, 0xd7, 0x9c, 0xd2, 0x3d, 0xc9, 0xf5, 0x7c,
-	0xd9, 0x30, 0x42, 0x44, 0x22, 0x6b, 0xe6, 0xd7, 0x7b, 0x84, 0x08, 0xf4, 0x2a, 0x34, 0x09, 0x93,
-	0x3d, 0xc1, 0x06, 0x16, 0xba, 0xef, 0xd8, 0xe9, 0x72, 0x10, 0xfd, 0x5e, 0x74, 0xc1, 0x0f, 0xf3,
-	0x24, 0x72, 0x89, 0x5f, 0xfe, 0x77, 0xa0, 0x99, 0xae, 0xa9, 0x43, 0x26, 0x6e, 0xf9, 0x79, 0xbe,
-	0x12, 0xcf, 0xa6, 0x68, 0x37, 0xb0, 0x94, 0xb0, 0x8f, 0x34, 0xc2, 0xb7, 0x9d, 0x9c, 0xa9, 0xe6,
-	0xfc, 0x98, 0xbc, 0x04, 0x10, 0x0b, 0xfa, 0x19, 0x15, 0x54, 0x7f, 0x91, 0xdf, 0x35, 0x21, 0x19,
-	0xa2, 0x1d, 0x4e, 0x79, 0x18, 0xbb, 0xbb, 0xd6, 0xe1, 0xba, 0x8d, 0xef, 0x02, 0xa0, 0x59, 0x19,
-	0xd0, 0x0d, 0x07, 0x96, 0xb2, 0x38, 0x75, 0xf7, 0x1f, 0x73, 0x5e, 0xbf, 0x1c, 0xb2, 0x57, 0x40,
-	0x23, 0x53, 0x51, 0x7c, 0xaf, 0x0e, 0x2f, 0xce, 0x84, 0xa0, 0x55, 0xa8, 0x30, 0x62, 0x6f, 0xca,
-	0xf4, 0x65, 0x51, 0x61, 0x04, 0x5d, 0x2f, 0xda, 0xee, 0xdf, 0x0b, 0xb7, 0xfb, 0x12, 0x6f, 0x5e,
-	0x75, 0xa0, 0x2a, 0x19, 0x99, 0x58, 0xf2, 0x9f, 0x0b, 0xb8, 0x29, 0x46, 0x12, 0xbb, 0x9a, 0x9d,
-	0xe0, 0x2f, 0x73, 0x2e, 0x6d, 0x4d, 0xab, 0x69, 0xca, 0xd8, 0x81, 0xda, 0x57, 0x41, 0xc8, 0x88,
-	0xf1, 0x60, 0xdd, 0xb3, 0x1d, 0x6d, 0x51, 0xc6, 0x4d, 0xd3, 0x17, 0x34, 0x90, 0x11, 0x4f, 0xac,
-	0xd7, 0x4c, 0xa8, 0x67, 0x20, 0x5a, 0x83, 0x17, 0x46, 0x94, 0xf5, 0x4f, 0x55, 0x62, 0xb9, 0xa4,
-	0x87, 0xff, 0xac, 0xc2, 0xe2, 0x24, 0x0d, 0x74, 0xd3, 0x81, 0x05, 0xfd, 0xed, 0x4c, 0x5c, 0xf2,
-	0xdf, 0x05, 0x96, 0x54, 0xb7, 0xac, 0x71, 0xf4, 0x8e, 0xf0, 0xa5, 0x0a, 0xd4, 0x53, 0x82, 0x36,
-	0xa1, 0xc6, 0x38, 0xa1, 0x67, 0x46, 0xdc, 0x6a, 0x6a, 0x15, 0xcb, 0xd0, 0x9d, 0xa2, 0x5b, 0xae,
-	0x3c, 0x0f, 0x2a, 0xcc, 0x1a, 0x08, 0xef, 0x16, 0x1f, 0x5a, 0x19, 0x4d, 0x52, 0x31, 0xec, 0x99,
-	0x1b, 0xd2, 0xe4, 0x95, 0x65, 0x3b, 0xef, 0x8d, 0xe0, 0xe5, 0xcf, 0x79, 0x2c, 0xfc, 0x72, 0x59,
-	0x7c, 0x7a, 0xa6, 0xd0, 0x7a, 0xf7, 0xc3, 0x21, 0x67, 0x31, 0x15, 0x87, 0x36, 0x46, 0x1e, 0x53,
-	0x2e, 0x23, 0x21, 0xdd, 0xdf, 0xac, 0xa8, 0xeb, 0x0f, 0xd1, 0xd4, 0xdb, 0xd4, 0x33, 0x1f, 0xe6,
-	0xff, 0x4e, 0x49, 0x3d, 0x72, 0x70, 0xa6, 0x1e, 0x04, 0x00, 0x00, 0xff, 0xff, 0xc4, 0xe7, 0x2a,
-	0x20, 0xfc, 0x0d, 0x00, 0x00,
+	// 1061 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xdc, 0x58, 0x3d, 0x8c, 0x1c, 0x35,
+	0x14, 0x96, 0x37, 0xbb, 0xb0, 0xfb, 0xf6, 0x76, 0x37, 0xf1, 0x5d, 0xee, 0x06, 0x07, 0xc1, 0x11,
+	0x11, 0xd8, 0x86, 0x41, 0x0a, 0x81, 0x04, 0x2a, 0x12, 0x29, 0x45, 0x50, 0x74, 0x9c, 0xe6, 0x68,
+	0xa8, 0x46, 0x73, 0x3b, 0xbe, 0x8d, 0x61, 0xd6, 0x33, 0xd8, 0x5e, 0xee, 0xae, 0x43, 0x51, 0x3a,
+	0x8a, 0x48, 0x14, 0x17, 0x2a, 0xa4, 0x20, 0x04, 0x4a, 0x83, 0x10, 0x82, 0x26, 0x48, 0x69, 0x10,
+	0x0d, 0x45, 0x84, 0x84, 0x10, 0x35, 0x14, 0x20, 0x41, 0x4d, 0x03, 0x0d, 0xf2, 0x78, 0xfe, 0x77,
+	0x4e, 0x22, 0x81, 0x24, 0x7b, 0x74, 0xf6, 0xf7, 0xde, 0xd8, 0xcf, 0x9f, 0xdf, 0xf7, 0x6c, 0x0f,
+	0x58, 0x22, 0xf2, 0x5d, 0x29, 0x14, 0x75, 0xa3, 0x30, 0x60, 0xa3, 0x5d, 0x37, 0x1c, 0xd9, 0x91,
+	0x08, 0x55, 0x48, 0x16, 0x15, 0x0d, 0xe8, 0x84, 0x2a, 0xb1, 0xeb, 0xaa, 0x30, 0x32, 0xe0, 0xf1,
+	0x9f, 0x9e, 0x82, 0x65, 0x4e, 0xd5, 0x76, 0x28, 0xde, 0x74, 0x19, 0x97, 0xca, 0xe3, 0x23, 0x2a,
+	0xdd, 0x0d, 0xe7, 0xb5, 0xf3, 0xf8, 0x75, 0x38, 0x5c, 0xb5, 0x58, 0xd7, 0xd0, 0xea, 0xa1, 0x61,
+	0xf7, 0xe4, 0x33, 0x76, 0xfd, 0x37, 0x33, 0xb0, 0x1b, 0x30, 0xa9, 0x9c, 0x41, 0x02, 0x5f, 0x48,
+	0x50, 0xf2, 0xfb, 0x09, 0x38, 0x5a, 0xeb, 0x8a, 0x1f, 0x81, 0x26, 0xf7, 0x26, 0xd4, 0x7a, 0x6e,
+	0x15, 0x0d, 0x3b, 0xe7, 0x5a, 0x97, 0x5f, 0x6e, 0xb4, 0x91, 0x13, 0x43, 0x38, 0x80, 0x81, 0xa4,
+	0xe3, 0x09, 0xe5, 0xca, 0x15, 0xe1, 0x54, 0x31, 0x3e, 0xd6, 0xe1, 0xa0, 0x61, 0xf7, 0xe4, 0xb9,
+	0x3b, 0x0a, 0xc7, 0xae, 0x8c, 0xe2, 0xaa, 0xdd, 0x88, 0x3a, 0xfd, 0x04, 0x75, 0x0c, 0x88, 0x2f,
+	0x42, 0x73, 0x12, 0x05, 0xd2, 0x7a, 0xdf, 0x4c, 0x71, 0xfa, 0xce, 0xa6, 0xd0, 0x9f, 0x9a, 0x71,
+	0xe3, 0x51, 0xc8, 0x6d, 0x0b, 0x96, 0xea, 0xa6, 0xc5, 0x53, 0xe8, 0xa6, 0x5b, 0xc5, 0xa8, 0x4c,
+	0x17, 0xb4, 0xf1, 0xef, 0x17, 0x64, 0x17, 0x86, 0x35, 0x91, 0x80, 0xa2, 0xeb, 0x09, 0x40, 0x6e,
+	0xad, 0xc0, 0xe1, 0xaa, 0x03, 0x7e, 0x07, 0x41, 0x27, 0xcb, 0x9b, 0x74, 0xab, 0x37, 0xef, 0x41,
+	0x28, 0x76, 0x9e, 0x9d, 0x71, 0x7e, 0xb4, 0x93, 0xc8, 0x76, 0xc9, 0xc7, 0xcb, 0xd0, 0x2f, 0x1b,
+	0xf1, 0x12, 0xb4, 0x46, 0x61, 0x10, 0x8a, 0x38, 0x25, 0x7a, 0x8e, 0xe9, 0x60, 0x02, 0x6d, 0xca,
+	0xfd, 0x28, 0x64, 0x5c, 0x59, 0xa7, 0x74, 0xae, 0x38, 0x59, 0x1f, 0x5f, 0x41, 0xd0, 0x92, 0xca,
+	0x53, 0x34, 0xa5, 0x73, 0x72, 0xef, 0xd7, 0x60, 0xc7, 0x13, 0x1a, 0xa2, 0xcd, 0xe4, 0xf8, 0x3a,
+	0x82, 0xc1, 0xc8, 0xe3, 0x3e, 0xf3, 0xb5, 0x25, 0xf2, 0xd4, 0xa5, 0x2c, 0x9b, 0xb6, 0xef, 0x43,
+	0x40, 0x95, 0xa9, 0x93, 0x2c, 0xcf, 0xd0, 0x75, 0x0d, 0x12, 0x07, 0x20, 0x0f, 0xfc, 0x2e, 0xa8,
+	0xc6, 0xd0, 0xdc, 0x94, 0xcc, 0xb7, 0x9e, 0x8f, 0xf1, 0xb8, 0x4d, 0x7e, 0xc6, 0xb0, 0x54, 0x37,
+	0x39, 0xfe, 0x02, 0x41, 0xbf, 0x6c, 0x48, 0x93, 0xec, 0x5d, 0xf4, 0x80, 0x08, 0xa9, 0x80, 0x26,
+	0x1d, 0x7b, 0x25, 0x92, 0xc8, 0x7b, 0x47, 0x60, 0xb1, 0xc6, 0x0d, 0x3f, 0x0d, 0x83, 0xb8, 0x86,
+	0x8e, 0xc2, 0xc0, 0x0d, 0x05, 0x1b, 0x33, 0x6e, 0xaa, 0x96, 0xd3, 0x4f, 0xe1, 0x57, 0x63, 0x14,
+	0x9f, 0x80, 0xbe, 0xb1, 0x7b, 0x2a, 0x14, 0xae, 0x27, 0x79, 0x4c, 0x63, 0xcf, 0xe9, 0xe5, 0xe8,
+	0x59, 0xc9, 0xf5, 0x78, 0x45, 0x37, 0xdf, 0x17, 0x09, 0xad, 0x85, 0xaf, 0xcf, 0xfa, 0xbe, 0xc0,
+	0x4f, 0x42, 0xcf, 0x67, 0x72, 0x24, 0xd8, 0xc4, 0x80, 0xd6, 0x0b, 0x66, 0xb8, 0x12, 0x88, 0x3f,
+	0xad, 0xaa, 0x60, 0x6f, 0x9e, 0x48, 0xae, 0xd1, 0xcb, 0x37, 0x08, 0x7a, 0xe9, 0x9c, 0xda, 0x25,
+	0x53, 0xcb, 0x07, 0xf3, 0x15, 0x78, 0x31, 0x44, 0xb3, 0x80, 0x85, 0x04, 0xbb, 0xa8, 0x21, 0xf2,
+	0x07, 0x2a, 0x89, 0x6a, 0xce, 0xd3, 0xe4, 0x31, 0x80, 0x48, 0xd0, 0x2d, 0x2a, 0xa8, 0x3e, 0xdf,
+	0x4f, 0xc7, 0x2e, 0x05, 0x44, 0x2b, 0x9c, 0xf2, 0x20, 0xb2, 0xce, 0x18, 0x85, 0xeb, 0xb6, 0xae,
+	0x13, 0x6f, 0x7b, 0x01, 0xf3, 0xad, 0x17, 0x57, 0xd1, 0xb0, 0xed, 0x98, 0x0e, 0xf9, 0x0d, 0x00,
+	0xcf, 0x92, 0x83, 0x7f, 0x40, 0xb0, 0x50, 0x84, 0x53, 0xcd, 0x7f, 0x36, 0xe7, 0xbb, 0x5a, 0x82,
+	0x4c, 0x61, 0xe8, 0x16, 0xf6, 0x99, 0xfc, 0xd5, 0x86, 0x23, 0x33, 0x2e, 0xf8, 0x28, 0x34, 0x98,
+	0x6f, 0xea, 0x67, 0x7a, 0x7b, 0x69, 0x30, 0x1f, 0x7f, 0x5f, 0x15, 0xe3, 0x57, 0x07, 0x6e, 0xf5,
+	0x35, 0x8a, 0xfd, 0x0e, 0x41, 0x53, 0x32, 0x3f, 0x13, 0xea, 0xcd, 0x03, 0xb8, 0x28, 0xe6, 0xa7,
+	0x17, 0x35, 0xdd, 0x24, 0x6f, 0x95, 0xb4, 0xdb, 0xcf, 0x77, 0x33, 0xde, 0xc6, 0x2c, 0xf1, 0x4f,
+	0x15, 0x12, 0x5f, 0x0b, 0x97, 0xf1, 0xb8, 0xe9, 0x0a, 0xea, 0xc9, 0x90, 0x27, 0x82, 0xec, 0x25,
+	0xa8, 0x13, 0x83, 0x78, 0x19, 0x1e, 0xda, 0xa6, 0x6c, 0x7c, 0x49, 0x25, 0x42, 0x4c, 0x7a, 0xe4,
+	0xf3, 0x26, 0x74, 0xb2, 0x30, 0xf0, 0x8f, 0x08, 0x0e, 0xe9, 0x13, 0x35, 0x51, 0xc9, 0xd7, 0x07,
+	0x98, 0x52, 0xdd, 0x32, 0xc2, 0xd1, 0x2b, 0x22, 0xdf, 0x36, 0xa0, 0x9d, 0x22, 0xf8, 0x18, 0xb4,
+	0x18, 0xf7, 0xe9, 0x4e, 0x4c, 0x6e, 0x33, 0x95, 0x8a, 0xc1, 0xf0, 0x2f, 0x55, 0xb5, 0xdc, 0xfe,
+	0x3f, 0xb0, 0x30, 0x2b, 0x20, 0x72, 0xa6, 0x7a, 0xfd, 0x2a, 0x70, 0x92, 0x92, 0x61, 0x72, 0x6e,
+	0x4a, 0x93, 0xbb, 0x97, 0xe9, 0x90, 0x1b, 0x5d, 0xe8, 0x64, 0x8f, 0x0c, 0x7c, 0x19, 0xc1, 0xa2,
+	0x64, 0x63, 0xee, 0x05, 0x7a, 0xb5, 0xe9, 0xb9, 0x92, 0x3d, 0x27, 0xd6, 0xef, 0xf2, 0xf1, 0x62,
+	0xd7, 0x8c, 0x69, 0xe2, 0xc7, 0x99, 0x65, 0x3d, 0x35, 0x90, 0x3d, 0x00, 0x6b, 0xbf, 0x0f, 0xf0,
+	0x55, 0xb4, 0xef, 0xeb, 0x8d, 0xfe, 0xd7, 0xd1, 0xfd, 0xa3, 0x07, 0x1e, 0xf9, 0xb5, 0xbd, 0xcf,
+	0x93, 0x6c, 0x0f, 0x01, 0x30, 0xae, 0xa8, 0xd8, 0xf2, 0x46, 0xf9, 0x93, 0x6c, 0x7a, 0x5f, 0xa2,
+	0xb4, 0xf3, 0x89, 0x93, 0x47, 0x5b, 0x0e, 0x90, 0x2f, 0x1f, 0x86, 0x41, 0xc5, 0x8e, 0x3f, 0x42,
+	0xd0, 0xc9, 0xb0, 0xb4, 0x68, 0x5c, 0x41, 0x0f, 0x24, 0xd8, 0xbc, 0x6f, 0x54, 0x9f, 0x07, 0x46,
+	0xfe, 0x6c, 0xe9, 0x1a, 0x59, 0xb4, 0xe2, 0x21, 0x2c, 0xe4, 0x48, 0x52, 0x65, 0xb3, 0x17, 0x7f,
+	0x37, 0x33, 0x5d, 0xf0, 0xf1, 0x27, 0xd5, 0x72, 0x70, 0x75, 0x2e, 0xd6, 0x57, 0x73, 0x20, 0xde,
+	0x42, 0xd0, 0xcb, 0x9d, 0x04, 0xdd, 0x4a, 0x4f, 0xc6, 0x6b, 0xf3, 0x11, 0x71, 0x29, 0xb6, 0xe4,
+	0xee, 0x9a, 0x61, 0x0e, 0xdd, 0x22, 0xcf, 0x96, 0x0a, 0xd2, 0x13, 0x75, 0x5b, 0x54, 0xda, 0x1b,
+	0x72, 0xbd, 0x01, 0x78, 0x76, 0x54, 0x7c, 0xb3, 0xba, 0x65, 0x1f, 0xce, 0x2b, 0x01, 0x35, 0x55,
+	0x79, 0xad, 0x44, 0xc2, 0xa3, 0x45, 0x81, 0x19, 0x06, 0x72, 0x00, 0x1f, 0x87, 0x05, 0x39, 0xdd,
+	0xcc, 0x1d, 0xcc, 0x95, 0xbd, 0x84, 0xbd, 0xb4, 0x0d, 0x8f, 0xbf, 0xc1, 0x23, 0xe1, 0xd6, 0x13,
+	0xe0, 0xd2, 0x1d, 0x85, 0x57, 0xec, 0x57, 0xa6, 0x9c, 0x45, 0x54, 0xac, 0x19, 0x1f, 0xb9, 0x41,
+	0xb9, 0x0c, 0x85, 0xb4, 0x6e, 0x18, 0xfa, 0x56, 0xf6, 0x61, 0xcf, 0x39, 0xa6, 0x47, 0x5e, 0x2b,
+	0xff, 0x5e, 0x93, 0xda, 0x72, 0x7e, 0x47, 0xfd, 0x1d, 0x00, 0x00, 0xff, 0xff, 0xd5, 0x41, 0x8e,
+	0x3d, 0x0c, 0x14, 0x00, 0x00,
 }

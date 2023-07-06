@@ -59,11 +59,11 @@ func (m *NetworkInstancesEvpn) GetNetworkInstance() []*NetworkInstancesEvpnNetwo
 }
 
 type NetworkInstancesEvpnNetworkInstanceList struct {
-	Name                 *string                                               `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
-	Protocols            *NetworkInstancesEvpnNetworkInstanceListProtocolsType `protobuf:"bytes,151,opt,name=protocols" json:"protocols,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                              `json:"-"`
-	XXX_unrecognized     []byte                                                `json:"-"`
-	XXX_sizecache        int32                                                 `json:"-"`
+	Name                 *string                                             `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	JnxEvpn              *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType `protobuf:"bytes,151,opt,name=jnx_evpn,json=jnxEvpn" json:"jnx_evpn,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                            `json:"-"`
+	XXX_unrecognized     []byte                                              `json:"-"`
+	XXX_sizecache        int32                                               `json:"-"`
 }
 
 func (m *NetworkInstancesEvpnNetworkInstanceList) Reset() {
@@ -99,268 +99,184 @@ func (m *NetworkInstancesEvpnNetworkInstanceList) GetName() string {
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceList) GetProtocols() *NetworkInstancesEvpnNetworkInstanceListProtocolsType {
+func (m *NetworkInstancesEvpnNetworkInstanceList) GetJnxEvpn() *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType {
 	if m != nil {
-		return m.Protocols
+		return m.JnxEvpn
 	}
 	return nil
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsType struct {
-	Protocol             *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType `protobuf:"bytes,151,opt,name=protocol" json:"protocol,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                          `json:"-"`
-	XXX_unrecognized     []byte                                                            `json:"-"`
-	XXX_sizecache        int32                                                             `json:"-"`
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnType struct {
+	NumPeers             *uint32                                                                    `protobuf:"varint,51,opt,name=num_peers,json=numPeers" json:"num_peers,omitempty"`
+	NumInterfaces        *uint32                                                                    `protobuf:"varint,52,opt,name=num_interfaces,json=numInterfaces" json:"num_interfaces,omitempty"`
+	NumInterfacesUp      *uint32                                                                    `protobuf:"varint,53,opt,name=num_interfaces_up,json=numInterfacesUp" json:"num_interfaces_up,omitempty"`
+	NumIrbInterfaces     *uint32                                                                    `protobuf:"varint,54,opt,name=num_irb_interfaces,json=numIrbInterfaces" json:"num_irb_interfaces,omitempty"`
+	NumIrbInterfacesUp   *uint32                                                                    `protobuf:"varint,55,opt,name=num_irb_interfaces_up,json=numIrbInterfacesUp" json:"num_irb_interfaces_up,omitempty"`
+	NumRemoteMacs        *uint32                                                                    `protobuf:"varint,59,opt,name=num_remote_macs,json=numRemoteMacs" json:"num_remote_macs,omitempty"`
+	NumRemoteMacIpV4     *uint32                                                                    `protobuf:"varint,60,opt,name=num_remote_mac_ip_v4,json=numRemoteMacIpV4" json:"num_remote_mac_ip_v4,omitempty"`
+	NumRemoteMacIpV6     *uint32                                                                    `protobuf:"varint,61,opt,name=num_remote_mac_ip_v6,json=numRemoteMacIpV6" json:"num_remote_mac_ip_v6,omitempty"`
+	NumRemoteIrbMacs     *uint32                                                                    `protobuf:"varint,62,opt,name=num_remote_irb_macs,json=numRemoteIrbMacs" json:"num_remote_irb_macs,omitempty"`
+	NumEthernetSegments  *uint32                                                                    `protobuf:"varint,63,opt,name=num_ethernet_segments,json=numEthernetSegments" json:"num_ethernet_segments,omitempty"`
+	LabelAllocationMode  *string                                                                    `protobuf:"bytes,70,opt,name=label_allocation_mode,json=labelAllocationMode" json:"label_allocation_mode,omitempty"`
+	Interfaces           []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList        `protobuf:"bytes,152,rep,name=interfaces" json:"interfaces,omitempty"`
+	IrbInterfaces        []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList     `protobuf:"bytes,153,rep,name=irb_interfaces,json=irbInterfaces" json:"irb_interfaces,omitempty"`
+	Peer                 []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList              `protobuf:"bytes,154,rep,name=peer" json:"peer,omitempty"`
+	SgDb                 []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList              `protobuf:"bytes,156,rep,name=sg_db,json=sgDb" json:"sg_db,omitempty"`
+	EthernetSegment      []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList   `protobuf:"bytes,155,rep,name=ethernet_segment,json=ethernetSegment" json:"ethernet_segment,omitempty"`
+	AssistedReplication  *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType `protobuf:"bytes,157,opt,name=assisted_replication,json=assistedReplication" json:"assisted_replication,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                   `json:"-"`
+	XXX_unrecognized     []byte                                                                     `json:"-"`
+	XXX_sizecache        int32                                                                      `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsType{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnType{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsType) ProtoMessage() {}
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsType) Descriptor() ([]byte, []int) {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsType.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnType.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsType.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnType.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsType.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnType.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsType.Size(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnType.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsType.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsType proto.InternalMessageInfo
-
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsType) GetProtocol() *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType {
-	if m != nil {
-		return m.Protocol
-	}
-	return nil
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnType.DiscardUnknown(m)
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType struct {
-	Evpn                 *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType `protobuf:"bytes,151,opt,name=evpn" json:"evpn,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                                  `json:"-"`
-	XXX_unrecognized     []byte                                                                    `json:"-"`
-	XXX_sizecache        int32                                                                     `json:"-"`
-}
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnType proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType{}
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) String() string {
-	return proto.CompactTextString(m)
-}
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) ProtoMessage() {}
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0}
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType.Unmarshal(m, b)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType.Marshal(b, m, deterministic)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType.Merge(m, src)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType proto.InternalMessageInfo
-
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType) GetEvpn() *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType {
-	if m != nil {
-		return m.Evpn
-	}
-	return nil
-}
-
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType struct {
-	NumPeers             *uint32                                                                                          `protobuf:"varint,51,opt,name=num_peers,json=numPeers" json:"num_peers,omitempty"`
-	NumInterfaces        *uint32                                                                                          `protobuf:"varint,52,opt,name=num_interfaces,json=numInterfaces" json:"num_interfaces,omitempty"`
-	NumInterfacesUp      *uint32                                                                                          `protobuf:"varint,53,opt,name=num_interfaces_up,json=numInterfacesUp" json:"num_interfaces_up,omitempty"`
-	NumIrbInterfaces     *uint32                                                                                          `protobuf:"varint,54,opt,name=num_irb_interfaces,json=numIrbInterfaces" json:"num_irb_interfaces,omitempty"`
-	NumIrbInterfacesUp   *uint32                                                                                          `protobuf:"varint,55,opt,name=num_irb_interfaces_up,json=numIrbInterfacesUp" json:"num_irb_interfaces_up,omitempty"`
-	NumRemoteMacs        *uint32                                                                                          `protobuf:"varint,59,opt,name=num_remote_macs,json=numRemoteMacs" json:"num_remote_macs,omitempty"`
-	NumRemoteMacIpV4     *uint32                                                                                          `protobuf:"varint,60,opt,name=num_remote_mac_ip_v4,json=numRemoteMacIpV4" json:"num_remote_mac_ip_v4,omitempty"`
-	NumRemoteMacIpV6     *uint32                                                                                          `protobuf:"varint,61,opt,name=num_remote_mac_ip_v6,json=numRemoteMacIpV6" json:"num_remote_mac_ip_v6,omitempty"`
-	NumRemoteIrbMacs     *uint32                                                                                          `protobuf:"varint,62,opt,name=num_remote_irb_macs,json=numRemoteIrbMacs" json:"num_remote_irb_macs,omitempty"`
-	NumEthernetSegments  *uint32                                                                                          `protobuf:"varint,63,opt,name=num_ethernet_segments,json=numEthernetSegments" json:"num_ethernet_segments,omitempty"`
-	LabelAllocationMode  *string                                                                                          `protobuf:"bytes,70,opt,name=label_allocation_mode,json=labelAllocationMode" json:"label_allocation_mode,omitempty"`
-	Interfaces           []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList        `protobuf:"bytes,152,rep,name=interfaces" json:"interfaces,omitempty"`
-	IrbInterfaces        []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList     `protobuf:"bytes,153,rep,name=irb_interfaces,json=irbInterfaces" json:"irb_interfaces,omitempty"`
-	Peer                 []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList              `protobuf:"bytes,154,rep,name=peer" json:"peer,omitempty"`
-	SgDb                 []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList              `protobuf:"bytes,156,rep,name=sg_db,json=sgDb" json:"sg_db,omitempty"`
-	EthernetSegment      []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList   `protobuf:"bytes,155,rep,name=ethernet_segment,json=ethernetSegment" json:"ethernet_segment,omitempty"`
-	AssistedReplication  *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType `protobuf:"bytes,157,opt,name=assisted_replication,json=assistedReplication" json:"assisted_replication,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                                                         `json:"-"`
-	XXX_unrecognized     []byte                                                                                           `json:"-"`
-	XXX_sizecache        int32                                                                                            `json:"-"`
-}
-
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType{}
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) String() string {
-	return proto.CompactTextString(m)
-}
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) ProtoMessage() {}
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0}
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType.Unmarshal(m, b)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType.Marshal(b, m, deterministic)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType.Merge(m, src)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType proto.InternalMessageInfo
-
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumPeers() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumPeers() uint32 {
 	if m != nil && m.NumPeers != nil {
 		return *m.NumPeers
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumInterfaces() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumInterfaces() uint32 {
 	if m != nil && m.NumInterfaces != nil {
 		return *m.NumInterfaces
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumInterfacesUp() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumInterfacesUp() uint32 {
 	if m != nil && m.NumInterfacesUp != nil {
 		return *m.NumInterfacesUp
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumIrbInterfaces() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumIrbInterfaces() uint32 {
 	if m != nil && m.NumIrbInterfaces != nil {
 		return *m.NumIrbInterfaces
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumIrbInterfacesUp() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumIrbInterfacesUp() uint32 {
 	if m != nil && m.NumIrbInterfacesUp != nil {
 		return *m.NumIrbInterfacesUp
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumRemoteMacs() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumRemoteMacs() uint32 {
 	if m != nil && m.NumRemoteMacs != nil {
 		return *m.NumRemoteMacs
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumRemoteMacIpV4() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumRemoteMacIpV4() uint32 {
 	if m != nil && m.NumRemoteMacIpV4 != nil {
 		return *m.NumRemoteMacIpV4
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumRemoteMacIpV6() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumRemoteMacIpV6() uint32 {
 	if m != nil && m.NumRemoteMacIpV6 != nil {
 		return *m.NumRemoteMacIpV6
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumRemoteIrbMacs() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumRemoteIrbMacs() uint32 {
 	if m != nil && m.NumRemoteIrbMacs != nil {
 		return *m.NumRemoteIrbMacs
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetNumEthernetSegments() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetNumEthernetSegments() uint32 {
 	if m != nil && m.NumEthernetSegments != nil {
 		return *m.NumEthernetSegments
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetLabelAllocationMode() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetLabelAllocationMode() string {
 	if m != nil && m.LabelAllocationMode != nil {
 		return *m.LabelAllocationMode
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetInterfaces() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetInterfaces() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList {
 	if m != nil {
 		return m.Interfaces
 	}
 	return nil
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetIrbInterfaces() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetIrbInterfaces() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList {
 	if m != nil {
 		return m.IrbInterfaces
 	}
 	return nil
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetPeer() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetPeer() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList {
 	if m != nil {
 		return m.Peer
 	}
 	return nil
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetSgDb() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetSgDb() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList {
 	if m != nil {
 		return m.SgDb
 	}
 	return nil
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetEthernetSegment() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetEthernetSegment() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList {
 	if m != nil {
 		return m.EthernetSegment
 	}
 	return nil
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType) GetAssistedReplication() *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnType) GetAssistedReplication() *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType {
 	if m != nil {
 		return m.AssistedReplication
 	}
 	return nil
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList struct {
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList struct {
 	Name                 *string  `protobuf:"bytes,61,opt,name=name" json:"name,omitempty"`
 	Esi                  *string  `protobuf:"bytes,62,opt,name=esi" json:"esi,omitempty"`
 	Mode                 *string  `protobuf:"bytes,63,opt,name=mode" json:"mode,omitempty"`
@@ -370,64 +286,63 @@ type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInt
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 0}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) GetName() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) GetName() string {
 	if m != nil && m.Name != nil {
 		return *m.Name
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) GetEsi() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) GetEsi() string {
 	if m != nil && m.Esi != nil {
 		return *m.Esi
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) GetMode() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) GetMode() string {
 	if m != nil && m.Mode != nil {
 		return *m.Mode
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList) GetStatus() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList) GetStatus() string {
 	if m != nil && m.Status != nil {
 		return *m.Status
 	}
 	return ""
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList struct {
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList struct {
 	Name                 *string  `protobuf:"bytes,61,opt,name=name" json:"name,omitempty"`
 	VirtualGatewayEsi    *string  `protobuf:"bytes,62,opt,name=virtual_gateway_esi,json=virtualGatewayEsi" json:"virtual_gateway_esi,omitempty"`
 	Status               *string  `protobuf:"bytes,63,opt,name=status" json:"status,omitempty"`
@@ -437,64 +352,63 @@ type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrb
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 1}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 1}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) GetName() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) GetName() string {
 	if m != nil && m.Name != nil {
 		return *m.Name
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) GetVirtualGatewayEsi() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) GetVirtualGatewayEsi() string {
 	if m != nil && m.VirtualGatewayEsi != nil {
 		return *m.VirtualGatewayEsi
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) GetStatus() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) GetStatus() string {
 	if m != nil && m.Status != nil {
 		return *m.Status
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList) GetL3Context() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList) GetL3Context() string {
 	if m != nil && m.L3Context != nil {
 		return *m.L3Context
 	}
 	return ""
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList struct {
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList struct {
 	PeerAddress                 *string  `protobuf:"bytes,71,opt,name=peer_address,json=peerAddress" json:"peer_address,omitempty"`
 	NumAutoDiscoveryRoutes      *uint32  `protobuf:"varint,73,opt,name=num_auto_discovery_routes,json=numAutoDiscoveryRoutes" json:"num_auto_discovery_routes,omitempty"`
 	NumMulticastRoutes          *uint32  `protobuf:"varint,74,opt,name=num_multicast_routes,json=numMulticastRoutes" json:"num_multicast_routes,omitempty"`
@@ -507,176 +421,174 @@ type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePee
 	XXX_sizecache               int32    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 2}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 2}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetPeerAddress() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetPeerAddress() string {
 	if m != nil && m.PeerAddress != nil {
 		return *m.PeerAddress
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetNumAutoDiscoveryRoutes() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetNumAutoDiscoveryRoutes() uint32 {
 	if m != nil && m.NumAutoDiscoveryRoutes != nil {
 		return *m.NumAutoDiscoveryRoutes
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetNumMulticastRoutes() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetNumMulticastRoutes() uint32 {
 	if m != nil && m.NumMulticastRoutes != nil {
 		return *m.NumMulticastRoutes
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetNumEthernetSegmentRoutes() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetNumEthernetSegmentRoutes() uint32 {
 	if m != nil && m.NumEthernetSegmentRoutes != nil {
 		return *m.NumEthernetSegmentRoutes
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetNumMacRoutes() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetNumMacRoutes() uint32 {
 	if m != nil && m.NumMacRoutes != nil {
 		return *m.NumMacRoutes
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetNumMacIpRoutes() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetNumMacIpRoutes() uint32 {
 	if m != nil && m.NumMacIpRoutes != nil {
 		return *m.NumMacIpRoutes
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList) GetNumSelectiveMulticastRoutes() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList) GetNumSelectiveMulticastRoutes() uint32 {
 	if m != nil && m.NumSelectiveMulticastRoutes != nil {
 		return *m.NumSelectiveMulticastRoutes
 	}
 	return 0
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList struct {
-	EthernetTagId        *uint32                                                                                        `protobuf:"varint,71,opt,name=ethernet_tag_id,json=ethernetTagId" json:"ethernet_tag_id,omitempty"`
-	Group                *string                                                                                        `protobuf:"bytes,72,opt,name=group" json:"group,omitempty"`
-	Source               *string                                                                                        `protobuf:"bytes,73,opt,name=source" json:"source,omitempty"`
-	TotalEsiFanout       *uint32                                                                                        `protobuf:"varint,74,opt,name=total_esi_fanout,json=totalEsiFanout" json:"total_esi_fanout,omitempty"`
-	TotalLocalFanout     *uint32                                                                                        `protobuf:"varint,75,opt,name=total_local_fanout,json=totalLocalFanout" json:"total_local_fanout,omitempty"`
-	TotalRemoteFanout    *uint32                                                                                        `protobuf:"varint,76,opt,name=total_remote_fanout,json=totalRemoteFanout" json:"total_remote_fanout,omitempty"`
-	SgdbEsi              []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList `protobuf:"bytes,151,rep,name=sgdb_esi,json=sgdbEsi" json:"sgdb_esi,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                                                       `json:"-"`
-	XXX_unrecognized     []byte                                                                                         `json:"-"`
-	XXX_sizecache        int32                                                                                          `json:"-"`
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList struct {
+	EthernetTagId        *uint32                                                                  `protobuf:"varint,71,opt,name=ethernet_tag_id,json=ethernetTagId" json:"ethernet_tag_id,omitempty"`
+	Group                *string                                                                  `protobuf:"bytes,72,opt,name=group" json:"group,omitempty"`
+	Source               *string                                                                  `protobuf:"bytes,73,opt,name=source" json:"source,omitempty"`
+	TotalEsiFanout       *uint32                                                                  `protobuf:"varint,74,opt,name=total_esi_fanout,json=totalEsiFanout" json:"total_esi_fanout,omitempty"`
+	TotalLocalFanout     *uint32                                                                  `protobuf:"varint,75,opt,name=total_local_fanout,json=totalLocalFanout" json:"total_local_fanout,omitempty"`
+	TotalRemoteFanout    *uint32                                                                  `protobuf:"varint,76,opt,name=total_remote_fanout,json=totalRemoteFanout" json:"total_remote_fanout,omitempty"`
+	SgdbEsi              []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList `protobuf:"bytes,151,rep,name=sgdb_esi,json=sgdbEsi" json:"sgdb_esi,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                 `json:"-"`
+	XXX_unrecognized     []byte                                                                   `json:"-"`
+	XXX_sizecache        int32                                                                    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 3}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 3}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetEthernetTagId() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetEthernetTagId() uint32 {
 	if m != nil && m.EthernetTagId != nil {
 		return *m.EthernetTagId
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetGroup() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetGroup() string {
 	if m != nil && m.Group != nil {
 		return *m.Group
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetSource() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetSource() string {
 	if m != nil && m.Source != nil {
 		return *m.Source
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetTotalEsiFanout() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetTotalEsiFanout() uint32 {
 	if m != nil && m.TotalEsiFanout != nil {
 		return *m.TotalEsiFanout
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetTotalLocalFanout() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetTotalLocalFanout() uint32 {
 	if m != nil && m.TotalLocalFanout != nil {
 		return *m.TotalLocalFanout
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetTotalRemoteFanout() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetTotalRemoteFanout() uint32 {
 	if m != nil && m.TotalRemoteFanout != nil {
 		return *m.TotalRemoteFanout
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList) GetSgdbEsi() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList) GetSgdbEsi() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList {
 	if m != nil {
 		return m.SgdbEsi
 	}
 	return nil
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList struct {
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList struct {
 	Esi                  *string  `protobuf:"bytes,152,opt,name=esi" json:"esi,omitempty"`
 	LocalIntfName        *string  `protobuf:"bytes,151,opt,name=local_intf_name,json=localIntfName" json:"local_intf_name,omitempty"`
 	JoinSyncStatus       *string  `protobuf:"bytes,153,opt,name=join_sync_status,json=joinSyncStatus" json:"join_sync_status,omitempty"`
@@ -688,169 +600,167 @@ type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgD
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 3, 0}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 3, 0}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) GetEsi() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) GetEsi() string {
 	if m != nil && m.Esi != nil {
 		return *m.Esi
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) GetLocalIntfName() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) GetLocalIntfName() string {
 	if m != nil && m.LocalIntfName != nil {
 		return *m.LocalIntfName
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) GetJoinSyncStatus() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) GetJoinSyncStatus() string {
 	if m != nil && m.JoinSyncStatus != nil {
 		return *m.JoinSyncStatus
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) GetJoinSyncLastUpdated() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) GetJoinSyncLastUpdated() string {
 	if m != nil && m.JoinSyncLastUpdated != nil {
 		return *m.JoinSyncLastUpdated
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) GetLeaveSyncStatus() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) GetLeaveSyncStatus() string {
 	if m != nil && m.LeaveSyncStatus != nil {
 		return *m.LeaveSyncStatus
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList) GetLeaveSyncLastUpdated() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList) GetLeaveSyncLastUpdated() string {
 	if m != nil && m.LeaveSyncLastUpdated != nil {
 		return *m.LeaveSyncLastUpdated
 	}
 	return ""
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList struct {
-	Esi                  *string                                                                                                    `protobuf:"bytes,71,opt,name=esi" json:"esi,omitempty"`
-	Status               *string                                                                                                    `protobuf:"bytes,72,opt,name=status" json:"status,omitempty"`
-	LocalIntfName        *string                                                                                                    `protobuf:"bytes,73,opt,name=local_intf_name,json=localIntfName" json:"local_intf_name,omitempty"`
-	LocalIntfStatus      *string                                                                                                    `protobuf:"bytes,74,opt,name=local_intf_status,json=localIntfStatus" json:"local_intf_status,omitempty"`
-	DfElectionAlgorithm  *string                                                                                                    `protobuf:"bytes,75,opt,name=df_election_algorithm,json=dfElectionAlgorithm" json:"df_election_algorithm,omitempty"`
-	DesignatedForwarder  *string                                                                                                    `protobuf:"bytes,76,opt,name=designated_forwarder,json=designatedForwarder" json:"designated_forwarder,omitempty"`
-	RemotePe             []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList `protobuf:"bytes,151,rep,name=remote_pe,json=remotePe" json:"remote_pe,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                                                                   `json:"-"`
-	XXX_unrecognized     []byte                                                                                                     `json:"-"`
-	XXX_sizecache        int32                                                                                                      `json:"-"`
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList struct {
+	Esi                  *string                                                                              `protobuf:"bytes,71,opt,name=esi" json:"esi,omitempty"`
+	Status               *string                                                                              `protobuf:"bytes,72,opt,name=status" json:"status,omitempty"`
+	LocalIntfName        *string                                                                              `protobuf:"bytes,73,opt,name=local_intf_name,json=localIntfName" json:"local_intf_name,omitempty"`
+	LocalIntfStatus      *string                                                                              `protobuf:"bytes,74,opt,name=local_intf_status,json=localIntfStatus" json:"local_intf_status,omitempty"`
+	DfElectionAlgorithm  *string                                                                              `protobuf:"bytes,75,opt,name=df_election_algorithm,json=dfElectionAlgorithm" json:"df_election_algorithm,omitempty"`
+	DesignatedForwarder  *string                                                                              `protobuf:"bytes,76,opt,name=designated_forwarder,json=designatedForwarder" json:"designated_forwarder,omitempty"`
+	RemotePe             []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList `protobuf:"bytes,151,rep,name=remote_pe,json=remotePe" json:"remote_pe,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                             `json:"-"`
+	XXX_unrecognized     []byte                                                                               `json:"-"`
+	XXX_sizecache        int32                                                                                `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 4}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 4}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetEsi() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetEsi() string {
 	if m != nil && m.Esi != nil {
 		return *m.Esi
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetStatus() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetStatus() string {
 	if m != nil && m.Status != nil {
 		return *m.Status
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetLocalIntfName() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetLocalIntfName() string {
 	if m != nil && m.LocalIntfName != nil {
 		return *m.LocalIntfName
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetLocalIntfStatus() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetLocalIntfStatus() string {
 	if m != nil && m.LocalIntfStatus != nil {
 		return *m.LocalIntfStatus
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetDfElectionAlgorithm() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetDfElectionAlgorithm() string {
 	if m != nil && m.DfElectionAlgorithm != nil {
 		return *m.DfElectionAlgorithm
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetDesignatedForwarder() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetDesignatedForwarder() string {
 	if m != nil && m.DesignatedForwarder != nil {
 		return *m.DesignatedForwarder
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList) GetRemotePe() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList) GetRemotePe() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList {
 	if m != nil {
 		return m.RemotePe
 	}
 	return nil
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList struct {
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList struct {
 	IpAddress            *string  `protobuf:"bytes,71,opt,name=ip_address,json=ipAddress" json:"ip_address,omitempty"`
 	Mode                 *string  `protobuf:"bytes,72,opt,name=mode" json:"mode,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -858,152 +768,151 @@ type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEth
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) ProtoMessage() {
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 4, 0}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 4, 0}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList.Size(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) GetIpAddress() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) GetIpAddress() string {
 	if m != nil && m.IpAddress != nil {
 		return *m.IpAddress
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList) GetMode() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList) GetMode() string {
 	if m != nil && m.Mode != nil {
 		return *m.Mode
 	}
 	return ""
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType struct {
-	Role                 *string                                                                                                        `protobuf:"bytes,51,opt,name=role" json:"role,omitempty"`
-	L2Domain             []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList `protobuf:"bytes,171,rep,name=l2_domain,json=l2Domain" json:"l2_domain,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                                                                       `json:"-"`
-	XXX_unrecognized     []byte                                                                                                         `json:"-"`
-	XXX_sizecache        int32                                                                                                          `json:"-"`
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType struct {
+	Role                 *string                                                                                  `protobuf:"bytes,51,opt,name=role" json:"role,omitempty"`
+	L2Domain             []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList `protobuf:"bytes,171,rep,name=l2_domain,json=l2Domain" json:"l2_domain,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                 `json:"-"`
+	XXX_unrecognized     []byte                                                                                   `json:"-"`
+	XXX_sizecache        int32                                                                                    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) ProtoMessage() {}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 5}
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 5}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType.Size(m)
-}
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) GetRole() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) GetRole() string {
 	if m != nil && m.Role != nil {
 		return *m.Role
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType) GetL2Domain() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType) GetL2Domain() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList {
 	if m != nil {
 		return m.L2Domain
 	}
 	return nil
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList struct {
-	VniId                *uint32                                                                                                                    `protobuf:"varint,51,opt,name=vni_id,json=vniId" json:"vni_id,omitempty"`
-	Nexthops             []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList `protobuf:"bytes,171,rep,name=nexthops" json:"nexthops,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                                                                                   `json:"-"`
-	XXX_unrecognized     []byte                                                                                                                     `json:"-"`
-	XXX_sizecache        int32                                                                                                                      `json:"-"`
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList struct {
+	VniId                *uint32                                                                                              `protobuf:"varint,51,opt,name=vni_id,json=vniId" json:"vni_id,omitempty"`
+	Nexthops             []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList `protobuf:"bytes,171,rep,name=nexthops" json:"nexthops,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                             `json:"-"`
+	XXX_unrecognized     []byte                                                                                               `json:"-"`
+	XXX_sizecache        int32                                                                                                `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) ProtoMessage() {
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 5, 0}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 5, 0}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList.Size(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) GetVniId() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) GetVniId() uint32 {
 	if m != nil && m.VniId != nil {
 		return *m.VniId
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList) GetNexthops() []*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList) GetNexthops() []*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList {
 	if m != nil {
 		return m.Nexthops
 	}
 	return nil
 }
 
-type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList struct {
+type NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList struct {
 	NexthopIndex         *uint32  `protobuf:"varint,72,opt,name=nexthop_index,json=nexthopIndex" json:"nexthop_index,omitempty"`
 	VniId                *uint32  `protobuf:"varint,71,opt,name=vni_id,json=vniId" json:"vni_id,omitempty"`
 	Interface            *string  `protobuf:"bytes,73,opt,name=interface" json:"interface,omitempty"`
@@ -1014,64 +923,64 @@ type NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAss
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) Reset() {
-	*m = NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList{}
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) Reset() {
+	*m = NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList{}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) String() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) ProtoMessage() {
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) ProtoMessage() {
 }
-func (*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 0, 0, 5, 0, 0}
+func (*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ece6942ef07f71da, []int{0, 0, 0, 5, 0, 0}
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Unmarshal(m, b)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Unmarshal(m, b)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Marshal(b, m, deterministic)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Merge(m, src)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Merge(m, src)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Size() int {
-	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Size(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.Size(m)
 }
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_DiscardUnknown() {
-	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.DiscardUnknown(m)
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList proto.InternalMessageInfo
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetNexthopIndex() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetNexthopIndex() uint32 {
 	if m != nil && m.NexthopIndex != nil {
 		return *m.NexthopIndex
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetVniId() uint32 {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetVniId() uint32 {
 	if m != nil && m.VniId != nil {
 		return *m.VniId
 	}
 	return 0
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetInterface() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetInterface() string {
 	if m != nil && m.Interface != nil {
 		return *m.Interface
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetReplicatorIp() string {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetReplicatorIp() string {
 	if m != nil && m.ReplicatorIp != nil {
 		return *m.ReplicatorIp
 	}
 	return ""
 }
 
-func (m *NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetIsDesignatedNode() bool {
+func (m *NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList) GetIsDesignatedNode() bool {
 	if m != nil && m.IsDesignatedNode != nil {
 		return *m.IsDesignatedNode
 	}
@@ -1090,118 +999,112 @@ var E_JnprNetworkInstancesEvpnExt = &proto.ExtensionDesc{
 func init() {
 	proto.RegisterType((*NetworkInstancesEvpn)(nil), "network_instances_evpn")
 	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceList)(nil), "network_instances_evpn.network_instance_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsType)(nil), "network_instances_evpn.network_instance_list.protocols_type")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolType)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnType)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeInterfacesList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.interfaces_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeIrbInterfacesList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.irb_interfaces_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypePeerList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.peer_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.sg_db_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeSgDbListSgdbEsiList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.sg_db_list.sgdb_esi_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.ethernet_segment_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeEthernetSegmentListRemotePeList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.ethernet_segment_list.remote_pe_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationType)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.assisted_replication_type")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.assisted_replication_type.l2_domain_list")
-	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListProtocolsTypeProtocolTypeEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList)(nil), "network_instances_evpn.network_instance_list.protocols_type.protocol_type.evpn_type.assisted_replication_type.l2_domain_list.nexthops_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnType)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeInterfacesList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.interfaces_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeIrbInterfacesList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.irb_interfaces_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypePeerList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.peer_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.sg_db_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeSgDbListSgdbEsiList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.sg_db_list.sgdb_esi_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.ethernet_segment_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeEthernetSegmentListRemotePeList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.ethernet_segment_list.remote_pe_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationType)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.assisted_replication_type")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.assisted_replication_type.l2_domain_list")
+	proto.RegisterType((*NetworkInstancesEvpnNetworkInstanceListJnxEvpnTypeAssistedReplicationTypeL2DomainListNexthopsList)(nil), "network_instances_evpn.network_instance_list.jnx_evpn_type.assisted_replication_type.l2_domain_list.nexthops_list")
 	proto.RegisterExtension(E_JnprNetworkInstancesEvpnExt)
 }
 
 func init() { proto.RegisterFile("rpd_ni_evpn_render.proto", fileDescriptor_ece6942ef07f71da) }
 
 var fileDescriptor_ece6942ef07f71da = []byte{
-	// 1491 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x58, 0xcd, 0x6f, 0xdc, 0x44,
-	0x1b, 0x97, 0x9b, 0xa4, 0x6f, 0xf6, 0x69, 0x76, 0x93, 0xcc, 0xe6, 0xc3, 0x75, 0x3f, 0x5f, 0x28,
-	0x25, 0x2d, 0x74, 0x45, 0xd3, 0x10, 0x04, 0xb4, 0xb4, 0xa1, 0x49, 0xdb, 0x0d, 0x4d, 0x54, 0x39,
-	0x2d, 0x12, 0x42, 0x62, 0xe4, 0xac, 0x27, 0x9b, 0x09, 0xde, 0xb1, 0x35, 0x33, 0xde, 0x26, 0x07,
-	0x2e, 0x48, 0x1c, 0x10, 0x17, 0xb8, 0xd0, 0x96, 0x16, 0x09, 0x71, 0x43, 0x70, 0x40, 0x82, 0x33,
-	0x17, 0xfe, 0x1a, 0x6e, 0xdc, 0xb8, 0xa2, 0xf9, 0xb0, 0xd7, 0xde, 0x6c, 0x91, 0x10, 0xa4, 0xdc,
-	0x76, 0x9e, 0xdf, 0xef, 0x99, 0xe7, 0xc3, 0xcf, 0x87, 0xbd, 0xe0, 0xf2, 0x24, 0xc4, 0x8c, 0x62,
-	0xd2, 0x4d, 0x18, 0xe6, 0x84, 0x85, 0x84, 0x37, 0x12, 0x1e, 0xcb, 0xd8, 0xab, 0x4b, 0x12, 0x91,
-	0x0e, 0x91, 0x7c, 0x0f, 0xcb, 0x38, 0x31, 0xc2, 0xe7, 0x7e, 0xfe, 0x3f, 0xcc, 0x30, 0x22, 0xef,
-	0xc7, 0xfc, 0x43, 0x4c, 0x99, 0x90, 0x01, 0x6b, 0x11, 0xa1, 0x95, 0xd1, 0x7b, 0x30, 0xd1, 0x8f,
-	0xb8, 0x0f, 0x9c, 0xd3, 0x43, 0x73, 0x47, 0xe6, 0x2f, 0x34, 0x06, 0xeb, 0xec, 0x13, 0xe3, 0x88,
-	0x0a, 0xe9, 0x8f, 0x5b, 0x71, 0xd3, 0x4a, 0xbd, 0x5f, 0x4e, 0xc3, 0xf4, 0x40, 0x2a, 0x3a, 0x0a,
-	0xc3, 0x2c, 0xe8, 0x10, 0xf7, 0xd2, 0x69, 0x67, 0xae, 0xf2, 0xf6, 0xc8, 0xc7, 0xd7, 0x0e, 0x8d,
-	0x3a, 0xbe, 0x16, 0xa1, 0xf7, 0xa1, 0xa2, 0x7d, 0x6e, 0xc5, 0x91, 0x50, 0x8e, 0x38, 0x73, 0x47,
-	0xe6, 0x2f, 0xff, 0x2d, 0x47, 0x1a, 0xb9, 0x3e, 0x96, 0x7b, 0x09, 0xf1, 0x7b, 0xf7, 0x79, 0x3f,
-	0x9c, 0x82, 0x5a, 0x19, 0x45, 0x6d, 0x18, 0xcd, 0x24, 0x99, 0xb9, 0xd5, 0x7f, 0x62, 0x2e, 0x3f,
-	0x1a, 0xe3, 0xf9, 0xe5, 0xde, 0x8f, 0x27, 0xa1, 0x5a, 0xc2, 0x10, 0x85, 0x61, 0x75, 0x6d, 0x66,
-	0xf6, 0xee, 0xbf, 0x67, 0xb6, 0xa1, 0xeb, 0x42, 0x3b, 0xa0, 0x4d, 0x78, 0x3f, 0x9d, 0x80, 0x4a,
-	0x2e, 0x43, 0xc7, 0xa0, 0xc2, 0xd2, 0x0e, 0x4e, 0x08, 0xe1, 0x42, 0x3f, 0x83, 0xaa, 0x3f, 0xca,
-	0xd2, 0xce, 0x1d, 0x75, 0x46, 0x2f, 0x40, 0x4d, 0x81, 0x94, 0x49, 0xc2, 0xb7, 0x82, 0x16, 0x11,
-	0xee, 0x82, 0x66, 0x54, 0x59, 0xda, 0x69, 0xe6, 0x42, 0x74, 0x1e, 0x26, 0xcb, 0x34, 0x9c, 0x26,
-	0xee, 0xab, 0x9a, 0x39, 0x5e, 0x62, 0xde, 0x4b, 0xd0, 0xcb, 0x80, 0x34, 0x97, 0x6f, 0x16, 0xaf,
-	0x5d, 0xd4, 0xe4, 0x09, 0x45, 0xe6, 0x9b, 0x85, 0x9b, 0x2f, 0xc2, 0xf4, 0x7e, 0xb6, 0xba, 0xfd,
-	0x35, 0xad, 0x80, 0xfa, 0x15, 0xee, 0x25, 0xe8, 0x2c, 0x28, 0x9b, 0x98, 0x93, 0x4e, 0x2c, 0x09,
-	0xee, 0x04, 0x2d, 0xe1, 0xbe, 0x99, 0x3b, 0xed, 0x6b, 0xe9, 0x5a, 0xd0, 0x12, 0xa8, 0x01, 0x53,
-	0x65, 0x1e, 0xa6, 0x09, 0xee, 0x2e, 0xb8, 0x97, 0x73, 0x57, 0x72, 0x72, 0x33, 0x79, 0x77, 0xe1,
-	0x29, 0xfc, 0x45, 0xf7, 0xca, 0x40, 0xfe, 0x22, 0xba, 0x00, 0xf5, 0x02, 0x5f, 0x45, 0xa0, 0x7d,
-	0x79, 0xab, 0x8f, 0xde, 0xe4, 0x9b, 0xda, 0x9d, 0x79, 0x13, 0x29, 0x91, 0xdb, 0x84, 0x33, 0x22,
-	0xb1, 0x20, 0xed, 0x0e, 0x61, 0x52, 0xb8, 0x57, 0xb5, 0x82, 0xba, 0x6b, 0xc5, 0x62, 0x1b, 0x16,
-	0x52, 0x3a, 0x51, 0xb0, 0x49, 0x22, 0x1c, 0x44, 0x51, 0xdc, 0x0a, 0x24, 0x8d, 0x19, 0xee, 0xc4,
-	0x21, 0x71, 0x6f, 0xa8, 0x5e, 0xf2, 0xeb, 0x1a, 0x5c, 0xca, 0xb1, 0xb5, 0x38, 0x24, 0xe8, 0x13,
-	0x07, 0xa0, 0x90, 0xf8, 0x87, 0xa6, 0xbd, 0xc3, 0x83, 0xa8, 0xb7, 0x46, 0xe1, 0x91, 0xe9, 0xa9,
-	0x50, 0x30, 0x8c, 0x3e, 0x77, 0xa0, 0xd6, 0x57, 0x04, 0x8f, 0x8c, 0x2f, 0xdb, 0x07, 0xe3, 0x4b,
-	0xb9, 0x84, 0xb4, 0x3f, 0x55, 0x5a, 0x2a, 0x36, 0x01, 0xc3, 0xaa, 0x0d, 0xdc, 0xaf, 0x8c, 0x1f,
-	0x1f, 0x1c, 0x88, 0x1f, 0xca, 0x82, 0xb1, 0xae, 0x8d, 0xa1, 0x14, 0x46, 0x44, 0x1b, 0x87, 0x9b,
-	0xee, 0x13, 0x63, 0x15, 0x1f, 0x88, 0x55, 0x6d, 0xc2, 0x9a, 0x15, 0xed, 0xe5, 0x4d, 0xf4, 0xa5,
-	0x03, 0x13, 0xfd, 0xb5, 0xe6, 0x3e, 0x36, 0x2e, 0xec, 0x1c, 0x88, 0x0b, 0xfd, 0xd6, 0xec, 0xa2,
-	0x20, 0xe5, 0xa2, 0x46, 0xdf, 0x3a, 0x30, 0x15, 0x08, 0x41, 0x85, 0x24, 0x21, 0xe6, 0x24, 0x89,
-	0xa8, 0x29, 0x5e, 0xf7, 0x6b, 0x33, 0x19, 0xd9, 0x81, 0x38, 0x37, 0xc8, 0xa2, 0x99, 0x99, 0xf5,
-	0x0c, 0xf2, 0x7b, 0x88, 0xb7, 0x03, 0xe3, 0x7d, 0xb5, 0x94, 0xaf, 0xb1, 0x2b, 0xfb, 0xd7, 0xd8,
-	0x04, 0x0c, 0x11, 0x41, 0x75, 0xe7, 0x57, 0x7c, 0xf5, 0x13, 0x21, 0x18, 0xd6, 0x7d, 0x7a, 0x55,
-	0x8b, 0xf4, 0x6f, 0x34, 0x03, 0x87, 0x85, 0x0c, 0x64, 0x2a, 0xdc, 0x6b, 0x5a, 0x6a, 0x4f, 0xde,
-	0x03, 0x07, 0xea, 0x03, 0x8a, 0xf7, 0xaf, 0x0c, 0x36, 0xa0, 0xde, 0xa5, 0x5c, 0xa6, 0x41, 0x84,
-	0xdb, 0x81, 0x24, 0xf7, 0x83, 0x3d, 0xdc, 0x73, 0x60, 0xd2, 0x42, 0x37, 0x0d, 0xb2, 0x22, 0x68,
-	0xc1, 0xf4, 0xd5, 0xa2, 0x69, 0x74, 0x02, 0x20, 0xba, 0x84, 0x5b, 0x31, 0x93, 0x64, 0x57, 0x5a,
-	0xb7, 0x2a, 0xd1, 0xa5, 0xeb, 0x46, 0xe0, 0xfd, 0x71, 0x08, 0x2a, 0x79, 0x39, 0xa3, 0x39, 0x18,
-	0xd3, 0x87, 0x20, 0x0c, 0x39, 0x11, 0xc2, 0xbd, 0x59, 0xf4, 0xeb, 0x88, 0x82, 0x96, 0x0c, 0x82,
-	0x5e, 0x87, 0xa3, 0x6a, 0xd4, 0x05, 0xa9, 0x8c, 0x71, 0x48, 0x45, 0x2b, 0xee, 0x12, 0xbe, 0x87,
-	0x79, 0x9c, 0x4a, 0x22, 0xdc, 0xa6, 0x1e, 0x77, 0x33, 0x2c, 0xed, 0x2c, 0xa5, 0x32, 0x5e, 0xce,
-	0x60, 0x5f, 0xa3, 0xe8, 0x15, 0x33, 0x84, 0x3b, 0x69, 0x24, 0x69, 0x2b, 0x10, 0x32, 0xd3, 0x5a,
-	0xcd, 0xd7, 0xc1, 0x5a, 0x06, 0x59, 0x8d, 0x2b, 0x70, 0x6c, 0xd0, 0x5c, 0xcd, 0x14, 0xdf, 0xd1,
-	0x8a, 0xee, 0xfe, 0xe9, 0x6a, 0xd5, 0xcf, 0x98, 0x0d, 0xa8, 0xc6, 0xbd, 0xd5, 0xb8, 0xad, 0x35,
-	0xc6, 0x94, 0xa9, 0xa0, 0x65, 0x59, 0xe7, 0xcc, 0x02, 0xb4, 0x4b, 0xc1, 0x12, 0xd7, 0x34, 0xb1,
-	0x66, 0x88, 0xcd, 0xc4, 0x52, 0xaf, 0xc3, 0x49, 0x45, 0x15, 0x24, 0x22, 0x2d, 0x49, 0xbb, 0x64,
-	0x7f, 0x2c, 0xeb, 0x5a, 0x4f, 0x79, 0xbd, 0x91, 0x91, 0xfa, 0x82, 0xf2, 0xbe, 0x18, 0x01, 0xe8,
-	0xb5, 0xb4, 0x5a, 0x79, 0x79, 0x7c, 0x32, 0x68, 0x63, 0x1a, 0xea, 0xec, 0x57, 0xfd, 0x6a, 0x26,
-	0xbe, 0x1b, 0xb4, 0x9b, 0x21, 0x9a, 0x82, 0x91, 0x36, 0x8f, 0xd3, 0xc4, 0xbd, 0xa5, 0x1f, 0xa5,
-	0x39, 0xe8, 0xa7, 0x1f, 0xa7, 0xbc, 0x45, 0x74, 0xee, 0xd5, 0xd3, 0xd7, 0x27, 0x34, 0x07, 0x13,
-	0x32, 0x96, 0x41, 0xa4, 0x6a, 0x07, 0x6f, 0x05, 0x2c, 0x4e, 0xa5, 0xcd, 0x73, 0x4d, 0xcb, 0x57,
-	0x04, 0xbd, 0xa1, 0xa5, 0x6a, 0xa7, 0x1b, 0xa6, 0xda, 0x34, 0x51, 0xc6, 0x35, 0xa9, 0x35, 0x77,
-	0xdc, 0x56, 0x80, 0x65, 0x37, 0xa0, 0x6e, 0xd8, 0x76, 0x35, 0x5a, 0xba, 0xc9, 0xeb, 0xa4, 0x86,
-	0xcc, 0x6a, 0xb4, 0xfc, 0x4f, 0x1d, 0x18, 0x15, 0xed, 0x70, 0x53, 0xd7, 0xb0, 0x7d, 0x1d, 0xed,
-	0x1c, 0xf0, 0x94, 0x6c, 0x64, 0x06, 0xcd, 0x94, 0xfa, 0x9f, 0x3a, 0xae, 0x08, 0xea, 0x3d, 0x3c,
-	0x04, 0xd5, 0x12, 0x84, 0x5c, 0xd3, 0xdc, 0x0f, 0x9d, 0x62, 0xb9, 0xeb, 0x26, 0x7f, 0x11, 0xc6,
-	0x4d, 0x3e, 0x28, 0x93, 0x5b, 0x58, 0xf7, 0xaa, 0x7e, 0xbb, 0xab, 0xf8, 0x55, 0x2d, 0x6f, 0x32,
-	0xb9, 0xb5, 0xae, 0xda, 0xf5, 0x1c, 0x4c, 0xec, 0xc4, 0x94, 0x61, 0xb1, 0xc7, 0x5a, 0xd8, 0x36,
-	0xe2, 0x23, 0xc3, 0xac, 0x29, 0x60, 0x63, 0x8f, 0xb5, 0x36, 0x4c, 0x47, 0x2e, 0xc0, 0x4c, 0x8f,
-	0x1a, 0xa9, 0xa2, 0x49, 0x93, 0x30, 0x90, 0x24, 0x54, 0x4b, 0x4b, 0xef, 0xfc, 0x4c, 0xe1, 0x76,
-	0x20, 0xe4, 0x3d, 0x83, 0xa1, 0x97, 0x60, 0x32, 0x22, 0x41, 0x97, 0x94, 0x2c, 0x3c, 0x36, 0x0a,
-	0xe3, 0x1a, 0x29, 0x98, 0x58, 0x84, 0xd9, 0x02, 0xb9, 0x64, 0xe3, 0x89, 0x51, 0x99, 0xca, 0x55,
-	0x0a, 0x46, 0xbc, 0xdf, 0x86, 0x60, 0x7a, 0xe0, 0x8c, 0x47, 0xb3, 0x26, 0x45, 0x37, 0xf7, 0x65,
-	0xa8, 0x37, 0x77, 0x6e, 0x95, 0xe6, 0xce, 0xd9, 0xfd, 0x99, 0x6b, 0x0e, 0x4a, 0xdc, 0x79, 0x98,
-	0x2c, 0xf0, 0xec, 0x55, 0xab, 0x36, 0xac, 0x8c, 0x69, 0xc3, 0x9a, 0x87, 0xe9, 0x70, 0x0b, 0x9b,
-	0x86, 0x8a, 0x19, 0x0e, 0xa2, 0x76, 0xcc, 0xa9, 0xdc, 0xee, 0xe8, 0x32, 0xad, 0xf8, 0xf5, 0x70,
-	0x6b, 0xc5, 0x62, 0x4b, 0x19, 0x84, 0x2e, 0xc2, 0x54, 0x48, 0x04, 0x6d, 0x33, 0x15, 0x20, 0xde,
-	0x8a, 0xf9, 0xfd, 0x80, 0x87, 0x84, 0xeb, 0x52, 0x55, 0x2a, 0x39, 0x76, 0x23, 0x83, 0xd0, 0x03,
-	0x07, 0x2a, 0xb6, 0xae, 0x93, 0xfc, 0xe3, 0x69, 0xef, 0xd9, 0x2d, 0xd4, 0x46, 0x6e, 0xdc, 0x54,
-	0xee, 0xa8, 0x39, 0xdf, 0x21, 0xde, 0x2a, 0xd4, 0xca, 0x18, 0x3a, 0x03, 0x40, 0x93, 0xc1, 0xf3,
-	0xba, 0x42, 0x93, 0x6c, 0x5a, 0x67, 0xbb, 0xea, 0x56, 0x6f, 0x57, 0x79, 0xbf, 0x0f, 0xc3, 0xd1,
-	0xa7, 0xae, 0x4c, 0xa5, 0xc1, 0xe3, 0xc8, 0x7e, 0xd1, 0xf9, 0xfa, 0x37, 0x7a, 0xec, 0x40, 0x25,
-	0x9a, 0xc7, 0x61, 0xdc, 0x09, 0x28, 0x73, 0xbf, 0x37, 0x79, 0xf9, 0xe8, 0xd9, 0xee, 0xf2, 0x46,
-	0xee, 0x80, 0xcd, 0x4d, 0x34, 0xbf, 0xac, 0x8f, 0xde, 0x37, 0x43, 0x50, 0x2b, 0x83, 0xe8, 0x38,
-	0x1c, 0xee, 0x32, 0xaa, 0x46, 0xa9, 0xfe, 0x28, 0xca, 0x12, 0x33, 0xd2, 0x65, 0xb4, 0x19, 0xa2,
-	0xef, 0x1c, 0x18, 0x65, 0x64, 0x57, 0x6e, 0xc7, 0x89, 0xc8, 0xa2, 0xf9, 0xcc, 0xf9, 0x4f, 0xc3,
-	0x69, 0x64, 0xfe, 0xd8, 0xe0, 0xb2, 0xa3, 0xf7, 0xab, 0x03, 0xd5, 0x12, 0x86, 0xce, 0xe7, 0x02,
-	0x4c, 0x59, 0x48, 0x76, 0xf5, 0xb3, 0xcd, 0x43, 0x1c, 0xb3, 0x58, 0x53, 0x41, 0x68, 0x3a, 0xcf,
-	0x83, 0x59, 0x29, 0x36, 0x01, 0xc7, 0xa1, 0x92, 0xbf, 0x90, 0xd8, 0xe6, 0xec, 0x09, 0xd0, 0xf3,
-	0x50, 0xcd, 0xbc, 0x8d, 0x39, 0xa6, 0x89, 0x6d, 0xca, 0xb1, 0x9e, 0xb0, 0xa9, 0xbf, 0x04, 0xa9,
-	0xc0, 0x85, 0x06, 0x63, 0xaa, 0xcc, 0x54, 0x3b, 0x8e, 0xfa, 0x13, 0x54, 0x2c, 0xe7, 0xc0, 0x7a,
-	0x1c, 0x92, 0x37, 0xba, 0x70, 0x6a, 0x87, 0x25, 0x1c, 0x0f, 0x4e, 0x31, 0x26, 0xbb, 0x12, 0xcd,
-	0x36, 0x56, 0x53, 0x46, 0x13, 0xc2, 0xd7, 0x0d, 0x47, 0x6c, 0x10, 0x26, 0x62, 0x2e, 0xdc, 0x44,
-	0xbf, 0x39, 0xce, 0x3e, 0xe5, 0xf1, 0xf8, 0xc7, 0xd4, 0xc5, 0xeb, 0xe5, 0x3f, 0x2c, 0xc4, 0x4a,
-	0x37, 0x61, 0x2b, 0xbb, 0xf2, 0xcf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x19, 0x0f, 0x80, 0x87, 0x5e,
-	0x11, 0x00, 0x00,
+	// 1436 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x57, 0xcb, 0x6f, 0x1b, 0x45,
+	0x18, 0x97, 0x9b, 0xa4, 0x8d, 0xbf, 0xc6, 0x79, 0x8c, 0xf3, 0xd8, 0x3a, 0x2d, 0x54, 0x50, 0x4a,
+	0x5a, 0xa8, 0x45, 0xd3, 0x10, 0x04, 0xa5, 0xb4, 0xa1, 0x71, 0x5a, 0xa7, 0x4d, 0x28, 0x9b, 0x06,
+	0x04, 0x42, 0x1a, 0x36, 0xde, 0xb1, 0x3b, 0x61, 0x3d, 0xbb, 0x9a, 0x99, 0x75, 0x9c, 0x03, 0x1c,
+	0x7a, 0x40, 0xe2, 0xc4, 0xb1, 0x2d, 0x2d, 0x7f, 0x01, 0x7f, 0x00, 0x07, 0xc4, 0x09, 0x71, 0xe6,
+	0xcf, 0xe9, 0x15, 0xcd, 0x63, 0xd7, 0xbb, 0xb6, 0x8b, 0x84, 0x52, 0xb8, 0x79, 0xbe, 0xdf, 0xef,
+	0x7b, 0xcd, 0x7c, 0x0f, 0x2f, 0x38, 0x3c, 0xf2, 0x31, 0xa3, 0x98, 0x74, 0x22, 0x86, 0x39, 0x61,
+	0x3e, 0xe1, 0xd5, 0x88, 0x87, 0x32, 0xac, 0x94, 0x25, 0x09, 0x48, 0x9b, 0x48, 0x7e, 0x88, 0x65,
+	0x18, 0x19, 0xe1, 0x6b, 0xbf, 0x9d, 0x81, 0x79, 0x46, 0xe4, 0x41, 0xc8, 0xbf, 0xc1, 0x94, 0x09,
+	0xe9, 0xb1, 0x06, 0x11, 0x5a, 0x19, 0x7d, 0x01, 0xd3, 0xfd, 0x88, 0xf3, 0xa8, 0x70, 0x76, 0x64,
+	0xe9, 0xe4, 0xf2, 0xa5, 0xea, 0x70, 0x9d, 0x01, 0x31, 0x0e, 0xa8, 0x90, 0xee, 0x94, 0x15, 0xd7,
+	0xad, 0xb4, 0xf2, 0xe7, 0x69, 0x98, 0x1b, 0x4a, 0x45, 0xa7, 0x60, 0x94, 0x79, 0x6d, 0xe2, 0x5c,
+	0x39, 0x5b, 0x58, 0x2a, 0x7e, 0x3c, 0xf6, 0xf0, 0xc6, 0xb1, 0xf1, 0x82, 0xab, 0x45, 0xe8, 0x73,
+	0x18, 0xdf, 0x67, 0x5d, 0xed, 0x47, 0xc5, 0x51, 0x58, 0x3a, 0xb9, 0x7c, 0xf5, 0x5f, 0xc5, 0x51,
+	0x4d, 0xd4, 0xb1, 0x3c, 0x8c, 0x88, 0x7b, 0x62, 0x9f, 0x75, 0x6b, 0x9d, 0x88, 0x55, 0x7e, 0x5d,
+	0x84, 0x52, 0x0e, 0x42, 0x8b, 0x50, 0x64, 0x71, 0x1b, 0x47, 0x84, 0x70, 0xa1, 0x43, 0x29, 0xb9,
+	0xe3, 0x2c, 0x6e, 0xdf, 0x53, 0x67, 0xf4, 0x06, 0x4c, 0x2a, 0x90, 0x32, 0x49, 0x78, 0xd3, 0x6b,
+	0x10, 0xe1, 0xac, 0x68, 0x46, 0x89, 0xc5, 0xed, 0x7a, 0x2a, 0x44, 0x17, 0x61, 0x26, 0x4f, 0xc3,
+	0x71, 0xe4, 0xbc, 0xab, 0x99, 0x53, 0x39, 0xe6, 0x6e, 0x84, 0xde, 0x06, 0xa4, 0xb9, 0x7c, 0x2f,
+	0x6b, 0x76, 0x55, 0x93, 0xa7, 0x15, 0x99, 0xef, 0x65, 0x2c, 0x5f, 0x86, 0xb9, 0x41, 0xb6, 0xb2,
+	0xfe, 0x9e, 0x56, 0x40, 0xfd, 0x0a, 0xbb, 0x11, 0x3a, 0x0f, 0xca, 0x27, 0xe6, 0xa4, 0x1d, 0x4a,
+	0x82, 0xdb, 0x5e, 0x43, 0x38, 0x57, 0xd3, 0xa0, 0x5d, 0x2d, 0xdd, 0xf2, 0x1a, 0x02, 0x55, 0x61,
+	0x36, 0xcf, 0xc3, 0x34, 0xc2, 0x9d, 0x15, 0xe7, 0xc3, 0x34, 0x94, 0x94, 0x5c, 0x8f, 0x3e, 0x5b,
+	0x79, 0x01, 0x7f, 0xd5, 0xb9, 0x36, 0x94, 0xbf, 0x8a, 0x2e, 0x41, 0x39, 0xc3, 0x57, 0x19, 0xe8,
+	0x58, 0x3e, 0xea, 0xa3, 0xd7, 0xf9, 0x9e, 0x0e, 0x67, 0xd9, 0x64, 0x4a, 0xe4, 0x03, 0xc2, 0x19,
+	0x91, 0x58, 0x90, 0x56, 0x9b, 0x30, 0x29, 0x9c, 0xeb, 0x5a, 0x41, 0xd9, 0xaa, 0x59, 0x6c, 0xc7,
+	0x42, 0x4a, 0x27, 0xf0, 0xf6, 0x48, 0x80, 0xbd, 0x20, 0x08, 0x1b, 0x9e, 0xa4, 0x21, 0xc3, 0xed,
+	0xd0, 0x27, 0xce, 0x86, 0x2a, 0x29, 0xb7, 0xac, 0xc1, 0xb5, 0x14, 0xdb, 0x0a, 0x7d, 0x82, 0x02,
+	0x80, 0xcc, 0xbd, 0x3f, 0x36, 0x45, 0x7e, 0xe7, 0x08, 0xc5, 0x55, 0xcd, 0x3c, 0x8c, 0x6e, 0x81,
+	0x8c, 0x7d, 0x74, 0x00, 0x93, 0x7d, 0x2f, 0xfd, 0xc4, 0x78, 0xfc, 0xe4, 0x48, 0x1e, 0xf3, 0xe5,
+	0xa0, 0xbd, 0x96, 0x68, 0xae, 0x70, 0xbe, 0x84, 0x51, 0x55, 0xd2, 0xce, 0x4f, 0xc6, 0x5d, 0xed,
+	0x28, 0xee, 0x94, 0x21, 0xe3, 0x44, 0xdb, 0x44, 0x5f, 0xc1, 0x98, 0x68, 0x61, 0x7f, 0xcf, 0x79,
+	0x66, 0x8c, 0x6f, 0x1c, 0xc5, 0xb8, 0xb6, 0x64, 0xad, 0x8b, 0xd6, 0xfa, 0x1e, 0xfa, 0x16, 0xa6,
+	0xfb, 0x8b, 0xc0, 0x79, 0x6a, 0x1c, 0x7d, 0x7a, 0x14, 0x47, 0xfd, 0x46, 0xed, 0xbc, 0x22, 0xf9,
+	0xa2, 0x42, 0x3f, 0x14, 0x60, 0xd6, 0x13, 0x82, 0x0a, 0x49, 0x7c, 0xcc, 0x49, 0x14, 0x50, 0x53,
+	0x3c, 0xce, 0xcf, 0x66, 0x0e, 0xed, 0x1e, 0x25, 0x86, 0x61, 0x86, 0xcd, 0x84, 0x2a, 0x27, 0x90,
+	0xdb, 0x43, 0x2a, 0xfb, 0x30, 0xd5, 0xf7, 0xcc, 0xe9, 0xd0, 0xbc, 0x36, 0x38, 0x34, 0xa7, 0x61,
+	0x84, 0x08, 0xaa, 0x1b, 0xac, 0xe8, 0xaa, 0x9f, 0x08, 0xc1, 0xa8, 0x6e, 0x87, 0xeb, 0x5a, 0xa4,
+	0x7f, 0xa3, 0x79, 0x38, 0x2e, 0xa4, 0x27, 0x63, 0xe1, 0xdc, 0xd0, 0x52, 0x7b, 0xaa, 0x3c, 0x2a,
+	0x40, 0x79, 0x48, 0x5d, 0xfd, 0x93, 0xc3, 0x2a, 0x94, 0x3b, 0x94, 0xcb, 0xd8, 0x0b, 0x70, 0xcb,
+	0x93, 0xe4, 0xc0, 0x3b, 0xc4, 0xbd, 0x00, 0x66, 0x2c, 0x74, 0xcb, 0x20, 0x35, 0x41, 0x33, 0xae,
+	0xaf, 0x67, 0x5d, 0xa3, 0x33, 0x00, 0xc1, 0x15, 0xdc, 0x08, 0x99, 0x24, 0x5d, 0x69, 0xc3, 0x2a,
+	0x06, 0x57, 0x6e, 0x1a, 0x41, 0xe5, 0xf9, 0x31, 0x28, 0xa6, 0x25, 0x88, 0x96, 0x60, 0x42, 0x1f,
+	0x3c, 0xdf, 0xe7, 0x44, 0x08, 0xe7, 0x56, 0x36, 0xae, 0x93, 0x0a, 0x5a, 0x33, 0x08, 0x7a, 0x1f,
+	0x4e, 0xa9, 0x89, 0xe2, 0xc5, 0x32, 0xc4, 0x3e, 0x15, 0x8d, 0xb0, 0x43, 0xf8, 0x21, 0xe6, 0x61,
+	0x2c, 0x89, 0x70, 0xea, 0x7a, 0xaa, 0xcc, 0xb3, 0xb8, 0xbd, 0x16, 0xcb, 0x70, 0x3d, 0x81, 0x5d,
+	0x8d, 0xa2, 0x77, 0xcc, 0xac, 0x6b, 0xc7, 0x81, 0xa4, 0x0d, 0x4f, 0xc8, 0x44, 0x6b, 0x33, 0x9d,
+	0xba, 0x5b, 0x09, 0x64, 0x35, 0xae, 0xc1, 0xe2, 0xb0, 0xf1, 0x95, 0x28, 0xde, 0xd1, 0x8a, 0xce,
+	0xe0, 0x10, 0xb3, 0xea, 0xe7, 0xcc, 0xa2, 0x51, 0x53, 0xd5, 0x6a, 0xdc, 0xd5, 0x1a, 0x13, 0xca,
+	0x95, 0xd7, 0xb0, 0xac, 0x0b, 0x66, 0xcf, 0xd8, 0xd9, 0x6b, 0x89, 0x5b, 0x9a, 0x38, 0x69, 0x88,
+	0xf5, 0xc8, 0x52, 0x6f, 0xc2, 0x2b, 0x8a, 0x2a, 0x48, 0x40, 0x1a, 0x92, 0x76, 0xc8, 0x60, 0x2e,
+	0xdb, 0x5a, 0x4f, 0x45, 0xbd, 0x93, 0x90, 0xfa, 0x92, 0xaa, 0x3c, 0x1f, 0x05, 0xe8, 0xf5, 0xa7,
+	0xda, 0x2c, 0x69, 0x7e, 0xd2, 0x6b, 0x61, 0xea, 0xeb, 0xdb, 0x2f, 0xb9, 0xa5, 0x44, 0x7c, 0xdf,
+	0x6b, 0xd5, 0x7d, 0x34, 0x0b, 0x63, 0x2d, 0x1e, 0xc6, 0x91, 0x73, 0x5b, 0x3f, 0xa5, 0x39, 0xe8,
+	0xd7, 0x0f, 0x63, 0xde, 0x20, 0xfa, 0xee, 0xd5, 0xeb, 0xeb, 0x13, 0x5a, 0x82, 0x69, 0x19, 0x4a,
+	0x2f, 0x50, 0xb5, 0x83, 0x9b, 0x1e, 0x0b, 0x63, 0x69, 0xef, 0x79, 0x52, 0xcb, 0x6b, 0x82, 0x6e,
+	0x68, 0xa9, 0x5a, 0x9d, 0x86, 0xa9, 0x06, 0x7a, 0x90, 0x70, 0xcd, 0xd5, 0x1a, 0x1b, 0x77, 0x15,
+	0x60, 0xd9, 0x55, 0x28, 0x1b, 0xb6, 0xdd, 0x40, 0x96, 0x6e, 0xee, 0x75, 0x46, 0x43, 0x66, 0x03,
+	0x59, 0x7e, 0x04, 0xe3, 0xa2, 0xe5, 0xef, 0xe9, 0x12, 0xb6, 0xff, 0x7d, 0xee, 0xbf, 0x9c, 0xc1,
+	0x56, 0x4d, 0xec, 0x9a, 0x91, 0x73, 0x42, 0x1d, 0x6b, 0x82, 0x56, 0x1e, 0x1f, 0x83, 0x52, 0x0e,
+	0x42, 0x8e, 0x69, 0xe1, 0xc7, 0x85, 0x6c, 0x51, 0xeb, 0x56, 0x7e, 0x13, 0xa6, 0x4c, 0xd6, 0x94,
+	0xc9, 0x26, 0xd6, 0x1d, 0xa9, 0xff, 0x18, 0x15, 0xdd, 0x92, 0x96, 0xd7, 0x99, 0x6c, 0x6e, 0xab,
+	0xa6, 0xbc, 0x00, 0xd3, 0xfb, 0x21, 0x65, 0x58, 0x1c, 0xb2, 0x06, 0xb6, 0xed, 0xf6, 0xc4, 0x30,
+	0x27, 0x15, 0xb0, 0x73, 0xc8, 0x1a, 0x3b, 0xa6, 0xef, 0x56, 0x60, 0xbe, 0x47, 0x0d, 0x54, 0x69,
+	0xc4, 0x91, 0xef, 0x49, 0xe2, 0xab, 0xad, 0xa1, 0x17, 0x68, 0xa2, 0x70, 0xd7, 0x13, 0x72, 0xd7,
+	0x60, 0xe8, 0x2d, 0x98, 0x09, 0x88, 0xd7, 0x21, 0x39, 0x0f, 0x4f, 0x8d, 0xc2, 0x94, 0x46, 0x32,
+	0x2e, 0x56, 0x61, 0x21, 0x43, 0xce, 0xf9, 0x78, 0x66, 0x54, 0x66, 0x53, 0x95, 0x8c, 0x93, 0xca,
+	0x5f, 0x23, 0x30, 0x37, 0x74, 0x60, 0xa3, 0x05, 0x73, 0x45, 0xb7, 0x06, 0x6e, 0xa8, 0x37, 0x5d,
+	0x6e, 0xe7, 0xa6, 0xcb, 0xf9, 0xc1, 0x9b, 0xab, 0x0f, 0xbb, 0xb8, 0x8b, 0x30, 0x93, 0xe1, 0x59,
+	0x53, 0x9b, 0x36, 0xad, 0x84, 0x69, 0xd3, 0x5a, 0x86, 0x39, 0xbf, 0x89, 0x4d, 0xdb, 0x84, 0x0c,
+	0x7b, 0x41, 0x2b, 0xe4, 0x54, 0x3e, 0x68, 0xeb, 0x62, 0x2c, 0xba, 0x65, 0xbf, 0x59, 0xb3, 0xd8,
+	0x5a, 0x02, 0xa1, 0xcb, 0x30, 0xeb, 0x13, 0x41, 0x5b, 0x4c, 0x25, 0x88, 0x9b, 0x21, 0x3f, 0xf0,
+	0xb8, 0x4f, 0xb8, 0x2e, 0x48, 0xa5, 0x92, 0x62, 0x1b, 0x09, 0x84, 0xbe, 0x83, 0xa2, 0x2d, 0xde,
+	0x28, 0xfd, 0x3f, 0xfe, 0xf5, 0x4b, 0xdf, 0x81, 0xd5, 0xd4, 0x87, 0xa9, 0xcf, 0x71, 0x73, 0xbe,
+	0x47, 0x2a, 0x9b, 0x30, 0x99, 0xc7, 0xd0, 0x39, 0x00, 0x1a, 0x0d, 0x9f, 0xbd, 0x45, 0x1a, 0x25,
+	0x93, 0x37, 0xd9, 0x3b, 0xb7, 0x7b, 0x7b, 0xa7, 0xf2, 0xfb, 0x28, 0x9c, 0x7a, 0xe1, 0xfa, 0x53,
+	0x1a, 0x3c, 0x0c, 0xec, 0xb7, 0x80, 0xab, 0x7f, 0xa3, 0x87, 0x05, 0x28, 0x06, 0xcb, 0xd8, 0x0f,
+	0xdb, 0x1e, 0x65, 0xce, 0x2f, 0x26, 0x7d, 0xff, 0x3f, 0x59, 0xbf, 0xd5, 0xd4, 0x8f, 0xbd, 0x82,
+	0x60, 0x79, 0x5d, 0x1f, 0x2b, 0xdf, 0x8f, 0xc0, 0x64, 0x1e, 0x44, 0xa7, 0xe1, 0x78, 0x87, 0x51,
+	0x35, 0xfd, 0xf4, 0xe7, 0x42, 0x92, 0xff, 0x58, 0x87, 0xd1, 0xba, 0x8f, 0x7e, 0x2c, 0xc0, 0x38,
+	0x23, 0x5d, 0xf9, 0x20, 0x8c, 0x44, 0x12, 0x34, 0xff, 0x3f, 0x82, 0xae, 0x26, 0x5e, 0x6d, 0x0a,
+	0xc9, 0xb1, 0xf2, 0x47, 0x01, 0x4a, 0x39, 0x0c, 0x5d, 0x4c, 0x05, 0x98, 0x32, 0x9f, 0x74, 0xf5,
+	0x43, 0xa5, 0x89, 0x4c, 0x58, 0xac, 0xae, 0x20, 0x34, 0x97, 0x66, 0x6b, 0x66, 0xbd, 0x4d, 0xf3,
+	0x34, 0x14, 0xd3, 0x7f, 0x0a, 0xb6, 0x9f, 0x7a, 0x02, 0xf4, 0x3a, 0x94, 0x92, 0x68, 0x43, 0x8e,
+	0x69, 0x64, 0xfb, 0x68, 0xa2, 0x27, 0xac, 0xeb, 0x2f, 0x21, 0x2a, 0x70, 0xa6, 0x27, 0x98, 0xaa,
+	0x19, 0xd5, 0x41, 0xe3, 0xee, 0x34, 0x15, 0xeb, 0x29, 0xb0, 0x1d, 0xfa, 0xe4, 0x83, 0x0e, 0xbc,
+	0xba, 0xcf, 0x22, 0x8e, 0x87, 0xdf, 0x24, 0x26, 0x5d, 0x89, 0x16, 0xaa, 0x9b, 0x31, 0xa3, 0x11,
+	0xe1, 0xdb, 0x86, 0x23, 0x76, 0x08, 0x13, 0x21, 0x17, 0x4e, 0xa4, 0xff, 0xb9, 0x2d, 0xbc, 0xe0,
+	0x15, 0xdc, 0x45, 0x65, 0x78, 0x3b, 0xff, 0xdd, 0x2a, 0xd4, 0xe7, 0x62, 0xad, 0x2b, 0xff, 0x0e,
+	0x00, 0x00, 0xff, 0xff, 0x59, 0xf6, 0x50, 0xe3, 0x65, 0x0f, 0x00, 0x00,
 }

@@ -20,99 +20,1961 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type VlansL2Al struct {
-	Vlan                 []*VlansL2AlVlanList `protobuf:"bytes,151,rep,name=vlan" json:"vlan,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
+type NetworkInstancesL2NetworkInstance struct {
+	NetworkInstance      []*NetworkInstancesL2NetworkInstanceNetworkInstanceList `protobuf:"bytes,151,rep,name=network_instance,json=networkInstance" json:"network_instance,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                `json:"-"`
+	XXX_unrecognized     []byte                                                  `json:"-"`
+	XXX_sizecache        int32                                                   `json:"-"`
 }
 
-func (m *VlansL2Al) Reset()         { *m = VlansL2Al{} }
-func (m *VlansL2Al) String() string { return proto.CompactTextString(m) }
-func (*VlansL2Al) ProtoMessage()    {}
-func (*VlansL2Al) Descriptor() ([]byte, []int) {
+func (m *NetworkInstancesL2NetworkInstance) Reset()         { *m = NetworkInstancesL2NetworkInstance{} }
+func (m *NetworkInstancesL2NetworkInstance) String() string { return proto.CompactTextString(m) }
+func (*NetworkInstancesL2NetworkInstance) ProtoMessage()    {}
+func (*NetworkInstancesL2NetworkInstance) Descriptor() ([]byte, []int) {
 	return fileDescriptor_3d20593bdd4ba4e6, []int{0}
 }
-func (m *VlansL2Al) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2Al.Unmarshal(m, b)
+func (m *NetworkInstancesL2NetworkInstance) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstance.Unmarshal(m, b)
 }
-func (m *VlansL2Al) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2Al.Marshal(b, m, deterministic)
+func (m *NetworkInstancesL2NetworkInstance) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstance.Marshal(b, m, deterministic)
 }
-func (m *VlansL2Al) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2Al.Merge(m, src)
+func (m *NetworkInstancesL2NetworkInstance) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstance.Merge(m, src)
 }
-func (m *VlansL2Al) XXX_Size() int {
-	return xxx_messageInfo_VlansL2Al.Size(m)
+func (m *NetworkInstancesL2NetworkInstance) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstance.Size(m)
 }
-func (m *VlansL2Al) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2Al.DiscardUnknown(m)
+func (m *NetworkInstancesL2NetworkInstance) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstance.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_VlansL2Al proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesL2NetworkInstance proto.InternalMessageInfo
 
-func (m *VlansL2Al) GetVlan() []*VlansL2AlVlanList {
+func (m *NetworkInstancesL2NetworkInstance) GetNetworkInstance() []*NetworkInstancesL2NetworkInstanceNetworkInstanceList {
 	if m != nil {
-		return m.Vlan
+		return m.NetworkInstance
 	}
 	return nil
 }
 
-type VlansL2AlVlanList struct {
-	VlanId               *uint32                       `protobuf:"varint,51,opt,name=vlan_id,json=vlanId" json:"vlan_id,omitempty"`
-	State                *VlansL2AlVlanListStateType   `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
-	Members              *VlansL2AlVlanListMembersType `protobuf:"bytes,152,opt,name=members" json:"members,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
-	XXX_unrecognized     []byte                        `json:"-"`
-	XXX_sizecache        int32                         `json:"-"`
+type NetworkInstancesL2NetworkInstanceNetworkInstanceList struct {
+	Name                 *string                                                             `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	Fdb                  *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType        `protobuf:"bytes,141,opt,name=fdb" json:"fdb,omitempty"`
+	Interfaces           *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType `protobuf:"bytes,151,opt,name=interfaces" json:"interfaces,omitempty"`
+	Vlans                *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType      `protobuf:"bytes,161,opt,name=vlans" json:"vlans,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                            `json:"-"`
+	XXX_unrecognized     []byte                                                              `json:"-"`
+	XXX_sizecache        int32                                                               `json:"-"`
 }
 
-func (m *VlansL2AlVlanList) Reset()         { *m = VlansL2AlVlanList{} }
-func (m *VlansL2AlVlanList) String() string { return proto.CompactTextString(m) }
-func (*VlansL2AlVlanList) ProtoMessage()    {}
-func (*VlansL2AlVlanList) Descriptor() ([]byte, []int) {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceList) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceList) Descriptor() ([]byte, []int) {
 	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0}
 }
-func (m *VlansL2AlVlanList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2AlVlanList.Unmarshal(m, b)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceList.Unmarshal(m, b)
 }
-func (m *VlansL2AlVlanList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2AlVlanList.Marshal(b, m, deterministic)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceList.Marshal(b, m, deterministic)
 }
-func (m *VlansL2AlVlanList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanList.Merge(m, src)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceList.Merge(m, src)
 }
-func (m *VlansL2AlVlanList) XXX_Size() int {
-	return xxx_messageInfo_VlansL2AlVlanList.Size(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceList.Size(m)
 }
-func (m *VlansL2AlVlanList) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2AlVlanList.DiscardUnknown(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_VlansL2AlVlanList proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceList proto.InternalMessageInfo
 
-func (m *VlansL2AlVlanList) GetVlanId() uint32 {
-	if m != nil && m.VlanId != nil {
-		return *m.VlanId
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
 	}
-	return 0
+	return ""
 }
 
-func (m *VlansL2AlVlanList) GetState() *VlansL2AlVlanListStateType {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) GetFdb() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType {
+	if m != nil {
+		return m.Fdb
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) GetInterfaces() *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType {
+	if m != nil {
+		return m.Interfaces
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceList) GetVlans() *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType {
+	if m != nil {
+		return m.Vlans
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType struct {
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType    `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	MacTable             *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType `protobuf:"bytes,121,opt,name=mac_table,json=macTable" json:"mac_table,omitempty"`
+	L2Rib                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType    `protobuf:"bytes,131,opt,name=l2rib" json:"l2rib,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                 `json:"-"`
+	XXX_unrecognized     []byte                                                                   `json:"-"`
+	XXX_sizecache        int32                                                                    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType {
 	if m != nil {
 		return m.State
 	}
 	return nil
 }
 
-func (m *VlansL2AlVlanList) GetMembers() *VlansL2AlVlanListMembersType {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) GetMacTable() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType {
+	if m != nil {
+		return m.MacTable
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType) GetL2Rib() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType {
+	if m != nil {
+		return m.L2Rib
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType struct {
+	MacLearning          *bool    `protobuf:"varint,61,opt,name=mac_learning,json=macLearning" json:"mac_learning,omitempty"`
+	MacAgingTime         *uint32  `protobuf:"varint,62,opt,name=mac_aging_time,json=macAgingTime" json:"mac_aging_time,omitempty"`
+	MaximumEntries       *uint32  `protobuf:"varint,63,opt,name=maximum_entries,json=maximumEntries" json:"maximum_entries,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) GetMacLearning() bool {
+	if m != nil && m.MacLearning != nil {
+		return *m.MacLearning
+	}
+	return false
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) GetMacAgingTime() uint32 {
+	if m != nil && m.MacAgingTime != nil {
+		return *m.MacAgingTime
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType) GetMaximumEntries() uint32 {
+	if m != nil && m.MaximumEntries != nil {
+		return *m.MaximumEntries
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType struct {
+	Entries              *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType `protobuf:"bytes,131,opt,name=entries" json:"entries,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                            `json:"-"`
+	XXX_unrecognized     []byte                                                                              `json:"-"`
+	XXX_sizecache        int32                                                                               `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType) GetEntries() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType {
+	if m != nil {
+		return m.Entries
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType struct {
+	Entry                []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList `protobuf:"bytes,141,rep,name=entry" json:"entry,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                       `json:"-"`
+	XXX_unrecognized     []byte                                                                                         `json:"-"`
+	XXX_sizecache        int32                                                                                          `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType) GetEntry() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList {
+	if m != nil {
+		return m.Entry
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList struct {
+	MacAddress           *string                                                                                                   `protobuf:"bytes,61,opt,name=mac_address,json=macAddress" json:"mac_address,omitempty"`
+	Vlan                 *uint32                                                                                                   `protobuf:"varint,62,opt,name=vlan" json:"vlan,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType     `protobuf:"bytes,111,opt,name=state" json:"state,omitempty"`
+	Interface            *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType `protobuf:"bytes,112,opt,name=interface" json:"interface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                                                     `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) GetMacAddress() string {
+	if m != nil && m.MacAddress != nil {
+		return *m.MacAddress
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) GetVlan() uint32 {
+	if m != nil && m.Vlan != nil {
+		return *m.Vlan
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList) GetInterface() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType {
+	if m != nil {
+		return m.Interface
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType struct {
+	MacAddress           *string  `protobuf:"bytes,81,opt,name=mac_address,json=macAddress" json:"mac_address,omitempty"`
+	Vlan                 *uint32  `protobuf:"varint,82,opt,name=vlan" json:"vlan,omitempty"`
+	EntryType            *string  `protobuf:"bytes,83,opt,name=entry_type,json=entryType" json:"entry_type,omitempty"`
+	Evi                  *uint32  `protobuf:"varint,85,opt,name=evi" json:"evi,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1, 0, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) GetMacAddress() string {
+	if m != nil && m.MacAddress != nil {
+		return *m.MacAddress
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) GetVlan() uint32 {
+	if m != nil && m.Vlan != nil {
+		return *m.Vlan
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) GetEntryType() string {
+	if m != nil && m.EntryType != nil {
+		return *m.EntryType
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType) GetEvi() uint32 {
+	if m != nil && m.Evi != nil {
+		return *m.Evi
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType struct {
+	InterfaceRef         *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType `protobuf:"bytes,112,opt,name=interface_ref,json=interfaceRef" json:"interface_ref,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                                                                     `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1, 0, 0, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType) GetInterfaceRef() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType {
+	if m != nil {
+		return m.InterfaceRef
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType struct {
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType `protobuf:"bytes,113,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                           `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                             `json:"-"`
+	XXX_sizecache        int32                                                                                                                              `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1, 0, 0, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType struct {
+	Interface            *string  `protobuf:"bytes,131,opt,name=interface" json:"interface,omitempty"`
+	Subinterface         *uint32  `protobuf:"varint,141,opt,name=subinterface" json:"subinterface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 1, 0, 0, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) GetInterface() string {
+	if m != nil && m.Interface != nil {
+		return *m.Interface
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType) GetSubinterface() uint32 {
+	if m != nil && m.Subinterface != nil {
+		return *m.Subinterface
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType struct {
+	MacTable             *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType   `protobuf:"bytes,130,opt,name=mac_table,json=macTable" json:"mac_table,omitempty"`
+	MacIpTable           *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType `protobuf:"bytes,140,opt,name=mac_ip_table,json=macIpTable" json:"mac_ip_table,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                            `json:"-"`
+	XXX_unrecognized     []byte                                                                              `json:"-"`
+	XXX_sizecache        int32                                                                               `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) GetMacTable() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType {
+	if m != nil {
+		return m.MacTable
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType) GetMacIpTable() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType {
+	if m != nil {
+		return m.MacIpTable
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType struct {
+	Entries              *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType  `protobuf:"bytes,130,opt,name=entries" json:"entries,omitempty"`
+	NextHops             *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType `protobuf:"bytes,131,opt,name=next_hops,json=nextHops" json:"next_hops,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                      `json:"-"`
+	XXX_unrecognized     []byte                                                                                        `json:"-"`
+	XXX_sizecache        int32                                                                                         `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) GetEntries() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType {
+	if m != nil {
+		return m.Entries
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType) GetNextHops() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType {
+	if m != nil {
+		return m.NextHops
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType struct {
+	Entry                []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList `protobuf:"bytes,130,rep,name=entry" json:"entry,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                `json:"-"`
+	XXX_unrecognized     []byte                                                                                                  `json:"-"`
+	XXX_sizecache        int32                                                                                                   `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType) GetEntry() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList {
+	if m != nil {
+		return m.Entry
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList struct {
+	MacAddress           *string                                                                                                            `protobuf:"bytes,130,opt,name=mac_address,json=macAddress" json:"mac_address,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType     `protobuf:"bytes,131,opt,name=state" json:"state,omitempty"`
+	Producers            *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType `protobuf:"bytes,132,opt,name=producers" json:"producers,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                           `json:"-"`
+	XXX_unrecognized     []byte                                                                                                             `json:"-"`
+	XXX_sizecache        int32                                                                                                              `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) GetMacAddress() string {
+	if m != nil && m.MacAddress != nil {
+		return *m.MacAddress
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList) GetProducers() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType {
+	if m != nil {
+		return m.Producers
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType struct {
+	MacAddress           *string  `protobuf:"bytes,131,opt,name=mac_address,json=macAddress" json:"mac_address,omitempty"`
+	Vlan                 *uint32  `protobuf:"varint,132,opt,name=vlan" json:"vlan,omitempty"`
+	Evi                  *uint32  `protobuf:"varint,133,opt,name=evi" json:"evi,omitempty"`
+	L2Vni                *uint32  `protobuf:"varint,134,opt,name=l2_vni,json=l2Vni" json:"l2_vni,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 0, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) GetMacAddress() string {
+	if m != nil && m.MacAddress != nil {
+		return *m.MacAddress
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) GetVlan() uint32 {
+	if m != nil && m.Vlan != nil {
+		return *m.Vlan
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) GetEvi() uint32 {
+	if m != nil && m.Evi != nil {
+		return *m.Evi
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType) GetL2Vni() uint32 {
+	if m != nil && m.L2Vni != nil {
+		return *m.L2Vni
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType struct {
+	Producer             []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList `protobuf:"bytes,132,rep,name=producer" json:"producer,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                         `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                           `json:"-"`
+	XXX_sizecache        int32                                                                                                                            `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 0, 0, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType) GetProducer() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList {
+	if m != nil {
+		return m.Producer
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList struct {
+	Producer             *string                                                                                                                                 `protobuf:"bytes,132,opt,name=producer" json:"producer,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType `protobuf:"bytes,133,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                                `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                                  `json:"-"`
+	XXX_sizecache        int32                                                                                                                                   `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 0, 0, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) GetProducer() string {
+	if m != nil && m.Producer != nil {
+		return *m.Producer
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType struct {
+	Producer             *string  `protobuf:"bytes,133,opt,name=producer" json:"producer,omitempty"`
+	Esi                  *string  `protobuf:"bytes,134,opt,name=esi" json:"esi,omitempty"`
+	NextHop              *uint64  `protobuf:"varint,135,opt,name=next_hop,json=nextHop" json:"next_hop,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 0, 0, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) GetProducer() string {
+	if m != nil && m.Producer != nil {
+		return *m.Producer
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) GetEsi() string {
+	if m != nil && m.Esi != nil {
+		return *m.Esi
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) GetNextHop() uint64 {
+	if m != nil && m.NextHop != nil {
+		return *m.NextHop
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType struct {
+	NextHop              []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList `protobuf:"bytes,131,rep,name=next_hop,json=nextHop" json:"next_hop,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                   `json:"-"`
+	XXX_unrecognized     []byte                                                                                                     `json:"-"`
+	XXX_sizecache        int32                                                                                                      `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType) GetNextHop() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList {
+	if m != nil {
+		return m.NextHop
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList struct {
+	Index                *uint64                                                                                                           `protobuf:"varint,131,opt,name=index" json:"index,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType `protobuf:"bytes,132,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                          `json:"-"`
+	XXX_unrecognized     []byte                                                                                                            `json:"-"`
+	XXX_sizecache        int32                                                                                                             `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) GetIndex() uint64 {
+	if m != nil && m.Index != nil {
+		return *m.Index
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType struct {
+	Index                *uint64  `protobuf:"varint,132,opt,name=index" json:"index,omitempty"`
+	PeerIp               *string  `protobuf:"bytes,133,opt,name=peer_ip,json=peerIp" json:"peer_ip,omitempty"`
+	Interface            *string  `protobuf:"bytes,134,opt,name=interface" json:"interface,omitempty"`
+	Subinterface         *uint32  `protobuf:"varint,135,opt,name=subinterface" json:"subinterface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 0, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) GetIndex() uint64 {
+	if m != nil && m.Index != nil {
+		return *m.Index
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) GetPeerIp() string {
+	if m != nil && m.PeerIp != nil {
+		return *m.PeerIp
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) GetInterface() string {
+	if m != nil && m.Interface != nil {
+		return *m.Interface
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType) GetSubinterface() uint32 {
+	if m != nil && m.Subinterface != nil {
+		return *m.Subinterface
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType struct {
+	Entries              *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType  `protobuf:"bytes,140,opt,name=entries" json:"entries,omitempty"`
+	NextHops             *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType `protobuf:"bytes,141,opt,name=next_hops,json=nextHops" json:"next_hops,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                        `json:"-"`
+	XXX_unrecognized     []byte                                                                                          `json:"-"`
+	XXX_sizecache        int32                                                                                           `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) GetEntries() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType {
+	if m != nil {
+		return m.Entries
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType) GetNextHops() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType {
+	if m != nil {
+		return m.NextHops
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType struct {
+	Entry                []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList `protobuf:"bytes,140,rep,name=entry" json:"entry,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                                                     `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType) GetEntry() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList {
+	if m != nil {
+		return m.Entry
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList struct {
+	MacAddress           *string                                                                                                              `protobuf:"bytes,140,opt,name=mac_address,json=macAddress" json:"mac_address,omitempty"`
+	HostIp               *string                                                                                                              `protobuf:"bytes,141,opt,name=host_ip,json=hostIp" json:"host_ip,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType     `protobuf:"bytes,142,opt,name=state" json:"state,omitempty"`
+	Producers            *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType `protobuf:"bytes,143,opt,name=producers" json:"producers,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                             `json:"-"`
+	XXX_unrecognized     []byte                                                                                                               `json:"-"`
+	XXX_sizecache        int32                                                                                                                `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) GetMacAddress() string {
+	if m != nil && m.MacAddress != nil {
+		return *m.MacAddress
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) GetHostIp() string {
+	if m != nil && m.HostIp != nil {
+		return *m.HostIp
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList) GetProducers() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType {
+	if m != nil {
+		return m.Producers
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType struct {
+	MacAddress           *string  `protobuf:"bytes,142,opt,name=mac_address,json=macAddress" json:"mac_address,omitempty"`
+	Vlan                 *uint32  `protobuf:"varint,144,opt,name=vlan" json:"vlan,omitempty"`
+	Evi                  *uint32  `protobuf:"varint,145,opt,name=evi" json:"evi,omitempty"`
+	L2Vni                *uint32  `protobuf:"varint,146,opt,name=l2_vni,json=l2Vni" json:"l2_vni,omitempty"`
+	HostIp               *string  `protobuf:"bytes,143,opt,name=host_ip,json=hostIp" json:"host_ip,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 0, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) GetMacAddress() string {
+	if m != nil && m.MacAddress != nil {
+		return *m.MacAddress
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) GetVlan() uint32 {
+	if m != nil && m.Vlan != nil {
+		return *m.Vlan
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) GetEvi() uint32 {
+	if m != nil && m.Evi != nil {
+		return *m.Evi
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) GetL2Vni() uint32 {
+	if m != nil && m.L2Vni != nil {
+		return *m.L2Vni
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType) GetHostIp() string {
+	if m != nil && m.HostIp != nil {
+		return *m.HostIp
+	}
+	return ""
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType struct {
+	Producer             []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList `protobuf:"bytes,143,rep,name=producer" json:"producer,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                           `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                             `json:"-"`
+	XXX_sizecache        int32                                                                                                                              `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 0, 0, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType) GetProducer() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList {
+	if m != nil {
+		return m.Producer
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList struct {
+	Producer             *string                                                                                                                                   `protobuf:"bytes,143,opt,name=producer" json:"producer,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType `protobuf:"bytes,144,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                                                                                     `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 0, 0, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) GetProducer() string {
+	if m != nil && m.Producer != nil {
+		return *m.Producer
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType struct {
+	Producer             *string  `protobuf:"bytes,144,opt,name=producer" json:"producer,omitempty"`
+	Esi                  *string  `protobuf:"bytes,145,opt,name=esi" json:"esi,omitempty"`
+	NextHop              *uint64  `protobuf:"varint,146,opt,name=next_hop,json=nextHop" json:"next_hop,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 0, 0, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) GetProducer() string {
+	if m != nil && m.Producer != nil {
+		return *m.Producer
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) GetEsi() string {
+	if m != nil && m.Esi != nil {
+		return *m.Esi
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType) GetNextHop() uint64 {
+	if m != nil && m.NextHop != nil {
+		return *m.NextHop
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType struct {
+	NextHop              []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList `protobuf:"bytes,141,rep,name=next_hop,json=nextHop" json:"next_hop,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                     `json:"-"`
+	XXX_unrecognized     []byte                                                                                                       `json:"-"`
+	XXX_sizecache        int32                                                                                                        `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType) GetNextHop() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList {
+	if m != nil {
+		return m.NextHop
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList struct {
+	Index                *uint64                                                                                                             `protobuf:"varint,141,opt,name=index" json:"index,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType `protobuf:"bytes,142,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                                            `json:"-"`
+	XXX_unrecognized     []byte                                                                                                              `json:"-"`
+	XXX_sizecache        int32                                                                                                               `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) GetIndex() uint64 {
+	if m != nil && m.Index != nil {
+		return *m.Index
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType struct {
+	Index                *uint64  `protobuf:"varint,142,opt,name=index" json:"index,omitempty"`
+	PeerIp               *string  `protobuf:"bytes,143,opt,name=peer_ip,json=peerIp" json:"peer_ip,omitempty"`
+	Interface            *string  `protobuf:"bytes,144,opt,name=interface" json:"interface,omitempty"`
+	Subinterface         *uint32  `protobuf:"varint,145,opt,name=subinterface" json:"subinterface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0, 2, 1, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) GetIndex() uint64 {
+	if m != nil && m.Index != nil {
+		return *m.Index
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) GetPeerIp() string {
+	if m != nil && m.PeerIp != nil {
+		return *m.PeerIp
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) GetInterface() string {
+	if m != nil && m.Interface != nil {
+		return *m.Interface
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType) GetSubinterface() uint32 {
+	if m != nil && m.Subinterface != nil {
+		return *m.Subinterface
+	}
+	return 0
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType struct {
+	Interface            []*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList `protobuf:"bytes,151,rep,name=interface" json:"interface,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                           `json:"-"`
+	XXX_unrecognized     []byte                                                                             `json:"-"`
+	XXX_sizecache        int32                                                                              `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType) GetInterface() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList {
+	if m != nil {
+		return m.Interface
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList struct {
+	Id                   *string                                                                                   `protobuf:"bytes,51,opt,name=id" json:"id,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType `protobuf:"bytes,161,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                                     `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType struct {
+	Id                   *string  `protobuf:"bytes,61,opt,name=id" json:"id,omitempty"`
+	MacPinning           *bool    `protobuf:"varint,62,opt,name=mac_pinning,json=macPinning" json:"mac_pinning,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) ProtoMessage() {
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return ""
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType) GetMacPinning() bool {
+	if m != nil && m.MacPinning != nil {
+		return *m.MacPinning
+	}
+	return false
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType struct {
+	Vlan                 []*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList `protobuf:"bytes,161,rep,name=vlan" json:"vlan,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                 `json:"-"`
+	XXX_unrecognized     []byte                                                                   `json:"-"`
+	XXX_sizecache        int32                                                                    `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 2}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType) GetVlan() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList {
+	if m != nil {
+		return m.Vlan
+	}
+	return nil
+}
+
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList struct {
+	VlanId               *uint32                                                                           `protobuf:"varint,51,opt,name=vlan_id,json=vlanId" json:"vlan_id,omitempty"`
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType   `protobuf:"bytes,52,opt,name=state" json:"state,omitempty"`
+	Members              *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType `protobuf:"bytes,53,opt,name=members" json:"members,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                          `json:"-"`
+	XXX_unrecognized     []byte                                                                            `json:"-"`
+	XXX_sizecache        int32                                                                             `json:"-"`
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList{}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) ProtoMessage() {}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 2, 0}
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList.Unmarshal(m, b)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList proto.InternalMessageInfo
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) GetVlanId() uint32 {
+	if m != nil && m.VlanId != nil {
+		return *m.VlanId
+	}
+	return 0
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList) GetMembers() *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType {
 	if m != nil {
 		return m.Members
 	}
 	return nil
 }
 
-type VlansL2AlVlanListStateType struct {
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType struct {
 	VlanId               *uint32  `protobuf:"varint,52,opt,name=vlan_id,json=vlanId" json:"vlan_id,omitempty"`
 	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
 	Status               *string  `protobuf:"bytes,53,opt,name=status" json:"status,omitempty"`
@@ -121,259 +1983,340 @@ type VlansL2AlVlanListStateType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *VlansL2AlVlanListStateType) Reset()         { *m = VlansL2AlVlanListStateType{} }
-func (m *VlansL2AlVlanListStateType) String() string { return proto.CompactTextString(m) }
-func (*VlansL2AlVlanListStateType) ProtoMessage()    {}
-func (*VlansL2AlVlanListStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 0}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType{}
 }
-func (m *VlansL2AlVlanListStateType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2AlVlanListStateType.Unmarshal(m, b)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) String() string {
+	return proto.CompactTextString(m)
 }
-func (m *VlansL2AlVlanListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2AlVlanListStateType.Marshal(b, m, deterministic)
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) ProtoMessage() {
 }
-func (m *VlansL2AlVlanListStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListStateType.Merge(m, src)
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 2, 0, 0}
 }
-func (m *VlansL2AlVlanListStateType) XXX_Size() int {
-	return xxx_messageInfo_VlansL2AlVlanListStateType.Size(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType.Unmarshal(m, b)
 }
-func (m *VlansL2AlVlanListStateType) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2AlVlanListStateType.DiscardUnknown(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_VlansL2AlVlanListStateType proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType proto.InternalMessageInfo
 
-func (m *VlansL2AlVlanListStateType) GetVlanId() uint32 {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) GetVlanId() uint32 {
 	if m != nil && m.VlanId != nil {
 		return *m.VlanId
 	}
 	return 0
 }
 
-func (m *VlansL2AlVlanListStateType) GetName() string {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) GetName() string {
 	if m != nil && m.Name != nil {
 		return *m.Name
 	}
 	return ""
 }
 
-func (m *VlansL2AlVlanListStateType) GetStatus() string {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType) GetStatus() string {
 	if m != nil && m.Status != nil {
 		return *m.Status
 	}
 	return ""
 }
 
-type VlansL2AlVlanListMembersType struct {
-	Member               []*VlansL2AlVlanListMembersTypeMemberList `protobuf:"bytes,151,rep,name=member" json:"member,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                  `json:"-"`
-	XXX_unrecognized     []byte                                    `json:"-"`
-	XXX_sizecache        int32                                     `json:"-"`
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType struct {
+	Member               []*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList `protobuf:"bytes,151,rep,name=member" json:"member,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                      `json:"-"`
+	XXX_unrecognized     []byte                                                                                        `json:"-"`
+	XXX_sizecache        int32                                                                                         `json:"-"`
 }
 
-func (m *VlansL2AlVlanListMembersType) Reset()         { *m = VlansL2AlVlanListMembersType{} }
-func (m *VlansL2AlVlanListMembersType) String() string { return proto.CompactTextString(m) }
-func (*VlansL2AlVlanListMembersType) ProtoMessage()    {}
-func (*VlansL2AlVlanListMembersType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType{}
 }
-func (m *VlansL2AlVlanListMembersType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2AlVlanListMembersType.Unmarshal(m, b)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) String() string {
+	return proto.CompactTextString(m)
 }
-func (m *VlansL2AlVlanListMembersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2AlVlanListMembersType.Marshal(b, m, deterministic)
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) ProtoMessage() {
 }
-func (m *VlansL2AlVlanListMembersType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersType.Merge(m, src)
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 2, 0, 1}
 }
-func (m *VlansL2AlVlanListMembersType) XXX_Size() int {
-	return xxx_messageInfo_VlansL2AlVlanListMembersType.Size(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType.Unmarshal(m, b)
 }
-func (m *VlansL2AlVlanListMembersType) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2AlVlanListMembersType.DiscardUnknown(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType.Marshal(b, m, deterministic)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType.Merge(m, src)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_VlansL2AlVlanListMembersType proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType proto.InternalMessageInfo
 
-func (m *VlansL2AlVlanListMembersType) GetMember() []*VlansL2AlVlanListMembersTypeMemberList {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType) GetMember() []*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList {
 	if m != nil {
 		return m.Member
 	}
 	return nil
 }
 
-type VlansL2AlVlanListMembersTypeMemberList struct {
-	InterfaceRef         *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType `protobuf:"bytes,151,opt,name=interface_ref,json=interfaceRef" json:"interface_ref,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                `json:"-"`
-	XXX_unrecognized     []byte                                                  `json:"-"`
-	XXX_sizecache        int32                                                   `json:"-"`
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList struct {
+	State                *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType `protobuf:"bytes,161,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                             `json:"-"`
+	XXX_unrecognized     []byte                                                                                               `json:"-"`
+	XXX_sizecache        int32                                                                                                `json:"-"`
 }
 
-func (m *VlansL2AlVlanListMembersTypeMemberList) Reset() {
-	*m = VlansL2AlVlanListMembersTypeMemberList{}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList{}
 }
-func (m *VlansL2AlVlanListMembersTypeMemberList) String() string { return proto.CompactTextString(m) }
-func (*VlansL2AlVlanListMembersTypeMemberList) ProtoMessage()    {}
-func (*VlansL2AlVlanListMembersTypeMemberList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0}
-}
-func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Unmarshal(m, b)
-}
-func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Marshal(b, m, deterministic)
-}
-func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Merge(m, src)
-}
-func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_Size() int {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.Size(m)
-}
-func (m *VlansL2AlVlanListMembersTypeMemberList) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberList proto.InternalMessageInfo
-
-func (m *VlansL2AlVlanListMembersTypeMemberList) GetInterfaceRef() *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType {
-	if m != nil {
-		return m.InterfaceRef
-	}
-	return nil
-}
-
-type VlansL2AlVlanListMembersTypeMemberListInterfaceRefType struct {
-	State                *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                                                         `json:"-"`
-	XXX_unrecognized     []byte                                                           `json:"-"`
-	XXX_sizecache        int32                                                            `json:"-"`
-}
-
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) Reset() {
-	*m = VlansL2AlVlanListMembersTypeMemberListInterfaceRefType{}
-}
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) String() string {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) String() string {
 	return proto.CompactTextString(m)
 }
-func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) ProtoMessage() {}
-func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0, 0}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) ProtoMessage() {
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Unmarshal(m, b)
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 2, 0, 1, 0}
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Marshal(b, m, deterministic)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList.Unmarshal(m, b)
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Merge(m, src)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList.Marshal(b, m, deterministic)
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_Size() int {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.Size(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList.Merge(m, src)
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType.DiscardUnknown(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefType proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList proto.InternalMessageInfo
 
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefType) GetState() *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList) GetState() *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType {
 	if m != nil {
 		return m.State
 	}
 	return nil
 }
 
-type VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType struct {
-	Interface            *string  `protobuf:"bytes,51,opt,name=interface" json:"interface,omitempty"`
+type NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType struct {
+	Interface            *string  `protobuf:"bytes,151,opt,name=interface" json:"interface,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) Reset() {
-	*m = VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType{}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) Reset() {
+	*m = NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType{}
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) String() string {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) String() string {
 	return proto.CompactTextString(m)
 }
-func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) ProtoMessage() {}
-func (*VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 1, 0, 0, 0}
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) ProtoMessage() {
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Unmarshal(m, b)
+func (*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_3d20593bdd4ba4e6, []int{0, 0, 2, 0, 1, 0, 0}
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Marshal(b, m, deterministic)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType.Unmarshal(m, b)
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Merge(m, src)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType.Marshal(b, m, deterministic)
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_Size() int {
-	return xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.Size(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType.Merge(m, src)
 }
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) XXX_DiscardUnknown() {
-	xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType.DiscardUnknown(m)
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) XXX_Size() int {
+	return xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType.Size(m)
+}
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType proto.InternalMessageInfo
+var xxx_messageInfo_NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType proto.InternalMessageInfo
 
-func (m *VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType) GetInterface() string {
+func (m *NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType) GetInterface() string {
 	if m != nil && m.Interface != nil {
 		return *m.Interface
 	}
 	return ""
 }
 
-var E_JnprVlansL2AlExt = &proto.ExtensionDesc{
+var E_JnprNetworkInstancesL2NetworkInstanceExt = &proto.ExtensionDesc{
 	ExtendedType:  (*JuniperNetworksSensors)(nil),
-	ExtensionType: (*VlansL2Al)(nil),
+	ExtensionType: (*NetworkInstancesL2NetworkInstance)(nil),
 	Field:         50,
-	Name:          "jnpr_vlans_l2al_ext",
-	Tag:           "bytes,50,opt,name=jnpr_vlans_l2al_ext",
+	Name:          "jnpr_network_instances_l2_network_instance_ext",
+	Tag:           "bytes,50,opt,name=jnpr_network_instances_l2_network_instance_ext",
 	Filename:      "l2ald_oc.proto",
 }
 
 func init() {
-	proto.RegisterType((*VlansL2Al)(nil), "vlans_l2al")
-	proto.RegisterType((*VlansL2AlVlanList)(nil), "vlans_l2al.vlan_list")
-	proto.RegisterType((*VlansL2AlVlanListStateType)(nil), "vlans_l2al.vlan_list.state_type")
-	proto.RegisterType((*VlansL2AlVlanListMembersType)(nil), "vlans_l2al.vlan_list.members_type")
-	proto.RegisterType((*VlansL2AlVlanListMembersTypeMemberList)(nil), "vlans_l2al.vlan_list.members_type.member_list")
-	proto.RegisterType((*VlansL2AlVlanListMembersTypeMemberListInterfaceRefType)(nil), "vlans_l2al.vlan_list.members_type.member_list.interface_ref_type")
-	proto.RegisterType((*VlansL2AlVlanListMembersTypeMemberListInterfaceRefTypeStateType)(nil), "vlans_l2al.vlan_list.members_type.member_list.interface_ref_type.state_type")
-	proto.RegisterExtension(E_JnprVlansL2AlExt)
+	proto.RegisterType((*NetworkInstancesL2NetworkInstance)(nil), "network_instances_l2_network_instance")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceList)(nil), "network_instances_l2_network_instance.network_instance_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type.entries_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type.entries_type.entry_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type.entries_type.entry_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type.entries_type.entry_list.interface_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type.entries_type.entry_list.interface_type.interface_ref_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeMacTableTypeEntriesTypeEntryListInterfaceTypeInterfaceRefTypeStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.mac_table_type.entries_type.entry_list.interface_type.interface_ref_type.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.entries_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.entries_type.entry_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.entries_type.entry_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.entries_type.entry_list.producers_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.entries_type.entry_list.producers_type.producer_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeEntriesTypeEntryListProducersTypeProducerListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.entries_type.entry_list.producers_type.producer_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.next_hops_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.next_hops_type.next_hop_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacTableTypeNextHopsTypeNextHopListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_table_type.next_hops_type.next_hop_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.entries_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.entries_type.entry_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.entries_type.entry_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.entries_type.entry_list.producers_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.entries_type.entry_list.producers_type.producer_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeEntriesTypeEntryListProducersTypeProducerListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.entries_type.entry_list.producers_type.producer_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.next_hops_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopList)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.next_hops_type.next_hop_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListFdbTypeL2RibTypeMacIpTableTypeNextHopsTypeNextHopListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.fdb_type.l2rib_type.mac_ip_table_type.next_hops_type.next_hop_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesType)(nil), "network_instances_l2_network_instance.network_instance_list.interfaces_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceList)(nil), "network_instances_l2_network_instance.network_instance_list.interfaces_type.interface_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListInterfacesTypeInterfaceListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.interfaces_type.interface_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansType)(nil), "network_instances_l2_network_instance.network_instance_list.vlans_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanList)(nil), "network_instances_l2_network_instance.network_instance_list.vlans_type.vlan_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.vlans_type.vlan_list.state_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersType)(nil), "network_instances_l2_network_instance.network_instance_list.vlans_type.vlan_list.members_type")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberList)(nil), "network_instances_l2_network_instance.network_instance_list.vlans_type.vlan_list.members_type.member_list")
+	proto.RegisterType((*NetworkInstancesL2NetworkInstanceNetworkInstanceListVlansTypeVlanListMembersTypeMemberListStateType)(nil), "network_instances_l2_network_instance.network_instance_list.vlans_type.vlan_list.members_type.member_list.state_type")
+	proto.RegisterExtension(E_JnprNetworkInstancesL2NetworkInstanceExt)
 }
 
 func init() { proto.RegisterFile("l2ald_oc.proto", fileDescriptor_3d20593bdd4ba4e6) }
 
 var fileDescriptor_3d20593bdd4ba4e6 = []byte{
-	// 376 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x51, 0x4f, 0x4b, 0xfb, 0x40,
-	0x14, 0x24, 0xfd, 0xf5, 0xcf, 0xaf, 0x2f, 0xad, 0xc8, 0x16, 0x6d, 0x08, 0x22, 0xa5, 0xa7, 0xd2,
-	0x43, 0x0e, 0x51, 0x11, 0x04, 0x41, 0x05, 0x11, 0xa5, 0x08, 0xa6, 0xe0, 0x75, 0x89, 0xed, 0xab,
-	0x44, 0xf3, 0x8f, 0xdd, 0xad, 0xb6, 0x57, 0xbf, 0x84, 0x9e, 0xbc, 0x79, 0xf3, 0xcb, 0x79, 0xf3,
-	0x28, 0xbb, 0x49, 0x93, 0xd6, 0x16, 0x44, 0xbc, 0xed, 0xcc, 0xce, 0xcc, 0x1b, 0xde, 0x83, 0x35,
-	0xdf, 0x76, 0xfd, 0x21, 0x8d, 0x06, 0x56, 0xcc, 0x22, 0x11, 0x99, 0x0d, 0x81, 0x3e, 0x06, 0x28,
-	0xd8, 0x94, 0x8a, 0x28, 0x4e, 0xc8, 0xf6, 0x7b, 0x09, 0xe0, 0xc1, 0x77, 0x43, 0x4e, 0xa5, 0x9a,
-	0x74, 0xa1, 0x28, 0x91, 0xf1, 0xac, 0xb5, 0xfe, 0x75, 0x74, 0x7b, 0xc3, 0xca, 0xff, 0xd4, 0x93,
-	0xfa, 0x1e, 0x17, 0x8e, 0xd2, 0x98, 0x1f, 0x45, 0xa8, 0x66, 0x1c, 0xd9, 0x86, 0x8a, 0x02, 0xde,
-	0xd0, 0xd8, 0x69, 0x69, 0x9d, 0xfa, 0x49, 0xe9, 0xe9, 0xa8, 0xf0, 0x5f, 0x73, 0xca, 0x92, 0x3d,
-	0x1f, 0x92, 0x7d, 0x28, 0x71, 0xe1, 0x0a, 0x94, 0xd1, 0x5a, 0x47, 0xb7, 0x5b, 0x2b, 0xa3, 0x2d,
-	0xa5, 0xa1, 0x62, 0x1a, 0xa3, 0x93, 0xe8, 0xc9, 0x21, 0x54, 0x02, 0x0c, 0x6e, 0x90, 0x71, 0xe3,
-	0x25, 0xb1, 0xb6, 0x57, 0x5b, 0x53, 0x55, 0x62, 0x9e, 0x79, 0xcc, 0x2b, 0x80, 0x3c, 0x93, 0x34,
-	0xf3, 0x96, 0xbb, 0xb2, 0x65, 0x56, 0x8f, 0x40, 0x31, 0x74, 0x03, 0x54, 0xdd, 0xab, 0x8e, 0x7a,
-	0x93, 0x4d, 0x28, 0x4b, 0xeb, 0x98, 0x1b, 0x7b, 0x8a, 0x4d, 0x91, 0xf9, 0x59, 0x80, 0xda, 0xfc,
-	0x30, 0x72, 0x06, 0xe5, 0x04, 0xcf, 0xf6, 0x66, 0xfd, 0xdc, 0x30, 0x05, 0xc9, 0x42, 0x53, 0xbb,
-	0xf9, 0x5a, 0x00, 0x7d, 0x8e, 0x27, 0xb7, 0x50, 0xf7, 0x42, 0x81, 0x6c, 0xe4, 0x0e, 0x90, 0x32,
-	0x1c, 0xcd, 0x96, 0x77, 0xfc, 0xbb, 0x7c, 0x6b, 0x21, 0x24, 0x59, 0x50, 0x2d, 0xe3, 0x1c, 0x1c,
-	0x99, 0x6f, 0x1a, 0x90, 0x65, 0x11, 0x19, 0x7c, 0x3b, 0x5a, 0xef, 0xcf, 0x73, 0x97, 0x0f, 0x6c,
-	0x76, 0x17, 0x2e, 0xb4, 0x05, 0xd5, 0xcc, 0x95, 0x5e, 0x23, 0x27, 0x0e, 0xfa, 0xd0, 0xb8, 0x0b,
-	0x63, 0x46, 0xf3, 0x1a, 0x14, 0x27, 0x82, 0x34, 0xad, 0x8b, 0x71, 0xe8, 0xc5, 0xc8, 0x2e, 0x51,
-	0x3c, 0x46, 0xec, 0x9e, 0xf7, 0x31, 0xe4, 0x11, 0xe3, 0x86, 0xad, 0x6a, 0xeb, 0x73, 0xb5, 0x9d,
-	0x75, 0x19, 0x70, 0x2d, 0x71, 0xcf, 0x76, 0xfd, 0xd3, 0x89, 0xf8, 0x0a, 0x00, 0x00, 0xff, 0xff,
-	0xa9, 0xef, 0x30, 0x7a, 0x29, 0x03, 0x00, 0x00,
+	// 1576 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x59, 0xdd, 0x6b, 0x1c, 0x55,
+	0x1b, 0xe7, 0x6c, 0xb2, 0xd9, 0x9d, 0x27, 0xc9, 0xa6, 0x3d, 0xa5, 0xed, 0xbc, 0xf3, 0x5a, 0x8d,
+	0xf5, 0xa3, 0x01, 0x61, 0x85, 0xb5, 0xde, 0x68, 0x5b, 0x3f, 0xa0, 0x68, 0xa4, 0x94, 0x76, 0x1a,
+	0xa5, 0xa0, 0x74, 0x98, 0xdd, 0x3d, 0x9b, 0x4e, 0x9d, 0x99, 0x9d, 0xce, 0x4c, 0xda, 0xa4, 0xb6,
+	0x4a, 0x93, 0xa6, 0xd1, 0x92, 0x64, 0x93, 0xa2, 0xd4, 0x5a, 0xa4, 0xb4, 0x17, 0x82, 0x77, 0x22,
+	0x4a, 0xc1, 0x3f, 0xc0, 0xa2, 0x37, 0xbd, 0x10, 0xbc, 0x12, 0x11, 0x44, 0x6f, 0xbd, 0xf2, 0x46,
+	0x10, 0xe4, 0x7c, 0xcc, 0xec, 0xcc, 0xee, 0x4c, 0x3f, 0xe8, 0x7e, 0xe4, 0x6e, 0xce, 0x33, 0x33,
+	0xcf, 0xf3, 0x7b, 0x3e, 0xce, 0xf3, 0x7b, 0x38, 0x07, 0x0a, 0x66, 0x49, 0x37, 0xab, 0x5a, 0xbd,
+	0x52, 0x74, 0xdc, 0xba, 0x5f, 0x57, 0xb6, 0xf8, 0xc4, 0x24, 0x16, 0xf1, 0xdd, 0x39, 0xcd, 0xaf,
+	0x3b, 0x5c, 0xb8, 0xf3, 0x9f, 0x3d, 0xf0, 0x94, 0x4d, 0xfc, 0xd3, 0x75, 0xf7, 0x5d, 0xcd, 0xb0,
+	0x3d, 0x5f, 0xb7, 0x2b, 0xc4, 0xd3, 0xcc, 0x92, 0xd6, 0x2a, 0xc4, 0xc7, 0x61, 0x53, 0xab, 0x4c,
+	0xbe, 0x82, 0xc6, 0x07, 0x26, 0x86, 0x4b, 0x7b, 0x8a, 0xf7, 0xa5, 0xa2, 0xed, 0x2b, 0xcd, 0x34,
+	0x3c, 0x5f, 0x1d, 0x13, 0xe2, 0x49, 0x21, 0x55, 0xfe, 0x7c, 0x11, 0xb6, 0x26, 0x7e, 0x8a, 0xff,
+	0x07, 0x83, 0xb6, 0x6e, 0x11, 0xf9, 0xb9, 0x71, 0x34, 0x21, 0xbd, 0x9a, 0x9d, 0x7f, 0x39, 0x93,
+	0x47, 0x2a, 0x13, 0xe1, 0xa3, 0x30, 0x50, 0xab, 0x96, 0xe5, 0x15, 0x34, 0x8e, 0x26, 0x86, 0x4b,
+	0xfb, 0x1f, 0x06, 0x51, 0xb1, 0x56, 0x2d, 0x6b, 0xfe, 0x9c, 0x43, 0x54, 0xaa, 0x12, 0x5b, 0x00,
+	0x86, 0xed, 0x13, 0xb7, 0xa6, 0x57, 0x88, 0x47, 0x5d, 0xa6, 0x06, 0x0e, 0x3c, 0x94, 0x81, 0xa6,
+	0x3e, 0x6e, 0x27, 0x62, 0x00, 0x1f, 0x83, 0xec, 0x29, 0x53, 0xb7, 0x3d, 0xf9, 0x06, 0xb7, 0xf4,
+	0xda, 0x43, 0x59, 0x62, 0xaa, 0xb8, 0x11, 0xae, 0x56, 0xb9, 0xfd, 0x2c, 0xe4, 0x03, 0x07, 0xf1,
+	0x34, 0x64, 0x3d, 0x5f, 0xf7, 0x49, 0xe0, 0xd6, 0xa1, 0x8e, 0xc4, 0xad, 0xc8, 0x74, 0x0a, 0xab,
+	0xec, 0x19, 0x9f, 0x04, 0xc9, 0xd2, 0x2b, 0x9a, 0xaf, 0x97, 0x4d, 0x22, 0xcf, 0x31, 0x5b, 0x53,
+	0x9d, 0xb1, 0x15, 0xaa, 0xe5, 0xf6, 0xf2, 0x96, 0x5e, 0x99, 0xa2, 0x4b, 0xea, 0x9b, 0x59, 0x72,
+	0x8d, 0xb2, 0xbc, 0xd0, 0x51, 0xdf, 0x98, 0x4e, 0xe1, 0x1b, 0x7b, 0x56, 0xde, 0x07, 0x68, 0x3a,
+	0x8c, 0x1f, 0x87, 0x11, 0x0a, 0xc9, 0x24, 0xba, 0x6b, 0x1b, 0xf6, 0xb4, 0xbc, 0x77, 0x1c, 0x4d,
+	0xe4, 0xd5, 0x61, 0x4b, 0xaf, 0x1c, 0x10, 0x22, 0xfc, 0x24, 0x14, 0xe8, 0x27, 0xfa, 0xb4, 0x61,
+	0x4f, 0x6b, 0xbe, 0x61, 0x11, 0x79, 0xdf, 0x38, 0x9a, 0x18, 0x55, 0xe9, 0x8f, 0xaf, 0x50, 0xe1,
+	0x94, 0x61, 0x11, 0xbc, 0x0b, 0xc6, 0x2c, 0x7d, 0xd6, 0xb0, 0x66, 0x2c, 0x8d, 0xd8, 0xbe, 0x6b,
+	0x10, 0x4f, 0x7e, 0x89, 0x7d, 0x56, 0x10, 0xe2, 0xfd, 0x5c, 0xaa, 0xfc, 0x25, 0x71, 0x7d, 0xcd,
+	0x28, 0xe0, 0xb3, 0x90, 0x0b, 0xfe, 0x11, 0xde, 0xeb, 0xdd, 0x88, 0x76, 0x51, 0x18, 0xe1, 0xe1,
+	0x08, 0x4c, 0x2a, 0xbf, 0xe6, 0x61, 0x24, 0xfa, 0x06, 0x2f, 0x20, 0xc8, 0x52, 0xc1, 0x1c, 0xdd,
+	0x9f, 0xb4, 0x63, 0x98, 0x5d, 0x47, 0xc3, 0x16, 0x73, 0xbc, 0xc3, 0x70, 0xdb, 0xca, 0xed, 0x1c,
+	0x40, 0x53, 0x8a, 0x1f, 0x83, 0x61, 0x96, 0x85, 0x6a, 0xd5, 0x25, 0x9e, 0xc7, 0xf2, 0x24, 0xa9,
+	0x40, 0x53, 0xc0, 0x25, 0x18, 0xc3, 0x20, 0xdd, 0x32, 0x22, 0x39, 0xec, 0x19, 0xaf, 0xa0, 0x60,
+	0xc7, 0xd4, 0x59, 0x58, 0x4f, 0xf7, 0xd2, 0x91, 0x84, 0x7d, 0x75, 0x15, 0x81, 0x14, 0x36, 0x0f,
+	0xd9, 0x61, 0x98, 0xde, 0xeb, 0x29, 0xa6, 0xd0, 0x3a, 0xc7, 0xd5, 0x44, 0xa3, 0xb8, 0xb1, 0x7d,
+	0xd1, 0x12, 0xee, 0xc3, 0xa9, 0xe1, 0x56, 0x23, 0xe1, 0xde, 0x11, 0x64, 0x8c, 0xaa, 0x90, 0x8f,
+	0xb0, 0x7f, 0x24, 0x26, 0x99, 0xa2, 0x3a, 0x37, 0xc1, 0x00, 0x39, 0x65, 0xc8, 0x6f, 0xb2, 0x3f,
+	0xe8, 0xa3, 0xf2, 0xfb, 0x00, 0x14, 0xe2, 0x88, 0xf0, 0x37, 0x08, 0x46, 0x9b, 0x22, 0x97, 0xd4,
+	0x44, 0x98, 0x56, 0x51, 0x1f, 0xe3, 0x54, 0x8c, 0x21, 0xe2, 0xa1, 0x1b, 0x09, 0x65, 0x2a, 0xa9,
+	0x29, 0x57, 0x33, 0x80, 0xdb, 0x3f, 0xc2, 0x5f, 0x85, 0x05, 0x78, 0x92, 0x79, 0x71, 0x75, 0x83,
+	0x79, 0xd1, 0x5e, 0xa3, 0xca, 0xa1, 0x58, 0x1d, 0xec, 0x88, 0x16, 0x2c, 0x6b, 0x4e, 0x52, 0xa4,
+	0x68, 0xf0, 0x13, 0x30, 0xe2, 0xcd, 0x94, 0x9b, 0x5f, 0x30, 0x42, 0x1f, 0x55, 0x63, 0x42, 0x65,
+	0x61, 0x27, 0x40, 0xb3, 0x0f, 0xe3, 0x73, 0x51, 0x72, 0x99, 0xe7, 0xfd, 0x4e, 0xeb, 0x74, 0xb7,
+	0x4f, 0x27, 0x9a, 0x45, 0xc4, 0x5b, 0xbe, 0xe1, 0x08, 0x08, 0xcb, 0x1c, 0x42, 0xb9, 0x2b, 0x10,
+	0x02, 0x2b, 0x62, 0x72, 0xb0, 0xf4, 0xca, 0xa4, 0xc3, 0x70, 0x28, 0x77, 0xc6, 0xda, 0x78, 0x60,
+	0x09, 0x35, 0x89, 0x40, 0x04, 0xc6, 0xec, 0x72, 0x60, 0x92, 0x39, 0x01, 0x2f, 0x23, 0x90, 0x6c,
+	0x32, 0xeb, 0x6b, 0xc7, 0xeb, 0x4e, 0x48, 0x4a, 0x76, 0xb7, 0xb1, 0x84, 0x16, 0x45, 0xce, 0xe8,
+	0xfa, 0xf5, 0xba, 0xe3, 0x29, 0xd7, 0xa5, 0x16, 0x8a, 0x5a, 0x0d, 0x29, 0x6a, 0x9e, 0x53, 0xd4,
+	0xe9, 0x5e, 0xc6, 0x29, 0x81, 0xad, 0xfe, 0x8d, 0xb3, 0xd5, 0xae, 0x78, 0xfb, 0x64, 0xc9, 0x0c,
+	0x47, 0xe0, 0x68, 0x1b, 0xfd, 0x2c, 0x6c, 0x10, 0x22, 0xc8, 0xf3, 0xa8, 0x4f, 0x9e, 0x24, 0xd0,
+	0xd5, 0x17, 0x08, 0x24, 0xc7, 0xad, 0x57, 0x67, 0x2a, 0xc4, 0xf5, 0xe4, 0x0b, 0x1c, 0xe0, 0xc5,
+	0xbe, 0x01, 0x0c, 0xa1, 0x08, 0xee, 0x0a, 0xd7, 0x8a, 0x1d, 0xeb, 0x59, 0xe3, 0xf1, 0xe0, 0x8b,
+	0xae, 0x15, 0x8d, 0xfa, 0x16, 0x41, 0x5e, 0x17, 0x50, 0x84, 0xbd, 0x36, 0x73, 0x7a, 0x5a, 0x44,
+	0x21, 0x3f, 0xe1, 0x6d, 0x30, 0x64, 0x96, 0xb4, 0x53, 0xb6, 0x21, 0x5f, 0xe4, 0xd2, 0xac, 0x59,
+	0x7a, 0xcb, 0x36, 0x94, 0xc6, 0x20, 0x14, 0xe2, 0x68, 0xf0, 0xd7, 0x08, 0xf2, 0x81, 0x88, 0xea,
+	0xa5, 0x45, 0xf9, 0xf1, 0x06, 0x09, 0x55, 0xb8, 0xe4, 0x25, 0x1b, 0xe2, 0x54, 0x6e, 0x67, 0x60,
+	0x34, 0xf6, 0x0e, 0xef, 0x8c, 0x7b, 0x11, 0xa9, 0xda, 0x50, 0x8e, 0x6f, 0x85, 0x35, 0xbb, 0xc8,
+	0x4b, 0xe2, 0xfa, 0x86, 0xf4, 0x33, 0x81, 0xdb, 0x8e, 0xc6, 0xea, 0xe4, 0xff, 0x11, 0x5f, 0x17,
+	0x79, 0x91, 0x34, 0x9d, 0xa4, 0xd5, 0xe0, 0x89, 0xbc, 0x4b, 0x2a, 0x7d, 0xc6, 0x0a, 0xe4, 0x83,
+	0x0e, 0x25, 0x2f, 0x51, 0xf9, 0xa0, 0x9a, 0x13, 0x2d, 0x4a, 0x39, 0x3f, 0x08, 0x85, 0x78, 0xfb,
+	0xc2, 0x9f, 0xa2, 0xc8, 0xf7, 0x0b, 0xbc, 0x22, 0xce, 0xf6, 0xb6, 0x85, 0x86, 0x4b, 0x9e, 0xf8,
+	0x10, 0xed, 0x4f, 0x19, 0x18, 0x8d, 0xbd, 0xc2, 0x8f, 0x40, 0xd6, 0xb0, 0xab, 0x64, 0x96, 0xef,
+	0x96, 0xc1, 0x20, 0xe9, 0x5c, 0x88, 0xaf, 0x87, 0x19, 0x17, 0x4d, 0x60, 0x09, 0xf5, 0xd3, 0x91,
+	0x84, 0xcc, 0x9e, 0x47, 0xb1, 0xd4, 0x6e, 0x0d, 0xdc, 0xb9, 0xc0, 0xf3, 0x24, 0xfc, 0x90, 0x21,
+	0xe7, 0x10, 0xe2, 0x6a, 0x86, 0x13, 0x24, 0x7c, 0x88, 0xae, 0x27, 0x9d, 0xf8, 0x9c, 0x73, 0xf1,
+	0x9e, 0x73, 0xce, 0x52, 0xd2, 0x9c, 0x73, 0x6d, 0x13, 0x6c, 0x6e, 0xe3, 0x7c, 0x7c, 0x29, 0x42,
+	0xea, 0x62, 0xd4, 0xa8, 0x77, 0x7f, 0xd4, 0x48, 0xe1, 0xf5, 0x46, 0x8c, 0xd7, 0xc5, 0xf1, 0xcb,
+	0xc9, 0x1e, 0xc0, 0x49, 0xa5, 0xf6, 0x5f, 0x5a, 0xa9, 0x7d, 0x3d, 0xa4, 0xf6, 0x65, 0xbe, 0x67,
+	0xce, 0xf4, 0x38, 0x5a, 0x09, 0xec, 0x7e, 0x2b, 0x1f, 0x63, 0xf7, 0x16, 0x82, 0x59, 0x6e, 0x27,
+	0x18, 0x19, 0x72, 0xc7, 0xeb, 0x9e, 0x4f, 0x0b, 0x6d, 0x45, 0x14, 0x1a, 0x5d, 0x4f, 0x3a, 0xf8,
+	0xf3, 0x70, 0x2b, 0xad, 0xf2, 0xe8, 0x2f, 0xa2, 0xfe, 0xf9, 0x97, 0xc0, 0xf9, 0x5f, 0xc6, 0x38,
+	0xbf, 0xc1, 0x31, 0x7e, 0xd4, 0x4f, 0x8c, 0xe9, 0xb4, 0xff, 0x21, 0xba, 0x1b, 0xef, 0xaf, 0xa6,
+	0xf3, 0xfe, 0x5a, 0x02, 0xef, 0xaf, 0x27, 0xf2, 0xfe, 0xe5, 0x28, 0xef, 0x47, 0xd3, 0xda, 0x88,
+	0xa5, 0x55, 0xf9, 0xa4, 0x7d, 0x22, 0xf8, 0x36, 0x3a, 0x11, 0x34, 0x78, 0x2d, 0x5f, 0xd9, 0x38,
+	0x81, 0x4c, 0x1d, 0x0a, 0x7e, 0xbc, 0xeb, 0x50, 0xd0, 0x48, 0x19, 0x0a, 0xbe, 0x0b, 0xeb, 0x7a,
+	0x8d, 0xd7, 0xcc, 0xcd, 0x8d, 0xea, 0xea, 0x03, 0xcd, 0x05, 0x6b, 0x29, 0x73, 0xc1, 0x7a, 0xca,
+	0x5c, 0x70, 0xb9, 0x65, 0x2e, 0x58, 0x6a, 0x9f, 0x0b, 0xae, 0x45, 0xe7, 0x02, 0x71, 0xc2, 0xf6,
+	0x41, 0xcf, 0x5b, 0x70, 0xda, 0x68, 0xf0, 0x73, 0xfa, 0x68, 0xb0, 0x92, 0x34, 0x1a, 0xdc, 0x6c,
+	0xed, 0x67, 0x97, 0x50, 0x9f, 0x7d, 0x79, 0x80, 0xe9, 0x60, 0x35, 0x6d, 0x3a, 0x68, 0xdc, 0x65,
+	0x3a, 0x58, 0xbb, 0xe7, 0x74, 0xb0, 0x9e, 0x34, 0x1d, 0xfc, 0x9d, 0x81, 0xb1, 0x96, 0x9b, 0x04,
+	0x7c, 0x26, 0xaa, 0x57, 0x5c, 0xcf, 0xbc, 0xdd, 0xc9, 0xbb, 0x8a, 0xc8, 0x91, 0x0f, 0x4b, 0x73,
+	0xe4, 0xbc, 0xef, 0x0f, 0x14, 0x3d, 0x7b, 0x63, 0x99, 0xde, 0x0a, 0x19, 0xa3, 0x1a, 0xbf, 0xae,
+	0xc9, 0x18, 0x55, 0x7c, 0x2e, 0xc8, 0xb0, 0xb8, 0xe3, 0xa8, 0x75, 0x11, 0x61, 0x42, 0xf2, 0xf6,
+	0xc6, 0x72, 0x57, 0x60, 0x18, 0xf9, 0xf1, 0x2f, 0x05, 0x27, 0x0e, 0x2a, 0x1d, 0xc3, 0x66, 0xe7,
+	0xf7, 0xfb, 0xd8, 0xf9, 0x3d, 0xed, 0xf9, 0x87, 0xb8, 0x44, 0xf9, 0x7e, 0x08, 0xa0, 0x79, 0xaf,
+	0x82, 0x6b, 0x82, 0x02, 0x6e, 0xf0, 0x68, 0x1f, 0xee, 0xd0, 0x7d, 0x0d, 0x7b, 0xe4, 0x31, 0x66,
+	0xfa, 0x95, 0x3b, 0x59, 0x90, 0x42, 0x19, 0x7e, 0x14, 0x72, 0x6c, 0x21, 0xc2, 0x3b, 0x1a, 0x84,
+	0x77, 0x88, 0x4a, 0x27, 0xab, 0xd8, 0x0d, 0x42, 0xbc, 0x9b, 0x45, 0xf8, 0x9d, 0x8e, 0xa3, 0x4a,
+	0x60, 0xfa, 0x59, 0xc8, 0x59, 0xc4, 0x2a, 0x53, 0x9a, 0x7f, 0x9e, 0x59, 0x3d, 0xd6, 0x79, 0xab,
+	0xc2, 0x80, 0x98, 0x42, 0xc5, 0x4a, 0x39, 0x1c, 0xcb, 0xe8, 0xf6, 0x66, 0x6c, 0x76, 0xb3, 0x7d,
+	0x13, 0x04, 0x05, 0x47, 0xef, 0x0f, 0xc5, 0xc5, 0xe1, 0x36, 0x18, 0xa2, 0xbf, 0xce, 0x70, 0xcc,
+	0x92, 0x2a, 0x56, 0xca, 0x6f, 0x19, 0x18, 0x89, 0x1a, 0xc3, 0x0b, 0x08, 0x86, 0xb8, 0x20, 0xd8,
+	0x58, 0x27, 0xba, 0xeb, 0x9e, 0x58, 0xf0, 0x1a, 0x10, 0xa6, 0x95, 0x1f, 0x10, 0x0c, 0x47, 0xe4,
+	0x78, 0x19, 0xb5, 0xec, 0xa5, 0x99, 0xde, 0x81, 0x4a, 0xd8, 0x5a, 0xcf, 0xa4, 0x9f, 0xf5, 0x5e,
+	0x69, 0xed, 0x72, 0x2f, 0xdc, 0x40, 0x50, 0x3c, 0x61, 0x3b, 0xae, 0x76, 0x5f, 0x88, 0x35, 0x32,
+	0xeb, 0xe3, 0xed, 0xc5, 0x37, 0x66, 0x6c, 0xc3, 0x21, 0xee, 0x41, 0xfe, 0xd6, 0x3b, 0x42, 0x6c,
+	0xaf, 0xee, 0x7a, 0x72, 0x89, 0x39, 0xff, 0xf4, 0xfd, 0x39, 0xaf, 0x4e, 0x50, 0xb3, 0x07, 0xe3,
+	0xf7, 0xce, 0xde, 0x81, 0x52, 0x8b, 0x64, 0xff, 0xac, 0xff, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff,
+	0xe3, 0x43, 0x39, 0x13, 0x46, 0x1f, 0x00, 0x00,
 }
