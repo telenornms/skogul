@@ -163,6 +163,11 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 			if ok {
 				tagValue = idb.replacer.Replace(v)
+				// Skip empty tag values, they are invalid
+				// for Influx
+				if tagValue == "" {
+					continue
+				}
 			} else {
 				tagValue = value
 			}
