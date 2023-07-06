@@ -35,8 +35,8 @@ import (
 // data-section to metadata, but it's left intentionally generic.
 type SourceDestination struct {
 	Source      string `doc:"Name of the source field"`
-	Destination string `doc:"The destination name/field. If left blank/undefined, the source name will be used as a destination name."`
-	Delete      bool   `doc:"Set to true to delete the original. Default is to leave the original."`
+	Destination string `doc:"The destination name/field. If left blank/undefined, the source name will be used as a destination name when moving between data/metadata."`
+	Keep        bool   `doc:"Set to true to keep the original. Default is to delete the original."`
 }
 
 // Metadata enforces a set of rules on metadata in all metrics, potentially
@@ -50,6 +50,7 @@ type Metadata struct {
 	Ban              []string               `doc:"Fail if any of these fields are present"`
 	Flatten          [][]string             `doc:"Flatten nested structures down to the root level"`
 	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
+	Rename           []SourceDestination    `doc:"Rename a metadatafield." example:"[{\"source\": \"some_long_variable\", \"destination\": \"var\"}]" `
 	KeepOriginal     bool
 }
 
@@ -90,7 +91,7 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 				cpy.Destination = cpy.Source
 			}
 			c.Metrics[mi].Metadata[cpy.Destination] = c.Metrics[mi].Data[cpy.Source]
-			if cpy.Delete {
+			if !cpy.Keep {
 				delete(c.Metrics[mi].Data, cpy.Source)
 			}
 		}
@@ -106,6 +107,22 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			}
 			if c.Metrics[mi].Metadata[value] != nil {
 				return fmt.Errorf("banned metadata field `%s' present", value)
+			}
+		}
+		for _, rename := range meta.Rename {
+			fmt.Printf("hei\n")
+			if c.Metrics[mi].Metadata == nil {
+				continue
+			}
+			fmt.Printf("hei2\n")
+			if _, ok := c.Metrics[mi].Metadata[rename.Source]; !ok {
+				fmt.Printf("src: %v\n", c.Metrics[mi].Metadata)
+				continue
+			}
+			fmt.Printf("hei3\n")
+			c.Metrics[mi].Metadata[rename.Destination] = c.Metrics[mi].Metadata[rename.Source]
+			if !rename.Keep {
+				delete(c.Metrics[mi].Metadata, rename.Source)
 			}
 		}
 
@@ -211,6 +228,7 @@ type Data struct {
 	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
 	Remove           []string               `doc:"Remove these data fields."`
 	Ban              []string               `doc:"Fail if any of these data fields are present"`
+	Rename           []SourceDestination    `doc:"Rename a datafield." example:"[{\"source\": \"some_long_variable\", \"destination\": \"var\"}]" `
 	KeepOriginal     bool
 }
 
@@ -248,6 +266,18 @@ func (data *Data) Transform(c *skogul.Container) error {
 			}
 			if c.Metrics[mi].Data[value] != nil {
 				return fmt.Errorf("banned data field `%s' present", value)
+			}
+		}
+		for _, rename := range data.Rename {
+			if c.Metrics[mi].Data == nil {
+				continue
+			}
+			if _, ok := c.Metrics[mi].Data[rename.Source]; !ok {
+				continue
+			}
+			c.Metrics[mi].Data[rename.Destination] = c.Metrics[mi].Data[rename.Source]
+			if !rename.Keep {
+				delete(c.Metrics[mi].Data, rename.Source)
 			}
 		}
 	}
