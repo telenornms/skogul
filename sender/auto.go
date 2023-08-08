@@ -181,5 +181,10 @@ func init() {
 		Name:  "rabbitmq",
 		Alloc: func() interface{} { return &Rabbitmq{} },
 		Help:  "Rabbitmq sender",
+  })
+  Auto.Add(skogul.Module{
+		Name:  "snmp",
+		Alloc: func() interface{} { return &SNMP{} },
+		Help:  "Encodes and sends an snmp trap. This is an experimental feature, please use with caution.",
 	})
 }

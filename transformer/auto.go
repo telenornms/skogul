@@ -115,4 +115,11 @@ func init() {
 		Help:     "Create structured data from flat keys, e.g.: foo.bar.zoo: 1, foo.baz.zoo: 2 to { foo: { bar: { zoo: 1 }, baz: { zoo: 2 } } }",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "ban",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &Ban{} },
+		Help:     "Ban values from nested structure using a path e.g. Path looking like this foo.bar.1 has a structure looking like this { foo: { bar: { 1: hello } } }. The last element in the path will get removed from the tree in this case 1: hello, you will end up having a tree looking like this { foo: { bar: {} } }.",
+		AutoMake: false,
+	})
 }

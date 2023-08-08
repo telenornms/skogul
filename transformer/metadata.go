@@ -35,19 +35,23 @@ import (
 // data-section to metadata, but it's left intentionally generic.
 type SourceDestination struct {
 	Source      string `doc:"Name of the source field"`
-	Destination string `doc:"The destination name/field. If left blank/undefined, the source name will be used as a destination name."`
-	Delete      bool   `doc:"Set to true to delete the original. Default is to leave the original."`
+	Destination string `doc:"The destination name/field. If left blank/undefined, the source name will be used as a destination name when moving between data/metadata."`
+	Keep        bool   `doc:"Set to true to keep the original. Default is to delete the original."`
 }
 
 // Metadata enforces a set of rules on metadata in all metrics, potentially
 // changing the metric metadata.
 type Metadata struct {
-	Set             map[string]interface{} `doc:"Set metadata fields to specific values."`
-	Require         []string               `doc:"Require the pressence of these fields."`
-	ExtractFromData []string               `doc:"Extract a set of fields from Data and add it to Metadata. Removes the original. Obsolete, will be removed. Use CopyFromData instead."`
-	CopyFromData    []SourceDestination    `doc:"Copy and potentially rename keys from the data section to the metadata section." example:"[{\"source\": \"datakey\", \"destination\": \"destkey\"},{\"source\":\"otherkey\"}]" `
-	Remove          []string               `doc:"Remove these metadata fields."`
-	Ban             []string               `doc:"Fail if any of these fields are present"`
+	Set              map[string]interface{} `doc:"Set metadata fields to specific values."`
+	Require          []string               `doc:"Require the pressence of these fields."`
+	ExtractFromData  []string               `doc:"Extract a set of fields from Data and add it to Metadata. Removes the original. Obsolete, will be removed. Use CopyFromData instead."`
+	CopyFromData     []SourceDestination    `doc:"Copy and potentially rename keys from the data section to the metadata section." example:"[{\"source\": \"datakey\", \"destination\": \"destkey\"},{\"source\":\"otherkey\"}]" `
+	Remove           []string               `doc:"Remove these metadata fields."`
+	Ban              []string               `doc:"Fail if any of these fields are present"`
+	Flatten          [][]string             `doc:"Flatten nested structures down to the root level"`
+	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
+	Rename           []SourceDestination    `doc:"Rename a metadatafield." example:"[{\"source\": \"some_long_variable\", \"destination\": \"var\"}]" `
+	KeepOriginal     bool
 }
 
 // Transform enforces the Metadata rules
@@ -87,7 +91,7 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 				cpy.Destination = cpy.Source
 			}
 			c.Metrics[mi].Metadata[cpy.Destination] = c.Metrics[mi].Data[cpy.Source]
-			if cpy.Delete {
+			if !cpy.Keep {
 				delete(c.Metrics[mi].Data, cpy.Source)
 			}
 		}
@@ -105,6 +109,26 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 				return fmt.Errorf("banned metadata field `%s' present", value)
 			}
 		}
+		for _, rename := range meta.Rename {
+			fmt.Printf("hei\n")
+			if c.Metrics[mi].Metadata == nil {
+				continue
+			}
+			fmt.Printf("hei2\n")
+			if _, ok := c.Metrics[mi].Metadata[rename.Source]; !ok {
+				fmt.Printf("src: %v\n", c.Metrics[mi].Metadata)
+				continue
+			}
+			fmt.Printf("hei3\n")
+			c.Metrics[mi].Metadata[rename.Destination] = c.Metrics[mi].Metadata[rename.Source]
+			if !rename.Keep {
+				delete(c.Metrics[mi].Metadata, rename.Source)
+			}
+		}
+
+		for _, nestedPath := range meta.Flatten {
+			_ = flattenStructure(nestedPath, meta.FlattenSeparator, meta.KeepOriginal, c.Metrics[mi], false)
+		}
 	}
 	return nil
 }
@@ -117,7 +141,7 @@ func (meta *Metadata) Deprecated() error {
 }
 
 // flattenStructure copies a nested object/array to the root level
-func flattenStructure(nestedPath []string, separator string, KeepOriginal bool, metric *skogul.Metric) error {
+func flattenStructure(nestedPath []string, separator string, KeepOriginal bool, metric *skogul.Metric, isData bool) error {
 	nestedObjectPath := nestedPath[0]
 
 	// Create a nested path unless configuration says not to
@@ -132,7 +156,14 @@ func flattenStructure(nestedPath []string, separator string, KeepOriginal bool, 
 		nestedObjectPath = ""
 	}
 
-	obj, err := skogul.ExtractNestedObject(metric.Data, nestedPath)
+	var obj map[string]interface{}
+	var err error
+
+	if isData {
+		obj, err = skogul.ExtractNestedObject(metric.Data, nestedPath)
+	} else {
+		obj, err = skogul.ExtractNestedObject(metric.Metadata, nestedPath)
+	}
 
 	if err == nil {
 		nestedObj, ok := obj[nestedPath[len(nestedPath)-1]].(map[string]interface{})
@@ -165,11 +196,20 @@ func flattenStructure(nestedPath []string, separator string, KeepOriginal bool, 
 		}
 
 		for key, val := range nestedObj {
-			if KeepOriginal {
-				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+			if isData {
+				if KeepOriginal {
+					metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+				} else {
+					metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+					delete(metric.Data, nestedObjectPath)
+				}
 			} else {
-				metric.Data[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
-				delete(metric.Data, nestedObjectPath)
+				if KeepOriginal {
+					metric.Metadata[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+				} else {
+					metric.Metadata[fmt.Sprintf("%s%s%s", nestedObjectPath, separator, key)] = val
+					delete(metric.Metadata, nestedObjectPath)
+				}
 			}
 		}
 	} else {
@@ -188,6 +228,7 @@ type Data struct {
 	FlattenSeparator string                 `doc:"Custom separator to use for flattening. Use 'drop' to drop intermediate keys. This will overwrite existing keys with the same name."`
 	Remove           []string               `doc:"Remove these data fields."`
 	Ban              []string               `doc:"Fail if any of these data fields are present"`
+	Rename           []SourceDestination    `doc:"Rename a datafield." example:"[{\"source\": \"some_long_variable\", \"destination\": \"var\"}]" `
 	KeepOriginal     bool
 }
 
@@ -206,7 +247,7 @@ func (data *Data) Transform(c *skogul.Container) error {
 			c.Metrics[mi].Data[key] = value
 		}
 		for _, nestedPath := range data.Flatten {
-			_ = flattenStructure(nestedPath, data.FlattenSeparator, data.KeepOriginal, c.Metrics[mi])
+			_ = flattenStructure(nestedPath, data.FlattenSeparator, data.KeepOriginal, c.Metrics[mi], true)
 		}
 		for _, value := range data.Require {
 			if c.Metrics[mi].Data == nil || c.Metrics[mi].Data[value] == nil {
@@ -225,6 +266,18 @@ func (data *Data) Transform(c *skogul.Container) error {
 			}
 			if c.Metrics[mi].Data[value] != nil {
 				return fmt.Errorf("banned data field `%s' present", value)
+			}
+		}
+		for _, rename := range data.Rename {
+			if c.Metrics[mi].Data == nil {
+				continue
+			}
+			if _, ok := c.Metrics[mi].Data[rename.Source]; !ok {
+				continue
+			}
+			c.Metrics[mi].Data[rename.Destination] = c.Metrics[mi].Data[rename.Source]
+			if !rename.Keep {
+				delete(c.Metrics[mi].Data, rename.Source)
 			}
 		}
 	}

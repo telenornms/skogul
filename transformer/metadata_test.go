@@ -185,7 +185,8 @@ func TestCopy(t *testing.T) {
 	testData := `
 	{
 		"metadata": {
-			"something": "value"
+			"something": "value",
+			"old_key_name": "mv_123"
 		},
 		"data": {
 			"leavethis": "123",
@@ -203,10 +204,14 @@ func TestCopy(t *testing.T) {
 		"ok": {
 			"type": "metadata",
 			"copyfromdata": [
-				{ "source": "leavethis", "destination": "meta1" },
-				{ "source": "deleteme", "destination": "meta2", "delete": true },
+				{ "source": "leavethis", "destination": "meta1", "keep": true },
+				{ "source": "deleteme", "destination": "meta2" },
 				{ "source": "newkey" }
+			],
+			"rename": [
+				{ "source": "old_key_name", "destination": "new_key_name" }
 			]
+
 		}
 	}
 	}`)
@@ -234,11 +239,62 @@ func TestCopy(t *testing.T) {
 	if c.Metrics[0].Data["leavethis"] != "123" {
 		t.Errorf(`Expected 123 but got %s`, c.Metrics[0].Data["leavethis"])
 	}
+	if c.Metrics[0].Metadata["old_key_name"] != nil {
+		t.Errorf(`Expcted old_key_name to be removed, but still present: %s`, c.Metrics[0].Metadata["old_key_name"])
+	}
+	if c.Metrics[0].Metadata["new_key_name"] != "mv_123" {
+		t.Errorf(`Expected new_key_name to be mv_123, but it is: %s`, c.Metrics[0].Metadata["new_key_name"])
+	}
 	if _, ok := c.Metrics[0].Data["deleteme"]; ok {
 		t.Errorf(`Data key 'deleteme' is set after extraction`)
 	}
 }
 
+func TestRenameData(t *testing.T) {
+
+	metric := skogul.Metric{}
+	testData := `
+	{
+		"metadata": {
+			"something": "value"
+		},
+		"data": {
+			"leavethis": "123",
+			"old_key_name": "mv_123"
+		}
+	}`
+	json.Unmarshal([]byte(testData), &metric)
+
+	c := skogul.Container{}
+	c.Metrics = []*skogul.Metric{&metric}
+
+	conf := testConfOk(t, `
+	{ "transformers": {
+		"ok": {
+			"type": "data",
+			"rename": [
+				{ "source": "old_key_name", "destination": "new_key_name" }
+			]
+
+		}
+	}
+	}`)
+
+	metadata := conf.Transformers["ok"].Transformer
+
+	err := metadata.Transform(&c)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if c.Metrics[0].Data["old_key_name"] != nil {
+		t.Errorf(`Expcted old_key_name to be removed, but still present: %s`, c.Metrics[0].Data["old_key_name"])
+	}
+	if c.Metrics[0].Data["new_key_name"] != "mv_123" {
+		t.Errorf(`Expected new_key_name to be mv_123, but it is: %s`, c.Metrics[0].Data["new_key_name"])
+	}
+}
 func TestFlattenMap(t *testing.T) {
 	path := "nestedData"
 	extracted_value_key := "key"

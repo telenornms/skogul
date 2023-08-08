@@ -1,6 +1,6 @@
 module github.com/telenornms/skogul
 
-go 1.18
+go 1.20
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.4.1
@@ -13,28 +13,30 @@ require (
 	google.golang.org/protobuf v1.28.1
 )
 
-require github.com/dolmen-go/jsonptr v0.0.0-20220904212016-e3f38a361346
+require (
+	github.com/dolmen-go/jsonptr v0.0.0-20220904212016-e3f38a361346
+	github.com/nats-io/nats.go v1.23.0
+)
 
 require (
-	github.com/nats-io/nats.go v1.18.0 // indirect
+	github.com/nats-io/nats-server/v2 v2.9.14 // indirect
 	github.com/nats-io/nkeys v0.3.0 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
-	github.com/rabbitmq/amqp091-go v1.7.0 // indirect
-	golang.org/x/crypto v0.0.0-20210314154223-e6e6c4f2bb5b // indirect
 )
 
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/gosnmp/gosnmp v1.35.0
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/compress v1.15.6 // indirect
+	github.com/klauspost/compress v1.15.15 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.15 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0
-	golang.org/x/net v0.0.0-20220624214902-1bab6f366d9e // indirect
+	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
-	golang.org/x/sys v0.0.0-20220829200755-d48e67d00261 // indirect
+	golang.org/x/sys v0.5.0 // indirect
 )

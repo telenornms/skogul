@@ -506,7 +506,7 @@ func (m *InterfaceStats) GetIfUnknownProtoPkts() uint64 {
 // Inbound traffic error statistics
 //
 type IngressInterfaceErrors struct {
-	// The number of packets that contained errors
+	// Total no of error packets received by this interface
 	IfErrors *uint64 `protobuf:"varint,1,opt,name=if_errors,json=ifErrors" json:"if_errors,omitempty"`
 	// The number of packets dropped by the input queue of the I/O Manager ASIC
 	IfInQdrops *uint64 `protobuf:"varint,2,opt,name=if_in_qdrops,json=ifInQdrops" json:"if_in_qdrops,omitempty"`
@@ -629,7 +629,7 @@ func (m *IngressInterfaceErrors) GetIfInResourceErrors() uint64 {
 // Outbound traffic error statistics
 //
 type EgressInterfaceErrors struct {
-	// The number of packets that contained errors
+	// Total no of error packets sent by this interface
 	IfErrors *uint64 `protobuf:"varint,1,opt,name=if_errors,json=ifErrors" json:"if_errors,omitempty"`
 	// The number of non-error packets which were chosen to be discarded
 	IfDiscards           *uint64  `protobuf:"varint,2,opt,name=if_discards,json=ifDiscards" json:"if_discards,omitempty"`

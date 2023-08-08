@@ -21,11 +21,13 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type Qos struct {
-	Interfaces           *QosInterfacesType       `protobuf:"bytes,151,opt,name=interfaces" json:"interfaces,omitempty"`
-	ForwardingGroups     *QosForwardingGroupsType `protobuf:"bytes,152,opt,name=forwarding_groups,json=forwardingGroups" json:"forwarding_groups,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
-	XXX_unrecognized     []byte                   `json:"-"`
-	XXX_sizecache        int32                    `json:"-"`
+	Interfaces           *QosInterfacesType        `protobuf:"bytes,151,opt,name=interfaces" json:"interfaces,omitempty"`
+	ForwardingGroups     *QosForwardingGroupsType  `protobuf:"bytes,152,opt,name=forwarding_groups,json=forwardingGroups" json:"forwarding_groups,omitempty"`
+	Classifiers          *QosClassifiersType       `protobuf:"bytes,153,opt,name=classifiers" json:"classifiers,omitempty"`
+	SchedulerPolicies    *QosSchedulerPoliciesType `protobuf:"bytes,154,opt,name=scheduler_policies,json=schedulerPolicies" json:"scheduler_policies,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
 }
 
 func (m *Qos) Reset()         { *m = Qos{} }
@@ -62,6 +64,20 @@ func (m *Qos) GetInterfaces() *QosInterfacesType {
 func (m *Qos) GetForwardingGroups() *QosForwardingGroupsType {
 	if m != nil {
 		return m.ForwardingGroups
+	}
+	return nil
+}
+
+func (m *Qos) GetClassifiers() *QosClassifiersType {
+	if m != nil {
+		return m.Classifiers
+	}
+	return nil
+}
+
+func (m *Qos) GetSchedulerPolicies() *QosSchedulerPoliciesType {
+	if m != nil {
+		return m.SchedulerPolicies
 	}
 	return nil
 }
@@ -108,6 +124,8 @@ type QosInterfacesTypeInterfaceList struct {
 	InterfaceId          *string                                         `protobuf:"bytes,51,opt,name=interface_id,json=interfaceId" json:"interface_id,omitempty"`
 	State                *QosInterfacesTypeInterfaceListStateType        `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
 	InterfaceRef         *QosInterfacesTypeInterfaceListInterfaceRefType `protobuf:"bytes,152,opt,name=interface_ref,json=interfaceRef" json:"interface_ref,omitempty"`
+	Input                *QosInterfacesTypeInterfaceListInputType        `protobuf:"bytes,153,opt,name=input" json:"input,omitempty"`
+	Output               *QosInterfacesTypeInterfaceListOutputType       `protobuf:"bytes,154,opt,name=output" json:"output,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
 	XXX_unrecognized     []byte                                          `json:"-"`
 	XXX_sizecache        int32                                           `json:"-"`
@@ -154,6 +172,20 @@ func (m *QosInterfacesTypeInterfaceList) GetState() *QosInterfacesTypeInterfaceL
 func (m *QosInterfacesTypeInterfaceList) GetInterfaceRef() *QosInterfacesTypeInterfaceListInterfaceRefType {
 	if m != nil {
 		return m.InterfaceRef
+	}
+	return nil
+}
+
+func (m *QosInterfacesTypeInterfaceList) GetInput() *QosInterfacesTypeInterfaceListInputType {
+	if m != nil {
+		return m.Input
+	}
+	return nil
+}
+
+func (m *QosInterfacesTypeInterfaceList) GetOutput() *QosInterfacesTypeInterfaceListOutputType {
+	if m != nil {
+		return m.Output
 	}
 	return nil
 }
@@ -242,6 +274,7 @@ func (m *QosInterfacesTypeInterfaceListInterfaceRefType) GetState() *QosInterfac
 
 type QosInterfacesTypeInterfaceListInterfaceRefTypeStateType struct {
 	Interface            *string  `protobuf:"bytes,51,opt,name=interface" json:"interface,omitempty"`
+	Subinterface         *uint32  `protobuf:"varint,53,opt,name=subinterface" json:"subinterface,omitempty"`
 	JnxIflsetinterface   *string  `protobuf:"bytes,52,opt,name=jnx_iflsetinterface,json=jnxIflsetinterface" json:"jnx_iflsetinterface,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -283,9 +316,474 @@ func (m *QosInterfacesTypeInterfaceListInterfaceRefTypeStateType) GetInterface()
 	return ""
 }
 
+func (m *QosInterfacesTypeInterfaceListInterfaceRefTypeStateType) GetSubinterface() uint32 {
+	if m != nil && m.Subinterface != nil {
+		return *m.Subinterface
+	}
+	return 0
+}
+
 func (m *QosInterfacesTypeInterfaceListInterfaceRefTypeStateType) GetJnxIflsetinterface() string {
 	if m != nil && m.JnxIflsetinterface != nil {
 		return *m.JnxIflsetinterface
+	}
+	return ""
+}
+
+type QosInterfacesTypeInterfaceListInputType struct {
+	Classifiers          *QosInterfacesTypeInterfaceListInputTypeClassifiersType `protobuf:"bytes,151,opt,name=classifiers" json:"classifiers,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                `json:"-"`
+	XXX_unrecognized     []byte                                                  `json:"-"`
+	XXX_sizecache        int32                                                   `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListInputType) Reset() {
+	*m = QosInterfacesTypeInterfaceListInputType{}
+}
+func (m *QosInterfacesTypeInterfaceListInputType) String() string { return proto.CompactTextString(m) }
+func (*QosInterfacesTypeInterfaceListInputType) ProtoMessage()    {}
+func (*QosInterfacesTypeInterfaceListInputType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 2}
+}
+func (m *QosInterfacesTypeInterfaceListInputType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListInputType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListInputType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListInputType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListInputType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListInputType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListInputType) GetClassifiers() *QosInterfacesTypeInterfaceListInputTypeClassifiersType {
+	if m != nil {
+		return m.Classifiers
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListInputTypeClassifiersType struct {
+	Classifier           []*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList `protobuf:"bytes,151,rep,name=classifier" json:"classifier,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                `json:"-"`
+	XXX_unrecognized     []byte                                                                  `json:"-"`
+	XXX_sizecache        int32                                                                   `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) Reset() {
+	*m = QosInterfacesTypeInterfaceListInputTypeClassifiersType{}
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListInputTypeClassifiersType) ProtoMessage() {}
+func (*QosInterfacesTypeInterfaceListInputTypeClassifiersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 2, 0}
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersType) GetClassifier() []*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList {
+	if m != nil {
+		return m.Classifier
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList struct {
+	Type                 *string                                                                        `protobuf:"bytes,51,opt,name=type" json:"type,omitempty"`
+	State                *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                       `json:"-"`
+	XXX_unrecognized     []byte                                                                         `json:"-"`
+	XXX_sizecache        int32                                                                          `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) Reset() {
+	*m = QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList{}
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) ProtoMessage() {}
+func (*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 2, 0, 0}
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList) GetState() *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType struct {
+	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	Type                 *string  `protobuf:"bytes,52,opt,name=type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) Reset() {
+	*m = QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType{}
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) ProtoMessage() {
+}
+func (*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 2, 0, 0, 0}
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+type QosInterfacesTypeInterfaceListOutputType struct {
+	Classifiers          *QosInterfacesTypeInterfaceListOutputTypeClassifiersType     `protobuf:"bytes,152,opt,name=classifiers" json:"classifiers,omitempty"`
+	SchedulerPolicy      *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType `protobuf:"bytes,151,opt,name=scheduler_policy,json=schedulerPolicy" json:"scheduler_policy,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                     `json:"-"`
+	XXX_unrecognized     []byte                                                       `json:"-"`
+	XXX_sizecache        int32                                                        `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputType) Reset() {
+	*m = QosInterfacesTypeInterfaceListOutputType{}
+}
+func (m *QosInterfacesTypeInterfaceListOutputType) String() string { return proto.CompactTextString(m) }
+func (*QosInterfacesTypeInterfaceListOutputType) ProtoMessage()    {}
+func (*QosInterfacesTypeInterfaceListOutputType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 3}
+}
+func (m *QosInterfacesTypeInterfaceListOutputType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListOutputType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListOutputType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListOutputType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListOutputType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListOutputType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListOutputType) GetClassifiers() *QosInterfacesTypeInterfaceListOutputTypeClassifiersType {
+	if m != nil {
+		return m.Classifiers
+	}
+	return nil
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputType) GetSchedulerPolicy() *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType {
+	if m != nil {
+		return m.SchedulerPolicy
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListOutputTypeClassifiersType struct {
+	Classifier           []*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList `protobuf:"bytes,151,rep,name=classifier" json:"classifier,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                 `json:"-"`
+	XXX_unrecognized     []byte                                                                   `json:"-"`
+	XXX_sizecache        int32                                                                    `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) Reset() {
+	*m = QosInterfacesTypeInterfaceListOutputTypeClassifiersType{}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListOutputTypeClassifiersType) ProtoMessage() {}
+func (*QosInterfacesTypeInterfaceListOutputTypeClassifiersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 3, 0}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersType) GetClassifier() []*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList {
+	if m != nil {
+		return m.Classifier
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList struct {
+	Type                 *string                                                                         `protobuf:"bytes,51,opt,name=type" json:"type,omitempty"`
+	State                *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                        `json:"-"`
+	XXX_unrecognized     []byte                                                                          `json:"-"`
+	XXX_sizecache        int32                                                                           `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) Reset() {
+	*m = QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList{}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) ProtoMessage() {}
+func (*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 3, 0, 0}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList) GetState() *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType struct {
+	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	Type                 *string  `protobuf:"bytes,52,opt,name=type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) Reset() {
+	*m = QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType{}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) ProtoMessage() {
+}
+func (*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 3, 0, 0, 0}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+type QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType struct {
+	State                *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                              `json:"-"`
+	XXX_unrecognized     []byte                                                                `json:"-"`
+	XXX_sizecache        int32                                                                 `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) Reset() {
+	*m = QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType{}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) ProtoMessage() {}
+func (*QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 3, 1}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType) GetState() *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType struct {
+	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) Reset() {
+	*m = QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType{}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) ProtoMessage() {}
+func (*QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 0, 0, 3, 1, 0}
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType.Unmarshal(m, b)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType.Merge(m, src)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType.Size(m)
+}
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType proto.InternalMessageInfo
+
+func (m *QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
 	}
 	return ""
 }
@@ -380,6 +878,7 @@ func (m *QosForwardingGroupsTypeForwardingGroupList) GetState() *QosForwardingGr
 
 type QosForwardingGroupsTypeForwardingGroupListStateType struct {
 	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	FabricPriority       *uint32  `protobuf:"varint,53,opt,name=fabric_priority,json=fabricPriority" json:"fabric_priority,omitempty"`
 	OutputQueue          *string  `protobuf:"bytes,52,opt,name=output_queue,json=outputQueue" json:"output_queue,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -421,11 +920,1309 @@ func (m *QosForwardingGroupsTypeForwardingGroupListStateType) GetName() string {
 	return ""
 }
 
+func (m *QosForwardingGroupsTypeForwardingGroupListStateType) GetFabricPriority() uint32 {
+	if m != nil && m.FabricPriority != nil {
+		return *m.FabricPriority
+	}
+	return 0
+}
+
 func (m *QosForwardingGroupsTypeForwardingGroupListStateType) GetOutputQueue() string {
 	if m != nil && m.OutputQueue != nil {
 		return *m.OutputQueue
 	}
 	return ""
+}
+
+type QosClassifiersType struct {
+	Classifier           []*QosClassifiersTypeClassifierList `protobuf:"bytes,151,rep,name=classifier" json:"classifier,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                            `json:"-"`
+	XXX_unrecognized     []byte                              `json:"-"`
+	XXX_sizecache        int32                               `json:"-"`
+}
+
+func (m *QosClassifiersType) Reset()         { *m = QosClassifiersType{} }
+func (m *QosClassifiersType) String() string { return proto.CompactTextString(m) }
+func (*QosClassifiersType) ProtoMessage()    {}
+func (*QosClassifiersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2}
+}
+func (m *QosClassifiersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersType.Unmarshal(m, b)
+}
+func (m *QosClassifiersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersType.Merge(m, src)
+}
+func (m *QosClassifiersType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersType.Size(m)
+}
+func (m *QosClassifiersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersType proto.InternalMessageInfo
+
+func (m *QosClassifiersType) GetClassifier() []*QosClassifiersTypeClassifierList {
+	if m != nil {
+		return m.Classifier
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierList struct {
+	Name                 *string                                    `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	State                *QosClassifiersTypeClassifierListStateType `protobuf:"bytes,152,opt,name=state" json:"state,omitempty"`
+	Terms                *QosClassifiersTypeClassifierListTermsType `protobuf:"bytes,151,opt,name=terms" json:"terms,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                   `json:"-"`
+	XXX_unrecognized     []byte                                     `json:"-"`
+	XXX_sizecache        int32                                      `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierList) Reset()         { *m = QosClassifiersTypeClassifierList{} }
+func (m *QosClassifiersTypeClassifierList) String() string { return proto.CompactTextString(m) }
+func (*QosClassifiersTypeClassifierList) ProtoMessage()    {}
+func (*QosClassifiersTypeClassifierList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0}
+}
+func (m *QosClassifiersTypeClassifierList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierList.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierList.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierList.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierList) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierList.Size(m)
+}
+func (m *QosClassifiersTypeClassifierList) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierList proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierList) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *QosClassifiersTypeClassifierList) GetState() *QosClassifiersTypeClassifierListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *QosClassifiersTypeClassifierList) GetTerms() *QosClassifiersTypeClassifierListTermsType {
+	if m != nil {
+		return m.Terms
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListStateType struct {
+	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	Type                 *string  `protobuf:"bytes,52,opt,name=type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListStateType{}
+}
+func (m *QosClassifiersTypeClassifierListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListStateType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 0}
+}
+func (m *QosClassifiersTypeClassifierListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListStateType) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *QosClassifiersTypeClassifierListStateType) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+type QosClassifiersTypeClassifierListTermsType struct {
+	Term                 []*QosClassifiersTypeClassifierListTermsTypeTermList `protobuf:"bytes,151,rep,name=term" json:"term,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                             `json:"-"`
+	XXX_unrecognized     []byte                                               `json:"-"`
+	XXX_sizecache        int32                                                `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1}
+}
+func (m *QosClassifiersTypeClassifierListTermsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsType) GetTerm() []*QosClassifiersTypeClassifierListTermsTypeTermList {
+	if m != nil {
+		return m.Term
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermList struct {
+	Id                   *string                                                          `protobuf:"bytes,51,opt,name=id" json:"id,omitempty"`
+	State                *QosClassifiersTypeClassifierListTermsTypeTermListStateType      `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	Conditions           *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType `protobuf:"bytes,152,opt,name=conditions" json:"conditions,omitempty"`
+	Actions              *QosClassifiersTypeClassifierListTermsTypeTermListActionsType    `protobuf:"bytes,153,opt,name=actions" json:"actions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                         `json:"-"`
+	XXX_unrecognized     []byte                                                           `json:"-"`
+	XXX_sizecache        int32                                                            `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermList{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermList) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermList.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermList.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermList.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermList.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermList proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return ""
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) GetState() *QosClassifiersTypeClassifierListTermsTypeTermListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) GetConditions() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType {
+	if m != nil {
+		return m.Conditions
+	}
+	return nil
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermList) GetActions() *QosClassifiersTypeClassifierListTermsTypeTermListActionsType {
+	if m != nil {
+		return m.Actions
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListStateType struct {
+	Id                   *string  `protobuf:"bytes,51,opt,name=id" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListStateType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListStateType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListStateType) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return ""
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsType struct {
+	Ipv4                 *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type `protobuf:"bytes,151,opt,name=ipv4" json:"ipv4,omitempty"`
+	Ipv6                 *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type `protobuf:"bytes,152,opt,name=ipv6" json:"ipv6,omitempty"`
+	Mpls                 *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType `protobuf:"bytes,153,opt,name=mpls" json:"mpls,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                 `json:"-"`
+	XXX_unrecognized     []byte                                                                   `json:"-"`
+	XXX_sizecache        int32                                                                    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) GetIpv4() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type {
+	if m != nil {
+		return m.Ipv4
+	}
+	return nil
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) GetIpv6() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type {
+	if m != nil {
+		return m.Ipv6
+	}
+	return nil
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsType) GetMpls() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType {
+	if m != nil {
+		return m.Mpls
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type struct {
+	State                *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                          `json:"-"`
+	XXX_unrecognized     []byte                                                                            `json:"-"`
+	XXX_sizecache        int32                                                                             `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type) GetState() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType struct {
+	Dscp                 *uint32  `protobuf:"varint,51,opt,name=dscp" json:"dscp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) ProtoMessage() {
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1, 0, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType) GetDscp() uint32 {
+	if m != nil && m.Dscp != nil {
+		return *m.Dscp
+	}
+	return 0
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type struct {
+	State                *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                          `json:"-"`
+	XXX_unrecognized     []byte                                                                            `json:"-"`
+	XXX_sizecache        int32                                                                             `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1, 1}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type) GetState() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType struct {
+	Dscp                 *uint32  `protobuf:"varint,51,opt,name=dscp" json:"dscp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) ProtoMessage() {
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1, 1, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType) GetDscp() uint32 {
+	if m != nil && m.Dscp != nil {
+		return *m.Dscp
+	}
+	return 0
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType struct {
+	State                *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                          `json:"-"`
+	XXX_unrecognized     []byte                                                                            `json:"-"`
+	XXX_sizecache        int32                                                                             `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1, 2}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType) GetState() *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType struct {
+	TrafficClass         *uint32  `protobuf:"varint,51,opt,name=traffic_class,json=trafficClass" json:"traffic_class,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) ProtoMessage() {
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 1, 2, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType) GetTrafficClass() uint32 {
+	if m != nil && m.TrafficClass != nil {
+		return *m.TrafficClass
+	}
+	return 0
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListActionsType struct {
+	State                *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType  `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	Remark               *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType `protobuf:"bytes,152,opt,name=remark" json:"remark,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                `json:"-"`
+	XXX_unrecognized     []byte                                                                  `json:"-"`
+	XXX_sizecache        int32                                                                   `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListActionsType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 2}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) GetState() *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsType) GetRemark() *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType {
+	if m != nil {
+		return m.Remark
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType struct {
+	TargetGroup          *string  `protobuf:"bytes,151,opt,name=target_group,json=targetGroup" json:"target_group,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 2, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType) GetTargetGroup() string {
+	if m != nil && m.TargetGroup != nil {
+		return *m.TargetGroup
+	}
+	return ""
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType struct {
+	State                *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                         `json:"-"`
+	XXX_unrecognized     []byte                                                                           `json:"-"`
+	XXX_sizecache        int32                                                                            `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) ProtoMessage() {}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 2, 1}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType) GetState() *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType struct {
+	SetDscp              *uint32  `protobuf:"varint,51,opt,name=set_dscp,json=setDscp" json:"set_dscp,omitempty"`
+	SetDot1P             *uint32  `protobuf:"varint,52,opt,name=set_dot1p,json=setDot1p" json:"set_dot1p,omitempty"`
+	SetMplsTc            *uint32  `protobuf:"varint,53,opt,name=set_mpls_tc,json=setMplsTc" json:"set_mpls_tc,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) Reset() {
+	*m = QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType{}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) ProtoMessage() {
+}
+func (*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 2, 0, 1, 0, 2, 1, 0}
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType.Unmarshal(m, b)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType.Merge(m, src)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType.Size(m)
+}
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType proto.InternalMessageInfo
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) GetSetDscp() uint32 {
+	if m != nil && m.SetDscp != nil {
+		return *m.SetDscp
+	}
+	return 0
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) GetSetDot1P() uint32 {
+	if m != nil && m.SetDot1P != nil {
+		return *m.SetDot1P
+	}
+	return 0
+}
+
+func (m *QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType) GetSetMplsTc() uint32 {
+	if m != nil && m.SetMplsTc != nil {
+		return *m.SetMplsTc
+	}
+	return 0
+}
+
+type QosSchedulerPoliciesType struct {
+	SchedulerPolicy      []*QosSchedulerPoliciesTypeSchedulerPolicyList `protobuf:"bytes,151,rep,name=scheduler_policy,json=schedulerPolicy" json:"scheduler_policy,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesType) Reset()         { *m = QosSchedulerPoliciesType{} }
+func (m *QosSchedulerPoliciesType) String() string { return proto.CompactTextString(m) }
+func (*QosSchedulerPoliciesType) ProtoMessage()    {}
+func (*QosSchedulerPoliciesType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3}
+}
+func (m *QosSchedulerPoliciesType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesType.Size(m)
+}
+func (m *QosSchedulerPoliciesType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesType) GetSchedulerPolicy() []*QosSchedulerPoliciesTypeSchedulerPolicyList {
+	if m != nil {
+		return m.SchedulerPolicy
+	}
+	return nil
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyList struct {
+	Name                 *string                                                    `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	State                *QosSchedulerPoliciesTypeSchedulerPolicyListStateType      `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	Schedulers           *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType `protobuf:"bytes,152,opt,name=schedulers" json:"schedulers,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                   `json:"-"`
+	XXX_unrecognized     []byte                                                     `json:"-"`
+	XXX_sizecache        int32                                                      `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyList{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyList) ProtoMessage() {}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyList.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyList.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyList.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyList.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyList proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) GetState() *QosSchedulerPoliciesTypeSchedulerPolicyListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyList) GetSchedulers() *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType {
+	if m != nil {
+		return m.Schedulers
+	}
+	return nil
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListStateType struct {
+	Name                 *string  `protobuf:"bytes,51,opt,name=name" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListStateType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListStateType) ProtoMessage() {}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 0}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListStateType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListStateType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListStateType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListStateType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListStateType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListStateType) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType struct {
+	Scheduler            []*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList `protobuf:"bytes,151,rep,name=scheduler" json:"scheduler,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                  `json:"-"`
+	XXX_unrecognized     []byte                                                                    `json:"-"`
+	XXX_sizecache        int32                                                                     `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) ProtoMessage() {}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType) GetScheduler() []*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList {
+	if m != nil {
+		return m.Scheduler
+	}
+	return nil
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList struct {
+	Sequence             *uint32                                                                                      `protobuf:"varint,51,opt,name=sequence" json:"sequence,omitempty"`
+	State                *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType             `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	Output               *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType            `protobuf:"bytes,152,opt,name=output" json:"output,omitempty"`
+	TwoRateThreeColor    *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType `protobuf:"bytes,153,opt,name=two_rate_three_color,json=twoRateThreeColor" json:"two_rate_three_color,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                     `json:"-"`
+	XXX_unrecognized     []byte                                                                                       `json:"-"`
+	XXX_sizecache        int32                                                                                        `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) ProtoMessage() {}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1, 0}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) GetSequence() uint32 {
+	if m != nil && m.Sequence != nil {
+		return *m.Sequence
+	}
+	return 0
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) GetState() *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) GetOutput() *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType {
+	if m != nil {
+		return m.Output
+	}
+	return nil
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList) GetTwoRateThreeColor() *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType {
+	if m != nil {
+		return m.TwoRateThreeColor
+	}
+	return nil
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType struct {
+	Sequence             *uint32  `protobuf:"varint,51,opt,name=sequence" json:"sequence,omitempty"`
+	Priority             *string  `protobuf:"bytes,52,opt,name=priority" json:"priority,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) ProtoMessage() {
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1, 0, 0}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) GetSequence() uint32 {
+	if m != nil && m.Sequence != nil {
+		return *m.Sequence
+	}
+	return 0
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType) GetPriority() string {
+	if m != nil && m.Priority != nil {
+		return *m.Priority
+	}
+	return ""
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType struct {
+	State                *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                   `json:"-"`
+	XXX_unrecognized     []byte                                                                                     `json:"-"`
+	XXX_sizecache        int32                                                                                      `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) ProtoMessage() {
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1, 0, 1}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType) GetState() *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType struct {
+	OutputFwdGroup       *string  `protobuf:"bytes,51,opt,name=output_fwd_group,json=outputFwdGroup" json:"output_fwd_group,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) ProtoMessage() {
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1, 0, 1, 0}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType) GetOutputFwdGroup() string {
+	if m != nil && m.OutputFwdGroup != nil {
+		return *m.OutputFwdGroup
+	}
+	return ""
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType struct {
+	State                *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType `protobuf:"bytes,151,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                                                              `json:"-"`
+	XXX_unrecognized     []byte                                                                                                `json:"-"`
+	XXX_sizecache        int32                                                                                                 `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) ProtoMessage() {
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1, 0, 2}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType) GetState() *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
+type QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType struct {
+	Cir                  *uint64  `protobuf:"varint,51,opt,name=cir" json:"cir,omitempty"`
+	CirPct               *uint32  `protobuf:"varint,52,opt,name=cir_pct,json=cirPct" json:"cir_pct,omitempty"`
+	Pir                  *uint64  `protobuf:"varint,53,opt,name=pir" json:"pir,omitempty"`
+	PirPct               *uint32  `protobuf:"varint,54,opt,name=pir_pct,json=pirPct" json:"pir_pct,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) Reset() {
+	*m = QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType{}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) ProtoMessage() {
+}
+func (*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6caf35228bc78289, []int{0, 3, 0, 1, 0, 2, 0}
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType.Unmarshal(m, b)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType.Marshal(b, m, deterministic)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType.Merge(m, src)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) XXX_Size() int {
+	return xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType.Size(m)
+}
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) XXX_DiscardUnknown() {
+	xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType proto.InternalMessageInfo
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) GetCir() uint64 {
+	if m != nil && m.Cir != nil {
+		return *m.Cir
+	}
+	return 0
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) GetCirPct() uint32 {
+	if m != nil && m.CirPct != nil {
+		return *m.CirPct
+	}
+	return 0
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) GetPir() uint64 {
+	if m != nil && m.Pir != nil {
+		return *m.Pir
+	}
+	return 0
+}
+
+func (m *QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType) GetPirPct() uint32 {
+	if m != nil && m.PirPct != nil {
+		return *m.PirPct
+	}
+	return 0
 }
 
 var E_JnprQosExt = &proto.ExtensionDesc{
@@ -444,43 +2241,142 @@ func init() {
 	proto.RegisterType((*QosInterfacesTypeInterfaceListStateType)(nil), "qos.interfaces_type.interface_list.state_type")
 	proto.RegisterType((*QosInterfacesTypeInterfaceListInterfaceRefType)(nil), "qos.interfaces_type.interface_list.interface_ref_type")
 	proto.RegisterType((*QosInterfacesTypeInterfaceListInterfaceRefTypeStateType)(nil), "qos.interfaces_type.interface_list.interface_ref_type.state_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListInputType)(nil), "qos.interfaces_type.interface_list.input_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListInputTypeClassifiersType)(nil), "qos.interfaces_type.interface_list.input_type.classifiers_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierList)(nil), "qos.interfaces_type.interface_list.input_type.classifiers_type.classifier_list")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListInputTypeClassifiersTypeClassifierListStateType)(nil), "qos.interfaces_type.interface_list.input_type.classifiers_type.classifier_list.state_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListOutputType)(nil), "qos.interfaces_type.interface_list.output_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListOutputTypeClassifiersType)(nil), "qos.interfaces_type.interface_list.output_type.classifiers_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierList)(nil), "qos.interfaces_type.interface_list.output_type.classifiers_type.classifier_list")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListOutputTypeClassifiersTypeClassifierListStateType)(nil), "qos.interfaces_type.interface_list.output_type.classifiers_type.classifier_list.state_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyType)(nil), "qos.interfaces_type.interface_list.output_type.scheduler_policy_type")
+	proto.RegisterType((*QosInterfacesTypeInterfaceListOutputTypeSchedulerPolicyTypeStateType)(nil), "qos.interfaces_type.interface_list.output_type.scheduler_policy_type.state_type")
 	proto.RegisterType((*QosForwardingGroupsType)(nil), "qos.forwarding_groups_type")
 	proto.RegisterType((*QosForwardingGroupsTypeForwardingGroupList)(nil), "qos.forwarding_groups_type.forwarding_group_list")
 	proto.RegisterType((*QosForwardingGroupsTypeForwardingGroupListStateType)(nil), "qos.forwarding_groups_type.forwarding_group_list.state_type")
+	proto.RegisterType((*QosClassifiersType)(nil), "qos.classifiers_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierList)(nil), "qos.classifiers_type.classifier_list")
+	proto.RegisterType((*QosClassifiersTypeClassifierListStateType)(nil), "qos.classifiers_type.classifier_list.state_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsType)(nil), "qos.classifiers_type.classifier_list.terms_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermList)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListStateType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.state_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4Type)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type.ipv4_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv4TypeStateType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type.ipv4_type.state_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6Type)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type.ipv6_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeIpv6TypeStateType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type.ipv6_type.state_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type.mpls_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListConditionsTypeMplsTypeStateType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.conditions_type.mpls_type.state_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListActionsType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.actions_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeStateType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.actions_type.state_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.actions_type.remark_type")
+	proto.RegisterType((*QosClassifiersTypeClassifierListTermsTypeTermListActionsTypeRemarkTypeStateType)(nil), "qos.classifiers_type.classifier_list.terms_type.term_list.actions_type.remark_type.state_type")
+	proto.RegisterType((*QosSchedulerPoliciesType)(nil), "qos.scheduler_policies_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyList)(nil), "qos.scheduler_policies_type.scheduler_policy_list")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListStateType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.state_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerList)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type.scheduler_list")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListStateType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type.scheduler_list.state_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type.scheduler_list.output_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListOutputTypeStateType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type.scheduler_list.output_type.state_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type.scheduler_list.two_rate_three_color_type")
+	proto.RegisterType((*QosSchedulerPoliciesTypeSchedulerPolicyListSchedulersTypeSchedulerListTwoRateThreeColorTypeStateType)(nil), "qos.scheduler_policies_type.scheduler_policy_list.schedulers_type.scheduler_list.two_rate_three_color_type.state_type")
 	proto.RegisterExtension(E_JnprQosExt)
 }
 
 func init() { proto.RegisterFile("cosd_oc.proto", fileDescriptor_6caf35228bc78289) }
 
 var fileDescriptor_6caf35228bc78289 = []byte{
-	// 456 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xcd, 0x6e, 0xd3, 0x40,
-	0x10, 0x96, 0x9b, 0x54, 0x6a, 0x27, 0x29, 0x2d, 0x53, 0x7e, 0xc2, 0xc2, 0xa1, 0x85, 0x4b, 0x4e,
-	0xae, 0x28, 0x3f, 0x07, 0xc4, 0xa1, 0x14, 0x55, 0x28, 0x1c, 0x90, 0xea, 0x5e, 0x90, 0x00, 0xad,
-	0xa2, 0x64, 0x5c, 0x39, 0xa4, 0xbb, 0xf6, 0xee, 0x5a, 0x75, 0xaf, 0x1c, 0x90, 0x78, 0x02, 0x78,
-	0x12, 0x1e, 0x81, 0x0b, 0x3c, 0x03, 0xcf, 0x82, 0xec, 0xc5, 0xdd, 0xf8, 0x47, 0x28, 0xf4, 0xb8,
-	0xdf, 0xcc, 0x37, 0xf3, 0xcd, 0xb7, 0x1f, 0x6c, 0x4c, 0xa4, 0x9e, 0x72, 0x39, 0xf1, 0x63, 0x25,
-	0x8d, 0x64, 0xdb, 0x86, 0xe6, 0x74, 0x46, 0x46, 0x5d, 0x70, 0x23, 0x63, 0x0b, 0xde, 0xff, 0xb2,
-	0x06, 0x9d, 0x44, 0x6a, 0x7c, 0x02, 0x10, 0x09, 0x43, 0x2a, 0x1c, 0x4f, 0x48, 0x0f, 0xbe, 0x7a,
-	0x3b, 0xde, 0xb0, 0xb7, 0x7f, 0xc3, 0x4f, 0xa4, 0xf6, 0x1d, 0xce, 0xcd, 0x45, 0x4c, 0xc1, 0x42,
-	0x23, 0x8e, 0xe0, 0x7a, 0x28, 0xd5, 0xf9, 0x58, 0x4d, 0x23, 0x71, 0xca, 0x4f, 0x95, 0x4c, 0x63,
-	0x3d, 0xf8, 0x66, 0xd9, 0x77, 0x0b, 0x76, 0xa3, 0x6c, 0x87, 0x6c, 0x39, 0xfc, 0x55, 0x01, 0xb3,
-	0xef, 0x5d, 0xd8, 0xac, 0xad, 0xc2, 0x43, 0x58, 0xbf, 0x84, 0x72, 0x51, 0x9d, 0x61, 0x6f, 0xff,
-	0x41, 0x9b, 0x28, 0xf7, 0xe6, 0xf3, 0x48, 0x9b, 0xc0, 0xd1, 0xd8, 0xef, 0x0e, 0x5c, 0xab, 0x56,
-	0x71, 0x08, 0x7d, 0x87, 0x44, 0xd3, 0xc1, 0xa3, 0x1d, 0x6f, 0xb8, 0x7e, 0xb8, 0xfa, 0xe9, 0x60,
-	0x65, 0xcd, 0x0b, 0x7a, 0x97, 0xa5, 0xd1, 0x14, 0x8f, 0x60, 0x55, 0x9b, 0xb1, 0xa1, 0xd2, 0x11,
-	0x7f, 0x89, 0xe5, 0x7e, 0xc1, 0xb0, 0x67, 0x5a, 0x36, 0xbe, 0x87, 0x0d, 0xd7, 0xa3, 0x28, 0x2c,
-	0x2d, 0x7a, 0xba, 0xcc, 0xb8, 0x0a, 0xd3, 0x8e, 0x75, 0xf2, 0x03, 0x0a, 0xd9, 0x1e, 0x80, 0x5b,
-	0x89, 0xbb, 0x6d, 0xc7, 0x55, 0xae, 0x62, 0x3f, 0x3d, 0xc0, 0xe6, 0x54, 0x7c, 0x5b, 0x3b, 0xf6,
-	0xc5, 0xd5, 0xd4, 0x35, 0xef, 0x67, 0xef, 0x2a, 0x0a, 0xef, 0x2d, 0xfe, 0xaa, 0x95, 0xe7, 0x00,
-	0xdc, 0x83, 0xed, 0x99, 0xc8, 0x78, 0x14, 0xce, 0x35, 0x19, 0xd7, 0xf7, 0xb8, 0xe8, 0xc3, 0x99,
-	0xc8, 0x46, 0xd5, 0x0a, 0xfb, 0xb1, 0x02, 0xb7, 0xda, 0x53, 0x86, 0x1f, 0x60, 0xab, 0x5e, 0x29,
-	0x63, 0xf4, 0xf0, 0x1f, 0xe9, 0x6c, 0xc0, 0x36, 0x54, 0x9b, 0xb5, 0xcc, 0xb2, 0x5f, 0x1e, 0xdc,
-	0x6c, 0x6d, 0xc5, 0x3b, 0xd0, 0x15, 0xe3, 0x33, 0xaa, 0x26, 0xab, 0x80, 0xf0, 0xa4, 0xe6, 0xf2,
-	0xf3, 0xff, 0x16, 0xd2, 0x62, 0xf0, 0xcb, 0x8a, 0xc1, 0xb8, 0xb8, 0xfd, 0xef, 0xda, 0x5d, 0xe8,
-	0xcb, 0xd4, 0xc4, 0xa9, 0xe1, 0x49, 0x4a, 0x69, 0xe9, 0x67, 0xcf, 0x62, 0xc7, 0x39, 0xf4, 0xec,
-	0x00, 0xfa, 0x33, 0x11, 0x2b, 0x9e, 0x48, 0xcd, 0x29, 0x33, 0x78, 0xdb, 0x7f, 0x9d, 0x8a, 0x28,
-	0x26, 0xf5, 0x86, 0xcc, 0xb9, 0x54, 0x1f, 0xf5, 0x09, 0x09, 0x2d, 0x95, 0x1e, 0x7c, 0xb6, 0xca,
-	0xbb, 0xb9, 0xf2, 0x00, 0x72, 0xce, 0xb1, 0xd4, 0x47, 0x99, 0xf9, 0x13, 0x00, 0x00, 0xff, 0xff,
-	0x07, 0xba, 0x14, 0x8c, 0x72, 0x04, 0x00, 0x00,
+	// 1454 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x58, 0xcd, 0x6f, 0x1b, 0x45,
+	0x14, 0xd7, 0x26, 0xce, 0x87, 0x9f, 0xe3, 0x8f, 0x4e, 0x1b, 0x9a, 0x4e, 0x2b, 0x94, 0xb6, 0x42,
+	0xe4, 0xe4, 0x36, 0xa5, 0xb5, 0x50, 0x05, 0xa2, 0xb4, 0x4d, 0x43, 0x2b, 0xa0, 0xa9, 0x9b, 0x03,
+	0x82, 0xb6, 0x2b, 0x67, 0x3d, 0x4e, 0xb7, 0x71, 0xbc, 0xeb, 0x99, 0x71, 0x3e, 0x4e, 0x95, 0x38,
+	0xf4, 0x80, 0x84, 0x38, 0xf2, 0x21, 0x71, 0x41, 0xe2, 0x84, 0xb8, 0xa1, 0xfe, 0x09, 0x5c, 0x39,
+	0x20, 0x7a, 0x01, 0x21, 0x71, 0x42, 0x82, 0x43, 0x4f, 0x3d, 0x70, 0x43, 0xf3, 0xb1, 0xbb, 0xde,
+	0xf1, 0x24, 0xb1, 0x13, 0xa7, 0xb7, 0xd9, 0x37, 0x6f, 0xde, 0xfb, 0xcd, 0xef, 0xbd, 0x37, 0xf3,
+	0x76, 0x20, 0xef, 0x05, 0xac, 0xee, 0x06, 0x5e, 0x39, 0xa4, 0x01, 0x0f, 0xf0, 0x51, 0x4e, 0x9a,
+	0x64, 0x9d, 0x70, 0xba, 0xed, 0xf2, 0x20, 0x54, 0xc2, 0x33, 0x3f, 0xcd, 0xc3, 0x68, 0x3b, 0x60,
+	0xe8, 0x12, 0x80, 0xdf, 0xe2, 0x84, 0x36, 0x6a, 0x1e, 0x61, 0x33, 0x5f, 0x3a, 0xb3, 0xce, 0x5c,
+	0xee, 0xc2, 0xb1, 0x72, 0x3b, 0x60, 0xe5, 0x44, 0xee, 0xf2, 0xed, 0x90, 0x54, 0xbb, 0x14, 0xd1,
+	0x4d, 0x38, 0xd2, 0x08, 0xe8, 0x66, 0x8d, 0xd6, 0xfd, 0xd6, 0xaa, 0xbb, 0x4a, 0x83, 0x4e, 0xc8,
+	0x66, 0xbe, 0x52, 0xab, 0x4f, 0xca, 0xd5, 0x3d, 0xd3, 0xca, 0x48, 0x29, 0x91, 0x2f, 0x4a, 0x31,
+	0x7a, 0x13, 0x72, 0x5e, 0xb3, 0xc6, 0x98, 0xdf, 0xf0, 0x09, 0x65, 0x33, 0x5f, 0x2b, 0x23, 0xd3,
+	0xd2, 0x48, 0xd7, 0x84, 0x5a, 0xde, 0xad, 0x8a, 0xde, 0x07, 0xc4, 0xbc, 0x87, 0xa4, 0xde, 0x69,
+	0x12, 0xea, 0x86, 0x41, 0xd3, 0xf7, 0x7c, 0xc2, 0x66, 0xbe, 0x51, 0x06, 0x4e, 0x49, 0x03, 0xbd,
+	0xf3, 0xca, 0xce, 0x91, 0x78, 0x62, 0x49, 0xcb, 0xf1, 0x0f, 0x45, 0x28, 0x1a, 0x5b, 0x46, 0x57,
+	0x21, 0x1b, 0x8b, 0x04, 0x39, 0xa3, 0x73, 0xb9, 0x0b, 0x67, 0x6d, 0xe4, 0x24, 0xdf, 0x6e, 0xd3,
+	0x67, 0xbc, 0x9a, 0x2c, 0xc3, 0xbf, 0x16, 0xa0, 0x90, 0x9e, 0x45, 0x73, 0x30, 0x95, 0x48, 0xfc,
+	0xfa, 0xcc, 0x1b, 0xb3, 0xce, 0x5c, 0xf6, 0xea, 0xd8, 0xa7, 0x57, 0x46, 0x26, 0x9d, 0x6a, 0x2e,
+	0x9e, 0xba, 0x59, 0x47, 0x0b, 0x30, 0xc6, 0x78, 0x8d, 0x93, 0x28, 0x32, 0xe5, 0x3e, 0x9c, 0x97,
+	0xe5, 0x0a, 0xb5, 0x4f, 0xb5, 0x1a, 0xdd, 0x83, 0x7c, 0xa2, 0x43, 0x49, 0x23, 0x0a, 0x55, 0xa5,
+	0x1f, 0x73, 0xa9, 0x95, 0xca, 0x6c, 0x02, 0xbf, 0x4a, 0x1a, 0x02, 0xa4, 0xdf, 0x0a, 0x3b, 0x3c,
+	0x8a, 0x5d, 0xb9, 0x3f, 0xab, 0x61, 0x87, 0x6b, 0x90, 0x72, 0x8c, 0xde, 0x83, 0xf1, 0xa0, 0xc3,
+	0x85, 0x1d, 0x1d, 0xc2, 0x73, 0xfd, 0xd8, 0x51, 0x4b, 0x94, 0x21, 0xbd, 0x1e, 0x9f, 0x03, 0x48,
+	0x38, 0x40, 0xa7, 0x6d, 0x6c, 0xa7, 0x68, 0xc6, 0xcf, 0x1d, 0x40, 0xbd, 0xdb, 0x44, 0x1f, 0x19,
+	0xec, 0xbf, 0xbb, 0x3f, 0xba, 0x7a, 0x03, 0x82, 0x1f, 0xa7, 0x10, 0x9e, 0xea, 0x4e, 0x33, 0x05,
+	0x2f, 0x11, 0xa0, 0x33, 0x30, 0xc5, 0x3a, 0x2b, 0x89, 0xc2, 0xa5, 0x59, 0x67, 0x2e, 0x5f, 0x4d,
+	0xc9, 0xd0, 0x39, 0x38, 0xfa, 0xa8, 0xb5, 0xe5, 0xfa, 0x8d, 0x26, 0x23, 0x3c, 0x51, 0xbd, 0x28,
+	0x6d, 0xa1, 0x47, 0xad, 0xad, 0x9b, 0xe9, 0x19, 0xfc, 0xcb, 0xa8, 0x28, 0xfc, 0x88, 0x39, 0xb4,
+	0x92, 0x2e, 0x42, 0xbd, 0xdf, 0x77, 0x06, 0x0b, 0xe4, 0xee, 0xe5, 0x8a, 0xff, 0x18, 0x81, 0x92,
+	0xa9, 0x81, 0x42, 0x80, 0x44, 0x16, 0x95, 0xd8, 0xed, 0x03, 0xfa, 0xed, 0x12, 0xa8, 0x72, 0xec,
+	0xf2, 0x81, 0x7f, 0x73, 0xa0, 0x68, 0xcc, 0xa3, 0x13, 0x90, 0x11, 0xeb, 0xd2, 0x85, 0x28, 0x45,
+	0xa8, 0x6d, 0xe4, 0xc0, 0xc7, 0x43, 0xc6, 0x66, 0x49, 0x8e, 0x8b, 0xa9, 0xe4, 0x40, 0x90, 0x69,
+	0xd5, 0xd6, 0xa3, 0xbc, 0x90, 0x63, 0x21, 0x93, 0x78, 0x55, 0x7c, 0xe5, 0x18, 0xff, 0x3b, 0x06,
+	0xb9, 0xae, 0x62, 0x40, 0x5e, 0x3a, 0xa4, 0xba, 0xe2, 0xaf, 0x0c, 0x58, 0x53, 0x7b, 0x1c, 0xc1,
+	0x6d, 0x28, 0x19, 0x47, 0xec, 0x76, 0x44, 0xd4, 0xc2, 0xa0, 0x9e, 0x4c, 0x43, 0xca, 0x5d, 0x31,
+	0x7d, 0x52, 0x6f, 0xe3, 0x3f, 0x6d, 0x69, 0xd4, 0xb6, 0xa5, 0xd1, 0xd2, 0x41, 0xf7, 0xba, 0x6b,
+	0x1e, 0x3d, 0x1b, 0x2c, 0x8f, 0xa8, 0x91, 0x47, 0x9f, 0x0c, 0x1b, 0xdc, 0xd0, 0x12, 0xe9, 0x3b,
+	0x07, 0xa6, 0xad, 0xb1, 0x40, 0xab, 0xc6, 0x1e, 0x96, 0x86, 0x12, 0x62, 0x0b, 0xf0, 0xd9, 0xbd,
+	0x80, 0xe3, 0xe7, 0x23, 0xf0, 0x8a, 0xbd, 0xc5, 0x40, 0xf7, 0xa1, 0x64, 0xce, 0x44, 0x19, 0x31,
+	0xbf, 0x4b, 0x6b, 0xd2, 0x23, 0x56, 0x21, 0x2f, 0x1a, 0x0d, 0x0b, 0x7e, 0xe1, 0xc0, 0xb4, 0x55,
+	0x55, 0x44, 0x3f, 0xc1, 0x19, 0x47, 0x5f, 0xf2, 0x7c, 0xd7, 0x60, 0xee, 0xad, 0x81, 0x81, 0x58,
+	0x58, 0x6a, 0xee, 0x19, 0xde, 0xd7, 0xa1, 0xd8, 0xa8, 0xad, 0x50, 0xdf, 0x73, 0x43, 0xea, 0x07,
+	0xd4, 0xe7, 0xdb, 0xfa, 0xf6, 0x28, 0x28, 0xf1, 0x92, 0x96, 0x8a, 0x3b, 0x52, 0xc7, 0xa9, 0xdd,
+	0x21, 0x9d, 0x28, 0x1f, 0xf4, 0x79, 0x72, 0x47, 0x88, 0xf0, 0x67, 0x47, 0x2c, 0x75, 0x77, 0xc3,
+	0x56, 0x77, 0xaf, 0x59, 0x7b, 0xb7, 0x5d, 0x8b, 0xe9, 0xc7, 0x92, 0xb5, 0x98, 0x76, 0xa2, 0x73,
+	0x31, 0xa2, 0x53, 0x9f, 0x6a, 0xe7, 0xfb, 0xf2, 0x68, 0x69, 0x8c, 0x16, 0x61, 0x8c, 0x13, 0xba,
+	0x1e, 0xdf, 0x78, 0x7d, 0x1a, 0x92, 0x6b, 0xb4, 0x21, 0x39, 0xde, 0x67, 0xa9, 0x3d, 0x2d, 0x00,
+	0x24, 0xb6, 0xd0, 0x6d, 0xc8, 0x88, 0xaf, 0x88, 0xc7, 0xcb, 0x83, 0x82, 0x91, 0x43, 0x45, 0xae,
+	0x34, 0x84, 0x9f, 0xe5, 0x21, 0x1b, 0xcb, 0xd0, 0x34, 0x8c, 0x98, 0xcd, 0xe6, 0x88, 0x5f, 0x47,
+	0xf7, 0x8c, 0xdc, 0x5c, 0xd8, 0xbf, 0x5b, 0x0b, 0xc3, 0x6b, 0x00, 0x5e, 0xd0, 0xaa, 0xfb, 0xdc,
+	0x0f, 0x5a, 0xf1, 0x2d, 0x74, 0xeb, 0x00, 0x2e, 0x12, 0x6b, 0xfa, 0xb7, 0x24, 0x11, 0xa0, 0x15,
+	0x98, 0xa8, 0x79, 0xca, 0x93, 0xee, 0x45, 0x17, 0x0f, 0xe0, 0x49, 0x9b, 0x52, 0x6e, 0x22, 0xc3,
+	0xf8, 0x54, 0x2a, 0xd2, 0x85, 0x84, 0x53, 0x41, 0x26, 0xfe, 0x7d, 0x1c, 0x8a, 0x06, 0x42, 0xe4,
+	0x43, 0xc6, 0x0f, 0x37, 0x2e, 0x46, 0xfc, 0x2e, 0x0f, 0x6f, 0xf3, 0x65, 0x61, 0x57, 0xe1, 0x93,
+	0x2e, 0xb4, 0xab, 0x4a, 0xc4, 0xf3, 0x90, 0x5d, 0x55, 0x12, 0x57, 0x15, 0xe1, 0x6a, 0x3d, 0x6c,
+	0xc6, 0x44, 0x0f, 0xd3, 0x95, 0xb0, 0xab, 0x5d, 0x89, 0x21, 0xfe, 0xde, 0x81, 0x6c, 0xbc, 0x53,
+	0xb4, 0x61, 0xe4, 0xab, 0x7b, 0x18, 0x7c, 0xf6, 0x73, 0x29, 0xd5, 0x99, 0x17, 0xca, 0xd0, 0xe7,
+	0xab, 0x72, 0x1c, 0xe1, 0xac, 0xbc, 0x14, 0x9c, 0x95, 0xfd, 0xe3, 0x7c, 0xea, 0x40, 0x36, 0xe6,
+	0xf8, 0x50, 0x71, 0xc6, 0x5e, 0x2c, 0x38, 0xe7, 0x53, 0x38, 0xcf, 0x42, 0x9e, 0xd3, 0x5a, 0xa3,
+	0xe1, 0x7b, 0xae, 0xf4, 0xa4, 0x01, 0x4f, 0x69, 0xe1, 0x35, 0x21, 0xc3, 0x4f, 0x32, 0x30, 0xd5,
+	0x5d, 0x95, 0xc8, 0x37, 0xb0, 0x57, 0x87, 0x54, 0xee, 0x96, 0x83, 0xac, 0x09, 0xe3, 0x94, 0xac,
+	0xd7, 0xe8, 0x5a, 0x54, 0x5c, 0x77, 0x87, 0xe5, 0x4b, 0x99, 0xd5, 0xbf, 0xb0, 0xea, 0x03, 0x9f,
+	0x4f, 0x91, 0x73, 0x06, 0xa6, 0x78, 0x8d, 0xae, 0x12, 0x9e, 0xb4, 0x33, 0xf2, 0x7e, 0x56, 0x42,
+	0xd5, 0x97, 0xfc, 0xe3, 0x40, 0xae, 0xcb, 0x12, 0xea, 0x18, 0xd4, 0x3c, 0x38, 0x04, 0xb8, 0x96,
+	0xa8, 0xd6, 0x53, 0xc0, 0x4f, 0xc0, 0x24, 0x23, 0xdc, 0xed, 0xca, 0xc0, 0x09, 0x46, 0xf8, 0x75,
+	0xe6, 0x85, 0xe8, 0x24, 0x64, 0xe5, 0x54, 0xc0, 0xe7, 0x43, 0x79, 0x29, 0xe6, 0xab, 0x42, 0xf7,
+	0xba, 0xf8, 0x46, 0xaf, 0x42, 0x4e, 0x4c, 0xaa, 0xf4, 0xf1, 0x74, 0xd3, 0x22, 0xf4, 0x3f, 0x08,
+	0x9b, 0x6c, 0xd9, 0xc3, 0x2f, 0x72, 0x70, 0x7c, 0x87, 0xb7, 0x1d, 0xf4, 0xc0, 0xfe, 0x4f, 0x22,
+	0x6e, 0xd4, 0x0b, 0xbb, 0x3d, 0x0a, 0xf5, 0x76, 0xa7, 0xaa, 0x01, 0x34, 0x7f, 0x40, 0xfe, 0x03,
+	0x4b, 0x7f, 0xbc, 0x57, 0xc7, 0xb2, 0x6c, 0x44, 0xe3, 0xed, 0xc1, 0x91, 0x58, 0x72, 0xd2, 0x03,
+	0x88, 0x55, 0xe3, 0xcb, 0xf5, 0xea, 0x7e, 0x4c, 0xc7, 0x56, 0xf4, 0xa5, 0x9a, 0x08, 0xfa, 0x68,
+	0xc6, 0xff, 0x9e, 0x84, 0xa2, 0x61, 0x01, 0x85, 0x90, 0x8d, 0x45, 0x11, 0xfd, 0x77, 0x0e, 0x8e,
+	0xac, 0x4b, 0x4b, 0x3d, 0xb4, 0xc5, 0xdf, 0xf8, 0xaf, 0x09, 0x28, 0xa4, 0x67, 0xd1, 0x69, 0x91,
+	0x7e, 0xed, 0x0e, 0x69, 0xe9, 0x77, 0x95, 0x7c, 0x14, 0x94, 0x58, 0x8c, 0x98, 0x11, 0x98, 0x7b,
+	0x43, 0xc7, 0x68, 0x89, 0xdb, 0x46, 0xfc, 0xd4, 0xa5, 0x63, 0x76, 0x7f, 0xf8, 0x5e, 0x2d, 0x0f,
+	0x63, 0xe8, 0x5b, 0x07, 0x8e, 0xf1, 0xcd, 0xc0, 0xa5, 0x12, 0xd0, 0x43, 0x4a, 0x88, 0xeb, 0x05,
+	0xcd, 0x80, 0x46, 0x97, 0xf8, 0xda, 0xf0, 0x61, 0xd8, 0xdc, 0xe9, 0x37, 0x58, 0xbe, 0x19, 0x54,
+	0x6b, 0x9c, 0x2c, 0x8b, 0x89, 0x6b, 0x42, 0x8e, 0xaf, 0xa7, 0x52, 0x0d, 0x9b, 0xd1, 0xeb, 0x0a,
+	0x1b, 0x86, 0xc9, 0xf8, 0x97, 0x46, 0x75, 0xd4, 0xf1, 0x37, 0xfe, 0xd9, 0x49, 0xbf, 0x84, 0x3c,
+	0x36, 0x42, 0xfc, 0xf0, 0x50, 0xc9, 0xb6, 0x9c, 0x89, 0x95, 0xd4, 0xb6, 0xe6, 0xa0, 0xa4, 0xd5,
+	0x1b, 0x9b, 0x75, 0x7d, 0xa0, 0xab, 0x6a, 0x2a, 0x28, 0xf9, 0x8d, 0xcd, 0xba, 0x3a, 0xd2, 0xbf,
+	0x18, 0x81, 0x13, 0x3b, 0xf2, 0x87, 0x3e, 0x77, 0x8c, 0x7d, 0x6d, 0xbc, 0xc4, 0xe8, 0x59, 0x76,
+	0xb9, 0x92, 0xda, 0x65, 0x09, 0x46, 0x3d, 0x9f, 0xca, 0x8d, 0x65, 0xaa, 0x62, 0x88, 0x8e, 0xc3,
+	0x84, 0xe7, 0x53, 0x37, 0xf4, 0xb8, 0x3e, 0xee, 0xc7, 0x3d, 0x9f, 0x2e, 0x79, 0x5c, 0xa8, 0x86,
+	0x3e, 0x95, 0x87, 0x7c, 0xa6, 0x2a, 0x86, 0x42, 0x35, 0xd4, 0xaa, 0x15, 0xa5, 0x1a, 0x4a, 0xd5,
+	0xcb, 0x57, 0x60, 0xea, 0x51, 0x2b, 0xa4, 0x6e, 0x3b, 0x60, 0x2e, 0xd9, 0xe2, 0xe8, 0x78, 0xf9,
+	0x56, 0xa7, 0xe5, 0x87, 0x84, 0x7e, 0x48, 0xf8, 0x66, 0x40, 0xd7, 0xd8, 0x5d, 0xd2, 0x62, 0x01,
+	0x65, 0x33, 0x4f, 0x14, 0x25, 0x19, 0x41, 0x49, 0x15, 0xc4, 0x9a, 0x3b, 0x01, 0x5b, 0xd8, 0xe2,
+	0xff, 0x07, 0x00, 0x00, 0xff, 0xff, 0xcc, 0xc5, 0xa7, 0xfc, 0x1d, 0x19, 0x00, 0x00,
 }
