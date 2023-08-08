@@ -1,3 +1,12 @@
+v0.24.0
+=======
+
+Release date: 2023-08-08
+
+Adds two new, somewhat experimental modules: an SNMP trap sender and
+rabbitmq sender and receiver. Both are expected to get some changes after
+we get them tested, but of course any feedback is welcome.
+
 v0.23.0
 =======
 
