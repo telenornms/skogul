@@ -65,5 +65,4 @@ func init() {
 		Alloc: func() interface{} { return &AVRO{} },
 		Help:  "Encodes the avro format.",
 	})
-
 }
