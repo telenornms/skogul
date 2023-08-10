@@ -16,60 +16,41 @@ import (
 
 func TestSnmpSenderTest(t *testing.T) {
 	t.Skip()
-	c, _ := loadJsonFile(t, "ble ble")
+	c, _ := loadJsonFile(t, "")
 
 	sconf := fmt.Sprintln(`
-{
-  "receivers": {
-    "http": {
-      "type": "http",
-      "address": "localhost:1337",
-      "handlers": {
-				"/": "h"
+	{
+		"receivers": {
+			"http": {
+				"type": "http",
+				"address": ":11111",
+				"handlers": {
+					"/": "h"
+				}
 			}
-    }
-  },
-	"transformers": {
-		"flatten_data": {
-			"type": "data",
-      "flattenSeparator": "drop",
-      "flatten": [
-        [
-          "kek"
-        ]
-      ]
 		},
-    "remove_data": {
-      "type": "data",
-      "remove": [
-        "kek"
-      ]
-    }
-  },
-  "handlers": {
-    "h": {
-      "parser": "skogul",
-      "transformers": [
-        "now",
-				"flatten_data",
-				"remove_data"
-      ],
-      "sender": "snmp"
-    }
-  },
-  "senders": {
-    "snmp": {
-      "type": "snmp",
-			"port": 7331,
-			"community": "xxx",
-			"version": "2c",
-			"target": "localhost",
-			"oidmap": {
-				"kek": "1.3.3.7",
+		"transformers": {},
+		"handlers": {
+			"h": {
+				"parser": "skogul",
+				"transformers": [
+					"now"
+				],
+				"sender": "print"
 			}
-    }
-  }
-}`)
+		},
+		"senders": {
+			"snmp": {
+				"type": "snmp",
+				"port": 1337,
+				"community": "public",
+				"version": "2c",
+				"target": "localhost",
+				"oidmap": {}
+			}
+		}
+	}
+	`)
 
 	conf, err := config.Bytes([]byte(sconf))
 
@@ -91,7 +72,7 @@ func TestSnmpSenderTest(t *testing.T) {
 	}
 
 	go httpRcv.Start()
-	time.Sleep(time.Duration(20 * time.Millisecond))
+	time.Sleep(time.Duration(5 * time.Second))
 
 	err = snmpSender.Send(c)
 

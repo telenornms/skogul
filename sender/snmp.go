@@ -22,6 +22,9 @@ type SNMP struct {
 	g         *gosnmp.GoSNMP
 }
 
+/*
+ * SNMP trap sender
+ */
 func (x *SNMP) init() {
 	var version gosnmp.SnmpVersion
 	if x.Version == "2c" {
@@ -60,52 +63,56 @@ func (x *SNMP) Send(c *skogul.Container) error {
 		return x.err
 	}
 
-	pdutypes := []gosnmp.SnmpPDU{}
-
-	for _, m := range c.Metrics {
-		for j, i := range m.Data {
-			var pdutype gosnmp.SnmpPDU
-
-			pduName := fmt.Sprintf("%s", x.Oidmap[j])
-
-			switch reflect.TypeOf(i).Kind() {
-			case reflect.String:
-				pdutype = gosnmp.SnmpPDU{
-					Value: i,
-					Name:  pduName,
-					Type:  gosnmp.OctetString,
-				}
-			case reflect.Bool:
-				pdutype = gosnmp.SnmpPDU{
-					Value: i,
-					Name:  pduName,
-					Type:  gosnmp.Boolean,
-				}
-			case reflect.Int:
-				pdutype = gosnmp.SnmpPDU{
-					Value: i,
-					Name:  pduName,
-					Type:  gosnmp.Integer,
-				}
-			default:
-			}
-			pdutypes = append(pdutypes, pdutype)
-
-			trap := gosnmp.SnmpTrap{}
-			trap.Variables = pdutypes
-			trap.IsInform = false
-			trap.Enterprise = "no"
-			trap.AgentAddress = "localhost"
-			trap.GenericTrap = 1
-			trap.SpecificTrap = 1
-			_, err := x.g.SendTrap(trap)
-
-			if err != nil {
-				x.err = err
-			}
-		}
-
+	pdutypes := []gosnmp.SnmpPDU{
+		{
+			Value: ".1.3.6.1.4.1.12748.2023.0.888",
+			Name:  ".1.3.6.1.6.3.1.1.4.1.0",
+			Type:  gosnmp.ObjectIdentifier,
+		},
 	}
 
-	return nil
+	m := c.Metrics[0]
+
+	for j, i := range m.Data {
+		var pdutype gosnmp.SnmpPDU
+
+		pduName := fmt.Sprintf("%s", x.Oidmap[j])
+
+		switch reflect.TypeOf(i).Kind() {
+		case reflect.String:
+			pdutype = gosnmp.SnmpPDU{
+				Value: i,
+				Name:  pduName,
+				Type:  gosnmp.OctetString,
+			}
+		case reflect.Bool:
+			pdutype = gosnmp.SnmpPDU{
+				Value: i,
+				Name:  pduName,
+				Type:  gosnmp.Boolean,
+			}
+		case reflect.Float64:
+			k := int(i.(float64))
+			pdutype = gosnmp.SnmpPDU{
+				Value: k,
+				Name:  pduName,
+				Type:  gosnmp.Integer,
+			}
+		default:
+		}
+		pdutypes = append(pdutypes, pdutype)
+	}
+
+	trap := gosnmp.SnmpTrap{}
+	trap.Variables = pdutypes
+	trap.IsInform = false
+	trap.Enterprise = "no"
+	trap.AgentAddress = "localhost"
+	_, err := x.g.SendTrap(trap)
+
+	if err != nil {
+		x.err = err
+	}
+
+	return x.err
 }
