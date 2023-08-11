@@ -115,4 +115,11 @@ func init() {
 		Help:     "Parse a prometheus formatted document into a skogul container, one metric per line.",
 		AutoMake: true,
 	})
+	Auto.Add(skogul.Module{
+		Name:     "blob",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &Blob{} },
+		Help:     "Store unparsed data as a byte string in a Skogul metric. Can be used to parse arbitrary data from A to B without implementing support for it. See the blob encoder for the oposite end.",
+		AutoMake: true,
+	})
 }

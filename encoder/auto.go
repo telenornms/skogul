@@ -61,6 +61,12 @@ func init() {
 		AutoMake: true,
 	})
 	Auto.Add(skogul.Module{
+		Name:     "blob",
+		Alloc:    func() interface{} { return &Blob{} },
+		Help:     "Use data[\"data\"] as the raw message, unaltered. Optionally with a delimiter between metrics. Useful for transparently moving data in conjunction with the blob parser.",
+		AutoMake: true,
+	})
+	Auto.Add(skogul.Module{
 		Name:  "avro",
 		Alloc: func() interface{} { return &AVRO{} },
 		Help:  "Encodes the avro format.",
