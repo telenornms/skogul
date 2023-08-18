@@ -187,4 +187,9 @@ func init() {
 		Alloc: func() interface{} { return &SNMP{} },
 		Help:  "Encodes and sends an snmp trap. This is an experimental feature, please use with caution.",
 	})
+	Auto.Add(skogul.Module{
+		Name:  "tcp",
+		Alloc: func() interface{} { return &TCP{} },
+		Help:  "Send messages over a TCP connection.",
+	})
 }

@@ -1,0 +1,39 @@
+{
+  "receivers": {
+    "api": {
+      "type": "http",
+      "address": ":8080",
+      "handlers": { "/": "myhandler" }
+    },
+    "udp": {
+      "type": "udp",
+      "address": ":1234",
+      "handler": "myhandler"
+    }
+  },
+  "handlers": {
+    "myhandler": {
+      "parser": "blob",
+      "transformers": ["now"],
+      "sender": "print"
+    }
+  },
+  "encoders": {
+	  "blob": {
+		  "type": "blob",
+		  "delimiter": "8J+QtAo="
+	  }
+  },
+  "senders": {
+	  "print": {
+		  "type": "tcp",
+		  "encoder": "blob",
+		  "dialtimeout": "1s",
+		  "maxretries": -1,
+		  "WriteTimeout": "1s",
+		  "address": "[::1]:1337",
+		  "delimiter": "8J+QtAo=",
+		  "threads": 1
+	  }
+  }
+}
