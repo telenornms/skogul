@@ -1,3 +1,38 @@
+v0.25.0
+=======
+
+Release date: 2023-08-21
+
+Skogul, now with more blobs.
+
+The blob encoder and "parser" introduces a way of shuffeling arbitrary data
+through Skogul without actually parsing it. By using the blob "parser",
+Skogul will simply add the input data to a generic "data" key as a byte
+array. This can then be forwarded and handled with any regular Skogul
+mechanism. The regular JSON encoding will actually base64-encode byte
+arrays, so you can forward it just fine like that.
+
+To unpack the data, you can use the blob encoder, which should return the
+data to the original unparsed state. Since you may have introduced a batch
+sender and put multiple metrics into a container, the blob encoder has an
+optional delimiter which will be injected in between metrics.
+
+The TCP sender expands upon the net-sender. Technically, the net-sender can
+do TCP just fine, but it is extremely inefficient at scale, because it will
+open a new TCP connection for each container sent, instead of re-using it.
+The TCP sender tries to address this and has been tested. It is still not
+perfect in error-handling, so it should not be used if you need a guarantee
+that messages are delivered, but it is actually reasonably performant.
+
+Putting this together you can receive syslog messages on a UDP port and
+forward it with the TCP sender without either side knowing there was
+something like Skogul in between, and thus making sure rsyslogd doesn't get
+backed up and blocks due to a slow receiving end and full buffers. NOT THAT
+THAT EVER HAPPENS.
+
+docs/examples/misc/tcp.json includes an example of two receivers using the
+same handler, the blob encoder and tcp sender.
+
 v0.24.0
 =======
 
