@@ -11,29 +11,38 @@ type Ban struct {
 }
 
 func (b *Ban) Transform(c *skogul.Container) error {
+	tmp := []*skogul.Metric{}
 	for pathKey, pathValue := range b.LookupData {
-		for metricKey, mi := range c.Metrics {
+		for _, mi := range c.Metrics {
 			var ptr interface{}
 
 			ptr, _ = jsonptr.Get(mi.Data, pathKey)
 
 			if ptr == pathValue {
-				c.Metrics = append(c.Metrics[:metricKey], c.Metrics[metricKey+1:]...)
+				continue
 			}
+			tmp = append(tmp, mi)
 		}
-	}
+	}	
 
+	c.Metrics = tmp
+
+	tmp = []*skogul.Metric{}
 	for pathKey, pathValue := range b.LookupMetadata {
-		for metricKey, mi := range c.Metrics {
+		for _, mi := range c.Metrics {
 			var ptr interface{}
 
 			ptr, _ = jsonptr.Get(mi.Metadata, pathKey)
 
 			if ptr == pathValue {
-				c.Metrics = append(c.Metrics[:metricKey], c.Metrics[metricKey+1:]...)
+				continue
 			}
+			tmp = append(tmp, mi)
 		}
 	}
 
+	c.Metrics = tmp
+
 	return nil
 }
+
