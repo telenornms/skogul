@@ -38,7 +38,7 @@ func TestSplit(t *testing.T) {
 		"metrics": [
 		{
 			"data": {
-				"data": [
+				"data1": [
 				{
 					"splitField": "key1",
 					"data": "yes"
@@ -49,7 +49,6 @@ func TestSplit(t *testing.T) {
 				}
 				]
 			}
-
 		},
 		{
 			"data": {
@@ -58,7 +57,7 @@ func TestSplit(t *testing.T) {
 		},
 		{
 			"data": {
-				"data": [
+				"data1": [
 				{
 					"splitField": "key3",
 					"data": "2yes"
@@ -78,7 +77,7 @@ func TestSplit(t *testing.T) {
 		return
 	}
 
-	split_path := "data"
+	split_path := ""
 	metadata := transformer.Split{
 		Field:        []string{split_path},
 		MetadataName: "arrayidx",

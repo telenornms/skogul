@@ -31,9 +31,41 @@ import (
 
 // Split is the configuration for the split transformer
 type Split struct {
-	Field        []string `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element)."`
-	MetadataName string   `doc:"If specified, the index of the array being split will be stored as the named metadata field. E.g.: The first element will have a metadata field matching MetadataName with a value of 0, the second will have a 1, and so on. If left blank, the array index will be discarded."`
-	Fail         bool     `doc:"Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working."`
+	Field []string `doc:"Split into multiple metrics based on this field (each field denotes the path to a nested object element). In case the first element is set to \"\" the default behaviour is to split all the metrics based on their parent key. Keys consisting of empty strings are not splitted"
+
+	Input 
+	{
+		"metrics": [
+		{
+			"data": {
+				"data1": [
+				{
+					"splitField": "key1",
+					"data": "yes"
+				}
+				]
+			}
+		}
+		]
+	}
+
+	The output
+	{
+		"metrics": [
+		{
+			"data": {
+				{
+					"splitField": "key1",
+					"data": "yes"
+				}
+			}
+		}
+		]
+	}
+
+	`
+	MetadataName string `doc:"If specified, the index of the array being split will be stored as the named metadata field. E.g.: The first element will have a metadata field matching MetadataName with a value of 0, the second will have a 1, and so on. If left blank, the array index will be discarded."`
+	Fail         bool   `doc:"Fail the transformer entirely if split is unsuccsessful on a metric container. This will prevent successive transformers from working."`
 }
 
 type DictSplit struct {
@@ -59,13 +91,30 @@ func (split *Split) Transform(c *skogul.Container) error {
 	return nil
 }
 
+func (split *Split) getMetricKeys(metric *skogul.Metric) []string {
+	keys := []string{}
+	for k, _ := range metric.Data {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
 // splitMetricsByObjectKey splits the metrics into multiple metrics based on a key in a list of sub-metrics
 func (split *Split) splitMetricsByObjectKey(metrics *[]*skogul.Metric) ([]*skogul.Metric, error) {
 	origMetrics := *metrics
 	var newMetrics []*skogul.Metric
 
 	for mi := range origMetrics {
-		splitObj, err := skogul.ExtractNestedObject(origMetrics[mi].Data, split.Field)
+		var splitObj map[string]interface{}
+		var err error
+
+		if split.Field[0] == "" && len(split.Field) == 1 {
+			metricKeys := split.getMetricKeys(origMetrics[mi])
+			split.Field = metricKeys
+			splitObj, err = skogul.ExtractNestedObject(origMetrics[mi].Data, split.Field)
+		} else {
+			splitObj, err = skogul.ExtractNestedObject(origMetrics[mi].Data, split.Field)
+		}
 
 		if err != nil {
 			if !split.Fail {
