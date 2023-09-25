@@ -164,7 +164,7 @@ func TestSplit_dict(t *testing.T) {
 	}
 
 	if len(c.Metrics) != 2 {
-		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 5, len(c.Metrics))
+		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 2, len(c.Metrics))
 		return
 	}
 
@@ -199,4 +199,77 @@ func TestSplit_dict(t *testing.T) {
 		t.Errorf(`Expected Metrics Metadata key 'keyname' to have value of 'barkey', but got '%s'`, c.Metrics[test2].Metadata["keyname"])
 	}
 
+}
+
+func TestTopDict(t *testing.T) {
+	var c skogul.Container
+	testData := `
+	{
+		"metrics": [
+		{
+			"data": {
+				"eth0": {
+					"in": 13,
+					"out": 15
+				},
+				"eth1": {
+					"in": 124,
+					"out": 111
+				}
+			}
+
+		}
+		]
+	}
+	`
+	if err := json.Unmarshal([]byte(testData), &c); err != nil {
+		t.Error(err)
+		return
+	}
+
+	metadata := transformer.DictSplit{
+		Field:        []string{},
+		MetadataName: "name",
+	}
+
+	if err := metadata.Transform(&c); err != nil {
+		t.Error(err)
+		return
+	}
+
+	if len(c.Metrics) != 2 {
+		t.Errorf(`Expected c.Metrics to be of len %d but got %d`, 5, len(c.Metrics))
+		return
+	}
+
+	// Verify that the data is not the same in the two objects as it might differ
+	// Since dictionaries/hashes are unsorted, there's no guarantee
+	// that c.Metrics[0] is the first data listed in the data set
+	// above, though it usually has been for now. Thus we try to detect
+	// which test is which. This sort of makes us verify parts of the
+	// test twice, though.
+	test1 := 0
+	test2 := 1
+	if c.Metrics[0].Metadata["name"] == "eth0" && c.Metrics[1].Metadata["name"] == "eth1" {
+		test1 = 0
+		test2 = 1
+	} else if c.Metrics[1].Metadata["name"] == "eth0" && c.Metrics[0].Metadata["name"] == "eth1" {
+		test1 = 1
+		test2 = 0
+	} else {
+		t.Errorf(`Expected Metrics not present for dict split?`)
+	}
+	// Verify that the data is not the same in the two objects as it might differ
+	if c.Metrics[test1].Metadata["name"] != "eth0" {
+		t.Errorf(`Expected Metrics[test1].name == eth0, got %v`, c.Metrics[test1].Metadata["name"])
+	}
+	if c.Metrics[test1].Data["in"] != 13.0 {
+		t.Errorf(`Expected Metrics Data to contain key of val 13 but got '%#v'`, c.Metrics[test1].Data["in"])
+	}
+	if c.Metrics[test2].Metadata["name"] != "eth1" {
+		t.Errorf(`Expected Metrics[test1].name == eth1, got %v`, c.Metrics[test2].Metadata["name"])
+	}
+	if c.Metrics[test2].Data["in"] != 124.0 {
+		t.Errorf(`Expected Metrics Data to contain key of val 124 but got '%#v'`, c.Metrics[test2].Data["in"])
+	}
 }
