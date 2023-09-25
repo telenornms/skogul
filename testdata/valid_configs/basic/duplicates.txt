@@ -1,0 +1,4 @@
+Correct behavior is to overwrite modules with the same name, but accept it,
+while not requiring all modules to be named. E.g.: You can have multiple
+"senders" sections, and if the same instance of _a_ sender is defined
+multiple times, the last one will "win". This is by design.

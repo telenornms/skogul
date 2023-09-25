@@ -1,0 +1,15 @@
+{
+	"senders": {
+		"print": {
+			"type": "debug"
+		}
+	},
+	"senders": {
+		"print": {
+			"type": "null"
+		},
+		"print2": {
+			"type": "debug"
+		}
+	}
+}
