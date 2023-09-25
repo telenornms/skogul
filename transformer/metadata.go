@@ -110,16 +110,13 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 			}
 		}
 		for _, rename := range meta.Rename {
-			fmt.Printf("hei\n")
 			if c.Metrics[mi].Metadata == nil {
 				continue
 			}
-			fmt.Printf("hei2\n")
 			if _, ok := c.Metrics[mi].Metadata[rename.Source]; !ok {
 				fmt.Printf("src: %v\n", c.Metrics[mi].Metadata)
 				continue
 			}
-			fmt.Printf("hei3\n")
 			c.Metrics[mi].Metadata[rename.Destination] = c.Metrics[mi].Metadata[rename.Source]
 			if !rename.Keep {
 				delete(c.Metrics[mi].Metadata, rename.Source)
