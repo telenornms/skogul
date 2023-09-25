@@ -1,3 +1,75 @@
+v0.25.1
+=======
+
+Release date: 2023-09-25
+
+Allow Dictsplit to split on the top-object.
+
+Previously Skogul could split::
+
+	{
+		"metrics": [
+			{
+				"metadata": { },
+				"timestamp": { ... },
+				"data": {
+					"foo": {
+						"eth0": { "key": 123 },
+						"eth1": { "key": 567 }
+					}
+				}
+			}
+		]
+	}
+
+Into::
+
+	{
+		"metrics": [
+			{
+				"timestamp": { ... },
+				"metadata": { "name": "eth0" },
+				"data": { "key": 123 }
+			},
+			{
+				"timestamp": { ... },
+				"metadata": { "name": "eth1" },
+				"data": { "key": 567 }
+			}
+		]
+	}
+
+but always needed a top key bellow "data" to refer to. Now you can also
+split the following original::
+
+	{
+		"metrics": [
+			{
+				"metadata": { },
+				"timestamp": { ... },
+				"data": {
+					"eth0": { "key": 123 },
+					"eth1": { "key": 567 }
+				}
+			}
+		]
+	}
+
+To do this, simply omit the Field option (or leave it as an empty array).
+
+E.g.::
+
+	"transformers": {
+		"type": "dictsplit",
+		"metadataname": "name"
+	}
+
+As before, "Metadataname" will be the metadata key where the dictionary
+index is stored.
+
+Also, some printf-debugging was accidentally included in v0.25.0, this is
+removed.
+
 v0.25.0
 =======
 
