@@ -51,7 +51,7 @@ func (x *SNMP) init() {
 	}
 
 	x.g.Target = x.Target
-	x.g.Connect()
+	x.err = x.g.Connect()
 }
 
 func (x *SNMP) Send(c *skogul.Container) error {
@@ -110,9 +110,5 @@ func (x *SNMP) Send(c *skogul.Container) error {
 	trap.AgentAddress = "localhost"
 	_, err := x.g.SendTrap(trap)
 
-	if err != nil {
-		x.err = err
-	}
-
-	return x.err
+	return err
 }
