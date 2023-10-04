@@ -2,7 +2,6 @@ package sender
 
 import (
 	"fmt"
-	"reflect"
 	"sync"
 	"time"
 
@@ -59,10 +58,6 @@ func (x *SNMP) Send(c *skogul.Container) error {
 		x.init()
 	})
 
-	if x.err != nil {
-		return x.err
-	}
-
 	pdutypes := []gosnmp.SnmpPDU{
 		{
 			Value: ".1.3.6.1.4.1.12748.2023.0.888",
@@ -78,20 +73,20 @@ func (x *SNMP) Send(c *skogul.Container) error {
 
 		pduName := fmt.Sprintf("%s", x.Oidmap[j])
 
-		switch reflect.TypeOf(i).Kind() {
-		case reflect.String:
+		switch i.(type) {
+		case string:
 			pdutype = gosnmp.SnmpPDU{
 				Value: i,
 				Name:  pduName,
 				Type:  gosnmp.OctetString,
 			}
-		case reflect.Bool:
+		case bool:
 			pdutype = gosnmp.SnmpPDU{
 				Value: i,
 				Name:  pduName,
 				Type:  gosnmp.Boolean,
 			}
-		case reflect.Float64:
+		case float64:
 			k := int(i.(float64))
 			pdutype = gosnmp.SnmpPDU{
 				Value: k,
