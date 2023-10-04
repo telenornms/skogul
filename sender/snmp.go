@@ -2,7 +2,6 @@ package sender
 
 import (
 	"fmt"
-	"log"
 	"sync"
 	"time"
 
