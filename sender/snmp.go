@@ -10,16 +10,17 @@ import (
 )
 
 type SNMP struct {
-	Port      uint16                 `doc:"Snmp port"`
-	Community string                 `doc:"Snmp communit field"`
-	Version   string                 `doc:"Snmp version possible values: 2c, 3"`
-	Target    string                 `doc:"Snmp target"`
-	Oidmap    map[string]interface{} `doc:"Snmp oid to json field mapping"`
-	Timeout   uint                   `doc:"Snmp timeout, default 5 seconds"`
-	r         sync.Once
-	err       error
-	g         *gosnmp.GoSNMP
-	PduTypes  []gosnmp.SnmpPDU `doc:"This list is prepended to the snmp trap values"`
+	Port         uint16                 `doc:"Snmp port"`
+	Community    string                 `doc:"Snmp communit field"`
+	Version      string                 `doc:"Snmp version possible values: 2c, 3"`
+	Target       string                 `doc:"Snmp target"`
+	Oidmap       map[string]interface{} `doc:"Snmp oid to json field mapping"`
+	Timeout      uint                   `doc:"Snmp timeout, default 5 seconds"`
+	OverrideType bool                   `doc:"Override the type of the first element in SnmpTrapOID map. The element will inherit ObjectIdentifier type"`
+	r            sync.Once
+	err          error
+	g            *gosnmp.GoSNMP
+	SnmpTrapOID  []gosnmp.SnmpPDU `doc:"List of pdu's"`
 }
 
 /*
@@ -60,16 +61,12 @@ func (x *SNMP) Send(c *skogul.Container) error {
 	})
 
 	var pdutypes []gosnmp.SnmpPDU
-	if len(x.PduTypes) > 0 {
-		pdutypes = x.PduTypes
-	} else {
-		pdutypes = []gosnmp.SnmpPDU{
-			{
-				Value: ".1.3.6.1.4.1.12748.2023.0.888",
-				Name:  ".1.3.6.1.6.3.1.1.4.1.0",
-				Type:  gosnmp.ObjectIdentifier,
-			},
+
+	if len(x.SnmpTrapOID) > 0 {
+		if x.OverrideType {
+			x.SnmpTrapOID[0].Type = gosnmp.ObjectIdentifier
 		}
+		pdutypes = x.SnmpTrapOID
 	}
 
 	m := c.Metrics[0]
