@@ -10,17 +10,16 @@ import (
 )
 
 type SNMP struct {
-	Port         uint16                 `doc:"Snmp port"`
-	Community    string                 `doc:"Snmp communit field"`
-	Version      string                 `doc:"Snmp version possible values: 2c, 3"`
-	Target       string                 `doc:"Snmp target"`
-	Oidmap       map[string]interface{} `doc:"Snmp oid to json field mapping"`
-	Timeout      uint                   `doc:"Snmp timeout, default 5 seconds"`
-	OverrideType bool                   `doc:"Override the type of the first element in SnmpTrapOID map. The element will inherit ObjectIdentifier type"`
-	r            sync.Once
-	err          error
-	g            *gosnmp.GoSNMP
-	SnmpTrapOID  []gosnmp.SnmpPDU `doc:"List of pdu's"`
+	Port        uint16                 `doc:"Snmp port"`
+	Community   string                 `doc:"Snmp communit field"`
+	Version     string                 `doc:"Snmp version possible values: 2c, 3"`
+	Target      string                 `doc:"Snmp target"`
+	Oidmap      map[string]interface{} `doc:"Snmp oid to json field mapping"`
+	Timeout     uint                   `doc:"Snmp timeout, default 5 seconds"`
+	r           sync.Once
+	err         error
+	g           *gosnmp.GoSNMP
+	SnmpTrapOID string `doc:"Value of the enterprise snmp trap oid pdu"`
 }
 
 /*
@@ -62,11 +61,12 @@ func (x *SNMP) Send(c *skogul.Container) error {
 
 	var pdutypes []gosnmp.SnmpPDU
 
-	if len(x.SnmpTrapOID) > 0 {
-		if x.OverrideType {
-			x.SnmpTrapOID[0].Type = gosnmp.ObjectIdentifier
-		}
-		pdutypes = x.SnmpTrapOID
+	if x.SnmpTrapOID != "" {
+		pdutypes = append(pdutypes, gosnmp.SnmpPDU{
+			Value: x.SnmpTrapOID,
+			Type:  gosnmp.ObjectIdentifier,
+			Name:  ".1.3.6.1.6.3.1.1.4.1.0",
+		})
 	}
 
 	m := c.Metrics[0]
