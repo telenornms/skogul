@@ -19,7 +19,7 @@ type SNMP struct {
 	r           sync.Once
 	err         error
 	g           *gosnmp.GoSNMP
-	SnmpTrapOID string `doc:"Value of the enterprise snmp trap oid pdu"`
+	SnmpTrapOID string `doc:"Value of the snmp trap oid pdu"`
 }
 
 /*
