@@ -2,7 +2,6 @@ package sender
 
 import (
 	"fmt"
-	"reflect"
 	"sync"
 	"time"
 
@@ -11,17 +10,21 @@ import (
 )
 
 type SNMP struct {
-	Port      uint16                 `doc:"Snmp port"`
-	Community string                 `doc:"Snmp communit field"`
-	Version   string                 `doc:"Snmp version possible values: 2c, 3"`
-	Target    string                 `doc:"Snmp target"`
-	Oidmap    map[string]interface{} `doc:"Snmp oid to json field mapping"`
-	Timeout   uint                   `doc:"Snmp timeout, default 5 seconds"`
-	r         sync.Once
-	err       error
-	g         *gosnmp.GoSNMP
+	Port        uint16                 `doc:"Snmp port"`
+	Community   string                 `doc:"Snmp communit field"`
+	Version     string                 `doc:"Snmp version possible values: 2c, 3"`
+	Target      string                 `doc:"Snmp target"`
+	Oidmap      map[string]interface{} `doc:"Snmp oid to json field mapping"`
+	Timeout     uint                   `doc:"Snmp timeout, default 5 seconds"`
+	r           sync.Once
+	err         error
+	g           *gosnmp.GoSNMP
+	SnmpTrapOID string `doc:"Value of the snmp trap oid pdu"`
 }
 
+/*
+ * SNMP trap sender
+ */
 func (x *SNMP) init() {
 	var version gosnmp.SnmpVersion
 	if x.Version == "2c" {
@@ -48,7 +51,7 @@ func (x *SNMP) init() {
 	}
 
 	x.g.Target = x.Target
-	x.g.Connect()
+	x.err = x.g.Connect()
 }
 
 func (x *SNMP) Send(c *skogul.Container) error {
@@ -56,56 +59,54 @@ func (x *SNMP) Send(c *skogul.Container) error {
 		x.init()
 	})
 
-	if x.err != nil {
-		return x.err
+	var pdutypes []gosnmp.SnmpPDU
+
+	if x.SnmpTrapOID != "" {
+		pdutypes = append(pdutypes, gosnmp.SnmpPDU{
+			Value: x.SnmpTrapOID,
+			Type:  gosnmp.ObjectIdentifier,
+			Name:  ".1.3.6.1.6.3.1.1.4.1.0",
+		})
 	}
 
-	pdutypes := []gosnmp.SnmpPDU{}
+	m := c.Metrics[0]
 
-	for _, m := range c.Metrics {
-		for j, i := range m.Data {
-			var pdutype gosnmp.SnmpPDU
+	for j, i := range m.Data {
+		var pdutype gosnmp.SnmpPDU
 
-			pduName := fmt.Sprintf("%s", x.Oidmap[j])
+		pduName := fmt.Sprintf("%s", x.Oidmap[j])
 
-			switch reflect.TypeOf(i).Kind() {
-			case reflect.String:
-				pdutype = gosnmp.SnmpPDU{
-					Value: i,
-					Name:  pduName,
-					Type:  gosnmp.OctetString,
-				}
-			case reflect.Bool:
-				pdutype = gosnmp.SnmpPDU{
-					Value: i,
-					Name:  pduName,
-					Type:  gosnmp.Boolean,
-				}
-			case reflect.Int:
-				pdutype = gosnmp.SnmpPDU{
-					Value: i,
-					Name:  pduName,
-					Type:  gosnmp.Integer,
-				}
-			default:
+		switch i.(type) {
+		case string:
+			pdutype = gosnmp.SnmpPDU{
+				Value: i,
+				Name:  pduName,
+				Type:  gosnmp.OctetString,
 			}
-			pdutypes = append(pdutypes, pdutype)
-
-			trap := gosnmp.SnmpTrap{}
-			trap.Variables = pdutypes
-			trap.IsInform = false
-			trap.Enterprise = "no"
-			trap.AgentAddress = "localhost"
-			trap.GenericTrap = 1
-			trap.SpecificTrap = 1
-			_, err := x.g.SendTrap(trap)
-
-			if err != nil {
-				x.err = err
+		case bool:
+			pdutype = gosnmp.SnmpPDU{
+				Value: i,
+				Name:  pduName,
+				Type:  gosnmp.Boolean,
 			}
+		case float64:
+			k := int(i.(float64))
+			pdutype = gosnmp.SnmpPDU{
+				Value: k,
+				Name:  pduName,
+				Type:  gosnmp.Integer,
+			}
+		default:
 		}
-
+		pdutypes = append(pdutypes, pdutype)
 	}
 
-	return nil
+	trap := gosnmp.SnmpTrap{}
+	trap.Variables = pdutypes
+	trap.IsInform = false
+	trap.Enterprise = "no"
+	trap.AgentAddress = "localhost"
+	_, err := x.g.SendTrap(trap)
+
+	return err
 }
