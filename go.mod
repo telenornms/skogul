@@ -6,7 +6,6 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.4.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gogo/protobuf v1.3.2
-	github.com/hamba/avro v1.8.0
 	github.com/lib/pq v1.10.6
 	github.com/segmentio/kafka-go v0.4.32
 	github.com/sirupsen/logrus v1.9.0
@@ -15,12 +14,12 @@ require (
 
 require (
 	github.com/dolmen-go/jsonptr v0.0.0-20220904212016-e3f38a361346
+	github.com/hamba/avro/v2 v2.16.0
 	github.com/nats-io/nats.go v1.23.0
 	github.com/rabbitmq/amqp091-go v1.8.1
 )
 
 require (
-	github.com/hamba/avro/v2 v2.16.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/nats-io/nats-server/v2 v2.9.14 // indirect
 	github.com/nats-io/nkeys v0.3.0 // indirect
