@@ -29,7 +29,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/hamba/avro"
+	avro "github.com/hamba/avro/v2"
 	"github.com/telenornms/skogul"
 )
 
