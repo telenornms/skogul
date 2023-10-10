@@ -78,7 +78,7 @@ rpm: build/redhat-skogul.spec
 	@cp x86_64/skogul-${VERSION_NO}-1.x86_64.rpm .
 	@echo ⭐ RPM built: ./skogul-${VERSION_NO}-1.x86_64.rpm
 
-check: test fmtcheck vet exampletest exampletestdep checkconfigs
+check: test fmtcheck vet exampletest exampletestdep checkconfigs printfcheck
 
 # Can't for the life of me remember where this came from and it's seemingly
 # gone now, so removed from check.
@@ -97,6 +97,10 @@ fmtcheck:
 fmtfix:
 	@echo 🎨 Fixing formating
 	@find . -name '*.go' -not -wholename './gen/*' -and -not -wholename './vendor/*' -exec gofmt -d -s -w {} +
+
+printfcheck:
+	@echo 📖 Looking for printf-debugging left over
+	@! find -not -wholename './cmd/*' -and -not -wholename '*_test.go' -and -not -wholename './config/parse.go' -and -not -wholename './sender/debug.go' -and -name '*.go' -exec egrep fmt.Printf {} +
 
 exampletest: skogul
 	@echo 📖 Verifying examples
