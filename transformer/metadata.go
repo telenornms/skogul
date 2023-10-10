@@ -55,6 +55,19 @@ type Metadata struct {
 }
 
 // Transform enforces the Metadata rules
+//
+// FIXME: This is too simple with regards to detecting errors and treating
+// metrics in an isolated manner. E.g.: right now, if a single metric in a
+// container of 1000 contains a banned field, it will ban the entire
+// container. That is _probably_ not desired. And if flatten fails, it just
+// fails silently.
+//
+// FIXME: I don't know what the correct failure mode for flatten is. Should
+// the container remain or not? So far, the main failure I've seen is if
+// the object being flattened isn't actually a map, but a strict structure
+// which wont happen in most cases, but can happen when used as a library
+// (Happened when Svipul embedded the original Order structure in the
+// metadata).
 func (meta *Metadata) Transform(c *skogul.Container) error {
 	for mi := range c.Metrics {
 		for key, value := range meta.Set {
@@ -114,7 +127,6 @@ func (meta *Metadata) Transform(c *skogul.Container) error {
 				continue
 			}
 			if _, ok := c.Metrics[mi].Metadata[rename.Source]; !ok {
-				fmt.Printf("src: %v\n", c.Metrics[mi].Metadata)
 				continue
 			}
 			c.Metrics[mi].Metadata[rename.Destination] = c.Metrics[mi].Metadata[rename.Source]

@@ -84,7 +84,7 @@ func (s *SQL) Start() error {
 		}
 		columnt, err := rows.ColumnTypes()
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			sqlLog.WithError(err).Error("unable to retrieve column types", err)
 			continue
 		}
 
