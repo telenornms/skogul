@@ -1,3 +1,19 @@
+v0.26.0
+=======
+
+Release date: 2023-10-12
+
+At a glance: Improvements to the SNMP sender and security fixes.
+
+This addresses:
+
+- CVE-2023-37475 (avro issues)
+- CVE-2023-39325 (HTTP/2 rapid reset)
+
+The SNMP trap sender fixes included make the sender more usable. It allows
+manually configuring snmpTrapOID among other things, needed to make the
+sender actually send valid snmpTraps.
+
 v0.25.1
 =======
 
