@@ -21,10 +21,14 @@
   },
   "senders": {
     "kaf": {
-      "type": "kafka",
-      "address": "localhost:9092",
-      "topic": "quickstart",
-      "sync": true
-    }
+         "type": "kafka",
+         "address": "broker01.example.com:9092",
+         "tls": true,
+         "clientid": "skogul",
+         "username":"demouser",
+         "password":"passwordforyou",
+         "topic": "com.example.foobar",
+         "sync": true
+     }
   }
 }
