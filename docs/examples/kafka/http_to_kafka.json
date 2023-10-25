@@ -1,0 +1,30 @@
+{
+  "receivers": {
+      "api": {
+        "type": "http",
+        "address": "[::1]:8080",
+	"log204ok": true,
+        "handlers": {
+          "/": "json"
+        },
+	"auth": {
+	 "/": { "username": "lol", "password": "kek"}
+	}
+      }
+  },
+  "handlers": {
+    "json": {
+      "parser": "skogul",
+      "transformers": [],
+      "sender": "kaf"
+    }
+  },
+  "senders": {
+    "kaf": {
+      "type": "kafka",
+      "address": "localhost:9092",
+      "topic": "quickstart",
+      "sync": true
+    }
+  }
+}
