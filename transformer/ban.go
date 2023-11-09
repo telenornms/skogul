@@ -18,46 +18,30 @@ func (b *Ban) Transform(c *skogul.Container) error {
 			ptr, _ = jsonptr.Get(mi.Data, pathKey)
 
 			if ptr == pathValue {
-				c.Metrics[k] = &skogul.Metric{}
-				continue
+				if k == len(c.Metrics)-1 {
+					c.Metrics = c.Metrics[:k]
+				} else {
+					c.Metrics = append(c.Metrics[:k], c.Metrics[k+1:]...)
+				}
 			}
 		}
 	}
-
-	tmp := []*skogul.Metric{}
-	// clean up
-	for _, v := range c.Metrics {
-		if v.Data != nil || v.Metadata != nil {
-			tmp = append(tmp, v)
-		}
-	}
-
-	c.Metrics = tmp
-	tmp = nil
 
 	for pathKey, pathValue := range b.LookupMetadata {
 		for k, mi := range c.Metrics {
 			var ptr interface{}
 
 			ptr, _ = jsonptr.Get(mi.Metadata, pathKey)
-
 			if ptr == pathValue {
-				c.Metrics[k] = &skogul.Metric{}
+				if k == len(c.Metrics)-1 {
+					c.Metrics = c.Metrics[:k]
+				} else {
+					c.Metrics = append(c.Metrics[:k], c.Metrics[k+1:]...)
+				}
 				continue
 			}
 		}
 	}
-
-	tmp = []*skogul.Metric{}
-	// clean up
-	for _, v := range c.Metrics {
-		if v.Data != nil || v.Metadata != nil {
-			tmp = append(tmp, v)
-		}
-	}
-
-	c.Metrics = tmp
-	tmp = nil
 
 	return nil
 }
