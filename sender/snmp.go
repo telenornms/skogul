@@ -59,54 +59,59 @@ func (x *SNMP) Send(c *skogul.Container) error {
 		x.init()
 	})
 
-	var pdutypes []gosnmp.SnmpPDU
-
-	if x.SnmpTrapOID != "" {
-		pdutypes = append(pdutypes, gosnmp.SnmpPDU{
-			Value: x.SnmpTrapOID,
-			Type:  gosnmp.ObjectIdentifier,
-			Name:  ".1.3.6.1.6.3.1.1.4.1.0",
-		})
-	}
-
-	m := c.Metrics[0]
-
-	for j, i := range m.Data {
-		var pdutype gosnmp.SnmpPDU
-
-		pduName := fmt.Sprintf("%s", x.Oidmap[j])
-
-		switch i.(type) {
-		case string:
-			pdutype = gosnmp.SnmpPDU{
-				Value: i,
-				Name:  pduName,
-				Type:  gosnmp.OctetString,
-			}
-		case bool:
-			pdutype = gosnmp.SnmpPDU{
-				Value: i,
-				Name:  pduName,
-				Type:  gosnmp.Boolean,
-			}
-		case float64:
-			k := int(i.(float64))
-			pdutype = gosnmp.SnmpPDU{
-				Value: k,
-				Name:  pduName,
-				Type:  gosnmp.Integer,
-			}
-		default:
+	var errors []error
+	for _, m := range c.Metrics {
+		var pdutypes []gosnmp.SnmpPDU
+		if x.SnmpTrapOID != "" {
+			pdutypes = append(pdutypes, gosnmp.SnmpPDU{
+				Value: x.SnmpTrapOID,
+				Type:  gosnmp.ObjectIdentifier,
+				Name:  ".1.3.6.1.6.3.1.1.4.1.0",
+			})
 		}
-		pdutypes = append(pdutypes, pdutype)
+		for j, i := range m.Data {
+			var pdutype gosnmp.SnmpPDU
+
+			pduName := fmt.Sprintf("%s", x.Oidmap[j])
+
+			switch i.(type) {
+			case string:
+				pdutype = gosnmp.SnmpPDU{
+					Value: i,
+					Name:  pduName,
+					Type:  gosnmp.OctetString,
+				}
+			case bool:
+				pdutype = gosnmp.SnmpPDU{
+					Value: i,
+					Name:  pduName,
+					Type:  gosnmp.Boolean,
+				}
+			case float64:
+				k := int(i.(float64))
+				pdutype = gosnmp.SnmpPDU{
+					Value: k,
+					Name:  pduName,
+					Type:  gosnmp.Integer,
+				}
+			default:
+			}
+			pdutypes = append(pdutypes, pdutype)
+		}
+
+		trap := gosnmp.SnmpTrap{}
+		trap.Variables = pdutypes
+		trap.IsInform = false
+		trap.Enterprise = "no"
+		trap.AgentAddress = "localhost"
+		_, err := x.g.SendTrap(trap)
+		if err != nil {
+			errors = append(errors, err)
+		}
 	}
 
-	trap := gosnmp.SnmpTrap{}
-	trap.Variables = pdutypes
-	trap.IsInform = false
-	trap.Enterprise = "no"
-	trap.AgentAddress = "localhost"
-	_, err := x.g.SendTrap(trap)
-
-	return err
+	if len(errors) == 0 {
+		return nil
+	}
+	return fmt.Errorf("%d of %d traps failed, first error: %w", len(errors), len(c.Metrics), errors[0])
 }
