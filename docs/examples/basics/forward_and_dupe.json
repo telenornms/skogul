@@ -1,0 +1,41 @@
+{
+  "receivers": {
+    "api": {
+      "type": "http",
+        "address": "[::1]:8082",
+        "handlers": {
+          "/": "myhandler"
+        }
+    },
+      "tester": {
+        "type": "test",
+        "delay": "1s",
+        "threads": 2,
+        "metrics": 1,
+        "values": 1,
+        "handler": "myhandler"
+      }
+  },
+  "handlers": {
+    "myhandler": {
+      "parser": "skogul",
+      "sender": "fwd-and-debug"
+    }
+  },
+  "senders": {
+    "fwd-and-debug": {
+      "type": "dupe",
+      "next": [ "print", "to-file", "fwd" ]
+    },
+    "fwd": {
+      "type": "http",
+      "idleconnsperhost": 30,
+      "URL": "http://[::1]:8083/"
+    },
+    "to-file": {
+      "type": "file",
+      "encoder": "skogul",
+      "file": "/tmp/debug-skogul"
+    }
+  }
+}

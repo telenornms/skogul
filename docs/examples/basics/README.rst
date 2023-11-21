@@ -56,6 +56,25 @@ example, it just prints the result to standard out. You can run it with::
 And see for yourself. Both the "print" sender and "test" receiver are
 mainly useful for debugging and testing.
 
+forward_and_dupe.json
+---------------------
+
+This is a demonstration of how you can use a dupe sender to debug a stream
+of data. The dupe sender can be inserted anywhere.
+
+In addition it demonstrates that two receivers can use the same handlers:
+Both the test-receiver that automatically generates dummy-data and the
+"api"-receiver that listens for data on HTTP use the handler called
+"myhandler", and thus treat the data the same.
+
+Two different methods of debugging is provided here as well: By using the
+"print" (or "debug") sender, data is printed to standard output (e.g.:
+journalctl). Because the print-sender doesn't require any configuration,
+you don't have to define it anywhere either, though you can.
+
+The "to-file" sender simply writes the data to a file, using the provided
+encoder. "skogul" means this is encoded as json, with Skogul's format.
+
 http_count.json
 ---------------
 
@@ -137,4 +156,5 @@ configuration doing just that::
                         ....
                 }
         }
+
 
