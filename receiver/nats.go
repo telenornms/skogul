@@ -51,6 +51,7 @@ type Nats struct {
 	NKeyFile      string            `doc:"Nats nkey file path"`
 	Insecure      bool              `doc:"TLS InsecureSkipVerify"`
 	conOpts       *[]nats.Option
+	natsSub       *nats.Subscription
 	natsCon       *nats.Conn
 	wg            sync.WaitGroup
 }
