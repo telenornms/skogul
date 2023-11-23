@@ -154,8 +154,8 @@ func (n *Nats) Start() error {
 		natsLog.Debugf("Starting queued subscription on %v with queue %v", n.Subject, n.Queue)
 		n.natsSub, err = n.natsCon.QueueSubscribe(n.Subject, n.Queue, cb)
 	} else {
-			natsLog.Debugf("Starting subscription on %v", n.Subject)
-			n.natsSub, err = n.natsCon.Subscribe(n.Subject, cb)
+		natsLog.Debugf("Starting subscription on %v", n.Subject)
+		n.natsSub, err = n.natsCon.Subscribe(n.Subject, cb)
 	}
 
 	if err != nil {
