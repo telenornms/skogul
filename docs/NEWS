@@ -1,3 +1,11 @@
+v0.27.1
+=======
+
+Release date: 2023-12-01
+
+Minor, second attempt at fixing the ban transformer. Should no longer
+cause out of bounds errors. Hopefully.
+
 v0.27.0
 =======
 
@@ -9,7 +17,7 @@ Two minor, but important bug fixes:
 - Make the SNMP trap sender iterate over all metrics in a container, not
   just the first.
 
-Other than that, some more relevant documentaiton and examples.
+Other than that, some more relevant documentation and examples.
 
 v0.26.0
 =======
