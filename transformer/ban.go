@@ -11,37 +11,34 @@ type Ban struct {
 }
 
 func (b *Ban) Transform(c *skogul.Container) error {
-	for pathKey, pathValue := range b.LookupData {
-		for k, mi := range c.Metrics {
-			var ptr interface{}
 
+	for pathKey, pathValue := range b.LookupData {
+		newMetrics := make([]*skogul.Metric, 0, len(c.Metrics))
+		for _, mi := range c.Metrics {
+			var ptr interface{}
 			ptr, _ = jsonptr.Get(mi.Data, pathKey)
 
-			if ptr == pathValue {
-				if k == len(c.Metrics)-1 {
-					c.Metrics = c.Metrics[:k]
-				} else {
-					c.Metrics = append(c.Metrics[:k], c.Metrics[k+1:]...)
-				}
+			if ptr != pathValue {
+				newMetrics = append(newMetrics, mi)
 			}
 		}
+		c.Metrics = newMetrics
 	}
 
 	for pathKey, pathValue := range b.LookupMetadata {
-		for k, mi := range c.Metrics {
+		newMetrics := make([]*skogul.Metric, 0, len(c.Metrics))
+		for _, mi := range c.Metrics {
 			var ptr interface{}
 
 			ptr, _ = jsonptr.Get(mi.Metadata, pathKey)
-			if ptr == pathValue {
-				if k == len(c.Metrics)-1 {
-					c.Metrics = c.Metrics[:k]
-				} else {
-					c.Metrics = append(c.Metrics[:k], c.Metrics[k+1:]...)
-				}
-				continue
+			if ptr != pathValue {
+				newMetrics = append(newMetrics, mi)
 			}
 		}
+		c.Metrics = newMetrics
 	}
-
+	newMetrics := make([]*skogul.Metric, len(c.Metrics))
+	copy(newMetrics, c.Metrics)
+	c.Metrics = newMetrics
 	return nil
 }

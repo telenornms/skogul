@@ -99,11 +99,20 @@ func TestBan(t *testing.T) {
 			"funny": "notfunny",
 		},
 	}
+	metric5 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"funny": "",
+		},
+	}
+	metric6 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"funny": "",
+		},
+	}
 
 	c := skogul.Container{}
-	c.Metrics = []*skogul.Metric{&metric, &metric2, &metric3, &metric4}
+	c.Metrics = []*skogul.Metric{&metric, &metric2, &metric3, &metric4, &metric5, &metric6}
 
-	originalMetricsCount := len(c.Metrics)
 	ban := &transformer.Ban{}
 
 	ban.LookupData = map[string]interface{}{
@@ -113,16 +122,17 @@ func TestBan(t *testing.T) {
 	}
 
 	ban.LookupMetadata = map[string]interface{}{
-		"/funny": "notfunny",
+		"/funny": "",
 	}
 
 	err := ban.Transform(&c)
 	if err != nil {
 		t.Fatalf("error occurred %v", err.Error())
 	}
-
-	if originalMetricsCount == len(c.Metrics) {
-		t.Fatal("Metrics slice has same length even after the banning of values")
+	if len(c.Metrics) != 1 {
+		t.Fatalf("expected exactly 1 metric to remain, got %d", len(c.Metrics))
 	}
-
+	if cap(c.Metrics) != 1 {
+		t.Fatalf("expected exactly len(metrics) == 1, got %d", cap(c.Metrics))
+	}
 }
