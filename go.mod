@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.10.6
 	github.com/segmentio/kafka-go v0.4.32
 	github.com/sirupsen/logrus v1.9.0
-	google.golang.org/protobuf v1.28.1
+	google.golang.org/protobuf v1.33.0
 )
 
 require (
