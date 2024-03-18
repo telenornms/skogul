@@ -1,3 +1,11 @@
+v0.27.2
+=======
+
+Release date: 2024-03-18
+
+Very minor release to improve debugging by adding timestamps to
+metric-related messages. Also a few library bumps for security advisories.
+
 v0.27.1
 =======
 
