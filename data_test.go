@@ -104,7 +104,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with empty metrics[]")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "missing timestamp for metric(0 metadatafields and 0 data-fields, First 5 Metadata fields:  Data: )"
+	want = "missing timestamp for metric(0 metadatafields and 0 data-fields, time: <nil>, First 5 Metadata fields:  Data: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -118,7 +118,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with no data")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "missing data for metric(0 metadatafields and 0 data-fields, First 5 Metadata fields:  Data: )"
+	want = fmt.Sprintf("missing data for metric(0 metadatafields and 0 data-fields, time: %s, First 5 Metadata fields:  Data: )", now.Format(time.RFC3339))
 	if got != want {
 		t.Errorf("Validate() expected reason {%s}, got {%s}", want, got)
 	}
@@ -130,7 +130,7 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with no data")
 	}
 	got = fmt.Sprintf("%s", err)
-	want = "empty data for metric(0 metadatafields and 0 data-fields, First 5 Metadata fields:  Data: )"
+	want = fmt.Sprintf("empty data for metric(0 metadatafields and 0 data-fields, time: %s, First 5 Metadata fields:  Data: )", now.Format(time.RFC3339))
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}
@@ -171,7 +171,7 @@ func TestValidate_partial(t *testing.T) {
 		t.Errorf("Validate() succeeded on an Container with bad data")
 	}
 	got := fmt.Sprintf("%s", err)
-	want := "missing data for metric(1 metadatafields and 0 data-fields, First 5 Metadata fields:  [ok=nah] Data: )"
+	want := "missing data for metric(1 metadatafields and 0 data-fields, time: 2022-03-22T19:55:15+02:00, First 5 Metadata fields:  [ok=nah] Data: )"
 	if got != want {
 		t.Errorf("Validate() expected reason %s, got %s", want, got)
 	}

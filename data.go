@@ -237,7 +237,11 @@ func (m Metric) Describe() string {
 			dfields = fmt.Sprintf("%s [%s=%v]", dfields, idx, v)
 		}
 	}
-	return fmt.Sprintf("%d metadatafields and %d data-fields, First 5 Metadata fields: %s Data: %s", metadata, data, mfields, dfields)
+	tm := "<nil>"
+	if m.Time != nil {
+		tm = m.Time.Format(time.RFC3339)
+	}
+	return fmt.Sprintf("%d metadatafields and %d data-fields, time: %s, First 5 Metadata fields: %s Data: %s", metadata, data, tm, mfields, dfields)
 }
 
 // Describe returns key properties of the container useful for debugging
