@@ -8,7 +8,7 @@ require (
 	github.com/gogo/protobuf v1.3.2
 	github.com/lib/pq v1.10.6
 	github.com/segmentio/kafka-go v0.4.32
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.33.0
 )
 
@@ -41,5 +41,5 @@ require (
 	github.com/prometheus/common v0.37.0
 	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
 )
