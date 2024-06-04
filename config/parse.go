@@ -97,6 +97,21 @@ type Config struct {
 	Transformers map[string]*Transformer
 }
 
+// MarshalJSON marshals Transformer config. See MarshalJSON for receiver - same
+// same.
+func (t *Transformer) MarshalJSON() ([]byte, error) {
+	nest, err := json.Marshal(t.Transformer)
+	if err != nil {
+		return nil, err
+	}
+	var merged map[string]interface{}
+	if err := json.Unmarshal(nest, &merged); err != nil {
+		return nil, err
+	}
+	merged["type"] = t.Type
+	return json.Marshal(merged)
+}
+
 // UnmarshalJSON picks up the type of the Receiver, instantiates a copy of
 // that receiver, then unmarshals the remaining configuration onto that.
 func (t *Transformer) UnmarshalJSON(b []byte) error {
