@@ -1,0 +1,51 @@
+{
+  "receivers": {
+    "file": {
+      "type": "wholefile",
+      "file": "payload",
+      "handler": "wip"
+    }
+  },
+  "handlers": {
+    "wip": {
+      "parser": "skogul",
+      "transformers": ["optics_diag","extract_names","flatten","extract_names2","split2","extract_names3"],
+      "sender": "print"
+    }
+  },
+  "transformers": {
+    "optics_diag": {
+      "type": "split",
+      "field": ["Optics_diag"]
+    },
+    "extract_names": {
+      "type": "metadata",
+      "copyFromData": [
+        {"source": "if_name", "delete": true},
+        {"source": "snmp_if_index", "delete": true}
+      ]
+    },
+    "flatten": {
+      "type": "data",
+      "flatten": [
+        ["optics_diag_stats"]
+      ]
+    },
+    "extract_names2": {
+      "type": "metadata",
+      "copyFromData": [
+        {"source": "optics_diag_stats__optics_type", "destination": "optics_type", "delete": true}
+      ]
+    },
+    "split2": {
+      "type": "split",
+      "field": ["optics_diag_stats__optics_lane_diag_stats"]
+    },
+    "extract_names3": {
+      "type": "metadata",
+      "copyFromData": [
+        {"source": "lane_number", "delete": true}
+      ]
+    }
+  }
+}

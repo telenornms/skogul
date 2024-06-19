@@ -1,0 +1,16 @@
+{
+  "receivers": {
+    "file": {
+      "type": "wholefile",
+      "file": "payload",
+      "handler": "wip"
+    }
+  },
+  "handlers": {
+    "wip": {
+      "parser": "skogul",
+      "transformers": [],
+      "sender": "print"
+    }
+  }
+}

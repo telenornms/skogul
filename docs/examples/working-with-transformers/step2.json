@@ -1,0 +1,29 @@
+{
+  "receivers": {
+    "file": {
+      "type": "wholefile",
+      "file": "payload",
+      "handler": "wip"
+    }
+  },
+  "handlers": {
+    "wip": {
+      "parser": "skogul",
+      "transformers": ["optics_diag","extract_names"],
+      "sender": "print"
+    }
+  },
+  "transformers": {
+    "optics_diag": {
+      "type": "split",
+      "field": ["Optics_diag"]
+    },
+    "extract_names": {
+      "type": "metadata",
+      "copyFromData": [
+        {"source": "if_name", "delete": true},
+        {"source": "snmp_if_index", "delete": true}
+      ]
+    }
+  }
+}

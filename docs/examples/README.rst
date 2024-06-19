@@ -42,3 +42,8 @@ client-certificates
 A complex example for client certificate validation, including a script to
 generate test certificates.
 
+working-with-transformers
+-------------------------
+
+This is a demonstration of how to gradually work with relatively raw,
+untransformed input data and an approach to flatten it sensibly.
