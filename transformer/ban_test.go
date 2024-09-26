@@ -109,9 +109,41 @@ func TestBan(t *testing.T) {
 			"funny": "",
 		},
 	}
+	metric7 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"bar2": "hmm",
+		},
+		Data: map[string]interface{}{
+			"foo2": "dette er 1339, two steps ahead",
+		},
+	}
+	metric8 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"bar2": "hmm",
+		},
+		Data: map[string]interface{}{
+			"foo2": "dette er 1337, akkurat passe",
+		},
+	}
+	metric9 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"bar2": "1234578901337890",
+		},
+		Data: map[string]interface{}{
+			"foo2": "dette er 1335, litt veikt",
+		},
+	}
+	metric10 := skogul.Metric{
+		Metadata: map[string]interface{}{
+			"bar2": []byte("1234578901337890"),
+		},
+		Data: map[string]interface{}{
+			"foo2": "dette er 1335, litt veikt",
+		},
+	}
 
 	c := skogul.Container{}
-	c.Metrics = []*skogul.Metric{&metric, &metric2, &metric3, &metric4, &metric5, &metric6}
+	c.Metrics = []*skogul.Metric{&metric, &metric2, &metric3, &metric4, &metric5, &metric6, &metric7, &metric8, &metric9, &metric10}
 
 	ban := &transformer.Ban{}
 
@@ -125,14 +157,24 @@ func TestBan(t *testing.T) {
 		"/funny": "",
 	}
 
+	ban.RegexpData = map[string]string{
+		"/foo2": ".*1337.*",
+	}
+	ban.RegexpMetadata = map[string]string{
+		"/bar2": ".*1337.*",
+	}
+
 	err := ban.Transform(&c)
 	if err != nil {
 		t.Fatalf("error occurred %v", err.Error())
 	}
-	if len(c.Metrics) != 1 {
+	if len(c.Metrics) != 2 {
+		for _, x := range c.Metrics {
+			t.Logf("metric left: %#v", x)
+		}
 		t.Fatalf("expected exactly 1 metric to remain, got %d", len(c.Metrics))
 	}
-	if cap(c.Metrics) != 1 {
+	if cap(c.Metrics) != 2 {
 		t.Fatalf("expected exactly len(metrics) == 1, got %d", cap(c.Metrics))
 	}
 }

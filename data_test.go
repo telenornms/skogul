@@ -30,6 +30,8 @@ import (
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/parser"
 	"log"
+	"regexp"
+	"strings"
 	"testing"
 	"time"
 )
@@ -201,6 +203,42 @@ func BenchmarkValidate(b *testing.B) {
 		okc.Validate(false)
 	}
 
+}
+
+func BenchmarkCompareText(b *testing.B) {
+	data := []string{"the fox jumps over the some-variable=na something", "this is fine, nothing is on fire", "only 1337 allowed"}
+	str := "only 1337 allowed"
+	for i := 0; i < b.N; i++ {
+		for x := 0; x < 3; x++ {
+			if data[x] == str {
+				continue
+			}
+		}
+	}
+}
+func BenchmarkCompareRegexp(b *testing.B) {
+	data := []string{"the fox jumps over the some-variable=na something", "this is fine, nothing is on fire", "only 1337 allowed"}
+	exp, err := regexp.Compile(".*some-variable=.*")
+	if err != nil {
+		b.Fatalf("Couldn't compile regexp: %v", err)
+	}
+	for i := 0; i < b.N; i++ {
+		for x := 0; x < 3; x++ {
+			if exp.Match([]byte(data[x])) {
+				continue
+			}
+		}
+	}
+}
+func BenchmarkCompareSubstr(b *testing.B) {
+	data := []string{"the fox jumps over the some-variable=na something", "this is fine, nothing is on fire", "only 1337 allowed"}
+	for i := 0; i < b.N; i++ {
+		for x := 0; x < 3; x++ {
+			if strings.Contains(data[x], "1337") {
+				continue
+			}
+		}
+	}
 }
 
 func TestString_invalid(t *testing.T) {
