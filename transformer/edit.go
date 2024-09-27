@@ -67,6 +67,9 @@ func (replace *Replace) Transform(c *skogul.Container) error {
 			delete(c.Metrics[mi].Metadata, replace.Destination)
 			continue
 		}
+		// FIXME: This should be a type cast to allow working with
+		// both text strings (as per now) and []byte strings.
+		// Similar to what is done in the ban transformer.
 		str, ok := c.Metrics[mi].Metadata[replace.Source].(string)
 		if !ok {
 			// FIXME: What to do? It's tempting to copy the
