@@ -1,17 +1,3 @@
-v0.28.1
-=======
-
-Release date: 2024-09-27
-
-Very minor techincal release that fixes a build issue. v0.28.0 never built.
-
-The following is the 0.28.0 features added:
-
-Adds the ability to ban content with a regular expression. Also bumps some,
-but not all modules.
-
-Fixes an issue where transformers were not visible when running with -show.
-
 v0.28.0
 =======
 
@@ -21,6 +7,9 @@ Adds the ability to ban content with a regular expression. Also bumps some,
 but not all modules.
 
 Fixes an issue where transformers were not visible when running with -show.
+
+PS: There were some github action issues that caused some minor history
+issues which can be seen in the git log as we re-did the tags of v0.28.x
 
 v0.27.2
 =======
