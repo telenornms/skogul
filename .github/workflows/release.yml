@@ -21,8 +21,8 @@ jobs:
         run: |
           export PATH=$PATH:/usr/local/go/bin
           yum install -y git python3-docutils rpm-build wget make gcc coreutils-single
-          wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
-          tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
+          wget https://go.dev/dl/go1.20.14.linux-amd64.tar.gz
+          tar -C /usr/local -xzf go1.20.14.linux-amd64.tar.gz
           make check
       - name: Build tarball
         id: build
