@@ -256,20 +256,20 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 		}
 
 		for _, value := range cast.MetadataBlobsToStrings {
-			if c.Metrics[mi].Data[value] != nil {
-				_, ok := c.Metrics[mi].Data[value].(string)
+			if c.Metrics[mi].Metadata[value] != nil {
+				_, ok := c.Metrics[mi].Metadata[value].(string)
 				if ok {
 					continue
 				}
-				c.Metrics[mi].Data[value] = fmt.Sprintf("%s", c.Metrics[mi].Data[value])
+				c.Metrics[mi].Metadata[value] = fmt.Sprintf("%s", c.Metrics[mi].Metadata[value])
 			}
 		}
 		for _, value := range cast.MetadataStringsToBlobs {
-			if c.Metrics[mi].Data[value] != nil {
-				cpy := fmt.Sprintf("%s", c.Metrics[mi].Data[value])
-				delete(c.Metrics[mi].Data, value)
-				c.Metrics[mi].Data[value] = make([]byte, len(cpy))
-				c.Metrics[mi].Data[value] = []byte(cpy)
+			if c.Metrics[mi].Metadata[value] != nil {
+				cpy := fmt.Sprintf("%s", c.Metrics[mi].Metadata[value])
+				delete(c.Metrics[mi].Metadata, value)
+				c.Metrics[mi].Metadata[value] = make([]byte, len(cpy))
+				c.Metrics[mi].Metadata[value] = []byte(cpy)
 			}
 		}
 	}
