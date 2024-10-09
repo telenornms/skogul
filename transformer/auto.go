@@ -82,6 +82,12 @@ func init() {
 		Help:    "Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.",
 	})
 	Auto.Add(skogul.Module{
+		Name:    "replacedata",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &ReplaceData{} },
+		Help:    "Uses a regular expression to replace the content of a data key, storing it to either a different data key, or overwriting the original.",
+	})
+	Auto.Add(skogul.Module{
 		Name:    "switch",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Switch{} },
