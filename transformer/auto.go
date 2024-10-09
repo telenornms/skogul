@@ -82,6 +82,12 @@ func init() {
 		Help:    "Uses a regular expression to replace the content of a metadata key, storing it to either a different metadata key, or overwriting the original.",
 	})
 	Auto.Add(skogul.Module{
+		Name:    "replacedata",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &ReplaceData{} },
+		Help:    "Uses a regular expression to replace the content of a data key, storing it to either a different data key, or overwriting the original.",
+	})
+	Auto.Add(skogul.Module{
 		Name:    "switch",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Switch{} },
@@ -120,6 +126,13 @@ func init() {
 		Aliases:  []string{},
 		Alloc:    func() interface{} { return &Ban{} },
 		Help:     "Ban values from nested structure using a path e.g. Path looking like this foo.bar.1 has a structure looking like this { foo: { bar: { 1: hello } } }. The last element in the path will get removed from the tree in this case 1: hello, you will end up having a tree looking like this { foo: { bar: {} } }.",
+		AutoMake: false,
+	})
+	Auto.Add(skogul.Module{
+		Name:     "banfield",
+		Aliases:  []string{},
+		Alloc:    func() interface{} { return &BanField{} },
+		Help:     "Remove single fields in a metric based on a regular expression criteria",
 		AutoMake: false,
 	})
 }
