@@ -35,20 +35,24 @@ import (
 )
 
 type Cast struct {
-	MetadataStrings    []string `doc:"List of metadatafields that should be strings"`
-	MetadataInts       []string `doc:"List of metadatafields that should be integers"`
-	MetadataFloats     []string `doc:"List of metadatafields that should be 64-bit floats"`
-	MetadataFlatFloats []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
-	MetadataIpToDec    []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
-	MetadataJson       []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
-	MetadataTopJson    string   `doc:"Metadata-field containing text-encoded JSON which will replace all other metadata after being decoded."`
-	DataStrings        []string `doc:"List of datafields that should be strings"`
-	DataInts           []string `doc:"List of datafields that should be integers"`
-	DataFloats         []string `doc:"List of datafields that should be 64-bit floats"`
-	DataFlatFloats     []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
-	DataIpToDec        []string `doc:"List of datafields containing IP addresses that should be decimals"`
-	DataJson           []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
-	DataTopJson        string   `doc:"Data-field containing text-encoded JSON which will replace all other data after being decoded."`
+	MetadataStrings        []string `doc:"List of metadatafields that should be strings"`
+	MetadataInts           []string `doc:"List of metadatafields that should be integers"`
+	MetadataFloats         []string `doc:"List of metadatafields that should be 64-bit floats"`
+	MetadataFlatFloats     []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
+	MetadataIpToDec        []string `doc:"List of metadatafields containing IP addresses that should be decimals"`
+	MetadataJson           []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
+	MetadataTopJson        string   `doc:"Metadata-field containing text-encoded JSON which will replace all other metadata after being decoded."`
+	DataStrings            []string `doc:"List of datafields that should be strings"`
+	DataInts               []string `doc:"List of datafields that should be integers"`
+	DataFloats             []string `doc:"List of datafields that should be 64-bit floats"`
+	DataFlatFloats         []string `doc:"List of metadatafields that are floats which should be expressed as plain, non-exponential numbers in text. E.g.: Large serial numbers will be written as plain numbers, not 1.1231215e+10. If the field is a non-float, it will be left as is."`
+	DataIpToDec            []string `doc:"List of datafields containing IP addresses that should be decimals"`
+	DataJson               []string `doc:"List of fields that will be json-decoded. E.g.: Original value is encoded as text string, but contains json."`
+	DataTopJson            string   `doc:"Data-field containing text-encoded JSON which will replace all other data after being decoded."`
+	DataBlobsToStrings     []string `doc:"List of datafields containning blob (byte-array) values that should be strings"`
+	DataStringsToBlobs     []string `doc:"List of datafields containing a string that should be blobs (byte-arrays)"`
+	MetadataBlobsToStrings []string `doc:"List of metadatafields containning blob (byte-array) values that should be strings"`
+	MetadataStringsToBlobs []string `doc:"List of metadatafields containing a string that should be blobs (byte-arrays)"`
 }
 
 // Transform enforces the Cast rules
@@ -95,6 +99,24 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 
 				}
 			}
+			for _, value := range cast.DataBlobsToStrings {
+				if c.Metrics[mi].Data[value] != nil {
+					_, ok := c.Metrics[mi].Data[value].(string)
+					if ok {
+						continue
+					}
+					c.Metrics[mi].Data[value] = fmt.Sprintf("%s", c.Metrics[mi].Data[value])
+				}
+			}
+			for _, value := range cast.DataStringsToBlobs {
+				if c.Metrics[mi].Data[value] != nil {
+					cpy := fmt.Sprintf("%s", c.Metrics[mi].Data[value])
+					delete(c.Metrics[mi].Data, value)
+					c.Metrics[mi].Data[value] = make([]byte, len(cpy))
+					c.Metrics[mi].Data[value] = []byte(cpy)
+				}
+			}
+
 			for _, value := range cast.MetadataJson {
 				if c.Metrics[mi].Metadata[value] != nil {
 					tmp1, ok := c.Metrics[mi].Metadata[value].(string)
@@ -230,6 +252,24 @@ func (cast *Cast) Transform(c *skogul.Container) error {
 					continue
 				}
 				c.Metrics[mi].Metadata[value] = cast.Inet6Aton(s)
+			}
+		}
+
+		for _, value := range cast.MetadataBlobsToStrings {
+			if c.Metrics[mi].Metadata[value] != nil {
+				_, ok := c.Metrics[mi].Metadata[value].(string)
+				if ok {
+					continue
+				}
+				c.Metrics[mi].Metadata[value] = fmt.Sprintf("%s", c.Metrics[mi].Metadata[value])
+			}
+		}
+		for _, value := range cast.MetadataStringsToBlobs {
+			if c.Metrics[mi].Metadata[value] != nil {
+				cpy := fmt.Sprintf("%s", c.Metrics[mi].Metadata[value])
+				delete(c.Metrics[mi].Metadata, value)
+				c.Metrics[mi].Metadata[value] = make([]byte, len(cpy))
+				c.Metrics[mi].Metadata[value] = []byte(cpy)
 			}
 		}
 	}
