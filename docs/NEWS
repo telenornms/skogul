@@ -6,7 +6,7 @@ the replace transformer that only supported metadata fields, now it also
 supports the data field.
 
 Adds new data type support to cast transformer. Now you will be able to
-transform between byte-arrays (blobs) and strings.
+transform between byte-arrays (blobs) and strings. 
 
 v0.28.0
 =======
