@@ -61,7 +61,6 @@ func TestJSONParse(t *testing.T) {
 	}
 
 	container, err := parser.JSON{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse JSON data: %v", err)
 		return
@@ -82,7 +81,6 @@ func TestJSONArrayParse(t *testing.T) {
 	}
 
 	container, err := parser.JSON{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse JSON data: %v", err)
 		return
