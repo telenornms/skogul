@@ -25,7 +25,7 @@ package transformer_test
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"testing"
 	"time"
 
@@ -34,7 +34,7 @@ import (
 )
 
 func TestTimestampParse(t *testing.T) {
-	b, err := ioutil.ReadFile("./testdata/data-with-timestamp.json")
+	b, err := os.ReadFile("./testdata/data-with-timestamp.json")
 	if err != nil {
 		t.Errorf("Could not read json data file: %v", err)
 		return
