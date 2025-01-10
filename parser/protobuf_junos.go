@@ -228,7 +228,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 		}
 
 		if found {
-			return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do!")
+			return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do")
 		}
 
 		messageOnly, ok := ext.(proto.Message)
