@@ -34,14 +34,14 @@ import (
 	"github.com/telenornms/skogul/transformer"
 )
 
-func check_m(t *testing.T, m *skogul.Metric, field string, want interface{}) {
+func checkM(t *testing.T, m *skogul.Metric, field string, want interface{}) {
 	t.Helper()
 	if m.Metadata[field] != want {
 		t.Errorf("Transformer failed to enforce rule for metadata field \"%s\". Wanted \"%#v\"(%T), got \"%#v\"(%T)", field, want, want, m.Metadata[field], m.Metadata[field])
 	}
 }
 
-func check_d(t *testing.T, m *skogul.Metric, field string, want interface{}) {
+func checkD(t *testing.T, m *skogul.Metric, field string, want interface{}) {
 	t.Helper()
 	if m.Data[field] != want {
 		t.Errorf("Transformer failed to enforce rule for data field \"%s\". Wanted \"%#v\", got \"%#v\"", field, want, m.Data[field])
@@ -71,10 +71,10 @@ func TestMetadata(t *testing.T) {
 		t.Errorf("Metadata() returned non-nil err: %v", err)
 	}
 
-	check_m(t, c.Metrics[0], "set", "new")
-	check_m(t, c.Metrics[0], "require", "present")
-	check_m(t, c.Metrics[0], "remove", nil)
-	check_m(t, c.Metrics[0], "ban", nil)
+	checkM(t, c.Metrics[0], "set", "new")
+	checkM(t, c.Metrics[0], "require", "present")
+	checkM(t, c.Metrics[0], "remove", nil)
+	checkM(t, c.Metrics[0], "ban", nil)
 }
 
 func TestMetadata_config(t *testing.T) {
@@ -143,21 +143,21 @@ func testConfBad(t *testing.T, rawconf string) {
 }
 
 func TestExtract(t *testing.T) {
-	extracted_value_key := "extract-this"
-	extracted_value := "the value"
+	extractedValueKey := "extract-this"
+	extractedValue := "the value"
 
 	metric := skogul.Metric{}
 	metric.Metadata = make(map[string]interface{})
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": "%s"}`, extracted_value_key, extracted_value)
+	testData := fmt.Sprintf(`{"%s": "%s"}`, extractedValueKey, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
 	c.Metrics = []*skogul.Metric{&metric}
 
 	metadata := transformer.Metadata{
-		ExtractFromData: []string{extracted_value_key, "empty_key"},
+		ExtractFromData: []string{extractedValueKey, "empty_key"},
 	}
 
 	err := metadata.Transform(&c)
@@ -165,8 +165,8 @@ func TestExtract(t *testing.T) {
 		t.Error(err)
 	}
 
-	if c.Metrics[0].Metadata[extracted_value_key] != extracted_value {
-		t.Errorf(`Expected %s but got %s`, extracted_value, c.Metrics[0].Metadata[extracted_value_key])
+	if c.Metrics[0].Metadata[extractedValueKey] != extractedValue {
+		t.Errorf(`Expected %s but got %s`, extractedValue, c.Metrics[0].Metadata[extractedValueKey])
 	}
 	if _, ok := c.Metrics[0].Data["empty_key"]; ok {
 		t.Errorf(`Data key 'empty_key' is set after extraction`)
@@ -174,8 +174,8 @@ func TestExtract(t *testing.T) {
 	if _, ok := c.Metrics[0].Metadata["empty_key"]; ok {
 		t.Errorf(`Metadata key 'empty_key' is set after extraction`)
 	}
-	if _, ok := c.Metrics[0].Data[extracted_value_key]; ok {
-		t.Errorf(`Data key %s is still set after extraction`, extracted_value_key)
+	if _, ok := c.Metrics[0].Data[extractedValueKey]; ok {
+		t.Errorf(`Data key %s is still set after extraction`, extractedValueKey)
 	}
 }
 
@@ -294,13 +294,13 @@ func TestRenameData(t *testing.T) {
 
 func TestFlattenMap(t *testing.T) {
 	path := "nestedData"
-	extracted_value_key := "key"
-	extracted_value := "value"
+	extractedValueKey := "key"
+	extractedValue := "value"
 
 	metric := skogul.Metric{}
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extracted_value_key, extracted_value)
+	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extractedValueKey, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
@@ -315,11 +315,11 @@ func TestFlattenMap(t *testing.T) {
 		t.Error(err)
 	}
 
-	new_path := fmt.Sprintf("%s__%s", path, extracted_value_key)
+	newPath := fmt.Sprintf("%s__%s", path, extractedValueKey)
 
 	// Expect data to be accessible at its new location
-	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	if c.Metrics[0].Data[newPath] != extractedValue {
+		t.Errorf(`Expected "%s" but got "%s"`, extractedValue, c.Metrics[0].Data[newPath])
 	}
 
 	// Expect data be removed at its original location
@@ -335,13 +335,13 @@ func TestFlattenMap(t *testing.T) {
 
 func TestFlattenMapDefaultSeparator(t *testing.T) {
 	path := "nestedData"
-	extracted_value_key := "key"
-	extracted_value := "value"
+	extractedValueKey := "key"
+	extractedValue := "value"
 
 	metric := skogul.Metric{}
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extracted_value_key, extracted_value)
+	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extractedValueKey, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
@@ -357,11 +357,11 @@ func TestFlattenMapDefaultSeparator(t *testing.T) {
 		t.Error(err)
 	}
 
-	new_path := fmt.Sprintf("%s__%s", path, extracted_value_key)
+	newPath := fmt.Sprintf("%s__%s", path, extractedValueKey)
 
 	// Expect data to be accessible at its new location
-	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	if c.Metrics[0].Data[newPath] != extractedValue {
+		t.Errorf(`Expected "%s" but got "%s"`, extractedValue, c.Metrics[0].Data[newPath])
 	}
 
 	// Expect data to be removed at its original location
@@ -377,14 +377,14 @@ func TestFlattenMapDefaultSeparator(t *testing.T) {
 
 func TestFlattenMapCustomSeparator(t *testing.T) {
 	path := "nestedData"
-	extracted_value_key := "key"
-	extracted_value := "value"
+	extractedValueKey := "key"
+	extractedValue := "value"
 	separator := "!SEP!"
 
 	metric := skogul.Metric{}
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extracted_value_key, extracted_value)
+	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extractedValueKey, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
@@ -400,11 +400,11 @@ func TestFlattenMapCustomSeparator(t *testing.T) {
 		t.Error(err)
 	}
 
-	new_path := fmt.Sprintf("%s%s%s", path, separator, extracted_value_key)
+	newPath := fmt.Sprintf("%s%s%s", path, separator, extractedValueKey)
 
 	// Expect data to be accessible at its new location
-	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	if c.Metrics[0].Data[newPath] != extractedValue {
+		t.Errorf(`Expected "%s" but got "%s"`, extractedValue, c.Metrics[0].Data[newPath])
 	}
 
 	// Expect data to removed at its original location
@@ -420,14 +420,14 @@ func TestFlattenMapCustomSeparator(t *testing.T) {
 
 func TestFlattenMapDropSeparator(t *testing.T) {
 	path := "nestedData"
-	extracted_value_key := "key"
-	extracted_value := "value"
+	extractedValueKey := "key"
+	extractedValue := "value"
 	separator := "drop"
 
 	metric := skogul.Metric{}
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extracted_value_key, extracted_value)
+	testData := fmt.Sprintf(`{"%s": {"%s": "%s"}, "otherData": "dataer"}`, path, extractedValueKey, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
@@ -443,16 +443,16 @@ func TestFlattenMapDropSeparator(t *testing.T) {
 		t.Error(err)
 	}
 
-	new_path := fmt.Sprintf("%s", extracted_value_key)
+	newPath := fmt.Sprintf("%s", extractedValueKey)
 
 	// Expect data to be accessible at its new location
-	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	if c.Metrics[0].Data[newPath] != extractedValue {
+		t.Errorf(`Expected "%s" but got "%s"`, extractedValue, c.Metrics[0].Data[newPath])
 	}
 
 	// Expect data to still be accessible at its original location
 	if c.Metrics[0].Data[path] == nil {
-		t.Errorf(`Expected "%s" but got "%s" in %+v`, extracted_value, c.Metrics[0].Data[path], c.Metrics[0].Data)
+		t.Errorf(`Expected "%s" but got "%s" in %+v`, extractedValue, c.Metrics[0].Data[path], c.Metrics[0].Data)
 	}
 
 	// Expect data unrelated to the flattening to still be accessible
@@ -463,13 +463,13 @@ func TestFlattenMapDropSeparator(t *testing.T) {
 
 func TestFlattenArray(t *testing.T) {
 	path := "nestedData"
-	extracted_value_key := "0"
-	extracted_value := "value"
+	extractedValueKey := "0"
+	extractedValue := "value"
 
 	metric := skogul.Metric{}
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": ["%s"]}`, path, extracted_value)
+	testData := fmt.Sprintf(`{"%s": ["%s"]}`, path, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
@@ -485,23 +485,23 @@ func TestFlattenArray(t *testing.T) {
 		t.Error(err)
 	}
 
-	new_path := fmt.Sprintf("%s__%s", path, extracted_value_key)
+	newPath := fmt.Sprintf("%s__%s", path, extractedValueKey)
 
-	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	if c.Metrics[0].Data[newPath] != extractedValue {
+		t.Errorf(`Expected "%s" but got "%s"`, extractedValue, c.Metrics[0].Data[newPath])
 	}
 }
 
 func TestFlattenArrayOfMaps(t *testing.T) {
 	path := "nestedData"
-	extracted_value_key := "0"
-	extracted_value_key_2 := "key"
-	extracted_value := "value"
+	extractedValueKey := "0"
+	extractedValueKey2 := "key"
+	extractedValue := "value"
 
 	metric := skogul.Metric{}
 
 	metric.Data = make(map[string]interface{})
-	testData := fmt.Sprintf(`{"%s": [{"%s": "%s"}, {"a": "b"}]}`, path, extracted_value_key_2, extracted_value)
+	testData := fmt.Sprintf(`{"%s": [{"%s": "%s"}, {"a": "b"}]}`, path, extractedValueKey2, extractedValue)
 	json.Unmarshal([]byte(testData), &metric.Data)
 
 	c := skogul.Container{}
@@ -517,9 +517,9 @@ func TestFlattenArrayOfMaps(t *testing.T) {
 		t.Error(err)
 	}
 
-	new_path := fmt.Sprintf("%s__%s__%s", path, extracted_value_key, extracted_value_key_2)
+	newPath := fmt.Sprintf("%s__%s__%s", path, extractedValueKey, extractedValueKey2)
 
-	if c.Metrics[0].Data[new_path] != extracted_value {
-		t.Errorf(`Expected "%s" but got "%s"`, extracted_value, c.Metrics[0].Data[new_path])
+	if c.Metrics[0].Data[newPath] != extractedValue {
+		t.Errorf(`Expected "%s" but got "%s"`, extractedValue, c.Metrics[0].Data[newPath])
 	}
 }

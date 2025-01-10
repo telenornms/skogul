@@ -78,9 +78,9 @@ func TestSplit(t *testing.T) {
 		return
 	}
 
-	split_path := "data"
+	splitPath := "data"
 	metadata := transformer.Split{
-		Field:        []string{split_path},
+		Field:        []string{splitPath},
 		MetadataName: "arrayidx",
 	}
 
@@ -153,9 +153,9 @@ func TestSplit_dict(t *testing.T) {
 		return
 	}
 
-	split_path := "dict"
+	splitPath := "dict"
 	metadata := transformer.DictSplit{
-		Field:        []string{split_path},
+		Field:        []string{splitPath},
 		MetadataName: "keyname",
 	}
 
