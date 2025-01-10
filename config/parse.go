@@ -435,7 +435,6 @@ func findConfigFiles(path string) ([]string, error) {
 		}
 		return err
 	})
-
 	if err != nil {
 		return nil, err
 	}
@@ -447,7 +446,6 @@ func findConfigFiles(path string) ([]string, error) {
 // and combines them to a configuration for the program.
 func ReadFiles(p string) (*Config, error) {
 	files, err := findConfigFiles(p)
-
 	if err != nil {
 		return nil, err
 	}

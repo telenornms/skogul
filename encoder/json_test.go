@@ -68,7 +68,6 @@ func testJSON(t *testing.T, file string, match bool) {
 		t.Logf("new:\n'%s'", snew)
 		return
 	}
-
 }
 
 func parseJSON(t *testing.T, file string) (*skogul.Container, []byte) {
@@ -80,7 +79,6 @@ func parseJSON(t *testing.T, file string) (*skogul.Container, []byte) {
 		return nil, nil
 	}
 	container, err := parser.SkogulJSON{}.Parse(b)
-
 	if err != nil {
 		t.Logf("Failed to parse JSON data: %v", err)
 		t.FailNow()
@@ -93,5 +91,4 @@ func parseJSON(t *testing.T, file string) (*skogul.Container, []byte) {
 		return nil, nil
 	}
 	return container, b
-
 }
