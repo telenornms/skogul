@@ -6,6 +6,13 @@ when found escaped apostrophes.
 
 Adds options to add CA files for certificate verification in influxdb sender.
 
+v0.30.0
+=======
+
+Release date: 2025-01-14
+
+Adds a transformer that convert from uW to dBm.
+
 v0.29.2
 =======
 
