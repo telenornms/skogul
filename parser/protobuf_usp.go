@@ -7,9 +7,11 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/gogo/protobuf/proto"
+	// "github.com/gogo/protobuf/proto"
+	// "github.com/golang/protobuf/proto"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/gen/usp"
+	"google.golang.org/protobuf/proto"
 )
 
 type USP_Parser struct {
@@ -60,7 +62,6 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 	metadata := p.createRecordMetadata(record, recordData)
 
 	json, err := p.extractJSON(recordData["event_data"].(string))
-
 	if err != nil {
 		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
 		return nil, fmt.Errorf("failed to unmarshal json: %w", err)
@@ -110,7 +111,7 @@ func (p *USP_Parser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 
 // createRecordMetadata creates a map[string]interface{} of the metadata for skogul.Metric
 func (p *USP_Parser) createRecordMetadata(h *usp.Record, xh map[string]interface{}) map[string]interface{} {
-	var d = make(map[string]interface{})
+	d := make(map[string]interface{})
 
 	d["event"] = xh["event"]
 	d["event_type"] = xh["event_type"]
@@ -139,9 +140,8 @@ func (p *USP_Parser) extractJSON(s string) (map[string]interface{}, error) {
 
 // createRecordData creates a map[string]interface{} of the record payload for skogul.Metric
 func (p *USP_Parser) createRecordData(t *usp.Record) (map[string]interface{}, error) {
-	var jsonMap = make(map[string]interface{})
+	jsonMap := make(map[string]interface{})
 	payload, err := p.getRecordMsgPayload(t.GetNoSessionContext().GetPayload())
-
 	if err != nil {
 		return nil, err
 	}

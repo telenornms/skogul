@@ -31,11 +31,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	//"github.com/golang/protobuf/proto"
-	"github.com/gogo/protobuf/proto"
-
+	// "github.com/gogo/protobuf/proto"
+	// "github.com/golang/protobuf/proto"
 	"github.com/telenornms/skogul"
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"
+	"google.golang.org/protobuf/proto"
 )
 
 var pbLog = skogul.Logger("parser", "protobuf")
@@ -74,7 +74,6 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 	x.once.Do(x.initStats)
 	atomic.AddUint64(&x.stats.Received, 1)
 	parsedProtoBuf, err := parseTelemetryStream(b)
-
 	if err != nil {
 		atomic.AddUint64(&x.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("initial parsing failed: %w", err)
@@ -123,7 +122,7 @@ func parseTelemetryStream(protobuffer []byte) (*pb.TelemetryStream, error) {
 // createMetadata extracts the fields containing metadata from the protocol buffer
 // and stores them in a string-interface map to be consumed at a later stage.
 func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) (map[string]interface{}, error) {
-	var metadata = make(map[string]interface{})
+	metadata := make(map[string]interface{})
 
 	metadata["systemId"] = telemetry.GetSystemId()
 	metadata["sensorName"] = telemetry.GetSensorName()

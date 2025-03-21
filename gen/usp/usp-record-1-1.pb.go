@@ -5,7 +5,8 @@ package usp
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
+	"google.golang.org/protobuf/proto"
+	// proto "github.com/gogo/protobuf/proto"
 	math "math"
 )
 
