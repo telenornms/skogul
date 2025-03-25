@@ -1,0 +1,40 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional state_mib_249 jnpr_state_mib_249_ext = 249;
+}
+
+message state_mib_249 {
+   optional interfaces_type interfaces = 50;
+   message interfaces_type {
+      message interface_list {
+         optional string name = 51 [(telemetry_options).is_key = true];
+         optional uint32 local_index = 66;
+         optional string media_type = 67;
+         optional string link_level_type = 72;
+         optional flags_type flags = 74;
+         message flags_type {
+            repeated string config = 70;
+            repeated string specific_config = 68;
+            repeated string media = 71;
+            repeated string device = 69;
+            repeated string error = 57;
+         }
+         optional ethernet_type ethernet = 151;
+         message ethernet_type {
+            optional string fec_mode = 51;
+            optional uint32 fec_codeword_size = 52;
+            optional double fec_codeword_rate = 53;
+            optional counters_type counters = 152;
+            message counters_type {
+               optional uint64 in_pcs_errored_seconds = 54;
+               optional uint64 fec_corrected_words = 55;
+               optional uint64 fec_uncorrectable_words = 56;
+            }
+         }
+      }
+      repeated interface_list interface = 151;
+   }
+}

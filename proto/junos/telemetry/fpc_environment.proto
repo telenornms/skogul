@@ -1,0 +1,88 @@
+// fpc_environment.proto  - FPC Environments protobuf message for JVision
+// 
+// Author: Srinivas Seshadri -  July, 2014
+//
+// Copyrights (c) 2014, 2016, Juniper Networks, Inc.
+// All rights reserved.
+
+//
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+//
+
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+
+// Temperature sensor information
+message g_temp_info {
+    // Temperature sensor name
+    required string temp_sensor_name = 1 [(telemetry_options).is_key = true];
+
+    // Gauge: the current temperature read by this sensor, in degrees Celcius
+    required int32  temp_value       = 2 [(telemetry_options).is_gauge = true];
+}
+
+// Voltage sensor information
+message g_voltage_info {
+    // Voltage sensor name
+    required string voltage_sensor_name = 1 [(telemetry_options).is_key = true];
+
+    // Gauge: The current voltage (in milli volts) read by this sensor
+    required int32  voltage_value       = 2 [(telemetry_options).is_gauge = true];
+}
+
+// Power consumed by FPC, ASICs & Max consumption
+message g_power_info {
+    // This is maximum power, in Watts, that this fpc is allowed to consume
+    optional int32 max_fpc_power = 1;
+
+    // This is the amount of power, in Watts, that this fpc currently is consuming
+    optional int32 fpc_power     = 2;
+}
+
+// Main FPC Environment message, which will be shipped out
+message g_fpc_environment {
+    // FPC power info
+    optional g_power_info    power_record   = 1;
+
+    // Various temp sensor info
+    repeated g_temp_info     temp_record    = 2;
+
+    // Various voltage sensor info
+    repeated g_voltage_info  voltage_record = 3;
+
+    message linecard_list {
+       optional string name = 4 [(telemetry_options).is_key = true];
+
+       optional g_power_info    power_record   = 1;
+
+       repeated g_temp_info     temp_record    = 2;
+
+       repeated g_voltage_info  voltage_record = 3;
+    }
+    repeated linecard_list linecard = 4;
+}
+
+//
+// this occupies branch 4 from JuniperNetworksSensors
+//
+extend JuniperNetworksSensors {
+    optional g_fpc_environment fpcEnvironmentExt = 4;
+}
+

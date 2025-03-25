@@ -1,0 +1,54 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional telemetry_system_stats jnpr_telemetry_system_stats_ext = 211;
+}
+
+message telemetry_system_stats {
+   optional subscriptions_type subscriptions = 151;
+   message subscriptions_type {
+      optional dynamic_subscriptions_type dynamic_subscriptions = 151;
+      message dynamic_subscriptions_type {
+         message dynamic_subscription_list {
+            optional uint32 id = 51 [(telemetry_options).is_key = true];
+            optional state_type state = 151;
+            message state_type {
+               optional uint64 id = 51;
+               optional string destination_address = 52;
+               optional uint32 destination_port = 53;
+               optional string protocol = 54;
+               optional string encoding = 55;
+            }
+            optional sensor_paths_type sensor_paths = 152;
+            message sensor_paths_type {
+               message sensor_path_list {
+                  optional string path = 51 [(telemetry_options).is_key = true];
+                  optional state_type state = 151;
+                  message state_type {
+                     optional string path = 51;
+                     optional uint64 sample_interval = 52;
+                     optional counters_type counters = 151;
+                     message counters_type {
+                        message counter_list {
+                           optional string severity = 51 [(telemetry_options).is_key = true];
+                           optional state_type state = 151;
+                           message state_type {
+                              optional string severity = 51;
+                              optional string id = 52;
+                              optional uint64 value = 53;
+                              optional string unit = 54;
+                           }
+                        }
+                        repeated counter_list counter = 151;
+                     }
+                  }
+               }
+               repeated sensor_path_list sensor_path = 151;
+            }
+         }
+         repeated dynamic_subscription_list dynamic_subscription = 151;
+      }
+   }
+}

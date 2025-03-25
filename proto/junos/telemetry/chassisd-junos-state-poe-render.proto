@@ -1,0 +1,50 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional state_chassis_246 jnpr_state_chassis_246_ext = 246;
+}
+
+message state_chassis_246 {
+   optional poe_type poe = 149;
+   message poe_type {
+      optional interfaces_type interfaces = 150;
+      message interfaces_type {
+         message interface_list {
+            optional string name = 152 [(telemetry_options).is_key = true];
+            optional string admin_status = 153;
+            optional string oper_status = 154;
+            optional string poe_four_pair = 156;
+            optional string poe_pair_status = 157;
+            optional double power_limit = 158;
+            optional bool power_limit_lldp_negotiated = 159;
+            optional string priority = 160;
+            optional bool priority_lldp_negotiated = 161;
+            optional double power_consumption = 162;
+            optional bool power_over_consumed = 163;
+            optional string power_class_a = 164;
+            optional string power_class_b = 165;
+            optional string poe_mode = 166;
+         }
+         repeated interface_list interface = 151;
+      }
+      optional controllers_type controllers = 184;
+      message controllers_type {
+         optional bool fast_poe_enabled = 183;
+         optional bool perpetual_poe_enabled = 184;
+         message controller_list {
+            optional uint32 index = 186 [(telemetry_options).is_key = true];
+            optional bool firmware_available = 187;
+            optional double max_power = 188;
+            optional double power_consumption = 189;
+            optional bool power_over_consumed = 190;
+            optional uint64 guard_band = 191;
+            optional string poe_management = 192;
+            optional string poe_status = 193;
+            optional string lldp_priority = 194;
+         }
+         repeated controller_list controller = 185;
+      }
+   }
+}

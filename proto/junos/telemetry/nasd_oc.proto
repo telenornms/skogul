@@ -1,0 +1,140 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional junos_224 jnpr_junos_224_ext = 224;
+}
+
+message junos_224 {
+   optional system_type system = 151;
+   message system_type {
+      optional subscriber_management_type subscriber_management = 151;
+      message subscriber_management_type {
+         optional agf_type agf = 151;
+         message agf_type {
+            optional nas_type nas = 151;
+            message nas_type {
+               optional n1_type n1 = 151;
+               message n1_type {
+                  optional statistics_type statistics = 151;
+                  message statistics_type {
+                     optional uint64 registration_request_sent = 51;
+                     optional uint64 registration_complete_sent = 52;
+                     optional uint64 deregistration_request_sent = 53;
+                     optional uint64 deregistration_accept_sent = 54;
+                     optional uint64 identity_response_sent = 55;
+                     optional uint64 authentication_response_sent = 56;
+                     optional uint64 authentication_failure_sent = 57;
+                     optional uint64 security_mode_complete_sent = 58;
+                     optional uint64 security_mode_reject_sent = 59;
+                     optional uint64 service_request_sent = 60;
+                     optional uint64 uplink_nas_transport_sent = 61;
+                     optional uint64 mobility_5gmm_status_sent = 62;
+                     optional uint64 pdu_session_est_request_sent = 63;
+                     optional uint64 pdu_session_mod_complete_sent = 64;
+                     optional uint64 pdu_session_mod_reject_sent = 65;
+                     optional uint64 pdu_session_release_request_sent = 66;
+                     optional uint64 pdu_session_release_complete_sent = 67;
+                     optional uint64 pdu_session_5gsm_status_sent = 68;
+                     optional uint64 registration_accept_rcvd = 69;
+                     optional uint64 registration_reject_rcvd = 70;
+                     optional uint64 deregistration_accept_rcvd = 71;
+                     optional uint64 deregistration_request_rcvd = 72;
+                     optional uint64 identity_request_rcvd = 73;
+                     optional uint64 authentication_request_rcvd = 74;
+                     optional uint64 authentication_result_rcvd = 75;
+                     optional uint64 authentication_reject_rcvd = 76;
+                     optional uint64 security_mode_command_rcvd = 77;
+                     optional uint64 service_accept_rcvd = 78;
+                     optional uint64 service_reject_rcvd = 79;
+                     optional uint64 downlink_nas_transport_rcvd = 80;
+                     optional uint64 mobility_5gmm_status_rcvd = 81;
+                     optional uint64 pdu_session_est_accept_rcvd = 82;
+                     optional uint64 pdu_session_est_reject_rcvd = 83;
+                     optional uint64 pdu_session_mod_command_rcvd = 84;
+                     optional uint64 pdu_session_release_cmd_rcvd = 85;
+                     optional uint64 pdu_session_release_reject_rcvd = 86;
+                     optional uint64 pdu_session_5gsm_status_rcvd = 87;
+                  }
+                  optional fn_rg_type fn_rg = 152;
+                  message fn_rg_type {
+                     optional statistics_type statistics = 151;
+                     message statistics_type {
+                        optional uint64 registration_request_sent = 94;
+                        optional uint64 registration_complete_sent = 95;
+                        optional uint64 deregistration_request_sent = 96;
+                        optional uint64 deregistration_accept_sent = 97;
+                        optional uint64 identity_response_sent = 98;
+                        optional uint64 authentication_response_sent = 99;
+                        optional uint64 authentication_failure_sent = 100;
+                        optional uint64 security_mode_complete_sent = 101;
+                        optional uint64 security_mode_reject_sent = 102;
+                        optional uint64 service_request_sent = 103;
+                        optional uint64 uplink_nas_transport_sent = 104;
+                        optional uint64 mobility_5gmm_status_sent = 105;
+                        optional uint64 pdu_session_est_request_sent = 106;
+                        optional uint64 pdu_session_mod_complete_sent = 107;
+                        optional uint64 pdu_session_mod_reject_sent = 108;
+                        optional uint64 pdu_session_release_request_sent = 109;
+                        optional uint64 pdu_session_release_complete_sent = 110;
+                        optional uint64 pdu_session_5gsm_status_sent = 111;
+                        optional uint64 registration_accept_rcvd = 112;
+                        optional uint64 registration_reject_rcvd = 113;
+                        optional uint64 deregistration_accept_rcvd = 114;
+                        optional uint64 deregistration_request_rcvd = 115;
+                        optional uint64 identity_request_rcvd = 116;
+                        optional uint64 authentication_request_rcvd = 117;
+                        optional uint64 authentication_result_rcvd = 118;
+                        optional uint64 authentication_reject_rcvd = 119;
+                        optional uint64 security_mode_command_rcvd = 120;
+                        optional uint64 service_accept_rcvd = 121;
+                        optional uint64 service_reject_rcvd = 122;
+                        optional uint64 downlink_nas_transport_rcvd = 123;
+                        optional uint64 mobility_5gmm_status_rcvd = 124;
+                        optional uint64 pdu_session_est_accept_rcvd = 125;
+                        optional uint64 pdu_session_est_reject_rcvd = 126;
+                        optional uint64 pdu_session_mod_command_rcvd = 127;
+                        optional uint64 pdu_session_release_cmd_rcvd = 128;
+                        optional uint64 pdu_session_release_reject_rcvd = 129;
+                        optional uint64 pdu_session_5gsm_status_rcvd = 130;
+                     }
+                  }
+               }
+               optional user_equipment_type user_equipment = 152;
+               message user_equipment_type {
+                  optional ue_summary_type ue_summary = 151;
+                  message ue_summary_type {
+                     optional uint64 ue_total_count = 88;
+                     optional uint64 ue_initial_count = 89;
+                     optional uint64 ue_registering_count = 90;
+                     optional uint64 ue_registered_count = 91;
+                     optional uint64 ue_deregistering_count = 92;
+                     optional uint64 ue_deregistered_count = 93;
+                  }
+                  optional fn_rg_type fn_rg = 152;
+                  message fn_rg_type {
+                     optional ue_summary_type ue_summary = 151;
+                     message ue_summary_type {
+                        optional uint64 ue_total_count = 131;
+                        optional uint64 ue_initial_count = 132;
+                        optional uint64 ue_registering_count = 133;
+                        optional uint64 ue_registered_count = 134;
+                        optional uint64 ue_deregistering_count = 135;
+                        optional uint64 ue_deregistered_count = 136;
+                     }
+                  }
+                  optional pdu_session_state_type pdu_session_state = 153;
+                  message pdu_session_state_type {
+                     optional uint64 session_total_count = 137;
+                     optional uint64 session_inactive_count = 138;
+                     optional uint64 session_activating_count = 139;
+                     optional uint64 session_active_count = 140;
+                     optional uint64 session_deactivating_count = 141;
+                  }
+               }
+            }
+         }
+      }
+   }
+}

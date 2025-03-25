@@ -1,0 +1,537 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional network_instances_bgp_rib jnpr_network_instances_bgp_rib_ext = 63;
+}
+
+message network_instances_bgp_rib {
+   message network_instance_list {
+      optional string name = 51 [(telemetry_options).is_key = true];
+      optional protocols_type protocols = 151;
+      message protocols_type {
+         message protocol_list {
+            optional string identifier = 51;
+            optional string name = 52;
+            optional bgp_type bgp = 151;
+            message bgp_type {
+               optional rib_type rib = 151;
+               message rib_type {
+                  optional attr_sets_type attr_sets = 151;
+                  message attr_sets_type {
+                     message attr_set_list {
+                        optional uint64 index = 51 [(telemetry_options).is_key = true];
+                        optional state_type state = 151;
+                        message state_type {
+                           optional uint64 index = 51;
+                           optional string origin = 52;
+                           optional bool atomic_aggregate = 53;
+                           optional string next_hop = 54;
+                           optional uint32 med = 55;
+                           optional uint32 local_pref = 56;
+                           optional string originator_id = 57;
+                           repeated string cluster_list = 58;
+                           optional uint64 aigp = 59;
+                        }
+                        optional aggregator_type aggregator = 152;
+                        message aggregator_type {
+                           optional state_type state = 151;
+                           message state_type {
+                              optional uint32 as = 51;
+                              optional uint32 as4 = 52;
+                              optional string address = 53;
+                           }
+                        }
+                        optional as_path_type as_path = 153;
+                        message as_path_type {
+                           message as_segment_list {
+                              optional state_type state = 151;
+                              message state_type {
+                                 optional string type = 51;
+                                 repeated uint32 member = 52;
+                              }
+                           }
+                           repeated as_segment_list as_segment = 151;
+                        }
+                        optional as4_path_type as4_path = 154;
+                        message as4_path_type {
+                           message as4_segment_list {
+                              optional state_type state = 151;
+                              message state_type {
+                                 optional string type = 51;
+                                 repeated uint32 member = 52;
+                              }
+                           }
+                           repeated as4_segment_list as4_segment = 151;
+                        }
+                     }
+                     repeated attr_set_list attr_set = 151;
+                  }
+                  optional communities_type communities = 152;
+                  message communities_type {
+                     message community_list {
+                        optional uint64 index = 51 [(telemetry_options).is_key = true];
+                        optional state_type state = 151;
+                        message state_type {
+                           optional uint64 index = 51;
+                           repeated string community = 52;
+                        }
+                     }
+                     repeated community_list community = 151;
+                  }
+                  optional ext_communities_type ext_communities = 153;
+                  message ext_communities_type {
+                     message ext_community_list {
+                        optional uint64 index = 51 [(telemetry_options).is_key = true];
+                        optional state_type state = 151;
+                        message state_type {
+                           optional uint64 index = 51;
+                           repeated string ext_community = 52;
+                        }
+                     }
+                     repeated ext_community_list ext_community = 151;
+                  }
+                  optional afi_safis_type afi_safis = 154;
+                  message afi_safis_type {
+                     message afi_safi_list {
+                        optional string afi_safi_name = 51 [(telemetry_options).is_key = true];
+                        optional state_type state = 151;
+                        message state_type {
+                           optional string afi_safi_name = 51;
+                        }
+                        optional ipv4_unicast_type ipv4_unicast = 152;
+                        message ipv4_unicast_type {
+                           optional loc_rib_type loc_rib = 151;
+                           message loc_rib_type {
+                              optional routes_type routes = 151;
+                              message routes_type {
+                                 message route_list {
+                                    optional string prefix = 51;
+                                    optional string origin = 52;
+                                    optional uint32 path_id = 53;
+                                    optional state_type state = 151;
+                                    message state_type {
+                                       optional string prefix = 51;
+                                       optional string origin = 52;
+                                       optional uint32 path_id = 53;
+                                       optional uint64 attr_index = 54;
+                                       optional uint64 community_index = 55;
+                                       optional uint64 ext_community_index = 56;
+                                       optional uint64 last_modified = 57;
+                                       optional bool valid_route = 58;
+                                       optional string invalid_reason = 59;
+                                    }
+                                    optional unknown_attributes_type unknown_attributes = 162;
+                                    message unknown_attributes_type {
+                                       message unknown_attribute_list {
+                                          optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                          optional state_type state = 181;
+                                          message state_type {
+                                             optional bool optional = 51;
+                                             optional bool transitive = 52;
+                                             optional bool partial = 53;
+                                             optional bool extended = 54;
+                                             optional uint32 attr_type = 61;
+                                             optional uint32 attr_len = 62;
+                                             optional string attr_value = 63;
+                                          }
+                                       }
+                                       repeated unknown_attribute_list unknown_attribute = 171;
+                                    }
+                                 }
+                                 repeated route_list route = 151;
+                              }
+                           }
+                           optional neighbors_type neighbors = 152;
+                           message neighbors_type {
+                              message neighbor_list {
+                                 optional string neighbor_address = 51 [(telemetry_options).is_key = true];
+                                 optional state_type state = 151;
+                                 message state_type {
+                                    optional string neighbor_address = 51;
+                                 }
+                                 optional adj_rib_in_pre_type adj_rib_in_pre = 152;
+                                 message adj_rib_in_pre_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                                 optional adj_rib_in_post_type adj_rib_in_post = 153;
+                                 message adj_rib_in_post_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                             optional bool best_path = 60;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                                 optional adj_rib_out_pre_type adj_rib_out_pre = 154;
+                                 message adj_rib_out_pre_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                                 optional adj_rib_out_post_type adj_rib_out_post = 155;
+                                 message adj_rib_out_post_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                              }
+                              repeated neighbor_list neighbor = 151;
+                           }
+                        }
+                        optional ipv6_unicast_type ipv6_unicast = 153;
+                        message ipv6_unicast_type {
+                           optional loc_rib_type loc_rib = 151;
+                           message loc_rib_type {
+                              optional routes_type routes = 151;
+                              message routes_type {
+                                 message route_list {
+                                    optional string prefix = 51;
+                                    optional string origin = 52;
+                                    optional uint32 path_id = 53;
+                                    optional state_type state = 151;
+                                    message state_type {
+                                       optional string prefix = 51;
+                                       optional string origin = 52;
+                                       optional uint32 path_id = 53;
+                                       optional uint64 attr_index = 54;
+                                       optional uint64 community_index = 55;
+                                       optional uint64 ext_community_index = 56;
+                                       optional uint64 last_modified = 57;
+                                       optional bool valid_route = 58;
+                                       optional string invalid_reason = 59;
+                                    }
+                                    optional unknown_attributes_type unknown_attributes = 162;
+                                    message unknown_attributes_type {
+                                       message unknown_attribute_list {
+                                          optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                          optional state_type state = 181;
+                                          message state_type {
+                                             optional bool optional = 51;
+                                             optional bool transitive = 52;
+                                             optional bool partial = 53;
+                                             optional bool extended = 54;
+                                             optional uint32 attr_type = 61;
+                                             optional uint32 attr_len = 62;
+                                             optional string attr_value = 63;
+                                          }
+                                       }
+                                       repeated unknown_attribute_list unknown_attribute = 171;
+                                    }
+                                 }
+                                 repeated route_list route = 151;
+                              }
+                           }
+                           optional neighbors_type neighbors = 152;
+                           message neighbors_type {
+                              message neighbor_list {
+                                 optional string neighbor_address = 51 [(telemetry_options).is_key = true];
+                                 optional state_type state = 151;
+                                 message state_type {
+                                    optional string neighbor_address = 51;
+                                 }
+                                 optional adj_rib_in_pre_type adj_rib_in_pre = 152;
+                                 message adj_rib_in_pre_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                                 optional adj_rib_in_post_type adj_rib_in_post = 153;
+                                 message adj_rib_in_post_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                             optional bool best_path = 60;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                                 optional adj_rib_out_pre_type adj_rib_out_pre = 154;
+                                 message adj_rib_out_pre_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                                 optional adj_rib_out_post_type adj_rib_out_post = 155;
+                                 message adj_rib_out_post_type {
+                                    optional routes_type routes = 151;
+                                    message routes_type {
+                                       message route_list {
+                                          optional string prefix = 51;
+                                          optional uint32 path_id = 52;
+                                          optional state_type state = 151;
+                                          message state_type {
+                                             optional string prefix = 51;
+                                             optional uint32 path_id = 52;
+                                             optional uint64 attr_index = 53;
+                                             optional uint64 community_index = 54;
+                                             optional uint64 ext_community_index = 55;
+                                             optional uint64 last_modified = 57;
+                                             optional bool valid_route = 58;
+                                             optional string invalid_reason = 59;
+                                          }
+                                          optional unknown_attributes_type unknown_attributes = 162;
+                                          message unknown_attributes_type {
+                                             message unknown_attribute_list {
+                                                optional uint32 attr_type = 51 [(telemetry_options).is_key = true];
+                                                optional state_type state = 181;
+                                                message state_type {
+                                                   optional bool optional = 51;
+                                                   optional bool transitive = 52;
+                                                   optional bool partial = 53;
+                                                   optional bool extended = 54;
+                                                   optional uint32 attr_type = 61;
+                                                   optional uint32 attr_len = 62;
+                                                   optional string attr_value = 63;
+                                                }
+                                             }
+                                             repeated unknown_attribute_list unknown_attribute = 171;
+                                          }
+                                       }
+                                       repeated route_list route = 151;
+                                    }
+                                 }
+                              }
+                              repeated neighbor_list neighbor = 151;
+                           }
+                        }
+                     }
+                     repeated afi_safi_list afi_safi = 151;
+                  }
+               }
+            }
+         }
+         repeated protocol_list protocol = 151;
+      }
+   }
+   repeated network_instance_list network_instance = 151;
+}

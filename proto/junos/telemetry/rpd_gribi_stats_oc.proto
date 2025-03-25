@@ -1,0 +1,163 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional gribi_statistics_gribi_stats_229 jnpr_gribi_statistics_gribi_stats_229_ext = 229;
+}
+
+message gribi_statistics_gribi_stats_229 {
+   optional state_type state = 1;
+   message state_type {
+      optional uint32 stats_aggregation_interval = 301;
+      optional uint32 stats_sampling_interval = 302;
+      optional uint32 num_clients = 102;
+      optional uint32 client_flaps = 103;
+      optional uint32 programmed_route_count = 104;
+      optional uint32 connection_termination_errors = 105;
+      optional uint32 fib_ack_failures = 106;
+      optional add_operations_type add_operations = 107;
+      message add_operations_type {
+         optional uint32 ipv4 = 108;
+         optional uint32 ipv6 = 109;
+         optional uint32 next_hop = 110;
+         optional uint32 next_hop_group = 111;
+      }
+      optional replace_operations_type replace_operations = 112;
+      message replace_operations_type {
+         optional uint32 ipv4 = 113;
+         optional uint32 ipv6 = 114;
+         optional uint32 next_hop = 115;
+         optional uint32 next_hop_group = 116;
+      }
+      optional delete_operations_type delete_operations = 117;
+      message delete_operations_type {
+         optional uint32 ipv4 = 118;
+         optional uint32 ipv6 = 119;
+         optional uint32 next_hop = 120;
+         optional uint32 next_hop_group = 121;
+      }
+      optional get_operations_type get_operations = 122;
+      message get_operations_type {
+         optional uint32 ipv4 = 123;
+         optional uint32 ipv6 = 124;
+         optional uint32 next_hop = 125;
+         optional uint32 next_hop_group = 126;
+      }
+      optional mod_req_queue_size_type mod_req_queue_size = 127;
+      message mod_req_queue_size_type {
+         optional uint32 min = 128;
+         optional uint32 max = 129;
+         optional uint32 mean = 130;
+      }
+      optional get_req_queue_size_type get_req_queue_size = 131;
+      message get_req_queue_size_type {
+         optional uint32 min = 132;
+         optional uint32 max = 133;
+         optional uint32 mean = 134;
+      }
+      optional add_operation_batch_size_type add_operation_batch_size = 135;
+      message add_operation_batch_size_type {
+         optional uint32 min = 136;
+         optional uint32 max = 137;
+         optional uint32 mean = 138;
+      }
+      optional replace_operation_batch_size_type replace_operation_batch_size = 139;
+      message replace_operation_batch_size_type {
+         optional uint32 min = 140;
+         optional uint32 max = 141;
+         optional uint32 mean = 142;
+      }
+      optional delete_operation_batch_size_type delete_operation_batch_size = 143;
+      message delete_operation_batch_size_type {
+         optional uint32 min = 144;
+         optional uint32 max = 145;
+         optional uint32 mean = 146;
+      }
+      optional fib_response_time_type fib_response_time = 147;
+      message fib_response_time_type {
+         optional uint32 min = 148;
+         optional uint32 max = 149;
+         optional uint32 mean = 150;
+      }
+   }
+   optional clients_type clients = 2;
+   message clients_type {
+      message client_list {
+         optional string client_id = 202 [(telemetry_options).is_key = true];
+         optional state_type state = 203;
+         message state_type {
+            optional uint32 client_flaps = 206;
+            optional uint32 programmed_route_count = 207;
+            optional uint32 connection_termination_errors = 208;
+            optional uint32 fib_ack_failures = 209;
+            optional add_operations_type add_operations = 210;
+            message add_operations_type {
+               optional uint32 ipv4 = 211;
+               optional uint32 ipv6 = 212;
+               optional uint32 next_hop = 213;
+               optional uint32 next_hop_group = 214;
+            }
+            optional replace_operations_type replace_operations = 215;
+            message replace_operations_type {
+               optional uint32 ipv4 = 216;
+               optional uint32 ipv6 = 217;
+               optional uint32 next_hop = 218;
+               optional uint32 next_hop_group = 219;
+            }
+            optional delete_operations_type delete_operations = 220;
+            message delete_operations_type {
+               optional uint32 ipv4 = 221;
+               optional uint32 ipv6 = 222;
+               optional uint32 next_hop = 223;
+               optional uint32 next_hop_group = 224;
+            }
+            optional get_operations_type get_operations = 225;
+            message get_operations_type {
+               optional uint32 ipv4 = 226;
+               optional uint32 ipv6 = 227;
+               optional uint32 next_hop = 228;
+               optional uint32 next_hop_group = 229;
+            }
+            optional mod_req_queue_size_type mod_req_queue_size = 230;
+            message mod_req_queue_size_type {
+               optional uint32 min = 231;
+               optional uint32 max = 232;
+               optional uint32 mean = 233;
+            }
+            optional get_req_queue_size_type get_req_queue_size = 234;
+            message get_req_queue_size_type {
+               optional uint32 min = 235;
+               optional uint32 max = 236;
+               optional uint32 mean = 237;
+            }
+            optional add_operation_batch_size_type add_operation_batch_size = 238;
+            message add_operation_batch_size_type {
+               optional uint32 min = 239;
+               optional uint32 max = 240;
+               optional uint32 mean = 241;
+            }
+            optional replace_operation_batch_size_type replace_operation_batch_size = 242;
+            message replace_operation_batch_size_type {
+               optional uint32 min = 243;
+               optional uint32 max = 244;
+               optional uint32 mean = 245;
+            }
+            optional delete_operation_batch_size_type delete_operation_batch_size = 246;
+            message delete_operation_batch_size_type {
+               optional uint32 min = 247;
+               optional uint32 max = 248;
+               optional uint32 mean = 249;
+            }
+            optional fib_response_time_type fib_response_time = 250;
+            message fib_response_time_type {
+               optional uint32 min = 251;
+               optional uint32 max = 252;
+               optional uint32 mean = 253;
+            }
+            optional uint32 up_time = 205;
+         }
+      }
+      repeated client_list client = 201;
+   }
+}

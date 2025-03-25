@@ -1,0 +1,296 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional network_instances_evpn_263 jnpr_network_instances_evpn_263_ext = 263;
+}
+
+message network_instances_evpn_263 {
+   message network_instance_list {
+      optional string name = 51 [(telemetry_options).is_key = true];
+      optional protocols_type protocols = 151;
+      message protocols_type {
+         message protocol_list {
+            optional string identifier = 51;
+            optional string name = 52;
+            optional bgp_type bgp = 151;
+            message bgp_type {
+               optional rib_type rib = 151;
+               message rib_type {
+                  optional afi_safis_type afi_safis = 154;
+                  message afi_safis_type {
+                     message afi_safi_list {
+                        optional string afi_safi_name = 51 [(telemetry_options).is_key = true];
+                        optional state_type state = 151;
+                        message state_type {
+                           optional string afi_safi_name = 51;
+                        }
+                        optional l2vpn_evpn_type l2vpn_evpn = 154;
+                        message l2vpn_evpn_type {
+                           optional loc_rib_type loc_rib = 131;
+                           message loc_rib_type {
+                              optional routes_type routes = 132;
+                              message routes_type {
+                                 message route_distinguisher_list {
+                                    optional string route_distinguisher = 71 [(telemetry_options).is_key = true];
+                                    optional state_type state = 132;
+                                    message state_type {
+                                       optional string route_distinguisher = 71;
+                                    }
+                                    optional type_one_ethernet_auto_discovery_type type_one_ethernet_auto_discovery = 133;
+                                    message type_one_ethernet_auto_discovery_type {
+                                       message type_one_route_list {
+                                          optional string esi = 71;
+                                          optional uint32 ethernet_tag = 72;
+                                          optional state_type state = 133;
+                                          message state_type {
+                                             optional string esi = 71;
+                                             optional uint32 ethernet_tag = 72;
+                                          }
+                                          optional paths_type paths = 138;
+                                          message paths_type {
+                                             message path_list {
+                                                optional string peer_ip = 71;
+                                                optional uint32 peer_path_id = 72;
+                                                optional string source_route_distinguisher = 73;
+                                                optional string source_address_family = 74;
+                                                optional state_type state = 138;
+                                                message state_type {
+                                                   optional string peer_ip = 71;
+                                                   optional uint32 peer_path_id = 72;
+                                                   optional string source_route_distinguisher = 73;
+                                                   optional string source_address_family = 74;
+                                                   optional string label = 76;
+                                                   optional string label2 = 77;
+                                                   optional bool bestpath = 78;
+                                                   optional bool multipath = 79;
+                                                   optional bool backup = 80;
+                                                   optional uint64 last_modified = 84;
+                                                   optional bool valid_route = 85;
+                                                   optional string invalid_reason = 86;
+                                                   optional uint64 attr_index = 81;
+                                                   optional uint64 community_index = 82;
+                                                   optional uint64 ext_community_index = 83;
+                                                }
+                                                optional unknown_attributes_type unknown_attributes = 139;
+                                                message unknown_attributes_type {
+                                                   message unknown_attribute_list {
+                                                      optional uint32 attr_type = 71 [(telemetry_options).is_key = true];
+                                                      optional state_type state = 139;
+                                                      message state_type {
+                                                         optional bool optional = 74;
+                                                         optional bool transitive = 75;
+                                                         optional bool partial = 76;
+                                                         optional bool extended = 77;
+                                                         optional uint32 attr_type = 71;
+                                                         optional uint32 attr_len = 72;
+                                                         optional string attr_value = 73;
+                                                      }
+                                                   }
+                                                   repeated unknown_attribute_list unknown_attribute = 139;
+                                                }
+                                             }
+                                             repeated path_list path = 138;
+                                          }
+                                       }
+                                       repeated type_one_route_list type_one_route = 133;
+                                    }
+                                    optional type_three_inclusive_multicast_ethernet_tag_type type_three_inclusive_multicast_ethernet_tag = 135;
+                                    message type_three_inclusive_multicast_ethernet_tag_type {
+                                       message type_three_route_list {
+                                          optional uint32 ethernet_tag = 71;
+                                          optional string originating_router_ip = 72;
+                                          optional uint32 originator_ip_length = 73;
+                                          optional state_type state = 135;
+                                          message state_type {
+                                             optional uint32 ethernet_tag = 71;
+                                             optional string originating_router_ip = 72;
+                                             optional uint32 originator_ip_length = 73;
+                                          }
+                                          optional paths_type paths = 138;
+                                          message paths_type {
+                                             message path_list {
+                                                optional string peer_ip = 71;
+                                                optional uint32 peer_path_id = 72;
+                                                optional string source_route_distinguisher = 73;
+                                                optional string source_address_family = 74;
+                                                optional state_type state = 138;
+                                                message state_type {
+                                                   optional string peer_ip = 71;
+                                                   optional uint32 peer_path_id = 72;
+                                                   optional string source_route_distinguisher = 73;
+                                                   optional string source_address_family = 74;
+                                                   optional string label = 76;
+                                                   optional string label2 = 77;
+                                                   optional bool bestpath = 78;
+                                                   optional bool multipath = 79;
+                                                   optional bool backup = 80;
+                                                   optional uint64 last_modified = 84;
+                                                   optional bool valid_route = 85;
+                                                   optional string invalid_reason = 86;
+                                                   optional uint64 attr_index = 81;
+                                                   optional uint64 community_index = 82;
+                                                   optional uint64 ext_community_index = 83;
+                                                }
+                                                optional unknown_attributes_type unknown_attributes = 139;
+                                                message unknown_attributes_type {
+                                                   message unknown_attribute_list {
+                                                      optional uint32 attr_type = 71 [(telemetry_options).is_key = true];
+                                                      optional state_type state = 139;
+                                                      message state_type {
+                                                         optional bool optional = 74;
+                                                         optional bool transitive = 75;
+                                                         optional bool partial = 76;
+                                                         optional bool extended = 77;
+                                                         optional uint32 attr_type = 71;
+                                                         optional uint32 attr_len = 72;
+                                                         optional string attr_value = 73;
+                                                      }
+                                                   }
+                                                   repeated unknown_attribute_list unknown_attribute = 139;
+                                                }
+                                             }
+                                             repeated path_list path = 138;
+                                          }
+                                       }
+                                       repeated type_three_route_list type_three_route = 135;
+                                    }
+                                    optional type_four_ethernet_segment_type type_four_ethernet_segment = 136;
+                                    message type_four_ethernet_segment_type {
+                                       message type_four_route_list {
+                                          optional string esi = 71;
+                                          optional string originating_router_ip = 72;
+                                          optional uint32 originator_ip_length = 73;
+                                          optional state_type state = 136;
+                                          message state_type {
+                                             optional string esi = 71;
+                                             optional string originating_router_ip = 72;
+                                             optional uint32 originator_ip_length = 73;
+                                          }
+                                          optional paths_type paths = 138;
+                                          message paths_type {
+                                             message path_list {
+                                                optional string peer_ip = 71;
+                                                optional uint32 peer_path_id = 72;
+                                                optional string source_route_distinguisher = 73;
+                                                optional string source_address_family = 74;
+                                                optional state_type state = 138;
+                                                message state_type {
+                                                   optional string peer_ip = 71;
+                                                   optional uint32 peer_path_id = 72;
+                                                   optional string source_route_distinguisher = 73;
+                                                   optional string source_address_family = 74;
+                                                   optional string label = 76;
+                                                   optional string label2 = 77;
+                                                   optional bool bestpath = 78;
+                                                   optional bool multipath = 79;
+                                                   optional bool backup = 80;
+                                                   optional uint64 last_modified = 84;
+                                                   optional bool valid_route = 85;
+                                                   optional string invalid_reason = 86;
+                                                   optional uint64 attr_index = 81;
+                                                   optional uint64 community_index = 82;
+                                                   optional uint64 ext_community_index = 83;
+                                                }
+                                                optional unknown_attributes_type unknown_attributes = 139;
+                                                message unknown_attributes_type {
+                                                   message unknown_attribute_list {
+                                                      optional uint32 attr_type = 71 [(telemetry_options).is_key = true];
+                                                      optional state_type state = 139;
+                                                      message state_type {
+                                                         optional bool optional = 74;
+                                                         optional bool transitive = 75;
+                                                         optional bool partial = 76;
+                                                         optional bool extended = 77;
+                                                         optional uint32 attr_type = 71;
+                                                         optional uint32 attr_len = 72;
+                                                         optional string attr_value = 73;
+                                                      }
+                                                   }
+                                                   repeated unknown_attribute_list unknown_attribute = 139;
+                                                }
+                                             }
+                                             repeated path_list path = 138;
+                                          }
+                                       }
+                                       repeated type_four_route_list type_four_route = 136;
+                                    }
+                                    optional type_five_ip_prefix_type type_five_ip_prefix = 137;
+                                    message type_five_ip_prefix_type {
+                                       message type_five_route_list {
+                                          optional uint32 ethernet_tag = 71;
+                                          optional string ip_prefix_length = 72;
+                                          optional string ip_prefix = 73;
+                                          optional state_type state = 137;
+                                          message state_type {
+                                             optional uint32 ethernet_tag = 71;
+                                             optional string ip_prefix_length = 72;
+                                             optional string ip_prefix = 73;
+                                          }
+                                          optional paths_type paths = 138;
+                                          message paths_type {
+                                             message path_list {
+                                                optional string peer_ip = 71;
+                                                optional uint32 peer_path_id = 72;
+                                                optional string source_route_distinguisher = 73;
+                                                optional string source_address_family = 74;
+                                                optional state_type state = 138;
+                                                message state_type {
+                                                   optional string esi = 87;
+                                                   optional string gateway_ip_address = 88;
+                                                   optional string peer_ip = 71;
+                                                   optional uint32 peer_path_id = 72;
+                                                   optional string source_route_distinguisher = 73;
+                                                   optional string source_address_family = 74;
+                                                   optional string label = 76;
+                                                   optional string label2 = 77;
+                                                   optional bool bestpath = 78;
+                                                   optional bool multipath = 79;
+                                                   optional bool backup = 80;
+                                                   optional uint64 last_modified = 84;
+                                                   optional bool valid_route = 85;
+                                                   optional string invalid_reason = 86;
+                                                   optional uint64 attr_index = 81;
+                                                   optional uint64 community_index = 82;
+                                                   optional uint64 ext_community_index = 83;
+                                                }
+                                                optional unknown_attributes_type unknown_attributes = 139;
+                                                message unknown_attributes_type {
+                                                   message unknown_attribute_list {
+                                                      optional uint32 attr_type = 71 [(telemetry_options).is_key = true];
+                                                      optional state_type state = 139;
+                                                      message state_type {
+                                                         optional bool optional = 74;
+                                                         optional bool transitive = 75;
+                                                         optional bool partial = 76;
+                                                         optional bool extended = 77;
+                                                         optional uint32 attr_type = 71;
+                                                         optional uint32 attr_len = 72;
+                                                         optional string attr_value = 73;
+                                                      }
+                                                   }
+                                                   repeated unknown_attribute_list unknown_attribute = 139;
+                                                }
+                                             }
+                                             repeated path_list path = 138;
+                                          }
+                                       }
+                                       repeated type_five_route_list type_five_route = 137;
+                                    }
+                                 }
+                                 repeated route_distinguisher_list route_distinguisher = 132;
+                              }
+                           }
+                        }
+                     }
+                     repeated afi_safi_list afi_safi = 151;
+                  }
+               }
+            }
+         }
+         repeated protocol_list protocol = 151;
+      }
+   }
+   repeated network_instance_list network_instance = 151;
+}

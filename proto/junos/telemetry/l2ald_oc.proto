@@ -1,0 +1,180 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional network_instances_l2_network_instance jnpr_network_instances_l2_network_instance_ext = 50;
+}
+
+message network_instances_l2_network_instance {
+   message network_instance_list {
+      optional string name = 51 [(telemetry_options).is_key = true];
+      optional fdb_type fdb = 141;
+      message fdb_type {
+         optional state_type state = 151;
+         message state_type {
+            optional bool mac_learning = 61;
+            optional uint32 mac_aging_time = 62;
+            optional uint32 maximum_entries = 63;
+         }
+         optional mac_table_type mac_table = 121;
+         message mac_table_type {
+            optional entries_type entries = 131;
+            message entries_type {
+               message entry_list {
+                  optional string mac_address = 61;
+                  optional uint32 vlan = 62;
+                  optional state_type state = 111;
+                  message state_type {
+                     optional string mac_address = 81;
+                     optional uint32 vlan = 82;
+                     optional string entry_type = 83;
+                     optional uint32 evi = 85;
+                  }
+                  optional interface_type interface = 112;
+                  message interface_type {
+                     optional interface_ref_type interface_ref = 112;
+                     message interface_ref_type {
+                        optional state_type state = 113;
+                        message state_type {
+                           optional string interface = 131;
+                           optional uint32 subinterface = 141;
+                        }
+                     }
+                  }
+               }
+               repeated entry_list entry = 141;
+            }
+         }
+         optional l2rib_type l2rib = 131;
+         message l2rib_type {
+            optional mac_table_type mac_table = 130;
+            message mac_table_type {
+               optional entries_type entries = 130;
+               message entries_type {
+                  message entry_list {
+                     optional string mac_address = 130 [(telemetry_options).is_key = true];
+                     optional state_type state = 131;
+                     message state_type {
+                        optional string mac_address = 131;
+                        optional uint32 vlan = 132;
+                        optional uint32 evi = 133;
+                        optional uint32 l2_vni = 134;
+                     }
+                     optional producers_type producers = 132;
+                     message producers_type {
+                        message producer_list {
+                           optional string producer = 132 [(telemetry_options).is_key = true];
+                           optional state_type state = 133;
+                           message state_type {
+                              optional string producer = 133;
+                              optional string esi = 134;
+                              optional uint64 next_hop = 135;
+                           }
+                        }
+                        repeated producer_list producer = 132;
+                     }
+                  }
+                  repeated entry_list entry = 130;
+               }
+               optional next_hops_type next_hops = 131;
+               message next_hops_type {
+                  message next_hop_list {
+                     optional uint64 index = 131 [(telemetry_options).is_key = true];
+                     optional state_type state = 132;
+                     message state_type {
+                        optional uint64 index = 132;
+                        optional string peer_ip = 133;
+                        optional string interface = 134;
+                        optional uint32 subinterface = 135;
+                     }
+                  }
+                  repeated next_hop_list next_hop = 131;
+               }
+            }
+            optional mac_ip_table_type mac_ip_table = 140;
+            message mac_ip_table_type {
+               optional entries_type entries = 140;
+               message entries_type {
+                  message entry_list {
+                     optional string mac_address = 140;
+                     optional string host_ip = 141;
+                     optional state_type state = 142;
+                     message state_type {
+                        optional string mac_address = 142;
+                        optional uint32 vlan = 144;
+                        optional uint32 evi = 145;
+                        optional uint32 l2_vni = 146;
+                        optional string host_ip = 143;
+                     }
+                     optional producers_type producers = 143;
+                     message producers_type {
+                        message producer_list {
+                           optional string producer = 143 [(telemetry_options).is_key = true];
+                           optional state_type state = 144;
+                           message state_type {
+                              optional string producer = 144;
+                              optional string esi = 145;
+                              optional uint64 next_hop = 146;
+                           }
+                        }
+                        repeated producer_list producer = 143;
+                     }
+                  }
+                  repeated entry_list entry = 140;
+               }
+               optional next_hops_type next_hops = 141;
+               message next_hops_type {
+                  message next_hop_list {
+                     optional uint64 index = 141 [(telemetry_options).is_key = true];
+                     optional state_type state = 142;
+                     message state_type {
+                        optional uint64 index = 142;
+                        optional string peer_ip = 143;
+                        optional string interface = 144;
+                        optional uint32 subinterface = 145;
+                     }
+                  }
+                  repeated next_hop_list next_hop = 141;
+               }
+            }
+         }
+      }
+      optional interfaces_type interfaces = 151;
+      message interfaces_type {
+         message interface_list {
+            optional string id = 51 [(telemetry_options).is_key = true];
+            optional state_type state = 161;
+            message state_type {
+               optional string id = 61;
+               optional bool mac_pinning = 62;
+            }
+         }
+         repeated interface_list interface = 151;
+      }
+      optional vlans_type vlans = 161;
+      message vlans_type {
+         message vlan_list {
+            optional uint32 vlan_id = 51 [(telemetry_options).is_key = true];
+            optional state_type state = 52;
+            message state_type {
+               optional uint32 vlan_id = 52;
+               optional string name = 51;
+               optional string status = 53;
+            }
+            optional members_type members = 53;
+            message members_type {
+               message member_list {
+                  optional state_type state = 161;
+                  message state_type {
+                     optional string interface = 151;
+                  }
+               }
+               repeated member_list member = 151;
+            }
+         }
+         repeated vlan_list vlan = 161;
+      }
+   }
+   repeated network_instance_list network_instance = 151;
+}

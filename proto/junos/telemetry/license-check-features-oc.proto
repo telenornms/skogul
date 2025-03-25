@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional system_license jnpr_system_license_ext = 108;
+}
+
+message system_license {
+   optional license_type license = 151;
+   message license_type {
+      optional licenses_type licenses = 151;
+      message licenses_type {
+         message license_list {
+            optional string license_id = 151 [(telemetry_options).is_key = true];
+            optional state_type state = 152;
+            message state_type {
+               optional string license_id = 51;
+               optional string license_data = 52;
+               optional bool active = 53;
+               optional string description = 54;
+               optional uint64 expiration_date = 55;
+               optional bool in_use = 56;
+               optional bool expired = 57;
+               optional bool valid = 58;
+            }
+         }
+         repeated license_list license = 151;
+      }
+   }
+}

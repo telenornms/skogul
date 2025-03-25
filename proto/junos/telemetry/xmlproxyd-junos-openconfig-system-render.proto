@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional system_system_250 jnpr_system_system_250_ext = 250;
+}
+
+message system_system_250 {
+   optional ssh_server_type ssh_server = 153;
+   message ssh_server_type {
+      optional state_type state = 151;
+      message state_type {
+         optional uint32 rate_limit = 54;
+         optional uint32 session_limit = 55;
+      }
+   }
+   optional telnet_server_type telnet_server = 154;
+   message telnet_server_type {
+      optional state_type state = 151;
+      message state_type {
+         optional bool enable = 51;
+         optional uint32 rate_limit = 52;
+         optional uint32 session_limit = 53;
+      }
+   }
+   optional aaa_type aaa = 156;
+   message aaa_type {
+      optional accounting_type accounting = 152;
+      message accounting_type {
+         optional events_type events = 152;
+         message events_type {
+            message event_list {
+               optional string event_type = 51 [(telemetry_options).is_key = true];
+               optional state_type state = 151;
+               message state_type {
+                  optional string event_type = 51;
+               }
+            }
+            repeated event_list event = 151;
+         }
+      }
+   }
+}

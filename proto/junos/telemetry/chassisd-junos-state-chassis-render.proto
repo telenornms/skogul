@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional state_chassis_248 jnpr_state_chassis_248_ext = 248;
+}
+
+message state_chassis_248 {
+   optional chassis_type chassis = 149;
+   message chassis_type {
+      optional modules_type modules = 150;
+      message modules_type {
+         message module_list {
+            optional string name = 152 [(telemetry_options).is_key = true];
+            optional mac_addresses_type mac_addresses = 153;
+            message mac_addresses_type {
+               optional string public_base_address = 154;
+               optional uint32 public_address_count = 155;
+               optional string private_base_address = 156;
+               optional uint32 private_address_count = 157;
+            }
+         }
+         repeated module_list module = 151;
+      }
+   }
+}

@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional junos_228 jnpr_junos_228_ext = 228;
+}
+
+message junos_228 {
+   optional system_type system = 151;
+   message system_type {
+      optional linecard_type linecard = 151;
+      message linecard_type {
+         optional page_drops_type page_drops = 151;
+         message page_drops_type {
+            message page_drop_list {
+               optional uint32 pfe = 51 [(telemetry_options).is_key = true];
+               optional uint32 count = 52;
+               optional string interface = 53;
+               optional uint32 interface_oq = 54;
+               optional string interface_parent_ae = 55;
+            }
+            repeated page_drop_list page_drop = 152;
+         }
+      }
+   }
+}

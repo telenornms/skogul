@@ -1,0 +1,151 @@
+/*
+ * $Id:$
+ *
+ * Copyright (c) 2022, Juniper Networks, Inc.
+ * All rights reserved.
+ */
+
+module jkdsd_system_cpu_oc {
+  yang-version "1";
+
+  // namespace
+  namespace "http://juniper.net/yang/jkdsd-system-cpu-oc";
+
+  prefix "jkdsd";
+
+  import drend { prefix "dr"; }
+  import jnpr-proto { prefix jnpr-proto; }
+  jnpr-proto:message-id "JKDSD-SYSTEM-CPU-OC-MESSAGE-ID";
+  dr:command-app "jkdsd";
+  dr:sub-component "debug";
+
+  description "None";
+  revision "2022-02-22" {
+    description "";
+  }
+
+  grouping cpu-stats-group {
+      description "CPU times statistics";
+      leaf avg {
+          type uint8 {
+              range "0..100";
+          }
+          dr:source "avg";
+          dr:fieldnum 51;
+      }
+      leaf instant {
+          type uint8 {
+              range "0..100";
+          }
+          dr:source "instant";
+          dr:fieldnum 52;
+      }
+      leaf min {
+          type uint8 {
+              range "0..100";
+          }
+          dr:source "min";
+          dr:fieldnum 53;
+      }
+      leaf max {
+          type uint8 {
+              range "0..100";
+          }
+          dr:source "max";
+          dr:fieldnum 54;
+      }
+  }
+
+  grouping cpu-stats-total-group {
+      description "CPU times total statistics";
+      uses cpu-stats-group;
+      leaf interval {
+	  type uint32;
+	  dr:source "interval";
+	  dr:fieldnum 55;
+      }
+      leaf min-time {
+	  type uint64;
+	  dr:source "min-time";
+	  dr:fieldnum 56;
+      }
+      leaf max-time {
+	  type uint64;
+	  dr:source "max-time";
+	  dr:fieldnum 57;
+      }
+  }
+
+  grouping system-cpu-group {
+      container system {
+          dr:source "/system";
+          dr:fieldnum 151;
+          container cpus {
+              dr:source "cpus";
+              dr:fieldnum 151;
+                 list cpu {
+                     dr:source "cpu";
+                     dr:fieldnum 141;
+                        key index;
+                        leaf index {
+                            type uint32;
+                            dr:source "index";
+                            dr:fieldnum 51;
+                        }
+
+                        container state {
+                            dr:source "state";
+                            dr:fieldnum 151;
+
+                               leaf index {
+                                   type uint32;
+                                   dr:source "index";
+                                   dr:fieldnum 51;
+                               }
+
+                               container idle {
+                                   dr:source "idle";
+                                   dr:fieldnum 151;
+                                   uses cpu-stats-group;
+                               }
+                               container user {
+                                   dr:source "user";
+                                   dr:fieldnum 152;
+                                   uses cpu-stats-group;
+                               }
+                               container kernel {
+                                   dr:source "kernel";
+                                   dr:fieldnum 153;
+                                   uses cpu-stats-group;
+                               }
+                               container software-interrupt {
+                                   dr:source "software-interrupt";
+                                   dr:fieldnum 154;
+                                      uses cpu-stats-group;
+                               }
+                               container nice {
+                                   dr:source "nice";
+                                   dr:fieldnum 155;
+                                   uses cpu-stats-group;
+                               }
+                               container total {
+                                   dr:source "total";
+                                   dr:fieldnum 156;
+				   uses cpu-stats-total-group;
+			       }
+			}
+		 }
+	  }
+      }
+  }
+
+
+  rpc juniper-netconf-get {
+    dr:command-help "Default <get> rpc";
+    output {
+        uses system-cpu-group;
+    }
+  }
+}
+
+

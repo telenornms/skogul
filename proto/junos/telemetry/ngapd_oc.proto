@@ -1,0 +1,124 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional junos_225 jnpr_junos_225_ext = 225;
+}
+
+message junos_225 {
+   optional system_type system = 151;
+   message system_type {
+      optional subscriber_management_type subscriber_management = 151;
+      message subscriber_management_type {
+         optional agf_type agf = 151;
+         message agf_type {
+            optional ngap_type ngap = 151;
+            message ngap_type {
+               optional n2_type n2 = 151;
+               message n2_type {
+                  optional statistics_type statistics = 151;
+                  message statistics_type {
+                     optional amfs_type amfs = 151;
+                     message amfs_type {
+                        message amf_list {
+                           optional string amf_name = 51 [(telemetry_options).is_key = true];
+                           optional string ngap_amf_configured_name = 54;
+                           optional uint32 ngap_amf_stats_ng_setup_request = 55;
+                           optional uint32 ngap_amf_stats_ran_config_update = 56;
+                           optional uint32 ngap_amf_stats_amf_config_update_ack = 57;
+                           optional uint32 ngap_amf_stats_amf_config_update_failure = 58;
+                           optional uint32 ngap_amf_stats_ng_reset_sent = 59;
+                           optional uint32 ngap_amf_stats_ng_reset_ack_sent = 60;
+                           optional uint32 ngap_amf_stats_error_indication_sent = 61;
+                           optional uint32 ngap_amf_stats_ng_setup_response = 62;
+                           optional uint32 ngap_amf_stats_ng_setup_failure = 63;
+                           optional uint32 ngap_amf_stats_ran_config_update_ack = 64;
+                           optional uint64 ngap_amf_stats_ran_config_update_failure = 65;
+                           optional uint32 ngap_amf_stats_amf_config_update = 66;
+                           optional uint64 ngap_amf_stats_ng_reset_recv = 67;
+                           optional uint32 ngap_amf_stats_ng_reset_ack_recv = 68;
+                           optional uint32 ngap_amf_stats_error_indication_recv = 69;
+                           optional uint32 ngap_amf_stats_amf_status_indication = 70;
+                           optional uint32 ngap_amf_stats_overload_start = 71;
+                           optional uint32 ngap_amf_stats_overload_stop = 72;
+                           optional string ngap_amf_stats_init_ctx_setup_resp = 73;
+                           optional uint32 ngap_amf_stats_init_ctx_setup_failure = 74;
+                           optional uint32 ngap_amf_stats_ue_ctx_release_req = 75;
+                           optional uint32 ngap_amf_stats_ue_ctx_release_complete = 76;
+                           optional uint32 ngap_amf_stats_ue_ctx_mod_resp = 77;
+                           optional uint32 ngap_amf_stats_ue_ctx_mod_failure = 78;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_setup_resp = 79;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_release_resp = 80;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_modify_resp = 81;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_notify = 82;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_mod_indication = 83;
+                           optional uint64 ngap_amf_stats_initial_ue_message = 84;
+                           optional uint32 ngap_amf_stats_uplink_nas_transport = 85;
+                           optional uint64 ngap_amf_stats_nas_non_delivery_indication = 86;
+                           optional uint32 ngap_amf_stats_init_ctx_setup_req = 87;
+                           optional uint32 ngap_amf_stats_ue_ctx_release_cmd = 88;
+                           optional uint32 ngap_amf_stats_ue_ctx_mod_req = 89;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_setup_req = 90;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_release_cmd = 91;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_mod_req = 92;
+                           optional uint32 ngap_amf_stats_pdu_sess_res_mod_confirm = 93;
+                           optional uint32 ngap_amf_stats_downlink_nas_transport = 94;
+                           optional uint32 ngap_amf_stats_reroute_nas_req = 95;
+                           optional uint32 ngap_amf_stats_ue_tnla_bind_release_req = 96;
+                        }
+                        repeated amf_list amf = 151;
+                     }
+                  }
+               }
+               optional amf_state_type amf_state = 152;
+               message amf_state_type {
+                  optional aggregate_type aggregate = 151;
+                  message aggregate_type {
+                     optional amfs_type amfs = 151;
+                     message amfs_type {
+                        message amf_list {
+                           optional string amf_name = 53 [(telemetry_options).is_key = true];
+                           optional string ngap_amf_configured_name = 97;
+                           optional string ngap_amf_routing_instance = 98;
+                           optional string ngap_amf_is_default = 99;
+                           optional string ngap_amf_state = 100;
+                           optional string ngap_amf_overload_state = 101;
+                           optional uint32 ngap_amf_total_ues = 102;
+                        }
+                        repeated amf_list amf = 151;
+                     }
+                  }
+               }
+               optional user_equipment_type user_equipment = 153;
+               message user_equipment_type {
+                  optional ue_summary_stats_type ue_summary_stats = 151;
+                  message ue_summary_stats_type {
+                     optional total_type total = 151;
+                     message total_type {
+                        optional uint32 ngap_ue_total = 109;
+                        optional uint32 ngap_ue_establishing = 110;
+                        optional uint32 ngap_ue_established = 111;
+                        optional uint32 ngap_ue_releasing = 112;
+                        optional uint32 ngap_ue_released = 113;
+                     }
+                     optional amfs_type amfs = 152;
+                     message amfs_type {
+                        message amf_list {
+                           optional string amf_name = 52 [(telemetry_options).is_key = true];
+                           optional string ngap_amf_configured_name = 103;
+                           optional uint32 ngap_ue_total = 104;
+                           optional uint32 ngap_ue_establishing = 105;
+                           optional uint32 ngap_ue_established = 106;
+                           optional uint32 ngap_ue_releasing = 107;
+                           optional uint32 ngap_ue_released = 108;
+                        }
+                        repeated amf_list amf = 151;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

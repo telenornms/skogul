@@ -1,0 +1,53 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional network_instances_IGMP_262 jnpr_network_instances_IGMP_262_ext = 262;
+}
+
+message network_instances_IGMP_262 {
+   message network_instance_list {
+      optional string name = 51 [(telemetry_options).is_key = true];
+      optional protocols_type protocols = 151;
+      message protocols_type {
+         message protocol_list {
+            optional string identifier = 51;
+            optional string name = 52;
+            optional igmp_type igmp = 151;
+            message igmp_type {
+               optional interfaces_type interfaces = 151;
+               message interfaces_type {
+                  message interface_list {
+                     optional string interface_id = 51 [(telemetry_options).is_key = true];
+                     optional state_type state = 151;
+                     message state_type {
+                        optional uint64 query_expires = 52;
+                        optional string interface_id = 51;
+                        optional bool enabled = 56;
+                        optional uint32 version = 53;
+                        optional uint32 query_interval = 54;
+                     }
+                     optional membership_groups_type membership_groups = 152;
+                     message membership_groups_type {
+                        message group_list {
+                           optional string group = 57 [(telemetry_options).is_key = true];
+                           optional state_type state = 152;
+                           message state_type {
+                              optional string group = 57;
+                              optional string source = 58;
+                              optional string reporter = 59;
+                           }
+                        }
+                        repeated group_list group = 152;
+                     }
+                  }
+                  repeated interface_list interface = 151;
+               }
+            }
+         }
+         repeated protocol_list protocol = 151;
+      }
+   }
+   repeated network_instance_list network_instance = 151;
+}

@@ -1,0 +1,75 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional network_instances_PIM jnpr_network_instances_PIM_ext = 206;
+}
+
+message network_instances_PIM {
+   message network_instance_list {
+      optional string name = 51 [(telemetry_options).is_key = true];
+      optional protocols_type protocols = 151;
+      message protocols_type {
+         message protocol_list {
+            optional string identifier = 51;
+            optional string name = 52;
+            optional pim_type pim = 151;
+            message pim_type {
+               optional global_type global = 151;
+               message global_type {
+                  optional state_type state = 152;
+                  message state_type {
+                     optional counters_type counters = 154;
+                     message counters_type {
+                        optional uint32 hello_messages = 51;
+                        optional uint32 join_prune_messages = 52;
+                        optional uint32 bootstrap_messages = 53;
+                     }
+                  }
+                  optional rendezvous_points_type rendezvous_points = 155;
+                  message rendezvous_points_type {
+                     message rendezvous_point_list {
+                        optional state_type state = 155;
+                        message state_type {
+                           optional string address = 51;
+                           optional string multicast_groups = 52;
+                        }
+                     }
+                     repeated rendezvous_point_list rendezvous_point = 155;
+                  }
+               }
+               optional interfaces_type interfaces = 153;
+               message interfaces_type {
+                  message interface_list {
+                     optional string interface_id = 51 [(telemetry_options).is_key = true];
+                     optional state_type state = 154;
+                     message state_type {
+                        optional string interface_id = 52;
+                        optional string mode = 51;
+                     }
+                     optional neighbors_type neighbors = 151;
+                     message neighbors_type {
+                        message neighbor_list {
+                           optional string neighbor_address = 51 [(telemetry_options).is_key = true];
+                           optional state_type state = 151;
+                           message state_type {
+                              optional string neighbor_address = 51;
+                              optional string dr_address = 52;
+                              optional uint64 neighbor_established = 53;
+                              optional uint64 neighbor_expires = 54;
+                              optional string mode = 55;
+                           }
+                        }
+                        repeated neighbor_list neighbor = 151;
+                     }
+                  }
+                  repeated interface_list interface = 151;
+               }
+            }
+         }
+         repeated protocol_list protocol = 151;
+      }
+   }
+   repeated network_instance_list network_instance = 151;
+}

@@ -1,0 +1,62 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional state_mist_238 jnpr_state_mist_238_ext = 238;
+}
+
+message state_mist_238 {
+   optional system_type system = 156;
+   message system_type {
+      optional controller_connectivity_type controller_connectivity = 155;
+      message controller_connectivity_type {
+         optional mist_type mist = 154;
+         message mist_type {
+            optional string connectivity_state = 96;
+            optional uint32 error_code = 97;
+         }
+      }
+   }
+   optional protocols_type protocols = 153;
+   message protocols_type {
+      optional lldp_type lldp = 152;
+      message lldp_type {
+         optional interfaces_type interfaces = 151;
+         message interfaces_type {
+            message interface_list {
+               optional string name = 52 [(telemetry_options).is_key = true];
+               optional string local_port_id = 53;
+               optional string local_port_description = 54;
+               optional counters_type counters = 150;
+               message counters_type {
+                  optional uint64 frame_in = 57;
+                  optional uint64 frame_out = 58;
+               }
+               optional neighbors_type neighbors = 151;
+               message neighbors_type {
+                  message neighbor_list {
+                     optional string id = 66 [(telemetry_options).is_key = true];
+                     optional string system_name = 67;
+                     optional string system_description = 68;
+                     optional string chassis_id = 69;
+                     optional string port_id = 74;
+                     optional string port_description = 76;
+                     optional uint32 ttl = 79;
+                     optional controller_connectivity_type controller_connectivity = 149;
+                     message controller_connectivity_type {
+                        optional mist_type mist = 148;
+                        message mist_type {
+                           optional string connectivity_state = 98;
+                           optional uint32 error_code = 99;
+                        }
+                     }
+                  }
+                  repeated neighbor_list neighbor = 150;
+               }
+            }
+            repeated interface_list interface = 150;
+         }
+      }
+   }
+}

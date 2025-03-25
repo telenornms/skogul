@@ -1,0 +1,53 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional junos_pfe_slice_egr_qstats_243 jnpr_junos_pfe_slice_egr_qstats_243_ext = 243;
+}
+
+message junos_pfe_slice_egr_qstats_243 {
+   optional system_type system = 151;
+   message system_type {
+      optional linecard_type linecard = 151;
+      message linecard_type {
+         optional cos_type cos = 151;
+         message cos_type {
+            message interface_list {
+               optional string name = 51 [(telemetry_options).is_key = true];
+               optional string parent_ae_name = 52;
+               message slice_list {
+                  optional string slice_name = 51 [(telemetry_options).is_key = true];
+                  message out_queue_list {
+                     optional uint32 queue_number = 51 [(telemetry_options).is_key = true];
+                     optional uint64 queued_pkts = 52;
+                     optional uint64 queued_bytes = 53;
+                     optional uint64 pkts = 54;
+                     optional uint64 bytes = 55;
+                     optional uint64 tail_drop_pkts = 56;
+                     optional uint64 rl_drop_pkts = 57;
+                     optional uint64 rl_drop_bytes = 58;
+                     optional uint64 red_drop_pkts = 59;
+                     optional uint64 lp_red_drop_pkts = 60;
+                     optional uint64 mlp_red_drop_pkts = 61;
+                     optional uint64 mhp_red_drop_pkts = 62;
+                     optional uint64 hp_red_drop_pkts = 63;
+                     optional uint64 red_drop_bytes = 64;
+                     optional uint64 lp_red_drop_bytes = 65;
+                     optional uint64 mlp_red_drop_bytes = 66;
+                     optional uint64 mhp_red_drop_bytes = 67;
+                     optional uint64 hp_red_drop_bytes = 68;
+                     optional uint64 avg_buffer_occupancy = 69;
+                     optional uint64 cur_buffer_occupancy = 70;
+                     optional uint64 peak_buffer_occupancy = 71;
+                     optional uint64 allocated_buffer_size = 72;
+                  }
+                  repeated out_queue_list out_queue = 151;
+               }
+               repeated slice_list slice = 151;
+            }
+            repeated interface_list interface = 151;
+         }
+      }
+   }
+}

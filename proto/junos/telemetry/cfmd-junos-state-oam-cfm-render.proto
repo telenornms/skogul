@@ -1,0 +1,375 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional state_257 jnpr_state_257_ext = 257;
+}
+
+message state_257 {
+   optional protocols_type protocols = 151;
+   message protocols_type {
+      optional oam_type oam = 151;
+      message oam_type {
+         optional ethernet_type ethernet = 151;
+         message ethernet_type {
+            optional connectivity_fault_management_type connectivity_fault_management = 151;
+            message connectivity_fault_management_type {
+               optional bool enhanced_cfm_mode = 51;
+               optional interfaces_type interfaces = 152;
+               message interfaces_type {
+                  message interface_list {
+                     optional string name = 51 [(telemetry_options).is_key = true];
+                     optional maintenance_domains_type maintenance_domains = 151;
+                     message maintenance_domains_type {
+                        message maintenance_domain_list {
+                           optional string name = 51 [(telemetry_options).is_key = true];
+                           optional uint32 level = 52;
+                           optional string format = 53;
+                           optional maintenance_associations_type maintenance_associations = 151;
+                           message maintenance_associations_type {
+                              message maintenance_association_list {
+                                 optional string name = 51 [(telemetry_options).is_key = true];
+                                 optional string format = 52;
+                                 optional string ccm_interval = 53;
+                                 optional uint32 loss_threshold = 54;
+                                 optional bool continuity_check_status = 55;
+                                 optional meps_type meps = 151;
+                                 message meps_type {
+                                    message mep_list {
+                                       optional uint32 id = 51 [(telemetry_options).is_key = true];
+                                       optional string mac_address = 52;
+                                       optional string direction = 53;
+                                       optional bool auto_discovery = 54;
+                                       optional uint32 ccm_ltm_priority = 55;
+                                       optional string interface_status = 56;
+                                       optional string link_status = 57;
+                                       optional string port_status_tlv = 58;
+                                       optional string interface_status_tlv = 59;
+                                       optional string chassis_id = 60;
+                                       optional string management_address = 61;
+                                       optional bool send_id_tlv = 62;
+                                       optional rmeps_type rmeps = 151;
+                                       message rmeps_type {
+                                          message rmep_list {
+                                             optional uint32 id = 51 [(telemetry_options).is_key = true];
+                                             optional string status = 52;
+                                             optional string mac_address = 66;
+                                             optional string rmep_type = 62;
+                                             optional string interface = 53;
+                                             optional uint64 last_flapped = 54;
+                                             optional uint32 continuity = 55;
+                                             optional uint32 loss_threshold = 58;
+                                             optional bool rdi = 59;
+                                             optional string port_status_tlv = 60;
+                                             optional string interface_status_tlv = 61;
+                                             optional string chassis_id = 63;
+                                             optional string management_address = 64;
+                                             optional bool send_id_tlv = 65;
+                                             optional action_profile_type action_profile = 152;
+                                             message action_profile_type {
+                                                optional string name = 51;
+                                                optional string last_event = 52;
+                                                optional string action = 53;
+                                                optional uint64 action_time = 54;
+                                                optional uint64 action_clear_time = 55;
+                                             }
+                                             optional performance_monitoring_type performance_monitoring = 151;
+                                             message performance_monitoring_type {
+                                                optional delay_measurements_type delay_measurements = 151;
+                                                message delay_measurements_type {
+                                                   message delay_measurement_list {
+                                                      optional string name = 51 [(telemetry_options).is_key = true];
+                                                      optional string measurement_type = 52;
+                                                      optional string session_status = 53;
+                                                      optional uint32 cycle_time = 54;
+                                                      optional uint32 iteration_period = 55;
+                                                      optional bool infinite_iterations = 56;
+                                                      optional uint64 reset_time = 57;
+                                                      optional string reset_reason = 58;
+                                                      optional current_type current = 151;
+                                                      message current_type {
+                                                         optional uint32 measurement_id = 51;
+                                                         optional bool suspect_status = 52;
+                                                         optional uint64 start_time = 53;
+                                                         optional uint32 elapsed_time = 54;
+                                                         optional counters_type counters = 151;
+                                                         message counters_type {
+                                                            optional uint32 soam_pdus_sent = 51;
+                                                            optional uint32 soam_pdus_received = 52;
+                                                         }
+                                                         optional uint32 frame_delay_two_way_min = 55;
+                                                         optional uint32 frame_delay_two_way_max = 56;
+                                                         optional uint32 frame_delay_two_way_average = 57;
+                                                         optional uint32 frame_delay_forward_min = 58;
+                                                         optional uint32 frame_delay_forward_max = 59;
+                                                         optional uint32 frame_delay_forward_average = 60;
+                                                         optional uint32 frame_delay_backward_min = 61;
+                                                         optional uint32 frame_delay_backward_max = 62;
+                                                         optional uint32 frame_delay_backward_average = 63;
+                                                         optional uint32 inter_frame_delay_variation_forward_min = 64;
+                                                         optional uint32 inter_frame_delay_variation_forward_max = 65;
+                                                         optional uint32 inter_frame_delay_variation_forward_average = 66;
+                                                         optional uint32 inter_frame_delay_variation_backward_min = 67;
+                                                         optional uint32 inter_frame_delay_variation_backward_max = 68;
+                                                         optional uint32 inter_frame_delay_variation_backward_average = 69;
+                                                         optional uint32 inter_frame_delay_variation_two_way_min = 70;
+                                                         optional uint32 inter_frame_delay_variation_two_way_max = 71;
+                                                         optional uint32 inter_frame_delay_variation_two_way_average = 72;
+                                                         optional uint32 frame_delay_range_forward_max = 73;
+                                                         optional uint32 frame_delay_range_forward_average = 74;
+                                                         optional uint32 frame_delay_range_backward_max = 75;
+                                                         optional uint32 frame_delay_range_backward_average = 76;
+                                                         optional uint32 frame_delay_range_two_way_max = 77;
+                                                         optional uint32 frame_delay_range_two_way_average = 78;
+                                                         optional bins_type bins = 152;
+                                                         message bins_type {
+                                                            message frame_delay_list {
+                                                               optional string type = 51;
+                                                               optional uint32 bin = 52;
+                                                               optional uint32 lower_bound = 53;
+                                                               optional uint32 complete_measurements = 54;
+                                                            }
+                                                            repeated frame_delay_list frame_delay = 151;
+                                                            message inter_frame_delay_variation_list {
+                                                               optional string type = 51;
+                                                               optional uint32 bin = 52;
+                                                               optional uint32 lower_bound = 53;
+                                                               optional uint32 complete_measurements = 54;
+                                                            }
+                                                            repeated inter_frame_delay_variation_list inter_frame_delay_variation = 152;
+                                                            message frame_delay_range_list {
+                                                               optional string type = 51;
+                                                               optional uint32 bin = 52;
+                                                               optional uint32 lower_bound = 53;
+                                                               optional uint32 complete_measurements = 54;
+                                                            }
+                                                            repeated frame_delay_range_list frame_delay_range = 153;
+                                                         }
+                                                      }
+                                                      optional histories_type histories = 152;
+                                                      message histories_type {
+                                                         message history_list {
+                                                            optional uint32 id = 50 [(telemetry_options).is_key = true];
+                                                            optional uint32 measurement_id = 51;
+                                                            optional bool suspect_status = 52;
+                                                            optional uint64 start_time = 53;
+                                                            optional uint32 elapsed_time = 54;
+                                                            optional counters_type counters = 151;
+                                                            message counters_type {
+                                                               optional uint32 soam_pdus_sent = 51;
+                                                               optional uint32 soam_pdus_received = 52;
+                                                            }
+                                                            optional uint32 frame_delay_two_way_min = 55;
+                                                            optional uint32 frame_delay_two_way_max = 56;
+                                                            optional uint32 frame_delay_two_way_average = 57;
+                                                            optional uint32 frame_delay_forward_min = 58;
+                                                            optional uint32 frame_delay_forward_max = 59;
+                                                            optional uint32 frame_delay_forward_average = 60;
+                                                            optional uint32 frame_delay_backward_min = 61;
+                                                            optional uint32 frame_delay_backward_max = 62;
+                                                            optional uint32 frame_delay_backward_average = 63;
+                                                            optional uint32 inter_frame_delay_variation_forward_min = 64;
+                                                            optional uint32 inter_frame_delay_variation_forward_max = 65;
+                                                            optional uint32 inter_frame_delay_variation_forward_average = 66;
+                                                            optional uint32 inter_frame_delay_variation_backward_min = 67;
+                                                            optional uint32 inter_frame_delay_variation_backward_max = 68;
+                                                            optional uint32 inter_frame_delay_variation_backward_average = 69;
+                                                            optional uint32 inter_frame_delay_variation_two_way_min = 70;
+                                                            optional uint32 inter_frame_delay_variation_two_way_max = 71;
+                                                            optional uint32 inter_frame_delay_variation_two_way_average = 72;
+                                                            optional uint32 frame_delay_range_forward_max = 73;
+                                                            optional uint32 frame_delay_range_forward_average = 74;
+                                                            optional uint32 frame_delay_range_backward_max = 75;
+                                                            optional uint32 frame_delay_range_backward_average = 76;
+                                                            optional uint32 frame_delay_range_two_way_max = 77;
+                                                            optional uint32 frame_delay_range_two_way_average = 78;
+                                                            optional bins_type bins = 152;
+                                                            message bins_type {
+                                                               message frame_delay_list {
+                                                                  optional string type = 51;
+                                                                  optional uint32 bin = 52;
+                                                                  optional uint32 lower_bound = 53;
+                                                                  optional uint32 complete_measurements = 54;
+                                                               }
+                                                               repeated frame_delay_list frame_delay = 151;
+                                                               message inter_frame_delay_variation_list {
+                                                                  optional string type = 51;
+                                                                  optional uint32 bin = 52;
+                                                                  optional uint32 lower_bound = 53;
+                                                                  optional uint32 complete_measurements = 54;
+                                                               }
+                                                               repeated inter_frame_delay_variation_list inter_frame_delay_variation = 152;
+                                                               message frame_delay_range_list {
+                                                                  optional string type = 51;
+                                                                  optional uint32 bin = 52;
+                                                                  optional uint32 lower_bound = 53;
+                                                                  optional uint32 complete_measurements = 54;
+                                                               }
+                                                               repeated frame_delay_range_list frame_delay_range = 153;
+                                                            }
+                                                            optional uint64 end_time = 79;
+                                                         }
+                                                         repeated history_list history = 151;
+                                                      }
+                                                   }
+                                                   repeated delay_measurement_list delay_measurement = 151;
+                                                }
+                                                optional loss_measurements_type loss_measurements = 152;
+                                                message loss_measurements_type {
+                                                   message loss_measurement_list {
+                                                      optional string name = 51 [(telemetry_options).is_key = true];
+                                                      optional string measurement_type = 52;
+                                                      optional string session_status = 53;
+                                                      optional uint32 cycle_time = 54;
+                                                      optional uint32 iteration_period = 55;
+                                                      optional bool infinite_iterations = 56;
+                                                      optional uint64 reset_time = 57;
+                                                      optional string reset_reason = 58;
+                                                      optional current_type current = 151;
+                                                      message current_type {
+                                                         optional iterator_type iterator = 152;
+                                                         message iterator_type {
+                                                            optional counters_type counters = 151;
+                                                            message counters_type {
+                                                               optional uint32 soam_pdus_skipped_threshold = 51;
+                                                               optional uint32 soam_pdus_skipped_threshold_window = 52;
+                                                               optional uint32 soam_pdus_out_of_sequence = 53;
+                                                               optional uint32 local_tx_frames_last_sent = 54;
+                                                               optional uint32 local_rx_frames_last_sent = 55;
+                                                               optional uint32 forward_tx_frames_last_received = 56;
+                                                               optional uint32 backward_tx_frames_last_received = 57;
+                                                               optional uint32 frame_loss_ratio_samples = 58;
+                                                            }
+                                                            optional uint32 sample_size = 51;
+                                                            optional double last_forward_frame_loss_ratio = 52;
+                                                            optional double last_backward_frame_loss_ratio = 53;
+                                                         }
+                                                         optional loss_type loss = 151;
+                                                         message loss_type {
+                                                            optional uint32 measurement_id = 51;
+                                                            optional bool suspect_status = 52;
+                                                            optional uint64 start_time = 53;
+                                                            optional uint32 elapsed_time = 54;
+                                                            optional counters_type counters = 152;
+                                                            message counters_type {
+                                                               optional uint32 soam_pdus_sent = 51;
+                                                               optional uint32 soam_pdus_received = 52;
+                                                               optional uint32 forward_frames_sent = 53;
+                                                               optional uint32 forward_frames_received = 54;
+                                                               optional uint32 backward_frames_sent = 55;
+                                                               optional uint32 backward_frames_received = 56;
+                                                               optional uint32 forward_frames_lost = 57;
+                                                               optional uint32 backward_frames_lost = 58;
+                                                            }
+                                                            optional double forward_min_frame_loss_ratio = 57;
+                                                            optional double forward_max_frame_loss_ratio = 58;
+                                                            optional double forward_average_frame_loss_ratio = 59;
+                                                            optional double backward_min_frame_loss_ratio = 62;
+                                                            optional double backward_max_frame_loss_ratio = 63;
+                                                            optional double backward_average_frame_loss_ratio = 64;
+                                                         }
+                                                         optional availability_type availability = 153;
+                                                         message availability_type {
+                                                            optional uint32 measurement_id = 65;
+                                                            optional bool suspect_status = 66;
+                                                            optional uint64 start_time = 67;
+                                                            optional uint32 elapsed_time = 68;
+                                                            optional uint32 forward_high_loss = 51;
+                                                            optional uint32 backward_high_loss = 52;
+                                                            optional uint32 forward_consecutive_high_loss = 53;
+                                                            optional uint32 backward_consecutive_high_loss = 54;
+                                                            optional uint32 forward_available = 55;
+                                                            optional uint32 backward_available = 56;
+                                                            optional uint32 forward_unavailable = 57;
+                                                            optional uint32 backward_unavailable = 58;
+                                                            optional double forward_min_frame_loss_ratio = 59;
+                                                            optional double forward_max_frame_loss_ratio = 60;
+                                                            optional double forward_average_frame_loss_ratio = 61;
+                                                            optional double backward_min_frame_loss_ratio = 62;
+                                                            optional double backward_max_frame_loss_ratio = 63;
+                                                            optional double backward_average_frame_loss_ratio = 64;
+                                                            optional string last_forward_status = 69;
+                                                            optional string last_backward_status = 70;
+                                                            optional uint64 last_forward_transition_time = 71;
+                                                            optional uint64 last_backward_transition_time = 72;
+                                                         }
+                                                      }
+                                                      optional histories_type histories = 152;
+                                                      message histories_type {
+                                                         message history_list {
+                                                            optional uint32 id = 51 [(telemetry_options).is_key = true];
+                                                            optional loss_type loss = 151;
+                                                            message loss_type {
+                                                               optional uint32 measurement_id = 51;
+                                                               optional bool suspect_status = 52;
+                                                               optional uint64 start_time = 53;
+                                                               optional uint32 elapsed_time = 54;
+                                                               optional counters_type counters = 151;
+                                                               message counters_type {
+                                                                  optional uint32 soam_pdus_sent = 51;
+                                                                  optional uint32 soam_pdus_received = 52;
+                                                                  optional uint32 forward_frames_sent = 53;
+                                                                  optional uint32 forward_frames_received = 54;
+                                                                  optional uint32 backward_frames_sent = 55;
+                                                                  optional uint32 backward_frames_received = 56;
+                                                                  optional uint32 forward_frames_lost = 57;
+                                                                  optional uint32 backward_frames_lost = 58;
+                                                               }
+                                                               optional double forward_min_frame_loss_ratio = 57;
+                                                               optional double forward_max_frame_loss_ratio = 58;
+                                                               optional double forward_average_frame_loss_ratio = 59;
+                                                               optional double backward_min_frame_loss_ratio = 62;
+                                                               optional double backward_max_frame_loss_ratio = 63;
+                                                               optional double backward_average_frame_loss_ratio = 64;
+                                                               optional uint64 end_time = 65;
+                                                            }
+                                                            optional availability_type availability = 153;
+                                                            message availability_type {
+                                                               optional uint32 measurement_id = 66;
+                                                               optional bool suspect_status = 67;
+                                                               optional uint64 start_time = 68;
+                                                               optional uint32 elapsed_time = 69;
+                                                               optional uint32 forward_high_loss = 51;
+                                                               optional uint32 backward_high_loss = 52;
+                                                               optional uint32 forward_consecutive_high_loss = 53;
+                                                               optional uint32 backward_consecutive_high_loss = 54;
+                                                               optional uint32 forward_available = 55;
+                                                               optional uint32 backward_available = 56;
+                                                               optional uint32 forward_unavailable = 57;
+                                                               optional uint32 backward_unavailable = 58;
+                                                               optional double forward_min_frame_loss_ratio = 59;
+                                                               optional double forward_max_frame_loss_ratio = 60;
+                                                               optional double forward_average_frame_loss_ratio = 61;
+                                                               optional double backward_min_frame_loss_ratio = 62;
+                                                               optional double backward_max_frame_loss_ratio = 63;
+                                                               optional double backward_average_frame_loss_ratio = 64;
+                                                               optional uint64 end_time = 65;
+                                                            }
+                                                         }
+                                                         repeated history_list history = 151;
+                                                      }
+                                                   }
+                                                   repeated loss_measurement_list loss_measurement = 151;
+                                                }
+                                             }
+                                          }
+                                          repeated rmep_list rmep = 151;
+                                       }
+                                    }
+                                    repeated mep_list mep = 151;
+                                 }
+                              }
+                              repeated maintenance_association_list maintenance_association = 151;
+                           }
+                        }
+                        repeated maintenance_domain_list maintenance_domain = 151;
+                     }
+                  }
+                  repeated interface_list interface = 151;
+               }
+            }
+         }
+      }
+   }
+}

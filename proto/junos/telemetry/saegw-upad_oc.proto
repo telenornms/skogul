@@ -1,0 +1,315 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional junos_saegw jnpr_junos_saegw_ext = 205;
+}
+
+message junos_saegw {
+   optional services_type services = 151;
+   message services_type {
+      optional mobile_edge_type mobile_edge = 151;
+      message mobile_edge_type {
+         optional system_stats_type system_stats = 152;
+         message system_stats_type {
+            optional string system_state = 73;
+            optional uint32 cur_inflight = 74;
+            optional string sync_status = 75;
+            optional string shared_memory = 76;
+            optional string heap_memory = 77;
+         }
+         optional sessions_type sessions = 151;
+         message sessions_type {
+            optional summary_type summary = 153;
+            message summary_type {
+               optional session_type session = 154;
+               message session_type {
+                  optional uint64 established = 58;
+                  optional uint64 wait = 59;
+                  optional uint64 invalid = 60;
+                  optional uint64 deleting = 61;
+                  optional uint64 init = 62;
+                  optional uint64 total = 63;
+               }
+               optional bearer_type bearer = 155;
+               message bearer_type {
+                  optional uint64 established = 58;
+                  optional uint64 wait = 59;
+                  optional uint64 invalid = 60;
+                  optional uint64 deleting = 61;
+                  optional uint64 init = 62;
+                  optional uint64 total = 63;
+               }
+               optional dlfar_bearer_type dlfar_bearer = 156;
+               message dlfar_bearer_type {
+                  optional uint64 forward = 64;
+                  optional uint64 idle = 65;
+                  optional uint64 buffering = 66;
+                  optional uint64 drop = 67;
+                  optional uint64 total = 68;
+               }
+               optional qos_flow_type qos_flow = 157;
+               message qos_flow_type {
+                  optional uint64 established = 69;
+                  optional uint64 wait = 70;
+                  optional uint64 invalid = 71;
+                  optional uint64 total = 72;
+               }
+               optional control_peers_type control_peers = 158;
+               message control_peers_type {
+                  message control_peer_list {
+                     optional string ip_addr = 51 [(telemetry_options).is_key = true];
+                     optional session_type session = 160;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 161;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated control_peer_list control_peer = 159;
+               }
+               optional access_peers_type access_peers = 162;
+               message access_peers_type {
+                  message access_peer_list {
+                     optional string ip_addr = 51 [(telemetry_options).is_key = true];
+                     optional session_type session = 164;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 165;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated access_peer_list access_peer = 163;
+               }
+               optional core_peers_type core_peers = 167;
+               message core_peers_type {
+                  message core_peer_list {
+                     optional string ip_addr = 51 [(telemetry_options).is_key = true];
+                     optional session_type session = 169;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 170;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated core_peer_list core_peer = 168;
+               }
+               optional slots_type slots = 171;
+               message slots_type {
+                  message slot_list {
+                     optional uint32 pfe = 52 [(telemetry_options).is_key = true];
+                     optional session_type session = 173;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 174;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated slot_list slot = 172;
+               }
+               optional pics_type pics = 175;
+               message pics_type {
+                  message pic_list {
+                     optional string pfe = 53 [(telemetry_options).is_key = true];
+                     optional session_type session = 177;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 178;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated pic_list pic = 176;
+               }
+               optional apfes_type apfes = 179;
+               message apfes_type {
+                  message apfe_list {
+                     optional string apfe_name = 54 [(telemetry_options).is_key = true];
+                     optional string apfe_role = 55;
+                     optional string apfe_sync = 56;
+                     optional session_type session = 181;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 182;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated apfe_list apfe = 180;
+               }
+               optional apns_type apns = 183;
+               message apns_type {
+                  message apn_list {
+                     optional string apn_name = 57 [(telemetry_options).is_key = true];
+                     optional session_type session = 185;
+                     message session_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                     optional bearer_type bearer = 186;
+                     message bearer_type {
+                        optional uint64 established = 58;
+                        optional uint64 wait = 59;
+                        optional uint64 invalid = 60;
+                        optional uint64 deleting = 61;
+                        optional uint64 init = 62;
+                        optional uint64 total = 63;
+                     }
+                  }
+                  repeated apn_list apn = 184;
+               }
+            }
+         }
+         optional peers_type peers = 190;
+         message peers_type {
+            optional summary_type summary = 191;
+            message summary_type {
+               optional uint32 total_control_peers = 81;
+               optional uint32 total_access_peers = 82;
+               optional uint32 total_core_peers = 83;
+               optional uint32 total_cpfu_peers = 84;
+            }
+            optional control_peers_type control_peers = 192;
+            message control_peers_type {
+               message control_peer_list {
+                  optional string routing_instance = 86;
+                  optional uint32 heartbeat_request_received = 87;
+                  optional uint32 heartbeat_response_sent = 88;
+                  optional uint32 heartbeat_request_sent = 89;
+                  optional uint32 heartbeat_response_received = 90;
+                  optional uint32 association_setup_request_received = 91;
+                  optional uint32 association_setup_response_sent = 92;
+                  optional uint32 association_release_request_received = 93;
+                  optional uint32 association_release_response_sent = 94;
+                  optional uint32 session_establishment_request_received = 95;
+                  optional uint32 session_establishment_request_accepted = 96;
+                  optional uint32 session_establishment_request_rejected = 97;
+                  optional uint64 session_modification_request_received = 98;
+                  optional uint32 session_modification_request_accepted = 99;
+                  optional uint32 session_modification_request_rejected = 100;
+                  optional uint32 session_deletion_request_received = 101;
+                  optional uint32 session_deletion_request_accepted = 102;
+                  optional uint32 session_deletion_request_rejected = 103;
+                  optional string ip_addr = 51 [(telemetry_options).is_key = true];
+               }
+               repeated control_peer_list control_peer = 193;
+            }
+            optional access_peers_type access_peers = 194;
+            message access_peers_type {
+               message access_peer_list {
+                  optional string routing_instance = 106;
+                  optional uint32 echo_request_received = 109;
+                  optional uint32 echo_response_sent = 110;
+                  optional uint32 error_indication_received = 111;
+                  optional uint32 end_marker_sent = 112;
+                  optional string ip_addr = 51 [(telemetry_options).is_key = true];
+               }
+               repeated access_peer_list access_peer = 195;
+            }
+            optional core_peers_type core_peers = 196;
+            message core_peers_type {
+               message core_peer_list {
+                  optional string routing_instance = 114;
+                  optional uint32 echo_request_received = 115;
+                  optional uint32 echo_response_sent = 116;
+                  optional string ip_addr = 51 [(telemetry_options).is_key = true];
+               }
+               repeated core_peer_list core_peer = 197;
+            }
+            optional cpfu_peers_type cpfu_peers = 198;
+            message cpfu_peers_type {
+               message cpfu_peer_list {
+                  optional string routing_instance = 114;
+                  optional uint32 echo_request_received = 115;
+                  optional uint32 echo_response_sent = 116;
+                  optional string ip_addr = 51 [(telemetry_options).is_key = true];
+               }
+               repeated cpfu_peer_list cpfu_peer = 199;
+            }
+         }
+         optional events_type events = 201;
+         message events_type {
+            optional string association = 121;
+            optional string peer = 122;
+            optional string apfe = 123;
+            optional string ha_sync = 124;
+            optional string load_control = 125;
+         }
+      }
+   }
+}

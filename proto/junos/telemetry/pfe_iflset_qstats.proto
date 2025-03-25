@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+import "telemetry_top.proto";
+
+extend JuniperNetworksSensors {
+   optional junos_pfe_iflset_234 jnpr_junos_pfe_iflset_234_ext = 234;
+}
+
+message junos_pfe_iflset_234 {
+   optional system_type system = 151;
+   message system_type {
+      optional linecard_type linecard = 151;
+      message linecard_type {
+         optional cos_type cos = 151;
+         message cos_type {
+            message interface_list {
+               optional string name = 51 [(telemetry_options).is_key = true];
+               message interface_set_list {
+                  optional uint64 iflsetindex = 51 [(telemetry_options).is_key = true];
+                  optional output_type output = 151;
+                  message output_type {
+                     message queue_list {
+                        optional uint64 queue_number = 51 [(telemetry_options).is_key = true];
+                        optional uint64 queued_pkts = 52;
+                        optional uint64 queued_octets = 53;
+                        optional uint64 transmit_pkts = 54;
+                        optional uint64 transmit_octets = 55;
+                        optional uint64 tail_drop_pkts = 56;
+                        optional uint64 red_drop_pkts = 57;
+                        optional uint64 red_drop_octets = 58;
+                     }
+                     repeated queue_list queue = 151;
+                  }
+               }
+               repeated interface_set_list interface_set = 151;
+            }
+            repeated interface_list interface = 151;
+         }
+      }
+   }
+}
