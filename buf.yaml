@@ -1,26 +1,10 @@
 version: v2
-build:
-  roots:
-    - .
-  excludes:
-    # Extension number 44 has already been used in "JuniperNetworksSensors" by extension "jnpr_junos_l2tp_ext" defined in jl2tpd_oc.proto.
-    - gen/junos-telemetry-interface/jl2tpd_oc.proto
-    - gen/junos-telemetry-interface/sr_te_transit_tunnel_stats.proto
-    # Extension number 45 has already been used in "JuniperNetworksSensors" by extension "jnpr_junos_ppp_ext" defined in jpppd_oc.proto
-    - gen/junos-telemetry-interface/jpppd_oc.proto
-    - gen/junos-telemetry-interface/sr_te_ingress_tunnel_stats.proto
-  deps:
-    - googleapis
-    - github.com/protocolbuffers/protobuf
-    - github.com/golang/protobuf
 breaking:
   use:
     - FILE
 lint:
   use:
-    - DEFAULT
-generate:
-  - name: go
-    path: gen
-    opt: paths=source_relative
-    strategy: directory
+    - STANDARD
+modules:
+  - path: proto/junos/telemetry
+  - path: proto/usp
