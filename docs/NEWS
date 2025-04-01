@@ -1,3 +1,11 @@
+v0.31.0
+=======
+
+Fixes a bug in influxdb parser that incorrectly closed opened apostrophes
+when found escaped apostrophes.
+
+Adds options to add CA files for certificate verification in influxdb sender.
+
 v0.29.2
 =======
 
