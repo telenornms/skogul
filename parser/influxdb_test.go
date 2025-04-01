@@ -350,3 +350,31 @@ func TestInfluxDBParseTelegrafSystemdUnitLines(t *testing.T) {
 		}
 	}
 }
+
+func TestInfluxDBLineParseEscapedQuouteInQuoutedString(t *testing.T) {
+	b := []byte(`x509_cert,ansible_release=8.10,common_name=common_name,country=NO,host=some_host,issuer_common_name=some_issuer_common_name,ocsp_stapled=no,organization=Organization\ Random,organizational_unit=Computer,public_key_algorithm=RSA,san=some_san\,127.0.0.1,serial_number=13377331,signature_algorithm=SHA256-RSA,source=file:///local/keys/some_crt_file.crt,type=leaf,verification=invalid age=1416048i,enddate=1746137169i,expiry=2990350i,startdate=1741730770i,verification_code=1i,verification_error="x509: certificate signed by unknown authority (possibly because of \"crypto/rsa: verification error\" while trying to verify candidate authority certificate \"some_crt_file.crt\")" 1337146819000000000`)
+
+	container, err := parser.InfluxDB{}.Parse(b)
+
+	if err != nil {
+		t.Errorf("Failed to parse data as influx line protocol: %v", err)
+		return
+	}
+
+	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
+		t.Errorf("Expected parsed influx data to return a container with 1 metric")
+		return
+	}
+
+	if container.Metrics[0].Time == nil {
+		t.Errorf("Expected container to add own timestamp")
+	}
+
+	isNowish := container.Metrics[0].Time.UnixNano() - time.Now().UnixNano()
+
+	// Arbitrary value for difference between when timestamp was created in test and the
+	// one that should have been added in the parser
+	if isNowish > 100 {
+		t.Errorf("Expected container time to be reasonably close to timestamp generated in test, expected <=100 but got '%d'", isNowish)
+	}
+}
