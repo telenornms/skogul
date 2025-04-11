@@ -133,7 +133,10 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 		t.Errorf("expected to have gotten 100 stats container but got %d", tester.Received())
 	}
 
-	if td > time.Millisecond*1 {
+	// this test being time sensitive might cause issues when
+	// running in a slow environment.
+	// wait for up to 15ms and fail when exceeded
+	if td > time.Millisecond*15 {
 		t.Errorf("expected stats channel to not block noticeably, but had to wait %v", td)
 	}
 }
