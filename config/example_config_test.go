@@ -24,6 +24,7 @@
 package config_test
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -35,9 +36,21 @@ import (
 func getExampleConfigs() (map[string][]byte, error) {
 	examplesPath := "../docs/examples"
 
-	files, err := os.ReadDir(examplesPath)
+	fileDirInfos, err := os.ReadDir(examplesPath)
 	if err != nil {
 		return nil, err
+	}
+
+	files := make([]os.FileInfo, 0, len(fileDirInfos))
+
+	// maintaining `FileInfo` interface for files passed to readFileAndParseConfig()
+	for _, info := range fileDirInfos {
+		fileInfo, err := os.Stat(filepath.Join(examplesPath, info.Name()))
+		if err != nil {
+			fmt.Println("Error getting file info for", info.Name(), ":", err)
+			continue
+		}
+		files = append(files, fileInfo)
 	}
 
 	bytes := make(map[string][]byte, 0)
@@ -60,7 +73,7 @@ func getExampleConfigs() (map[string][]byte, error) {
 	return bytes, nil
 }
 
-func readFileAndParseConfig(path string, info os.DirEntry) ([]byte, error) {
+func readFileAndParseConfig(path string, info os.FileInfo) ([]byte, error) {
 	// Assuming we can parse all .json files in the example config directory
 	if filepath.Ext(info.Name()) != ".json" {
 		return nil, nil
