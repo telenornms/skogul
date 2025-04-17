@@ -215,6 +215,12 @@ func parseFieldValue(value string) interface{} {
 			return i
 		}
 	}
+	// If the last char is an 'u' and the rest is numeric, this is an unsigned integer
+	if value[len(value)-1:] == "u" {
+		if u, err := strconv.ParseUint(value[0:len(value)-1], 0, 64); err == nil {
+			return u
+		}
+	}
 
 	if f, err := strconv.ParseFloat(value, 64); err == nil {
 		return f

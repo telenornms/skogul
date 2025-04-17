@@ -244,9 +244,17 @@ func (idb *InfluxDB) toInfluxValue(value interface{}) string {
 		if ok {
 			return fmt.Sprintf("%di", i)
 		}
+		i2, ok := value.(int32)
+		if ok {
+			return fmt.Sprintf("%di", i2)
+		}
 		u, ok := value.(uint64)
 		if ok {
 			return fmt.Sprintf("%du", u)
+		}
+		u2, ok := value.(uint32)
+		if ok {
+			return fmt.Sprintf("%du", u2)
 		}
 	}
 	return fmt.Sprintf("%#v", value)

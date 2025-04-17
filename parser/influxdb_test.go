@@ -80,7 +80,7 @@ func TestInfluxDBLineParse(t *testing.T) {
 }
 
 func TestInfluxDBLineParseWithoutTimestamp(t *testing.T) {
-	b := []byte("system,host=testhost uptime=5464i")
+	b := []byte("system,host=testhost uptime=5464i,foo=123u")
 
 	container, err := parser.InfluxDB{}.Parse(b)
 
@@ -92,6 +92,11 @@ func TestInfluxDBLineParseWithoutTimestamp(t *testing.T) {
 	if container == nil || container.Metrics == nil || len(container.Metrics) == 0 {
 		t.Errorf("Expected parsed influx data to return a container with 1 metric")
 		return
+	}
+
+	_, ok := container.Metrics[0].Data["foo"].(uint64)
+	if !ok {
+		t.Errorf("Expected metric foo to be uint64, but it isn't. foo is: %#T", container.Metrics[0].Data["foo"])
 	}
 
 	if container.Metrics[0].Time == nil {
