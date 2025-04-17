@@ -1,3 +1,22 @@
+v0.31.2
+=======
+
+Release date: 2025-04-17
+
+More minor influx fixes on how unsigned integers are handled, both in
+sender and encoder.
+
+This is done mainly to fix Svipul which currently ends up encoded
+ifHcInOctets correctly, but not e.g. ifInErrors. E.g.:
+
+Example of bad encoding seen from svipul using real life SNMP data using
+v0.31.1:
+
+skrot,target=e1-kbula.tg25.tg.no,ifName=dsc ifName="dsc",ifDescr="dsc",ifOperStatus="up(1)",ifAdminStatus="up(1)",ifHCInOctets=0u,ifHCOutOctets=0u,ifOutErrors=0x0,ifInUnknownProtos=0x0,ifAlias="",ifHighSpeed=0x0,ifPhysAddress="",ifOutDiscards=0x0,ifInErrors=0x0,ifOutQLen=0x0,ifIndex=5,ifType="other(1)",ifLastChange=0xb48,ifInDiscards=0x0 1744919740470127807
+
+This should hopefully the remaining issues.
+
+
 v0.31.1
 =======
 
