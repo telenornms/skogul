@@ -1,3 +1,28 @@
+v0.31.0
+=======
+
+Fixes a bug in influxdb parser that incorrectly closed opened apostrophes
+when found escaped apostrophes.
+
+Adds options to add CA files for certificate verification in influxdb sender.
+
+v0.30.0
+=======
+
+Release date: 2025-01-14
+
+Adds a transformer that convert from uW to dBm.
+
+v0.29.2
+=======
+
+Adds the ability to ban fields based on regular expression. Also improves
+the replace transformer that only supported metadata fields, now it also
+supports the data field.
+
+Adds new data type support to cast transformer. Now you will be able to
+transform between byte-arrays (blobs) and strings. 
+
 v0.28.0
 =======
 

@@ -26,6 +26,7 @@ package sender
 
 import (
 	"bytes"
+	"crypto/tls"
 	"fmt"
 	"io"
 	"net/http"
@@ -50,6 +51,8 @@ type InfluxDB struct {
 	Measurement             string          `doc:"Measurement name to write to."`
 	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
 	Timeout                 skogul.Duration `doc:"HTTP timeout"`
+	Insecure                bool            `doc:"Disable TLS certificate validation."`
+	RootCA                  string          `doc:"Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults."`
 	ConvertIntToFloat       bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
 	Token                   skogul.Secret   `doc:"Authorization token used in InfluxDB 2.0"`
 	client                  *http.Client
@@ -102,7 +105,20 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		if idb.Timeout.Duration == 0 {
 			idb.Timeout.Duration = 20 * time.Second
 		}
-		idb.client = &http.Client{Timeout: idb.Timeout.Duration}
+		cp, err := getCertPool(idb.RootCA)
+		if err != nil {
+			influxLog.Errorf("Failed to initialize root CA pool")
+		}
+
+		tlsConfig := &tls.Config{
+			InsecureSkipVerify: idb.Insecure,
+			RootCAs:            cp,
+		}
+		tran := http.Transport{
+			TLSClientConfig: tlsConfig,
+		}
+
+		idb.client = &http.Client{Transport: &tran, Timeout: idb.Timeout.Duration}
 	})
 	added := 0
 	nmdata := 0
@@ -240,6 +256,10 @@ func (idb *InfluxDB) toInfluxValue(value interface{}) string {
 func (idb *InfluxDB) Verify() error {
 	if idb.URL == "" {
 		return skogul.MissingArgument("URL")
+	}
+	_, err := getCertPool(idb.RootCA)
+	if err != nil {
+		return fmt.Errorf("failed to read custom root CA (RootCA: %s): %w", idb.RootCA, err)
 	}
 	if idb.Measurement == "" && idb.MeasurementFromMetadata == "" {
 		return skogul.MissingArgument("Measurement or MeasurementFromMetadata")

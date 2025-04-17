@@ -293,7 +293,7 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 
 		if escape {
 			escape = false
-			if c != 'x' && c != 'X' && c != '0' && c != 'u' && c != 'U' {
+			if c != 'x' && c != 'X' && c != '0' && c != 'u' && c != 'U' && c != '"' {
 				// \x is hex, so let's keep the \ and the x so that a consumer can
 				// parse the value themselves. Let's also do the same for decimals (\0) and unicode (\u).
 				if removeEscapedCharsFromResult {
@@ -301,6 +301,13 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 					escapeCharsWidth = append([]int{previousWidth}, escapeCharsWidth...)
 				}
 			}
+			continue
+		}
+
+		// Skip next char
+		if c == '\\' {
+			escape = true
+			previousWidth = width
 			continue
 		}
 
@@ -318,13 +325,6 @@ func influxLineParser(data []byte, sectionBreak rune, removeEscapedCharsFromResu
 		// We found the opening of a quote, continue until we find the closing one
 		if c == '"' {
 			openQuote = true
-			continue
-		}
-
-		// Skip next char
-		if c == '\\' {
-			escape = true
-			previousWidth = width
 			continue
 		}
 
