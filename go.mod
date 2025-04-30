@@ -1,6 +1,8 @@
 module github.com/telenornms/skogul
 
-go 1.23
+go 1.23.0
+
+toolchain go1.24.0
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.4.3
