@@ -1,0 +1,63 @@
+{
+  "receivers": {
+    "http": {
+      "type": "http",
+      "address": ":8081",
+      "log204ok": false,
+      "handlers": {
+        "/": "json"
+      }
+    }
+  },
+  "handlers": {
+    "json": {
+      "parser": "skogul",
+      "transformers": ["split_default", "check_value"],
+      "sender": "print"
+    }
+  },
+  "transformers": {
+		"split_default": {
+			"type": "split",
+      "field": ["stats"]
+    },
+		"copy_metadata": {
+			"type": "metadata",
+			"extractfromdata": [
+				"some_metric",
+				"time",
+				"super_metric"
+			]
+		},
+		"check_value": {
+			"type": "switchdata",
+			"cases": [
+				{
+					"when": "/foo",
+					"allowmissing": true,
+					"transformers": ["copy_metadata", "flatten_structure" ]
+				},
+				{
+					"when": "/foo",
+					"exists": true,
+					"transformers": ["copy_metadata", "split_metrics"]
+				}
+			]
+		},
+		"split_metrics": {
+			"type": "split",
+			"field": ["some_nested_structure"]
+		},
+		"flatten_structure": {
+			"type": "data",
+			"flatten": [
+				["foobarbaz"],
+			]
+		}
+  },
+  "senders": {
+    "print": {
+      "type": "debug"
+    }
+  }
+}
