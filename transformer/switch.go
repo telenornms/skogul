@@ -38,12 +38,12 @@ type Case struct {
 	Exists       bool                     `doc:"Used to check if the 'when' field exists"`
 	Is           interface{}              `doc:"Used for the specific value of the stated metadata field"`
 	Transformers []*skogul.TransformerRef `doc:"The transformers to run when the defined conditional is true"`
-	AllowMissing bool                     `doc:"Allows 'When' to not exist in structure`
+	AllowMissing bool                     `doc:"Allows 'When' to not exist in structure"`
 }
 
 // Switch is a wrapper for a list of cases
 type Switch struct {
-	Cases []Case `doc:"A list of switch cases "`
+	Cases []Case `doc:"A list of switch cases"`
 }
 
 var switchLogger = skogul.Logger("transformer", "switch")
@@ -105,7 +105,7 @@ func (sw *Switch) Verify() error {
 }
 
 type SwitchData struct {
-	Cases []Case `doc:"A list of switch cases "`
+	Cases []Case `doc:"A list of switch cases"`
 }
 
 var switchDataLogger = skogul.Logger("transformer", "switch_data")
