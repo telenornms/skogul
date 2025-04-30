@@ -91,7 +91,14 @@ func init() {
 		Name:    "switch",
 		Aliases: []string{},
 		Alloc:   func() interface{} { return &Switch{} },
-		Help:    "Conditionally apply transformers.",
+		Help:    "Conditionally apply transformers to metadata field.",
+		Extras:  []interface{}{Case{}},
+	})
+	Auto.Add(skogul.Module{
+		Name:    "switchdata",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &SwitchData{} },
+		Help:    "Conditionally apply transformers to data field.",
 		Extras:  []interface{}{Case{}},
 	})
 	Auto.Add(skogul.Module{
