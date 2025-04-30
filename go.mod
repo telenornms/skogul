@@ -1,6 +1,6 @@
 module github.com/telenornms/skogul
 
-go 1.20
+go 1.23.8
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.4.3
@@ -23,7 +23,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/nats-io/nkeys v0.4.7 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
-	golang.org/x/crypto v0.23.0 // indirect
+	golang.org/x/crypto v0.35.0 // indirect
 )
 
 require (
@@ -38,5 +38,5 @@ require (
 	github.com/prometheus/common v0.54.0
 	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
-	golang.org/x/sys v0.20.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
 )
