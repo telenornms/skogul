@@ -238,3 +238,33 @@ func TestSwitchCaseFieldExists(t *testing.T) {
 		t.Error("switch transformer did not remove field based on 'exists' option")
 	}
 }
+
+func TestSwitchCaseAllowMissing(t *testing.T) {
+	data := `{"metrics": [{"data": {"remove": "me"}}]}`
+	caseTransformer := transformer.Metadata{
+		Remove: []string{"remove"},
+	}
+	tref := skogul.TransformerRef{
+		T: &caseTransformer,
+	}
+	transform := transformer.SwitchData{
+		Cases: []transformer.Case{
+			{
+				When:         "/foo",
+				AllowMissing: true,
+				Transformers: []*skogul.TransformerRef{&tref},
+			},
+		},
+	}
+
+	c := skogul.Container{}
+	if err := json.Unmarshal([]byte(data), &c); err != nil {
+		t.Errorf("failed to parse test case data: %s", err)
+		return
+	}
+
+	if err := transform.Transform(&c); err != nil {
+		t.Errorf("failed to run transform: %s", err)
+		return
+	}
+}
