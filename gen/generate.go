@@ -1,14 +1,49 @@
-// Package gen consists of auto-generated protobuf code for the junos
-// streaming telemetry interface. This file provides the commands to
-// (re)generate the files.
+// Package gen consists of auto-generated protobuf code for the Junos
+// streaming telemetry interface and USP (User Services Platform).
+//
+// # Regenerating Protocol Buffer Code
+//
+// This project uses buf (https://buf.build) for protocol buffer code generation
+// with vtprotobuf (https://github.com/planetscale/vtprotobuf) for optimized
+// serialization performance.
+//
+// To regenerate the protocol buffer code:
+//
+//	make generate
+//
+// Or directly:
+//
+//	./gen/generate.sh
+//
+// # What Happens During Generation
+//
+// 1. Extracts proto files from tarballs in gen/tar-balls/
+//   - junos-telemetry-interface-25.2R1.8-EVO.tar.gz
+//   - usp-interface-1-1.tar.gz
+//
+// 2. Injects go_package options into extracted proto files
+//
+// 3. Removes proto files matching /(gnmi|sr_|Gnmi)/ pattern
+//
+// 4. Runs buf generate to create:
+//   - Standard protobuf Go code (.pb.go files)
+//   - vtprotobuf optimized code (_vtproto.pb.go files)
+//
+// Generated code is placed in:
+//   - gen/junos/telemetry/
+//   - gen/usp/
+//
+// # Configuration Files
+//
+// - buf.yaml: Defines the buf workspace and modules
+// - buf.gen.yaml: Configures code generation plugins and options
+// - gen/generate.sh: Orchestrates extraction and generation
+//
+// # Migration from gogo/protobuf
+//
+// This project was migrated from github.com/gogo/protobuf (now deprecated)
+// to the official google.golang.org/protobuf with vtprotobuf for performance.
+// The migration maintains API compatibility while using modern protobuf tooling.
 package gen
 
-//go:generate /bin/bash -c "rm -f junos/telemetry/*pb.go; mkdir -p junos/telemetry"
-//go:generate /bin/bash -c "tar xzf tar-balls/junos-telemetry-interface-23.2R1.tar.gz"
-//go:generate /bin/bash -c "for a in junos-telemetry-interface/*.proto; do if echo $DOLLAR{a} | egrep -qv '/(gnmi|sr_|Gnmi)'; then protoc --gogo_out=junos/telemetry --gogo_opt=M=$DOLLAR{PWD}junos-telemetry-interface/ -Ijunos-telemetry-interface/ $DOLLAR{a}; else echo skipping $DOLLAR{a}; fi; done"
-//go:generate /bin/bash -c "sed -i.bak 's/^package.*/package telemetry/g' junos/telemetry/*.go && rm junos/telemetry/*.go.bak"
-
-//go:generate /bin/bash -c "rm -f usp/*pb.go; mkdir -p usp"
-//go:generate /bin/bash -c "tar xf tar-balls/usp-interface-1-1.tar.gz"
-//go:generate /bin/bash -c "protoc --gogo_out=usp --gogo_opt=M=${PWD}/usp usp-record-1-1.proto"
-//go:generate /bin/bash -c "protoc --gogo_out=usp --gogo_opt=M=${PWD}/usp usp-msg-1-1.proto"
+//go:generate ./generate.sh

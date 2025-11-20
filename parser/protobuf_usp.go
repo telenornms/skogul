@@ -7,7 +7,6 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/gogo/protobuf/proto"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/gen/usp"
 )
@@ -60,7 +59,6 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 	metadata := p.createRecordMetadata(record, recordData)
 
 	json, err := p.extractJSON(recordData["event_data"].(string))
-
 	if err != nil {
 		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
 		return nil, fmt.Errorf("failed to unmarshal json: %w", err)
@@ -83,10 +81,11 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 	return &container, err
 }
 
-// getUspRecord Unmarshals []byte into a protoc generated struct and returns it
+// getUspRecord Unmarshals []byte into a protoc generated struct and returns it.
+// Uses vtprotobuf's optimized UnmarshalVT for performance.
 func (p *USP_Parser) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
-	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
+	if err := unmarshaledMessage.UnmarshalVT(d); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to unmarshal protocol buffer: %w", err)
 	}
@@ -95,12 +94,12 @@ func (p *USP_Parser) getUspRecord(d []byte) (*usp.Record, error) {
 
 /*
 getRecordMsgPayload unmarshals []byte consisting of the record payload into
-a protoc generated struct and returns it
+a protoc generated struct and returns it.
 */
 func (p *USP_Parser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 	msgPayload := &usp.Msg{}
 
-	if err := proto.Unmarshal(payload, msgPayload); err != nil {
+	if err := msgPayload.UnmarshalVT(payload); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to unmarshal payload: %w", err)
 	}
@@ -110,7 +109,7 @@ func (p *USP_Parser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 
 // createRecordMetadata creates a map[string]interface{} of the metadata for skogul.Metric
 func (p *USP_Parser) createRecordMetadata(h *usp.Record, xh map[string]interface{}) map[string]interface{} {
-	var d = make(map[string]interface{})
+	d := make(map[string]interface{})
 
 	d["event"] = xh["event"]
 	d["event_type"] = xh["event_type"]
@@ -139,9 +138,8 @@ func (p *USP_Parser) extractJSON(s string) (map[string]interface{}, error) {
 
 // createRecordData creates a map[string]interface{} of the record payload for skogul.Metric
 func (p *USP_Parser) createRecordData(t *usp.Record) (map[string]interface{}, error) {
-	var jsonMap = make(map[string]interface{})
+	jsonMap := make(map[string]interface{})
 	payload, err := p.getRecordMsgPayload(t.GetNoSessionContext().GetPayload())
-
 	if err != nil {
 		return nil, err
 	}

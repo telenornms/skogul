@@ -1,0 +1,19 @@
+version: v2
+modules:
+  - path: gen/junos-telemetry-interface
+    name: buf.build/telenornms/skogul-junos-telemetry
+    excludes:
+      # State message collision within junos-telemetry-interface-25.2R1.8-EVO
+      # (collides with prioritised transceiver.proto)
+      - gen/junos-telemetry-interface/ddosd-junos-state-ddos-protection-render.proto
+  - path: gen/usp-interface
+    name: buf.build/telenornms/skogul-usp
+lint:
+  use:
+    - STANDARD
+  except:
+    - PACKAGE_DIRECTORY_MATCH
+    - IMPORT_NO_PUBLIC
+breaking:
+  use:
+    - FILE

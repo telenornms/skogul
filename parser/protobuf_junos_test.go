@@ -30,11 +30,10 @@ import (
 	"testing"
 	"time"
 
-	//proto "github.com/golang/protobuf/proto"
-	"github.com/gogo/protobuf/proto"
 	"github.com/telenornms/skogul"
 	junos_protobuf_telemetry "github.com/telenornms/skogul/gen/junos/telemetry"
 	"github.com/telenornms/skogul/parser"
+	"google.golang.org/protobuf/proto"
 )
 
 /*
@@ -88,7 +87,7 @@ func BenchmarkProtoBufParse(b *testing.B) {
 	}
 }
 
-func generateJunosTelemetryStream(sensorName string, eps junos_protobuf_telemetry.EnterpriseSensors) junos_protobuf_telemetry.TelemetryStream {
+func generateJunosTelemetryStream(sensorName string, eps *junos_protobuf_telemetry.EnterpriseSensors) junos_protobuf_telemetry.TelemetryStream {
 	systemId := "localhost"
 	now := uint64(time.Now().Unix())
 	componentId := uint32(1)
@@ -100,7 +99,7 @@ func generateJunosTelemetryStream(sensorName string, eps junos_protobuf_telemetr
 		ComponentId:    &componentId,
 		SubComponentId: &subComponentId,
 		SensorName:     &sensorName,
-		Enterprise:     (*junos_protobuf_telemetry.EnterpriseSensors)(&eps),
+		Enterprise:     eps,
 		// Should this be used ?  Ietf:       (*junos_protobuf_telemetry.IETFSensors)(&juniperNetworksSensors),
 	}
 }
@@ -108,9 +107,7 @@ func generateJunosTelemetryStream(sensorName string, eps junos_protobuf_telemetr
 func generateOpticsDiag(val float32) junos_protobuf_telemetry.TelemetryStream {
 	eps := junos_protobuf_telemetry.EnterpriseSensors{}
 	juniperNetworksSensors := junos_protobuf_telemetry.JuniperNetworksSensors{}
-	if err := proto.SetExtension(&eps, junos_protobuf_telemetry.E_JuniperNetworks, &juniperNetworksSensors); err != nil {
-		fmt.Printf("Failed to set juniperNetworks extension: %v\n", err)
-	}
+	proto.SetExtension(&eps, junos_protobuf_telemetry.E_JuniperNetworks, &juniperNetworksSensors)
 
 	ifName := "ge-1/0/1"
 	optics := junos_protobuf_telemetry.Optics{
@@ -127,10 +124,8 @@ func generateOpticsDiag(val float32) junos_protobuf_telemetry.TelemetryStream {
 			},
 		},
 	}
-	if err := proto.SetExtension(&juniperNetworksSensors, junos_protobuf_telemetry.E_JnprOpticsExt, &optics); err != nil {
-		fmt.Printf("Failed to set Optics extension: %v\n", err)
-	}
-	return generateJunosTelemetryStream("foo", eps)
+	proto.SetExtension(&juniperNetworksSensors, junos_protobuf_telemetry.E_JnprOpticsExt, &optics)
+	return generateJunosTelemetryStream("foo", &eps)
 }
 
 func parseDiagStatsResp(data map[string]interface{}, key string) interface{} {

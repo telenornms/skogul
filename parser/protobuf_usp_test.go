@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gogo/protobuf/proto"
 	"github.com/telenornms/skogul/gen/usp"
 	"github.com/telenornms/skogul/parser"
+	"google.golang.org/protobuf/proto"
 )
 
 func readFile(file string, t *testing.T) []byte {
