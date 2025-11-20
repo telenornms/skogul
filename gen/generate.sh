@@ -1,53 +1,62 @@
 #!/bin/bash
-# Script to regenerate protobuf code for Junos telemetry and USP interfaces
-# This script handles both GNU sed (Linux) and BSD sed (macOS)
+set -euo pipefail
 
-set -e
+# Script to extract protobuf tarballs and generate Go code using buf
 
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# Cross-platform in-place sed
-# BSD sed (macOS) requires -i '' while GNU sed requires just -i
-sed_inplace() {
-    if sed --version 2>/dev/null | grep -q GNU; then
-        sed -i "$@"
-    else
-        sed -i '' "$@"
+cd "$PROJECT_ROOT"
+
+echo "==> Cleaning old proto extraction directories..."
+rm -rf gen/junos-telemetry-interface gen/usp-interface
+
+echo "==> Extracting Junos telemetry proto files..."
+mkdir -p gen/junos-telemetry-interface
+tar xzf gen/tar-balls/junos-telemetry-interface-25.2R1.8-EVO.tar.gz -C gen/junos-telemetry-interface
+
+echo "==> Extracting USP proto files..."
+mkdir -p gen/usp-interface
+tar xzf gen/tar-balls/usp-interface-1-1.tar.gz -C gen/usp-interface
+
+echo "==> Injecting go_package options into proto files..."
+for proto_file in gen/junos-telemetry-interface/*.proto; do
+  if [ -f "$proto_file" ]; then
+    # Check if uncommented go_package already exists
+    if ! grep -q "^option go_package" "$proto_file"; then
+      sed -i.bak '/^syntax = /a\
+option go_package = "github.com/telenornms/skogul/gen/junos/telemetry";
+' "$proto_file"
+      rm -f "${proto_file}.bak"
     fi
-}
-
-echo "Generating Junos telemetry protobuf code..."
-
-# Clean and prepare output directory
-rm -f junos/telemetry/*pb.go
-mkdir -p junos/telemetry
-
-# Extract proto files
-tar xzf tar-balls/junos-telemetry-interface-23.2R1.tar.gz
-
-# Generate Go code from proto files, skipping gnmi/sr_/Gnmi patterns
-for a in junos-telemetry-interface/*.proto; do
-    if echo "${a}" | grep -Eqv '/(gnmi|sr_|Gnmi)'; then
-        protoc --gogo_out=junos/telemetry --gogo_opt=M="${PWD}/junos-telemetry-interface/" -Ijunos-telemetry-interface/ "${a}"
-    else
-        echo "skipping ${a}"
-    fi
+  fi
 done
 
-# Fix package names in generated files
-sed_inplace 's/^package.*/package telemetry/g' junos/telemetry/*.go
+# Remove administrative protos (gnmi, sr_, Gnmi patterns)
+find gen/junos-telemetry-interface -name "*.proto" | grep -E '(gnmi|sr_|Gnmi)' | xargs rm -f || true
+# ddosd-junos-state-ddos-protection-render.proto excluded via buf.yaml (State message collision)
 
-echo "Generating USP protobuf code..."
+echo "==> Cleaning old generated Go files..."
+rm -rf gen/junos gen/usp
 
-# Clean and prepare output directory
-rm -f usp/*pb.go
-mkdir -p usp
+echo "==> Running buf generate..."
+go run github.com/bufbuild/buf/cmd/buf generate
 
-# Extract proto files
-tar xf tar-balls/usp-interface-1-1.tar.gz
+echo "==> Moving generated files to proper locations..."
+mkdir -p gen/junos/telemetry
+mkdir -p gen/usp
 
-# Generate Go code
-protoc --gogo_out=usp --gogo_opt=M="${PWD}/usp" usp-record-1-1.proto
-protoc --gogo_out=usp --gogo_opt=M="${PWD}/usp" usp-msg-1-1.proto
+for file in gen/*.pb.go; do
+  if [ -f "$file" ]; then
+    if grep -q "^package usp$" "$file" 2>/dev/null; then
+      mv "$file" gen/usp/
+    else
+      # otherwise it's a Junos telemetry file (package telemetry)
+      mv "$file" gen/junos/telemetry/
+    fi
+  fi
+done
 
-echo "Done!"
+echo "==> Protocol buffer generation complete!"
+echo "    - gen/junos/telemetry/"
+echo "    - gen/usp/"

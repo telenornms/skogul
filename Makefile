@@ -14,6 +14,10 @@ skogul: $(wildcard *.go */*.go */*/*.go)
 	@echo 🤸 go build !
 	@CGO_ENABLED=0 go build -ldflags "-X main.versionNo=${VERSION_NO}" -o skogul ./cmd/skogul
 
+generate:
+	@echo 🔧 Generating protocol buffer code with buf
+	@./gen/generate.sh
+
 docs/skogul.rst: skogul
 	@echo 😽 Generating documentation$@
 	@./skogul -make-man > $@
@@ -219,6 +223,9 @@ clean:
 	@-rm -f skogul.1
 	@-rm -f *.rpm
 	@-rm -f coverage.out
+	@-rm -fr gen/junos-telemetry-interface
+	@-rm -fr gen/usp-interface
+	@-rm -fr gen/github.com
 
 help:
 	@echo "Several targets(🎯) exist:"
@@ -230,6 +237,7 @@ help:
 	@echo ""
 	@echo " - rpm - build RPM"
 	@echo " - clean - remove known build crap - use git clean -fdx for more thorough cleaning"
+	@echo " - generate - regenerate protocol buffer code using buf"
 	@echo " - test / bench - run go test, with and without benchmarks "
 	@echo "                  note that this uses "-short" to avoid mysql/postgres dependencies. "
 	@echo " - fmtcheck - Runs gofmt -d -s, excluding generated code"
