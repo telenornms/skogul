@@ -31,8 +31,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	//"github.com/golang/protobuf/proto"
-	"github.com/gogo/protobuf/proto"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 
 	"github.com/telenornms/skogul"
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"
@@ -110,10 +110,10 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 }
 
 // parseTelemetryStream parses a protocol buffer with the Juniper TelemetryStream
-// protobuf definitions
+// protobuf definitions. Uses vtprotobuf's optimized UnmarshalVT for performance.
 func parseTelemetryStream(protobuffer []byte) (*pb.TelemetryStream, error) {
 	telemetrystream := &pb.TelemetryStream{}
-	if err := proto.Unmarshal(protobuffer, telemetrystream); err != nil {
+	if err := telemetrystream.UnmarshalVT(protobuffer); err != nil {
 		// @ToDo: Consider what to do if failing to unmarshal the protobuf
 		// Reasons: Invalid proto spec, invalid data, invalid version of proto spec (?)
 		// not necessary to return here if we dont log or anything
@@ -185,16 +185,28 @@ func applyJuniperHaxx(messageOnly proto.Message) {
 	}
 }
 
+// getMessageExtensions extracts all message-type extensions from a protoreflect message.
+func getMessageExtensions(msg protoreflect.Message) []proto.Message {
+	var exts []proto.Message
+	msg.Range(func(field protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+		if field.IsExtension() && field.Message() != nil {
+			exts = append(exts, v.Message().Interface())
+		}
+		return true // continue
+	})
+	return exts
+}
+
 /*
 createData creates a string-interface map of skogul.Metric type Data
 by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
 */
 func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, error) {
-	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
-	if err != nil {
+	extension := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
+	if extension == nil {
 		atomic.AddUint64(&x.stats.MissingExtension, 1)
-		return nil, fmt.Errorf("failed to get Juniper protobuf extension: %w", err)
+		return nil, fmt.Errorf("failed to get Juniper protobuf extension")
 	}
 
 	enterpriseExtension, ok := extension.(proto.Message)
@@ -203,52 +215,27 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 		return nil, fmt.Errorf("failed to cast to juniper message")
 	}
 
-	registeredExtensions := proto.RegisteredExtensions(enterpriseExtension)
-
-	var regextensions []*proto.ExtensionDesc
-	for _, ext := range registeredExtensions {
-		regextensions = append(regextensions, ext)
-	}
-
-	availableExtensions, err := proto.GetExtensions(enterpriseExtension, regextensions)
-	if err != nil {
-		return nil, err
-	}
-
-	var jsonMessage []byte
-	found := false
-	for _, ext := range availableExtensions {
-		if ext == nil {
-			continue
-		}
-
-		if found {
-			return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do")
-		}
-
-		messageOnly, ok := ext.(proto.Message)
-		if !ok {
-			return nil, fmt.Errorf("failed to cast to message: %v", ext)
-		}
-		applyJuniperHaxx(messageOnly)
-
-		jsonMessage, err = json.Marshal(messageOnly)
-		if err != nil {
-			if x.Debug {
-				pbLog.WithError(err).Infof("failed to marshal protobuf. data: %v", messageOnly)
-			}
-			atomic.AddUint64(&x.stats.FailedToJsonMarshal, 1)
-			return nil, err
-		}
-
-		found = true
-	}
-
-	if !found {
+	exts := getMessageExtensions(enterpriseExtension.ProtoReflect())
+	if len(exts) == 0 {
 		if x.Debug {
-			pbLog.Infof("no valid extensions found. availableExtensions: %v, registered: %v, extensions: %v, telemetry: %v, regextensions: %v", availableExtensions, registeredExtensions, extension, telemetry, regextensions)
+			pbLog.Infof("no valid extensions found. enterprise extension: %v", enterpriseExtension)
 		}
 		return nil, fmt.Errorf("found no valid extensions")
+	}
+	if len(exts) > 1 {
+		return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do")
+	}
+
+	messageOnly := exts[0]
+	applyJuniperHaxx(messageOnly)
+
+	jsonMessage, err := json.Marshal(messageOnly)
+	if err != nil {
+		if x.Debug {
+			pbLog.WithError(err).Infof("failed to marshal protobuf. data: %v", messageOnly)
+		}
+		atomic.AddUint64(&x.stats.FailedToJsonMarshal, 1)
+		return nil, err
 	}
 
 	var metrics map[string]any
