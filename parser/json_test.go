@@ -45,6 +45,8 @@ func TestSkogulJSONParse(t *testing.T) {
 func BenchmarkSkogulJSONParse(b *testing.B) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
 	x := parser.SkogulJSON{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}
@@ -95,6 +97,8 @@ func TestJSONArrayParse(t *testing.T) {
 func BenchmarkJSONParse(b *testing.B) {
 	by := []byte(`{"string":"text","float":1.11,"integer":5,"timestamp":"2019-03-15T11:08:02+01:00","key":"value"}`)
 	x := parser.JSON{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}

@@ -191,6 +191,8 @@ func TestMNROnDataset(t *testing.T) {
 func BenchmarkMNRParse(b *testing.B) {
 	line := []byte("1599730066	group	127.0.0.1.ifXTable..1.12.RATEP.Pkts/s.820424119	0.0	key=1")
 	x := parser.MNR{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(line)
 	}

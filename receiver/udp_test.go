@@ -300,6 +300,7 @@ func BenchmarkUDP_protobuf(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
 	ds := &dummySender{}
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 10, 10)
 	}
@@ -309,6 +310,7 @@ func BenchmarkUDP_json_Threads1(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
 	ds := &dummyJSONSender{u5, 20}
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}
@@ -318,6 +320,7 @@ func BenchmarkUDP_json_Threads10(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
 	ds := &dummyJSONSender{u6, 20}
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}
@@ -327,6 +330,7 @@ func BenchmarkUDP_json_Threads100(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
 	ds := &dummyJSONSender{u7, 20}
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}

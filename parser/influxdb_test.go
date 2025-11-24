@@ -302,6 +302,8 @@ func TestInfluxDBParseTelegrafCmdLines(t *testing.T) {
 func BenchmarkInfluxDBLineParse(b *testing.B) {
 	by := []byte(`disk,device=sda1,fstype=fat32,host=testhost,mode=rw,path=/private/var/vm free=98896670720i,used=1073762304i,used_percent=1.0740798769394355,inodes_total=4882452880i,total=499963174912i 1585737350000000000`)
 	x := parser.InfluxDB{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}
@@ -310,6 +312,8 @@ func BenchmarkInfluxDBLineParse(b *testing.B) {
 func BenchmarkInfluxDBLineParseWithoutTimestamp(b *testing.B) {
 	by := []byte(`disk,device=sda1,fstype=fat32,host=testhost,mode=rw,path=/private/var/vm free=98896670720i,used=1073762304i,used_percent=1.0740798769394355,inodes_total=4882452880i,total=499963174912i`)
 	x := parser.InfluxDB{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}

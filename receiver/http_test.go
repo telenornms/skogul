@@ -403,6 +403,7 @@ func BenchmarkHttp_json(b *testing.B) {
 	sPlainOrigin := bConfig.Senders["plain_origin"].Sender.(*sender.HTTP)
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sPlainOrigin, &validContainer, 10, 10)
 	}
@@ -412,6 +413,7 @@ func BenchmarkHttp_ssl_json(b *testing.B) {
 	sPlainOrigin := bConfig.Senders["ssl_auth"].Sender.(*sender.HTTP)
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sPlainOrigin, &validContainer, 10, 10)
 	}
@@ -421,6 +423,7 @@ func BenchmarkHttp_batch_json(b *testing.B) {
 	sPlainBatch := bConfig.Senders["plain_batch"].Sender
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sPlainBatch, &validContainer, 100, 1)
 	}
@@ -430,6 +433,7 @@ func BenchmarkHttp_nobatch_json(b *testing.B) {
 	sPlainNoBatch := bConfig.Senders["plain_origin"].Sender
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sPlainNoBatch, &validContainer, 100, 100)
 	}
@@ -439,6 +443,7 @@ func BenchmarkHttp_ssl_nobatch_json(b *testing.B) {
 	sSSL := bConfig.Senders["ssl_auth"].Sender
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sSSL, &validContainer, 100, 100)
 	}
@@ -448,6 +453,7 @@ func BenchmarkHttp_ssl_batch_json(b *testing.B) {
 	sSSL := bConfig.Senders["ssl_auth_batch"].Sender
 	sCommon := bConfig.Senders["common"].Sender.(*sender.Test)
 	sCommon.SetSync(true)
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		sCommon.TestSync(b, sSSL, &validContainer, 100, 1)
 	}
