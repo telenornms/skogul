@@ -82,9 +82,101 @@ func TestProtoBuf(t *testing.T) {
 func BenchmarkProtoBufParse(b *testing.B) {
 	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
 	x := parser.ProtoBuf{}
-	for b.Loop() {
-		x.Parse(by)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_, err := x.Parse(by)
+		if err != nil {
+			b.Fatalf("Parse failed: %v", err)
+		}
 	}
+}
+
+// BenchmarkProtoBufUnmarshal benchmarks just the protobuf unmarshal step
+func BenchmarkProtoBufUnmarshal(b *testing.B) {
+	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		telemetrystream := &junos_protobuf_telemetry.TelemetryStream{}
+		if err := proto.Unmarshal(by, telemetrystream); err != nil {
+			b.Fatalf("Unmarshal failed: %v", err)
+		}
+	}
+}
+
+// BenchmarkProtoBufFullPipeline benchmarks the complete parsing pipeline
+// including protobuf unmarshal, extension extraction, JSON conversion
+func BenchmarkProtoBufFullPipeline(b *testing.B) {
+	// Generate a synthetic telemetry stream for consistent benchmarking
+	telemetry := generateOpticsDiag(-40)
+	bytes, err := proto.Marshal(&telemetry)
+	if err != nil {
+		b.Fatalf("Failed to marshal test data: %v", err)
+	}
+
+	x := parser.ProtoBuf{}
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		c, err := x.Parse(bytes)
+		if err != nil {
+			b.Fatalf("Parse failed: %v", err)
+		}
+		if c == nil || len(c.Metrics) == 0 {
+			b.Fatal("Parse returned empty container")
+		}
+	}
+}
+
+// BenchmarkProtoBufMemoryFootprint measures memory allocations
+func BenchmarkProtoBufMemoryFootprint(b *testing.B) {
+	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
+	x := parser.ProtoBuf{}
+
+	b.Run("SmallMessage", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			_, _ = x.Parse(by)
+		}
+	})
+
+	b.Run("LargeMessage", func(b *testing.B) {
+		// Generate a larger message with more optics data
+		val := float32(-40)
+		eps := junos_protobuf_telemetry.EnterpriseSensors{}
+		juniperNetworksSensors := junos_protobuf_telemetry.JuniperNetworksSensors{}
+		proto.SetExtension(&eps, junos_protobuf_telemetry.E_JuniperNetworks, &juniperNetworksSensors)
+
+		// Create 100 optics diag entries
+		opticsDiags := make([]*junos_protobuf_telemetry.OpticsInfos, 100)
+		for j := 0; j < 100; j++ {
+			ifName := fmt.Sprintf("ge-%d/0/%d", j/10, j%10)
+			opticsDiags[j] = &junos_protobuf_telemetry.OpticsInfos{
+				IfName: &ifName,
+				OpticsDiagStats: &junos_protobuf_telemetry.OpticsDiagStats{
+					OpticsLaneDiagStats: []*junos_protobuf_telemetry.OpticsDiagLaneStats{
+						{LaneLaserReceiverPowerDbm: &val},
+					},
+				},
+			}
+		}
+
+		optics := junos_protobuf_telemetry.Optics{OpticsDiag: opticsDiags}
+		proto.SetExtension(&juniperNetworksSensors, junos_protobuf_telemetry.E_JnprOpticsExt, &optics)
+		telemetry := generateJunosTelemetryStream("large-test", &eps)
+
+		largeBytes, err := proto.Marshal(&telemetry)
+		if err != nil {
+			b.Fatalf("Failed to marshal large message: %v", err)
+		}
+
+		b.ReportAllocs()
+		b.SetBytes(int64(len(largeBytes)))
+		for i := 0; i < b.N; i++ {
+			_, _ = x.Parse(largeBytes)
+		}
+	})
 }
 
 func generateJunosTelemetryStream(sensorName string, eps *junos_protobuf_telemetry.EnterpriseSensors) junos_protobuf_telemetry.TelemetryStream {
