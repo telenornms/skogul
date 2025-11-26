@@ -272,7 +272,6 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]interfa
 	delete(metrics, "componentId")
 	delete(metrics, "subComponentId")
 
-	atomic.AddUint64(&x.stats.Parsed, 1)
 	return metrics, nil
 }
 
