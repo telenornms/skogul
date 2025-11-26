@@ -38,6 +38,10 @@ import (
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"
 )
 
+// infinityReplacementDbm is used to replace -Inf optics power values
+// with a reasonable floor value (-40 dBm) for JSON compatibility.
+const infinityReplacementDbm float32 = -40.0
+
 var pbLog = skogul.Logger("parser", "protobuf")
 
 // ProtoBuf parses a byte string-representation of a Container
@@ -137,7 +141,7 @@ applyJuniperHaxx adjusts incoming telemetry packets to make them JSON-compatible
 So far, it's mainly about fixing -Inf.
 */
 func applyJuniperHaxx(messageOnly proto.Message) {
-	var foo float32 = -40.0
+	replacement := infinityReplacementDbm
 	optics, ok := messageOnly.(*pb.Optics)
 	if !ok {
 		return
@@ -169,12 +173,12 @@ func applyJuniperHaxx(messageOnly proto.Message) {
 		for _, lane := range odiags.OpticsDiagStats.OpticsLaneDiagStats {
 			if lane.LaneLaserReceiverPowerDbm != nil {
 				if skogul.IsInf(*lane.LaneLaserReceiverPowerDbm, -1) {
-					lane.LaneLaserReceiverPowerDbm = &foo
+					lane.LaneLaserReceiverPowerDbm = &replacement
 				}
 			}
 			if lane.LaneLaserOutputPowerDbm != nil {
 				if skogul.IsInf(*lane.LaneLaserOutputPowerDbm, -1) {
-					lane.LaneLaserOutputPowerDbm = &foo
+					lane.LaneLaserOutputPowerDbm = &replacement
 				}
 			}
 		}
