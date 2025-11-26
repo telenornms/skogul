@@ -59,7 +59,13 @@ func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 
 	metadata := p.createRecordMetadata(record, recordData)
 
-	json, err := p.extractJSON(recordData["event_data"].(string))
+	eventData, ok := recordData["event_data"].(string)
+	if !ok {
+		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
+		return nil, errors.New("event_data is missing or not a string")
+	}
+
+	json, err := p.extractJSON(eventData)
 	if err != nil {
 		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
 		return nil, fmt.Errorf("failed to unmarshal json: %w", err)
@@ -94,11 +100,10 @@ func (p *USPParser) getUspRecord(d []byte) (*usp.Record, error) {
 
 /*
 getRecordMsgPayload unmarshals []byte consisting of the record payload into
-a protoc generated struct and returns it
+a protoc generated struct
 */
 func (p *USPParser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 	msgPayload := &usp.Msg{}
-
 	if err := proto.Unmarshal(payload, msgPayload); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to unmarshal payload: %w", err)
