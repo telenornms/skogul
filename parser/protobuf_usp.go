@@ -92,7 +92,7 @@ func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 	return &container, nil
 }
 
-// getUspRecord Unmarshals []byte into a protoc generated struct and returns it
+// getUspRecord Unmarshals []byte into a protoc generated struct
 func (p *USPParser) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
 	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
@@ -167,7 +167,7 @@ func (p *USPParser) createRecordData(t *usp.Record) (map[string]interface{}, err
 }
 
 // GetStats prepares a skogul metric with stats for the USP parser.
-func (p *USP_Parser) GetStats() *skogul.Metric {
+func (p *USPParser) GetStats() *skogul.Metric {
 	now := skogul.Now()
 	metric := skogul.Metric{
 		Time:     &now,
