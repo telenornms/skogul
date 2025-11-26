@@ -43,6 +43,7 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 
 	if b == nil {
 		atomic.AddUint64(&p.stats.NilData, 1)
+		return nil, errors.New("nil byte slice provided")
 	}
 
 	record, err := p.getUspRecord(b)
