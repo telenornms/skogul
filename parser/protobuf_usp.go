@@ -40,6 +40,7 @@ func (p *USP_Parser) initParserStatistics() {
 // Parse accepts a byte slice of protobuf data and marshals it into a container
 func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 	p.once.Do(p.initParserStatistics)
+	atomic.AddUint64(&p.stats.Received, 1)
 
 	if b == nil {
 		atomic.AddUint64(&p.stats.NilData, 1)
@@ -86,7 +87,9 @@ func (p *USP_Parser) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	container.Metrics = make([]*skogul.Metric, 1)
 	container.Metrics[0] = &recordMetric
-	return &container, err
+
+	atomic.AddUint64(&p.stats.Parsed, 1)
+	return &container, nil
 }
 
 // getUspRecord Unmarshals []byte into a protoc generated struct
@@ -162,4 +165,27 @@ func (p *USP_Parser) createRecordData(t *usp.Record) (map[string]interface{}, er
 	jsonMap["event_data"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"]
 
 	return jsonMap, nil
+}
+
+// GetStats prepares a skogul metric with stats for the USP parser.
+func (p *USP_Parser) GetStats() *skogul.Metric {
+	now := skogul.Now()
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]interface{}),
+		Data:     make(map[string]interface{}),
+	}
+	metric.Metadata["component"] = "parser"
+	metric.Metadata["type"] = "usp"
+	metric.Metadata["identity"] = skogul.Identity[p]
+
+	p.once.Do(p.initParserStatistics)
+
+	metric.Data["received"] = p.stats.Received
+	metric.Data["parse_errors"] = p.stats.ParseErrors
+	metric.Data["failed_to_json_marshal"] = p.stats.FailedToJsonMarshal
+	metric.Data["failed_to_json_unmarshal"] = p.stats.FailedToJsonUnmarshal
+	metric.Data["nil_data"] = p.stats.NilData
+	metric.Data["parsed"] = p.stats.Parsed
+	return &metric
 }
