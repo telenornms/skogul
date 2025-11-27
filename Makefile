@@ -223,9 +223,6 @@ clean:
 	@-rm -f skogul.1
 	@-rm -f *.rpm
 	@-rm -f coverage.out
-	@-rm -fr gen/junos-telemetry-interface
-	@-rm -fr gen/usp-interface
-	@-rm -fr gen/github.com
 
 help:
 	@echo "Several targets(🎯) exist:"
