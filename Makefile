@@ -163,7 +163,42 @@ test:
 
 bench:
 	@echo 🏋 Benchmarking
-	@go test -run ^Bench -benchtime 1s -bench Bench ./... | grep Benchmark
+	@go test -run ^Bench -benchtime 1s -bench Bench ./... | grep --line-buffered Benchmark | awk -v term_width=$$(tput cols 2>/dev/null || echo 120) 'BEGIN { \
+		num_width = 13; \
+		spacing = 2; \
+		fixed_width = (num_width * 4) + (spacing * 4); \
+		name_width = term_width - fixed_width; \
+		if (name_width < 30) name_width = 30; \
+		if (name_width > 60) name_width = 60; \
+		fmt_name = "%-" name_width "s"; \
+		fmt_num = "%" num_width "s"; \
+		printf fmt_name " " fmt_num " " fmt_num " " fmt_num " " fmt_num "\n", "Test", "Iterations", "ns/op", "B/op", "allocs/op"; \
+		printf fmt_name " " fmt_num " " fmt_num " " fmt_num " " fmt_num "\n", "----", "----------", "-----", "----", "---------"; \
+		fflush(); \
+	} { \
+		name = $$1; \
+		sub(/^Benchmark/, "", name); \
+		sub(/ProtoBuf/, "PB", name); \
+		sub(/InfluxDB/, "Influx", name); \
+		sub(/MemoryFootprint/, "Mem", name); \
+		sub(/WithoutTimestamp/, "NoTS", name); \
+		sub(/SmallMessage/, "Small", name); \
+		sub(/LargeMessage/, "Large", name); \
+		iters = $$2; \
+		ns = $$3; \
+		bytes = "-"; \
+		allocs = "-"; \
+		for (i = 4; i <= NF; i++) { \
+			if ($$i == "B/op" && i > 4) { \
+				bytes = $$(i-1); \
+			} \
+			if ($$i == "allocs/op" && i > 4) { \
+				allocs = $$(i-1); \
+			} \
+		} \
+		printf fmt_name " " fmt_num " " fmt_num " " fmt_num " " fmt_num "\n", name, iters, ns, bytes, allocs; \
+		fflush(); \
+	}'
 
 covergui:
 	@echo 🧠 Testing, with coverage analysis

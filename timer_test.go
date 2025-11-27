@@ -53,12 +53,16 @@ func TestNow(t *testing.T) {
 }
 
 func BenchmarkTimeNow(b *testing.B) {
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		time.Now()
 	}
 }
 
 func BenchmarkSkogulNow(b *testing.B) {
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		skogul.Now()
 	}
