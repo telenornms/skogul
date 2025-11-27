@@ -175,6 +175,11 @@ func TestParseJunosProtobufTelemetryStreamOptics(t *testing.T) {
 	}
 	if c == nil {
 		t.Error("Protobuf parse returned nil-container")
+		return
+	}
+	if len(c.Metrics) == 0 {
+		t.Error("Protobuf parse returned container with no metrics")
+		return
 	}
 
 	got := parseDiagStatsResp(c.Metrics[0].Data, "lane_laser_receiver_power_dbm")
