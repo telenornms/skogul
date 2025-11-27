@@ -154,8 +154,9 @@ func (p *USPParser) createRecordData(t *usp.Record) (map[string]any, error) {
 	}
 
 	// Check if request contains the Notify event. (It could be a different event by mistake)
-	if _, ok := payload.Body.GetRequest().GetReqType().(*usp.Request_Notify); !ok {
-		return nil, fmt.Errorf("request does not contain a Notify event")
+	reqType := payload.Body.GetRequest().GetReqType()
+	if _, ok := reqType.(*usp.Request_Notify); !ok {
+		return nil, fmt.Errorf("request does not contain a Notify event, got %T", reqType)
 	}
 
 	jsonMap["event"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetObjPath()
