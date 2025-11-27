@@ -15,7 +15,7 @@ skogul: $(wildcard *.go */*.go */*/*.go)
 	@CGO_ENABLED=0 go build -ldflags "-X main.versionNo=${VERSION_NO}" -o skogul ./cmd/skogul
 
 generate:
-	@echo 🔧 Generating protocol buffer code with buf
+	@echo 🔧 Generating protocol buffer code
 	@./gen/generate.sh
 
 docs/skogul.rst: skogul
@@ -234,7 +234,7 @@ help:
 	@echo ""
 	@echo " - rpm - build RPM"
 	@echo " - clean - remove known build crap - use git clean -fdx for more thorough cleaning"
-	@echo " - generate - regenerate protocol buffer code using buf"
+	@echo " - generate - regenerate protocol buffer code"
 	@echo " - test / bench - run go test, with and without benchmarks "
 	@echo "                  note that this uses "-short" to avoid mysql/postgres dependencies. "
 	@echo " - fmtcheck - Runs gofmt -d -s, excluding generated code"

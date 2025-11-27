@@ -3,9 +3,13 @@
 //
 // # Regenerating Protocol Buffer Code
 //
-// This project uses buf (https://buf.build) for protocol buffer code generation
-// with vtprotobuf (https://github.com/planetscale/vtprotobuf) for optimized
+// This project uses protoc with protoc-gen-go and protoc-gen-go-vtproto
+// for protocol buffer code generation. vtprotobuf provides optimized
 // serialization performance.
+//
+// Requirements:
+//   - protoc (protocol buffer compiler)
+//   - Go toolchain (plugins are installed automatically)
 //
 // To regenerate the protocol buffer code:
 //
@@ -25,19 +29,15 @@
 //
 // 3. Removes proto files matching /(gnmi|sr_|Gnmi)/ pattern
 //
-// 4. Runs buf generate to create:
+// 4. Installs protoc plugins via go install
+//
+// 5. Runs protoc to generate:
 //   - Standard protobuf Go code (.pb.go files)
 //   - vtprotobuf optimized code (_vtproto.pb.go files)
 //
 // Generated code is placed in:
 //   - gen/junos/telemetry/
 //   - gen/usp/
-//
-// # Configuration Files
-//
-// - buf.yaml: Defines the buf workspace and modules
-// - buf.gen.yaml: Configures code generation plugins and options
-// - gen/generate.sh: Orchestrates extraction and generation
 //
 // # Migration from gogo/protobuf
 //
