@@ -46,7 +46,7 @@ const (
 )
 
 type failer interface {
-	Fatalf(format string, args ...interface{})
+	Fatalf(format string, args ...any)
 	Helper()
 }
 
@@ -83,7 +83,7 @@ func TestProtoBuf(t *testing.T) {
 func BenchmarkProtoBufParse(b *testing.B) {
 	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
 	x := parser.ProtoBuf{}
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		x.Parse(by)
 	}
 }
@@ -133,20 +133,20 @@ func generateOpticsDiag(val float32) junos_protobuf_telemetry.TelemetryStream {
 	return generateJunosTelemetryStream("foo", eps)
 }
 
-func parseDiagStatsResp(data map[string]interface{}, key string) interface{} {
-	opticsDiag, ok := data["Optics_diag"].([]interface{})
+func parseDiagStatsResp(data map[string]any, key string) any {
+	opticsDiag, ok := data["Optics_diag"].([]any)
 	if !ok {
 		fmt.Printf("failed to cast")
 	}
-	foo, ok := opticsDiag[0].(map[string]interface{})
+	foo, ok := opticsDiag[0].(map[string]any)
 	if !ok {
 		fmt.Printf("failed to cast 2")
 	}
-	opticsDiagStats := foo["optics_diag_stats"].(map[string]interface{})
+	opticsDiagStats := foo["optics_diag_stats"].(map[string]any)
 
-	opticsLaneDiagStats := opticsDiagStats["optics_lane_diag_stats"].([]interface{})
+	opticsLaneDiagStats := opticsDiagStats["optics_lane_diag_stats"].([]any)
 
-	bar, ok := opticsLaneDiagStats[0].(map[string]interface{})
+	bar, ok := opticsLaneDiagStats[0].(map[string]any)
 	if !ok {
 		fmt.Printf("failed to cast 3")
 	}

@@ -125,8 +125,8 @@ func parseTelemetryStream(protobuffer []byte) (*pb.TelemetryStream, error) {
 
 // createMetadata extracts the fields containing metadata from the protocol buffer
 // and stores them in a string-interface map to be consumed at a later stage.
-func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) (map[string]interface{}, error) {
-	metadata := make(map[string]interface{})
+func (x *ProtoBuf) createMetadata(telemetry *pb.TelemetryStream) (map[string]any, error) {
+	metadata := make(map[string]any)
 
 	metadata["systemId"] = telemetry.GetSystemId()
 	metadata["sensorName"] = telemetry.GetSensorName()
@@ -190,7 +190,7 @@ createData creates a string-interface map of skogul.Metric type Data
 by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
 */
-func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]interface{}, error) {
+func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, error) {
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
 		atomic.AddUint64(&x.stats.MissingExtension, 1)
@@ -251,7 +251,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]interfa
 		return nil, fmt.Errorf("found no valid extensions")
 	}
 
-	var metrics map[string]interface{}
+	var metrics map[string]any
 	if err = json.Unmarshal(jsonMessage, &metrics); err != nil {
 		atomic.AddUint64(&x.stats.FailedToJsonUnmarshal, 1)
 		target := 500
@@ -283,8 +283,8 @@ func (x *ProtoBuf) GetStats() *skogul.Metric {
 	now := skogul.Now()
 	metric := skogul.Metric{
 		Time:     &now,
-		Metadata: make(map[string]interface{}),
-		Data:     make(map[string]interface{}),
+		Metadata: make(map[string]any),
+		Data:     make(map[string]any),
 	}
 	metric.Metadata["component"] = "parser"
 	metric.Metadata["type"] = "protobuf"
