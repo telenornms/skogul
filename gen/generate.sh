@@ -1,62 +1,159 @@
 #!/bin/bash
 set -euo pipefail
 
-# Script to extract protobuf tarballs and generate Go code using buf
+# Generate Go code from protobuf tarballs using protoc.
+#
+# Requirements:
+#   - protoc (protocol buffer compiler)
+#   - Go toolchain (for installing protoc plugins)
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-
 cd "$PROJECT_ROOT"
 
-echo "==> Cleaning old proto extraction directories..."
-rm -rf gen/junos-telemetry-interface gen/usp-interface
+# Check for required tools
+if ! command -v protoc &>/dev/null; then
+    echo "Error: protoc is not installed or not in PATH" >&2
+    echo "Install it from: https://github.com/protocolbuffers/protobuf/releases" >&2
+    exit 1
+fi
+if ! command -v go &>/dev/null; then
+    echo "Error: go is not installed or not in PATH" >&2
+    exit 1
+fi
 
-echo "==> Extracting Junos telemetry proto files..."
-mkdir -p gen/junos-telemetry-interface
-tar xzf gen/tar-balls/junos-telemetry-interface-25.2R1.8-EVO.tar.gz -C gen/junos-telemetry-interface
+# Ensure GOBIN is in PATH for protoc to find plugins
+PATH="$(go env GOPATH)/bin:$PATH"
+export PATH
 
-echo "==> Extracting USP proto files..."
-mkdir -p gen/usp-interface
-tar xzf gen/tar-balls/usp-interface-1-1.tar.gz -C gen/usp-interface
+# These Juniper protos from 23.2R1 were removed in 25.2R1.8-EVO, but do not
+# collide with any protos included there and are included for backward
+# compatibility with older Junos devices.
+LEGACY_PROTOS=(
+    "lsp_stats.proto"
+    "qmon.proto"
+    "ancpd_oc.proto"
+    "authd_oc.proto"
+    "bbe-smgd_ancp_stats_oc.proto"
+    "bbe-smgd_pppoe_stats_oc.proto"
+    "bbe-smgd_rsmon_debug_oc.proto"
+    "bbe-smgd_rsmon_stats_oc.proto"
+    "bbe-smgd_smd_queue_stats_oc.proto"
+    "bbe-smgd_sub_mgmt_network_stats_oc.proto"
+    "dcd_oc.proto"
+    "eventd.proto"
+    "jdhcpd_oc.proto"
+    "jl2tpd_oc.proto"
+    "jpppd_oc.proto"
+    "kmd_render.proto"
+    "mib2d_nd6_oc.proto"
+    "mib2d_oc.proto"
+    "pfed_oc.proto"
+    "pfe_ifl_oc.proto"
+    "pfe_npu_resource.proto"
+    "pfe_port_oc.proto"
+    "xmlproxyd_show_local_interface_oc.proto"
+    "rpd_loc_rib_oc.proto"
+    "smid_oc.proto"
+    "kernel-ifstate-render.proto"
+    "ipsec_telemetry.proto"
+    "svcset_telemetry.proto"
+    "session_telemetry.proto"
+    "bbe-statsd-telemetry_oc.proto"
+    "jkhmd_oc.proto"
+    "jdiameterd_render.proto"
+    "sr_te_per_lsp_transit_stats.proto"
+    "sr_te_per_lsp_ingress_stats.proto"
+    "jkdsd_oc.proto"
+    "jkdsd_cpu_oc.proto"
+    "jkhmd_resiliency_render.proto"
+    "spu_cpu_util.proto"
+    "pfe_ifl_family_v4_stats_oc.proto"
+    "pfe_ifl_family_v6_stats_oc.proto"
+    "saegw-upad_oc.proto"
+    "nasd_oc.proto"
+    "ngapd_oc.proto"
+    "pfe_page_drop_oc.proto"
+    "pfe-junos-slice-egr-qstats-render.proto"
+    "chassisd-junos-state-poe-render.proto"
+    "chassisd-junos-state-chassis-render.proto"
+    "mib2d-junos-state-interfaces-render.proto"
+    "xmlproxyd-junos-openconfig-system-render.proto"
+    "sysd-junos-openconfig-system-render.proto"
+    "pbj.proto"
+)
 
-echo "==> Injecting go_package options into proto files..."
-for proto_file in gen/junos-telemetry-interface/*.proto; do
-  if [ -f "$proto_file" ]; then
-    # Check if uncommented go_package already exists
-    if ! grep -q "^option go_package" "$proto_file"; then
-      sed -i.bak '/^syntax = /a\
+# V23.2R1 protos removed in 25.2R1.8-EVO that have with conflicts (extension
+# tag or symbol collisions) - cannot easily be included:
+# chassisd_oc.proto,
+# mib2d_arp_oc.proto,
+# rmopd_render.proto,
+# alarmd_oc.proto,
+# cosd_oc.proto,
+# spu_flow_stats.proto
+
+WORK_DIR=$(mktemp -d)
+trap 'rm -rf "$WORK_DIR"' EXIT
+
+echo "==> Extracting proto files..."
+mkdir -p "$WORK_DIR/junos" "$WORK_DIR/junos-legacy" "$WORK_DIR/usp"
+tar xzf gen/tar-balls/junos-telemetry-interface-25.2R1.8-EVO.tar.gz -C "$WORK_DIR/junos"
+tar xzf gen/tar-balls/junos-telemetry-interface-23.2R1.tar.gz -C "$WORK_DIR/junos-legacy"
+tar xzf gen/tar-balls/usp-interface-1-1.tar.gz -C "$WORK_DIR/usp"
+
+# Restore legacy protos from 23.2R1 (only if not present in current version)
+for proto in "${LEGACY_PROTOS[@]}"; do
+    src="$WORK_DIR/junos-legacy/junos-telemetry-interface/$proto"
+    dst="$WORK_DIR/junos/$proto"
+    [ -f "$src" ] && [ ! -f "$dst" ] && cp "$src" "$dst"
+done
+
+echo "==> Injecting go_package options..."
+for proto_file in "$WORK_DIR/junos"/*.proto; do
+    [ -f "$proto_file" ] && ! grep -q "^option go_package" "$proto_file" &&
+        sed -i.bak '/^syntax = /a\
 option go_package = "github.com/telenornms/skogul/gen/junos/telemetry";
-' "$proto_file"
-      rm -f "${proto_file}.bak"
-    fi
-  fi
+' "$proto_file" && rm -f "${proto_file}.bak"
+done
+for proto_file in "$WORK_DIR/usp"/*.proto; do
+    [ -f "$proto_file" ] && ! grep -q "^option go_package" "$proto_file" &&
+        sed -i.bak '/^syntax = /a\
+option go_package = "github.com/telenornms/skogul/gen/usp";
+' "$proto_file" && rm -f "${proto_file}.bak"
 done
 
 # Remove administrative protos (gnmi, sr_, Gnmi patterns)
-find gen/junos-telemetry-interface -name "*.proto" | grep -E '(gnmi|sr_|Gnmi)' | xargs rm -f || true
-# ddosd-junos-state-ddos-protection-render.proto excluded via buf.yaml (State message collision)
+find "$WORK_DIR/junos" -name "*.proto" | grep -E '(gnmi|sr_|Gnmi)' | xargs rm -f || true
+# State message collision within junos-telemetry-interface-25.2R1.8-EVO
+# (collides with transceiver.proto which is prioritised in this case)
+rm -f "$WORK_DIR/junos/ddosd-junos-state-ddos-protection-render.proto" || true
 
-echo "==> Cleaning old generated Go files..."
-rm -rf gen/junos gen/usp
+echo "==> Installing protoc plugins..."
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+go install github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@latest
 
-echo "==> Running buf generate..."
-go run github.com/bufbuild/buf/cmd/buf generate
+echo "==> Generating Go code with protoc..."
+rm -rf gen/junos/telemetry gen/usp
+mkdir -p gen/junos/telemetry gen/usp
 
-echo "==> Moving generated files to proper locations..."
-mkdir -p gen/junos/telemetry
-mkdir -p gen/usp
+# Generate for junos-telemetry-interface
+if ! protoc \
+    --go_out=gen/junos/telemetry --go_opt=paths=source_relative \
+    --go-vtproto_out=gen/junos/telemetry --go-vtproto_opt=paths=source_relative,features=marshal+unmarshal+size+pool \
+    -I "$WORK_DIR/junos" \
+    "$WORK_DIR/junos"/*.proto; then
+    echo "Error: protoc failed for junos telemetry. Check proto file syntax." >&2
+    exit 1
+fi
 
-for file in gen/*.pb.go; do
-  if [ -f "$file" ]; then
-    if grep -q "^package usp$" "$file" 2>/dev/null; then
-      mv "$file" gen/usp/
-    else
-      # otherwise it's a Junos telemetry file (package telemetry)
-      mv "$file" gen/junos/telemetry/
-    fi
-  fi
-done
+# Generate for usp-interface
+if ! protoc \
+    --go_out=gen/usp --go_opt=paths=source_relative \
+    --go-vtproto_out=gen/usp --go-vtproto_opt=paths=source_relative,features=marshal+unmarshal+size+pool \
+    -I "$WORK_DIR/usp" \
+    "$WORK_DIR/usp"/*.proto; then
+    echo "Error: protoc failed for USP. Check proto file syntax." >&2
+    exit 1
+fi
 
-echo "==> Protocol buffer generation complete!"
-echo "    - gen/junos/telemetry/"
-echo "    - gen/usp/"
+echo "==> Done: gen/junos/telemetry/, gen/usp/"
