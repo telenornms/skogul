@@ -40,9 +40,11 @@ func (p *USPParser) initParserStatistics() {
 // Parse accepts a byte slice of protobuf data and marshals it into a container
 func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 	p.once.Do(p.initParserStatistics)
+	atomic.AddUint64(&p.stats.Received, 1)
 
 	if b == nil {
 		atomic.AddUint64(&p.stats.NilData, 1)
+		return nil, errors.New("nil byte slice provided")
 	}
 
 	record, err := p.getUspRecord(b)
@@ -59,7 +61,13 @@ func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 
 	metadata := p.createRecordMetadata(record, recordData)
 
-	json, err := p.extractJSON(recordData["event_data"].(string))
+	eventData, ok := recordData["event_data"].(string)
+	if !ok {
+		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
+		return nil, errors.New("event_data is missing or not a string")
+	}
+
+	json, err := p.extractJSON(eventData)
 	if err != nil {
 		atomic.AddUint64(&p.stats.FailedToJsonUnmarshal, 1)
 		return nil, fmt.Errorf("failed to unmarshal json: %w", err)
@@ -79,10 +87,12 @@ func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 	container := skogul.Container{}
 	container.Metrics = make([]*skogul.Metric, 1)
 	container.Metrics[0] = &recordMetric
-	return &container, err
+
+	atomic.AddUint64(&p.stats.Parsed, 1)
+	return &container, nil
 }
 
-// getUspRecord Unmarshals []byte into a protoc generated struct and returns it
+// getUspRecord Unmarshals []byte into a protoc generated struct
 func (p *USPParser) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
 	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
@@ -94,11 +104,10 @@ func (p *USPParser) getUspRecord(d []byte) (*usp.Record, error) {
 
 /*
 getRecordMsgPayload unmarshals []byte consisting of the record payload into
-a protoc generated struct and returns it
+a protoc generated struct
 */
 func (p *USPParser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 	msgPayload := &usp.Msg{}
-
 	if err := proto.Unmarshal(payload, msgPayload); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to unmarshal payload: %w", err)
@@ -108,8 +117,8 @@ func (p *USPParser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 }
 
 // createRecordMetadata creates a map[string]interface{} of the metadata for skogul.Metric
-func (p *USPParser) createRecordMetadata(h *usp.Record, xh map[string]interface{}) map[string]interface{} {
-	d := make(map[string]interface{})
+func (p *USPParser) createRecordMetadata(h *usp.Record, xh map[string]any) map[string]any {
+	d := make(map[string]any)
 
 	d["event"] = xh["event"]
 	d["event_type"] = xh["event_type"]
@@ -124,10 +133,10 @@ func (p *USPParser) createRecordMetadata(h *usp.Record, xh map[string]interface{
 }
 
 // extractJSON unmarshals event parameters to json
-func (p *USPParser) extractJSON(s string) (map[string]interface{}, error) {
+func (p *USPParser) extractJSON(s string) (map[string]any, error) {
 	input := []byte(s)
 
-	var d map[string]interface{}
+	var d map[string]any
 
 	if err := json.Unmarshal(input, &d); err != nil {
 		return nil, err
@@ -137,16 +146,17 @@ func (p *USPParser) extractJSON(s string) (map[string]interface{}, error) {
 }
 
 // createRecordData creates a map[string]interface{} of the record payload for skogul.Metric
-func (p *USPParser) createRecordData(t *usp.Record) (map[string]interface{}, error) {
-	jsonMap := make(map[string]interface{})
+func (p *USPParser) createRecordData(t *usp.Record) (map[string]any, error) {
+	jsonMap := make(map[string]any)
 	payload, err := p.getRecordMsgPayload(t.GetNoSessionContext().GetPayload())
 	if err != nil {
 		return nil, err
 	}
 
 	// Check if request contains the Notify event. (It could be a different event by mistake)
-	if d, ok := payload.Body.GetRequest().GetReqType().(*usp.Request_Notify); !ok {
-		return nil, fmt.Errorf("invalid event %s", d.Notify.GetEvent())
+	reqType := payload.Body.GetRequest().GetReqType()
+	if _, ok := reqType.(*usp.Request_Notify); !ok {
+		return nil, fmt.Errorf("request does not contain a Notify event, got %T", reqType)
 	}
 
 	jsonMap["event"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetObjPath()
@@ -155,4 +165,27 @@ func (p *USPParser) createRecordData(t *usp.Record) (map[string]interface{}, err
 	jsonMap["event_data"] = payload.GetBody().GetRequest().GetNotify().GetEvent().GetParams()["Data"]
 
 	return jsonMap, nil
+}
+
+// GetStats prepares a skogul metric with stats for the USP parser.
+func (p *USPParser) GetStats() *skogul.Metric {
+	now := skogul.Now()
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]any),
+		Data:     make(map[string]any),
+	}
+	metric.Metadata["component"] = "parser"
+	metric.Metadata["type"] = "usp"
+	metric.Metadata["identity"] = skogul.Identity[p]
+
+	p.once.Do(p.initParserStatistics)
+
+	metric.Data["received"] = p.stats.Received
+	metric.Data["parse_errors"] = p.stats.ParseErrors
+	metric.Data["failed_to_json_marshal"] = p.stats.FailedToJsonMarshal
+	metric.Data["failed_to_json_unmarshal"] = p.stats.FailedToJsonUnmarshal
+	metric.Data["nil_data"] = p.stats.NilData
+	metric.Data["parsed"] = p.stats.Parsed
+	return &metric
 }

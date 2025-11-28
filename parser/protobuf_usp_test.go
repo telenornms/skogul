@@ -84,7 +84,7 @@ func TestUSPExtractJSON(t *testing.T) {
 
 	input := []byte(msgPayload.Body.GetRequest().GetNotify().GetEvent().GetParams()["Data"])
 
-	var k map[string]interface{}
+	var k map[string]any
 
 	if err := json.Unmarshal(input, &k); err != nil {
 		t.Error("Failed to unmarshall json")
