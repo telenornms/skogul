@@ -37,7 +37,6 @@ func TestInfluxDBLineParse(t *testing.T) {
 	b := []byte("system,host=testhost uptime=5464i 1585737340000000000")
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -83,7 +82,6 @@ func TestInfluxDBLineParseWithoutTimestamp(t *testing.T) {
 	b := []byte("system,host=testhost uptime=5464i,foo=123u")
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -121,7 +119,6 @@ func TestInfluxDBParseFile(t *testing.T) {
 	}
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -137,7 +134,6 @@ func TestInfluxDBLineParseQuotedString(t *testing.T) {
 	b := []byte("system,host=testhost,foo=bar text=\"sometext\"")
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -157,7 +153,6 @@ func TestInfluxDBLineParseQuotedStringWithSpace(t *testing.T) {
 	b := []byte("system,host=testhost text=\"some text\"")
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -177,7 +172,6 @@ func TestInfluxDBLineParseEscapedChars(t *testing.T) {
 	b := []byte(`system,foo=bar,host=test\,host,host\,name=test\ host,hexed=my\x2dtag text=some\,text,other\,text=moretext,final=0`)
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -214,7 +208,6 @@ func TestInfluxDBParseLineEscapedChars(t *testing.T) {
 	b := []byte(fmt.Sprintf("procstat,%s,%s,foo=bar cpu=1 1593610640000000000", tag1, tag2))
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Error(err)
 		return
@@ -246,7 +239,6 @@ func TestInfluxDBParseTelegrafCmdLine(t *testing.T) {
 	b := []byte(`procstat,cmdline=/usr/bin/Java/bin/version/bin/java\ -Xms64m\ -Xmx2048m\ -javaagent:/some/path/to/a/.runtime/service/1.13u3/agent.jar\ -Djava.util.logging.config.file\=/var/log/service/you/get-the/gist-of-it/conf/logging.properties,host=host-name-prod.dc1.example.org,server_group=some-server-group cpu_time_irq=0 1593610640000000000`)
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Error(err)
 		return
@@ -272,7 +264,6 @@ func TestInfluxDBParseTelegrafCmdLines(t *testing.T) {
 	}
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -341,7 +332,6 @@ func TestInfluxDBParseTelegrafSystemdUnitLines(t *testing.T) {
 	}
 
 	container, err := parser.InfluxDB{}.Parse(b)
-
 	if err != nil {
 		t.Errorf("Failed to parse data as influx line protocol: %v", err)
 		return
@@ -353,7 +343,7 @@ func TestInfluxDBParseTelegrafSystemdUnitLines(t *testing.T) {
 	}
 
 	for i, metric := range container.Metrics {
-		//fmt.Printf("line:%v\n", metric)
+		// fmt.Printf("line:%v\n", metric)
 		if metric.Metadata["host"] == nil {
 			t.Errorf("Expected 'host' tag in metric %d", i)
 		}

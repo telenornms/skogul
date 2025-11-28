@@ -95,10 +95,10 @@ func (sw *Switch) Transform(c *skogul.Container) error {
 func (sw *Switch) Verify() error {
 	for _, cas := range sw.Cases {
 		if len(cas.Transformers) == 0 {
-			return fmt.Errorf("No transformers defined for switch case '%s'", cas.When)
+			return fmt.Errorf("no transformers defined for switch case '%s'", cas.When)
 		}
 		if cas.Exists && cas.Is != nil {
-			return fmt.Errorf("Case for '%s' configured with both Exists and Is. Only one of these makes sense.", cas.When)
+			return fmt.Errorf("case for '%s' configured with both Exists and Is. Only one of these makes sense", cas.When)
 		}
 	}
 	return nil
@@ -157,13 +157,13 @@ func (sw *SwitchData) Transform(c *skogul.Container) error {
 func (sw *SwitchData) Verify() error {
 	for _, cas := range sw.Cases {
 		if cas.AllowMissing && cas.Exists {
-			return fmt.Errorf("Options 'AllowMissing' and 'Exists' can't be both true")
+			return fmt.Errorf("options 'AllowMissing' and 'Exists' can't be both true")
 		}
 		if len(cas.Transformers) == 0 {
-			return fmt.Errorf("No transformers defined for switch case '%s'", cas.When)
+			return fmt.Errorf("no transformers defined for switch case '%s'", cas.When)
 		}
 		if cas.Exists && cas.Is != nil {
-			return fmt.Errorf("Case for '%s' configured with both Exists and Is. Only one of these makes sense.", cas.When)
+			return fmt.Errorf("case for '%s' configured with both Exists and Is, only one of these makes sense", cas.When)
 		}
 	}
 	return nil

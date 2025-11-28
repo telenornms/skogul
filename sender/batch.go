@@ -142,7 +142,7 @@ func (bat *Batch) flusher(ch chan *skogul.Container, sender skogul.Sender) {
 		c := <-ch
 		err := sender.Send(c)
 		if err != nil {
-			err = fmt.Errorf("Batch sender (%s) failed due to down stream error: %w", skogul.Identity[bat], err)
+			err = fmt.Errorf("batch sender (%s) failed due to downstream error: %w", skogul.Identity[bat], err)
 			batchLog.Error(err)
 		}
 	}
