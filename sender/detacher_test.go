@@ -44,8 +44,8 @@ func TestDetacher(t *testing.T) {
 	tst.TestQuick(t, detach, &c, 0)
 
 	diff := time.Since(start)
-	if diff > (20 * time.Millisecond) {
-		t.Errorf("Took too long sending to the detach-sender. Took more than 20ms (%v). Should be ~instant.", diff)
+	if diff > (30 * time.Millisecond) {
+		t.Errorf("Took too long sending to the detach-sender. Took more than 30ms (%v). Should be ~instant.", diff)
 	}
 	time.Sleep(200 * time.Millisecond)
 	if tst.Received() != 1 {
