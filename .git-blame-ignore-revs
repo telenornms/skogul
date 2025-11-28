@@ -1,1 +1,28 @@
 # This file contains hashes of style-only commits to hide them from git blame
+
+# chore: whitespace
+2e7fc749e6c55bf2ece7f8e4152b4290aeb56ada
+
+# chore: consise variable declaration
+77d722252fc09d264305f45e473b04708289aa91
+
+# chore: use go linter approved camel case instead of snake case
+0e1d7f334f319bc8c451642740ab720bf9089d0a
+
+# chore: use explicit octal notation
+49a0c2ac0c4be4deb011141d08ed9aefcc178e02
+
+# chore(style): declare data more clearly
+4a0aff7eef72b929e5e4a919641cb447aca1d2fa
+
+# chore: remove redundant return
+7de882c7e95fce97ffc8c9e48bc5aa4107b658ae
+
+# chore: format makefile with `bake`
+87dc4b4ae07016f1d996c925a6de25d00764a112
+
+# refactor: rename USP_Parser to USPParser
+87319883e61d4023cb83334d773cf826b935136e
+
+# chore: remove punctuation and capitalisation from errors as recommended by linting
+afe981de853e3e63e70154984403d6bd85d1df54
