@@ -39,7 +39,7 @@ func TestTCPLine(t *testing.T) {
   "receivers": {
     "tcpline": {
       "type": "tcp",
-      "address": "localhost:1337",
+      "address": "localhost:2337",
       "handler": "h"
     }
   },
@@ -56,7 +56,7 @@ func TestTCPLine(t *testing.T) {
     },
     "net": {
       "type": "net",
-      "address": "localhost:1337",
+      "address": "localhost:2337",
       "network": "tcp"
     },
     "bad1": {
@@ -81,7 +81,7 @@ func TestTCPLine(t *testing.T) {
     },
     "udp": {
       "type": "net",
-      "address": "localhost:1339",
+      "address": "localhost:2339",
       "network": "udp"
     }
   }
