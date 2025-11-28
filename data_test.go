@@ -199,6 +199,8 @@ func BenchmarkValidate(b *testing.B) {
 	metric.Time = &now
 	okc := skogul.Container{}
 	okc.Metrics = []*skogul.Metric{&metric}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		okc.Validate(false)
 	}
@@ -208,6 +210,8 @@ func BenchmarkValidate(b *testing.B) {
 func BenchmarkCompareText(b *testing.B) {
 	data := []string{"the fox jumps over the some-variable=na something", "this is fine, nothing is on fire", "only 1337 allowed"}
 	str := "only 1337 allowed"
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		for x := 0; x < 3; x++ {
 			if data[x] == str {
@@ -222,6 +226,8 @@ func BenchmarkCompareRegexp(b *testing.B) {
 	if err != nil {
 		b.Fatalf("Couldn't compile regexp: %v", err)
 	}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		for x := 0; x < 3; x++ {
 			if exp.Match([]byte(data[x])) {
@@ -232,6 +238,8 @@ func BenchmarkCompareRegexp(b *testing.B) {
 }
 func BenchmarkCompareSubstr(b *testing.B) {
 	data := []string{"the fox jumps over the some-variable=na something", "this is fine, nothing is on fire", "only 1337 allowed"}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		for x := 0; x < 3; x++ {
 			if strings.Contains(data[x], "1337") {

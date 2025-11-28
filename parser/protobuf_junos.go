@@ -31,8 +31,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	//"github.com/golang/protobuf/proto"
-	"github.com/gogo/protobuf/proto"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 
 	"github.com/telenornms/skogul"
 	pb "github.com/telenornms/skogul/gen/junos/telemetry"
@@ -110,10 +110,10 @@ func (x *ProtoBuf) Parse(b []byte) (*skogul.Container, error) {
 }
 
 // parseTelemetryStream parses a protocol buffer with the Juniper TelemetryStream
-// protobuf definitions
+// protobuf definitions. Uses vtprotobuf's optimized UnmarshalVT for performance.
 func parseTelemetryStream(protobuffer []byte) (*pb.TelemetryStream, error) {
 	telemetrystream := &pb.TelemetryStream{}
-	if err := proto.Unmarshal(protobuffer, telemetrystream); err != nil {
+	if err := telemetrystream.UnmarshalVT(protobuffer); err != nil {
 		// @ToDo: Consider what to do if failing to unmarshal the protobuf
 		// Reasons: Invalid proto spec, invalid data, invalid version of proto spec (?)
 		// not necessary to return here if we dont log or anything
@@ -194,7 +194,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
 	if err != nil {
 		atomic.AddUint64(&x.stats.MissingExtension, 1)
-		return nil, fmt.Errorf("failed to get Juniper protobuf extension: %w", err)
+		return nil, fmt.Errorf("failed to get Juniper protobuf extension")
 	}
 
 	enterpriseExtension, ok := extension.(proto.Message)
@@ -203,19 +203,24 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 		return nil, fmt.Errorf("failed to cast to juniper message")
 	}
 
-	registeredExtensions := proto.RegisteredExtensions(enterpriseExtension)
+	// Use protoreflect to iterate over all set extensions
+	reflectMsg := enterpriseExtension.ProtoReflect()
+	var availableExtensions []interface{}
 
-	var regextensions []*proto.ExtensionDesc
-	for _, ext := range registeredExtensions {
-		regextensions = append(regextensions, ext)
-	}
-
-	availableExtensions, err := proto.GetExtensions(enterpriseExtension, regextensions)
-	if err != nil {
-		return nil, err
-	}
+	reflectMsg.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+		if fd.IsExtension() {
+			// Get the extension value as an interface
+			if fd.Message() != nil {
+				// This is a message-type extension
+				extMsg := v.Message().Interface()
+				availableExtensions = append(availableExtensions, extMsg)
+			}
+		}
+		return true
+	})
 
 	var jsonMessage []byte
+	var err error
 	found := false
 	for _, ext := range availableExtensions {
 		if ext == nil {
@@ -246,7 +251,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 
 	if !found {
 		if x.Debug {
-			pbLog.Infof("no valid extensions found. availableExtensions: %v, registered: %v, extensions: %v, telemetry: %v, regextensions: %v", availableExtensions, registeredExtensions, extension, telemetry, regextensions)
+			pbLog.Infof("no valid extensions found. availableExtensions: %v, enterprise extension: %v", availableExtensions, enterpriseExtension)
 		}
 		return nil, fmt.Errorf("found no valid extensions")
 	}

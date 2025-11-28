@@ -52,6 +52,8 @@ func BenchmarkHash(b *testing.B) {
 	m.Metadata["key1"] = "a car"
 	m.Metadata["key2"] = "lol kek bikes rock"
 
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		e.Hash(m)
 	}

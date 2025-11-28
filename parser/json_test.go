@@ -25,7 +25,7 @@
 package parser_test
 
 import (
-	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/telenornms/skogul/parser"
@@ -45,14 +45,15 @@ func TestSkogulJSONParse(t *testing.T) {
 func BenchmarkSkogulJSONParse(b *testing.B) {
 	by := []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
 	x := parser.SkogulJSON{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}
 }
 
 func TestJSONParse(t *testing.T) {
-	b, err := ioutil.ReadFile("./testdata/raw.json")
-
+	b, err := os.ReadFile("./testdata/raw.json")
 	if err != nil {
 		t.Errorf("Failed to read test data file: %v", err)
 		return
@@ -72,8 +73,7 @@ func TestJSONParse(t *testing.T) {
 }
 
 func TestJSONArrayParse(t *testing.T) {
-	b, err := ioutil.ReadFile("./testdata/raw_array.json")
-
+	b, err := os.ReadFile("./testdata/raw_array.json")
 	if err != nil {
 		t.Errorf("Failed to read test data file: %v", err)
 		return
@@ -95,6 +95,8 @@ func TestJSONArrayParse(t *testing.T) {
 func BenchmarkJSONParse(b *testing.B) {
 	by := []byte(`{"string":"text","float":1.11,"integer":5,"timestamp":"2019-03-15T11:08:02+01:00","key":"value"}`)
 	x := parser.JSON{}
+	b.ResetTimer()
+	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		x.Parse(by)
 	}

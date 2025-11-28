@@ -25,25 +25,31 @@ package receiver_test
 
 import (
 	"fmt"
-	"github.com/telenornms/skogul"
-	"github.com/telenornms/skogul/config"
-	"github.com/telenornms/skogul/receiver"
-	"github.com/telenornms/skogul/sender"
 	"net"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/telenornms/skogul"
+	"github.com/telenornms/skogul/config"
+	"github.com/telenornms/skogul/receiver"
+	"github.com/telenornms/skogul/sender"
 )
 
 // FIXME: This file is very fond of global scope and init(), mainly for the
 // sake of benchmarks... and it's a bit messy.
-var uConfig *config.Config
-var pFile []byte
-var u1 *net.UDPConn
-var u2 *net.UDPConn
-var u3 *net.UDPConn
-var u4 *net.UDPConn
-var pJSON = []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
+var (
+	uConfig *config.Config
+	pFile   []byte
+	u1      *net.UDPConn
+	u2      *net.UDPConn
+	u3      *net.UDPConn
+	u4      *net.UDPConn
+	u5      *net.UDPConn
+	u6      *net.UDPConn
+	u7      *net.UDPConn
+	pJSON   = []byte("{\"metrics\":[{\"timestamp\":\"2019-03-15T11:08:02+01:00\",\"metadata\":{\"key\":\"value\"},\"data\":{\"string\":\"text\",\"float\":1.11,\"integer\":5}}]}")
+)
 
 func readProtobufFile(file string) []byte {
 	b := make([]byte, 9000)
@@ -105,6 +111,27 @@ func init() {
 			"handler": "json-sleep",
 			"Threads": 100,
 			"Buffer": 1024
+		},
+		"udp5": {
+			"type": "udp",
+			"address": "localhost:1989",
+			"handler": "json",
+			"Threads": 1,
+			"Buffer": 65536
+		},
+		"udp6": {
+			"type": "udp",
+			"address": "localhost:1999",
+			"handler": "json",
+			"Threads": 10,
+			"Buffer": 65536
+		},
+		"udp7": {
+			"type": "udp",
+			"address": "localhost:2009",
+			"handler": "json",
+			"Threads": 100,
+			"Buffer": 65536
 		}
 	},
 	"handlers": {
@@ -117,10 +144,14 @@ func init() {
 			"parser": "json",
 			"transformers": [],
 			"sender": "sleep"
+		},
+		"json": {
+			"parser": "json",
+			"transformers": [],
+			"sender": "common"
 		}
 	}
 }`))
-
 	if err != nil {
 		fmt.Printf("Failed to load config: %v", err)
 		os.Exit(1)
@@ -130,6 +161,9 @@ func init() {
 	var udpAddr2 *net.UDPAddr
 	var udpAddr3 *net.UDPAddr
 	var udpAddr4 *net.UDPAddr
+	var udpAddr5 *net.UDPAddr
+	var udpAddr6 *net.UDPAddr
+	var udpAddr7 *net.UDPAddr
 	udpAddr1, err = net.ResolveUDPAddr("udp", "localhost:1939")
 	if err != nil {
 		fmt.Printf("Failed to resolve: %v\n", err)
@@ -146,6 +180,21 @@ func init() {
 		os.Exit(1)
 	}
 	udpAddr4, err = net.ResolveUDPAddr("udp", "localhost:1979")
+	if err != nil {
+		fmt.Printf("Failed to resolve: %v\n", err)
+		os.Exit(1)
+	}
+	udpAddr5, err = net.ResolveUDPAddr("udp", "localhost:1989")
+	if err != nil {
+		fmt.Printf("Failed to resolve: %v\n", err)
+		os.Exit(1)
+	}
+	udpAddr6, err = net.ResolveUDPAddr("udp", "localhost:1999")
+	if err != nil {
+		fmt.Printf("Failed to resolve: %v\n", err)
+		os.Exit(1)
+	}
+	udpAddr7, err = net.ResolveUDPAddr("udp", "localhost:2009")
 	if err != nil {
 		fmt.Printf("Failed to resolve: %v\n", err)
 		os.Exit(1)
@@ -174,15 +223,39 @@ func init() {
 		os.Exit(1)
 	}
 	u4.SetWriteBuffer(9000)
+	u5, err = net.DialUDP("udp", nil, udpAddr5)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
+	u5.SetWriteBuffer(9000)
+	u6, err = net.DialUDP("udp", nil, udpAddr6)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
+	u6.SetWriteBuffer(9000)
+	u7, err = net.DialUDP("udp", nil, udpAddr7)
+	if err != nil {
+		fmt.Printf("Failed to dial: %v\n", err)
+		os.Exit(1)
+	}
+	u7.SetWriteBuffer(9000)
 
 	rUDP1 := uConfig.Receivers["udp1"].Receiver.(*receiver.UDP)
 	rUDP2 := uConfig.Receivers["udp2"].Receiver.(*receiver.UDP)
 	rUDP3 := uConfig.Receivers["udp3"].Receiver.(*receiver.UDP)
 	rUDP4 := uConfig.Receivers["udp4"].Receiver.(*receiver.UDP)
+	rUDP5 := uConfig.Receivers["udp5"].Receiver.(*receiver.UDP)
+	rUDP6 := uConfig.Receivers["udp6"].Receiver.(*receiver.UDP)
+	rUDP7 := uConfig.Receivers["udp7"].Receiver.(*receiver.UDP)
 	go rUDP1.Start()
 	go rUDP2.Start()
 	go rUDP3.Start()
 	go rUDP4.Start()
+	go rUDP5.Start()
+	go rUDP6.Start()
+	go rUDP7.Start()
 	time.Sleep(time.Duration(100 * time.Millisecond))
 }
 
@@ -193,11 +266,13 @@ func sendUDP(u *net.UDPConn, b []byte) {
 	}
 }
 
-type dummySender struct{}
-type dummyJSONSender struct {
-	sock       *net.UDPConn
-	iterations int
-}
+type (
+	dummySender     struct{}
+	dummyJSONSender struct {
+		sock       *net.UDPConn
+		iterations int
+	}
+)
 
 func (d *dummyJSONSender) Send(c *skogul.Container) error {
 	for i := 0; i < d.iterations; i++ {
@@ -225,34 +300,38 @@ func BenchmarkUDP_protobuf(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
 	ds := &dummySender{}
 	sCommon.SetSync(true)
-	for i := 0; i < b.N; i++ {
+	b.ReportAllocs()
+	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 10, 10)
 	}
 }
 
 func BenchmarkUDP_json_Threads1(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
-	ds := &dummyJSONSender{u2, 20}
+	ds := &dummyJSONSender{u5, 20}
 	sCommon.SetSync(true)
-	for i := 0; i < b.N; i++ {
+	b.ReportAllocs()
+	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}
 }
 
 func BenchmarkUDP_json_Threads10(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
-	ds := &dummyJSONSender{u3, 20}
+	ds := &dummyJSONSender{u6, 20}
 	sCommon.SetSync(true)
-	for i := 0; i < b.N; i++ {
+	b.ReportAllocs()
+	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}
 }
 
 func BenchmarkUDP_json_Threads100(b *testing.B) {
 	sCommon := uConfig.Senders["common"].Sender.(*sender.Test)
-	ds := &dummyJSONSender{u4, 20}
+	ds := &dummyJSONSender{u7, 20}
 	sCommon.SetSync(true)
-	for i := 0; i < b.N; i++ {
+	b.ReportAllocs()
+	for b.Loop() {
 		sCommon.TestSync(b, ds, &validContainer, 5, 100)
 	}
 }

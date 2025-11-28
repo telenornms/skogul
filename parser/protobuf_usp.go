@@ -7,7 +7,6 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/gogo/protobuf/proto"
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/gen/usp"
 )
@@ -95,7 +94,7 @@ func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 // getUspRecord Unmarshals []byte into a protoc generated struct
 func (p *USPParser) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
-	if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
+	if err := unmarshaledMessage.UnmarshalVT(d); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to unmarshal protocol buffer: %w", err)
 	}
@@ -108,7 +107,8 @@ a protoc generated struct
 */
 func (p *USPParser) getRecordMsgPayload(payload []byte) (*usp.Msg, error) {
 	msgPayload := &usp.Msg{}
-	if err := proto.Unmarshal(payload, msgPayload); err != nil {
+
+	if err := msgPayload.UnmarshalVT(payload); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
 		return nil, fmt.Errorf("failed to unmarshal payload: %w", err)
 	}
