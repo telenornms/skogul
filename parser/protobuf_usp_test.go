@@ -93,7 +93,7 @@ func TestUSPExtractJSON(t *testing.T) {
 
 func BenchmarkUSPParse(b *testing.B) {
 	d := readFile("testdata/usp.bin", b)
-	x := parser.USP_Parser{}
+	x := parser.USPParser{}
 
 	b.ReportAllocs()
 	for b.Loop() {
@@ -118,7 +118,7 @@ func BenchmarkUSPUnmarshal(b *testing.B) {
 
 func BenchmarkUSPMemoryFootprint(b *testing.B) {
 	d := readFile("testdata/usp.bin", b)
-	x := parser.USP_Parser{}
+	x := parser.USPParser{}
 
 	b.ReportAllocs()
 	b.SetBytes(int64(len(d)))
