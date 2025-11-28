@@ -191,8 +191,8 @@ by first marshalling the protobuf message into json and then parsing
 it back in to a string-interface map.
 */
 func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, error) {
-	extension, err := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
-	if err != nil {
+	extension := proto.GetExtension(telemetry.GetEnterprise(), pb.E_JuniperNetworks)
+	if extension == nil {
 		atomic.AddUint64(&x.stats.MissingExtension, 1)
 		return nil, fmt.Errorf("failed to get Juniper protobuf extension")
 	}
@@ -205,7 +205,7 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 
 	// Use protoreflect to iterate over all set extensions
 	reflectMsg := enterpriseExtension.ProtoReflect()
-	var availableExtensions []interface{}
+	var availableExtensions []any
 
 	reflectMsg.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
 		if fd.IsExtension() {

@@ -82,9 +82,9 @@ func TestProtoBuf(t *testing.T) {
 func BenchmarkProtoBufParse(b *testing.B) {
 	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
 	x := parser.ProtoBuf{}
-	b.ResetTimer()
+
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := x.Parse(by)
 		if err != nil {
 			b.Fatalf("Parse failed: %v", err)
@@ -95,9 +95,9 @@ func BenchmarkProtoBufParse(b *testing.B) {
 // BenchmarkProtoBufUnmarshal benchmarks just the protobuf unmarshal step
 func BenchmarkProtoBufUnmarshal(b *testing.B) {
 	by := readProtobufFile(b, "testdata/protobuf-packet.bin")
-	b.ResetTimer()
+
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		telemetrystream := &junos_protobuf_telemetry.TelemetryStream{}
 		if err := proto.Unmarshal(by, telemetrystream); err != nil {
 			b.Fatalf("Unmarshal failed: %v", err)
@@ -116,9 +116,9 @@ func BenchmarkProtoBufFullPipeline(b *testing.B) {
 	}
 
 	x := parser.ProtoBuf{}
-	b.ResetTimer()
+
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		c, err := x.Parse(bytes)
 		if err != nil {
 			b.Fatalf("Parse failed: %v", err)
@@ -136,7 +136,7 @@ func BenchmarkProtoBufMemoryFootprint(b *testing.B) {
 
 	b.Run("SmallMessage", func(b *testing.B) {
 		b.ReportAllocs()
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			_, _ = x.Parse(by)
 		}
 	})
@@ -150,7 +150,7 @@ func BenchmarkProtoBufMemoryFootprint(b *testing.B) {
 
 		// Create 100 optics diag entries
 		opticsDiags := make([]*junos_protobuf_telemetry.OpticsInfos, 100)
-		for j := 0; j < 100; j++ {
+		for j := range 100 {
 			ifName := fmt.Sprintf("ge-%d/0/%d", j/10, j%10)
 			opticsDiags[j] = &junos_protobuf_telemetry.OpticsInfos{
 				IfName: &ifName,
@@ -173,7 +173,7 @@ func BenchmarkProtoBufMemoryFootprint(b *testing.B) {
 
 		b.ReportAllocs()
 		b.SetBytes(int64(len(largeBytes)))
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			_, _ = x.Parse(largeBytes)
 		}
 	})

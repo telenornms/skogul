@@ -93,7 +93,7 @@ func (p *USPParser) Parse(b []byte) (*skogul.Container, error) {
 
 // getUspRecord Unmarshals []byte into a protoc generated struct and returns it.
 // Uses vtprotobuf's optimized UnmarshalVT for performance.
-func (p *USP_Parser) getUspRecord(d []byte) (*usp.Record, error) {
+func (p *USPParser) getUspRecord(d []byte) (*usp.Record, error) {
 	unmarshaledMessage := &usp.Record{}
 	if err := unmarshaledMessage.UnmarshalVT(d); err != nil {
 		atomic.AddUint64(&p.stats.ParseErrors, 1)
