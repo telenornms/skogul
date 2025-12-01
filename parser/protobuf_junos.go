@@ -185,6 +185,18 @@ func applyJuniperHaxx(messageOnly proto.Message) {
 	}
 }
 
+// getMessageExtensions extracts all message-type extensions from a protoreflect message.
+func getMessageExtensions(msg protoreflect.Message) []proto.Message {
+	var exts []proto.Message
+	msg.Range(func(field protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+		if field.IsExtension() && field.Message() != nil {
+			exts = append(exts, v.Message().Interface())
+		}
+		return true // continue
+	})
+	return exts
+}
+
 /*
 createData creates a string-interface map of skogul.Metric type Data
 by first marshalling the protobuf message into json and then parsing
@@ -203,57 +215,27 @@ func (x *ProtoBuf) createData(telemetry *pb.TelemetryStream) (map[string]any, er
 		return nil, fmt.Errorf("failed to cast to juniper message")
 	}
 
-	// Use protoreflect to iterate over all set extensions
-	reflectMsg := enterpriseExtension.ProtoReflect()
-	var availableExtensions []any
-
-	reflectMsg.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
-		if fd.IsExtension() {
-			// Get the extension value as an interface
-			if fd.Message() != nil {
-				// This is a message-type extension
-				extMsg := v.Message().Interface()
-				availableExtensions = append(availableExtensions, extMsg)
-			}
-		}
-		return true
-	})
-
-	var jsonMessage []byte
-	var err error
-	found := false
-	for _, ext := range availableExtensions {
-		if ext == nil {
-			continue
-		}
-
-		if found {
-			return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do")
-		}
-
-		messageOnly, ok := ext.(proto.Message)
-		if !ok {
-			return nil, fmt.Errorf("failed to cast to message: %v", ext)
-		}
-		applyJuniperHaxx(messageOnly)
-
-		jsonMessage, err = json.Marshal(messageOnly)
-		if err != nil {
-			if x.Debug {
-				pbLog.WithError(err).Infof("failed to marshal protobuf. data: %v", messageOnly)
-			}
-			atomic.AddUint64(&x.stats.FailedToJsonMarshal, 1)
-			return nil, err
-		}
-
-		found = true
-	}
-
-	if !found {
+	exts := getMessageExtensions(enterpriseExtension.ProtoReflect())
+	if len(exts) == 0 {
 		if x.Debug {
-			pbLog.Infof("no valid extensions found. availableExtensions: %v, enterprise extension: %v", availableExtensions, enterpriseExtension)
+			pbLog.Infof("no valid extensions found. enterprise extension: %v", enterpriseExtension)
 		}
 		return nil, fmt.Errorf("found no valid extensions")
+	}
+	if len(exts) > 1 {
+		return nil, fmt.Errorf("multiple protobuf extensions found, don't know what to do")
+	}
+
+	messageOnly := exts[0]
+	applyJuniperHaxx(messageOnly)
+
+	jsonMessage, err := json.Marshal(messageOnly)
+	if err != nil {
+		if x.Debug {
+			pbLog.WithError(err).Infof("failed to marshal protobuf. data: %v", messageOnly)
+		}
+		atomic.AddUint64(&x.stats.FailedToJsonMarshal, 1)
+		return nil, err
 	}
 
 	var metrics map[string]any
