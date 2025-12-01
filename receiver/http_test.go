@@ -373,6 +373,8 @@ func TestMain(m *testing.M) {
 		os.Exit(1)
 	}
 
+	UpdateHttpConfigWithUsablePorts(bConfig)
+
 	rPlain := bConfig.Receivers["plain"].Receiver.(*receiver.HTTP)
 	rSSL := bConfig.Receivers["ssl_auth"].Receiver.(*receiver.HTTP)
 
