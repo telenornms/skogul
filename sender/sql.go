@@ -28,6 +28,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 	"sync"
 
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
@@ -89,22 +90,20 @@ driver doesn't understand ?, ?, ?.
 I love humans.
 */
 func (sq *SQL) prep() {
-	mlen := len("metadata.")
-	dlen := len("data.")
-
 	nElement := 0
 	expander := func(element string) string {
-		if element == "timestamp" {
+		switch {
+		case element == "timestamp":
 			sq.list = append(sq.list, dbElement{timestamp, element})
-		} else if len(element) > mlen && element[0:mlen] == "metadata." {
-			sq.list = append(sq.list, dbElement{metadata, element[mlen:]})
-		} else if element == "json.metadata" {
+		case strings.HasPrefix(element, "metadata."):
+			sq.list = append(sq.list, dbElement{metadata, strings.TrimPrefix(element, "metadata.")})
+		case element == "json.metadata":
 			sq.list = append(sq.list, dbElement{marshalMeta, ""})
-		} else if element == "json.data" {
+		case element == "json.data":
 			sq.list = append(sq.list, dbElement{marshalData, ""})
-		} else if len(element) > dlen && element[0:dlen] == "data." {
-			sq.list = append(sq.list, dbElement{data, element[dlen:]})
-		} else {
+		case strings.HasPrefix(element, "data."):
+			sq.list = append(sq.list, dbElement{data, strings.TrimPrefix(element, "data.")})
+		default:
 			sq.list = append(sq.list, dbElement{data, element})
 		}
 		if sq.Driver == "mysql" {
@@ -126,7 +125,7 @@ func (sq *SQL) init() {
 }
 
 func (sq *SQL) exec(stmt *sql.Stmt, m *skogul.Metric) error {
-	var vals []interface{}
+	var vals []any
 	for _, e := range sq.list {
 		switch e.family {
 		case timestamp:

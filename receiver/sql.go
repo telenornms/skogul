@@ -62,8 +62,8 @@ func (s *SQL) Start() error {
 	if err != nil {
 		return fmt.Errorf("couldn't ping the database: %w", err)
 	}
-	tRawBytes := reflect.TypeOf(sql.RawBytes{})
-	tString := reflect.TypeOf("")
+	tRawBytes := reflect.TypeFor[sql.RawBytes]()
+	tString := reflect.TypeFor[string]()
 
 	// Need a reverse map here to quickly check if columns are metadata
 	// or not
@@ -90,7 +90,7 @@ func (s *SQL) Start() error {
 
 		for rows.Next() {
 			// We scan into values, but need to prepare it
-			values := make([]interface{}, len(columnt))
+			values := make([]any, len(columnt))
 
 			// Allocates type-specific values to scan into,
 			// including a work-around for the mysql driver (at
@@ -110,8 +110,8 @@ func (s *SQL) Start() error {
 			}
 
 			metric := skogul.Metric{}
-			metric.Metadata = make(map[string]interface{})
-			metric.Data = make(map[string]interface{})
+			metric.Metadata = make(map[string]any)
+			metric.Data = make(map[string]any)
 
 			// Store data where we actually want it
 			for idx := range columnt {
@@ -122,7 +122,7 @@ func (s *SQL) Start() error {
 				if len(s.UnmarshalJson) > 0 {
 					for _, v := range s.UnmarshalJson {
 						if name == v {
-							json.Unmarshal([]byte(fmt.Sprintf("%s", newValue)), &newValue)
+							json.Unmarshal(fmt.Appendf(nil, "%s", newValue), &newValue)
 							if isMetadata[name] {
 								metric.Metadata[v] = newValue
 							} else {

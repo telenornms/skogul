@@ -70,7 +70,7 @@ var sqlBase = `
 
 func sqlTestAuto(t *testing.T, url string) *config.Config {
 	t.Helper()
-	conf, err := config.Bytes([]byte(fmt.Sprintf(sqlBase, url)))
+	conf, err := config.Bytes(fmt.Appendf(nil, sqlBase, url))
 	if conf == nil {
 		t.Errorf("Bytes(\"%s\" failed", url)
 	}
@@ -82,7 +82,7 @@ func sqlTestAuto(t *testing.T, url string) *config.Config {
 
 func sqlTestAutoNeg(t *testing.T, url string) {
 	t.Helper()
-	conf, err := config.Bytes([]byte(fmt.Sprintf(sqlBase, url)))
+	conf, err := config.Bytes(fmt.Appendf(nil, sqlBase, url))
 	if conf != nil {
 		t.Errorf("Bytes(\"%s\" succeeded, but expected failure. Val: %v", url, conf)
 	}
@@ -111,8 +111,8 @@ func getValidContainer() *skogul.Container {
 	me := skogul.Metric{}
 	n := time.Now()
 	me.Time = &n
-	me.Metadata = make(map[string]interface{})
-	me.Data = make(map[string]interface{})
+	me.Metadata = make(map[string]any)
+	me.Data = make(map[string]any)
 	me.Metadata["src"] = "Test"
 	me.Data["name"] = "Foo Bar"
 	me.Data["data"] = "something"
