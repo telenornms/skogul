@@ -1,9 +1,10 @@
 /*
  * skogul, sql sender
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Aslak Bakkeland <aslak.bakkeland@telenor.no>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,6 +35,7 @@ import (
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
 	"github.com/telenornms/skogul"
+	sqlutil "github.com/telenornms/skogul/internal/sql"
 )
 
 const (
@@ -66,14 +68,18 @@ to foo("INSERT INTO foo VALUES(?,?,?)", timestamp, foo, someData), so they
 will be sensibly escaped.
 */
 type SQL struct {
-	ConnStr string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
-	Query   string `doc:"Query run for each metric. The following expansions are made:\n\n${timestamp} is expanded to the actual metric timestamp.\n\n${metadata.KEY} will be expanded to the metadata with key name \"KEY\".\n\n${data.KEY} will be expanded to data[foo].\n\n${json.metadata} will be expanded to a json representation of all metadata.\n\n${json.data} will be expanded to a json representation of all data.\n\nFinally, ${KEY} is a shorthand for ${data.KEY}. Both methods are provided, to allow referencing data fields named \"metadata.\". E.g.: ${data.metadata.x} will match data[\"metadata.x\"], while ${metadata.x} will match metadata[\"x\"]." example:"INSERT INTO test VALUES(${timestamp},${hei},${metadata.key1})"`
-	Driver  string `doc:"Database driver/system. Currently suported: mysql and postgres."`
-	initErr error
-	q       string
-	list    []dbElement
-	db      *sql.DB
-	once    sync.Once
+	ConnStr  string `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@host/database." example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
+	Query    string `doc:"Query run for each metric. The following expansions are made:\n\n${timestamp} is expanded to the actual metric timestamp.\n\n${metadata.KEY} will be expanded to the metadata with key name \"KEY\".\n\n${data.KEY} will be expanded to data[foo].\n\n${json.metadata} will be expanded to a json representation of all metadata.\n\n${json.data} will be expanded to a json representation of all data.\n\nFinally, ${KEY} is a shorthand for ${data.KEY}. Both methods are provided, to allow referencing data fields named \"metadata.\". E.g.: ${data.metadata.x} will match data[\"metadata.x\"], while ${metadata.x} will match metadata[\"x\"]." example:"INSERT INTO test VALUES(${timestamp},${hei},${metadata.key1})"`
+	Driver   string `doc:"Database driver/system. Currently supported: mysql and postgres."`
+	CAFile   string `doc:"Path to CA certificate file for server verification. Leave empty to use system defaults. For PostgreSQL, this automatically sets sslmode=verify-full."`
+	CertFile string `doc:"Path to client certificate file for TLS client authentication. Must be used with either CAFile (for server verification) or Insecure: true."`
+	KeyFile  string `doc:"Path to client private key file for TLS client authentication."`
+	Insecure bool   `doc:"Skip TLS certificate verification (insecure, use for testing only). For PostgreSQL, this sets sslmode=require."`
+	initErr  error
+	q        string
+	list     []dbElement
+	db       *sql.DB
+	once     sync.Once
 }
 
 /*
@@ -116,7 +122,25 @@ func (sq *SQL) prep() {
 }
 
 func (sq *SQL) init() {
-	sq.db, sq.initErr = sql.Open(sq.Driver, sq.ConnStr)
+	connStr := sq.ConnStr
+	tlsCfg := &sqlutil.TLSConfig{
+		CAFile:   sq.CAFile,
+		CertFile: sq.CertFile,
+		KeyFile:  sq.KeyFile,
+		Insecure: sq.Insecure,
+	}
+
+	switch sq.Driver {
+	case "mysql":
+		connStr, sq.initErr = sqlutil.SetupMySQLTLS(connStr, tlsCfg)
+	case "postgres":
+		connStr, sq.initErr = sqlutil.SetupPostgresTLS(connStr, tlsCfg)
+	}
+	if sq.initErr != nil {
+		return
+	}
+
+	sq.db, sq.initErr = sql.Open(sq.Driver, connStr)
 	if sq.initErr != nil {
 		sqlLog.WithError(sq.initErr).WithField("driver", sq.Driver).Error("Failed to initialize SQL connection")
 		return
@@ -197,17 +221,20 @@ func (sq *SQL) Send(c *skogul.Container) error {
 // Verify ensures options are set, but currently doesn't check very well,
 // since it is disallowed from connecting to a database and such.
 func (sq *SQL) Verify() error {
-	if sq.ConnStr == "" {
+	switch {
+	case sq.ConnStr == "":
 		return skogul.MissingArgument("ConnStr")
-	}
-	if sq.Query == "" {
+	case sq.Query == "":
 		return skogul.MissingArgument("Query")
-	}
-	if sq.Driver == "" {
+	case sq.Driver == "":
 		return skogul.MissingArgument("Driver")
+	case sq.Driver != "mysql" && sq.Driver != "postgres":
+		return fmt.Errorf("unsupported database driver %s - must be 'mysql' or 'postgres'", sq.Driver)
 	}
-	if sq.Driver != "mysql" && sq.Driver != "postgres" {
-		return fmt.Errorf("unsuported database driver %s - must be `mysql' or `postgres'", sq.Driver)
-	}
-	return nil
+	return (&sqlutil.TLSConfig{
+		CAFile:   sq.CAFile,
+		CertFile: sq.CertFile,
+		KeyFile:  sq.KeyFile,
+		Insecure: sq.Insecure,
+	}).Verify()
 }

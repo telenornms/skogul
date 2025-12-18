@@ -1,9 +1,10 @@
 /*
  * skogul, SQL receiver
  *
- * Copyright (c) 2022 Telenor Norge AS
+ * Copyright (c) 2022-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Aslak Bakkeland <aslak.bakkeland@telenor.no>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -33,6 +34,7 @@ import (
 	_ "github.com/go-sql-driver/mysql" // Imported for side effect/mysql support
 	_ "github.com/lib/pq"
 	"github.com/telenornms/skogul"
+	sqlutil "github.com/telenornms/skogul/internal/sql"
 )
 
 var sqlLog = skogul.Logger("receiver", "sql")
@@ -41,23 +43,43 @@ type SQL struct {
 	ConnStr       string            `doc:"Connection string to use for database. Slight variations between database engines. For MySQL typically user:password@tcp(host:port)/database. For  MySQL, you need to add parseTime=true at the end to successfully parse a time column, e.g foo:bar@tcp(db2)/blatti?parseTime=true" example:"mysql: 'root:lol@/mydb' postgres: 'user=pqgotest dbname=pqgotest sslmode=verify-full'"`
 	Query         string            `doc:"Query run for each metric. Any column named 'time' will be used as the metric time stamp."`
 	Metadata      []string          `doc:"Array of which columns to treat as metadata, the rest will be data fields."`
-	Driver        string            `doc:"Database driver/system. Currently suported: mysql and postgres."`
+	Driver        string            `doc:"Database driver/system. Currently supported: mysql and postgres."`
 	Interval      skogul.Duration   `doc:"How often to run the query. Set to negative value to run it just once."`
 	Handler       skogul.HandlerRef `doc:"Handler to use for data transmission."`
-	UnmarshalJson []string          `doc:"Unmarshal fields containing json strings into objects "`
+	UnmarshalJSON []string          `doc:"Unmarshal fields containing JSON strings into objects."`
+	UnmarshalJson []string          `doc:"DEPRECATED - use UnmarshalJSON instead. Unmarshal fields containing JSON strings into objects."`
+	CAFile        string            `doc:"Path to CA certificate file for server verification. Leave empty to use system defaults. For PostgreSQL, this automatically sets sslmode=verify-full."`
+	CertFile      string            `doc:"Path to client certificate file for TLS client authentication. Must be used with either CAFile (for server verification) or Insecure: true."`
+	KeyFile       string            `doc:"Path to client private key file for TLS client authentication."`
+	Insecure      bool              `doc:"Skip TLS certificate verification (insecure, use for testing only). For PostgreSQL, this sets sslmode=require."`
 }
 
 // Start the SQL receiver and never return
 // This is still a monstrosity
 func (s *SQL) Start() error {
-	db, err := sql.Open(s.Driver, s.ConnStr)
+	// Handle deprecated UnmarshalJson field
+	if len(s.UnmarshalJson) > 0 && len(s.UnmarshalJSON) == 0 {
+		s.UnmarshalJSON = s.UnmarshalJson
+	}
+
+	connStr, err := s.setupTLS()
+	if err != nil {
+		return fmt.Errorf("couldn't setup TLS: %w", err)
+	}
+
+	db, err := sql.Open(s.Driver, connStr)
 	if err != nil {
 		return fmt.Errorf("couldn't initialize SQL connection: %w", err)
 	}
+	// Note: defer only executes if we return early due to error below.
+	// During normal operation, Start() runs forever and these won't execute.
+	defer db.Close()
+
 	stmt, err := db.Prepare(s.Query)
 	if err != nil {
-		return fmt.Errorf("couldn't create prepared statemet from query:  %w", err)
+		return fmt.Errorf("couldn't create prepared statement from query: %w", err)
 	}
+	defer stmt.Close()
 	err = db.Ping()
 	if err != nil {
 		return fmt.Errorf("couldn't ping the database: %w", err)
@@ -119,8 +141,8 @@ func (s *SQL) Start() error {
 				oldValue := reflect.ValueOf(values[idx])
 				newValue := reflect.Indirect(oldValue).Interface()
 
-				if len(s.UnmarshalJson) > 0 {
-					for _, v := range s.UnmarshalJson {
+				if len(s.UnmarshalJSON) > 0 {
+					for _, v := range s.UnmarshalJSON {
 						if name == v {
 							json.Unmarshal(fmt.Appendf(nil, "%s", newValue), &newValue)
 							if isMetadata[name] {
@@ -132,9 +154,10 @@ func (s *SQL) Start() error {
 					}
 				}
 
-				if isMetadata[name] {
+				switch {
+				case isMetadata[name]:
 					metric.Metadata[name] = newValue
-				} else if name == "time" {
+				case name == "time":
 					ts, ok := newValue.(sql.NullTime)
 					if !ok {
 						sqlLog.Warnf("Unable to parse time column as timestamp. Value: %#v", newValue)
@@ -151,7 +174,7 @@ func (s *SQL) Start() error {
 						continue
 					}
 					metric.Time = &ts.Time
-				} else {
+				default:
 					metric.Data[name] = newValue
 				}
 			}
@@ -170,4 +193,49 @@ func (s *SQL) Start() error {
 			return nil
 		}
 	}
+}
+
+// setupTLS configures TLS for the database connection based on driver type.
+func (s *SQL) setupTLS() (string, error) {
+	tlsCfg := &sqlutil.TLSConfig{
+		CAFile:   s.CAFile,
+		CertFile: s.CertFile,
+		KeyFile:  s.KeyFile,
+		Insecure: s.Insecure,
+	}
+
+	switch s.Driver {
+	case "mysql":
+		return sqlutil.SetupMySQLTLS(s.ConnStr, tlsCfg)
+	case "postgres":
+		return sqlutil.SetupPostgresTLS(s.ConnStr, tlsCfg)
+	}
+
+	return s.ConnStr, nil
+}
+
+func (s *SQL) Verify() error {
+	switch {
+	case s.ConnStr == "":
+		return skogul.MissingArgument("ConnStr")
+	case s.Query == "":
+		return skogul.MissingArgument("Query")
+	case s.Driver == "":
+		return skogul.MissingArgument("Driver")
+	case s.Driver != "mysql" && s.Driver != "postgres":
+		return fmt.Errorf("unsupported database driver %s - must be 'mysql' or 'postgres'", s.Driver)
+	}
+	return (&sqlutil.TLSConfig{
+		CAFile:   s.CAFile,
+		CertFile: s.CertFile,
+		KeyFile:  s.KeyFile,
+		Insecure: s.Insecure,
+	}).Verify()
+}
+
+func (s *SQL) Deprecated() error {
+	if len(s.UnmarshalJson) > 0 {
+		return fmt.Errorf("config option UnmarshalJson is replaced by UnmarshalJSON, UnmarshalJson will be removed in future versions")
+	}
+	return nil
 }

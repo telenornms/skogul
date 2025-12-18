@@ -105,7 +105,7 @@ printfcheck:
 
 exampletest: skogul
 	@echo 📖 Verifying examples
-	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v juniper); do \
+	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v sql-tls | grep -v juniper); do \
 		./skogul -show -f $$a >/dev/null 2>&1 ; \
 		if [ $$? -ne 0 ]; then \
 			echo 🚩 Example $$a is not valid; \
@@ -146,7 +146,7 @@ checkconfigs: checkbadconfigs checkokconfigs
 
 exampletestdep: exampletest
 	@echo 📖 Checking examples for deprecation warnings
-	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v juniper); do \
+	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v sql-tls | grep -v juniper); do \
 		./skogul -show -f $$a 2>&1 | egrep -q "deprecation warning for" ; \
 		if [ $$? -eq 0 ]; then \
 			echo 🚩 Example $$a has deprecation warnings; \
