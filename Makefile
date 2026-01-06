@@ -165,6 +165,10 @@ test:
 	@echo 🧐 Testing, without SQL-tests
 	@go test -short ./...
 
+test-sql-tls: skogul
+	@echo 🔐 Running SQL TLS integration tests
+	@cd testdata/sql-tls && ./run-tests.sh
+
 bench:
 	@echo 🏋 Benchmarking
 	@go test -run ^Bench -benchtime 1s -bench Bench ./... | grep --line-buffered Benchmark | awk -v term_width=$$(tput cols 2>/dev/null || echo 120) 'BEGIN { \
@@ -237,8 +241,9 @@ help:
 	@echo " - generate - regenerate protocol buffer code"
 	@echo " - test / bench - run go test, with and without benchmarks "
 	@echo "                  note that this uses "-short" to avoid mysql/postgres dependencies. "
+	@echo " - test-sql-tls - Run SQL TLS integration tests using Docker (requires docker-compose)"
 	@echo " - fmtcheck - Runs gofmt -d -s, excluding generated code"
 	@echo " - fmtfix - Runs gofmt -d -s -w, excluding generated code (e.g.: fix formating)"
 	@echo " - covergui - Run tests, track test coverage and open coverage analysis in browser"
 
-.PHONY: all clean check checkconfigs test bench help install rpm release
+.PHONY: all clean check checkconfigs test test-sql-tls bench help install rpm release

@@ -1,0 +1,27 @@
+{
+  "_comment": "Example: SQL sender with mutual TLS. Change driver/connstr for MySQL vs PostgreSQL.",
+  "receivers": {
+    "http": {
+      "type": "http",
+      "address": "localhost:8080",
+      "handlers": { "/": "writer" }
+    }
+  },
+  "handlers": {
+    "writer": {
+      "parser": "skogul",
+      "sender": "database"
+    }
+  },
+  "senders": {
+    "database": {
+      "type": "sql",
+      "driver": "mysql",
+      "connstr": "user@tcp(db.example.com:3306)/metrics",
+      "query": "INSERT INTO metrics (time, host, value) VALUES (${timestamp}, ${metadata.host}, ${value})",
+      "cafile": "/etc/ssl/certs/ca.pem",
+      "certfile": "/etc/ssl/certs/client.pem",
+      "keyfile": "/etc/ssl/private/client-key.pem"
+    }
+  }
+}
