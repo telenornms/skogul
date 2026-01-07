@@ -1,0 +1,25 @@
+{
+  // This is a JSON5 config file with comments and trailing commas
+  "senders": {
+    "debug": {
+      "type": "debug",
+    },
+  },
+  "handlers": {
+    /* Multi-line comment:
+       This handler uses the debug sender */
+    "plain": {
+      "parser": "skogul",
+      "sender": "debug",
+      "transformers": [], // empty transformers
+    },
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+        "/": "plain",
+      },
+    },
+  },
+}

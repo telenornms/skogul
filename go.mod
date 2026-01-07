@@ -17,6 +17,7 @@ require (
 	github.com/nats-io/nats.go v1.35.0
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10
 	github.com/rabbitmq/amqp091-go v1.10.0
+	github.com/titanous/json5 v1.0.0
 )
 
 require (

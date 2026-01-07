@@ -118,7 +118,7 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 		Type string
 	}
 	var myt tType
-	if err := json.Unmarshal(b, &myt); err != nil {
+	if err := configUnmarshal(b, &myt); err != nil {
 		return err
 	}
 	t.Type = myt.Type
@@ -131,13 +131,13 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 	var ok bool
 	t.Transformer, ok = (transformer.Auto[t.Type].Alloc()).(skogul.Transformer)
 	skogul.Assert(ok)
-	if err := json.Unmarshal(b, &t.Transformer); err != nil {
+	if err := configUnmarshal(b, &t.Transformer); err != nil {
 		return fmt.Errorf("transformer unmarshal: %w", err)
 	}
 
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
-	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "transformer", t.Type, reflect.ValueOf(t.Transformer).Elem().Type())
 	return nil
 }
@@ -166,7 +166,7 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 		Type string
 	}
 	var t tType
-	if err := json.Unmarshal(b, &t); err != nil {
+	if err := configUnmarshal(b, &t); err != nil {
 		return err
 	}
 	r.Type = t.Type
@@ -179,13 +179,13 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	var ok bool
 	r.Receiver, ok = (receiver.Auto[r.Type].Alloc()).(skogul.Receiver)
 	skogul.Assert(ok)
-	if err := json.Unmarshal(b, &r.Receiver); err != nil {
+	if err := configUnmarshal(b, &r.Receiver); err != nil {
 		return fmt.Errorf("receiver unmarshalling: %w", err)
 	}
 
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
-	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "receiver", r.Type, reflect.ValueOf(r.Receiver).Elem().Type())
 	return nil
 }
@@ -211,7 +211,7 @@ func (p *Parser) UnmarshalJSON(b []byte) error {
 		Type string
 	}
 	var t tType
-	if err := json.Unmarshal(b, &t); err != nil {
+	if err := configUnmarshal(b, &t); err != nil {
 		return err
 	}
 	p.Type = t.Type
@@ -224,12 +224,12 @@ func (p *Parser) UnmarshalJSON(b []byte) error {
 	var ok bool
 	p.Parser, ok = (parser.Auto[p.Type].Alloc()).(skogul.Parser)
 	skogul.Assert(ok)
-	if err := json.Unmarshal(b, &p.Parser); err != nil {
+	if err := configUnmarshal(b, &p.Parser); err != nil {
 		return fmt.Errorf("parser unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
-	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "parser", p.Type, reflect.ValueOf(p.Parser).Elem().Type())
 	return nil
 }
@@ -255,7 +255,7 @@ func (e *Encoder) UnmarshalJSON(b []byte) error {
 		Type string
 	}
 	var t tType
-	if err := json.Unmarshal(b, &t); err != nil {
+	if err := configUnmarshal(b, &t); err != nil {
 		return err
 	}
 	e.Type = t.Type
@@ -268,12 +268,12 @@ func (e *Encoder) UnmarshalJSON(b []byte) error {
 	var ok bool
 	e.Encoder, ok = (encoder.Auto[e.Type].Alloc()).(skogul.Encoder)
 	skogul.Assert(ok)
-	if err := json.Unmarshal(b, &e.Encoder); err != nil {
+	if err := configUnmarshal(b, &e.Encoder); err != nil {
 		return fmt.Errorf("encoder unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
-	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "encoder", e.Type, reflect.ValueOf(e.Encoder).Elem().Type())
 	return nil
 }
@@ -299,7 +299,7 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 		Type string
 	}
 	var t tType
-	if err := json.Unmarshal(b, &t); err != nil {
+	if err := configUnmarshal(b, &t); err != nil {
 		return err
 	}
 	s.Type = t.Type
@@ -312,14 +312,25 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 	var ok bool
 	s.Sender, ok = (sender.Auto[s.Type].Alloc()).(skogul.Sender)
 	skogul.Assert(ok)
-	if err := json.Unmarshal(b, &s.Sender); err != nil {
+	if err := configUnmarshal(b, &s.Sender); err != nil {
 		return fmt.Errorf("sender unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
 	var jsonConf map[string]interface{}
-	json.Unmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
+	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "sender", s.Type, reflect.ValueOf(s.Sender).Elem().Type())
 	return nil
+}
+
+// printConfigSyntaxError prints a helpful error message for syntax errors.
+// It attempts to show context around the error location.
+func printConfigSyntaxError(b []byte, err error) {
+	offset, message := configSyntaxError(err)
+	if offset >= 0 {
+		printSyntaxError(b, offset, message)
+	} else {
+		fmt.Printf("Unable to parse configuration.\nError: %s\n", message)
+	}
 }
 
 func printSyntaxError(b []byte, offset int, text string) {
@@ -354,7 +365,7 @@ func printSyntaxError(b []byte, offset int, text string) {
 			lines++
 		}
 	}
-	fmt.Printf("Unable to parse JSON configuration at byte offset %d.\nError: %s\nContext:\n", offset, text)
+	fmt.Printf("Unable to parse configuration at byte offset %d.\nError: %s\nContext:\n", offset, text)
 	fmt.Println(string(b[start:end2]))
 	for i := start2; i < (offset - 2); i++ {
 		if b[i] == '	' {
@@ -372,13 +383,16 @@ func printSyntaxError(b []byte, offset int, text string) {
 	fmt.Println(string(b[end2:end]))
 }
 
-// Bytes parses json in the provided byte array and returns a
-// configuration.
+// Bytes parses the provided byte array as configuration and returns a Config.
 //
-// It does this by first doing a pass where it just does JSON
-// unmarshalling, which also updates sender and handler reference tables
-// globally (unfortunately...), then calling secondPass(), which resolves
-// references and does a final validation.
+// Configuration is parsed using JSON5, which is a superset of JSON supporting
+// comments, trailing commas, and other conveniences. All valid JSON files
+// parse correctly.
+//
+// It does this by first doing a pass where it just does JSON unmarshalling,
+// which also updates sender and handler reference tables globally
+// (unfortunately...), then calling secondPass(), which resolves references
+// and does a final validation.
 func Bytes(b []byte) (*Config, error) {
 	var jsonData map[string]interface{}
 	skogul.HandlerMap = skogul.HandlerMap[0:0]
@@ -386,17 +400,14 @@ func Bytes(b []byte) (*Config, error) {
 	skogul.ParserMap = skogul.ParserMap[0:0]
 	skogul.TransformerMap = skogul.TransformerMap[0:0]
 	skogul.EncoderMap = skogul.EncoderMap[0:0]
-	if err := json.Unmarshal(b, &jsonData); err != nil {
-		jerr, ok := err.(*json.SyntaxError)
-		if ok {
-			printSyntaxError(b, int(jerr.Offset), jerr.Error())
-		}
-		return nil, fmt.Errorf("invalid JSON: %w", err)
+	if err := configUnmarshal(b, &jsonData); err != nil {
+		printConfigSyntaxError(b, err)
+		return nil, fmt.Errorf("invalid configuration: %w", err)
 	}
 
 	c := Config{}
-	if err := json.Unmarshal(b, &c); err != nil {
-		return nil, fmt.Errorf("valid JSON, but not valid Skogul configuration: %w", err)
+	if err := configUnmarshal(b, &c); err != nil {
+		return nil, fmt.Errorf("valid configuration syntax, but not valid Skogul configuration: %w", err)
 	}
 
 	return secondPass(&c)
@@ -417,7 +428,7 @@ func Path(path string) (*Config, error) {
 }
 
 // File opens a config file and parses it, then returns the valid
-// configuration, using Bytes()
+// configuration, using Bytes(). Both .json and .json5 files are supported.
 func File(f string) (*Config, error) {
 	dat, err := os.ReadFile(f)
 	if err != nil {
@@ -426,14 +437,23 @@ func File(f string) (*Config, error) {
 	return Bytes(dat)
 }
 
+// isConfigFile checks if a file has a valid config file extension (.json or .json5)
+func isConfigFile(path string) bool {
+	ext := filepath.Ext(path)
+	return ext == ".json" || ext == ".json5"
+}
+
 func findConfigFiles(path string) ([]string, error) {
 	confLog.WithField("path", path).Debugf("Reading configuration files from %s", path)
 	configFiles := make([]string, 0)
 	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() && filepath.Ext(path) == ".json" {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() && isConfigFile(path) {
 			configFiles = append(configFiles, path)
 		}
-		return err
+		return nil
 	})
 	if err != nil {
 		return nil, err
@@ -442,8 +462,8 @@ func findConfigFiles(path string) ([]string, error) {
 	return configFiles, nil
 }
 
-// ReadFiles reads all JSON files (with the .JSON suffix) in a given directory
-// and combines them to a configuration for the program.
+// ReadFiles reads all config files (with .json or .json5 suffix) in a
+// given directory and combines them to a configuration for the program.
 func ReadFiles(p string) (*Config, error) {
 	files, err := findConfigFiles(p)
 	if err != nil {
@@ -459,12 +479,9 @@ func ReadFiles(p string) (*Config, error) {
 			return nil, err
 		}
 
-		err = json.Unmarshal(b, &config)
+		err = configUnmarshal(b, &config)
 		if err != nil {
-			jerr, ok := err.(*json.SyntaxError)
-			if ok {
-				printSyntaxError(b, int(jerr.Offset), jerr.Error())
-			}
+			printConfigSyntaxError(b, err)
 			return nil, err
 		}
 	}
