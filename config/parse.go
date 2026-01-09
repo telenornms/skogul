@@ -103,7 +103,7 @@ func (t *Transformer) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	var merged map[string]interface{}
+	var merged map[string]any
 	if err := json.Unmarshal(nest, &merged); err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 	}
 
 	// Find superfluous config parameters
-	var jsonConf map[string]interface{}
+	var jsonConf map[string]any
 	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "transformer", t.Type, reflect.ValueOf(t.Transformer).Elem().Type())
 	return nil
@@ -151,7 +151,7 @@ func (r *Receiver) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	var merged map[string]interface{}
+	var merged map[string]any
 	if err := json.Unmarshal(nest, &merged); err != nil {
 		return nil, err
 	}
@@ -184,7 +184,7 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 	}
 
 	// Find superfluous config parameters
-	var jsonConf map[string]interface{}
+	var jsonConf map[string]any
 	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "receiver", r.Type, reflect.ValueOf(r.Receiver).Elem().Type())
 	return nil
@@ -197,7 +197,7 @@ func (p *Parser) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	var merged map[string]interface{}
+	var merged map[string]any
 	if err := json.Unmarshal(nest, &merged); err != nil {
 		return nil, err
 	}
@@ -228,7 +228,7 @@ func (p *Parser) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("parser unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
-	var jsonConf map[string]interface{}
+	var jsonConf map[string]any
 	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "parser", p.Type, reflect.ValueOf(p.Parser).Elem().Type())
 	return nil
@@ -241,7 +241,7 @@ func (e *Encoder) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	var merged map[string]interface{}
+	var merged map[string]any
 	if err := json.Unmarshal(nest, &merged); err != nil {
 		return nil, err
 	}
@@ -272,7 +272,7 @@ func (e *Encoder) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("encoder unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
-	var jsonConf map[string]interface{}
+	var jsonConf map[string]any
 	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "encoder", e.Type, reflect.ValueOf(e.Encoder).Elem().Type())
 	return nil
@@ -285,7 +285,7 @@ func (s *Sender) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	var merged map[string]interface{}
+	var merged map[string]any
 	if err := json.Unmarshal(nest, &merged); err != nil {
 		return nil, err
 	}
@@ -316,7 +316,7 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("sender unmarshalling: %w", err)
 	}
 	// Find superfluous config parameters
-	var jsonConf map[string]interface{}
+	var jsonConf map[string]any
 	configUnmarshal(b, &jsonConf) // Assuming this works out well since it did up there ^
 	VerifyOnlyRequiredConfigProps(&jsonConf, "sender", s.Type, reflect.ValueOf(s.Sender).Elem().Type())
 	return nil
@@ -394,7 +394,7 @@ func printSyntaxError(b []byte, offset int, text string) {
 // (unfortunately...), then calling secondPass(), which resolves references
 // and does a final validation.
 func Bytes(b []byte) (*Config, error) {
-	var jsonData map[string]interface{}
+	var jsonData map[string]any
 	skogul.HandlerMap = skogul.HandlerMap[0:0]
 	skogul.SenderMap = skogul.SenderMap[0:0]
 	skogul.ParserMap = skogul.ParserMap[0:0]
@@ -661,7 +661,7 @@ func identifyReceivers(c *Config) {
 // secondPass accepts a parsed configuration as input and resolves the
 // references in it, and verifies basic integrity.
 func secondPass(c *Config) (*Config, error) {
-	skogul.Identity = make(map[interface{}]string)
+	skogul.Identity = make(map[any]string)
 	identifyReceivers(c)
 	if err := resolveSenders(c); err != nil {
 		return nil, err
@@ -724,7 +724,7 @@ func secondPass(c *Config) (*Config, error) {
 	return c, nil
 }
 
-func deprecateCheck(family string, name string, item interface{}) {
+func deprecateCheck(family string, name string, item any) {
 	i, ok := item.(skogul.Deprecated)
 	if !ok {
 		return
@@ -736,7 +736,7 @@ func deprecateCheck(family string, name string, item interface{}) {
 
 // verifyItem checks if the item implements Verifier and if so, verifies
 // the item. Otherwise, returns nil.
-func verifyItem(family string, name string, item interface{}) error {
+func verifyItem(family string, name string, item any) error {
 	i, ok := item.(skogul.Verifier)
 	if !ok {
 		confLog.WithFields(logrus.Fields{"family": family, "name": name}).Trace("No verifier found")
@@ -771,22 +771,22 @@ func findFieldsOfStruct(T reflect.Type) []string {
 
 // GetRelevantRawConfigSection is a helper function to dig down into a Config JSON
 // and select the wanted family (receivers, transformers, senders) and item (foo).
-func GetRelevantRawConfigSection(rawConfig *map[string]interface{}, family, section string) map[string]interface{} {
-	configFamily, ok := (*rawConfig)[family].(map[string]interface{})
+func GetRelevantRawConfigSection(rawConfig *map[string]any, family, section string) map[string]any {
+	configFamily, ok := (*rawConfig)[family].(map[string]any)
 	if !ok {
 		confLog.WithFields(logrus.Fields{
 			"family":  family,
 			"section": section,
-		}).Warnf("Failed to cast config family to map[string]interface{}")
+		}).Warnf("Failed to cast config family to map[string]any")
 		return nil
 	}
 
-	configSection, ok := configFamily[section].(map[string]interface{})
+	configSection, ok := configFamily[section].(map[string]any)
 	if !ok {
 		confLog.WithFields(logrus.Fields{
 			"family":  family,
 			"section": section,
-		}).Warnf("Failed to cast config section to map[string]interface{}")
+		}).Warnf("Failed to cast config section to map[string]any")
 		return nil
 	}
 	return configSection
@@ -795,7 +795,7 @@ func GetRelevantRawConfigSection(rawConfig *map[string]interface{}, family, sect
 // VerifyOnlyRequiredConfigProps checks for undefined configuration properties
 // It can be used to identify typos or invalid configuration
 // Use 'config.GetRelevantRawConfigSection' first for handler if you have a full config.
-func VerifyOnlyRequiredConfigProps(componentConfig *map[string]interface{}, family, handler string, T reflect.Type) []string {
+func VerifyOnlyRequiredConfigProps(componentConfig *map[string]any, family, handler string, T reflect.Type) []string {
 	requiredProps := findFieldsOfStruct(T)
 
 	superfluousProperties := make([]string, 0)
@@ -809,7 +809,7 @@ func VerifyOnlyRequiredConfigProps(componentConfig *map[string]interface{}, fami
 		}
 
 		for _, requiredProp := range requiredProps {
-			if strings.ToLower(prop) == strings.ToLower(requiredProp) {
+			if strings.EqualFold(prop, requiredProp) {
 				propertyDefined = true
 				break
 			}

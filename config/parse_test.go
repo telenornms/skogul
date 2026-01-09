@@ -491,7 +491,7 @@ func TestFindSuperfluousReceiverConfigPropertiesFromFullConfig(t *testing.T) {
 	  }
 	}`)
 
-	var parsedConfig map[string]interface{}
+	var parsedConfig map[string]any
 	err := json.Unmarshal(rawConfig, &parsedConfig)
 
 	relevantConfig := config.GetRelevantRawConfigSection(&parsedConfig, "receivers", "foo")
@@ -500,7 +500,7 @@ func TestFindSuperfluousReceiverConfigPropertiesFromFullConfig(t *testing.T) {
 		t.Error("Failed to parse config")
 	}
 
-	configStruct := reflect.TypeOf(receiver.UDP{})
+	configStruct := reflect.TypeFor[receiver.UDP]()
 	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&relevantConfig, "receivers", "foo", configStruct)
 
 	if len(superfluousProperties) != 1 {
@@ -520,13 +520,13 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 		"superfluousField": "this is not needed"
 	}`)
 
-	var c map[string]interface{}
+	var c map[string]any
 	err := json.Unmarshal(rawConfig, &c)
 	if err != nil {
 		t.Error("Failed to parse config")
 	}
 
-	configStruct := reflect.TypeOf(receiver.UDP{})
+	configStruct := reflect.TypeFor[receiver.UDP]()
 	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&c, "receivers", "foo", configStruct)
 
 	if len(superfluousProperties) != 1 {
@@ -578,7 +578,7 @@ func TestReadConfigWithoutSuperfluousParamsNoSuperfluousParams(t *testing.T) {
     }
   }`)
 
-	var c map[string]interface{}
+	var c map[string]any
 	err := json.Unmarshal(rawConfig, &c)
 	if err != nil {
 		t.Errorf("Failed to unmarshal json: %s", err)
@@ -586,11 +586,11 @@ func TestReadConfigWithoutSuperfluousParamsNoSuperfluousParams(t *testing.T) {
 
 	superfluousProperties := make([]string, 0)
 
-	configStruct := reflect.TypeOf(receiver.Stdin{})
+	configStruct := reflect.TypeFor[receiver.Stdin]()
 	c1 := config.GetRelevantRawConfigSection(&c, "receivers", "foo")
 	superfluousProperties = append(superfluousProperties, config.VerifyOnlyRequiredConfigProps(&c1, "receiver", "foo", configStruct)...)
 
-	configStruct = reflect.TypeOf(sender.Debug{})
+	configStruct = reflect.TypeFor[sender.Debug]()
 	c2 := config.GetRelevantRawConfigSection(&c, "senders", "baz")
 	superfluousProperties = append(superfluousProperties, config.VerifyOnlyRequiredConfigProps(&c2, "sender", "baz", configStruct)...)
 
@@ -768,4 +768,3 @@ func TestJSON5InvalidSyntax(t *testing.T) {
 		})
 	}
 }
-
