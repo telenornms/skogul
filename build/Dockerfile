@@ -1,4 +1,4 @@
-FROM centos:8
+FROM rockylinux:9
 ENV SHELL bash
 RUN yum install -y vim man
 RUN yum install -y git python3-docutils rpm-build wget make
