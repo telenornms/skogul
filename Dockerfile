@@ -1,4 +1,5 @@
-FROM golang:latest
+ARG GO_VERSION=1.24
+FROM golang:${GO_VERSION}
 
 LABEL org.opencontainers.image.source https://github.com/telenornms/skogul
 

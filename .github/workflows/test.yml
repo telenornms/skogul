@@ -2,16 +2,12 @@ on: [push, pull_request]
 name: Test
 jobs:
   test:
-    strategy:
-      matrix:
-        go-version: [1.24.6]
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-go@v3
       with:
-        go-version: ${{ matrix.go-version }}
+        go-version-file: go.mod
         cache: true
     - run: make check
       env:
