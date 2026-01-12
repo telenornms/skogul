@@ -5,25 +5,25 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gogo/protobuf/proto"
 	"github.com/telenornms/skogul/gen/usp"
 	"github.com/telenornms/skogul/parser"
+	"google.golang.org/protobuf/proto"
 )
 
-func readFile(file string, t *testing.T) []byte {
-	t.Helper()
+func readFile(file string, tb testing.TB) []byte {
+	tb.Helper()
 	b := make([]byte, 9000)
 	f, err := os.Open(file)
 	if err != nil {
-		t.Fatalf("unable to open protobuf packet file: %v", err)
+		tb.Fatalf("unable to open protobuf packet file: %v", err)
 	}
 	defer f.Close()
 	n, err := f.Read(b)
 	if err != nil {
-		t.Fatalf("unable to read protobuf packet file: %v", err)
+		tb.Fatalf("unable to read protobuf packet file: %v", err)
 	}
 	if n == 0 {
-		t.Fatalf("read 0 bytes from protobuf packet file....")
+		tb.Fatalf("read 0 bytes from protobuf packet file....")
 	}
 	return b[0:n]
 }
@@ -88,5 +88,41 @@ func TestUSPExtractJSON(t *testing.T) {
 
 	if err := json.Unmarshal(input, &k); err != nil {
 		t.Error("Failed to unmarshall json")
+	}
+}
+
+func BenchmarkUSPParse(b *testing.B) {
+	d := readFile("testdata/usp.bin", b)
+	x := parser.USPParser{}
+
+	b.ReportAllocs()
+	for b.Loop() {
+		_, err := x.Parse(d)
+		if err != nil {
+			b.Fatalf("Parse failed: %v", err)
+		}
+	}
+}
+
+func BenchmarkUSPUnmarshal(b *testing.B) {
+	d := readFile("testdata/usp.bin", b)
+
+	b.ReportAllocs()
+	for b.Loop() {
+		unmarshaledMessage := &usp.Record{}
+		if err := proto.Unmarshal(d, unmarshaledMessage); err != nil {
+			b.Fatalf("Unmarshal failed: %v", err)
+		}
+	}
+}
+
+func BenchmarkUSPMemoryFootprint(b *testing.B) {
+	d := readFile("testdata/usp.bin", b)
+	x := parser.USPParser{}
+
+	b.ReportAllocs()
+	b.SetBytes(int64(len(d)))
+	for b.Loop() {
+		_, _ = x.Parse(d)
 	}
 }
