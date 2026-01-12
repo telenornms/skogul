@@ -1,9 +1,10 @@
 /*
  * skogul, mysql tests
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
+ *  - Aslak Bakkeland <aslak.bakkeland@telenor.no>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -128,6 +129,23 @@ func TestSQL_auto(t *testing.T) {
 	sqlTestAuto(t, `"driver":"mysql","connstr":"foo:bar@/blatt", "query":"foo%20bar"`)
 	sqlTestAutoNeg(t, `"driver":"postgres"`)
 	sqlTestAuto(t, `"driver":"postgres","connstr":"something","query": "blatti"`)
+}
+
+func TestSQL_tls_config(t *testing.T) {
+	// TLS validation is tested in detail in internal/sql/tls_test.go.
+	// Here we verify the sender integrates with that validation.
+
+	// Invalid: cert without key
+	sqlTestAutoNeg(t, `"driver":"mysql","connstr":"x","query":"INSERT","certfile":"/cert.pem"`)
+
+	// Invalid: cert+key without CA or insecure
+	sqlTestAutoNeg(t, `"driver":"mysql","connstr":"x","query":"INSERT","certfile":"/cert.pem","keyfile":"/key.pem"`)
+
+	// Valid: insecure flag alone
+	sqlTestAuto(t, `"driver":"mysql","connstr":"x","query":"INSERT","insecure":true`)
+
+	// Valid: full mTLS config (file existence checked at runtime)
+	sqlTestAuto(t, `"driver":"mysql","connstr":"x","query":"INSERT","cafile":"/ca.pem","certfile":"/cert.pem","keyfile":"/key.pem"`)
 }
 
 func TestSQL_mysql_basic(t *testing.T) {

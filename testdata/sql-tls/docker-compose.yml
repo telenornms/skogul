@@ -1,0 +1,52 @@
+services:
+  mysql:
+    image: mariadb:10.11
+    container_name: skogul-test-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: skogul_test
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./certs:/certs:ro
+      - ./mysql/my.cnf:/etc/mysql/conf.d/ssl.cnf:ro
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command: >
+      --ssl-ca=/certs/ca.pem
+      --ssl-cert=/certs/mysql-server.pem
+      --ssl-key=/certs/mysql-server-key.pem
+      --require-secure-transport=ON
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  postgres:
+    image: postgres:16
+    container_name: skogul-test-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
+      POSTGRES_DB: skogul_test
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./certs:/certs:ro
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./postgres/start.sh:/usr/local/bin/start.sh:ro
+    entrypoint: ["/usr/local/bin/start.sh"]
+    command: >
+      -c ssl=on
+      -c ssl_ca_file=/var/lib/postgresql/certs/ca.pem
+      -c ssl_cert_file=/var/lib/postgresql/certs/postgres-server.pem
+      -c ssl_key_file=/var/lib/postgresql/certs/postgres-server-key.pem
+      -c hba_file=/etc/postgresql/pg_hba.conf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
