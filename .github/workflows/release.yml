@@ -19,7 +19,7 @@ jobs:
           cache: true
       - name: Test
         run: |
-          yum install -y git python3-docutils rpm-build wget make gcc coreutils-single
+          yum install -y git python3-docutils rpm-build wget make gcc coreutils-single systemd
           make check
       - name: Build tarball
         id: build
