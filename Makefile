@@ -246,4 +246,4 @@ help:
 	@echo " - fmtfix - Runs gofmt -d -s -w, excluding generated code (e.g.: fix formating)"
 	@echo " - covergui - Run tests, track test coverage and open coverage analysis in browser"
 
-.PHONY: all clean check checkconfigs test test-sql-tls bench help install rpm release
+.PHONY: all clean check checkconfigs test test-sql-tls bench help install rpm release FORCE
