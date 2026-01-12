@@ -37,7 +37,7 @@ install: skogul skogul.1 docs/skogul.rst
 	@install -D -m 0755 skogul ${DESTDIR}${PREFIX}/bin/skogul
 	@install -D -m 0644 skogul.1 ${DESTDIR}${PREFIX}/share/man/man1/skogul.1
 	@install -D -m 0644 docs/examples/basics/default.json ${DESTDIR}/etc/skogul/conf.d/default.json
-	@cd docs && find . -type f -exec install -D -m 0644 {} ${DESTDIR}${DOCDIR}/{} \;
+	@cd docs && find . -type f -exec install -D -m 0644 {} $(CURDIR)/${DESTDIR}${DOCDIR}/{} \;
 	@install -D -m 0644 README.rst LICENSE -t ${DESTDIR}${DOCDIR}/
 
 # Any complaints on this macro-substitution without patches and I introduce m4.
