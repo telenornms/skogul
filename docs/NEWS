@@ -1,3 +1,41 @@
+v0.32.0
+=======
+
+Release date: 2026-01-12
+
+Two new features and some maintenance
+
+Features
+--------
+
+- SQL TLS
+	Both the SQL (MySQL & Postgresql) sender and receiver now support TLS
+	connections and full mTLS. 
+
+- Configuration with JSON5
+	This allows users with complex config files to comment out parts of the
+	config temporarily or add documentation in comments, and also to leave in
+	trailing commas without issue.
+
+Maintenance
+-----------
+
+The protobuf code generation has been modernized:
+- Migrated from deprecated gogo/proto to google.golang.org/protobuf
+- Using vtproto for performance
+- Fixed some minor issues in protobuf parsing implementation for USP
+- Juniper protobuf files updated from v23.2R1 to v25.2R1.8-EVO
+- This adds about 1M lines of Protobuf definitions, which unfortunately
+	increasing the binary size by nearly 100%
+
+Some toolchain updates:
+- CGO disabled for default build as we are currently not using any libraries
+	that need CGO
+- RPM builds now use Rocky Linux 9
+- Fixed an issue that prevented benchmarking from executing and added more
+	benchmarks related to protobufs
+- Various minor go syntax updates
+
 v0.31.4
 =======
 
