@@ -19,10 +19,7 @@ jobs:
           cache: true
       - name: Test
         run: |
-          export PATH=$PATH:/usr/local/go/bin
           yum install -y git python3-docutils rpm-build wget make gcc coreutils-single
-          wget https://go.dev/dl/go1.20.14.linux-amd64.tar.gz
-          tar -C /usr/local -xzf go1.20.14.linux-amd64.tar.gz
           make check
       - name: Build tarball
         id: build
@@ -45,7 +42,7 @@ jobs:
           body: "notes not found"
           draft: true
           files: |
-              skogul-${{github.ref_name}}.tar.bz2
-              skogul-*-1.x86_64.rpm
-              checksum_tarball.txt
-              notes
+            skogul-${{github.ref_name}}.tar.bz2
+            skogul-*-1.x86_64.rpm
+            checksum_tarball.txt
+            notes
