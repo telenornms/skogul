@@ -13,7 +13,7 @@ BuildArch:      xxARCHxx
 # Since we download go manually and not through yum,
 # the version won't be registered as installed.
 #BuildRequires:  go >= 1.13
-BuildRequires:  python3-docutils, systemd-units
+BuildRequires:  python3-docutils, systemd
 
 
 %description
