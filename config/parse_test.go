@@ -37,7 +37,7 @@ import (
 func TestFile(t *testing.T) {
 	defer func() {
 		if skogul.AssertErrors > 0 {
-			t.Errorf("File() paniced")
+			t.Errorf("File() panicked")
 		}
 	}()
 	c, err := config.File("testdata/test.json")
@@ -49,10 +49,40 @@ func TestFile(t *testing.T) {
 	}
 }
 
+func TestJSON5File(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("File() panicked")
+		}
+	}()
+
+	c, err := config.File("testdata/test.json5")
+	if err != nil {
+		t.Fatalf("File() failed with .json5 file: %v", err)
+	}
+	if c == nil {
+		t.Fatal("File() returned nil config for .json5 file")
+	}
+
+	if c.Handlers == nil {
+		t.Fatal("Handlers map is nil")
+	}
+	if h, ok := c.Handlers["plain"]; !ok || h == nil {
+		t.Error("Handler 'plain' not found or nil in parsed .json5 config")
+	}
+
+	if c.Receivers == nil {
+		t.Fatal("Receivers map is nil")
+	}
+	if r, ok := c.Receivers["http"]; !ok || r == nil {
+		t.Error("Receiver 'http' not found or nil in parsed .json5 config")
+	}
+}
+
 func TestByte_ok(t *testing.T) {
 	defer func() {
 		if skogul.AssertErrors > 0 {
-			t.Errorf("Byte() paniced")
+			t.Errorf("Bytes() panicked")
 		}
 	}()
 	okData := []byte(`
@@ -138,7 +168,7 @@ func TestByte_ok(t *testing.T) {
 func TestDefaultModules(t *testing.T) {
 	defer func() {
 		if skogul.AssertErrors > 0 {
-			t.Errorf("Byte() paniced")
+			t.Errorf("Bytes() panicked")
 		}
 	}()
 	okData := []byte(`
@@ -172,7 +202,7 @@ func TestDefaultModules(t *testing.T) {
 func TestUndefinedParser(t *testing.T) {
 	defer func() {
 		if skogul.AssertErrors > 0 {
-			t.Errorf("Byte() paniced")
+			t.Errorf("Bytes() panicked")
 		}
 	}()
 	okData := []byte(`
@@ -203,7 +233,7 @@ func TestUndefinedParser(t *testing.T) {
 func TestNamedParser(t *testing.T) {
 	defer func() {
 		if skogul.AssertErrors > 0 {
-			t.Errorf("Byte() paniced")
+			t.Errorf("Bytes() panicked")
 		}
 	}()
 	okData := []byte(`
@@ -461,7 +491,7 @@ func TestFindSuperfluousReceiverConfigPropertiesFromFullConfig(t *testing.T) {
 	  }
 	}`)
 
-	var parsedConfig map[string]interface{}
+	var parsedConfig map[string]any
 	err := json.Unmarshal(rawConfig, &parsedConfig)
 
 	relevantConfig := config.GetRelevantRawConfigSection(&parsedConfig, "receivers", "foo")
@@ -470,7 +500,7 @@ func TestFindSuperfluousReceiverConfigPropertiesFromFullConfig(t *testing.T) {
 		t.Error("Failed to parse config")
 	}
 
-	configStruct := reflect.TypeOf(receiver.UDP{})
+	configStruct := reflect.TypeFor[receiver.UDP]()
 	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&relevantConfig, "receivers", "foo", configStruct)
 
 	if len(superfluousProperties) != 1 {
@@ -490,13 +520,13 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 		"superfluousField": "this is not needed"
 	}`)
 
-	var c map[string]interface{}
+	var c map[string]any
 	err := json.Unmarshal(rawConfig, &c)
 	if err != nil {
 		t.Error("Failed to parse config")
 	}
 
-	configStruct := reflect.TypeOf(receiver.UDP{})
+	configStruct := reflect.TypeFor[receiver.UDP]()
 	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&c, "receivers", "foo", configStruct)
 
 	if len(superfluousProperties) != 1 {
@@ -548,7 +578,7 @@ func TestReadConfigWithoutSuperfluousParamsNoSuperfluousParams(t *testing.T) {
     }
   }`)
 
-	var c map[string]interface{}
+	var c map[string]any
 	err := json.Unmarshal(rawConfig, &c)
 	if err != nil {
 		t.Errorf("Failed to unmarshal json: %s", err)
@@ -556,11 +586,11 @@ func TestReadConfigWithoutSuperfluousParamsNoSuperfluousParams(t *testing.T) {
 
 	superfluousProperties := make([]string, 0)
 
-	configStruct := reflect.TypeOf(receiver.Stdin{})
+	configStruct := reflect.TypeFor[receiver.Stdin]()
 	c1 := config.GetRelevantRawConfigSection(&c, "receivers", "foo")
 	superfluousProperties = append(superfluousProperties, config.VerifyOnlyRequiredConfigProps(&c1, "receiver", "foo", configStruct)...)
 
-	configStruct = reflect.TypeOf(sender.Debug{})
+	configStruct = reflect.TypeFor[sender.Debug]()
 	c2 := config.GetRelevantRawConfigSection(&c, "senders", "baz")
 	superfluousProperties = append(superfluousProperties, config.VerifyOnlyRequiredConfigProps(&c2, "sender", "baz", configStruct)...)
 
@@ -582,5 +612,159 @@ func TestReadConfigFiles(t *testing.T) {
 
 	if c.Receivers["foo"] == nil || c.Receivers["bar"] == nil {
 		t.Error("Missing a receiver which should be configured")
+	}
+}
+
+// TestStrictJSONCompatibility verifies that strict JSON (without JSON5
+// features like comments or trailing commas) continues to parse correctly.
+func TestStrictJSONCompatibility(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Bytes() panicked")
+		}
+	}()
+
+	// Strict JSON with no trailing commas or comments
+	strictJSON := []byte(`{
+  "handlers": {
+    "plain": {
+      "parser": "skogul",
+      "sender": "debug",
+      "transformers": []
+    }
+  },
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+        "/": "plain"
+      }
+    }
+  }
+}`)
+
+	c, err := config.Bytes(strictJSON)
+	if err != nil {
+		t.Fatalf("Bytes() failed with strict JSON: %v", err)
+	}
+	if c == nil {
+		t.Fatal("Bytes() returned nil config for strict JSON")
+	}
+
+	if c.Handlers == nil || c.Handlers["plain"] == nil {
+		t.Error("Handler 'plain' not found in parsed strict JSON config")
+	}
+	if c.Receivers == nil || c.Receivers["http"] == nil {
+		t.Error("Receiver 'http' not found in parsed strict JSON config")
+	}
+}
+
+func TestJSON5Combined(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Bytes() panicked")
+		}
+	}()
+
+	// Config with comments and trailing commas
+	json5Data := []byte(`
+{
+  // Main handlers configuration
+  "handlers": {
+    "plain": {
+      "parser": "skogul",
+      "sender": "debug",
+      "transformers": [], // empty transformers
+    },
+  },
+  /* Receivers section
+     configures HTTP endpoint */
+  "receivers": {
+    "http": {
+      "type": "http",
+      "handlers": {
+        "/": "plain",
+      },
+    },
+  },
+}
+`)
+
+	c, err := config.Bytes(json5Data)
+	if err != nil {
+		t.Fatalf("Bytes() failed with combined JSON5 features: %v", err)
+	}
+	if c == nil {
+		t.Fatal("Bytes() returned nil config for JSON5 with combined features")
+	}
+
+	// Handlers
+	if c.Handlers == nil {
+		t.Fatal("Handlers map is nil")
+	}
+	if h, ok := c.Handlers["plain"]; !ok || h == nil {
+		t.Error("Handler 'plain' not found or nil in parsed config")
+	}
+
+	// Receivers
+	if c.Receivers == nil {
+		t.Fatal("Receivers map is nil")
+	}
+	if r, ok := c.Receivers["http"]; !ok || r == nil {
+		t.Error("Receiver 'http' not found or nil in parsed config")
+	}
+}
+
+func TestJSON5InvalidSyntax(t *testing.T) {
+	defer func() {
+		if skogul.AssertErrors > 0 {
+			t.Errorf("Bytes() panicked")
+		}
+	}()
+
+	tests := []struct {
+		name string
+		data []byte
+	}{
+		{
+			name: "unclosed comment",
+			data: []byte(`{
+  "handlers": {},
+  /* this comment is never closed
+}`),
+		},
+		{
+			name: "invalid trailing content",
+			data: []byte(`{
+  "handlers": {}
+} extra content`),
+		},
+		{
+			name: "missing colon",
+			data: []byte(`{
+  "handlers" {}
+}`),
+		},
+		{
+			name: "unclosed braces",
+			data: []byte(`{
+  "handlers": {
+    "plain": {
+      "parser": "skogul"
+    }
+}`),
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c, err := config.Bytes(tt.data)
+			if err == nil {
+				t.Errorf("Bytes() should have failed for %s, but returned config: %+v", tt.name, c)
+			}
+			if c != nil {
+				t.Errorf("Bytes() should return nil config for invalid syntax")
+			}
+		})
 	}
 }
