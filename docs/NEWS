@@ -1,9 +1,10 @@
 v0.32.1
 =======
 
+Release date: 2026-01-22
+
 Downgrade build OS in Dockerfile from Rockylinux 9 to 8 to support users still
 on CentOS 7
-
 
 v0.32.0
 =======
