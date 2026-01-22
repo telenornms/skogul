@@ -8,7 +8,7 @@ jobs:
   prepare-release:
     runs-on: ubuntu-latest
     container:
-      image: rockylinux:9
+      image: rockylinux:8
       env:
         GIT_DESCRIBE: ${{ github.ref_name }}
     steps:
@@ -19,7 +19,7 @@ jobs:
           cache: true
       - name: Test
         run: |
-          yum install -y git python3-docutils rpm-build wget make gcc coreutils-single systemd
+          yum install -y git python3-docutils rpm-build wget make gcc coreutils-single
           make check
       - name: Build tarball
         id: build

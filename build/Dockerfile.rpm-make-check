@@ -1,4 +1,4 @@
-FROM rockylinux:9
+FROM rockylinux:8
 ENV SHELL=/bin/bash
 RUN yum install -y git python3-docutils rpm-build wget make gcc
 RUN wget https://storage.googleapis.com/golang/getgo/installer_linux
