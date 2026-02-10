@@ -221,7 +221,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 		return fmt.Errorf("failed to create a HTTP request (we are %s). Error: %w", skogul.Identity[ht], err)
 	}
 	for header, value := range ht.Headers {
-		req.Header.Add(http.CanonicalHeaderKey(header), value)
+		req.Header.Add(header, value)
 	}
 	resp, err := ht.client.Do(req)
 	if err != nil {
@@ -298,8 +298,8 @@ func (ht *HTTP) GetStats() *skogul.Metric {
 	now := skogul.Now()
 	metric := skogul.Metric{
 		Time:     &now,
-		Metadata: make(map[string]interface{}),
-		Data:     make(map[string]interface{}),
+		Metadata: make(map[string]any),
+		Data:     make(map[string]any),
 	}
 	metric.Metadata["component"] = "sender"
 	metric.Metadata["type"] = "HTTP"
