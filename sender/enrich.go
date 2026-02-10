@@ -1,7 +1,7 @@
 /*
  * skogul, encrichment-updater sender
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -25,22 +25,32 @@ package sender
 
 import (
 	"fmt"
+	"sync"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 	"github.com/telenornms/skogul/transformer"
 )
-
-var enrichLog = skogul.Logger("sender", "enrichment")
 
 // EnrichmentUpdater sends any received container/metric to the
 // update-function of the provided transformer, allowing on-the-fly updates
 // to enrichment.
 type EnrichmentUpdater struct {
 	Enricher skogul.TransformerRef `doc:"The enrichment transformer to update."`
+	once     sync.Once
+	logger   *log.Entry
 }
 
-// Uses received metrics to update the enrichment transformer
+func (e *EnrichmentUpdater) init() {
+	e.logger = skogul.Logger("sender", "enrichment").WithField("name", skogul.Identity[e])
+}
+
+// Send Uses received metrics to update the enrichment transformer
 func (e *EnrichmentUpdater) Send(c *skogul.Container) error {
+	e.once.Do(func() {
+		e.init()
+	})
 	er, _ := e.Enricher.T.(*transformer.Enrich)
 	er.Update(c)
 	return nil

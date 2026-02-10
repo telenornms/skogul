@@ -43,8 +43,6 @@ import (
 	"github.com/telenornms/skogul/encoder"
 )
 
-var httpLog = skogul.Logger("sender", "http")
-
 /*
 HTTP sender POSTs the Skogul JSON-encoded data to the provided URL.
 */

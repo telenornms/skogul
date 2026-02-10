@@ -1,7 +1,7 @@
 /*
  * skogul, M&R port collector sender
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -27,11 +27,12 @@ import (
 	"bytes"
 	"fmt"
 	"net"
+	"sync"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
-
-var mnrLog = skogul.Logger("sender", "mnr")
 
 /*
 MnR sender writes to M&R port collector.
@@ -88,6 +89,8 @@ default group is "group". Meaning:
 type MnR struct {
 	Address      string `doc:"Address to send data to" example:"192.168.1.99:1234"`
 	DefaultGroup string `doc:"Default group to use if the metadatafield group is missing."`
+	once         sync.Once
+	logger       *log.Entry
 }
 
 /*
@@ -102,7 +105,14 @@ which is really suboptimal for large quantities of data, but ok for
 occasional data dumps. If large metric containers are received, the cost will
 be negligible. But this should, of course, be fixed in the future.
 */
+func (mnr *MnR) init() {
+	mnr.logger = skogul.Logger("sender", "mnr").WithField("name", skogul.Identity[mnr])
+}
+
 func (mnr *MnR) Send(c *skogul.Container) error {
+	mnr.once.Do(func() {
+		mnr.init()
+	})
 	d, err := net.Dial("tcp", mnr.Address)
 	if err != nil {
 		return fmt.Errorf("unable to connect to MnR at %s: %w", mnr.Address, err)

@@ -1,7 +1,7 @@
 /*
  * skogul, net line-sender
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -27,21 +27,31 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"sync"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/telenornms/skogul"
 )
-
-var netLog = skogul.Logger("sender", "net")
 
 // Net sends metrics to a network address
 // FIXME: Use Encoder
 type Net struct {
 	Address string `doc:"Address to send data to" example:"192.168.1.99:1234"`
 	Network string `doc:"Network, according to net.Dial. Typically udp or tcp."`
+	once    sync.Once
+	logger  *log.Entry
+}
+
+func (n *Net) init() {
+	n.logger = skogul.Logger("sender", "net").WithField("name", skogul.Identity[n])
 }
 
 // Send sends metrics to a network address, json-encoded
 func (n *Net) Send(c *skogul.Container) error {
+	n.once.Do(func() {
+		n.init()
+	})
 	d, err := net.Dial(n.Network, n.Address)
 	if err != nil {
 		return fmt.Errorf("connection to %s failed: %w", n.Address, err)
