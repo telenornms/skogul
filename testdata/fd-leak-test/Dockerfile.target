@@ -1,0 +1,8 @@
+FROM golang:latest-alpine AS build
+WORKDIR /src
+COPY target.go .
+RUN CGO_ENABLED=0 go build -o /target target.go
+
+FROM alpine:latest
+COPY --from=build /target /usr/local/bin/target
+ENTRYPOINT ["/usr/local/bin/target"]

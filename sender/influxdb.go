@@ -218,6 +218,10 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	if err != nil {
 		return fmt.Errorf("unable to POST data: %w", err)
 	}
+	defer func() {
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+	}()
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		var body []byte
 		if resp.ContentLength > 0 {

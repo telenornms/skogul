@@ -1,0 +1,6 @@
+FROM alpine:latest
+ARG BINARY
+COPY ${BINARY} /usr/local/bin/skogul
+RUN chmod +x /usr/local/bin/skogul
+ENTRYPOINT ["/usr/local/bin/skogul"]
+CMD ["-f", "/etc/skogul/skogul.json", "-pprof", "0.0.0.0:6060", "-loglevel", "warn"]
