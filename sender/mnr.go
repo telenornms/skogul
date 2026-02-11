@@ -1,7 +1,7 @@
 /*
  * skogul, M&R port collector sender
  *
- * Copyright (c) 2019 Telenor Norge AS
+ * Copyright (c) 2019-2026 Telenor Norge AS
  * Author(s):
  *  - Kristian Lyngstøl <kly@kly.no>
  *
@@ -27,6 +27,7 @@ import (
 	"bytes"
 	"fmt"
 	"net"
+	"strings"
 
 	"github.com/telenornms/skogul"
 )
@@ -38,7 +39,7 @@ MnR sender writes to M&R port collector.
 
 The output format is:
 
-	<timestamp>\t<groupname>\t<variable>\t<value>(\t<property>=<value>)*
+	<optional-action-flag>\t<timestamp>\t<groupname>\t<variable>\t<value>(\t<property>=<value>)*
 
 Example:
 
@@ -50,26 +51,26 @@ and "prefix" will be used to prefix all individual data variables.
 E.g:
 
 	{
-	    "template": {
-		    "timestamp": "2019-03-15T11:08:02+01:00",
-		    "metadata": {
+			"template": {
+				"timestamp": "2019-03-15T11:08:02+01:00",
+				"metadata": {
 			"server": "somewhere.example.com"
-		    }
-	    },
-	    "metrics": [
+				}
+			},
+			"metrics": [
 		{
-		    "metadata": {
+				"metadata": {
 			"prefix": "myDevice.",
 			"key": "value",
 			"paramkey": "paramvalue"
-		    },
-		    "data": {
+				},
+				"data": {
 			"astring": "text",
 			"float": 1.11,
 			"integer": 5
-		    }
+				}
 		}
-	    ]
+			]
 	}
 
 Will result in:
@@ -88,6 +89,21 @@ default group is "group". Meaning:
 type MnR struct {
 	Address      string `doc:"Address to send data to" example:"192.168.1.99:1234"`
 	DefaultGroup string `doc:"Default group to use if the metadatafield group is missing."`
+	Action       string `doc:"Optional action flag to prepend to each line. Valid values are 'refresh' and 'delete'."`
+}
+
+// Verify checks the configuration of the MnR sender.
+func (mnr *MnR) Verify() error {
+	if mnr.Address == "" {
+		return skogul.MissingArgument("Address")
+	}
+	if mnr.Action != "" {
+		action := strings.ToLower(mnr.Action)
+		if action != "refresh" && action != "delete" {
+			return fmt.Errorf("invalid action %q: must be 'refresh' or 'delete'", mnr.Action)
+		}
+	}
+	return nil
 }
 
 /*
@@ -107,18 +123,25 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 	if err != nil {
 		return fmt.Errorf("unable to connect to MnR at %s: %w", mnr.Address, err)
 	}
+	actionPrefix := ""
+	switch strings.ToLower(mnr.Action) {
+	case "refresh":
+		actionPrefix = "+r\t"
+	case "delete":
+		actionPrefix = "+d\t"
+	}
+
 	for _, m := range c.Metrics {
 		var bufferpre bytes.Buffer
 		var bufferpost bytes.Buffer
-		fmt.Fprintf(&bufferpre, "%d\t", m.Time.Unix())
-		if m.Metadata["group"] == nil {
-			if mnr.DefaultGroup == "" {
-				fmt.Fprintf(&bufferpre, "group\t")
-			} else {
-				fmt.Fprintf(&bufferpre, "%s\t", mnr.DefaultGroup)
-			}
-		} else {
+		fmt.Fprintf(&bufferpre, "%s%d\t", actionPrefix, m.Time.Unix())
+		switch {
+		case m.Metadata["group"] != nil:
 			fmt.Fprintf(&bufferpre, "%s\t", m.Metadata["group"])
+		case mnr.DefaultGroup != "":
+			fmt.Fprintf(&bufferpre, "%s\t", mnr.DefaultGroup)
+		default:
+			fmt.Fprintf(&bufferpre, "group\t")
 		}
 		pre := ""
 		if m.Metadata["prefix"] != nil {
