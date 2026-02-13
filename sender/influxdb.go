@@ -64,6 +64,11 @@ type InfluxDB struct {
 // handle.
 func checkVariable(category string, field string, idx string, value interface{}) error {
 	t := reflect.TypeOf(value)
+	if t == nil {
+		influxLog.Warnf("invalid %s: %s: %s: %v", category, field, idx, value)
+		return fmt.Errorf("invalid %s: %s: %s: %v", category, field, idx, value)
+	}
+
 	k := t.Kind()
 
 	switch k {
