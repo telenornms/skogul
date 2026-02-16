@@ -50,11 +50,26 @@ type Kafka struct {
 	TLS      bool              `doc:"Enable TLS, off by default."`
 	Username string            `doc:"Username for SASL auth."`
 	Password string            `doc:"Password for SASL auth."`
+	Certfile string            `doc:"Path to certificate file for TLS. If left blank, un-encrypted HTTP is used."`
+	Keyfile  string            `doc:"Path to key file for TLS."`
 	ClientID string            `doc:"ClientID to use - uses lower-case skogul by default."`
 }
 
 // Start the Kafka receiver and never return
 func (k *Kafka) Start() error {
+	var clientCert tls.Certificate
+	var err error
+
+	if (k.Certfile == "" && k.Keyfile != "") || (k.Certfile != "" && k.Keyfile == "") {
+		return fmt.Errorf("provided just one of certfile or keyfile for kafka receiver, which makes no sense. provide both or neither")
+	}
+	if k.Certfile != "" {
+		clientCert, err = tls.LoadX509KeyPair(k.Certfile, k.Keyfile)
+		if err != nil {
+			return fmt.Errorf("failed to load client key pair: %v", err)
+		}
+
+	}
 	if k.ClientID == "" {
 		k.ClientID = "skogul"
 	}
@@ -64,7 +79,9 @@ func (k *Kafka) Start() error {
 		ClientID:  k.ClientID,
 	}
 	if k.TLS {
-		dialer.TLS = &tls.Config{}
+		dialer.TLS = &tls.Config{
+			Certificates: []tls.Certificate{clientCert},
+		}
 	}
 	if (k.Username != "" && k.Password == "") || (k.Username == "" && k.Password != "") {
 		return fmt.Errorf("provided just one of Username or Password for Kafka receiver, which makes no sense. Provide both or neither")
