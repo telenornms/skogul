@@ -1,3 +1,12 @@
+v0.32.3
+=======
+
+Release date: 2026-02-16
+
+Add support for rate calculations
+TLS support in Kafka
+Handle case where reflect.TypeOf returns nil
+
 v0.32.2
 =======
 
