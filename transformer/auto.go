@@ -148,4 +148,10 @@ func init() {
 		Alloc:   func() interface{} { return &HuWtoDBM{} },
 		Help:    "Translate from uW to DBM.",
 	})
+	Auto.Add(skogul.Module{
+		Name:    "rate",
+		Aliases: []string{},
+		Alloc:   func() interface{} { return &Rate{} },
+		Help:    "Computes rate based on a set of counters",
+	})
 }
