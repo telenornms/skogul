@@ -56,7 +56,6 @@ exit 0
 %docdir %{_defaultdocdir}/%{name}-%{version}
 %{_defaultdocdir}/%{name}-%{version}
 %{_unitdir}/%{name}.service
-%config %{_sysconfdir}/%{name}/conf.d/default.json
 
 
 
