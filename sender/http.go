@@ -228,11 +228,14 @@ func (ht *HTTP) sendBytes(b []byte) error {
 		atomic.AddUint64(&ht.stats.RequestErrors, 1)
 		return fmt.Errorf("unable to POST request (we are %s). Error: %w", skogul.Identity[ht], err)
 	}
+	defer func() {
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+	}()
 	if resp.ContentLength > 0 {
 		tmp := make([]byte, resp.ContentLength)
 		if n, err := io.ReadFull(resp.Body, tmp); err != nil {
 			atomic.AddUint64(&ht.stats.Errors, 1)
-			resp.Body.Close()
 			return fmt.Errorf("failed to read HTTP response body, ContentLength said %d, got %d. Error: %w", resp.ContentLength, n, err)
 		}
 	}
