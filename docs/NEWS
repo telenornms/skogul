@@ -1,3 +1,14 @@
+v0.32.5
+=======
+
+Release date: 2026-07-15
+
+- Drain and close HTTP response bodies in the HTTP and Influx senders
+- Add the idle connection pool implementation from the HTTP sender into the
+	Influx sender.
+- Surface InfluxDB error messages that were dropped when the response had no
+	declared length
+
 v0.32.4
 =======
 
