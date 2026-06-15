@@ -30,10 +30,10 @@ import (
 
 const syncPeriod = time.Millisecond * 100
 
-var ltime struct {
-	sec  int64
-	nsec int64
-}
+// ltime holds the cached time as nanoseconds since the Unix epoch. A single
+// int64 is used (rather than separate sec/nsec fields) so that reads and
+// writes are atomic and can never tear across the two values.
+var ltime atomic.Int64
 
 func init() {
 	go syncTime()
@@ -41,11 +41,7 @@ func init() {
 
 func syncTime() {
 	f := func() {
-		t := time.Now()
-		s := int64(t.Unix())
-		ns := int64(t.Nanosecond())
-		atomic.StoreInt64(&ltime.sec, s)
-		atomic.StoreInt64(&ltime.nsec, ns)
+		ltime.Store(time.Now().UnixNano())
 	}
 	f()
 	myticker := time.NewTicker(syncPeriod)
@@ -70,5 +66,5 @@ configurable. The primary use case here is for transformers or parsers that
 need to insert time, but might get thousands of metrics per second.
 */
 func Now() time.Time {
-	return time.Unix(ltime.sec, ltime.nsec)
+	return time.Unix(0, ltime.Load())
 }
