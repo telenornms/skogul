@@ -31,6 +31,7 @@ import (
 	"io"
 	"net/http"
 	"reflect"
+	"runtime"
 	"strings"
 	"sync"
 	"time"
@@ -52,6 +53,8 @@ type InfluxDB struct {
 	MeasurementFromMetadata string          `doc:"Metadata key to read the measurement from. Either this or 'measurement' must be set. If both are present, 'measurement' will be used if the named metadatakey is not found."`
 	Timeout                 skogul.Duration `doc:"HTTP timeout"`
 	Insecure                bool            `doc:"Disable TLS certificate validation."`
+	ConnsPerHost            int             `doc:"Max concurrent connections per host. Should reflect ulimit -n. Defaults to unlimited."`
+	IdleConnsPerHost        int             `doc:"Max idle connections retained per host. Should reflect expected concurrency. Defaults to 2 + runtime.NumCPU."`
 	RootCA                  string          `doc:"Path to an alternate root CA used to verify server certificates. Leave blank to use system defaults."`
 	ConvertIntToFloat       bool            `doc:"Convert all integers to floats. Don't do this unless you really know why you're doing this."`
 	Token                   skogul.Secret   `doc:"Authorization token used in InfluxDB 2.0"`
@@ -119,8 +122,14 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 			InsecureSkipVerify: idb.Insecure,
 			RootCAs:            cp,
 		}
+		iconsph := idb.IdleConnsPerHost
+		if iconsph == 0 {
+			iconsph = 2 + runtime.NumCPU()
+		}
 		tran := http.Transport{
-			TLSClientConfig: tlsConfig,
+			TLSClientConfig:     tlsConfig,
+			MaxConnsPerHost:     idb.ConnsPerHost,
+			MaxIdleConnsPerHost: iconsph,
 		}
 
 		idb.client = &http.Client{Transport: &tran, Timeout: idb.Timeout.Duration}
@@ -228,15 +237,12 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		resp.Body.Close()
 	}()
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		var body []byte
-		if resp.ContentLength > 0 {
-			body = make([]byte, resp.ContentLength)
-
-			if _, err := io.ReadFull(resp.Body, body); err != nil {
-				body = []byte(`unable to ready body`)
-			}
-		} else {
-			body = []byte(fmt.Sprintf("No reply body. Request: %s", buffer.Bytes()))
+		body, rerr := io.ReadAll(resp.Body)
+		if rerr != nil {
+			body = []byte("unable to read body")
+		}
+		if len(body) == 0 {
+			body = fmt.Appendf(nil, "No reply body. Request: %s", buffer.Bytes())
 		}
 
 		return fmt.Errorf("influx sender(%s) failed to send container (%s). Bad response from InfluxDB: %s - %s", skogul.Identity[idb], c.Describe(), resp.Status, string(body))
