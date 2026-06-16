@@ -34,6 +34,7 @@ import (
 	"runtime"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -61,6 +62,18 @@ type InfluxDB struct {
 	client                  *http.Client
 	replacer                *strings.Replacer
 	once                    sync.Once
+	stats                   influxStats
+}
+
+// influxStats holds runtime counters for the InfluxDB sender.
+type influxStats struct {
+	Received      atomic.Uint64 // Containers received via Send.
+	Sent          atomic.Uint64 // Containers successfully POSTed to InfluxDB.
+	Written       atomic.Uint64 // Individual metrics included in the line protocol body.
+	Skipped       atomic.Uint64 // Metrics skipped (no data, missing measurement, bad tag/field).
+	Errors        atomic.Uint64 // Generic errors (request build etc.).
+	RequestErrors atomic.Uint64 // HTTP transport-level errors.
+	HttpErrors    atomic.Uint64 // Non-2XX responses from InfluxDB.
 }
 
 // checkVariable verifies that the relevant variable is of a type we can
@@ -134,6 +147,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 		idb.client = &http.Client{Transport: &tran, Timeout: idb.Timeout.Duration}
 	})
+	idb.stats.Received.Add(1)
 	added := 0
 	nmdata := 0
 	ndata := 0
@@ -142,6 +156,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		if len(m.Data) == 0 {
 			// must have SOME data
 			// XXX: Should report.
+			idb.stats.Skipped.Add(1)
 			continue
 		}
 		if idb.MeasurementFromMetadata != "" {
@@ -159,6 +174,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 				// in general? Failing the entire container
 				// for just one failed metric is not really
 				// acceptable...
+				idb.stats.Skipped.Add(1)
 				continue
 			}
 		}
@@ -178,6 +194,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 			}
 		}
 		if failed > 0 {
+			idb.stats.Skipped.Add(1)
 			continue
 		}
 		fmt.Fprintf(&buffer, "%s", measurement)
@@ -215,6 +232,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		fmt.Fprintf(&buffer, " %d\n", m.Time.UnixNano())
 		added++
 	}
+	idb.stats.Written.Add(uint64(added))
 	if added == 0 {
 		influxLog.Trace("Tried to send 0 metrics to influx. Probably no viable metrics after filtering out invalid tags and such. You may have to transform your data.")
 		return nil
@@ -222,6 +240,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 	req, err := http.NewRequest("POST", idb.URL, &buffer)
 	if err != nil {
+		idb.stats.Errors.Add(1)
 		return fmt.Errorf("unable to create request: %w", err)
 	}
 	if len(idb.Token) > 0 {
@@ -230,6 +249,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 	resp, err := idb.client.Do(req)
 	if err != nil {
+		idb.stats.RequestErrors.Add(1)
 		return fmt.Errorf("unable to POST data: %w", err)
 	}
 	defer func() {
@@ -237,6 +257,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		resp.Body.Close()
 	}()
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
+		idb.stats.HttpErrors.Add(1)
 		body, rerr := io.ReadAll(resp.Body)
 		if rerr != nil {
 			body = []byte("unable to read body")
@@ -247,7 +268,29 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 
 		return fmt.Errorf("influx sender(%s) failed to send container (%s). Bad response from InfluxDB: %s - %s", skogul.Identity[idb], c.Describe(), resp.Status, string(body))
 	}
+	idb.stats.Sent.Add(1)
 	return nil
+}
+
+// GetStats prepares a skogul metric with stats for the InfluxDB sender.
+func (idb *InfluxDB) GetStats() *skogul.Metric {
+	now := skogul.Now()
+	metric := skogul.Metric{
+		Time:     &now,
+		Metadata: make(map[string]interface{}),
+		Data:     make(map[string]interface{}),
+	}
+	metric.Metadata["component"] = "sender"
+	metric.Metadata["type"] = "influxdb"
+	metric.Metadata["identity"] = skogul.Identity[idb]
+	metric.Data["received"] = idb.stats.Received.Load()
+	metric.Data["sent"] = idb.stats.Sent.Load()
+	metric.Data["written"] = idb.stats.Written.Load()
+	metric.Data["skipped"] = idb.stats.Skipped.Load()
+	metric.Data["errors"] = idb.stats.Errors.Load()
+	metric.Data["request_errors"] = idb.stats.RequestErrors.Load()
+	metric.Data["http_errors"] = idb.stats.HttpErrors.Load()
+	return &metric
 }
 
 // toInfluxValue handles converting values to values known by InfluxDB.
