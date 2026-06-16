@@ -26,3 +26,14 @@ https_influx.json
 -----------------
 
 Same as above, but with TLS certificates and basic authentication
+
+influxdb_with_stats_to_file.json
+--------------------------------
+
+Same test-generator-into-InfluxDB pipeline as tester_to_influxdb.json,
+but additionally wires the internal Skogul stats channel through a
+``stats`` receiver to a ``file`` sender, appending JSON-encoded stats
+metrics to ``/tmp/skogul-stats.json``. The InfluxDB sender's counters
+(``received``, ``sent``, ``written``, ``skipped``, ``errors``,
+``request_errors``, ``http_errors``) appear there roughly every 10
+seconds while skogul is running.
