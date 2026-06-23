@@ -24,9 +24,13 @@
 package sender
 
 import (
+	"errors"
 	"fmt"
 	"github.com/telenornms/skogul"
 )
+
+// dupeLog logs down-stream failures from the Dupe sender.
+var dupeLog = skogul.Logger("sender", "dupe")
 
 /*
 Fallback sender tries each provided sender in turn before failing.
@@ -69,16 +73,19 @@ type Dupe struct {
 	Next []*skogul.SenderRef `doc:"List of senders that will receive metrics, in order."`
 }
 
-// Send sends data down stream
+// Send sends the container to every down-stream sender. Unlike a
+// first-error-wins approach, it logs each failure and aggregates all of
+// them, so a failure on any destination surfaces even when an earlier
+// sender already failed.
 func (dp *Dupe) Send(c *skogul.Container) error {
-	var e error
+	var errs []error
 	for _, s := range dp.Next {
-		err := s.S.Send(c)
-		if err != nil && e == nil {
-			e = err
+		if err := s.S.Send(c); err != nil {
+			dupeLog.WithError(err).WithField("sender", s.Name).Warn("dupe down-stream sender failed")
+			errs = append(errs, fmt.Errorf("sender %s: %w", s.Name, err))
 		}
 	}
-	return e
+	return errors.Join(errs...)
 }
 
 // logLog logs to a log. Loggingly.

@@ -24,6 +24,8 @@
 package sender_test
 
 import (
+	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/telenornms/skogul"
@@ -56,6 +58,58 @@ func TestDupe(t *testing.T) {
 	}
 	if two.Received() != 1 {
 		t.Errorf("dupe.Send(), sender 2 expected %d recevied, got %d", 1, two.Received())
+	}
+}
+
+// dupeFailer forwards to a Test sink (so we can verify it was reached) and
+// always returns a distinct error, mimicking a failing down-stream sender.
+type dupeFailer struct {
+	sink *sender.Test
+	name string
+}
+
+func (f *dupeFailer) Send(c *skogul.Container) error {
+	f.sink.Send(c)
+	return fmt.Errorf("boom-%s", f.name)
+}
+
+// TestDupeError verifies that the dupe sender surfaces down-stream failures
+// even when more than one sender fails: every sender is still invoked, and the
+// returned error reflects all failures rather than masking later ones.
+func TestDupeError(t *testing.T) {
+	c := skogul.Container{}
+	sinkA := &(sender.Test{})
+	sinkB := &(sender.Test{})
+	ok := &(sender.Test{})
+	failA := &dupeFailer{sink: sinkA, name: "A"}
+	failB := &dupeFailer{sink: sinkB, name: "B"}
+
+	dupe := sender.Dupe{Next: []*skogul.SenderRef{
+		{S: failA, Name: "failA"},
+		{S: ok, Name: "ok"},
+		{S: failB, Name: "failB"},
+	}}
+
+	err := dupe.Send(&c)
+	if err == nil {
+		t.Fatalf("dupe.Send() with failing senders returned nil, expected an error")
+	}
+	// Both failures must be visible, not just the first.
+	if !strings.Contains(err.Error(), "boom-A") {
+		t.Errorf("dupe.Send() error %q does not mention first failure (boom-A)", err)
+	}
+	if !strings.Contains(err.Error(), "boom-B") {
+		t.Errorf("dupe.Send() error %q does not mention later failure (boom-B)", err)
+	}
+	// Every sender must still have been invoked despite earlier failures.
+	if sinkA.Received() != 1 {
+		t.Errorf("failing sender A: expected %d received, got %d", 1, sinkA.Received())
+	}
+	if ok.Received() != 1 {
+		t.Errorf("ok sender: expected %d received, got %d", 1, ok.Received())
+	}
+	if sinkB.Received() != 1 {
+		t.Errorf("failing sender B: expected %d received, got %d", 1, sinkB.Received())
 	}
 }
 
