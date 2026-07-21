@@ -1,3 +1,138 @@
+Unreleased
+==========
+
+- Built-in retry with jittered exponential backoff in the HTTP, InfluxDB,
+	Splunk, RabbitMQ, MQTT, SNMP, MnR and Net senders.
+	NOTE: retries are ON by default, up to 3 retries per send, so a send
+	that used to fail immediately can now block while they play out. With
+	the defaults that is at most 4 attempts and three delays of up to
+	100ms, 200ms and 400ms, plus whatever each attempt itself takes -
+	which for the HTTP sender is its own Timeout, 20s by default.
+	Those delays are the no-Retry-After case. A server that answers with
+	Retry-After raises each delay to as much as MaxDelay, 30s by default,
+	so a single send can spend a minute and a half asleep on top of its
+	attempts. Set MaxElapsed to bound that, and MaxDelay to cap how far a
+	single hint can push it.
+	Only failures that look transient are retried: connection refused,
+	DNS failures, resets, broken pipes, unreachable hosts and networks,
+	timeouts, and for HTTP the 5xx, 429 and 408 statuses. A 4xx, an encoding error or any error we do not recognise
+	fails on the first attempt as before.
+	The delays are randomised, not fixed: each one is drawn uniformly
+	between zero and the computed exponential value (BaseDelay times
+	BackoffMultiplier to the power of the attempt number, capped at
+	MaxDelay). That is deliberate - fixed delays make every client retry
+	in lockstep.
+	Set BackoffEnabled to false, or MaxRetries to 0, for the old
+	fail-fast behaviour.
+	Use MaxElapsed to bound how long a single send may spend retrying:
+	retrying stops once the next delay would take it past that budget. It
+	is unset by default, in which case the bound is MaxRetries delays of
+	at most MaxDelay each.
+	Invalid retry settings - a negative MaxRetries or delay, or a
+	BackoffMultiplier below 1 - are now rejected at startup rather than
+	silently producing a hot retry loop.
+	Retry-After hints from a server are honoured as a floor, capped at
+	MaxDelay and given a small random spread, so that clients told the
+	same number by an overloaded server do not all return at once.
+- NOTE: a retry can deliver the same data twice. Where a request was
+	received and acted on but the reply never arrived - a timeout, or a
+	reset after the request was sent - the retry sends it again and the
+	remote sees it twice. This applies to the HTTP, InfluxDB and Splunk
+	senders; for InfluxDB, points without an explicit timestamp are
+	written twice under different timestamps. It applies to the MQTT
+	sender too, but only for a topic whose publish timed out: a retry
+	re-publishes just the topics that failed, so the other topics in the
+	same container do not get a second copy. There is no way for these
+	senders to tell that case apart from a request that never arrived, so
+	the choice is between at-least-once and at-most-once delivery: set
+	BackoffEnabled to false where duplicates are worse than loss.
+- NOTE: the error counters in the HTTP and InfluxDB sender statistics,
+	and so also the Splunk sender's, now count attempts rather than
+	containers. A container that fails twice and succeeds on the third
+	attempt records two errors and one send, where it would previously
+	have recorded one error and no send, or one send and no errors.
+- The HTTP sender's per-status-code error counters
+	(http_response_<code>) are now actually recorded. They were counted
+	on a copy of the value and thrown away, so every code always
+	reported zero.
+- The SNMP sender now connects on demand instead of once at startup, and
+	drops the socket when a send fails so the next attempt redials. The
+	connection error was previously discarded, so a trap target that was
+	unreachable when skogul started stayed broken for the lifetime of the
+	process. Sends are also serialized now, since gosnmp is not safe for
+	concurrent use.
+	Port now defaults to 162, the standard trap port, instead of 0.
+	Target is required, and is checked at startup rather than failing
+	silently at send time.
+	Metric fields with no entry in Oidmap, and fields whose type SNMP
+	has no mapping for, are skipped with a debug log. They used to be
+	turned into malformed PDUs. A metric left with nothing to send is
+	skipped too, with a warning, since a trap needs at least one PDU.
+- A send that fails after part of the payload has already reached the
+	receiver is not retried, since a retry re-sends the whole payload and
+	the receiver would see the partial data followed by a complete copy.
+	This applies to the MnR and Net senders, which write an unframed,
+	unacknowledged payload. Failing to connect, or failing before a
+	single byte is written, is still retried - nothing was delivered, so
+	there is nothing to duplicate. Set RetryPartialWrites to true for
+	at-least-once delivery on receivers that tolerate duplicates.
+- The MnR and Net senders now use a 10 second connection timeout. They
+	previously used net.Dial with no timeout, which leaves a failing
+	connect in the kernel's SYN retry for minutes - now repeated per
+	retry attempt.
+- The RabbitMQ sender now reconnects after a failed publish. It used to
+	close the channel but keep the handle, so the first publish error
+	left the sender permanently broken until restart.
+	Timeout now bounds the connection setup, both the TCP connect and the
+	AMQP handshake. It was previously only passed to PublishWithContext,
+	which amqp091-go ignores, so it had no effect at all.
+- Connecting to an MQTT broker now times out after 30 seconds instead of
+	waiting forever. This affects both the MQTT sender and receiver: the
+	sender turns it into a retryable error, the receiver logs it and
+	tries again. A timed-out attempt is now aborted rather than left to
+	finish in the background - the MQTT client refuses a fresh connect
+	while one is still in flight, and that refusal does not look like a
+	transient error, so the sender used to give up on the next attempt
+	instead of backing off. Aborting means the client is replaced:
+	disconnecting it is not enough, since the underlying library does
+	that in the background and returns before the client has left the
+	state that makes it refuse a connect.
+	Concurrent connects now share a single attempt rather than each
+	making their own in turn. The MQTT sender connects on every send, so
+	with the broker down a pipeline spread over several goroutines would
+	otherwise multiply the time each of them spends waiting.
+- The MQTT receiver now retries the connection to the broker every 5
+	seconds until it succeeds, rather than giving up after the first
+	attempt. Nothing retried that first connect: the client runs without
+	auto-reconnect, and its connection-lost handler only fires once a
+	connection has been established. A broker that was down when skogul
+	started therefore left the receiver silently dead - running, logging
+	nothing further, and receiving no messages - until skogul was
+	restarted.
+- The Kafka and NATS senders deliberately do NOT get the built-in retry:
+	their client libraries already own that responsibility. kafka-go
+	retries each batch internally (MaxAttempts, 10 by default) with its
+	own backoff, and the NATS sender is configured to reconnect
+	indefinitely, with the NATS client buffering published messages
+	while it does (ReconnectBufSize, 8MB by default).
+- The MQTT sender now waits for each publish to complete, up to 10
+	seconds, and reports failures instead of always returning success.
+	Note what that does and does not tell you: the sender publishes at
+	QoS 0, where a publish completes once the packet has been written to
+	the broker connection. It is not an acknowledgement from the broker,
+	and while the client is reconnecting a QoS 0 publish is reported as
+	complete without being written at all. What the sender does catch,
+	and retry, is publishing while disconnected and failures writing to
+	the connection.
+- The 'backoff' wrapper sender is deprecated. Combining it with the new
+	built-in retries multiplies the number of attempts; disable one of
+	them.
+	Its Retries setting is the total number of attempts, not a count on
+	top of the first one, and a value of 0 is now rejected at startup.
+	It used to mean "never send at all": the wrapper returned success
+	without passing the container on, silently dropping it. Use 1 for a
+	single attempt with no retry.
+
 v0.32.5
 =======
 
