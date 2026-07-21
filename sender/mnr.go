@@ -90,6 +90,7 @@ type MnR struct {
 	Address      string `doc:"Address to send data to" example:"192.168.1.99:1234"`
 	DefaultGroup string `doc:"Default group to use if the metadatafield group is missing."`
 	Action       string `doc:"Optional action flag to prepend to each line. Valid values are 'refresh' and 'delete'."`
+	RetryConfig
 }
 
 // Verify checks the configuration of the MnR sender.
@@ -103,7 +104,7 @@ func (mnr *MnR) Verify() error {
 			return fmt.Errorf("invalid action %q: must be 'refresh' or 'delete'", mnr.Action)
 		}
 	}
-	return nil
+	return mnr.verifyRetry()
 }
 
 /*
@@ -119,10 +120,6 @@ occasional data dumps. If large metric containers are received, the cost will
 be negligible. But this should, of course, be fixed in the future.
 */
 func (mnr *MnR) Send(c *skogul.Container) error {
-	d, err := net.Dial("tcp", mnr.Address)
-	if err != nil {
-		return fmt.Errorf("unable to connect to MnR at %s: %w", mnr.Address, err)
-	}
 	actionPrefix := ""
 	switch strings.ToLower(mnr.Action) {
 	case "refresh":
@@ -131,6 +128,9 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 		actionPrefix = "+d\t"
 	}
 
+	// Format the full payload up front so a retry can re-send it on a
+	// fresh connection.
+	var buffer bytes.Buffer
 	for _, m := range c.Metrics {
 		var bufferpre bytes.Buffer
 		var bufferpost bytes.Buffer
@@ -153,9 +153,23 @@ func (mnr *MnR) Send(c *skogul.Container) error {
 			}
 		}
 		for key, value := range m.Data {
-			fmt.Fprintf(d, "%s%s%s\t%v\tname=%s%s\n", bufferpre.String(), pre, key, value, key, bufferpost.String())
+			fmt.Fprintf(&buffer, "%s%s%s\t%v\tname=%s%s\n", bufferpre.String(), pre, key, value, key, bufferpost.String())
 		}
 	}
-	d.Close()
-	return nil
+
+	return retryNetwork(&mnr.RetryConfig, mnrLog, func() error {
+		d, err := net.DialTimeout("tcp", mnr.Address, defaultDialTimeout)
+		if err != nil {
+			return fmt.Errorf("unable to connect to MnR at %s: %w", mnr.Address, err)
+		}
+		defer d.Close()
+		nbytes, err := d.Write(buffer.Bytes())
+		if err != nil {
+			return partialWrite(fmt.Errorf("unable to send data to MnR at %s: %w", mnr.Address, err), nbytes, buffer.Len())
+		}
+		if nbytes < buffer.Len() {
+			return partialWrite(fmt.Errorf("write to MnR at %s succeeded, but not all data written", mnr.Address), nbytes, buffer.Len())
+		}
+		return nil
+	})
 }
