@@ -24,7 +24,8 @@
     "http": {
       "type": "http",
       "insecure": true,
-      "URL": "https://me:hunter2@[::1]:8080/"
+      "URL": "https://me:hunter2@[::1]:8080/",
+      "maxretries": 3
     }
   }
 }

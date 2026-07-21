@@ -27,7 +27,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	"crypto/x509"
-	//"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -64,14 +63,38 @@ type HTTP struct {
 	once             sync.Once
 	client           *http.Client
 	logger           *log.Entry
+	RetryConfig
 }
 
 type httpStats struct {
-	Received          uint64         // Metrics received.
-	Sent              uint64         // Metrics successfully sent.
-	Errors            uint64         // Generic error cases in the module, such as failing to initialize or marshal/unmarshal data.
-	RequestErrors     uint64         // Errors during requests, such as not being able to connect to a remote host.
-	HttpResponseError map[int]uint64 // Error response codes from HTTP requests. Basically anything != 2XX.
+	Received      uint64 // Metrics received.
+	Sent          uint64 // Metrics successfully sent.
+	Errors        uint64 // Generic error cases in the module, such as failing to initialize or marshal/unmarshal data.
+	RequestErrors uint64 // Errors during requests, such as not being able to connect to a remote host.
+	// Error response codes from HTTP requests. Basically anything !=
+	// 2XX. A map can't be updated atomically, so responseLock guards
+	// it; use addResponseError and responseErrors instead of touching
+	// it directly.
+	HttpResponseError map[int]uint64
+	responseLock      sync.Mutex
+}
+
+// addResponseError counts one response with the given status code.
+func (s *httpStats) addResponseError(code int) {
+	s.responseLock.Lock()
+	defer s.responseLock.Unlock()
+	s.HttpResponseError[code]++
+}
+
+// responseErrors returns a copy of the per-status-code counters.
+func (s *httpStats) responseErrors() map[int]uint64 {
+	s.responseLock.Lock()
+	defer s.responseLock.Unlock()
+	c := make(map[int]uint64, len(s.HttpResponseError))
+	for code, count := range s.HttpResponseError {
+		c[code] = count
+	}
+	return c
 }
 
 // getCertPool reads the file specified in f and returns a CertPool with
@@ -240,12 +263,29 @@ func (ht *HTTP) sendBytes(b []byte) error {
 		}
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		httpResponseCodeStats := ht.stats.HttpResponseError[resp.StatusCode]
-		atomic.AddUint64(&httpResponseCodeStats, 1)
-		return fmt.Errorf("non-OK status code from target: %d / %s", resp.StatusCode, resp.Status)
+		ht.stats.addResponseError(resp.StatusCode)
+		return newRetryableHTTPError(
+			fmt.Errorf("non-OK status code from target: %d / %s", resp.StatusCode, resp.Status),
+			resp,
+		)
 	}
 	atomic.AddUint64(&ht.stats.Sent, 1)
 	return nil
+}
+
+// sendBytesRetry sends a request with the sender's retry/backoff config.
+// Both HTTP.Send and senders wrapping the HTTP sender (e.g. Splunk) use
+// this, so the retry wiring lives in one place.
+func (ht *HTTP) sendBytesRetry(b []byte) error {
+	// ht.logger is set by init(), so make sure that has run before
+	// handing the logger to retryHTTP: a nil *log.Entry panics the
+	// first time a retry is logged.
+	ht.once.Do(func() {
+		ht.init()
+	})
+	return retryHTTP(&ht.RetryConfig, ht.logger, func() error {
+		return ht.sendBytes(b)
+	})
 }
 
 // Send POSTS data
@@ -270,7 +310,7 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 		atomic.AddUint64(&ht.stats.Errors, 1)
 		return fmt.Errorf("HTTP sender (%s) was unable to encode metric-data. Error: %w", skogul.Identity[ht], err)
 	}
-	err = ht.sendBytes(b)
+	err = ht.sendBytesRetry(b)
 	if err != nil {
 		return fmt.Errorf("HTTP sender (%s) was unable to send %d bytes. Container(%s).  Error: %w", skogul.Identity[ht], len(b), c.Describe(), err)
 	}
@@ -289,7 +329,7 @@ func (ht *HTTP) Verify() error {
 	if (ht.Certfile != "" && ht.Keyfile == "") || (ht.Certfile == "" && ht.Keyfile != "") {
 		return fmt.Errorf("either provide BOTH Certfile AND Keyfile, or neither")
 	}
-	return nil
+	return ht.verifyRetry()
 }
 
 // GetStats prepares a skogul metric with stats
@@ -312,7 +352,7 @@ func (ht *HTTP) GetStats() *skogul.Metric {
 	metric.Data["sent"] = ht.stats.Sent
 	metric.Data["errors"] = ht.stats.Errors
 	metric.Data["request_errors"] = ht.stats.RequestErrors
-	for key, val := range ht.stats.HttpResponseError {
+	for key, val := range ht.stats.responseErrors() {
 		metric.Data[fmt.Sprintf("http_response_%d", key)] = val
 	}
 	return &metric
