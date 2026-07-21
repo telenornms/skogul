@@ -78,23 +78,38 @@ func (handler *MQTT) receiver(msg mqtt.Message) {
 	}
 }
 
+// reconnectInterval is how often Start rechecks that the receiver still
+// has a broker connection. Nothing else retries a connect that never
+// succeeded in the first place: the client runs without auto-reconnect,
+// and its connection-lost handler only fires once a connection has been
+// established. Same cadence as that handler uses.
+const reconnectInterval = 5 * time.Second
+
 // Start MQTT receiver.
 func (handler *MQTT) Start() error {
 	handler.mc.MQTTLogs = handler.DisplayMQTTLogs
 	handler.mc.RenewClientID = handler.RenewClientID
-	handler.mc.Init(handler.Broker, handler.Username, handler.Password, handler.ClientID)
+	if err := handler.mc.Init(handler.Broker, handler.Username, handler.Password, handler.ClientID); err != nil {
+		return fmt.Errorf("unable to set up MQTT client: %w", err)
+	}
 	for _, topic := range handler.Topics {
 		handler.mc.Subscribe(topic, handler.receiver)
 	}
 	mqttLog.WithField("address", handler.Broker).Debug("Starting MQTT receiver")
-	handler.mc.Connect()
-	// Note that handler.listen() DOES return, because it only sets up
-	// subscriptions. This sillyness is to satisfy the requirement that
-	// Start() never returns. It should PROBABLY be more sensible.
-	timer := time.NewTicker(10 * time.Second)
-	for range timer.C {
+	// Connect() establishes the subscriptions and returns immediately
+	// once the client is connected, so this doubles as the supervisor
+	// that satisfies the requirement that Start() never returns. It
+	// covers the two cases the connection-lost handler never sees: a
+	// broker that is down at startup, and a connect that timed out and
+	// was aborted.
+	timer := time.NewTicker(reconnectInterval)
+	defer timer.Stop()
+	for {
+		if err := handler.mc.Connect(); err != nil {
+			mqttLog.WithError(err).Errorf("Failed to connect to MQTT broker, retrying in %v", reconnectInterval)
+		}
+		<-timer.C
 	}
-	return fmt.Errorf("unreachable")
 }
 
 // Verify makes sure required configuration options are set
