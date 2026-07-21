@@ -155,7 +155,10 @@ func (s *Splunk) Send(c *skogul.Container) error {
 		}
 		buffer.Write(b)
 	}
-	if err := s.HTTP.sendBytes(buffer.Bytes()); err != nil {
+	// Retries use the HTTP sender's backoff config, since that is where
+	// all other HTTP options for this sender live too.
+	err = s.HTTP.sendBytesRetry(buffer.Bytes())
+	if err != nil {
 		return fmt.Errorf("sendBytes failed: %w", err)
 	}
 
