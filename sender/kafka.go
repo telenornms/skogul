@@ -126,6 +126,9 @@ func (k *Kafka) Send(c *skogul.Container) error {
 		}
 		messages = append(messages, km)
 	}
-	err := k.w.WriteMessages(context.Background(), messages...)
-	return err
+	// No skogul-level retry here: kafka-go's Writer already retries
+	// each batch internally (MaxAttempts, default 10) with its own
+	// backoff. With Sync disabled (the default), WriteMessages returns
+	// before delivery and errors are not reported here at all.
+	return k.w.WriteMessages(context.Background(), messages...)
 }
