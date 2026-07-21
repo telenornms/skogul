@@ -319,6 +319,13 @@ func (ht *HTTP) Send(c *skogul.Container) error {
 
 // Verify checks that configuration is sensible
 func (ht *HTTP) Verify() error {
+	// Before the URL check, not after: the Splunk sender embeds this
+	// HTTP sender and deliberately swallows a missing-URL error, since
+	// it fills the URL in itself. Anything reported after that check is
+	// invisible to it.
+	if err := ht.verifyRetry(); err != nil {
+		return err
+	}
 	if ht.URL == "" {
 		return skogul.MissingArgument("URL")
 	}
@@ -329,7 +336,7 @@ func (ht *HTTP) Verify() error {
 	if (ht.Certfile != "" && ht.Keyfile == "") || (ht.Certfile == "" && ht.Keyfile != "") {
 		return fmt.Errorf("either provide BOTH Certfile AND Keyfile, or neither")
 	}
-	return ht.verifyRetry()
+	return nil
 }
 
 // GetStats prepares a skogul metric with stats

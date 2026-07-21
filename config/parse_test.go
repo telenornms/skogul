@@ -538,6 +538,27 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	}
 }
 
+// Retry settings on a Splunk sender live in its embedded HTTP sender,
+// whose Verify() reports a missing URL - an error Splunk.Verify
+// deliberately ignores, since it fills the URL in itself. The retry
+// settings still have to be validated rather than silently clamped.
+func TestSplunkSenderVerifiesRetrySettings(t *testing.T) {
+	rawConfig := []byte(`{
+	  "senders": {
+	    "splunk": {
+	      "type": "splunk",
+	      "url": "http://localhost:8088/services/collector/event",
+	      "token": "sekrit",
+	      "http": { "maxretries": -1 }
+	    }
+	  }
+	}`)
+
+	if _, err := config.Bytes(rawConfig); err == nil {
+		t.Error("Expected a negative MaxRetries on a Splunk sender to be rejected")
+	}
+}
+
 func TestBytesWorksWithSuperfluousReceiverConfigProperties(t *testing.T) {
 	rawConfig := []byte(`{"receivers": {
 		"foo": {
