@@ -63,6 +63,7 @@ type InfluxDB struct {
 	replacer                *strings.Replacer
 	once                    sync.Once
 	stats                   influxStats
+	RetryConfig
 }
 
 // influxStats holds runtime counters for the InfluxDB sender.
@@ -238,7 +239,18 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 		return nil
 	}
 
-	req, err := http.NewRequest("POST", idb.URL, &buffer)
+	err := retryHTTP(&idb.RetryConfig, influxLog, func() error {
+		return idb.postData(buffer.Bytes())
+	})
+	if err != nil {
+		return fmt.Errorf("influx sender(%s) failed to send container (%s). Error: %w", skogul.Identity[idb], c.Describe(), err)
+	}
+	return nil
+}
+
+// postData POSTs a line protocol body to InfluxDB, re-using idb.client.
+func (idb *InfluxDB) postData(reqBody []byte) error {
+	req, err := http.NewRequest("POST", idb.URL, bytes.NewReader(reqBody))
 	if err != nil {
 		idb.stats.Errors.Add(1)
 		return fmt.Errorf("unable to create request: %w", err)
@@ -258,18 +270,33 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 	}()
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		idb.stats.HttpErrors.Add(1)
-		body, rerr := io.ReadAll(resp.Body)
+		respBody, rerr := io.ReadAll(resp.Body)
 		if rerr != nil {
-			body = []byte("unable to read body")
+			respBody = []byte("unable to read body")
 		}
-		if len(body) == 0 {
-			body = fmt.Appendf(nil, "No reply body. Request: %s", buffer.Bytes())
+		if len(respBody) == 0 {
+			respBody = fmt.Appendf(nil, "No reply body. Request: %s", truncateForError(reqBody))
 		}
 
-		return fmt.Errorf("influx sender(%s) failed to send container (%s). Bad response from InfluxDB: %s - %s", skogul.Identity[idb], c.Describe(), resp.Status, string(body))
+		// Truncate the body: the error is logged on every retry
+		// attempt, and a failing multi-MB batch must not be copied
+		// into the log each time.
+		return newRetryableHTTPError(
+			fmt.Errorf("bad response from InfluxDB: %s - %s", resp.Status, truncateForError(respBody)),
+			resp,
+		)
 	}
 	idb.stats.Sent.Add(1)
 	return nil
+}
+
+// truncateForError caps a request/response body quoted in error messages.
+func truncateForError(b []byte) string {
+	const max = 512
+	if len(b) <= max {
+		return string(b)
+	}
+	return fmt.Sprintf("%s... (%d bytes total)", b[:max], len(b))
 }
 
 // GetStats prepares a skogul metric with stats for the InfluxDB sender.
@@ -334,5 +361,5 @@ func (idb *InfluxDB) Verify() error {
 	if idb.Measurement == "" && idb.MeasurementFromMetadata == "" {
 		return skogul.MissingArgument("Measurement or MeasurementFromMetadata")
 	}
-	return nil
+	return idb.verifyRetry()
 }
