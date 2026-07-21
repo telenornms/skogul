@@ -56,10 +56,14 @@ func TestRabbitmq(t *testing.T) {
 
 	data := createContainer()
 
+	// Retry logic is unit-tested in backoff_test.go; disable it here so
+	// a missing broker fails fast instead of retrying with backoff.
+	disabled := false
 	r := Rabbitmq{
-		Username: "guest",
-		Password: "guest",
-		Queue:    "test-queue",
+		Username:    "guest",
+		Password:    "guest",
+		Queue:       "test-queue",
+		RetryConfig: RetryConfig{BackoffEnabled: &disabled},
 	}
 
 	err := r.Send(data)
@@ -76,10 +80,14 @@ func TestRabbitmqTonsOfMessages(t *testing.T) {
 
 	data := createContainer()
 
+	// Retry logic is unit-tested in backoff_test.go; disable it here so
+	// a missing broker fails fast instead of retrying with backoff.
+	disabled := false
 	r := Rabbitmq{
-		Username: "guest",
-		Password: "guest",
-		Queue:    "test-queue",
+		Username:    "guest",
+		Password:    "guest",
+		Queue:       "test-queue",
+		RetryConfig: RetryConfig{BackoffEnabled: &disabled},
 	}
 
 	i := 0
@@ -87,7 +95,7 @@ func TestRabbitmqTonsOfMessages(t *testing.T) {
 		err := r.Send(data)
 
 		if err != nil {
-			t.Error(err)
+			t.Fatal(err)
 		}
 		i++
 	}
