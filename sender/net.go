@@ -38,30 +38,33 @@ var netLog = skogul.Logger("sender", "net")
 type Net struct {
 	Address string `doc:"Address to send data to" example:"192.168.1.99:1234"`
 	Network string `doc:"Network, according to net.Dial. Typically udp or tcp."`
+	RetryConfig
 }
 
 // Send sends metrics to a network address, json-encoded
 func (n *Net) Send(c *skogul.Container) error {
-	d, err := net.Dial(n.Network, n.Address)
-	if err != nil {
-		return fmt.Errorf("connection to %s failed: %w", n.Address, err)
-	}
-	// should almost certainly fix some method of retaining the
-	// connection in the future
-	defer d.Close()
-
 	b, err := json.Marshal(c)
 	if err != nil {
 		return fmt.Errorf("unable to marshal json for sending: %w", err)
 	}
-	nbytes, err := d.Write(b)
-	if err != nil {
-		return fmt.Errorf("unable to send (all) data: %w", err)
-	}
-	if nbytes < len(b) {
-		return fmt.Errorf("write succeeded, but not all data written. Wrote %d of %d bytes", nbytes, len(b))
-	}
-	return nil
+	return retryNetwork(&n.RetryConfig, netLog, func() error {
+		d, err := net.DialTimeout(n.Network, n.Address, defaultDialTimeout)
+		if err != nil {
+			return fmt.Errorf("connection to %s failed: %w", n.Address, err)
+		}
+		// should almost certainly fix some method of retaining the
+		// connection in the future
+		defer d.Close()
+
+		nbytes, err := d.Write(b)
+		if err != nil {
+			return partialWrite(fmt.Errorf("unable to send (all) data: %w", err), nbytes, len(b))
+		}
+		if nbytes < len(b) {
+			return partialWrite(fmt.Errorf("write succeeded, but not all data written"), nbytes, len(b))
+		}
+		return nil
+	})
 }
 
 func (n *Net) Verify() error {
@@ -71,5 +74,5 @@ func (n *Net) Verify() error {
 	if n.Network == "" {
 		return skogul.MissingArgument("Network")
 	}
-	return nil
+	return n.verifyRetry()
 }
