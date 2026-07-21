@@ -83,6 +83,18 @@ func getFieldDoc(d interface{}) (map[string]FieldDoc, string) {
 		if !unicode.IsUpper(rune(field.Name[0])) {
 			continue
 		}
+		if embeddedType := embeddedStructType(field); embeddedType != nil {
+			// The JSON config parser promotes the fields of
+			// embedded structs to the top level, so document them
+			// at the top level too.
+			embedded, _ := getFieldDoc(reflect.New(embeddedType).Interface())
+			for name, doc := range embedded {
+				if _, ok := fields[name]; !ok {
+					fields[name] = doc
+				}
+			}
+			continue
+		}
 		fielddoc := FieldDoc{}
 		t := fmt.Sprintf("%v", field.Type.Kind())
 		typeName := field.Type.Name()

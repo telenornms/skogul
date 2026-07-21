@@ -538,6 +538,31 @@ func TestFindSuperfluousReceiverConfigProperties(t *testing.T) {
 	}
 }
 
+// Fields promoted from embedded structs (e.g. RetryConfig in the HTTP
+// sender) are valid top-level config properties and must not be flagged
+// as superfluous.
+func TestNoSuperfluousWarningForPromotedEmbeddedFields(t *testing.T) {
+	rawConfig := []byte(`{
+		"type": "http",
+		"url": "http://localhost:1234",
+		"maxretries": 5,
+		"backoffenabled": false
+	}`)
+
+	var c map[string]any
+	err := json.Unmarshal(rawConfig, &c)
+	if err != nil {
+		t.Error("Failed to parse config")
+	}
+
+	configStruct := reflect.TypeFor[sender.HTTP]()
+	superfluousProperties := config.VerifyOnlyRequiredConfigProps(&c, "senders", "foo", configStruct)
+
+	if len(superfluousProperties) != 0 {
+		t.Errorf("Expected no superfluous properties but got %v", superfluousProperties)
+	}
+}
+
 // Retry settings on a Splunk sender live in its embedded HTTP sender,
 // whose Verify() reports a missing URL - an error Splunk.Verify
 // deliberately ignores, since it fills the URL in itself. The retry

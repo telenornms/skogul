@@ -756,10 +756,18 @@ func findFieldsOfStruct(T reflect.Type) []string {
 	case reflect.Struct:
 		for i := 0; i < T.NumField(); i++ {
 			field := T.Field(i)
-			jsonTag := field.Tag.Get("json")
+			if embedded := embeddedStructType(field); embedded != nil {
+				// The JSON parser promotes the fields of
+				// embedded structs to the top level (and does
+				// not accept the embedded type's own name as
+				// a key), so accept the promoted fields at
+				// the top level too.
+				requiredProps = append(requiredProps, findFieldsOfStruct(embedded)...)
+				continue
+			}
 
 			property := field.Name
-			if jsonTag != "" {
+			if jsonTag := field.Tag.Get("json"); jsonTag != "" {
 				property = jsonTag
 			}
 			requiredProps = append(requiredProps, property)
@@ -767,6 +775,23 @@ func findFieldsOfStruct(T reflect.Type) []string {
 	}
 
 	return requiredProps
+}
+
+// embeddedStructType returns the struct type whose fields encoding/json
+// promotes to the top level for an anonymous field, or nil if the field
+// is not embedded, carries its own json name, or is not a struct.
+func embeddedStructType(field reflect.StructField) reflect.Type {
+	if !field.Anonymous || field.Tag.Get("json") != "" {
+		return nil
+	}
+	t := field.Type
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	if t.Kind() != reflect.Struct {
+		return nil
+	}
+	return t
 }
 
 // GetRelevantRawConfigSection is a helper function to dig down into a Config JSON
