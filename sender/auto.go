@@ -36,7 +36,7 @@ func init() {
 		Name:    "backoff",
 		Aliases: []string{"retry"},
 		Alloc:   func() interface{} { return &Backoff{} },
-		Help:    "Forwards data to the next sender, retrying after a delay upon failure. For each retry, the delay is doubled. Gives up after the set number of retries.",
+		Help:    "DEPRECATED, use the backoff/retry settings on the sender itself: network senders back off from a failing target by default (BackoffEnabled), and can retry failed sends (MaxRetries). Forwards data to the next sender, retrying after a delay upon failure. For each retry, the delay is doubled. Gives up after the set number of retries. Note that wrapping a sender which does its own retries multiplies the number of attempts.",
 	})
 	Auto.Add(skogul.Module{
 		Name:    "batch",

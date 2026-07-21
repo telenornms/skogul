@@ -21,13 +21,7 @@
       "type": "batch",
       "threshold": 1000,
       "interval": "5s",
-      "next": "backoff"
-    },
-    "backoff": {
-      "type": "backoff",
-      "next": "http",
-      "base": "1s",
-      "retries": 10
+      "next": "http"
     },
     "http": {
       "type": "http",
