@@ -99,7 +99,7 @@ fmtfix:
 
 printfcheck:
 	@echo 📖 Looking for printf-debugging left over
-	@! find -not -wholename './cmd/*' -and -not -wholename '*_test.go' -and -not -wholename './config/parse.go' -and -not -wholename './sender/debug.go' -and -name '*.go' -exec egrep fmt.Printf {} +
+	@! find -not -wholename './cmd/*' -and -not -wholename '*_test.go' -and -not -wholename './config/parse.go' -and -not -wholename './sender/debug.go' -and -name '*.go' -exec grep -E fmt.Printf {} +
 
 exampletest: skogul
 	@echo 📖 Verifying examples
@@ -145,7 +145,7 @@ checkconfigs: checkbadconfigs checkokconfigs
 exampletestdep: exampletest
 	@echo 📖 Checking examples for deprecation warnings
 	@failed=0; for a in $$(find docs/examples/ -name '*json'  | grep -v payloads | grep -v client-certificates | grep -v sql-tls | grep -v juniper); do \
-		./skogul -show -f $$a 2>&1 | egrep -q "deprecation warning for" ; \
+		./skogul -show -f $$a 2>&1 | grep -E -q "deprecation warning for" ; \
 		if [ $$? -eq 0 ]; then \
 			echo 🚩 Example $$a has deprecation warnings; \
 			failed=$$(( failed + 1 )); \
@@ -153,7 +153,7 @@ exampletestdep: exampletest
 	done; \
 	exit $${failed}
 	@echo 📖 Checking junos example for deprecation warnings
-	@./skogul -show -d docs/examples/juniper 2>&1 | egrep -q 'deprecation warning for'; \
+	@./skogul -show -d docs/examples/juniper 2>&1 | grep -E -q 'deprecation warning for'; \
 	if [ $$? -eq 0 ]; then \
 		echo 🚩 Junos-example has deprecation warnings; \
 		exit 1; \
