@@ -55,21 +55,48 @@ func generateMetric() *skogul.Metric {
 	}
 }
 
-func TestNoStatsReceived(t *testing.T) {
-	tester := sender.Test{}
-	h := genStatsHandler(&tester)
+// startStatsReceiver starts a stats receiver in the background and returns a
+// function that stops it and waits for it to exit. stats.Chan is a global that
+// long-lived goroutines read, so it must never be re-assigned or closed by a
+// test: doing so races with both stats.DrainStats() and any stats receiver
+// left over from a previous test.
+func startStatsReceiver(t *testing.T, tester *sender.Test) func() {
+	t.Helper()
+
 	statsReceiver := receiver.Stats{
-		Handler: h,
+		Handler: genStatsHandler(tester),
 	}
 
-	stats.Chan = make(chan *skogul.Metric, 2)
-	defer func() {
-		close(stats.Chan)
+	ctx, cancel := context.WithCancel(context.Background())
+	done := make(chan struct{})
+	go func() {
+		statsReceiver.StartC(ctx)
+		close(done)
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
-	defer cancel()
-	go statsReceiver.StartC(ctx)
+	return func() {
+		cancel()
+		<-done
+		drainStatsChan()
+	}
+}
+
+// drainStatsChan empties stats.Chan of anything a previous test left behind.
+func drainStatsChan() {
+	for {
+		select {
+		case <-stats.Chan:
+		default:
+			return
+		}
+	}
+}
+
+func TestNoStatsReceived(t *testing.T) {
+	drainStatsChan()
+	tester := sender.Test{}
+	stop := startStatsReceiver(t, &tester)
+	defer stop()
 
 	// Allow stats to attempt to send
 	time.Sleep(time.Millisecond * 20)
@@ -80,19 +107,10 @@ func TestNoStatsReceived(t *testing.T) {
 }
 
 func TestStatsReceived(t *testing.T) {
+	drainStatsChan()
 	tester := sender.Test{}
-	h := genStatsHandler(&tester)
-	statsReceiver := receiver.Stats{
-		Handler: h,
-	}
-
-	stats.Chan = make(chan *skogul.Metric, 2)
-	defer func() {
-		close(stats.Chan)
-	}()
-	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
-	defer cancel()
-	go statsReceiver.StartC(ctx)
+	stop := startStatsReceiver(t, &tester)
+	defer stop()
 
 	stats.Chan <- generateMetric()
 
@@ -105,20 +123,10 @@ func TestStatsReceived(t *testing.T) {
 }
 
 func TestStatsDoesntBlockChan(t *testing.T) {
+	drainStatsChan()
 	tester := sender.Test{}
-	h := genStatsHandler(&tester)
-	statsReceiver := receiver.Stats{
-		Handler: h,
-	}
-
-	stats.Chan = make(chan *skogul.Metric, 2)
-	defer func() {
-		close(stats.Chan)
-	}()
-
-	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
-	defer cancel()
-	go statsReceiver.StartC(ctx)
+	stop := startStatsReceiver(t, &tester)
+	defer stop()
 
 	t0 := time.Now()
 	for i := 0; i < 100; i++ {
@@ -139,16 +147,20 @@ func TestStatsDoesntBlockChan(t *testing.T) {
 }
 
 func TestStatsDoesntBlockChanWithNoConfiguredReceiver(t *testing.T) {
-	stats.Chan = make(chan *skogul.Metric, 2)
-	defer func() {
-		close(stats.Chan)
-	}()
+	drainStatsChan()
 
 	// This is called by init, but since it has already been cancelled by earlier tests, we
 	// have to start it again.
 	drainCtx, drainCancel := context.WithCancel(context.Background())
-	go stats.DrainStats(drainCtx)
-	defer drainCancel()
+	drainDone := make(chan struct{})
+	go func() {
+		stats.DrainStats(drainCtx)
+		close(drainDone)
+	}()
+	defer func() {
+		drainCancel()
+		<-drainDone
+	}()
 
 	done := make(chan bool)
 

@@ -56,12 +56,23 @@ func (s *Stats) StartC(ctx context.Context) error {
 	// or we'll have to direct stats to a specific stats instance.
 
 	s.ch = make(chan *skogul.Metric, s.ChanSize)
+	defer close(s.ch)
 
 	go s.runner()
 
 	stats.CancelDrain()
 
-	for metric := range stats.Chan {
+	for {
+		var metric *skogul.Metric
+		var ok bool
+		select {
+		case metric, ok = <-stats.Chan:
+			if !ok {
+				return nil
+			}
+		case <-ctx.Done():
+			return ctx.Err()
+		}
 		if len(s.ch) >= cap(s.ch) {
 			statsLog.Debug("Dropping stats because the channel is full")
 			continue
@@ -73,7 +84,6 @@ func (s *Stats) StartC(ctx context.Context) error {
 			return ctx.Err()
 		}
 	}
-	return nil
 }
 
 // runner is the function listening for stats and
