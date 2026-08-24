@@ -58,7 +58,7 @@ func (bo *Backoff) Deprecated() error {
 // it would return success without ever reaching Next.
 func (bo *Backoff) Verify() error {
 	if bo.Retries == 0 {
-		return fmt.Errorf("Retries is the total number of attempts, not a count on top of the first one, so it must be at least 1 - use 1 for a single attempt with no retry")
+		return fmt.Errorf("retries is the total number of attempts, not a count on top of the first one, so it must be at least 1 - use 1 for a single attempt with no retry")
 	}
 	if bo.Base.Duration <= 0 {
 		backoffLog.Warn("Base is unset, so a failed send is retried with no delay at all")
