@@ -173,10 +173,7 @@ func (rc *RetryConfig) waitDuration(attempt int, retryAfter *time.Duration) time
 	}
 	delay *= rand.Float64() // Full Jitter: random in [0, delay]
 	if retryAfter != nil {
-		ra := *retryAfter
-		if ra > maxDelay {
-			ra = maxDelay
-		}
+		ra := min(*retryAfter, maxDelay)
 		if float64(ra) > delay {
 			delay = rc.jitterRetryAfter(ra)
 		}

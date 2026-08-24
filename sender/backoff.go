@@ -45,7 +45,7 @@ type Backoff struct {
 	Next    skogul.SenderRef `doc:"The sender to try"`
 	Base    skogul.Duration  `doc:"Delay after a failure. Doubles for each further attempt."`
 	Retries uint64           `doc:"Total number of attempts before giving up, not counted on top of the first one. A value of 1 means a single attempt and no retry."`
-	holdoff uint64
+	holdoff atomic.Uint64
 }
 
 // Deprecated returns an error for the Deprecated interface.
@@ -70,7 +70,7 @@ func (bo *Backoff) Verify() error {
 func (bo *Backoff) Send(c *skogul.Container) error {
 	var err error
 	delay := bo.Base.Duration
-	t := atomic.LoadUint64(&bo.holdoff)
+	t := bo.holdoff.Load()
 	if t > 0 {
 		time.Sleep(delay)
 	}
@@ -85,11 +85,11 @@ func (bo *Backoff) Send(c *skogul.Container) error {
 		err = bo.Next.S.Send(c)
 		if err == nil {
 			if i > 1 {
-				atomic.AddUint64(&bo.holdoff, 1-i)
+				bo.holdoff.Add(1 - i)
 			}
 			return nil
 		}
-		atomic.AddUint64(&bo.holdoff, 1)
+		bo.holdoff.Add(1)
 		time.Sleep(delay)
 		delay = delay * 2
 	}

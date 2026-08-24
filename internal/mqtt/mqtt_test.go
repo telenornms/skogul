@@ -200,7 +200,7 @@ func TestConcurrentConnectSharesOneAttempt(t *testing.T) {
 
 	const callers = 5
 	var wg sync.WaitGroup
-	for i := 0; i < callers; i++ {
+	for range callers {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()

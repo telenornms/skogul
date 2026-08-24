@@ -97,7 +97,7 @@ func testSNMP(port uint16) *SNMP {
 
 func testContainer(metrics int) *skogul.Container {
 	c := skogul.Container{}
-	for i := 0; i < metrics; i++ {
+	for i := range metrics {
 		c.Metrics = append(c.Metrics, &skogul.Metric{
 			Data: map[string]any{"value": float64(i), "name": "test"},
 		})
@@ -192,11 +192,11 @@ func TestSNMPConcurrentSend(t *testing.T) {
 	x := testSNMP(l.port)
 
 	var wg sync.WaitGroup
-	for i := 0; i < 8; i++ {
+	for range 8 {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			for j := 0; j < 5; j++ {
+			for range 5 {
 				if err := x.Send(testContainer(1)); err != nil {
 					t.Errorf("concurrent send failed: %v", err)
 					return

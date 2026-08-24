@@ -74,7 +74,7 @@ func HelpModule(mmap skogul.ModuleMap, mod string) (Help, error) {
 func getFieldDoc(d any) (map[string]FieldDoc, string) {
 	fields := make(map[string]FieldDoc)
 	st := reflect.TypeOf(d)
-	if st.Kind() == reflect.Ptr {
+	if st.Kind() == reflect.Pointer {
 		st = st.Elem()
 	}
 
@@ -104,7 +104,7 @@ func getFieldDoc(d any) (map[string]FieldDoc, string) {
 		} else if typeString != "" {
 			t = typeString
 		}
-		fielddoc.Type = fmt.Sprintf("%s", t)
+		fielddoc.Type = t
 		if doc, ok := field.Tag.Lookup("doc"); ok {
 			fielddoc.Doc = doc
 			if ex, ok := field.Tag.Lookup("example"); ok {

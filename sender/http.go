@@ -29,6 +29,7 @@ import (
 	"crypto/x509"
 	"fmt"
 	"io"
+	"maps"
 	"net/http"
 	"os"
 	"runtime"
@@ -91,9 +92,7 @@ func (s *httpStats) responseErrors() map[int]uint64 {
 	s.responseLock.Lock()
 	defer s.responseLock.Unlock()
 	c := make(map[int]uint64, len(s.HttpResponseError))
-	for code, count := range s.HttpResponseError {
-		c[code] = count
-	}
+	maps.Copy(c, s.HttpResponseError)
 	return c
 }
 
@@ -244,7 +243,7 @@ func (ht *HTTP) sendBytes(b []byte) error {
 		return fmt.Errorf("failed to create a HTTP request (we are %s). Error: %w", skogul.Identity[ht], err)
 	}
 	for header, value := range ht.Headers {
-		req.Header.Add(http.CanonicalHeaderKey(header), value)
+		req.Header.Add(header, value)
 	}
 	resp, err := ht.client.Do(req)
 	if err != nil {

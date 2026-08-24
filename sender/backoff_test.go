@@ -402,7 +402,7 @@ func TestFullJitterVariety(t *testing.T) {
 	cfg := defaultRetryConfig()
 
 	results := make([]float64, 100)
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		d := cfg.waitDuration(1, nil)
 		results[i] = float64(d)
 	}
@@ -545,7 +545,7 @@ func TestWaitDurationRetryAfterJittered(t *testing.T) {
 	retryAfter := 5 * time.Second
 
 	seen := make(map[time.Duration]bool)
-	for i := 0; i < 50; i++ {
+	for range 50 {
 		d := cfg.waitDuration(0, &retryAfter)
 		if d < retryAfter {
 			t.Fatalf("Retry-After must be honoured as a floor, got %v < %v", d, retryAfter)
@@ -567,7 +567,7 @@ func TestWaitDurationRetryAfterAtMaxDelayStillJitters(t *testing.T) {
 	retryAfter := 10 * time.Minute // way past MaxDelay
 
 	seen := make(map[time.Duration]bool)
-	for i := 0; i < 50; i++ {
+	for range 50 {
 		d := cfg.waitDuration(0, &retryAfter)
 		if d > cfg.MaxDelay.Duration {
 			t.Fatalf("delay must be capped at MaxDelay (%v), got %v", cfg.MaxDelay.Duration, d)
@@ -770,7 +770,7 @@ func TestNetSenderPartialWrite(t *testing.T) {
 	// A payload large enough that the write cannot complete into the
 	// socket buffer before the reset lands.
 	metrics := make([]*skogul.Metric, 0, 20000)
-	for i := 0; i < 20000; i++ {
+	for i := range 20000 {
 		metrics = append(metrics, &skogul.Metric{
 			Metadata: map[string]any{"key": "some reasonably long metadata value"},
 			Data:     map[string]any{"value": i},

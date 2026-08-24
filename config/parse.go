@@ -785,7 +785,7 @@ func embeddedStructType(field reflect.StructField) reflect.Type {
 		return nil
 	}
 	t := field.Type
-	if t.Kind() == reflect.Ptr {
+	if t.Kind() == reflect.Pointer {
 		t = t.Elem()
 	}
 	if t.Kind() != reflect.Struct {

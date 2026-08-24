@@ -120,7 +120,7 @@ func (x *SNMP) buildTrap(m *skogul.Metric) gosnmp.SnmpTrap {
 		}
 		pduName := fmt.Sprintf("%s", oid)
 
-		switch i.(type) {
+		switch i := i.(type) {
 		case string:
 			pdutype = gosnmp.SnmpPDU{
 				Value: i,
@@ -134,7 +134,7 @@ func (x *SNMP) buildTrap(m *skogul.Metric) gosnmp.SnmpTrap {
 				Type:  gosnmp.Boolean,
 			}
 		case float64:
-			k := int(i.(float64))
+			k := int(i)
 			pdutype = gosnmp.SnmpPDU{
 				Value: k,
 				Name:  pduName,
