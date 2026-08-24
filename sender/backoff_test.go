@@ -747,8 +747,8 @@ func TestNetSenderPartialWrite(t *testing.T) {
 	go func() {
 		defer close(done)
 		for {
-			conn, err := l.Accept()
-			if err != nil {
+			conn, connerr := l.Accept()
+			if connerr != nil {
 				return
 			}
 			accepted.Add(1)

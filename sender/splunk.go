@@ -148,8 +148,8 @@ func (s *Splunk) Send(c *skogul.Container) error {
 
 	var buffer bytes.Buffer
 	for _, event := range events {
-		b, err := json.Marshal(&event)
-		if err != nil {
+		b, marshalerr := json.Marshal(&event)
+		if marshalerr != nil {
 			return fmt.Errorf("failed to marshal JSON data to Splunk: %w", err)
 		}
 		buffer.Write(b)
