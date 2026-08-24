@@ -6,21 +6,20 @@
  *  - Kristian Lyngstøl <kly@kly.no>
  *  - Håkon Solbjørg <hakon.solbjorg@telenor.com>
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * This library is free software; you can redistribute it and/or modify it
+* under the terms of the GNU Lesser General Public License as published by the
+* Free Software Foundation; either version 2.1 of the License, or (at your
+* option) any later version.
  *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+* This library is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+* details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301  USA
- */
+* You should have received a copy of the GNU Lesser General Public License
+* along with this library; if not, write to the Free Software Foundation, Inc.,
+* 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+*/
 
 /*
 Package config handles Skogul configuration parsing.
@@ -129,7 +128,7 @@ func (t *Transformer) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("bad transformer %v", t.Type)
 	}
 	var ok bool
-	t.Transformer, ok = (transformer.Auto[t.Type].Alloc()).(skogul.Transformer)
+	t.Transformer, ok = transformer.Auto[t.Type].Alloc().(skogul.Transformer)
 	skogul.Assert(ok)
 	if err := configUnmarshal(b, &t.Transformer); err != nil {
 		return fmt.Errorf("transformer unmarshal: %w", err)
@@ -177,7 +176,7 @@ func (r *Receiver) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("bad receiver %v", r.Type)
 	}
 	var ok bool
-	r.Receiver, ok = (receiver.Auto[r.Type].Alloc()).(skogul.Receiver)
+	r.Receiver, ok = receiver.Auto[r.Type].Alloc().(skogul.Receiver)
 	skogul.Assert(ok)
 	if err := configUnmarshal(b, &r.Receiver); err != nil {
 		return fmt.Errorf("receiver unmarshalling: %w", err)
@@ -222,7 +221,7 @@ func (p *Parser) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("bad parser %v", p.Type)
 	}
 	var ok bool
-	p.Parser, ok = (parser.Auto[p.Type].Alloc()).(skogul.Parser)
+	p.Parser, ok = parser.Auto[p.Type].Alloc().(skogul.Parser)
 	skogul.Assert(ok)
 	if err := configUnmarshal(b, &p.Parser); err != nil {
 		return fmt.Errorf("parser unmarshalling: %w", err)
@@ -266,7 +265,7 @@ func (e *Encoder) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("bad encoder %v", e.Type)
 	}
 	var ok bool
-	e.Encoder, ok = (encoder.Auto[e.Type].Alloc()).(skogul.Encoder)
+	e.Encoder, ok = encoder.Auto[e.Type].Alloc().(skogul.Encoder)
 	skogul.Assert(ok)
 	if err := configUnmarshal(b, &e.Encoder); err != nil {
 		return fmt.Errorf("encoder unmarshalling: %w", err)
@@ -310,7 +309,7 @@ func (s *Sender) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("bad sender %v", s.Type)
 	}
 	var ok bool
-	s.Sender, ok = (sender.Auto[s.Type].Alloc()).(skogul.Sender)
+	s.Sender, ok = sender.Auto[s.Type].Alloc().(skogul.Sender)
 	skogul.Assert(ok)
 	if err := configUnmarshal(b, &s.Sender); err != nil {
 		return fmt.Errorf("sender unmarshalling: %w", err)
@@ -606,7 +605,7 @@ func resolveHandlers(c *Config) error {
 		if c.Handlers[h.Name] == nil {
 			return fmt.Errorf("handler `%s' referenced but not defined", h.Name)
 		}
-		h.H = &(c.Handlers[h.Name].Handler)
+		h.H = &c.Handlers[h.Name].Handler
 	}
 	skogul.HandlerMap = skogul.HandlerMap[0:0]
 	return nil
