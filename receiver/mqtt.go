@@ -55,7 +55,7 @@ type MQTT struct {
 func appendTopic(container *skogul.Container, topic string) {
 	for _, metric := range container.Metrics {
 		if metric.Metadata == nil {
-			metric.Metadata = make(map[string]interface{})
+			metric.Metadata = make(map[string]any)
 		}
 		metric.Metadata["_mqtt_topic"] = topic
 	}

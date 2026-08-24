@@ -52,12 +52,12 @@ type Splunk struct {
 // splunkEvent describes the structure of a Splunk
 // HTTP Event Collector event
 type splunkEvent struct {
-	Time   *time.Time             `json:"time,omitempty"`
-	Host   string                 `json:"host,omitempty"`
-	Index  string                 `json:"index,omitempty"`
-	Source string                 `json:"source,omitempty"`
-	Event  map[string]interface{} `json:"event"`
-	Fields map[string]interface{} `json:"fields,omitempty"`
+	Time   *time.Time     `json:"time,omitempty"`
+	Host   string         `json:"host,omitempty"`
+	Index  string         `json:"index,omitempty"`
+	Source string         `json:"source,omitempty"`
+	Event  map[string]any `json:"event"`
+	Fields map[string]any `json:"fields,omitempty"`
 }
 
 // prepare converts a skogul container into the appropriate

@@ -71,7 +71,7 @@ func newRecordingClient() *recordingClient {
 func (c *recordingClient) IsConnected() bool      { return true }
 func (c *recordingClient) IsConnectionOpen() bool { return true }
 
-func (c *recordingClient) Publish(topic string, _ byte, _ bool, _ interface{}) paho.Token {
+func (c *recordingClient) Publish(topic string, _ byte, _ bool, _ any) paho.Token {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.published[topic]++

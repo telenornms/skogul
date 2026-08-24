@@ -31,9 +31,9 @@ import (
 )
 
 func createContainer() *skogul.Container {
-	meta := make(map[string]interface{})
+	meta := make(map[string]any)
 	meta["foo"] = "bar"
-	data := make(map[string]interface{})
+	data := make(map[string]any)
 	data["baz"] = "qux"
 
 	metric := skogul.Metric{

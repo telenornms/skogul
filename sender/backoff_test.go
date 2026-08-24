@@ -772,8 +772,8 @@ func TestNetSenderPartialWrite(t *testing.T) {
 	metrics := make([]*skogul.Metric, 0, 20000)
 	for i := 0; i < 20000; i++ {
 		metrics = append(metrics, &skogul.Metric{
-			Metadata: map[string]interface{}{"key": "some reasonably long metadata value"},
-			Data:     map[string]interface{}{"value": i},
+			Metadata: map[string]any{"key": "some reasonably long metadata value"},
+			Data:     map[string]any{"value": i},
 		})
 	}
 	c := skogul.Container{Metrics: metrics}

@@ -71,7 +71,7 @@ func HelpModule(mmap skogul.ModuleMap, mod string) (Help, error) {
 	return mh, nil
 }
 
-func getFieldDoc(d interface{}) (map[string]FieldDoc, string) {
+func getFieldDoc(d any) (map[string]FieldDoc, string) {
 	fields := make(map[string]FieldDoc)
 	st := reflect.TypeOf(d)
 	if st.Kind() == reflect.Ptr {

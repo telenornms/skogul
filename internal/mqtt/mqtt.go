@@ -103,7 +103,7 @@ func (handler *MQTT) Subscribe(topic string, callback MessageHandler) {
 // Publish a payload on a topic, returning paho's token for it. Goes
 // through the handler rather than the client directly, since the client
 // is replaced whenever a connection is abandoned.
-func (handler *MQTT) Publish(topic string, qos byte, retained bool, payload interface{}) mqtt.Token {
+func (handler *MQTT) Publish(topic string, qos byte, retained bool, payload any) mqtt.Token {
 	return handler.getClient().Publish(topic, qos, retained, payload)
 }
 

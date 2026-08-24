@@ -79,7 +79,7 @@ type influxStats struct {
 
 // checkVariable verifies that the relevant variable is of a type we can
 // handle.
-func checkVariable(category string, field string, idx string, value interface{}) error {
+func checkVariable(category string, field string, idx string, value any) error {
 	t := reflect.TypeOf(value)
 	if t == nil {
 		influxLog.Warnf("invalid %s: %s: %s: %v", category, field, idx, value)
@@ -206,7 +206,7 @@ func (idb *InfluxDB) Send(c *skogul.Container) error {
 			// Therefore you need to escape any invalid character instead.
 			// Run the replacer for tags (keys and values), and field keys,
 			// but not for field values.
-			var tagValue interface{}
+			var tagValue any
 			v, ok := value.(string)
 
 			if ok {
@@ -304,8 +304,8 @@ func (idb *InfluxDB) GetStats() *skogul.Metric {
 	now := skogul.Now()
 	metric := skogul.Metric{
 		Time:     &now,
-		Metadata: make(map[string]interface{}),
-		Data:     make(map[string]interface{}),
+		Metadata: make(map[string]any),
+		Data:     make(map[string]any),
 	}
 	metric.Metadata["component"] = "sender"
 	metric.Metadata["type"] = "influxdb"
@@ -323,7 +323,7 @@ func (idb *InfluxDB) GetStats() *skogul.Metric {
 // toInfluxValue handles converting values to values known by InfluxDB.
 // E.g. an integer should end with the char 'i', so if the value is an int,
 // we need to add that 'i'.
-func (idb *InfluxDB) toInfluxValue(value interface{}) string {
+func (idb *InfluxDB) toInfluxValue(value any) string {
 	if !idb.ConvertIntToFloat {
 		i, ok := value.(int64)
 		if ok {

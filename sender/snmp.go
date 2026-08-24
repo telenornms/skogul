@@ -12,13 +12,13 @@ import (
 var snmpLog = skogul.Logger("sender", "snmp")
 
 type SNMP struct {
-	Port        uint16                 `doc:"Snmp port. Default: 162, the standard trap port."`
-	Community   string                 `doc:"Snmp communit field"`
-	Version     string                 `doc:"Snmp version possible values: 2c, 3"`
-	Target      string                 `doc:"Snmp target"`
-	Oidmap      map[string]interface{} `doc:"Snmp oid to json field mapping"`
-	Timeout     uint                   `doc:"Snmp timeout, default 5 seconds"`
-	SnmpTrapOID string                 `doc:"Value of the snmp trap oid pdu"`
+	Port        uint16         `doc:"Snmp port. Default: 162, the standard trap port."`
+	Community   string         `doc:"Snmp communit field"`
+	Version     string         `doc:"Snmp version possible values: 2c, 3"`
+	Target      string         `doc:"Snmp target"`
+	Oidmap      map[string]any `doc:"Snmp oid to json field mapping"`
+	Timeout     uint           `doc:"Snmp timeout, default 5 seconds"`
+	SnmpTrapOID string         `doc:"Value of the snmp trap oid pdu"`
 	RetryConfig
 
 	// mu protects g. gosnmp.GoSNMP is not safe for concurrent use:

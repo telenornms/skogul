@@ -86,7 +86,7 @@ func testSNMP(port uint16) *SNMP {
 		Community: "public",
 		Version:   "2c",
 		Target:    "127.0.0.1",
-		Oidmap: map[string]interface{}{
+		Oidmap: map[string]any{
 			"value": ".1.3.6.1.4.1.9.9.1.1",
 			"name":  ".1.3.6.1.4.1.9.9.1.2",
 		},
@@ -99,7 +99,7 @@ func testContainer(metrics int) *skogul.Container {
 	c := skogul.Container{}
 	for i := 0; i < metrics; i++ {
 		c.Metrics = append(c.Metrics, &skogul.Metric{
-			Data: map[string]interface{}{"value": float64(i), "name": "test"},
+			Data: map[string]any{"value": float64(i), "name": "test"},
 		})
 	}
 	return &c
@@ -223,8 +223,8 @@ func TestSNMPSendSkipsEmptyTraps(t *testing.T) {
 
 	c := skogul.Container{
 		Metrics: []*skogul.Metric{
-			{Data: map[string]interface{}{"nosuchfield": "a"}},
-			{Data: map[string]interface{}{"value": float64(1)}},
+			{Data: map[string]any{"nosuchfield": "a"}},
+			{Data: map[string]any{"value": float64(1)}},
 		},
 	}
 	if err := x.Send(&c); err != nil {
@@ -236,7 +236,7 @@ func TestSNMPSendSkipsEmptyTraps(t *testing.T) {
 
 	empty := skogul.Container{
 		Metrics: []*skogul.Metric{
-			{Data: map[string]interface{}{"nosuchfield": "a"}},
+			{Data: map[string]any{"nosuchfield": "a"}},
 		},
 	}
 	if err := x.Send(&empty); err != nil {
@@ -249,13 +249,13 @@ func TestSNMPBuildTrap(t *testing.T) {
 
 	tests := []struct {
 		name  string
-		data  map[string]interface{}
+		data  map[string]any
 		want  int // PDUs, including the trap OID
 		named []string
 	}{
 		{
 			name:  "mapped fields",
-			data:  map[string]interface{}{"value": float64(1), "name": "a"},
+			data:  map[string]any{"value": float64(1), "name": "a"},
 			want:  3,
 			named: []string{".1.3.6.1.4.1.9.9.1.1", ".1.3.6.1.4.1.9.9.1.2"},
 		},
@@ -263,18 +263,18 @@ func TestSNMPBuildTrap(t *testing.T) {
 			// Used to become a PDU named "%!s(<nil>)", which only
 			// fails later, inside gosnmp.
 			name: "unmapped field is skipped",
-			data: map[string]interface{}{"value": float64(1), "nosuchfield": "a"},
+			data: map[string]any{"value": float64(1), "nosuchfield": "a"},
 			want: 2,
 		},
 		{
 			// Used to append a nameless, valueless PDU.
 			name: "unsupported type is skipped",
-			data: map[string]interface{}{"value": float64(1), "name": []string{"a"}},
+			data: map[string]any{"value": float64(1), "name": []string{"a"}},
 			want: 2,
 		},
 		{
 			name: "no usable data leaves just the trap OID",
-			data: map[string]interface{}{"nosuchfield": "a"},
+			data: map[string]any{"nosuchfield": "a"},
 			want: 1,
 		},
 	}
